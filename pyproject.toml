@@ -13,8 +13,8 @@ dependencies = [
 dev = [
     "pytest>=8.0.0",
     "pytest-asyncio>=0.24.0",
-    "httpx>=0.27.0",
     "ruff>=0.6.0",
+    "httpx2>=2.5.0",
 ]
 
 [tool.ruff]
@@ -26,4 +26,4 @@ select = ["E", "F", "I"]  # pycodestyle errors, pyflakes, isort
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
-testpaths = ["backend/tests"]
+testpaths = ["tests"]
