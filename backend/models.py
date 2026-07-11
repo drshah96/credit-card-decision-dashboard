@@ -1,8 +1,10 @@
+from typing import Literal
+
 from pydantic import BaseModel
 
 
 class Verdict(BaseModel):
-    status: str  # "keep" | "situational" | "reconsider"
+    status: Literal["keep", "situational", "reconsider"]
     text: str
 
 
@@ -40,7 +42,7 @@ class Credit(BaseModel):
     subtitle: str
     max_annual: int
     default_value: int
-    tier: str  # "easy" | "plan" | "niche"
+    tier: Literal["easy", "plan", "niche"]
     removed: bool = False
     description: str
     tips: list[str]
@@ -49,7 +51,7 @@ class Credit(BaseModel):
 class Insurance(BaseModel):
     coverage: str
     detail: str
-    level: str  # "strong" | "good" | "mid" | "none"
+    level: Literal["strong", "good", "mid", "none"]
 
 
 class StatusPerk(BaseModel):
@@ -83,7 +85,7 @@ class AdditionalCards(BaseModel):
 
 class TimelineEvent(BaseModel):
     date: str
-    type: str  # "add" | "cut" | "neutral" | "future"
+    type: Literal["add", "cut", "neutral", "future"]
     badge: str
     text: str
 

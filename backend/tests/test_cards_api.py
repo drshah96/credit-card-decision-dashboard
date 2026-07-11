@@ -63,3 +63,38 @@ def test_easy_credits_not_negative() -> None:
     for card in response.json():
         assert card["total_easy_credits"] >= 0
         assert card["total_max_credits"] >= card["total_easy_credits"]
+
+
+def test_removed_credits_excluded_from_totals() -> None:
+    """Credits marked removed=true must not contribute to easy/max credit totals."""
+    response = client.get("/api/cards/amex")
+    card = response.json()
+    # Saks is removed (max_annual=0, removed=true) — verify it's in data but excluded from totals
+    saks = next(c for c in card["credits"] if c["id"] == "saks")
+    assert saks["removed"] is True
+    # Recalculate totals manually and compare to summary
+    summary_response = client.get("/api/cards")
+    amex_summary = next(c for c in summary_response.json() if c["id"] == "amex")
+    manual_easy = sum(
+        c["default_value"] for c in card["credits"] if c["tier"] == "easy" and not c["removed"]
+    )
+    manual_max = sum(c["max_annual"] for c in card["credits"] if not c["removed"])
+    assert amex_summary["total_easy_credits"] == manual_easy
+    assert amex_summary["total_max_credits"] == manual_max
+
+
+def test_credit_default_does_not_exceed_max() -> None:
+    """Every credit's default_value must be <= max_annual."""
+    for card_id in CARD_IDS:
+        response = client.get(f"/api/cards/{card_id}")
+        for credit in response.json()["credits"]:
+            assert credit["default_value"] <= credit["max_annual"], (
+                f"{card_id}/{credit['id']}: "
+                f"default {credit['default_value']} > max {credit['max_annual']}"
+            )
+
+
+def test_health_endpoint() -> None:
+    response = client.get("/health")
+    assert response.status_code == 200
+    assert response.json() == {"status": "ok"}
