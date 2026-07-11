@@ -40,7 +40,7 @@ export function CardSummaryCard({ card }: Props) {
           muted={card.total_max_credits === 0}
         />
         <Stat
-          label="Net cost"
+          label="Best-case net"
           value={netCost <= 0 ? `+$${Math.abs(netCost)}` : `$${netCost}`}
           positive={netCost <= 0}
           negative={netCost > 0}
