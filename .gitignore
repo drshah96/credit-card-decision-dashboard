@@ -29,5 +29,6 @@ build/
 htmlcov/
 .coverage
 
-# Frontend build artifacts (for later)
+# Frontend
 node_modules/
+frontend/dist/
