@@ -8,9 +8,9 @@ _DATA_PATH = Path(__file__).parent.parent / "data" / "cards.json"
 
 
 @lru_cache(maxsize=1)
-def _load_raw() -> list[dict]:
+def _load_raw() -> tuple[dict, ...]:
     with _DATA_PATH.open() as f:
-        return json.load(f)["cards"]
+        return tuple(json.load(f)["cards"])
 
 
 def get_all_cards() -> list[Card]:
