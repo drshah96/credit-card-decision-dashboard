@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# FastAPI / uvicorn
+*.log
+
+# Environment
+.env
+.env.*
+
+# macOS
+.DS_Store
+.AppleDouble
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Testing
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Frontend build artifacts (for later)
+node_modules/
