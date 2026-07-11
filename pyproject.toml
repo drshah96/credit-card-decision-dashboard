@@ -26,4 +26,4 @@ select = ["E", "F", "I"]  # pycodestyle errors, pyflakes, isort
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
-testpaths = ["backend/tests"]
+testpaths = ["tests"]
