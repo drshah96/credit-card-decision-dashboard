@@ -20,15 +20,11 @@ A web-based tool to help decide which premium credit cards to keep or downgrade.
 ## Getting started
 
 ```bash
-# Create and activate virtual environment
-python3.13 -m venv .venv
-source .venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
+# Install dependencies (uv handles the virtualenv automatically)
+uv sync --group dev
 
 # Run the dev server
-uvicorn backend.main:app --reload
+uv run uvicorn backend.main:app --reload
 ```
 
 API docs available at `http://localhost:8000/docs`.
@@ -42,6 +38,8 @@ API docs available at `http://localhost:8000/docs`.
 | `POST` | `/api/recommend` | Rules-based card recommendations |
 
 ## Project structure
+
+> Planned — files are added incrementally via feature branches.
 
 ```
 credit-card-decision-dashboard/
