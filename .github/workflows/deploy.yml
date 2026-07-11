@@ -9,6 +9,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Verify deploy webhook is configured
+        run: |
+          if [ -z "${{ secrets.RENDER_DEPLOY_HOOK_URL }}" ]; then
+            echo "Error: RENDER_DEPLOY_HOOK_URL secret is not set"
+            exit 1
+          fi
+
       - name: Trigger Render deploy
         run: |
-          curl -sf -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
+          curl -sf \
+            --max-time 30 \
+            -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}" \
+            -w "\nHTTP status: %{http_code}\n" \
+            -o /dev/null
