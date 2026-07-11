@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
+import { Link, Route, Routes } from "react-router-dom";
 import { fetchCards } from "./api/cards";
 import { CardSummaryCard } from "./components/CardSummaryCard";
+import { ErrorBoundary } from "./components/ErrorBoundary";
+import CardDetailPage from "./pages/CardDetailPage";
 
-export default function App() {
+function DashboardPage() {
   const { data: cards, isLoading, isError, error } = useQuery({
     queryKey: ["cards"],
     queryFn: fetchCards,
@@ -31,7 +34,7 @@ export default function App() {
             {[...Array(4)].map((_, i) => (
               <div
                 key={i}
-                className="rounded-2xl border border-white/10 bg-white/5 h-52 animate-pulse"
+                className="rounded-2xl border border-white/10 bg-white/5 min-h-52 animate-pulse"
               />
             ))}
           </div>
@@ -44,9 +47,9 @@ export default function App() {
               {error instanceof Error ? error.message : "Unknown error"}
             </p>
             <p className="text-sm text-red-400/50 mt-2">
-              Make sure the backend is running:{" "}
+              Make sure the backend is running at{" "}
               <code className="bg-red-500/10 px-1 rounded">
-                uv run uvicorn backend.main:app --reload
+                {import.meta.env.VITE_API_URL ?? "http://localhost:8000"}
               </code>
             </p>
           </div>
@@ -55,11 +58,24 @@ export default function App() {
         {cards && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {cards.map((card) => (
-              <CardSummaryCard key={card.id} card={card} />
+              <Link key={card.id} to={`/cards/${card.id}`} className="block">
+                <CardSummaryCard card={card} />
+              </Link>
             ))}
           </div>
         )}
       </div>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <ErrorBoundary>
+      <Routes>
+        <Route path="/" element={<DashboardPage />} />
+        <Route path="/cards/:id" element={<CardDetailPage />} />
+      </Routes>
+    </ErrorBoundary>
   );
 }
