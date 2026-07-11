@@ -47,9 +47,9 @@ function DashboardPage() {
               {error instanceof Error ? error.message : "Unknown error"}
             </p>
             <p className="text-sm text-red-400/50 mt-2">
-              Make sure the backend is running:{" "}
+              Make sure the backend is running at{" "}
               <code className="bg-red-500/10 px-1 rounded">
-                uv run uvicorn backend.main:app --reload
+                {import.meta.env.VITE_API_URL ?? "http://localhost:8000"}
               </code>
             </p>
           </div>

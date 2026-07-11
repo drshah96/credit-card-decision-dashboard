@@ -1,6 +1,7 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 import { fetchCard } from "../api/cards";
+import { VERDICT_STYLES } from "../constants/styles";
 import type {
   Card,
   Credit,
@@ -12,12 +13,6 @@ import type {
 } from "../types/cards";
 
 // ─── Shared helpers ──────────────────────────────────────────────────────────
-
-const VERDICT_STYLES = {
-  keep: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30",
-  situational: "bg-amber-500/10 text-amber-400 border-amber-500/30",
-  reconsider: "bg-red-500/10 text-red-400 border-red-500/30",
-};
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
@@ -151,9 +146,9 @@ function EarnRatesSection({ card }: { card: Card }) {
       <SectionHeading>Earn Rates</SectionHeading>
       <CardPanel>
         <div className="space-y-2">
-          {card.earn_rates.map((rate, i) => (
+          {card.earn_rates.map((rate) => (
             <div
-              key={i}
+              key={rate.category}
               className={`flex items-center gap-3 ${rate.is_base ? "opacity-50" : ""}`}
             >
               <span aria-hidden="true" className="text-lg w-6 text-center">{rate.emoji}</span>
@@ -186,8 +181,8 @@ function PointsSection({ card }: { card: Card }) {
           <p className="text-sm font-semibold text-white">{card.points.per_100k} per 100k pts</p>
         </div>
         <div className="space-y-2">
-          {card.points.redemption_options.map((opt, i) => (
-            <div key={i} className="flex items-center justify-between">
+          {card.points.redemption_options.map((opt) => (
+            <div key={opt.method} className="flex items-center justify-between">
               <span className={`text-sm ${opt.best ? "text-white font-medium" : "text-white/50"}`}>
                 {opt.method}
               </span>
@@ -262,7 +257,7 @@ const INSURANCE_DOTS: Record<InsuranceLevel, number> = {
 function InsuranceDots({ level }: { level: InsuranceLevel }) {
   const filled = INSURANCE_DOTS[level];
   return (
-    <div className="flex gap-0.5" aria-label={`Coverage level: ${level}`}>
+    <div role="img" aria-label={`Coverage level: ${level}`} className="flex gap-0.5">
       {[1, 2, 3, 4].map((n) => (
         <div
           key={n}
@@ -283,8 +278,8 @@ function InsuranceSection({ card }: { card: Card }) {
       <SectionHeading>Insurance & Protection</SectionHeading>
       <CardPanel>
         <div className="space-y-3">
-          {active.map((item, i) => (
-            <div key={i} className="flex items-start justify-between gap-4">
+          {active.map((item) => (
+            <div key={item.coverage} className="flex items-start justify-between gap-4">
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-white">{item.coverage}</p>
                 <p className="text-xs text-white/40 mt-0.5">{item.detail}</p>
@@ -292,8 +287,8 @@ function InsuranceSection({ card }: { card: Card }) {
               <InsuranceDots level={item.level} />
             </div>
           ))}
-          {missing.map((item, i) => (
-            <div key={i} className="flex items-start justify-between gap-4 opacity-35">
+          {missing.map((item) => (
+            <div key={item.coverage} className="flex items-start justify-between gap-4 opacity-35">
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-white/50">{item.coverage}</p>
                 <p className="text-xs text-white/30 mt-0.5">{item.detail}</p>
@@ -325,8 +320,8 @@ function StatusPerksSection({ card }: { card: Card }) {
       <SectionHeading>Status & Lounge Perks</SectionHeading>
       <CardPanel>
         <div className="space-y-4">
-          {card.status_perks.map((perk, i) => (
-            <div key={i}>
+          {card.status_perks.map((perk) => (
+            <div key={perk.name}>
               <div className="flex items-center justify-between mb-1">
                 <p className="text-sm font-medium text-white">{perk.name}</p>
                 <div className="flex gap-0.5" aria-label={`Strength: ${perk.strength} out of 5`}>
@@ -358,7 +353,7 @@ function ServicesSection({ card }: { card: Card }) {
       <CardPanel>
         <div className="space-y-3">
           {card.services.map((svc, i) => (
-            <div key={i} className={i > 0 ? "border-t border-white/5 pt-3" : ""}>
+            <div key={svc.name} className={i > 0 ? "border-t border-white/5 pt-3" : ""}>
               <p className="text-sm font-medium text-white mb-0.5">{svc.name}</p>
               <p className="text-xs text-white/40">{svc.detail}</p>
             </div>
@@ -389,9 +384,9 @@ function TimelineSection({ events }: { events: TimelineEvent[] }) {
   return (
     <section>
       <SectionHeading>Card Timeline</SectionHeading>
-      <div className="space-y-0">
+      <ol className="space-y-0">
         {events.map((event, i) => (
-          <div key={i} className="flex gap-4">
+          <li key={`${event.date}-${event.badge}`} className="flex gap-4">
             <div className="flex flex-col items-center">
               <div aria-hidden="true" className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${TIMELINE_LINE[event.type]}`} />
               {i < events.length - 1 && (
@@ -407,9 +402,9 @@ function TimelineSection({ events }: { events: TimelineEvent[] }) {
               </div>
               <p className="text-sm text-white/60">{event.text}</p>
             </div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ol>
     </section>
   );
 }

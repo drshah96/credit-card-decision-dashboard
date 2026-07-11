@@ -3,22 +3,20 @@ import { fetchCards, fetchCard } from "@/api/cards";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-function mockOk(body: unknown) {
-  return Promise.resolve({
-    ok: true,
-    status: 200,
-    statusText: "OK",
-    json: () => Promise.resolve(body),
-  } as Response);
+function mockOk(body: unknown): Promise<Response> {
+  return Promise.resolve(
+    new Response(JSON.stringify(body), {
+      status: 200,
+      statusText: "OK",
+      headers: { "Content-Type": "application/json" },
+    }),
+  );
 }
 
-function mockError(status: number, statusText: string) {
-  return Promise.resolve({
-    ok: false,
-    status,
-    statusText,
-    json: () => Promise.resolve({}),
-  } as Response);
+function mockError(status: number, statusText: string): Promise<Response> {
+  return Promise.resolve(
+    new Response(null, { status, statusText }),
+  );
 }
 
 const mockFetch = vi.fn();

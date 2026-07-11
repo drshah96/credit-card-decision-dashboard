@@ -11,7 +11,6 @@ export default defineConfig({
       // Ensure test files outside frontend/ resolve packages from frontend/node_modules
       "react": path.resolve(__dirname, "node_modules/react"),
       "react-dom": path.resolve(__dirname, "node_modules/react-dom"),
-      "react-dom/client": path.resolve(__dirname, "node_modules/react-dom/client"),
       "react-router-dom": path.resolve(__dirname, "node_modules/react-router-dom"),
       "@tanstack/react-query": path.resolve(__dirname, "node_modules/@tanstack/react-query"),
       "@testing-library/react": path.resolve(__dirname, "node_modules/@testing-library/react"),
