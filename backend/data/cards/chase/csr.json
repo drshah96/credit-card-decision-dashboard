@@ -165,6 +165,20 @@
       ]
     },
     {
+      "id": "global-entry",
+      "name": "Global Entry / TSA PreCheck / NEXUS Credit",
+      "subtitle": "$120 · every 4 years",
+      "max_annual": 30,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "One statement credit up to $120 every four years after the Global Entry, TSA PreCheck, or NEXUS application fee is charged to the card (by you or an authorized user). Shown here amortized to an annual figure.",
+      "tips": [
+        "Apply for Global Entry, not just TSA PreCheck — it includes TSA PreCheck and covers the same credit.",
+        "Must be paid directly to DHS or an authorized enrollment provider — third-party application services don't qualify."
+      ]
+    },
+    {
       "id": "peloton",
       "name": "Peloton",
       "subtitle": "$10/mo + 10× gear",

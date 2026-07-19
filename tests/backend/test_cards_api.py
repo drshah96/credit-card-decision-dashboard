@@ -5,7 +5,7 @@ from backend.main import app
 
 client = TestClient(app)
 
-CARD_IDS = ["amex", "csr", "venturex", "delta", "amex-gold"]
+CARD_IDS = ["amex-platinum", "csr", "venturex", "amex-delta-skymiles-platinum", "amex-gold"]
 
 
 def test_list_cards_returns_all_cards() -> None:
@@ -52,10 +52,10 @@ def test_get_card_not_found() -> None:
 def test_annual_fees_are_correct() -> None:
     response = client.get("/api/cards")
     fees = {c["id"]: c["annual_fee"] for c in response.json()}
-    assert fees["amex"] == 895
+    assert fees["amex-platinum"] == 895
     assert fees["csr"] == 795
     assert fees["venturex"] == 395
-    assert fees["delta"] == 350
+    assert fees["amex-delta-skymiles-platinum"] == 350
     assert fees["amex-gold"] == 325
 
 
@@ -68,14 +68,14 @@ def test_easy_credits_not_negative() -> None:
 
 def test_removed_credits_excluded_from_totals() -> None:
     """Credits marked removed=true must not contribute to easy/max credit totals."""
-    response = client.get("/api/cards/amex")
+    response = client.get("/api/cards/amex-platinum")
     card = response.json()
     # Saks is removed (max_annual=0, removed=true) — verify it's in data but excluded from totals
     saks = next(c for c in card["credits"] if c["id"] == "saks")
     assert saks["removed"] is True
     # Recalculate totals manually and compare to summary
     summary_response = client.get("/api/cards")
-    amex_summary = next(c for c in summary_response.json() if c["id"] == "amex")
+    amex_summary = next(c for c in summary_response.json() if c["id"] == "amex-platinum")
     manual_easy = sum(
         c["default_value"] for c in card["credits"] if c["tier"] == "easy" and not c["removed"]
     )

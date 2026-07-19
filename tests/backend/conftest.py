@@ -27,7 +27,7 @@ def _seed_test_database():
     Base.metadata.create_all(engine)
     session = SessionLocal()
     try:
-        for path in sorted(_CARDS_DIR.glob("*.json")):
+        for path in sorted(_CARDS_DIR.glob("**/*.json")):
             upsert_card(session, json.loads(path.read_text()))
         session.commit()
     finally:
