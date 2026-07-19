@@ -30,8 +30,15 @@ def cmd_add(args: argparse.Namespace) -> None:
     with open(args.json_file) as f:
         raw = json.load(f)
 
+    if not isinstance(raw, dict):
+        sys.exit(
+            f"error: {args.json_file} does not contain a JSON object (got {type(raw).__name__})"
+        )
+
     if raw.get("id") != args.slug:
-        sys.exit(f"error: JSON 'id' ({raw.get('id')!r}) does not match slug argument ({args.slug!r})")
+        sys.exit(
+            f"error: JSON 'id' ({raw.get('id')!r}) does not match slug argument ({args.slug!r})"
+        )
 
     try:
         Card(**raw)
@@ -60,7 +67,9 @@ def cmd_list(args: argparse.Namespace) -> None:
             print("no drafts found")
             return
         for d in drafts:
-            print(f"#{d.draft_id:<4} {d.status:<9} {d.card_slug:<14} {d.fetched_at}  {d.source_url}")
+            print(
+                f"#{d.draft_id:<4} {d.status:<9} {d.card_slug:<14} {d.fetched_at}  {d.source_url}"
+            )
 
 
 def cmd_show(args: argparse.Namespace) -> None:

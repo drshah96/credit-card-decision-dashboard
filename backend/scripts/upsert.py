@@ -15,6 +15,7 @@ sort_order trivially correct instead of hand-reconciling list positions.
 import re
 from datetime import date, datetime
 
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from backend.db_models import (
@@ -68,9 +69,17 @@ def _get_or_create(session: Session, model, defaults: dict | None = None, **look
     instance = session.query(model).filter_by(**lookup).one_or_none()
     if instance is not None:
         return instance
-    instance = model(**lookup, **(defaults or {}))
-    session.add(instance)
-    session.flush()
+    try:
+        # A SAVEPOINT, not the outer transaction: if another connection
+        # commits the same lookup row between our SELECT above and this
+        # INSERT, only this insert attempt rolls back — everything else
+        # upsert_card has already flushed in this transaction survives.
+        with session.begin_nested():
+            instance = model(**lookup, **(defaults or {}))
+            session.add(instance)
+            session.flush()
+    except IntegrityError:
+        instance = session.query(model).filter_by(**lookup).one()
     return instance
 
 
@@ -100,7 +109,8 @@ def upsert_card(session: Session, data: dict) -> CardModel:
         defaults={
             "program_type": "bank",
             "is_transferable": bool(
-                data["transfer_partners"]["airline_count"] or data["transfer_partners"]["hotel_count"]
+                data["transfer_partners"]["airline_count"]
+                or data["transfer_partners"]["hotel_count"]
             ),
         },
     )
