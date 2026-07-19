@@ -22,6 +22,11 @@ CARD_IDS = [
     "amex-delta-skymiles-gold",
     "amex-delta-skymiles-reserve",
     "amex-delta-skymiles-blue",
+    "chase-sapphire-preferred",
+    "chase-freedom-unlimited",
+    "chase-freedom-flex",
+    "chase-freedom-rise",
+    "chase-slate-edge",
 ]
 
 
@@ -58,7 +63,10 @@ def test_get_card_detail(card_id: str) -> None:
     assert "credits" in data
     assert "insurance" in data
     assert "timeline" in data
-    assert len(data["earn_rates"]) > 0
+    # Slate Edge has no rewards program at all (0% APR + APR-reduction mechanic
+    # instead of cash back/points) — every other card earns something.
+    if card_id != "chase-slate-edge":
+        assert len(data["earn_rates"]) > 0
 
 
 def test_get_card_not_found() -> None:
@@ -85,6 +93,11 @@ def test_annual_fees_are_correct() -> None:
     assert fees["amex-delta-skymiles-gold"] == 150
     assert fees["amex-delta-skymiles-reserve"] == 650
     assert fees["amex-delta-skymiles-blue"] == 0
+    assert fees["chase-sapphire-preferred"] == 95
+    assert fees["chase-freedom-unlimited"] == 0
+    assert fees["chase-freedom-flex"] == 0
+    assert fees["chase-freedom-rise"] == 0
+    assert fees["chase-slate-edge"] == 0
 
 
 def test_easy_credits_not_negative() -> None:
