@@ -1,0 +1,199 @@
+{
+  "id": "chase-marriott-bonvoy-boundless",
+  "name": "Marriott Bonvoy Boundless® Credit Card",
+  "issuer": "Chase",
+  "network": "VISA SIGNATURE",
+  "points_program": "Marriott Bonvoy",
+  "accent_color": "#8A1538",
+  "annual_fee": 95,
+  "effective_cost": "Low if you redeem the annual free night award",
+  "verdict": {
+    "status": "situational",
+    "text": "Keep if you'll actually book the annual free night — otherwise a mid-pack earner"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🏨",
+      "multiplier": "6×",
+      "category": "Marriott Bonvoy hotels",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "3×",
+      "category": "Groceries, gas stations & dining (combined $6,000/yr cap, then 2×)",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "2×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The 3× categories share one combined $6,000/yr cap across groceries, gas, and dining — easy to blow through if you lean on any single bucket. After that cap (and everywhere else), this card earns a flat 2×, which beats Amex's Bonvoy cards' catch-all rate.",
+  "points": {
+    "currency": "Marriott Bonvoy",
+    "redemption_options": [
+      {
+        "method": "Cash + Points",
+        "cpp": 0.5,
+        "best": false
+      },
+      {
+        "method": "Transfer to airline miles (3:1, +5,000 bonus per 60,000 transferred)",
+        "cpp": 0.45,
+        "best": false
+      },
+      {
+        "method": "Free Night Award (category-dependent)",
+        "cpp": 0.8,
+        "best": true
+      }
+    ],
+    "per_100k": "$800",
+    "note": "Same Marriott Bonvoy currency and redemption math as Amex's Bonvoy cards — points are worth the most redeemed for a free night you'd actually book, well above cashing out or transferring to airlines."
+  },
+  "transfer_partners": {
+    "airline_count": 40,
+    "hotel_count": 0,
+    "highlight": "Marriott Bonvoy transfers to 40+ airline programs at 3:1, with a 5,000-mile bonus for every 60,000 points transferred in a single transaction — but no hotel transfer partners, since it already is one.",
+    "recent_changes": "No confirmed recent changes to the airline transfer chart."
+  },
+  "credits": [
+    {
+      "id": "airline-credit",
+      "name": "Airline Incidental Credit",
+      "subtitle": "$50 × 2 · $250 min spend per half · thru 6/30/2027",
+      "max_annual": 100,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Up to $50 in statement credits twice a year (Jan–Jun and Jul–Dec) after spending $250 or more on eligible airline purchases within that half, active through June 30, 2027.",
+      "tips": [
+        "Requires $250 of actual airline charges in each 6-month window — general travel spend doesn't count.",
+        "This is a limited-time promotional benefit, not a confirmed permanent feature — re-check before assuming it renews past mid-2027."
+      ]
+    },
+    {
+      "id": "free-night",
+      "name": "Annual Free Night Award",
+      "subtitle": "up to 35,000-point category · after account anniversary",
+      "max_annual": 250,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "One free night award each year on your account anniversary, redeemable at hotels with a redemption level at or under 35,000 Marriott Bonvoy points. Valid for 12 months from issuance.",
+      "tips": [
+        "Lower cap than Amex's Bonvoy cards (50k/85k) — aim for a property priced near the 35k ceiling to get full value.",
+        "$250 here is a conservative mid-range estimate, not a guarantee for any specific hotel."
+      ]
+    },
+    {
+      "id": "dashpass",
+      "name": "DoorDash DashPass + Credit",
+      "subtitle": "complimentary + $10/qtr non-restaurant · thru 2027",
+      "max_annual": 40,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Complimentary DashPass membership plus up to $10 off quarterly on non-restaurant DoorDash orders, active through December 31, 2027.",
+      "tips": [
+        "Skip this if you're not already a DoorDash user — not worth chasing on its own."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Baggage delay",
+      "detail": "$100/day · up to 5 days",
+      "level": "mid"
+    },
+    {
+      "coverage": "Lost luggage",
+      "detail": "$3,000 per covered traveler",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "$500/traveler · after 12 hrs",
+      "level": "mid"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "$500/item · 120 days",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Not offered on this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not offered on this card",
+      "level": "none"
+    }
+  ],
+  "protection_note": "No trip cancellation/interruption and no rental car coverage — a real step down from Chase's own Sapphire Reserve and from Amex's Bonvoy cards. What's here (baggage, trip delay, purchase protection) is capped low ($500/item purchase protection, $500/traveler trip delay after a 12-hour trigger).",
+  "rental_note": "No rental car coverage of any kind is stated for this card — use a different card for rentals.",
+  "status_perks": [
+    {
+      "name": "Marriott Bonvoy Silver Elite Status",
+      "strength": 2,
+      "note": "Complimentary with the card — 15 Elite Night Credits/year automatically, plus 1 more for every $5,000 spent. Silver is Bonvoy's entry tier; $35,000/yr in card spend unlocks Gold Elite."
+    }
+  ],
+  "services": [
+    {
+      "name": "No foreign transaction fees",
+      "detail": "Zero FX fees on international spend."
+    },
+    {
+      "name": "Visa Signature Concierge",
+      "detail": "Complimentary 24/7 concierge for reservations, tickets, and travel arrangements."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional Cards",
+    "options": [
+      {
+        "name": "Additional Bonvoy Boundless Card",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns Marriott Bonvoy points on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Does not get their own Free Night Award or Elite status",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Additional cards are free — a way to pool household spend toward the 6× hotel rate and the $35,000 Gold Elite threshold."
+  },
+  "timeline": [
+    {
+      "date": "Jun 4, 2026",
+      "type": "neutral",
+      "badge": "Refresh",
+      "text": "Welcome offer changed to 125,000 points + 1 Free Night Award (up to 50k) after $3,000 spend in 3 months, replacing a temporary 5-Free-Night promotional offer that had run since Jan 8, 2026."
+    },
+    {
+      "date": "2026",
+      "type": "add",
+      "badge": "Add",
+      "text": "New $100/yr Airline Incidental Credit added ($50 semi-annually, $250 min spend per half), running through June 30, 2027."
+    }
+  ]
+}

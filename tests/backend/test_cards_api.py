@@ -33,6 +33,11 @@ CARD_IDS = [
     "chase-southwest-rapid-rewards-plus",
     "chase-southwest-rapid-rewards-premier",
     "chase-southwest-rapid-rewards-priority",
+    "chase-world-of-hyatt",
+    "chase-marriott-bonvoy-boundless",
+    "chase-marriott-bonvoy-bold",
+    "chase-ihg-one-rewards-premier",
+    "chase-ihg-one-rewards-traveler",
 ]
 
 
@@ -110,6 +115,11 @@ def test_annual_fees_are_correct() -> None:
     assert fees["chase-southwest-rapid-rewards-plus"] == 99
     assert fees["chase-southwest-rapid-rewards-premier"] == 149
     assert fees["chase-southwest-rapid-rewards-priority"] == 229
+    assert fees["chase-world-of-hyatt"] == 95
+    assert fees["chase-marriott-bonvoy-boundless"] == 95
+    assert fees["chase-marriott-bonvoy-bold"] == 0
+    assert fees["chase-ihg-one-rewards-premier"] == 99
+    assert fees["chase-ihg-one-rewards-traveler"] == 0
 
 
 def test_easy_credits_not_negative() -> None:
