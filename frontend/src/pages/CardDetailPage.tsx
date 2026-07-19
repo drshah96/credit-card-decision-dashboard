@@ -1,426 +1,776 @@
+import { useState, useEffect, useRef, type ReactNode } from "react";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 import { fetchCard } from "../api/cards";
-import { VERDICT_STYLES } from "../constants/styles";
 import type {
   Card,
   Credit,
   CreditTier,
-  Insurance,
   InsuranceLevel,
-  TimelineEvent,
-  TimelineEventType,
 } from "../types/cards";
 
-// ─── Shared helpers ──────────────────────────────────────────────────────────
+// ─── Tier config ──────────────────────────────────────────────────────────────
 
-function SectionHeading({ children }: { children: React.ReactNode }) {
+const TIER_LABELS: Record<CreditTier, string> = {
+  easy: "Effortless",
+  plan: "Plan a little",
+  niche: "Niche",
+};
+
+const TIER_SUBS: Record<CreditTier, string> = {
+  easy: "auto or unavoidable",
+  plan: "timed — partial use likely",
+  niche: "only if it fits your life",
+};
+
+const TIER_ORDER: CreditTier[] = ["easy", "plan", "niche"];
+
+// ─── Insurance helpers ────────────────────────────────────────────────────────
+
+const INS_DOT_CLASS: Record<InsuranceLevel, string> = {
+  strong: "d-strong",
+  good: "d-good",
+  mid: "d-mid",
+  none: "d-none",
+};
+
+// ─── Pip labels ───────────────────────────────────────────────────────────────
+
+const PIP_LABELS = ["", "minimal", "minor", "useful", "strong", "elite"];
+
+// ─── Credit Modal ─────────────────────────────────────────────────────────────
+
+function CreditModal({
+  credit,
+  tier,
+  onClose,
+}: {
+  credit: Credit;
+  tier: CreditTier;
+  onClose: () => void;
+}) {
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+
+  useEffect(() => {
+    const prevFocus = document.activeElement as HTMLElement | null;
+    closeButtonRef.current?.focus();
+    document.body.style.overflow = "hidden";
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") onCloseRef.current();
+    }
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+      prevFocus?.focus();
+    };
+  }, []);
+
+  const tierColors: Record<CreditTier, string> = {
+    easy: "var(--green)",
+    plan: "var(--blue)",
+    niche: "var(--gold)",
+  };
+
   return (
-    <h2 className="text-xs uppercase tracking-widest text-white/40 mb-4">
-      {children}
-    </h2>
+    <div className="modal-backdrop" onClick={onClose}>
+      <div
+        className="modal-box"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="credit-modal-title"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="modal-head">
+          <button
+            ref={closeButtonRef}
+            type="button"
+            className="modal-x-btn"
+            onClick={onClose}
+            aria-label="Close"
+          >
+            ✕
+          </button>
+          <div className="modal-cat" style={{ color: tierColors[tier] }}>
+            {TIER_LABELS[tier]} credit
+          </div>
+          <h4 className="modal-title" id="credit-modal-title">
+            {credit.name}
+          </h4>
+          {credit.max_annual > 0 && (
+            <span className="modal-val">Up to ${credit.max_annual}/yr</span>
+          )}
+        </div>
+        <div className="modal-body">
+          {credit.description && (
+            <div style={{ marginBottom: credit.tips.length > 0 ? 22 : 0 }}>
+              <h5>What it actually is</h5>
+              <p className="modal-what">{credit.description}</p>
+            </div>
+          )}
+          {credit.tips.length > 0 && (
+            <div>
+              <h5>Tricks &amp; hacks</h5>
+              <ul className="tips-list">
+                {credit.tips.map((tip, i) => {
+                  const isWarn = tip.startsWith("warn::");
+                  const text = isWarn ? tip.slice(6) : tip;
+                  return (
+                    <li key={i} className={isWarn ? "warn" : ""}>
+                      {text}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 
-function CardPanel({
-  children,
-  className = "",
+// ─── Credit row ───────────────────────────────────────────────────────────────
+
+interface CreditRowProps {
+  credit: Credit;
+  value: number;
+  tierIdx: number;
+  onSlider: (id: string, v: number) => void;
+  onTierMove: (id: string, dir: "up" | "down") => void;
+  onOpenModal: (credit: Credit, tier: CreditTier) => void;
+}
+
+function CreditRow({ credit, value, tierIdx, onSlider, onTierMove, onOpenModal }: CreditRowProps) {
+  const currentTier = TIER_ORDER[Math.max(0, Math.min(tierIdx, TIER_ORDER.length - 1))];
+
+  if (credit.removed) {
+    return (
+      <div className={`credit-card t-${credit.tier} removed`}>
+        <div className="credit-r1">
+          <button
+            type="button"
+            className="credit-name-btn"
+            onClick={() => onOpenModal(credit, credit.tier)}
+          >
+            {credit.name}
+            <i className="info-icon" aria-hidden="true">i</i>
+          </button>
+          <span
+            style={{
+              fontSize: 10,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              padding: "2px 7px",
+              borderRadius: 100,
+              background: "rgba(242,112,138,0.12)",
+              color: "var(--red)",
+              fontWeight: 600,
+              flexShrink: 0,
+            }}
+          >
+            Removed
+          </span>
+        </div>
+        <div className="credit-sub">{credit.subtitle}</div>
+      </div>
+    );
+  }
+
+  const canMoveUp = tierIdx > 0;
+  const canMoveDown = tierIdx < TIER_ORDER.length - 1;
+
+  return (
+    <div className={`credit-card t-${currentTier}`}>
+      <div className="credit-r1">
+        <button
+          type="button"
+          className="credit-name-btn"
+          onClick={() => onOpenModal(credit, currentTier)}
+        >
+          {credit.name}
+          <i className="info-icon" aria-hidden="true">i</i>
+        </button>
+        <span className="credit-max">${credit.max_annual}</span>
+      </div>
+      <div className="credit-sub">{credit.subtitle}</div>
+      {credit.max_annual > 0 ? (
+        <div className="credit-slider">
+          <input
+            type="range"
+            min={0}
+            max={credit.max_annual}
+            step={5}
+            value={value}
+            onChange={(e) => onSlider(credit.id, Number(e.target.value))}
+            aria-label={`How much of ${credit.name} you'll use`}
+          />
+          <span className="credit-use">${value}</span>
+        </div>
+      ) : (
+        <div className="credit-hint" style={{ marginTop: 6 }}>No monetary value</div>
+      )}
+      <div className="credit-r3">
+        <span className="credit-hint">of ${credit.max_annual} max</span>
+        <div className="tier-move">
+          <button
+            type="button"
+            className="tier-btn"
+            disabled={!canMoveUp}
+            onClick={() => onTierMove(credit.id, "up")}
+            aria-label={`Move ${credit.name} to easier tier`}
+            title="Easier tier"
+          >
+            ▲
+          </button>
+          <button
+            type="button"
+            className="tier-btn"
+            disabled={!canMoveDown}
+            onClick={() => onTierMove(credit.id, "down")}
+            aria-label={`Move ${credit.name} to harder tier`}
+            title="Harder tier"
+          >
+            ▼
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Credit calculator ────────────────────────────────────────────────────────
+
+function CreditCalculator({
+  totalUsed,
+  annualFee,
+  onReset,
 }: {
+  totalUsed: number;
+  annualFee: number;
+  onReset: () => void;
+}) {
+  const net = totalUsed - annualFee;
+  const scale = Math.max(annualFee, totalUsed, 1);
+  const fillPct = Math.min((totalUsed / scale) * 100, 100);
+  const markerPct = Math.min((annualFee / scale) * 100, 100);
+
+  let verdict: ReactNode;
+  if (net >= 0) {
+    verdict = (
+      <>With your inputs, the credits alone <b>more than cover the fee</b> — you're ahead ${net} before you count points, lounges, or insurance.</>
+    );
+  } else if (totalUsed >= annualFee * 0.6) {
+    verdict = (
+      <>Credits recoup <b>most</b> of the fee (${totalUsed} of ${annualFee}). Whether it's worth it comes down to how much you value the lounges, points and insurance on top.</>
+    );
+  } else {
+    verdict = (
+      <>Credits only recoup <b>${totalUsed} of ${annualFee}</b>. You'd be paying ${Math.abs(net)} for the lounges, points and status — make sure those are worth it to you.</>
+    );
+  }
+
+  return (
+    <div className="calc">
+      <div className="calc-top">
+        <h4>Will the credits offset the ${annualFee} fee?</h4>
+        <button type="button" className="calc-reset" onClick={onReset}>
+          Reset sliders
+        </button>
+      </div>
+      <div className="calc-nums">
+        <div className="calc-cell">
+          <div className="cl">Credits you'll use</div>
+          <div className="cv pos">${totalUsed}</div>
+        </div>
+        <div className="calc-cell">
+          <div className="cl">Annual fee</div>
+          <div className="cv" style={{ color: "var(--muted)" }}>${annualFee}</div>
+        </div>
+        <div className="calc-cell">
+          <div className="cl">{net >= 0 ? "Ahead by" : "Short by"}</div>
+          <div className={`cv ${net >= 0 ? "pos" : "neg"}`}>
+            {net >= 0 ? "+" : "−"}${Math.abs(net)}
+          </div>
+        </div>
+      </div>
+      <div
+        className="calc-bar"
+        role="progressbar"
+        aria-valuenow={Math.min(totalUsed, annualFee)}
+        aria-valuemin={0}
+        aria-valuemax={annualFee}
+        aria-label={`$${totalUsed} of $${annualFee} fee covered by credits`}
+      >
+        <div className="cbfill" style={{ width: `${fillPct}%` }} />
+        <div className="cbmark" style={{ left: `${markerPct}%` }} />
+      </div>
+      <div className="calc-verdict">{verdict}</div>
+      <div className="calc-disc">
+        Counts statement credits + cash-like perks only (not points earning, lounge value, or insurance).
+        Move the sliders to match your real usage. The white line marks the annual fee.
+      </div>
+    </div>
+  );
+}
+
+// ─── Credits section ──────────────────────────────────────────────────────────
+
+function CreditsSection({ credits, annualFee }: { credits: Credit[]; annualFee: number }) {
+  const active = credits.filter((c) => !c.removed);
+  const removed = credits.filter((c) => c.removed);
+
+  const [values, setValues] = useState<Record<string, number>>(
+    () => Object.fromEntries(active.map((c) => [c.id, c.default_value])),
+  );
+  const [tiers, setTiers] = useState<Record<string, CreditTier>>(
+    () => Object.fromEntries(active.map((c) => [c.id, c.tier])),
+  );
+  const [modal, setModal] = useState<{ credit: Credit; tier: CreditTier } | null>(null);
+
+  function handleSlider(id: string, v: number) {
+    setValues((prev) => ({ ...prev, [id]: v }));
+  }
+
+  function handleTierMove(id: string, dir: "up" | "down") {
+    setTiers((prev) => {
+      const cur = TIER_ORDER.indexOf(prev[id] ?? "niche");
+      const next = dir === "up" ? Math.max(0, cur - 1) : Math.min(2, cur + 1);
+      return { ...prev, [id]: TIER_ORDER[next] };
+    });
+  }
+
+  function handleReset() {
+    setValues(Object.fromEntries(active.map((c) => [c.id, c.default_value])));
+    setTiers(Object.fromEntries(active.map((c) => [c.id, c.tier])));
+  }
+
+  function handleOpenModal(credit: Credit, tier: CreditTier) {
+    setModal({ credit, tier });
+  }
+
+  const totalUsed = active.reduce((sum, c) => sum + (values[c.id] ?? 0), 0);
+
+  const tierGroups: Record<CreditTier, Credit[]> = { easy: [], plan: [], niche: [] };
+  active.forEach((c) => {
+    const t = tiers[c.id] ?? c.tier;
+    tierGroups[t].push(c);
+  });
+
+  return (
+    <>
+      <p className="credit-intro">
+        Drag each slider to the amount you'll <b>actually</b> capture. Use the{" "}
+        <b>▲▼</b> arrows to move a credit between tiers for <i>your</i> life —
+        Resy might be effortless for you and niche for someone else. The calculator below
+        tallies it against the fee.
+      </p>
+
+      <div className="credit-cols">
+        {TIER_ORDER.map((tier) => {
+          const group = tierGroups[tier];
+          return (
+            <div key={tier}>
+              <div className={`cgroup-head t-${tier}`}>
+                <span className="tag">{TIER_LABELS[tier]}</span>
+                <small>{TIER_SUBS[tier]}</small>
+              </div>
+              <div className="cgrid">
+                {group.length > 0 ? (
+                  group.map((c) => (
+                    <CreditRow
+                      key={c.id}
+                      credit={c}
+                      value={values[c.id] ?? 0}
+                      tierIdx={TIER_ORDER.indexOf(tiers[c.id] ?? c.tier)}
+                      onSlider={handleSlider}
+                      onTierMove={handleTierMove}
+                      onOpenModal={handleOpenModal}
+                    />
+                  ))
+                ) : (
+                  <div className="credit-hint" style={{ padding: "8px 2px" }}>— none here —</div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {removed.length > 0 && (
+        <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid var(--line)" }}>
+          {removed.map((c) => (
+            <div key={c.id} style={{ marginTop: 9 }}>
+              <CreditRow
+                credit={c}
+                value={0}
+                tierIdx={TIER_ORDER.indexOf(c.tier)}
+                onSlider={() => {}}
+                onTierMove={() => {}}
+                onOpenModal={handleOpenModal}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
+      <CreditCalculator
+        totalUsed={totalUsed}
+        annualFee={annualFee}
+        onReset={handleReset}
+      />
+
+      {modal && (
+        <CreditModal
+          credit={modal.credit}
+          tier={modal.tier}
+          onClose={() => setModal(null)}
+        />
+      )}
+    </>
+  );
+}
+
+// ─── Pips ─────────────────────────────────────────────────────────────────────
+
+function Pips({ strength }: { strength: number }) {
+  return (
+    <div className="pips" aria-label={`Strength: ${strength} out of 5`}>
+      {[1, 2, 3, 4, 5].map((n) => (
+        <span key={n} className={`pip ${n <= strength ? "on" : ""}`} aria-hidden="true" />
+      ))}
+      <span className="pl">{PIP_LABELS[strength] ?? ""}</span>
+    </div>
+  );
+}
+
+// ─── Section block ────────────────────────────────────────────────────────────
+
+function Block({
+  label,
+  title,
+  note,
+  children,
+}: {
+  label: string;
+  title: string;
+  note?: string;
   children: React.ReactNode;
-  className?: string;
 }) {
   return (
-    <div className={`rounded-2xl border border-white/10 bg-white/5 p-5 ${className}`}>
+    <div style={{ marginTop: 36 }}>
+      <div className="block-head">
+        <span className="lbl">{label}</span>
+        <h3>{title}</h3>
+        {note && <span className="note">{note}</span>}
+      </div>
       {children}
     </div>
   );
 }
 
-// ─── Credits section ─────────────────────────────────────────────────────────
+// ─── Skeleton ─────────────────────────────────────────────────────────────────
 
-const TIER_LABELS: Record<CreditTier, string> = {
-  easy: "Easy",
-  plan: "Plan ahead",
-  niche: "Niche",
-};
-
-const TIER_STYLES: Record<CreditTier, { badge: string; label: string }> = {
-  easy: { badge: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20", label: "text-emerald-400" },
-  plan: { badge: "bg-amber-500/10 text-amber-400 border-amber-500/20", label: "text-amber-400" },
-  niche: { badge: "bg-white/5 text-white/40 border-white/10", label: "text-white/40" },
-};
-
-function CreditRow({ credit }: { credit: Credit }) {
-  if (credit.removed) {
-    return (
-      <div className="flex items-start gap-4 py-3 border-b border-white/5 last:border-0 opacity-40">
-        <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-white/60 line-through">{credit.name}</p>
-          <p className="text-xs text-white/30 mt-0.5">{credit.subtitle}</p>
-        </div>
-        <span className="shrink-0 text-xs px-2 py-0.5 rounded border bg-red-500/10 text-red-400 border-red-500/20">
-          Removed
-        </span>
-      </div>
-    );
-  }
-
+function DetailSkeleton() {
   return (
-    <details className="group border-b border-white/5 last:border-0">
-      <summary
-        className="flex items-start gap-4 py-3 cursor-pointer list-none"
-        aria-label={`${credit.name}, ${TIER_LABELS[credit.tier]} credit, $${credit.max_annual} max per year`}
-      >
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 flex-wrap">
-            <p className="text-sm font-medium text-white">{credit.name}</p>
-            <span className={`text-xs px-2 py-0.5 rounded border ${TIER_STYLES[credit.tier].badge}`}>
-              {TIER_LABELS[credit.tier]}
-            </span>
-          </div>
-          <p className="text-xs text-white/40 mt-0.5">{credit.subtitle}</p>
-        </div>
-        <div className="shrink-0 text-right">
-          <p className="text-sm font-semibold tabular-nums text-white">
-            ${credit.max_annual}
-          </p>
-          <p className="text-xs text-white/30">max/yr</p>
-        </div>
-        <span aria-hidden="true" className="shrink-0 text-white/30 group-open:rotate-180 transition-transform mt-1">
-          ▾
-        </span>
-      </summary>
-      <div className="pb-4 pl-0 space-y-3">
-        <p className="text-sm text-white/60">{credit.description}</p>
-        {credit.tips.length > 0 && (
-          <ul className="space-y-1.5">
-            {credit.tips.map((tip) => (
-              <li key={tip} className="flex gap-2 text-xs text-white/50">
-                <span aria-hidden="true" className="shrink-0 text-amber-400 mt-0.5">→</span>
-                {tip}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    </details>
-  );
-}
-
-function CreditsSection({ credits }: { credits: Credit[] }) {
-  const active = credits.filter((c) => !c.removed);
-  const removed = credits.filter((c) => c.removed);
-  const tiers: CreditTier[] = ["easy", "plan", "niche"];
-
-  return (
-    <section>
-      <SectionHeading>Credits & Benefits</SectionHeading>
-      <CardPanel>
-        {tiers.map((tier) => {
-          const group = active.filter((c) => c.tier === tier);
-          if (group.length === 0) return null;
-          return (
-            <div key={tier} className="mb-1">
-              <p className={`text-xs font-semibold uppercase tracking-wider mb-1 px-0 pt-2 ${TIER_STYLES[tier].label}`}>
-                {TIER_LABELS[tier]}
-              </p>
-              {group.map((c) => (
-                <CreditRow key={c.id} credit={c} />
-              ))}
-            </div>
-          );
-        })}
-        {removed.map((c) => (
-          <CreditRow key={c.id} credit={c} />
-        ))}
-      </CardPanel>
-    </section>
-  );
-}
-
-// ─── Earn rates ───────────────────────────────────────────────────────────────
-
-function EarnRatesSection({ card }: { card: Card }) {
-  return (
-    <section>
-      <SectionHeading>Earn Rates</SectionHeading>
-      <CardPanel>
-        <div className="space-y-2">
-          {card.earn_rates.map((rate) => (
-            <div
-              key={rate.category}
-              className={`flex items-center gap-3 ${rate.is_base ? "opacity-50" : ""}`}
-            >
-              <span aria-hidden="true" className="text-lg w-6 text-center">{rate.emoji}</span>
-              <span className={`text-sm font-bold tabular-nums w-8 ${rate.highlight ? "text-emerald-400" : "text-white"}`}>
-                {rate.multiplier}
-              </span>
-              <span className="text-sm text-white/70">{rate.category}</span>
-            </div>
-          ))}
-        </div>
-        {card.earn_note && (
-          <p className="mt-4 text-xs text-white/40 border-t border-white/10 pt-3">
-            {card.earn_note}
-          </p>
-        )}
-      </CardPanel>
-    </section>
-  );
-}
-
-// ─── Points ───────────────────────────────────────────────────────────────────
-
-function PointsSection({ card }: { card: Card }) {
-  return (
-    <section>
-      <SectionHeading>Points Value</SectionHeading>
-      <CardPanel>
-        <div className="flex items-center justify-between mb-4">
-          <p className="text-sm text-white/60">{card.points.currency}</p>
-          <p className="text-sm font-semibold text-white">{card.points.per_100k} per 100k pts</p>
-        </div>
-        <div className="space-y-2">
-          {card.points.redemption_options.map((opt) => (
-            <div key={opt.method} className="flex items-center justify-between">
-              <span className={`text-sm ${opt.best ? "text-white font-medium" : "text-white/50"}`}>
-                {opt.method}
-              </span>
-              <div className="flex items-center gap-2">
-                <span className={`text-sm tabular-nums font-semibold ${opt.best ? "text-emerald-400" : "text-white/50"}`}>
-                  {opt.cpp}¢/pt
-                </span>
-                {opt.best && (
-                  <span className="text-xs px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    Best
-                  </span>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-        {card.points.note && (
-          <p className="mt-4 text-xs text-white/40 border-t border-white/10 pt-3">
-            {card.points.note}
-          </p>
-        )}
-      </CardPanel>
-    </section>
-  );
-}
-
-// ─── Transfer partners ────────────────────────────────────────────────────────
-
-function TransferPartnersSection({ card }: { card: Card }) {
-  const tp = card.transfer_partners;
-  return (
-    <section>
-      <SectionHeading>Transfer Partners</SectionHeading>
-      <CardPanel>
-        <div className="flex gap-6 mb-4">
-          <div>
-            <p className="text-2xl font-bold text-white">{tp.airline_count}</p>
-            <p className="text-xs text-white/40">Airlines</p>
-          </div>
-          <div>
-            <p className="text-2xl font-bold text-white">{tp.hotel_count}</p>
-            <p className="text-xs text-white/40">Hotels</p>
-          </div>
-        </div>
-        <p className="text-sm text-white/60 mb-3">{tp.highlight}</p>
-        {tp.recent_changes && (
-          <p className="text-xs text-amber-400/70 border-t border-white/10 pt-3">
-            <span role="img" aria-label="Warning">⚠</span> {tp.recent_changes}
-          </p>
-        )}
-      </CardPanel>
-    </section>
-  );
-}
-
-// ─── Insurance ────────────────────────────────────────────────────────────────
-
-const INSURANCE_DOT_FILL: Record<InsuranceLevel, string> = {
-  strong: "bg-emerald-400",
-  good: "bg-blue-400",
-  mid: "bg-amber-400",
-  none: "bg-white/10",
-};
-
-const INSURANCE_DOTS: Record<InsuranceLevel, number> = {
-  strong: 4,
-  good: 3,
-  mid: 2,
-  none: 0,
-};
-
-function InsuranceDots({ level }: { level: InsuranceLevel }) {
-  const filled = INSURANCE_DOTS[level];
-  return (
-    <div role="img" aria-label={`Coverage level: ${level}`} className="flex gap-0.5">
-      {[1, 2, 3, 4].map((n) => (
+    <div
+      role="status"
+      aria-label="Loading card details"
+      style={{ display: "flex", flexDirection: "column", gap: 24 }}
+    >
+      {[240, 190, 320, 280, 200].map((h, i) => (
         <div
-          key={n}
-          aria-hidden="true"
-          className={`w-1.5 h-1.5 rounded-full ${n <= filled ? INSURANCE_DOT_FILL[level] : "bg-white/10"}`}
+          key={i}
+          style={{
+            minHeight: h,
+            borderRadius: 16,
+            background: "var(--panel-s)",
+            border: "1px solid var(--line)",
+            animation: "pulse 1.5s ease-in-out infinite",
+            opacity: 0.6,
+          }}
         />
       ))}
     </div>
   );
 }
 
-function InsuranceSection({ card }: { card: Card }) {
-  const active = card.insurance.filter((i: Insurance) => i.level !== "none");
-  const missing = card.insurance.filter((i: Insurance) => i.level === "none");
+// ─── Card detail ──────────────────────────────────────────────────────────────
+
+function CardDetail({ card }: { card: Card }) {
+  const netCost = card.annual_fee - card.total_max_credits;
 
   return (
-    <section>
-      <SectionHeading>Insurance & Protection</SectionHeading>
-      <CardPanel>
-        <div className="space-y-3">
-          {active.map((item) => (
-            <div key={item.coverage} className="flex items-start justify-between gap-4">
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-white">{item.coverage}</p>
-                <p className="text-xs text-white/40 mt-0.5">{item.detail}</p>
+    <div>
+      {/* Hero */}
+      <header style={{ paddingTop: 12 }}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "flex-start",
+            justifyContent: "space-between",
+            gap: 16,
+            marginBottom: 6,
+          }}
+        >
+          <div>
+            <p
+              style={{
+                fontSize: 11.5,
+                letterSpacing: "0.28em",
+                textTransform: "uppercase",
+                color: "var(--faint)",
+                margin: "0 0 6px",
+              }}
+            >
+              {card.issuer}
+            </p>
+            <h2
+              style={{
+                fontFamily: '"Fraunces Variable", serif',
+                fontWeight: 600,
+                fontSize: "clamp(26px, 3.5vw, 34px)",
+                margin: "0 0 3px",
+                letterSpacing: "-0.01em",
+                color: "var(--ink)",
+              }}
+            >
+              {card.name}
+            </h2>
+            <p
+              style={{
+                fontSize: 12.5,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color: "var(--muted)",
+                margin: "0 0 14px",
+              }}
+            >
+              {card.points_program} · {card.network}
+            </p>
+          </div>
+          <div className={`verdict-badge ${card.verdict.status}`}>
+            {card.verdict.text}
+          </div>
+        </div>
+
+        {/* Fee stat row */}
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 20, margin: "4px 0 0" }}>
+          {[
+            { k: "Annual fee", v: `$${card.annual_fee}` },
+            { k: "Max credits", v: `$${card.total_max_credits}` },
+            {
+              k: "Best-case net",
+              v: netCost <= 0 ? `+$${Math.abs(netCost)}` : `$${netCost}`,
+            },
+            { k: "Effective cost", v: card.effective_cost },
+          ].map(({ k, v }) => (
+            <div key={k}>
+              <div
+                style={{ fontSize: 10.5, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--faint)" }}
+              >
+                {k}
               </div>
-              <InsuranceDots level={item.level} />
+              <div
+                style={{ fontFamily: '"Fraunces Variable", serif', fontSize: 22, fontWeight: 600, marginTop: 2, color: "var(--ink)", fontVariantNumeric: "tabular-nums" }}
+              >
+                {v}
+              </div>
             </div>
           ))}
-          {missing.map((item) => (
-            <div key={item.coverage} className="flex items-start justify-between gap-4 opacity-35">
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-white/50">{item.coverage}</p>
-                <p className="text-xs text-white/30 mt-0.5">{item.detail}</p>
+        </div>
+      </header>
+
+      {/* Earning */}
+      <Block label="Earning" title="How you earn points" note="per $1">
+        <div className="earn-grid">
+          {card.earn_rates.map((rate) => (
+            <div
+              key={rate.category}
+              className={`earn-tile ${rate.highlight ? "hi" : ""} ${rate.is_base ? "base" : ""}`}
+            >
+              <div className="ei">{rate.emoji}</div>
+              <div className="em">{rate.multiplier}</div>
+              <div className="el">{rate.category}</div>
+            </div>
+          ))}
+        </div>
+        {card.earn_note && <div className="earn-foot">{card.earn_note}</div>}
+      </Block>
+
+      {/* Points value */}
+      <Block label="Value" title="What your points are worth" note="cents per point">
+        <div className="grid2">
+          {/* Redemption ladder */}
+          <div className="panel-box">
+            <div className="ladder-top">
+              <span className="ladder-cur">{card.points.currency}</span>
+              <span className="ladder-100k">
+                100,000 pts ≈ <b>{card.points.per_100k}</b>
+              </span>
+            </div>
+            {card.points.redemption_options.map((opt) => {
+              const w = Math.min((opt.cpp / 2.2) * 100, 100);
+              return (
+                <div key={opt.method} className={`lrow ${opt.best ? "best" : ""}`}>
+                  <span className="ll">{opt.method}</span>
+                  <div className="ltrack">
+                    <div className={`lfill ${opt.best ? "" : "dim"}`} style={{ width: `${w}%` }} />
+                  </div>
+                  <span className="lval">{opt.cpp.toFixed(2)}¢</span>
+                </div>
+              );
+            })}
+            {card.points.note && <div className="ladder-note">{card.points.note}</div>}
+          </div>
+
+          {/* Transfer partners */}
+          <div className="panel-box partners">
+            <div className="pt">Transfer partners</div>
+            <div className="pcount">
+              {card.transfer_partners.airline_count > 0 || card.transfer_partners.hotel_count > 0 ? (
+                <>
+                  <div className="pc">
+                    <b>{card.transfer_partners.airline_count}</b>airlines
+                  </div>
+                  <div className="pc">
+                    <b>{card.transfer_partners.hotel_count}</b>hotels
+                  </div>
+                </>
+              ) : (
+                <div className="pc">
+                  <b>0</b>transfer out
+                </div>
+              )}
+            </div>
+            <div className="phi">{card.transfer_partners.highlight}</div>
+            {card.transfer_partners.recent_changes && (
+              <div className="pchg">{card.transfer_partners.recent_changes}</div>
+            )}
+          </div>
+        </div>
+      </Block>
+
+      {/* Credits */}
+      <Block label="Credits" title="Credits — set what you'll really use">
+        <CreditsSection credits={card.credits} annualFee={card.annual_fee} />
+      </Block>
+
+      {/* Additional cards */}
+      {card.additional_cards.options.length > 0 && (
+        <Block label="Cards" title="Adding a partner or family — additional cards">
+          <div className="addcards">
+            {card.additional_cards.options.map((opt) => (
+              <div key={opt.name} className={`addcard ${opt.is_free ? "free" : ""}`}>
+                <div className="addcard-top">
+                  <span className="addcard-name">{opt.name}</span>
+                  <span className={`addcard-fee ${opt.is_free ? "free" : "paid"}`}>{opt.fee}</span>
+                </div>
+                <ul>
+                  {opt.benefits.map((b, i) => (
+                    <li key={i} className={b.included ? "" : "no"}>
+                      {b.text}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <InsuranceDots level={item.level} />
+            ))}
+          </div>
+          {card.additional_cards.note && (
+            <p className="addcard-foot">{card.additional_cards.note}</p>
+          )}
+        </Block>
+      )}
+
+      {/* Insurance */}
+      <Block label="Protection" title="Insurance & protections" note="the value that isn't a credit">
+        <div className="ins-grid">
+          {card.insurance.slice(0, Math.ceil(card.insurance.length / 2)).map((item) => (
+            <div key={item.coverage} className="ins-row">
+              <span className={`ins-dot ${INS_DOT_CLASS[item.level]}`} />
+              <span className="ik">{item.coverage}</span>
+              <span className="iv">{item.detail}</span>
+            </div>
+          ))}
+          {card.insurance.slice(Math.ceil(card.insurance.length / 2)).map((item) => (
+            <div key={item.coverage} className="ins-row">
+              <span className={`ins-dot ${INS_DOT_CLASS[item.level]}`} />
+              <span className="ik">{item.coverage}</span>
+              <span className="iv">{item.detail}</span>
             </div>
           ))}
         </div>
         {card.protection_note && (
-          <p className="mt-4 text-xs text-white/40 border-t border-white/10 pt-3">
-            {card.protection_note}
-          </p>
+          <p className="protect-note">{card.protection_note}</p>
         )}
         {card.rental_note && (
-          <p className="mt-2 text-xs text-amber-400/60">
-            <span role="img" aria-label="Car rental">🚗</span> {card.rental_note}
-          </p>
+          <div className="rental-call">{card.rental_note}</div>
         )}
-      </CardPanel>
-    </section>
-  );
-}
+      </Block>
 
-// ─── Status perks ─────────────────────────────────────────────────────────────
-
-function StatusPerksSection({ card }: { card: Card }) {
-  return (
-    <section>
-      <SectionHeading>Status & Lounge Perks</SectionHeading>
-      <CardPanel>
-        <div className="space-y-4">
-          {card.status_perks.map((perk) => (
-            <div key={perk.name}>
-              <div className="flex items-center justify-between mb-1">
-                <p className="text-sm font-medium text-white">{perk.name}</p>
-                <div className="flex gap-0.5" aria-label={`Strength: ${perk.strength} out of 5`}>
-                  {[1, 2, 3, 4, 5].map((n) => (
-                    <div
-                      key={n}
-                      aria-hidden="true"
-                      className={`w-1.5 h-1.5 rounded-full ${n <= perk.strength ? "bg-amber-400" : "bg-white/10"}`}
-                    />
+      {/* Status, perks & services */}
+      {(card.status_perks.length > 0 || card.services.length > 0) && (
+        <Block label="Perks & status" title="Status, perks & services">
+          <div className="perkwrap">
+            {card.status_perks.length > 0 && (
+              <div>
+                <div>
+                  <span className="section-tag accent">Elite status</span>
+                </div>
+                <div className="chips">
+                  {card.status_perks.map((perk) => (
+                    <div key={perk.name} className="schip">
+                      <div className="schip-top">
+                        <span className="schip-name">{perk.name}</span>
+                        <Pips strength={perk.strength} />
+                      </div>
+                      <p>{perk.note}</p>
+                    </div>
                   ))}
                 </div>
               </div>
-              <p className="text-xs text-white/40">{perk.note}</p>
-            </div>
-          ))}
-        </div>
-      </CardPanel>
-    </section>
-  );
-}
-
-// ─── Services ─────────────────────────────────────────────────────────────────
-
-function ServicesSection({ card }: { card: Card }) {
-  if (card.services.length === 0) return null;
-  return (
-    <section>
-      <SectionHeading>Included Services</SectionHeading>
-      <CardPanel>
-        <div className="space-y-3">
-          {card.services.map((svc, i) => (
-            <div key={svc.name} className={i > 0 ? "border-t border-white/5 pt-3" : ""}>
-              <p className="text-sm font-medium text-white mb-0.5">{svc.name}</p>
-              <p className="text-xs text-white/40">{svc.detail}</p>
-            </div>
-          ))}
-        </div>
-      </CardPanel>
-    </section>
-  );
-}
-
-// ─── Timeline ─────────────────────────────────────────────────────────────────
-
-const TIMELINE_STYLES: Record<TimelineEventType, string> = {
-  add: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-  cut: "bg-red-500/10 text-red-400 border-red-500/20",
-  neutral: "bg-white/5 text-white/50 border-white/10",
-  future: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-};
-
-const TIMELINE_LINE: Record<TimelineEventType, string> = {
-  add: "bg-emerald-500/40",
-  cut: "bg-red-500/40",
-  neutral: "bg-white/10",
-  future: "bg-blue-500/40",
-};
-
-function TimelineSection({ events }: { events: TimelineEvent[] }) {
-  return (
-    <section>
-      <SectionHeading>Card Timeline</SectionHeading>
-      <ol className="space-y-0">
-        {events.map((event, i) => (
-          <li key={`${event.date}-${event.badge}`} className="flex gap-4">
-            <div className="flex flex-col items-center">
-              <div aria-hidden="true" className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${TIMELINE_LINE[event.type]}`} />
-              {i < events.length - 1 && (
-                <div aria-hidden="true" className="w-px flex-1 bg-white/5 mt-1" />
-              )}
-            </div>
-            <div className="pb-5">
-              <div className="flex items-center gap-2 mb-1 flex-wrap">
-                <span className={`text-xs px-2 py-0.5 rounded border ${TIMELINE_STYLES[event.type]}`}>
-                  {event.badge}
-                </span>
-                <span className="text-xs text-white/30">{event.date}</span>
+            )}
+            {card.services.length > 0 && (
+              <div>
+                <div>
+                  <span className="section-tag muted">Services &amp; perks</span>
+                </div>
+                <div className="svc-box">
+                  {card.services.map((svc) => (
+                    <div key={svc.name} className="svc-item">
+                      <div className="sn">{svc.name}</div>
+                      <div className="sd">{svc.detail}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <p className="text-sm text-white/60">{event.text}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
-    </section>
-  );
-}
+            )}
+          </div>
+        </Block>
+      )}
 
-// ─── Main page ────────────────────────────────────────────────────────────────
-
-function DetailSkeleton() {
-  return (
-    <div role="status" aria-label="Loading card details" className="space-y-6 animate-pulse">
-      <div className="min-h-24 rounded-2xl bg-white/5" />
-      <div className="min-h-48 rounded-2xl bg-white/5" />
-      <div className="min-h-32 rounded-2xl bg-white/5" />
-      <div className="min-h-40 rounded-2xl bg-white/5" />
+      {/* Timeline */}
+      <Block label="History" title="What changed — newest first">
+        <ol className="timeline">
+          {card.timeline.map((event) => (
+            <li key={`${event.date}-${event.badge}`} className={`tnode ${event.type}`}>
+              <div className="td">{event.date}</div>
+              <div className="tt">
+                {event.text}
+                <span className="badge">{event.badge}</span>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </Block>
     </div>
   );
 }
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function CardDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -430,27 +780,45 @@ export default function CardDetailPage() {
     queryFn: id ? () => fetchCard(id) : skipToken,
   });
 
-  const is404 =
-    error instanceof Error && error.message.includes("404");
+  const is404 = error instanceof Error && error.message.includes("404");
 
   return (
-    <div className="min-h-screen bg-[#0A0D12] text-white">
-      <div className="max-w-2xl mx-auto px-6 py-12">
+    <div style={{ minHeight: "100vh" }}>
+      <div className="wrap" style={{ paddingTop: 48, paddingBottom: 80 }}>
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-xs text-white/40 hover:text-white/70 transition-colors mb-8"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
+            fontSize: 12,
+            color: "var(--faint)",
+            textDecoration: "none",
+            marginBottom: 32,
+            transition: "color .15s",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--muted)")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "var(--faint)")}
         >
-          <span aria-hidden="true">←</span> All cards
+          ← All cards
         </Link>
 
         {isLoading && <DetailSkeleton />}
 
         {isError && (
-          <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-6 text-red-400">
-            <p className="font-semibold mb-1">
+          <div
+            style={{
+              border: "1px solid rgba(242,112,138,.3)",
+              borderRadius: 16,
+              background: "rgba(242,112,138,.08)",
+              padding: 24,
+              color: "var(--red)",
+            }}
+          >
+            <p style={{ fontWeight: 600, margin: "0 0 4px" }}>
               {is404 ? "Card not found" : "Failed to load card"}
             </p>
-            <p className="text-sm text-red-400/70">
+            <p style={{ fontSize: 13.5, color: "rgba(242,112,138,.7)", margin: "0 0 12px" }}>
               {is404
                 ? "This card doesn't exist. Check the URL or return to the dashboard."
                 : error instanceof Error
@@ -459,7 +827,7 @@ export default function CardDetailPage() {
             </p>
             <Link
               to="/"
-              className="inline-block mt-3 text-xs text-red-400/70 hover:text-red-300 underline"
+              style={{ fontSize: 13, color: "rgba(242,112,138,.6)", textDecoration: "underline" }}
             >
               Back to dashboard
             </Link>
@@ -468,59 +836,6 @@ export default function CardDetailPage() {
 
         {card && <CardDetail card={card} />}
       </div>
-    </div>
-  );
-}
-
-function CardDetail({ card }: { card: Card }) {
-  const netCost = card.annual_fee - card.total_max_credits;
-
-  return (
-    <div className="space-y-8">
-      {/* Header */}
-      <header>
-        <p className="text-xs uppercase tracking-widest text-white/30 mb-1">{card.issuer}</p>
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-bold text-white">{card.name}</h1>
-            <p className="text-white/40 mt-1">{card.points_program} · {card.network}</p>
-          </div>
-          <span
-            className={`shrink-0 text-xs font-semibold px-3 py-1 rounded-full border ${VERDICT_STYLES[card.verdict.status]}`}
-          >
-            {card.verdict.text}
-          </span>
-        </div>
-
-        {/* Fee summary strip */}
-        <div className="grid grid-cols-3 gap-3 mt-6">
-          {[
-            { label: "Annual fee", value: `$${card.annual_fee}` },
-            { label: "Max credits", value: `$${card.total_max_credits}` },
-            {
-              label: "Best-case net",
-              value: netCost <= 0 ? `+$${Math.abs(netCost)}` : `$${netCost}`,
-            },
-          ].map(({ label, value }) => (
-            <div
-              key={label}
-              className="rounded-xl border border-white/10 bg-white/5 px-4 py-3"
-            >
-              <p className="text-xs text-white/40 uppercase tracking-wider mb-1">{label}</p>
-              <p className="text-lg font-semibold tabular-nums text-white">{value}</p>
-            </div>
-          ))}
-        </div>
-      </header>
-
-      <CreditsSection credits={card.credits} />
-      <EarnRatesSection card={card} />
-      <PointsSection card={card} />
-      <TransferPartnersSection card={card} />
-      <InsuranceSection card={card} />
-      {card.status_perks.length > 0 && <StatusPerksSection card={card} />}
-      <ServicesSection card={card} />
-      <TimelineSection events={card.timeline} />
     </div>
   );
 }
