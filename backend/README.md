@@ -228,7 +228,7 @@ Design choices worth knowing before touching this schema:
 ## How data gets in
 
 ```
-backend/data/cards/{slug}.json  →  drafts add  →  card_drafts (pending)
+backend/data/cards/staging/{slug}.json  →  drafts add  →  card_drafts (pending)
                                                           │
                                                     drafts promote
                                                           │
@@ -237,6 +237,9 @@ backend/data/cards/{slug}.json  →  drafts add  →  card_drafts (pending)
                                                           │
                                                           ▼
                                             normalized tables (cards, credits, ...)
+                                                          │
+                                                          ▼
+                                move file: staging/{slug}.json → {issuer}/{slug}.json
 ```
 
 `upsert_card()` is the single write path — both draft promotion and any future
@@ -250,11 +253,18 @@ rates, etc.) rather than duplicating them.
    over third-party aggregators for factual claims (fees, credit amounts, terms) —
    editorial content like tips and the keep/reconsider verdict is necessarily a
    judgment call either way.
-2. Write or update `backend/data/cards/{slug}.json`, matching the `Card` shape in
-   `backend/models.py`.
+2. Write the card to `backend/data/cards/staging/{slug}.json`, matching the
+   `Card` shape in `backend/models.py`. A file in `staging/` means "drafted,
+   not yet promoted" — the seeding fixture in `tests/backend/conftest.py`
+   skips this folder for exactly that reason, so a pending card never behaves
+   like a live one in tests. See `backend/data/cards/staging/README.md`.
+   For co-branded cards (a bank card tied to an airline/hotel loyalty program),
+   the `id` follows `{issuer}-{brand}-{type}`, e.g. `amex-hilton-honors-aspire`
+   or `amex-marriott-bonvoy-brilliant` — keeps cards from the same loyalty
+   program grouped together alphabetically and makes the issuer unambiguous.
 3. Add it to the review queue:
    ```bash
-   uv run python -m backend.scripts.drafts add <slug> "<source url>" backend/data/cards/<slug>.json
+   uv run python -m backend.scripts.drafts add <slug> "<source url>" backend/data/cards/staging/<slug>.json
    ```
    This validates against the Pydantic schema before it's even allowed into the
    queue — a draft that doesn't parse never becomes something to review.
@@ -266,6 +276,11 @@ rates, etc.) rather than duplicating them.
    ```
    A rejected draft can't be promoted later — fix the JSON and add it as a new
    draft instead.
+6. Once promoted, move the file out of staging into its issuer folder so the
+   file tree matches what's actually live:
+   ```bash
+   git mv backend/data/cards/staging/<slug>.json backend/data/cards/<issuer>/<slug>.json
+   ```
 
 ## Migrations
 

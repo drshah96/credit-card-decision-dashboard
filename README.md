@@ -7,9 +7,10 @@ A web-based tool to help decide which premium credit cards to keep or downgrade.
 - **Backend:** Python 3.13 + FastAPI + SQLAlchemy + Alembic
 - **Frontend:** React 19 + TypeScript + Vite
 - **Database:** SQLite in development, Postgres in production. Card content itself
-  lives in `backend/data/cards/*.json` (one file per card, git-reviewable) and is
-  synced into the database through a review queue — see
-  [`backend/README.md`](backend/README.md) for the schema and how the pipeline works.
+  lives in `backend/data/cards/{issuer}/*.json` (one file per card, grouped by
+  issuer, git-reviewable) and is synced into the database through a review queue —
+  see [`backend/README.md`](backend/README.md) for the schema and how the pipeline
+  works.
 
 ## Cards covered
 
@@ -41,7 +42,7 @@ review queue (see [`backend/README.md`](backend/README.md#adding-or-updating-a-c
 for the full add → review → promote flow):
 
 ```bash
-uv run python -m backend.scripts.drafts add amex "<source url>" backend/data/cards/amex.json
+uv run python -m backend.scripts.drafts add amex-platinum "<source url>" backend/data/cards/amex/amex-platinum.json
 uv run python -m backend.scripts.drafts promote 1
 ```
 
@@ -63,7 +64,7 @@ credit-card-decision-dashboard/
 │   ├── db.py                   # SQLAlchemy engine/session
 │   ├── db_models.py            # ORM models (the normalized schema)
 │   ├── data/
-│   │   ├── cards/*.json        # Card content, source of truth — one file per card
+│   │   ├── cards/{issuer}/*.json  # Card content, source of truth — one file per card, grouped by issuer
 │   │   └── card_catalog.db     # Local dev SQLite db (gitignored, regenerable)
 │   ├── services/
 │   │   └── cards.py            # Query layer used by the API routes

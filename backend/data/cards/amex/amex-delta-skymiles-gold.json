@@ -1,0 +1,207 @@
+{
+  "id": "amex-delta-skymiles-gold",
+  "name": "Delta SkyMiles® Gold American Express Card",
+  "issuer": "American Express",
+  "network": "AMERICAN EXPRESS",
+  "points_program": "Delta SkyMiles",
+  "accent_color": "#7EC8E3",
+  "annual_fee": 150,
+  "effective_cost": "Low if you check a bag on Delta",
+  "verdict": {
+    "status": "situational",
+    "text": "Worth it if you check bags on Delta more than once a year"
+  },
+  "earn_rates": [
+    {
+      "emoji": "✈️",
+      "multiplier": "2×",
+      "category": "Delta purchases",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "2×",
+      "category": "Restaurants",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "2×",
+      "category": "U.S. supermarkets",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "Entry-level SkyMiles earning — 2× on Delta, dining, and groceries, 1× on everything else. This card is worth carrying for the free bag and Delta-side benefits, not for how it earns.",
+  "points": {
+    "currency": "Delta SkyMiles",
+    "redemption_options": [
+      {
+        "method": "Statement / low-end",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Average redemption",
+        "cpp": 1.15,
+        "best": true
+      },
+      {
+        "method": "Premium-cabin sweet spots",
+        "cpp": 2.2,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,100–1,200",
+    "note": "Same SkyMiles currency and dynamic pricing as the Platinum and Reserve tiers — this card just earns it more slowly."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "SkyMiles can't be transferred out — they're stuck in Delta's program.",
+    "recent_changes": "You can transfer INTO SkyMiles from Amex MR (1:1), Chase UR and Capital One — useful for topping up an award."
+  },
+  "credits": [
+    {
+      "id": "bags",
+      "name": "Free Checked Bags",
+      "subtitle": "1st (worldwide) + 2nd (domestic)",
+      "max_annual": 140,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "First checked bag free on Delta flights worldwide (you + up to 8 on the reservation); second bag free on domestic flights.",
+      "tips": [
+        "The single biggest reason to carry this card if you check bags on Delta — one round trip with a checked bag covers most of the $150 fee."
+      ]
+    },
+    {
+      "id": "rideshare",
+      "name": "Rideshare Credit",
+      "subtitle": "$10/mo · after first renewal",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "Monthly U.S. rideshare credit with select providers — but it only starts after your first card renewal, not from day one.",
+      "tips": [
+        "Doesn't kick in until your card has renewed once — new cardholders get nothing from this in year one."
+      ]
+    },
+    {
+      "id": "stays",
+      "name": "Delta Stays Credit",
+      "subtitle": "prepaid hotels · calendar year",
+      "max_annual": 100,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Up to $100/yr on prepaid hotels or vacation rentals booked through Delta Stays on delta.com.",
+      "tips": [
+        "Only worth it if you'd book a Delta Stays property anyway — resets on the calendar year, not renewal."
+      ]
+    },
+    {
+      "id": "flight-credit",
+      "name": "Delta Flight Credit",
+      "subtitle": "$200 · after $10,000/yr spend",
+      "max_annual": 200,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "A $200 statement credit toward a future Delta flight purchase, but only after you spend $10,000 on the card in a calendar year.",
+      "tips": [
+        "The $10,000 spend threshold is real money on a low-fee card — don't count this credit unless you're already going to hit that spend."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Secondary",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Not offered on this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "$500 · after 6 hrs",
+      "level": "good"
+    },
+    {
+      "coverage": "Baggage Insurance Plan",
+      "detail": "$1,250 carry-on / $500 checked",
+      "level": "mid"
+    }
+  ],
+  "protection_note": "The clearest gap versus the Platinum and Reserve tiers: no trip cancellation/interruption insurance at all. Trip delay coverage is actually better than the Platinum's ($500/6hrs vs $300/12hrs) — an odd inversion, but real.",
+  "rental_note": "Secondary only — it pays after your own auto policy. Put rentals on a card with free primary coverage (Venture X, Sapphire Reserve) if you rent often.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "Priority boarding",
+      "detail": "Zone 5 priority boarding on Delta flights."
+    },
+    {
+      "name": "In-flight purchase credit",
+      "detail": "20% back as a statement credit on Delta in-flight purchases (food, drinks, Wi-Fi)."
+    },
+    {
+      "name": "Award travel discount",
+      "detail": "15% off Delta award flights booked with miles."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "Zero FX fees on international spend."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Additional Card",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add — no annual fee for additional Gold cards",
+            "included": true
+          },
+          {
+            "text": "1st free checked bag when flying Delta",
+            "included": true
+          },
+          {
+            "text": "Earns SkyMiles (into your account)",
+            "included": true
+          },
+          {
+            "text": "Shares the account's credits — no separate set",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Additional Delta Gold cards are free, and each one extends the free-checked-bag perk to that cardholder when flying Delta."
+  },
+  "timeline": [
+    {
+      "date": "Jun 4, 2026",
+      "type": "add",
+      "badge": "Refresh",
+      "text": "Added a complimentary second checked bag on domestic Delta-operated flights and a $120 annual rideshare credit — no fee increase."
+    }
+  ]
+}

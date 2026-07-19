@@ -3,7 +3,7 @@ import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CardDetailPage from "@/pages/CardDetailPage";
-import type { Card } from "@/types/cards";
+import type { Card, Credit } from "@/types/cards";
 
 // ─── Mock API module ──────────────────────────────────────────────────────────
 
@@ -16,6 +16,21 @@ import { fetchCard } from "@/api/cards";
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 
+function makeCredit(overrides: Partial<Credit> = {}): Credit {
+  return {
+    id: "uber",
+    name: "Uber Cash",
+    subtitle: "$15/mo",
+    max_annual: 200,
+    default_value: 0,
+    tier: "easy",
+    removed: false,
+    description: "Monthly Uber Cash for rides and Eats.",
+    tips: [],
+    ...overrides,
+  };
+}
+
 function makeCard(overrides: Partial<Card> = {}): Card {
   return {
     id: "amex",
@@ -27,8 +42,6 @@ function makeCard(overrides: Partial<Card> = {}): Card {
     annual_fee: 895,
     effective_cost: "Depends on usage",
     verdict: { status: "situational", text: "Keep if you use the credits" },
-    total_easy_credits: 0,
-    total_max_credits: 2984,
     earn_rates: [
       { emoji: "✈️", multiplier: "5×", category: "Flights", highlight: true, is_base: false },
       { emoji: "💳", multiplier: "1×", category: "Everything else", highlight: false, is_base: true },
@@ -225,7 +238,9 @@ describe("CardDetailPage", () => {
     });
 
     it("renders annual fee, max credits, and best-case net", async () => {
-      vi.mocked(fetchCard).mockResolvedValue(makeCard({ annual_fee: 895, total_max_credits: 2984 }));
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({ annual_fee: 895, credits: [makeCredit({ max_annual: 2984 })] }),
+      );
 
       renderPage();
 
@@ -233,7 +248,8 @@ describe("CardDetailPage", () => {
         // $895 appears in both the header strip and the calculator
         expect(screen.getAllByText("$895").length).toBeGreaterThanOrEqual(2);
       });
-      expect(screen.getByText("$2984")).toBeInTheDocument();
+      // "$2984" also appears on the credit row's own max badge — assert at least one
+      expect(screen.getAllByText("$2984").length).toBeGreaterThanOrEqual(1);
       expect(screen.getByText("+$2089")).toBeInTheDocument();
     });
 
@@ -326,7 +342,7 @@ describe("CardDetailPage", () => {
     it("shows net cost as a plain amount when annual fee exceeds max credits", async () => {
       // netCost = 395 - 100 = 295 > 0 → shows "$295" (not "+$295")
       vi.mocked(fetchCard).mockResolvedValue(
-        makeCard({ annual_fee: 395, total_max_credits: 100 }),
+        makeCard({ annual_fee: 395, credits: [makeCredit({ max_annual: 100 })] }),
       );
 
       renderPage();
@@ -592,8 +608,10 @@ describe("CardDetailPage", () => {
       renderPage();
 
       await waitFor(() => {
-        // Credits used = $300 + $100 = $400, fee = $395, net = +$5
-        expect(screen.getByText("+$5")).toBeInTheDocument();
+        // Credits used = $300 + $100 = $400, fee = $395, net = +$5 — shown both in the
+        // header's best-case net (same $400 total, since max_annual == default_value here)
+        // and the calculator's verdict, so at least one match rather than exactly one.
+        expect(screen.getAllByText("+$5").length).toBeGreaterThanOrEqual(1);
       });
       expect(screen.getByText("Ahead by")).toBeInTheDocument();
     });

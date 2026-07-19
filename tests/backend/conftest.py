@@ -27,7 +27,9 @@ def _seed_test_database():
     Base.metadata.create_all(engine)
     session = SessionLocal()
     try:
-        for path in sorted(_CARDS_DIR.glob("*.json")):
+        for path in sorted(_CARDS_DIR.glob("**/*.json")):
+            if "staging" in path.parts:
+                continue  # not yet promoted — shouldn't behave like a live card in tests
             upsert_card(session, json.loads(path.read_text()))
         session.commit()
     finally:

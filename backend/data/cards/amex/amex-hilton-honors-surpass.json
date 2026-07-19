@@ -1,0 +1,158 @@
+{
+  "id": "amex-hilton-honors-surpass",
+  "name": "Hilton Honors American Express Surpass® Card",
+  "issuer": "American Express",
+  "network": "AMERICAN EXPRESS",
+  "points_program": "Hilton Honors",
+  "accent_color": "#5C7A9E",
+  "annual_fee": 150,
+  "effective_cost": "Low if you spend $200+/yr at Hilton",
+  "verdict": {
+    "status": "keep",
+    "text": "Fee pays for itself with modest Hilton spend"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🏨",
+      "multiplier": "12×",
+      "category": "Hilton portfolio hotels — direct",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "6×",
+      "category": "U.S. restaurants, supermarkets, gas stations",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛍️",
+      "multiplier": "4×",
+      "category": "U.S. online retail",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "3×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "Strong middle-tier earning — 12× at Hilton and a 3× catch-all beats most no-fee cards outright. Sits between the free Hilton Honors card and the $550 Aspire.",
+  "points": {
+    "currency": "Hilton Honors",
+    "redemption_options": [
+      {
+        "method": "Standard hotel stays",
+        "cpp": 0.5,
+        "best": true
+      },
+      {
+        "method": "Transfer to airline miles (~10:1)",
+        "cpp": 0.13,
+        "best": false
+      }
+    ],
+    "per_100k": "$500",
+    "note": "Same Hilton Honors currency as the free card and the Aspire — the Surpass earns it faster and adds Gold status, without the Aspire's resort credit or free night."
+  },
+  "transfer_partners": {
+    "airline_count": 26,
+    "hotel_count": 0,
+    "highlight": "26 airline transfer partners, almost all at a poor 10:1 ratio — Hilton points are built to be spent on hotel stays, not transferred out.",
+    "recent_changes": "No confirmed recent changes to the airline transfer chart."
+  },
+  "credits": [
+    {
+      "id": "hilton-credit",
+      "name": "Hilton Resort/Purchase Credit",
+      "subtitle": "$50/quarter",
+      "max_annual": 200,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "Up to $50 in statement credits each quarter on eligible Hilton purchases.",
+      "tips": [
+        "By itself, this credit covers the $150 annual fee if you spend $200/yr at Hilton — the lowest bar of any credit in this dashboard."
+      ]
+    },
+    {
+      "id": "free-night",
+      "name": "Free Night Reward",
+      "subtitle": "after $15,000/yr spend",
+      "max_annual": 250,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "One free night reward earned after spending $15,000 on the card in a calendar year.",
+      "tips": [
+        "A high spend threshold for a $150-fee card — don't count this unless you're already going to hit $15,000/yr."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Secondary · $50,000 · 30 days",
+      "level": "mid"
+    },
+    {
+      "coverage": "Baggage Insurance Plan",
+      "detail": "$1,250 carry-on / $500 checked",
+      "level": "mid"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "$1,000/claim · $50,000/yr · 90 days",
+      "level": "mid"
+    }
+  ],
+  "protection_note": "No trip cancellation, trip delay, or emergency medical/evacuation coverage — those start at the Aspire tier. This card's value is in earning and status, not trip protection.",
+  "rental_note": "Secondary only — put rentals on a card with primary coverage if you rent often.",
+  "status_perks": [
+    {
+      "name": "Hilton Honors Gold Status",
+      "strength": 3,
+      "note": "Complimentary with the card — space-available room upgrades, 80% bonus points on stays, and executive lounge access at select properties. Upgrades to Diamond if you spend $40,000/yr on the card."
+    }
+  ],
+  "services": [
+    {
+      "name": "Global Assist Hotline",
+      "detail": "24/7 emergency coordination when traveling 100+ miles from home (cardholder pays for any services rendered)."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "Zero FX fees on international spend."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Additional Card",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns Hilton Honors points on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Does not get their own Gold status or resort credit independently",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Additional cards are free — an easy way to pool household spend toward the 12× hotel rate and the $40,000 Diamond-status threshold."
+  },
+  "timeline": []
+}

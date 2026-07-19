@@ -1,0 +1,144 @@
+{
+  "id": "amex-blue-cash-preferred",
+  "name": "Blue Cash Preferred® Card from American Express",
+  "issuer": "American Express",
+  "network": "AMERICAN EXPRESS",
+  "points_program": "Cash Back",
+  "accent_color": "#2E6F9E",
+  "annual_fee": 95,
+  "effective_cost": "Low for grocery-heavy households",
+  "verdict": {
+    "status": "keep",
+    "text": "Easy keep if your grocery spend clears ~$1,600/yr"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🛒",
+      "multiplier": "6%",
+      "category": "U.S. supermarkets (up to $6,000/yr, then 1%)",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "📺",
+      "multiplier": "6%",
+      "category": "Select U.S. streaming subscriptions",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "⛽",
+      "multiplier": "3%",
+      "category": "U.S. gas stations",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "🚕",
+      "multiplier": "3%",
+      "category": "Transit",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1%",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The 6% supermarket rate caps at $6,000/yr (max $360/yr) — a household spending even half that already covers the $95 fee several times over. Streaming, gas, and transit round it out well beyond a single-category card.",
+  "points": {
+    "currency": "Cash Back",
+    "redemption_options": [
+      {
+        "method": "Statement credit",
+        "cpp": 1.0,
+        "best": true
+      }
+    ],
+    "per_100k": "$1,000",
+    "note": "Not a points program — cash back here is always worth exactly 1¢, redeemed as a statement credit. No transfer partners, no premium redemption to chase."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "Cash back isn't a transferable currency — it's a straight statement credit, always worth face value.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [
+    {
+      "id": "disney",
+      "name": "Disney Bundle Credit",
+      "subtitle": "$10/mo · enroll",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "Up to $10/month in statement credits toward Disney+, Hulu, or ESPN+ (including the Disney Bundle). Enrollment required.",
+      "tips": [
+        "Only worth it if you already subscribe to a Disney streaming service — otherwise it's $0 to you."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Extended warranty",
+      "detail": "+1 year on warranties of 5 years or less · $10,000/item · $50,000/yr",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "$1,000/claim · $50,000/yr · 90 days",
+      "level": "mid"
+    },
+    {
+      "coverage": "Return protection",
+      "detail": "Reimburses undamaged items merchants won't take back, within 90 days",
+      "level": "mid"
+    }
+  ],
+  "protection_note": "This is a cash-back card, not a travel card — no trip delay, trip cancellation, or rental car coverage. What it does have (extended warranty, return protection) is a step up from the fee-free Blue Cash Everyday.",
+  "rental_note": "No rental car coverage at all — use a different card for rentals.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "Foreign transaction fee applies",
+      "detail": "2.7% on purchases made outside the US — not built for international use."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Additional Card",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns cash back on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Same purchase protection as the primary card",
+            "included": true
+          }
+        ]
+      }
+    ],
+    "note": "Additional cards are free — no reason not to add a trusted household member."
+  },
+  "timeline": [
+    {
+      "date": "Aug 1, 2025",
+      "type": "add",
+      "badge": "Refresh",
+      "text": "Disney Streaming credit raised from $84/yr to $120/yr ($10/mo), effective for eligible transactions from this date."
+    }
+  ]
+}

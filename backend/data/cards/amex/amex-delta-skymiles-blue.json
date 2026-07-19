@@ -1,0 +1,127 @@
+{
+  "id": "amex-delta-skymiles-blue",
+  "name": "Delta SkyMiles® Blue American Express Card",
+  "issuer": "American Express",
+  "network": "AMERICAN EXPRESS",
+  "points_program": "Delta SkyMiles",
+  "accent_color": "#A8D8F0",
+  "annual_fee": 0,
+  "effective_cost": "Free — no annual fee",
+  "verdict": {
+    "status": "keep",
+    "text": "Free SkyMiles earner — fine as a backup, not a reason to fly Delta"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🍽️",
+      "multiplier": "2×",
+      "category": "Restaurants worldwide (incl. U.S. takeout/delivery)",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "✈️",
+      "multiplier": "2×",
+      "category": "Delta purchases",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "No annual fee means no free checked bag either — this card earns SkyMiles slowly and gives up the one benefit (the free bag) that makes the paid Delta tiers worth carrying.",
+  "points": {
+    "currency": "Delta SkyMiles",
+    "redemption_options": [
+      {
+        "method": "Statement / low-end",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Average redemption",
+        "cpp": 1.15,
+        "best": true
+      },
+      {
+        "method": "Premium-cabin sweet spots",
+        "cpp": 2.2,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,100–1,200",
+    "note": "Same SkyMiles currency as the rest of the Delta lineup — this card is purely about earning it for free, not about any card-side perks."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "SkyMiles can't be transferred out — they're stuck in Delta's program.",
+    "recent_changes": "You can transfer INTO SkyMiles from Amex MR (1:1), Chase UR and Capital One — useful for topping up an award."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Secondary",
+      "level": "mid"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "+1 year on warranties of 5 years or less",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "90 days from purchase",
+      "level": "mid"
+    }
+  ],
+  "protection_note": "The thinnest protection in the Delta lineup — no trip cancellation, no trip delay, no baggage coverage, and no emergency medical/evacuation assistance. This is a free card with free-card-level protection.",
+  "rental_note": "Secondary only — put rentals on a card with primary coverage if you rent often.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "In-flight purchase credit",
+      "detail": "20% back as a statement credit on Delta in-flight food and beverage purchases."
+    },
+    {
+      "name": "Pay with Miles discount",
+      "detail": "Up to $50 off a Delta.com flight for every 5,000 miles redeemed via Pay with Miles."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "Zero FX fees on international spend."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Additional Card",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns SkyMiles on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "No free checked bag on this tier regardless",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Additional cards are free, same as the rest of the Delta lineup."
+  },
+  "timeline": []
+}
