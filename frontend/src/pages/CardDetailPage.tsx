@@ -500,7 +500,12 @@ function DetailSkeleton() {
 // ─── Card detail ──────────────────────────────────────────────────────────────
 
 function CardDetail({ card }: { card: Card }) {
-  const netCost = card.annual_fee - card.total_max_credits;
+  // GET /api/cards/:id doesn't return total_max_credits (that's summary-only) —
+  // derive it from the same active, non-removed credits the calculator below uses.
+  const totalMaxCredits = card.credits
+    .filter((c) => !c.removed)
+    .reduce((sum, c) => sum + c.max_annual, 0);
+  const netCost = card.annual_fee - totalMaxCredits;
 
   return (
     <div>
@@ -561,7 +566,7 @@ function CardDetail({ card }: { card: Card }) {
         <div style={{ display: "flex", flexWrap: "wrap", gap: 20, margin: "4px 0 0" }}>
           {[
             { k: "Annual fee", v: `$${card.annual_fee}` },
-            { k: "Max credits", v: `$${card.total_max_credits}` },
+            { k: "Max credits", v: `$${totalMaxCredits}` },
             {
               k: "Best-case net",
               v: netCost <= 0 ? `+$${Math.abs(netCost)}` : `$${netCost}`,
