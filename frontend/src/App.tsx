@@ -12,53 +12,116 @@ function DashboardPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#0A0D12] text-white">
-      <div className="max-w-5xl mx-auto px-6 py-12">
+    <div style={{ minHeight: "100vh" }}>
+      <div className="wrap" style={{ paddingTop: 48, paddingBottom: 80 }}>
         {/* Header */}
-        <header className="mb-10">
-          <p className="text-xs uppercase tracking-widest text-white/30 mb-3">
+        <header style={{ marginBottom: 40 }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+              fontSize: 11.5,
+              letterSpacing: "0.32em",
+              textTransform: "uppercase",
+              color: "var(--faint)",
+              marginBottom: 16,
+            }}
+          >
             The Wallet Audit
-          </p>
-          <h1 className="text-4xl font-bold tracking-tight mb-3">
-            Premium Card Dashboard
+            <span style={{ flex: 1, height: 1, background: "var(--line)" }} />
+          </div>
+          <h1
+            style={{
+              fontFamily: '"Fraunces Variable", serif',
+              fontWeight: 600,
+              fontSize: "clamp(34px, 5.6vw, 56px)",
+              lineHeight: 1.05,
+              margin: "0 0 10px",
+              letterSpacing: "-0.01em",
+              color: "var(--ink)",
+            }}
+          >
+            Premium cards aren't about credits.
+            <br />
+            They're about{" "}
+            <em style={{ fontStyle: "italic", color: "var(--gold)" }}>
+              what you'll actually use.
+            </em>
           </h1>
-          <p className="text-white/50 max-w-xl">
-            Compare your premium credit cards, see what each one is actually
-            costing you, and decide what to keep.
+          <p
+            style={{
+              color: "var(--muted)",
+              maxWidth: 640,
+              fontSize: 15.5,
+              margin: 0,
+            }}
+          >
+            Pick a card to see every credit, earn rate, and insurance benefit — then drag
+            the sliders to what you'll <em>really</em> use. The calculator shows whether
+            it offsets the fee.
           </p>
         </header>
 
-        {/* States */}
+        {/* Loading skeletons */}
         {isLoading && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+              gap: 16,
+            }}
+          >
             {[...Array(4)].map((_, i) => (
               <div
                 key={i}
-                className="rounded-2xl border border-white/10 bg-white/5 min-h-52 animate-pulse"
+                style={{
+                  borderRadius: 16,
+                  border: "1px solid var(--line)",
+                  background: "var(--panel-s)",
+                  minHeight: 208,
+                  animation: "pulse 1.5s ease-in-out infinite",
+                  opacity: 0.6,
+                }}
               />
             ))}
           </div>
         )}
 
+        {/* Error */}
         {isError && (
-          <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-6 text-red-400">
-            <p className="font-semibold mb-1">Failed to load cards</p>
-            <p className="text-sm text-red-400/70">
+          <div
+            style={{
+              borderRadius: 16,
+              border: "1px solid rgba(242,112,138,.3)",
+              background: "rgba(242,112,138,.08)",
+              padding: 24,
+              color: "var(--red)",
+            }}
+          >
+            <p style={{ fontWeight: 600, margin: "0 0 4px" }}>Failed to load cards</p>
+            <p style={{ fontSize: 13.5, color: "rgba(242,112,138,.7)", margin: 0 }}>
               {error instanceof Error ? error.message : "Unknown error"}
-            </p>
-            <p className="text-sm text-red-400/50 mt-2">
-              Make sure the backend is running at{" "}
-              <code className="bg-red-500/10 px-1 rounded">
-                {import.meta.env.VITE_API_URL ?? "http://localhost:8000"}
-              </code>
             </p>
           </div>
         )}
 
+        {/* Cards grid */}
         {cards && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+              gap: 16,
+            }}
+          >
             {cards.map((card) => (
-              <Link key={card.id} to={`/cards/${card.id}`} className="block">
+              <Link
+                key={card.id}
+                to={`/cards/${card.id}`}
+                aria-label={`View ${card.name} details`}
+                style={{ display: "block", textDecoration: "none" }}
+              >
                 <CardSummaryCard card={card} />
               </Link>
             ))}

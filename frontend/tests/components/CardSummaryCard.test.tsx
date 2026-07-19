@@ -104,4 +104,13 @@ describe("CardSummaryCard", () => {
     expect(screen.getByText("AMERICAN EXPRESS")).toBeInTheDocument();
     expect(screen.getByText("Depends on usage")).toBeInTheDocument();
   });
+
+  it("applies muted style to max credits when there are no credits", () => {
+    // fee=$395, credits=$0 → netCost=395 (positive int) → displays "$395" for best-case net
+    render(<CardSummaryCard card={makeCard({ annual_fee: 395, total_max_credits: 0 })} />);
+
+    // "$0" only appears once — as max credits (best-case net shows "$395")
+    const zeroEl = screen.getByText("$0");
+    expect(zeroEl).toHaveClass("text-white/30");
+  });
 });
