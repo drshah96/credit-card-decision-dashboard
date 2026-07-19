@@ -7,7 +7,7 @@ client = TestClient(app)
 
 CARD_IDS = [
     "amex-platinum",
-    "csr",
+    "chase-sapphire-reserve",
     "venturex",
     "amex-delta-skymiles-platinum",
     "amex-gold",
@@ -91,7 +91,7 @@ def test_annual_fees_are_correct() -> None:
     response = client.get("/api/cards")
     fees = {c["id"]: c["annual_fee"] for c in response.json()}
     assert fees["amex-platinum"] == 895
-    assert fees["csr"] == 795
+    assert fees["chase-sapphire-reserve"] == 795
     assert fees["venturex"] == 395
     assert fees["amex-delta-skymiles-platinum"] == 350
     assert fees["amex-gold"] == 325
