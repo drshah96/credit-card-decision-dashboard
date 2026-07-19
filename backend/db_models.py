@@ -96,15 +96,18 @@ class CardModel(Base):
     card_id: Mapped[int] = mapped_column(primary_key=True)
     slug: Mapped[str] = mapped_column(unique=True)
     name: Mapped[str]
-    issuer_id: Mapped[int] = mapped_column(ForeignKey("issuers.issuer_id"))
-    network_id: Mapped[int] = mapped_column(ForeignKey("networks.network_id"))
-    points_program_id: Mapped[int] = mapped_column(ForeignKey("loyalty_programs.loyalty_program_id"))
+    issuer_id: Mapped[int] = mapped_column(ForeignKey("issuers.issuer_id"), index=True)
+    network_id: Mapped[int] = mapped_column(ForeignKey("networks.network_id"), index=True)
+    points_program_id: Mapped[int] = mapped_column(
+        ForeignKey("loyalty_programs.loyalty_program_id"), index=True
+    )
     accent_color: Mapped[str]
     annual_fee_cents: Mapped[int]
     effective_cost_label: Mapped[str]
     verdict_status: Mapped[str]
     verdict_text: Mapped[str]
     earn_note: Mapped[str | None] = mapped_column(default=None)
+    points_per_100k_label: Mapped[str] = mapped_column(default="")
     points_note: Mapped[str | None] = mapped_column(default=None)
     transfer_airline_count: Mapped[int] = mapped_column(default=0)
     transfer_hotel_count: Mapped[int] = mapped_column(default=0)
@@ -158,7 +161,7 @@ class EarnRate(Base):
     __tablename__ = "earn_rates"
 
     earn_rate_id: Mapped[int] = mapped_column(primary_key=True)
-    card_id: Mapped[int] = mapped_column(ForeignKey("cards.card_id", ondelete="CASCADE"))
+    card_id: Mapped[int] = mapped_column(ForeignKey("cards.card_id", ondelete="CASCADE"), index=True)
     emoji: Mapped[str | None] = mapped_column(default=None)
     multiplier_x: Mapped[float]
     category: Mapped[str]
@@ -173,7 +176,7 @@ class RedemptionOption(Base):
     __tablename__ = "redemption_options"
 
     redemption_option_id: Mapped[int] = mapped_column(primary_key=True)
-    card_id: Mapped[int] = mapped_column(ForeignKey("cards.card_id", ondelete="CASCADE"))
+    card_id: Mapped[int] = mapped_column(ForeignKey("cards.card_id", ondelete="CASCADE"), index=True)
     method: Mapped[str]
     cents_per_point: Mapped[float]
     is_best: Mapped[bool] = mapped_column(default=False)
@@ -187,13 +190,13 @@ class CreditModel(Base):
     __table_args__ = (UniqueConstraint("card_id", "slug", name="uq_credit_card_slug"),)
 
     credit_id: Mapped[int] = mapped_column(primary_key=True)
-    card_id: Mapped[int] = mapped_column(ForeignKey("cards.card_id", ondelete="CASCADE"))
+    card_id: Mapped[int] = mapped_column(ForeignKey("cards.card_id", ondelete="CASCADE"), index=True)
     slug: Mapped[str]
     name: Mapped[str]
     subtitle: Mapped[str]
     max_annual_cents: Mapped[int]
     default_value_cents: Mapped[int] = mapped_column(default=0)
-    tier_id: Mapped[int] = mapped_column(ForeignKey("benefit_tiers.tier_id"))
+    tier_id: Mapped[int] = mapped_column(ForeignKey("benefit_tiers.tier_id"), index=True)
     is_removed: Mapped[bool] = mapped_column(default=False)
     removed_on: Mapped[date | None] = mapped_column(default=None)
     description: Mapped[str]
@@ -210,7 +213,9 @@ class CreditTip(Base):
     __tablename__ = "credit_tips"
 
     credit_tip_id: Mapped[int] = mapped_column(primary_key=True)
-    credit_id: Mapped[int] = mapped_column(ForeignKey("credits.credit_id", ondelete="CASCADE"))
+    credit_id: Mapped[int] = mapped_column(
+        ForeignKey("credits.credit_id", ondelete="CASCADE"), index=True
+    )
     tip_text: Mapped[str]
     is_warning: Mapped[bool] = mapped_column(default=False)
     sort_order: Mapped[int]
@@ -225,8 +230,10 @@ class InsuranceBenefit(Base):
     )
 
     insurance_benefit_id: Mapped[int] = mapped_column(primary_key=True)
-    card_id: Mapped[int] = mapped_column(ForeignKey("cards.card_id", ondelete="CASCADE"))
-    coverage_type_id: Mapped[int] = mapped_column(ForeignKey("coverage_types.coverage_type_id"))
+    card_id: Mapped[int] = mapped_column(ForeignKey("cards.card_id", ondelete="CASCADE"), index=True)
+    coverage_type_id: Mapped[int] = mapped_column(
+        ForeignKey("coverage_types.coverage_type_id"), index=True
+    )
     detail: Mapped[str]
     level: Mapped[str]
     sort_order: Mapped[int]
@@ -240,7 +247,7 @@ class StatusPerk(Base):
     __table_args__ = (CheckConstraint("strength BETWEEN 1 AND 5", name="ck_status_perk_strength"),)
 
     status_perk_id: Mapped[int] = mapped_column(primary_key=True)
-    card_id: Mapped[int] = mapped_column(ForeignKey("cards.card_id", ondelete="CASCADE"))
+    card_id: Mapped[int] = mapped_column(ForeignKey("cards.card_id", ondelete="CASCADE"), index=True)
     name: Mapped[str]
     strength: Mapped[int]
     note: Mapped[str]
@@ -253,7 +260,7 @@ class ServiceModel(Base):
     __tablename__ = "services"
 
     service_id: Mapped[int] = mapped_column(primary_key=True)
-    card_id: Mapped[int] = mapped_column(ForeignKey("cards.card_id", ondelete="CASCADE"))
+    card_id: Mapped[int] = mapped_column(ForeignKey("cards.card_id", ondelete="CASCADE"), index=True)
     name: Mapped[str]
     detail: Mapped[str]
     sort_order: Mapped[int]
@@ -265,7 +272,7 @@ class AdditionalCardOption(Base):
     __tablename__ = "additional_card_options"
 
     option_id: Mapped[int] = mapped_column(primary_key=True)
-    card_id: Mapped[int] = mapped_column(ForeignKey("cards.card_id", ondelete="CASCADE"))
+    card_id: Mapped[int] = mapped_column(ForeignKey("cards.card_id", ondelete="CASCADE"), index=True)
     name: Mapped[str]
     fee_cents: Mapped[int | None] = mapped_column(default=None)
     fee_label: Mapped[str]
@@ -285,7 +292,7 @@ class AdditionalCardBenefit(Base):
 
     benefit_id: Mapped[int] = mapped_column(primary_key=True)
     option_id: Mapped[int] = mapped_column(
-        ForeignKey("additional_card_options.option_id", ondelete="CASCADE")
+        ForeignKey("additional_card_options.option_id", ondelete="CASCADE"), index=True
     )
     benefit_text: Mapped[str]
     is_included: Mapped[bool] = mapped_column(default=True)
@@ -303,7 +310,7 @@ class TimelineEvent(Base):
     )
 
     event_id: Mapped[int] = mapped_column(primary_key=True)
-    card_id: Mapped[int] = mapped_column(ForeignKey("cards.card_id", ondelete="CASCADE"))
+    card_id: Mapped[int] = mapped_column(ForeignKey("cards.card_id", ondelete="CASCADE"), index=True)
     event_date: Mapped[date | None] = mapped_column(default=None)
     date_label: Mapped[str]
     event_type: Mapped[str]

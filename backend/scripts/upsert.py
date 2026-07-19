@@ -109,6 +109,24 @@ def upsert_card(session: Session, data: dict) -> CardModel:
     if card is None:
         card = CardModel(slug=data["id"])
         session.add(card)
+    else:
+        # Clear and flush child collections before reassigning them below.
+        # Reassigning `card.credits = [...]` directly relies on the delete-orphan
+        # cascade to remove the old rows, but SQLAlchemy's unit of work doesn't
+        # guarantee those DELETEs are flushed before the new rows' INSERTs in the
+        # same flush — so re-promoting an existing card hits the UNIQUE(card_id,
+        # slug) constraint against its own not-yet-deleted old rows. Flushing an
+        # empty collection first forces the deletes to actually happen first.
+        card.earn_rates = []
+        card.redemption_options = []
+        card.credits = []
+        card.insurance_benefits = []
+        card.status_perks = []
+        card.services = []
+        card.additional_card_options = []
+        card.timeline_events = []
+        card.transfer_partners = []
+        session.flush()
 
     card.name = data["name"]
     card.issuer = issuer
@@ -120,6 +138,7 @@ def upsert_card(session: Session, data: dict) -> CardModel:
     card.verdict_status = data["verdict"]["status"]
     card.verdict_text = data["verdict"]["text"]
     card.earn_note = data.get("earn_note")
+    card.points_per_100k_label = data["points"]["per_100k"]
     card.points_note = data["points"].get("note")
     card.transfer_airline_count = data["transfer_partners"]["airline_count"]
     card.transfer_hotel_count = data["transfer_partners"]["hotel_count"]

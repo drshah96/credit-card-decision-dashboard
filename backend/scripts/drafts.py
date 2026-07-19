@@ -85,6 +85,12 @@ def cmd_promote(args: argparse.Namespace) -> None:
             sys.exit(f"error: no draft #{args.draft_id}")
         if draft.status == "approved":
             sys.exit(f"error: draft #{args.draft_id} was already promoted at {draft.reviewed_at}")
+        if draft.status == "rejected":
+            sys.exit(
+                f"error: draft #{args.draft_id} was rejected at {draft.reviewed_at} "
+                f"({draft.reviewer_notes!r}) — fix the extracted JSON and add it as a new draft "
+                "instead of promoting a rejected one"
+            )
 
         data = json.loads(draft.extracted_json)
         try:
