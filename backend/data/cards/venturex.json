@@ -1,0 +1,243 @@
+{
+  "id": "venturex",
+  "name": "Venture X",
+  "issuer": "Capital One",
+  "network": "VISA INFINITE",
+  "points_program": "Capital One Miles",
+  "accent_color": "#F0435F",
+  "annual_fee": 395,
+  "effective_cost": "~$0 net",
+  "verdict": {
+    "status": "keep",
+    "text": "Keep — the value anchor"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🏨",
+      "multiplier": "10×",
+      "category": "Hotels & rental cars — via Capital One Travel",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "✈️",
+      "multiplier": "5×",
+      "category": "Flights & vacation rentals — via Capital One Travel",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🌐",
+      "multiplier": "2×",
+      "category": "Everything else — no categories",
+      "highlight": true,
+      "is_base": false
+    }
+  ],
+  "earn_note": "The flat 2× on everything is the quiet star — it beats the 1× base on both the Amex Platinum and Sapphire Reserve, with nothing to track.",
+  "points": {
+    "currency": "Capital One Miles",
+    "redemption_options": [
+      {
+        "method": "Travel eraser (floor)",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Capital One Travel",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Transfer partners (avg)",
+        "cpp": 1.85,
+        "best": true
+      }
+    ],
+    "per_100k": "$1,850+",
+    "note": "Guaranteed 1¢ floor as a travel eraser on any travel charge — no other card here has that safety net."
+  },
+  "transfer_partners": {
+    "airline_count": 15,
+    "hotel_count": 3,
+    "highlight": "15+ airline partners. Best sweet spots: Turkish (Star Alliance short-hauls), Flying Blue, Virgin Atlantic, JAL (added 2025), Wyndham.",
+    "recent_changes": "The gap vs. Chase: no Hyatt and no U.S. legacy airline — but the 1¢ eraser floor means miles are never worthless."
+  },
+  "credits": [
+    {
+      "id": "travel",
+      "name": "Annual Travel Credit",
+      "subtitle": "Capital One Travel portal",
+      "max_annual": 300,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "A $300 credit on bookings through the Capital One Travel portal, resetting each anniversary.",
+      "tips": [
+        "Portal-only — book something you'd buy anyway. It price-matches within 24 hrs.",
+        "Resets on your anniversary, not Jan 1 — don't let it lapse."
+      ]
+    },
+    {
+      "id": "anniv",
+      "name": "Anniversary Miles",
+      "subtitle": "10,000 miles · auto-posted",
+      "max_annual": 100,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "10,000 miles (≥$100 toward travel) deposited automatically every anniversary — no spend required.",
+      "tips": [
+        "Totally passive. With the $300 credit, that's ~$400 against a $395 fee — the card pays for itself."
+      ]
+    },
+    {
+      "id": "premier",
+      "name": "Premier Collection",
+      "subtitle": "luxury hotels · $100/stay",
+      "max_annual": 100,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "A $100 experience credit plus upgrades and early check-in/late checkout on ~600 hotels via Capital One Travel (per stay, no annual cap).",
+      "tips": [
+        "Triple-dip: the $100 experience credit stacks with your $300 annual travel credit and 10× earning on the same booking.",
+        "Per-stay, so value it by how many qualifying luxe stays you'll book."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Primary · $75k (free)",
+      "level": "strong"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "$2,000 / person",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "$500 · after 6 hrs",
+      "level": "good"
+    },
+    {
+      "coverage": "Baggage delay",
+      "detail": "Via lost-baggage coverage",
+      "level": "mid"
+    },
+    {
+      "coverage": "Emergency medical",
+      "detail": "None",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "$800 · $50 deductible",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "$10k/claim · $50k/yr",
+      "level": "strong"
+    },
+    {
+      "coverage": "Return protection",
+      "detail": "$300/item · 90 days",
+      "level": "strong"
+    }
+  ],
+  "protection_note": "Well-rounded for the price: primary rental, cell-phone, purchase AND return protection — it's the only one of the four with return protection. The catch is a low $2,000 trip-cancellation cap and no medical, so charge big prepaid or international trips to the Sapphire Reserve.",
+  "rental_note": "Like the CSR, the Venture X gives free primary coverage (up to $75k) — pays before your own policy. Between this and the CSR, you never need the Amex's paid Premium Car Rental Protection.",
+  "status_perks": [
+    {
+      "name": "Hertz President's Circle",
+      "strength": 3,
+      "note": "Top-tier Hertz status — better fleet and upgrades. Useful only if you rent often."
+    },
+    {
+      "name": "Capital One Travel upgrades",
+      "strength": 2,
+      "note": "Room upgrades and check-in perks, but only on portal hotel bookings."
+    },
+    {
+      "name": "Lounge access",
+      "strength": 3,
+      "note": "Capital One Lounges are strong and growing. From Feb 1, 2026 guests need $75k spend and authorized users cost $125 each for lounge access."
+    }
+  ],
+  "services": [
+    {
+      "name": "Visa Infinite Concierge",
+      "detail": "24/7 concierge for reservations, tickets, and arrangements."
+    },
+    {
+      "name": "Premier & Lifestyle Collections + Visa Infinite Hotels",
+      "detail": "Luxury hotel perks ($100 experience credit, upgrades) via Capital One Travel and Visa Infinite."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "Zero FX fees, plus Visa Infinite travel & roadside assistance."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add — up to 4 authorized users",
+            "included": true
+          },
+          {
+            "text": "Hertz President's Circle status",
+            "included": true
+          },
+          {
+            "text": "Covered by trip & purchase protections",
+            "included": true
+          },
+          {
+            "text": "Earns 2× miles (into your account)",
+            "included": true
+          },
+          {
+            "text": "Lounge access now costs $125 each (from Feb 1, 2026)",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Up to 4 authorized users are free — the best AU deal here. The only catch is the new $125-per-user lounge fee from Feb 2026; skip it for a user who won't use lounges and they still keep status + protections at no cost."
+  },
+  "timeline": [
+    {
+      "date": "Feb 1, 2026",
+      "type": "cut",
+      "badge": "Cut",
+      "text": "Lounge access tightened: authorized users cost $125 each, and free guest access now needs $75k annual spend."
+    },
+    {
+      "date": "2025",
+      "type": "add",
+      "badge": "Add",
+      "text": "Japan Airlines added as a transfer partner — a rare, high-value option for Japan travel."
+    },
+    {
+      "date": "2022–24",
+      "type": "neutral",
+      "badge": "Stable",
+      "text": "Quietly stable; steadily added transfer partners while competitors churned benefits."
+    },
+    {
+      "date": "2021",
+      "type": "add",
+      "badge": "Launch",
+      "text": "Debuts at $395 — dramatically undercutting the Amex Platinum and Sapphire Reserve."
+    }
+  ]
+}

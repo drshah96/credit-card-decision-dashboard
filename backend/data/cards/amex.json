@@ -1,0 +1,438 @@
+{
+  "id": "amex",
+  "name": "The Platinum Card",
+  "issuer": "American Express",
+  "network": "AMERICAN EXPRESS",
+  "points_program": "Membership Rewards",
+  "accent_color": "#C4CBD8",
+  "annual_fee": 895,
+  "effective_cost": "Depends on usage",
+  "verdict": {
+    "status": "situational",
+    "text": "Keep if you use the credits + fly"
+  },
+  "earn_rates": [
+    {
+      "emoji": "✈️",
+      "multiplier": "5×",
+      "category": "Flights — direct or via Amex Travel (first $500k/yr)",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🏨",
+      "multiplier": "5×",
+      "category": "Prepaid hotels — via Amex Travel",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛍️",
+      "multiplier": "2×",
+      "category": "Big purchases — $5,000+ (up to $2M/yr)",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The 1× base is the real weakness — put everyday, dining and grocery spend on a 2× card (Venture X) and use the Platinum for flights and prepaid hotels.",
+  "points": {
+    "currency": "Membership Rewards",
+    "redemption_options": [
+      {
+        "method": "Statement credit",
+        "cpp": 0.6,
+        "best": false
+      },
+      {
+        "method": "Amex Travel portal",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Transfer partners (avg)",
+        "cpp": 2.0,
+        "best": true
+      }
+    ],
+    "per_100k": "$2,000",
+    "note": "Cashing out at 0.6¢ is a trap — always transfer. MR is the only bank currency that moves to Delta SkyMiles 1:1."
+  },
+  "transfer_partners": {
+    "airline_count": 17,
+    "hotel_count": 3,
+    "highlight": "Deepest airline list of any bank currency. Sweet spots: ANA, Virgin Atlantic, Flying Blue, Avios, Aeroplan. Weak spot: only 3 hotel partners.",
+    "recent_changes": "Recent cuts: Emirates devalued to 5:4 (Sep 2025), Etihad removed (Jun 30, 2026), Hawaiian removed."
+  },
+  "credits": [
+    {
+      "id": "uber",
+      "name": "Uber Cash",
+      "subtitle": "$15/mo + $20 Dec",
+      "max_annual": 200,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "Monthly Uber Cash for U.S. rides and Uber Eats.",
+      "tips": [
+        "Add the Platinum in the Uber app wallet — the cash won't appear until you do.",
+        "December is $35, not $15 — time a bigger order then."
+      ]
+    },
+    {
+      "id": "digital",
+      "name": "Digital Entertainment",
+      "subtitle": "$25/mo",
+      "max_annual": 300,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "Monthly credit across Disney+, Hulu, ESPN+, Peacock, Paramount+, NYT, WSJ, YouTube Premium & TV.",
+      "tips": [
+        "Bill annual plans monthly instead — a lump-sum annual charge blows past the $25 cap.",
+        "Stack two services to hit exactly $25/mo."
+      ]
+    },
+    {
+      "id": "clear",
+      "name": "CLEAR Plus",
+      "subtitle": "airport security",
+      "max_annual": 209,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "Covers a CLEAR+ membership at 55+ airports.",
+      "tips": [
+        "Pair with your Global Entry credit for the fastest lane combo.",
+        "$0 to you if you don't fly through CLEAR airports — drag the slider down."
+      ]
+    },
+    {
+      "id": "fhr",
+      "name": "Fine Hotels + Resorts",
+      "subtitle": "$300 × 2 · semi-annual",
+      "max_annual": 600,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Semi-annual credit on prepaid FHR / Hotel Collection stays via Amex Travel. FHR spans ~1,700+ luxury properties with guaranteed perks: breakfast for two, room upgrade, noon check-in, 4pm checkout, and a $100 property credit.",
+      "tips": [
+        "FHR works on ONE-night stays — book a single night to trigger both the $300 credit AND the $100 property credit.",
+        "Semi-annual is the catch: you must spend in both H1 and H2.",
+        "The ~1,700-property network is the widest of any card program."
+      ]
+    },
+    {
+      "id": "resy",
+      "name": "Resy Dining",
+      "subtitle": "$100/quarter · enroll",
+      "max_annual": 400,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Quarterly credit at 10,000+ U.S. Resy restaurants (Amex owns Resy). No reservation needed — just pay with the card.",
+      "tips": [
+        "10,000+ restaurants in 1,600+ cities is broad, unlike Chase's ~400-restaurant list.",
+        "Quarterly with no rollover — set four reminders so a missed quarter doesn't cost you $100.",
+        "Resy skews trendy/urban; scout your area in the app to confirm your usual spots qualify."
+      ]
+    },
+    {
+      "id": "airfee",
+      "name": "Airline Fee Credit",
+      "subtitle": "one airline · incidentals",
+      "max_annual": 200,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Incidental fees (checked bags, seat assignments, day passes) on one airline you select each year.",
+      "tips": [
+        "The old United TravelBank cash-loading trick DIED in mid-2026 — you now need real incidentals.",
+        "Select your airline in-account first; covers bags/seats, not airfare.",
+        "If you fly carry-on-only basic economy, this is now hard to fully use — set the slider low."
+      ]
+    },
+    {
+      "id": "lulu",
+      "name": "Lululemon",
+      "subtitle": "$75/quarter",
+      "max_annual": 300,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Quarterly credit at U.S. Lululemon (outlets excluded).",
+      "tips": [
+        "Stack with the Rakuten portal for cash back on the same purchase.",
+        "If you'd never shop there, leave the slider at $0."
+      ]
+    },
+    {
+      "id": "oura",
+      "name": "Oura Ring",
+      "subtitle": "ring hardware only",
+      "max_annual": 200,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Credit toward an Oura Ring at ouraring.com.",
+      "tips": [
+        "Covers the ring, not the subscription — effectively one-time. $0 unless you're buying a ring."
+      ]
+    },
+    {
+      "id": "equinox",
+      "name": "Equinox",
+      "subtitle": "gym or Equinox+ app",
+      "max_annual": 300,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Credit toward Equinox or the Equinox+ app.",
+      "tips": [
+        "The Equinox+ app (~$40/mo) can absorb it without a full gym membership. Worthless if you don't use Equinox."
+      ]
+    },
+    {
+      "id": "uberone",
+      "name": "Uber One",
+      "subtitle": "membership",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Covers an auto-renewing Uber One membership.",
+      "tips": [
+        "Only worth it if you'd pay for Uber One anyway (free delivery + ride discounts)."
+      ]
+    },
+    {
+      "id": "walmart",
+      "name": "Walmart+",
+      "subtitle": "monthly membership",
+      "max_annual": 155,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Covers a Walmart+ membership (bundles Paramount+).",
+      "tips": [
+        "The bundled Paramount+ doubles as an entertainment service if you'd use it."
+      ]
+    },
+    {
+      "id": "saks",
+      "name": "Saks — REMOVED",
+      "subtitle": "gone Jul 1, 2026",
+      "max_annual": 0,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": true,
+      "description": "The $100/yr Saks credit was permanently removed for all cardholders on July 1, 2026.",
+      "tips": [
+        "If any benefits list still shows Saks, it's out of date — it's gone."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Secondary US · primary abroad · $75k · 30 days",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "$10,000 / trip · $20,000 / yr",
+      "level": "good"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "$500 · after 6 hrs · 2/yr",
+      "level": "good"
+    },
+    {
+      "coverage": "Baggage Insurance Plan",
+      "detail": "Lost/damaged/stolen · $2k checked / $3k combined",
+      "level": "good"
+    },
+    {
+      "coverage": "Baggage delay",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Emergency evacuation",
+      "detail": "Uncapped transport via Global Assist",
+      "level": "good"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "$800 · $50 deductible",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "$10k/claim · $50k/yr · 90d (best-in-class)",
+      "level": "strong"
+    }
+  ],
+  "protection_note": "Amex does cover emergency medical evacuation/transport at no cost (uncapped) when coordinated through Premium Global Assist. It carries a Baggage Insurance Plan for lost/damaged/stolen bags (secondary) — only baggage delay is missing. Purchase protection here is the strongest of the four.",
+  "rental_note": "The Amex Platinum's complimentary coverage is secondary in the U.S. (primary only when you rent abroad). Its Premium Car Rental Protection gives true primary coverage but it's a separate paid product (~$19.95–$24.95 per rental). Easiest move: charge rentals to the CSR or Venture X.",
+  "status_perks": [
+    {
+      "name": "Hilton Honors Gold",
+      "strength": 3,
+      "note": "The useful one — free breakfast/food credit and space-available upgrades at most Hiltons."
+    },
+    {
+      "name": "Marriott Bonvoy Gold",
+      "strength": 2,
+      "note": "Mid-tier: 25% bonus points and 2pm late checkout, but no free breakfast or suite upgrades."
+    },
+    {
+      "name": "Global Lounge Collection",
+      "strength": 5,
+      "note": "Best in class — 1,550+ lounges: Centurion, Priority Pass, Plaza Premium, plus 10 Delta Sky Club visits/yr on Delta flights. From Jul 8, 2026, Centurion entry is within 5 hrs of departure and guests must be on your flight."
+    }
+  ],
+  "services": [
+    {
+      "name": "Global Dining Access & Platinum Nights by Resy",
+      "detail": "Access to hard-to-get reservations at 1,300+ acclaimed restaurants worldwide, plus in-demand tables on select nights."
+    },
+    {
+      "name": "Platinum Card Concierge",
+      "detail": "24/7 help booking dining, tickets, and travel — call the number on the card."
+    },
+    {
+      "name": "Car Rental Privileges",
+      "detail": "Complimentary elite status with Hertz (Gold Plus/President's Circle), Avis Preferred, and National Emerald Club Executive (enrollment required)."
+    },
+    {
+      "name": "Cruise Privileges Program",
+      "detail": "Book 5+ night cruises via Amex Travel for up to $300 shipboard credit/stateroom + amenities + 1 extra MR point/$."
+    },
+    {
+      "name": "International Airline Program",
+      "detail": "Platinum Member Airfares — discounted premium-cabin international fares booked through Amex Travel."
+    },
+    {
+      "name": "By Invitation Only & No FX fees",
+      "detail": "Access to exclusive events, plus zero foreign transaction fees on international spend."
+    }
+  ],
+  "additional_cards": {
+    "title": "Two ways to share it",
+    "options": [
+      {
+        "name": "Companion Platinum",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Earns Membership Rewards on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Own Global Entry / TSA PreCheck credit",
+            "included": true
+          },
+          {
+            "text": "Can book Fine Hotels + Resorts / The Hotel Collection on the account",
+            "included": true
+          },
+          {
+            "text": "No lounge access on their own card",
+            "included": false
+          },
+          {
+            "text": "No hotel or car-rental elite status",
+            "included": false
+          }
+        ]
+      },
+      {
+        "name": "Additional Platinum",
+        "fee": "$195 ea",
+        "is_free": false,
+        "benefits": [
+          {
+            "text": "Own Global Lounge Collection access (incl. 10 Sky Club visits)",
+            "included": true
+          },
+          {
+            "text": "Own Hilton + Marriott Gold & Leaders Club Sterling status",
+            "included": true
+          },
+          {
+            "text": "Car-rental elite status (Hertz Pres. Circle / Avis / National Exec.)",
+            "included": true
+          },
+          {
+            "text": "Own Global Entry credit + FHR/The Hotel Collection access",
+            "included": true
+          },
+          {
+            "text": "Does NOT get their own big statement credits",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Up to 3 Additional Platinum cards ($195 each), users 13+. The $600 hotel credit and other statement credits stay with the primary account — so a $0 Companion card is plenty for a partner who just wants to spend + earn, while $195 makes sense only if they'll travel solo and use lounges."
+  },
+  "timeline": [
+    {
+      "date": "Jul 8, 2026",
+      "type": "cut",
+      "badge": "Cut",
+      "text": "Centurion Lounge access tightened: entry within 5 hours of departure only, and guests must be on the same flight."
+    },
+    {
+      "date": "Jul 1, 2026",
+      "type": "cut",
+      "badge": "Cut",
+      "text": "$100 Saks credit permanently removed for everyone."
+    },
+    {
+      "date": "Jun 30, 2026",
+      "type": "cut",
+      "badge": "Cut",
+      "text": "Etihad Guest dropped as a Membership Rewards transfer partner."
+    },
+    {
+      "date": "May 7, 2026",
+      "type": "cut",
+      "badge": "Cut",
+      "text": "Uber VIP status retired, replaced by a lesser 'Signature Support.'"
+    },
+    {
+      "date": "Jan 2, 2026",
+      "type": "neutral",
+      "badge": "Fee hits",
+      "text": "The $895 fee reaches existing cardholders at their first renewal on or after this date."
+    },
+    {
+      "date": "Sep 16, 2025",
+      "type": "cut",
+      "badge": "Devalued",
+      "text": "Emirates Skywards transfer ratio cut from 1:1 to 5:4."
+    },
+    {
+      "date": "Sep 2025",
+      "type": "add",
+      "badge": "Refresh",
+      "text": "Major refresh: fee $695 → $895; added Resy $400, Lululemon $300, Oura $200, Uber One $120, hotel credit to $600, and 2× on $5,000+ purchases."
+    },
+    {
+      "date": "2021",
+      "type": "neutral",
+      "badge": "Coupon era",
+      "text": "Fee raised $550 → $695; the coupon book credit model begins."
+    }
+  ]
+}

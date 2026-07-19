@@ -29,11 +29,19 @@ class Points(BaseModel):
     note: str
 
 
+class TransferPartner(BaseModel):
+    name: str
+    type: Literal["airline", "hotel"]
+    ratio: str
+    notes: str | None = None
+
+
 class TransferPartners(BaseModel):
     airline_count: int
     hotel_count: int
     highlight: str
     recent_changes: str
+    partners: list[TransferPartner] = []
 
 
 class Credit(BaseModel):
