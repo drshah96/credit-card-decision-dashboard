@@ -1,0 +1,225 @@
+{
+  "id": "amex-gold",
+  "name": "Gold Card",
+  "issuer": "American Express",
+  "network": "AMERICAN EXPRESS",
+  "points_program": "Membership Rewards",
+  "accent_color": "#CBA135",
+  "annual_fee": 325,
+  "effective_cost": "Low if you use the monthly credits",
+  "verdict": {
+    "status": "situational",
+    "text": "Keep if dining/grocery spend and the monthly credits are real habits"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🏨",
+      "multiplier": "5×",
+      "category": "Prepaid hotels — via Amex Travel",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "4×",
+      "category": "Restaurants worldwide (up to $50k/yr, then 1×)",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "4×",
+      "category": "U.S. supermarkets (up to $25k/yr, then 1×)",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "✈️",
+      "multiplier": "3×",
+      "category": "Flights — via Amex Travel or direct with airlines",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "🚗",
+      "multiplier": "2×",
+      "category": "Prepaid car rentals & cruises — via Amex Travel",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The 4× restaurant/supermarket caps ($50k and $25k/yr) are generous enough that most households never hit them. Hotel and flight bonus rates only apply booked through Amex Travel (hotels) or direct with the airline (flights).",
+  "points": {
+    "currency": "Membership Rewards",
+    "redemption_options": [
+      {
+        "method": "Statement credit",
+        "cpp": 0.6,
+        "best": false
+      },
+      {
+        "method": "Amex Travel portal",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Transfer partners (avg)",
+        "cpp": 2.0,
+        "best": true
+      }
+    ],
+    "per_100k": "$2,000",
+    "note": "Same Membership Rewards currency as the Platinum — cashing out at 0.6¢ throws away most of the value; the same transfer partners apply."
+  },
+  "transfer_partners": {
+    "airline_count": 17,
+    "hotel_count": 3,
+    "highlight": "Shares the Platinum's full Membership Rewards transfer chart — 17 airline and 3 hotel partners.",
+    "recent_changes": "Subject to the same program-wide changes as any other Membership Rewards card (see the Platinum's transfer partner notes)."
+  },
+  "credits": [
+    {
+      "id": "dining",
+      "name": "Dining Credit",
+      "subtitle": "$10/mo · enroll",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "Up to $10/month in statement credits at Grubhub, The Cheesecake Factory, Five Guys, Wonder and other participating partners.",
+      "tips": [
+        "Enrollment required in the Amex app before credits start posting."
+      ]
+    },
+    {
+      "id": "uber",
+      "name": "Uber Cash",
+      "subtitle": "$10/mo",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "$10 in Uber Cash loaded monthly for U.S. Uber rides and Uber Eats orders.",
+      "tips": [
+        "Add the card in the Uber app wallet — the cash won't appear until you do."
+      ]
+    },
+    {
+      "id": "dunkin",
+      "name": "Dunkin' Credit",
+      "subtitle": "$7/mo · enroll",
+      "max_annual": 84,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "Up to $7/month in statement credits at U.S. Dunkin' locations.",
+      "tips": [
+        "Enrollment required."
+      ]
+    },
+    {
+      "id": "resy",
+      "name": "Resy Dining Credit",
+      "subtitle": "$50 × 2 · semi-annual",
+      "max_annual": 100,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Up to $50 in statement credits twice a year (Jan–Jun, Jul–Dec) at qualifying Resy restaurants.",
+      "tips": [
+        "Enrollment required.",
+        "No rollover between halves — an unused H1 doesn't carry into H2."
+      ]
+    },
+    {
+      "id": "hotel",
+      "name": "The Hotel Collection Credit",
+      "subtitle": "$100 · per eligible booking",
+      "max_annual": 100,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "$100 credit toward eligible charges at 1,300+ Hotel Collection properties booked via Amex Travel — no cap on number of qualifying stays per year.",
+      "tips": [
+        "Stacks with the 5× points rate on the same prepaid hotel booking."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Car Rental Loss & Damage Insurance — secondary in the US",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "$300/trip",
+      "level": "mid"
+    },
+    {
+      "coverage": "Baggage Insurance Plan",
+      "detail": "$1,250 carry-on / $500 checked",
+      "level": "mid"
+    },
+    {
+      "coverage": "Emergency assistance",
+      "detail": "24/7 Global Assist Hotline (coordination only — cardholder pays for services rendered)",
+      "level": "mid"
+    }
+  ],
+  "protection_note": "Noticeably thinner than the Platinum or Sapphire Reserve — trip delay caps at $300/trip and rental coverage is secondary. This card isn't built to be your primary travel-protection card.",
+  "rental_note": "Rental coverage is secondary in the US. If you rent often, put the charge on your Venture X or Sapphire Reserve instead and use those cards' free primary coverage.",
+  "status_perks": [
+    {
+      "name": "Hertz Five Star Status",
+      "strength": 2,
+      "note": "A step below full elite tiers — faster pickup counter and occasional upgrades, enrollment required. No hotel status or lounge access on this card."
+    }
+  ],
+  "services": [
+    {
+      "name": "Global Assist Hotline",
+      "detail": "24/7 emergency coordination when traveling 100+ miles from home (cardholder pays for any services rendered)."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional Cards",
+    "options": [
+      {
+        "name": "Additional Gold Card",
+        "fee": "$0 (first 5)",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free for up to 5 additional cards",
+            "included": true
+          },
+          {
+            "text": "Earns Membership Rewards on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "6th+ additional card costs $35/yr",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Up to five Additional Cards are free — a cheap way to add earning power across a household without raising the $325 primary fee."
+  },
+  "timeline": [
+    {
+      "date": "Apr 30, 2026",
+      "type": "add",
+      "badge": "Refresh",
+      "text": "Hotel Collection prepaid bookings raised from 2× to 5× Membership Rewards points; added complimentary Hertz Five Star status."
+    }
+  ]
+}

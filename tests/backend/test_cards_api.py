@@ -5,14 +5,14 @@ from backend.main import app
 
 client = TestClient(app)
 
-CARD_IDS = ["amex", "csr", "venturex", "delta"]
+CARD_IDS = ["amex", "csr", "venturex", "delta", "amex-gold"]
 
 
-def test_list_cards_returns_all_four() -> None:
+def test_list_cards_returns_all_cards() -> None:
     response = client.get("/api/cards")
     assert response.status_code == 200
     data = response.json()
-    assert len(data) == 4
+    assert len(data) == len(CARD_IDS)
     ids = [c["id"] for c in data]
     assert set(ids) == set(CARD_IDS)
 
@@ -56,6 +56,7 @@ def test_annual_fees_are_correct() -> None:
     assert fees["csr"] == 795
     assert fees["venturex"] == 395
     assert fees["delta"] == 350
+    assert fees["amex-gold"] == 325
 
 
 def test_easy_credits_not_negative() -> None:
