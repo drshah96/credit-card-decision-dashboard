@@ -20,7 +20,7 @@ export function CardSummaryCard({ card }: Props) {
           <p className="text-sm text-white/50 mt-0.5">{card.points_program}</p>
         </div>
         <span
-          className={`shrink-0 text-xs font-semibold px-3 py-1 rounded-full border ${VERDICT_STYLES[card.verdict.status]}`}
+          className={`shrink-0 max-w-[45%] text-right text-xs font-semibold px-3 py-1 rounded-lg border leading-snug ${VERDICT_STYLES[card.verdict.status]}`}
         >
           {card.verdict.text}
         </span>
