@@ -30,6 +30,9 @@ CARD_IDS = [
     "chase-united-explorer",
     "chase-united-quest",
     "chase-united-club-infinite",
+    "chase-southwest-rapid-rewards-plus",
+    "chase-southwest-rapid-rewards-premier",
+    "chase-southwest-rapid-rewards-priority",
 ]
 
 
@@ -104,6 +107,9 @@ def test_annual_fees_are_correct() -> None:
     assert fees["chase-united-explorer"] == 150
     assert fees["chase-united-quest"] == 350
     assert fees["chase-united-club-infinite"] == 695
+    assert fees["chase-southwest-rapid-rewards-plus"] == 99
+    assert fees["chase-southwest-rapid-rewards-premier"] == 149
+    assert fees["chase-southwest-rapid-rewards-priority"] == 229
 
 
 def test_easy_credits_not_negative() -> None:
