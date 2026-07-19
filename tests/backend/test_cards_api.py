@@ -5,7 +5,24 @@ from backend.main import app
 
 client = TestClient(app)
 
-CARD_IDS = ["amex-platinum", "csr", "venturex", "amex-delta-skymiles-platinum", "amex-gold"]
+CARD_IDS = [
+    "amex-platinum",
+    "csr",
+    "venturex",
+    "amex-delta-skymiles-platinum",
+    "amex-gold",
+    "amex-green",
+    "amex-blue-cash-everyday",
+    "amex-blue-cash-preferred",
+    "amex-marriott-bonvoy-brilliant",
+    "amex-marriott-bonvoy-bevy",
+    "amex-hilton-honors",
+    "amex-hilton-honors-surpass",
+    "amex-hilton-honors-aspire",
+    "amex-delta-skymiles-gold",
+    "amex-delta-skymiles-reserve",
+    "amex-delta-skymiles-blue",
+]
 
 
 def test_list_cards_returns_all_cards() -> None:
@@ -57,6 +74,17 @@ def test_annual_fees_are_correct() -> None:
     assert fees["venturex"] == 395
     assert fees["amex-delta-skymiles-platinum"] == 350
     assert fees["amex-gold"] == 325
+    assert fees["amex-green"] == 150
+    assert fees["amex-blue-cash-everyday"] == 0
+    assert fees["amex-blue-cash-preferred"] == 95
+    assert fees["amex-marriott-bonvoy-brilliant"] == 650
+    assert fees["amex-marriott-bonvoy-bevy"] == 250
+    assert fees["amex-hilton-honors"] == 0
+    assert fees["amex-hilton-honors-surpass"] == 150
+    assert fees["amex-hilton-honors-aspire"] == 550
+    assert fees["amex-delta-skymiles-gold"] == 150
+    assert fees["amex-delta-skymiles-reserve"] == 650
+    assert fees["amex-delta-skymiles-blue"] == 0
 
 
 def test_easy_credits_not_negative() -> None:
