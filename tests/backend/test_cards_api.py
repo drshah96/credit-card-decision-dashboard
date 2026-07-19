@@ -27,6 +27,9 @@ CARD_IDS = [
     "chase-freedom-flex",
     "chase-freedom-rise",
     "chase-slate-edge",
+    "chase-united-explorer",
+    "chase-united-quest",
+    "chase-united-club-infinite",
 ]
 
 
@@ -98,6 +101,9 @@ def test_annual_fees_are_correct() -> None:
     assert fees["chase-freedom-flex"] == 0
     assert fees["chase-freedom-rise"] == 0
     assert fees["chase-slate-edge"] == 0
+    assert fees["chase-united-explorer"] == 150
+    assert fees["chase-united-quest"] == 350
+    assert fees["chase-united-club-infinite"] == 695
 
 
 def test_easy_credits_not_negative() -> None:
