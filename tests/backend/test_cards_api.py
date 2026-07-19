@@ -38,6 +38,8 @@ CARD_IDS = [
     "chase-marriott-bonvoy-bold",
     "chase-ihg-one-rewards-premier",
     "chase-ihg-one-rewards-traveler",
+    "chase-disney-premier",
+    "chase-amazon-prime-visa",
 ]
 
 
@@ -120,6 +122,8 @@ def test_annual_fees_are_correct() -> None:
     assert fees["chase-marriott-bonvoy-bold"] == 0
     assert fees["chase-ihg-one-rewards-premier"] == 99
     assert fees["chase-ihg-one-rewards-traveler"] == 0
+    assert fees["chase-disney-premier"] == 49
+    assert fees["chase-amazon-prime-visa"] == 0
 
 
 def test_easy_credits_not_negative() -> None:

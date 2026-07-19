@@ -1,0 +1,156 @@
+{
+  "id": "chase-disney-premier",
+  "name": "Disney® Premier Visa® Card",
+  "issuer": "Chase",
+  "network": "VISA SIGNATURE",
+  "points_program": "Disney Rewards Dollars",
+  "accent_color": "#3B5BA5",
+  "annual_fee": 49,
+  "effective_cost": "Low, but only if you're already spending at Disney",
+  "verdict": {
+    "status": "situational",
+    "text": "Situational — only a keep if you regularly book Disney trips, stream Disney+/Hulu/ESPN+, or shop at Disney parks"
+  },
+  "earn_rates": [
+    {
+      "emoji": "📺",
+      "multiplier": "5%",
+      "category": "DisneyPlus.com, Hulu.com & Stream.ESPN.com",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "⛽",
+      "multiplier": "2%",
+      "category": "Gas stations & most Disney U.S. locations",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "2%",
+      "category": "Grocery stores & restaurants",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1%",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "No spend caps on any tier, which is unusual for a sub-$50 co-brand card. But the real catch isn't a subscription requirement — it's that every dollar earned becomes Disney Rewards Dollars, a currency with almost no use outside Disney. Don't get this card for the earn rate; get it for the park perks and Disney-locked spend.",
+  "points": {
+    "currency": "Disney Rewards Dollars",
+    "redemption_options": [
+      {
+        "method": "Disney parks, resorts, cruises, shopping & dining (or a statement credit toward airfare via Pay Yourself Back)",
+        "cpp": 1.0,
+        "best": true
+      }
+    ],
+    "per_100k": "$1,000",
+    "note": "Disney Rewards Dollars are dollar-denominated and always worth 1¢ — there's no bonus redemption to chase. The catch is where you can spend them: Disney parks, resorts, cruises, shopping, dining, and (via Pay Yourself Back) airline statement credits. No cash-out option and no transfer partners."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "Disney Rewards Dollars aren't a transferable currency — they're locked to Disney spend (or, via Pay Yourself Back, a statement credit toward airfare). No airline or hotel transfer partners.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [
+    {
+      "id": "dashpass",
+      "name": "DoorDash DashPass",
+      "subtitle": "1 year free · then auto-renews paid",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Complimentary 12-month DashPass membership ($0 delivery fees, lower service fees), plus up to $10 off per quarter on non-restaurant orders through Dec 2027.",
+      "tips": [
+        "Activate it — otherwise it's pure unused value.",
+        "After 12 months it auto-renews at DashPass's then-current monthly rate unless you cancel. Set a reminder."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Purchase protection",
+      "detail": "$500/item · 120 days",
+      "level": "mid"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "+1 year on eligible warranties",
+      "level": "good"
+    },
+    {
+      "coverage": "Baggage delay",
+      "detail": "$100/day · up to 3 days · after 6 hrs",
+      "level": "mid"
+    }
+  ],
+  "protection_note": "A retail card's protection suite, not a travel card's — purchase protection, extended warranty, and baggage delay are here as standard Visa Signature benefits, but there's no trip cancellation/interruption, no emergency medical, and no cell phone protection.",
+  "rental_note": "Secondary auto rental collision damage waiver (standard Visa Signature benefit) — decline the counter's CDW and pay with this card. Excludes exotic/luxury makes and rentals over 31 days; pays out after your personal auto policy.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "Character photo experiences",
+      "detail": "Cardmember-exclusive photo ops with a Disney PhotoPass photographer and complimentary digital downloads, at designated locations in Walt Disney World and Disneyland (up to 6 guests per cardmember, once per day)."
+    },
+    {
+      "name": "Merchandise & dining discounts",
+      "detail": "10% off select merchandise at Disney Store, DisneyStore.com, and select in-park locations; 10% off select dining most days; 15% off select guided tours."
+    },
+    {
+      "name": "0% APR on Disney vacation packages",
+      "detail": "6-month 0% promotional APR on qualifying Disney vacation package purchases, reverting to the standard variable APR (18.24%–29.99%) after the promo period."
+    },
+    {
+      "name": "Foreign transaction fee applies",
+      "detail": "3% on purchases made outside the US — not built for international use, including at Disneyland Paris."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Additional Card",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns Disney Rewards Dollars on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Same purchase protection as the primary card",
+            "included": true
+          }
+        ]
+      }
+    ],
+    "note": "Additional cards are free — no reason not to add a trusted household member, especially if they'll be doing the theme-park spending."
+  },
+  "timeline": [
+    {
+      "date": "Feb 3, 2026",
+      "type": "neutral",
+      "badge": "Lineup change",
+      "text": "Chase & Disney launched the Disney® Inspire Visa® Card ($149 AF) above Premier, aimed at frequent park/cruise visitors. Premier now sits as the mid-tier option between the no-fee Disney Visa and Inspire."
+    },
+    {
+      "date": "2026",
+      "type": "neutral",
+      "badge": "Offer change",
+      "text": "Welcome offer restructured from a $400 statement credit (after $1,000 spend) to a $200 Disney Gift Card eGift on approval plus a $100 statement credit after $500 spend — same $300 total, lower spend requirement, but split into a gift card instead of a full statement credit."
+    }
+  ]
+}
