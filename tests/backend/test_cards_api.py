@@ -60,6 +60,12 @@ CARD_IDS = [
     "citi-strata-premier",
     "citi-strata-elite",
     "citi-double-cash",
+    "citi-diamond-preferred",
+    "citi-simplicity",
+    "citi-secured",
+    "citi-aadvantage-platinum-select",
+    "citi-aadvantage-executive",
+    "citi-aadvantage-mileup",
 ]
 
 
@@ -102,6 +108,9 @@ def test_get_card_detail(card_id: str) -> None:
         "chase-slate-edge",
         "capital-one-platinum",
         "capital-one-platinum-secured",
+        "citi-diamond-preferred",
+        "citi-simplicity",
+        "citi-secured",
     )
     if card_id not in NO_REWARDS_CARDS:
         assert len(data["earn_rates"]) > 0
@@ -169,6 +178,12 @@ def test_annual_fees_are_correct() -> None:
     assert fees["citi-strata-premier"] == 95
     assert fees["citi-strata-elite"] == 595
     assert fees["citi-double-cash"] == 0
+    assert fees["citi-diamond-preferred"] == 0
+    assert fees["citi-simplicity"] == 0
+    assert fees["citi-secured"] == 0
+    assert fees["citi-aadvantage-platinum-select"] == 99
+    assert fees["citi-aadvantage-executive"] == 595
+    assert fees["citi-aadvantage-mileup"] == 0
 
 
 def test_easy_credits_not_negative() -> None:
