@@ -1,0 +1,85 @@
+{
+  "id": "capital-one-platinum-secured",
+  "name": "Platinum Secured",
+  "issuer": "Capital One",
+  "network": "MASTERCARD",
+  "points_program": "None — no rewards program",
+  "accent_color": "#A7ADB6",
+  "annual_fee": 0,
+  "effective_cost": "Free — no annual fee, refundable deposit sets your credit line",
+  "verdict": {
+    "status": "situational",
+    "text": "Not a rewards card — same non-earning story as the unsecured Platinum, but built for applicants who can't get approved without a deposit. If you can afford to fund the deposit, the Quicksilver Secured earns 1.5% cash back for the same $0 annual fee, so use this only if you're specifically declined for Quicksilver Secured or want the lowest possible minimum deposit."
+  },
+  "earn_rates": [],
+  "earn_note": "Like the unsecured Platinum, this card earns no cash back or points at all — it exists purely for credit access. If you want a secured Capital One card that actually earns rewards, use Quicksilver Secured (1.5% flat, same $0 annual fee) instead.",
+  "points": {
+    "currency": "None",
+    "redemption_options": [],
+    "per_100k": "$0 — no rewards program",
+    "note": "No points or cash-back program of any kind. The entire value proposition is the refundable security deposit and monthly reporting to all three credit bureaus, with a path to an unsecured Platinum card after demonstrated responsible use."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No rewards currency exists on this card, so there is nothing to transfer.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [],
+  "protection_note": "Bare-bones by design, even more so than Quicksilver Secured — Capital One's official Platinum Secured materials don't advertise purchase protection, extended warranty, price protection, or travel insurance. Treat this card as carrying no meaningful purchase or travel protections.",
+  "rental_note": "No rental car coverage is advertised for this card — use a different card for rentals.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "Refundable security deposit sets your credit line",
+      "detail": "A $49, $99, or $200 minimum deposit — tiered by your creditworthiness at approval — opens the account with an initial credit line of at least $200. You can deposit more, up to a $1,000 maximum, to start with a higher line, and you have 35 days after approval to fund it in increments of at least $20."
+    },
+    {
+      "name": "Path to an unsecured card",
+      "detail": "With on-time payments, Capital One may offer an upgrade to the unsecured Platinum card in as little as 6 months, at which point the deposit is refunded. The card itself carries no visible \"secured\" marking."
+    },
+    {
+      "name": "Automatic credit line review",
+      "detail": "Capital One automatically considers cardholders for a higher credit line — with no additional deposit needed — based on payment history and creditworthiness."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "$0 on purchases made outside the US."
+    },
+    {
+      "name": "Credit bureau reporting",
+      "detail": "Reports payment activity to all three major credit bureaus every month — the entire point of holding this card."
+    },
+    {
+      "name": "APR",
+      "detail": "28.99% variable on purchases and cash advances, with no introductory 0% period."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Can help build the authorized user's credit history too",
+            "included": true
+          },
+          {
+            "text": "No rewards earned — this card has no rewards program to share",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add, but since Platinum Secured itself earns nothing, the only upside for an authorized user is potential credit-history building, not rewards."
+  },
+  "timeline": []
+}
