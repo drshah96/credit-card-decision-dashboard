@@ -1,0 +1,217 @@
+{
+  "id": "citi-aadvantage-executive",
+  "name": "AAdvantage Executive",
+  "issuer": "Citi",
+  "network": "WORLD ELITE MASTERCARD",
+  "points_program": "AAdvantage",
+  "accent_color": "#7A0C1E",
+  "annual_fee": 595,
+  "effective_cost": "High sticker fee, but a standalone Admirals Club membership runs $850+/yr on its own, so this can be a net saver if you actually use the lounges",
+  "verdict": {
+    "status": "situational",
+    "text": "Keep only if you fly American often enough to make real use of the Admirals Club — that membership alone is worth more than the fee if you're in the lounge regularly. Without consistent AA travel, the fee (recently raised from $450 to $595) is hard to justify next to the mid-tier Platinum Select."
+  },
+  "earn_rates": [
+    {
+      "emoji": "🏨",
+      "multiplier": "10×",
+      "category": "Hotels & car rentals — via AAdvantage portals",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "✈️",
+      "multiplier": "4×",
+      "category": "Eligible American Airlines purchases",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "A 5x rate kicks in on AA purchases for the rest of the calendar year once you cross $150,000 in annual AA spend on the card — a threshold that's realistically only relevant to very heavy flyers or small-business owners funneling large ticket volume through the card. For everyone else it's a flat 4x on AA and 1x elsewhere; the case for this card is the Admirals Club, not the earn rate.",
+  "points": {
+    "currency": "AAdvantage Miles",
+    "redemption_options": [
+      {
+        "method": "Statement / low-end award",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Average redemption",
+        "cpp": 1.4,
+        "best": true
+      },
+      {
+        "method": "Premium-cabin / partner sweet spots",
+        "cpp": 2.2,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,000–$1,400",
+    "note": "AAdvantage has used dynamic pricing with no published award chart since 2016, so value swings by route and date. No blackout dates on award redemptions, and miles don't expire as long as there's qualifying account activity at least once every 18 months."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "AAdvantage miles aren't a transferable bank-points currency — there's no way to move them out to another loyalty program, and (unlike United MileagePlus) no bank card lets you transfer points in either.",
+    "recent_changes": "Citi became the sole issuer of AAdvantage-branded consumer credit cards as Barclays exited the co-brand partnership (announced Dec 2024, Barclays stopped issuing new AAdvantage cards Sept 30, 2025); Barclays AAdvantage cardholders began transitioning to equivalent Citi-issued cards starting April 2026, with some legacy Barclays benefits temporarily carried over."
+  },
+  "credits": [
+    {
+      "id": "global-entry",
+      "name": "Global Entry / TSA PreCheck Credit",
+      "subtitle": "$120 · every 4 years",
+      "max_annual": 30,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Statement credit for a Global Entry, TSA PreCheck, or NEXUS application fee, once every four years. Shown here amortized to an annual figure.",
+      "tips": [
+        "Apply for Global Entry, not just TSA PreCheck — it includes TSA PreCheck and covers the same credit."
+      ]
+    },
+    {
+      "id": "avis-budget",
+      "name": "Avis/Budget Credit",
+      "subtitle": "up to $120/yr",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Statement credits on eligible Avis or Budget car rentals, up to $120 per year.",
+      "tips": [
+        "Only useful if you already rent from Avis/Budget specifically."
+      ]
+    },
+    {
+      "id": "lyft",
+      "name": "Lyft Credit",
+      "subtitle": "$10/mo · up to $120/yr",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Up to $10 back per month on Lyft rides, after 3 qualifying rides in the month.",
+      "tips": [
+        "Requires 3 Lyft rides in a month before the $10 credit triggers — an occasional Lyft user may not clear it most months."
+      ]
+    },
+    {
+      "id": "grubhub",
+      "name": "Grubhub Credit",
+      "subtitle": "$10/mo · up to $120/yr",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Up to $10 back per month in Grubhub statement credits.",
+      "tips": [
+        "Monthly, no rollover — needs a recurring Grubhub order to capture in full."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Trip delay",
+      "detail": "Included — exact per-person/per-trip dollar caps aren't published in Citi's public summary materials; confirm limits in your Guide to Benefits.",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip cancellation/interruption",
+      "detail": "Included — exact dollar caps aren't published in Citi's public summary materials.",
+      "level": "mid"
+    },
+    {
+      "coverage": "Lost/delayed baggage",
+      "detail": "Included — exact dollar caps aren't published in Citi's public summary materials.",
+      "level": "mid"
+    },
+    {
+      "coverage": "Rental car coverage (MasterRental)",
+      "detail": "Worldwide car rental insurance included — whether it's primary or secondary, and the exact coverage cap, aren't published in Citi's public summary materials.",
+      "level": "mid"
+    }
+  ],
+  "protection_note": "The one AAdvantage card in this lineup with a real travel-insurance suite — trip delay, trip cancellation/interruption, lost baggage, and worldwide rental car coverage are all included, a step up from Platinum Select and MileUp, which advertise none of this. Citi's public card pages don't spell out the exact per-person/per-trip dollar limits, though, so treat the levels here as directional until you check your Guide to Benefits.",
+  "rental_note": "Worldwide car rental insurance (MasterRental Coverage) is included, but Citi doesn't publish primary-vs-secondary status or a coverage cap on its public summary pages — confirm terms in your Guide to Benefits before declining a rental company's own CDW.",
+  "status_perks": [
+    {
+      "name": "Admirals Club membership",
+      "strength": 5,
+      "note": "Complimentary annual membership for the primary cardmember plus up to 2 guests, covering 100+ Admirals Club and partner lounges worldwide — a standalone individual membership runs $850+/yr on its own, more than this card's entire annual fee."
+    },
+    {
+      "name": "Loyalty Points",
+      "strength": 3,
+      "note": "1 Loyalty Point per eligible mile earned, plus bonus points at set thresholds (10,000 bonus points at 50,000 points earned in a year, another 10,000 at 90,000) — a real boost toward AAdvantage status for heavy spenders."
+    }
+  ],
+  "services": [
+    {
+      "name": "Free first checked bag",
+      "detail": "First checked bag free on domestic American Airlines flights for the cardholder plus up to 8 companions on the same reservation — double Platinum Select's companion count."
+    },
+    {
+      "name": "25% back on inflight purchases",
+      "detail": "Uncapped statement credit rebate on food, beverage, and Wi-Fi purchased onboard American Airlines flights."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "$0 on purchases made outside the US."
+    },
+    {
+      "name": "No blackout dates",
+      "detail": "Standard AAdvantage award redemption term across the whole card family."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$175 for up to 3, then $175 each additional",
+        "is_free": false,
+        "benefits": [
+          {
+            "text": "Own Admirals Club membership and lounge access",
+            "included": true
+          },
+          {
+            "text": "Earns AAdvantage miles on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Shares the Global Entry/TSA PreCheck credit (same 4-year cycle)",
+            "included": true
+          },
+          {
+            "text": "No separate Loyalty Points allotment of their own",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "At $175/yr, an authorized user gets their own Admirals Club membership — the same lounge benefit the primary pays $595 for — a strong deal for a travel companion who also flies American regularly."
+  },
+  "timeline": [
+    {
+      "date": "2025",
+      "type": "cut",
+      "badge": "Fee increase",
+      "text": "Annual fee raised from $450 to $595 as part of Citi and American's broader refresh of the AAdvantage card lineup."
+    },
+    {
+      "date": "Apr 2026",
+      "type": "neutral",
+      "badge": "Issuer transition",
+      "text": "Citi became the sole issuer of AAdvantage-branded consumer credit cards as Barclays exited the partnership; transitioning Barclays cardholders began receiving Citi-issued cards in April 2026, with some legacy Barclays benefits temporarily carried over."
+    }
+  ]
+}

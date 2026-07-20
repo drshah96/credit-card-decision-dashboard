@@ -1,0 +1,161 @@
+{
+  "id": "citi-costco-anywhere-visa",
+  "name": "Costco Anywhere Visa® Card by Citi",
+  "issuer": "Citi",
+  "network": "VISA",
+  "points_program": "Cash Back",
+  "accent_color": "#005DAA",
+  "annual_fee": 0,
+  "effective_cost": "Free — no annual fee, but requires a paid Costco membership ($65/yr or more) to hold the card at all",
+  "verdict": {
+    "status": "situational",
+    "text": "An excellent card if you're already a paying Costco member and drive regularly — the gas and Costco-purchase rates are hard to beat. If you'd cancel your Costco membership without this card, don't get it for the card alone."
+  },
+  "earn_rates": [
+    {
+      "emoji": "⛽",
+      "multiplier": "5%",
+      "category": "Gas at Costco (worldwide) — first $7,000/yr combined with other gas/EV charging, then 1%",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🔌",
+      "multiplier": "4%",
+      "category": "Gas & EV charging elsewhere — first $7,000/yr combined with Costco gas, then 1%",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "3%",
+      "category": "Restaurants & eligible travel (airfare, hotels, car rentals, Costco Travel)",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🏬",
+      "multiplier": "2%",
+      "category": "Costco & Costco.com purchases",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1%",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The 5%/4% gas rate is capped at a combined $7,000/year in Costco + other gas/EV-charging spend (about $350 in rewards), dropping to 1% after that — heavy drivers will hit this cap well before year-end. Requires an active, paid Costco membership to apply for or keep the card; if your membership lapses, so does the card. No annual cap on the 3% or 2% categories found.",
+  "points": {
+    "currency": "Cash Back",
+    "redemption_options": [
+      {
+        "method": "Annual reward certificate, issued once your February billing statement closes — redeemable for cash or merchandise at any U.S. Costco warehouse (incl. Puerto Rico)",
+        "cpp": 1.0,
+        "best": true
+      }
+    ],
+    "per_100k": "Not applicable — this is a cash-back card with no points currency; a $1,000-equivalent year of 2–5% earning becomes a roughly $20–50 certificate depending on category mix",
+    "note": "Unlike most cash-back cards, rewards aren't a running statement credit — they accrue all year and pay out once annually as a single certificate you have to physically redeem in a Costco warehouse (or online per Costco's current process). If you close the account before the certificate is issued, you can lose accrued rewards, so time closures carefully."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners — straight cash back with no points currency to move anywhere.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Purchase protection",
+      "detail": "Damage & theft coverage · 120 days (90 days for NY residents) — per-item/per-year caps not published on Citi's public page",
+      "level": "mid"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Worldwide Car Rental Insurance when you decline the rental company's own collision coverage — secondary/primary status not confirmed",
+      "level": "mid"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "Named benefit — dollar limit not published on Citi's public page",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Baggage delay",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not included",
+      "level": "none"
+    }
+  ],
+  "protection_note": "A standard Visa (not Visa Signature) no-fee card's protection suite: purchase protection, rental car coverage, and travel accident insurance are named benefits, but Citi's public pages don't publish the exact dollar caps — check your Guide to Benefits for specifics. No trip cancellation/interruption, baggage delay, or cell phone protection, so this isn't a substitute for a dedicated travel card on bigger trips.",
+  "rental_note": "Worldwide Car Rental Insurance applies when you decline the counter's own collision/theft coverage and charge the full rental to this card; Citi's public page doesn't confirm whether it pays primary or secondary to your personal auto policy.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "No foreign transaction fees",
+      "detail": "$0 on purchases made outside the US."
+    },
+    {
+      "name": "Doubles as Costco membership ID",
+      "detail": "The card can be used to verify membership at warehouse entry while the membership is active."
+    },
+    {
+      "name": "Roadside assistance dispatch",
+      "detail": "Pay-per-use dispatch service available in the US, Puerto Rico, and US Virgin Islands."
+    },
+    {
+      "name": "Free FICO Score access",
+      "detail": "Monthly FICO Score available via Citi's online account and app."
+    },
+    {
+      "name": "No fee for additional cards",
+      "detail": "Authorized users can be added at no extra cost."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns cash back on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Same purchase/rental protections as the primary card",
+            "included": true
+          }
+        ]
+      }
+    ],
+    "note": "Free to add — a natural fit for a household member who also shops at Costco, since all spend rolls into one annual certificate."
+  },
+  "timeline": [
+    {
+      "date": "Ongoing",
+      "type": "neutral",
+      "badge": "Membership-gated",
+      "text": "Card eligibility and continued use are tied to holding a paid Costco membership; this has been the structure since Citi took over the Costco co-brand portfolio from American Express in 2016."
+    }
+  ]
+}

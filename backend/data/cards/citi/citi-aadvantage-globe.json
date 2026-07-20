@@ -1,0 +1,238 @@
+{
+  "id": "citi-aadvantage-globe",
+  "name": "AAdvantage® Globe™ Mastercard®",
+  "issuer": "Citi",
+  "network": "MASTERCARD",
+  "points_program": "American Airlines AAdvantage® Miles",
+  "accent_color": "#0078D2",
+  "annual_fee": 350,
+  "effective_cost": "~$100–150 net for a traveler who uses the Turo and inflight credits, before the year-two companion certificate",
+  "verdict": {
+    "status": "situational",
+    "text": "Only earns its $350 fee back if you actually fly American and use the Turo/inflight/splurge credits — a card built for a mid-frequency AA flyer, not a general-purpose travel card"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🏨",
+      "multiplier": "6×",
+      "category": "Hotels booked through aadvantagehotels.com",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "✈️",
+      "multiplier": "3×",
+      "category": "Eligible American Airlines purchases",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "2×",
+      "category": "Restaurants (incl. takeout/delivery)",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "🚕",
+      "multiplier": "2×",
+      "category": "Rides & rails — taxis, rideshare, public transit",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "All other purchases",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "Launched by American Airlines and Citi in 2025 as a mid-tier card slotted between AAdvantage Platinum Select and AAdvantage Executive World Elite. Welcome offer is 60,000 miles after $4,000 spend in 3 months (a limited-time 90,000-mile / $5,000-in-4-months offer has circulated since May 2026 — confirm what's live before applying). A Flight Streak bonus adds 5,000 Loyalty Points per 4 qualifying AA flights, up to 15,000/year. No cap found on category earning.",
+  "points": {
+    "currency": "American Airlines AAdvantage Miles",
+    "redemption_options": [
+      {
+        "method": "American Airlines flights (no blackout dates on award redemptions)",
+        "cpp": 1.4,
+        "best": true
+      },
+      {
+        "method": "AAdvantage eShopping, vacation packages, car rentals via aa.com",
+        "cpp": 1.0,
+        "best": false
+      }
+    ],
+    "per_100k": "~$1,200–1,600 in AA flight redemptions, well less in non-flight redemptions",
+    "note": "Standard airline miles, not a flexible bank-points currency — value depends entirely on American's award chart and availability. AAdvantage miles can also be earned by flying AA/oneworld and by everyday partners, so this card is best viewed as a top-up for people already in the AA ecosystem, not a standalone rewards engine."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners — this earns AAdvantage miles directly, a single-airline currency with no transfer flexibility in or out.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [
+    {
+      "id": "turo",
+      "name": "Turo Credit",
+      "subtitle": "up to $30/trip, 8 trips/year",
+      "max_annual": 240,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Up to $30 in statement credits per eligible Turo trip, capped at $240/year, when the Turo account is linked and paid with this card.",
+      "tips": [
+        "Only valuable if you already rent cars through Turo — otherwise this is the single biggest chunk of the card's advertised value that goes unused.",
+        "Requires linking your Citi card to your Turo account, not just paying with it at checkout."
+      ]
+    },
+    {
+      "id": "inflight",
+      "name": "Inflight Purchase Credit",
+      "subtitle": "up to $100/year on AA flights",
+      "max_annual": 100,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Up to $100 in statement credits annually for inflight purchases (food, Wi-Fi, entertainment) on American Airlines flights charged to this card.",
+      "tips": [
+        "Only accrues value if you actually fly American — a non-AA-heavy traveler gets $0 from this."
+      ]
+    },
+    {
+      "id": "splurge",
+      "name": "Annual Splurge Credit",
+      "subtitle": "up to $100 across 2 of: 1stDibs, AAdvantage Hotels, Future Personal Training, Live Nation",
+      "max_annual": 100,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Up to $100 in statement credits per year, split across your choice of up to two of: 1stDibs, eligible AAdvantage Hotels bookings, Future Personal Training, or Live Nation, exclusions apply.",
+      "tips": [
+        "A niche list — worth checking whether you'd naturally spend at any of these four before counting on this credit."
+      ]
+    },
+    {
+      "id": "ge-tsa",
+      "name": "Global Entry / TSA PreCheck Credit",
+      "subtitle": "up to $120 every 4 years",
+      "max_annual": 30,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "Statement credit up to $120 every 4 years for Global Entry or TSA PreCheck application fees.",
+      "tips": [
+        "Set-and-forget — apply once, get reimbursed, don't think about it again for 4 years."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Enhanced Trip Cancellation/Interruption — named benefit; per-incident dollar caps not published on Citi's public benefits page",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "Named benefit (\"Trip Delay\") — trigger hours and reimbursement caps not published on Citi's public benefits page",
+      "level": "mid"
+    },
+    {
+      "coverage": "Baggage delay / lost luggage",
+      "detail": "Lost or Damaged Luggage coverage — named benefit; dollar caps not published on Citi's public benefits page",
+      "level": "mid"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "MasterRental® Coverage — secondary, standard Mastercard rental benefit; decline the counter's CDW and charge the full rental to this card",
+      "level": "mid"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Named benefit — terms not itemized on Citi's public benefits page",
+      "level": "mid"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "\"Purchase Assurance Plus\" — named benefit; dollar caps not published on Citi's public benefits page",
+      "level": "mid"
+    }
+  ],
+  "protection_note": "Citi's public benefits pages for this card name six protections (Enhanced Trip Cancellation/Interruption, Trip Delay, Lost or Damaged Luggage, MasterRental Coverage, Extended Warranty, Purchase Assurance Plus) but don't publish the specific dollar caps, deductibles, or trigger thresholds anywhere in the consumer-facing pages — those live in the Guide to Benefits sent after account opening. Treat this as \"a real, Mastercard-standard protection suite exists\" rather than a promise of any particular dollar figure until you can read your own Guide to Benefits.",
+  "rental_note": "MasterRental Coverage is secondary (pays after your personal auto policy) — standard for a Mastercard in this tier, not a standout. Decline the rental counter's own CDW/LDW and put the entire rental charge on this card to activate it.",
+  "status_perks": [
+    {
+      "name": "Admirals Club Globe Passes",
+      "strength": 3,
+      "note": "4 single-visit, 24-hour Admirals Club passes per calendar year (~$300+ value) — not full Admirals Club membership, and they don't renew mid-year if used up."
+    },
+    {
+      "name": "Preferred boarding",
+      "strength": 2,
+      "note": "Cardholder plus up to 8 companions on the same reservation."
+    },
+    {
+      "name": "First checked bag free",
+      "strength": 3,
+      "note": "Domestic AA itineraries, cardholder plus up to 8 companions on the same reservation — can offset the annual fee by itself for a family that checks bags on 2+ AA trips/year."
+    }
+  ],
+  "services": [
+    {
+      "name": "Companion Certificate",
+      "detail": "Starting in year two, upon renewal: one certificate for a companion ticket, costing $99 plus taxes/fees to redeem — a strong perk if you renew and travel with a companion, but you get nothing from it in year one."
+    },
+    {
+      "name": "AA Vacations discount",
+      "detail": "10% off eligible American Airlines Vacations packages booked at AAVacations.com/citiaadvantage."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "$0 on purchases made outside the US."
+    },
+    {
+      "name": "Citi Quick Lock & fraud monitoring",
+      "detail": "Standard Citi account-security tools — lock the card from the app, 24-hour fraud alerts."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns miles on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Does not get their own Admirals Club Globe Passes — those are tied to the primary cardholder",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add and they earn into your mile balance, but the marquee lounge-pass and checked-bag/boarding perks are structured around the primary cardholder traveling with named companions on one reservation, not around a second full cardholder."
+  },
+  "timeline": [
+    {
+      "date": "May 2026",
+      "type": "neutral",
+      "badge": "Elevated offer",
+      "text": "A limited-time welcome offer of 90,000 AAdvantage miles after $5,000 spend in 4 months has circulated, up from the standard 60,000 miles / $4,000 in 3 months — confirm which offer is live before applying, these promotions rotate."
+    },
+    {
+      "date": "2025",
+      "type": "add",
+      "badge": "Launch",
+      "text": "American Airlines, Citi, and Mastercard launch the AAdvantage Globe Mastercard as a new mid-tier card between AAdvantage Platinum Select ($0/$99 fee) and AAdvantage Executive World Elite ($595 fee), built around Admirals Club day passes, a companion certificate, and lifestyle statement credits (Turo, inflight, splurge categories) rather than full lounge membership or elite-qualifying miles."
+    }
+  ]
+}

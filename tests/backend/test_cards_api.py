@@ -56,6 +56,29 @@ CARD_IDS = [
     "capital-one-bass-pro-cabelas-club",
     "capital-one-quicksilver-secured",
     "capital-one-platinum-secured",
+    "citi-strata",
+    "citi-strata-premier",
+    "citi-strata-elite",
+    "citi-double-cash",
+    "citi-diamond-preferred",
+    "citi-simplicity",
+    "citi-secured",
+    "citi-aadvantage-platinum-select",
+    "citi-aadvantage-executive",
+    "citi-aadvantage-mileup",
+    "citi-aadvantage-globe",
+    "citi-costco-anywhere-visa",
+    "citi-best-buy-visa",
+    "citi-home-depot-consumer",
+    "citi-att-points-plus",
+    "citi-exxonmobil-smart-card-plus",
+    "citi-macys",
+    "citi-bloomingdales",
+    "citi-dillards",
+    "citi-wayfair",
+    "citi-goodyear",
+    "citi-llbean",
+    "citi-tractor-supply",
 ]
 
 
@@ -92,9 +115,19 @@ def test_get_card_detail(card_id: str) -> None:
     assert "credits" in data
     assert "insurance" in data
     assert "timeline" in data
-    # Slate Edge and both Capital One Platinum variants have no rewards program
-    # at all — every other card earns something.
-    if card_id not in ("chase-slate-edge", "capital-one-platinum", "capital-one-platinum-secured"):
+    # These cards have no rewards program at all (pure APR/credit-access/
+    # financing products) — every other card earns something.
+    NO_REWARDS_CARDS = (
+        "chase-slate-edge",
+        "capital-one-platinum",
+        "capital-one-platinum-secured",
+        "citi-diamond-preferred",
+        "citi-simplicity",
+        "citi-secured",
+        "citi-home-depot-consumer",
+        "citi-goodyear",
+    )
+    if card_id not in NO_REWARDS_CARDS:
         assert len(data["earn_rates"]) > 0
 
 
@@ -156,6 +189,29 @@ def test_annual_fees_are_correct() -> None:
     assert fees["capital-one-bass-pro-cabelas-club"] == 0
     assert fees["capital-one-quicksilver-secured"] == 0
     assert fees["capital-one-platinum-secured"] == 0
+    assert fees["citi-strata"] == 0
+    assert fees["citi-strata-premier"] == 95
+    assert fees["citi-strata-elite"] == 595
+    assert fees["citi-double-cash"] == 0
+    assert fees["citi-diamond-preferred"] == 0
+    assert fees["citi-simplicity"] == 0
+    assert fees["citi-secured"] == 0
+    assert fees["citi-aadvantage-platinum-select"] == 99
+    assert fees["citi-aadvantage-executive"] == 595
+    assert fees["citi-aadvantage-mileup"] == 0
+    assert fees["citi-aadvantage-globe"] == 350
+    assert fees["citi-costco-anywhere-visa"] == 0
+    assert fees["citi-best-buy-visa"] == 0
+    assert fees["citi-home-depot-consumer"] == 0
+    assert fees["citi-att-points-plus"] == 0
+    assert fees["citi-exxonmobil-smart-card-plus"] == 0
+    assert fees["citi-macys"] == 0
+    assert fees["citi-bloomingdales"] == 0
+    assert fees["citi-dillards"] == 0
+    assert fees["citi-wayfair"] == 0
+    assert fees["citi-goodyear"] == 0
+    assert fees["citi-llbean"] == 0
+    assert fees["citi-tractor-supply"] == 0
 
 
 def test_easy_credits_not_negative() -> None:

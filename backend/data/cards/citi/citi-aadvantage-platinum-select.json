@@ -1,0 +1,161 @@
+{
+  "id": "citi-aadvantage-platinum-select",
+  "name": "AAdvantage Platinum Select",
+  "issuer": "Citi",
+  "network": "WORLD ELITE MASTERCARD",
+  "points_program": "AAdvantage",
+  "accent_color": "#C8102E",
+  "annual_fee": 99,
+  "effective_cost": "Free the first year (fee waived), $99/yr after — the free checked bag alone can clear that for a couple flying American once a year",
+  "verdict": {
+    "status": "situational",
+    "text": "Keep if you fly American at least once or twice a year and check bags — the free first bag for you plus up to 4 companions covers the $99 fee in a single round trip for two. If you rarely fly AA, the no-fee MileUp earns similar miles without the annual fee, just without the bag or boarding perks."
+  },
+  "earn_rates": [
+    {
+      "emoji": "✈️",
+      "multiplier": "2×",
+      "category": "Eligible American Airlines purchases",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "2×",
+      "category": "Restaurants",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "⛽",
+      "multiplier": "2×",
+      "category": "Gas stations",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "Broader everyday earning than MileUp (dining and gas added on top of AA purchases), but still thin compared to a dedicated cash-back or ThankYou card — this is a perks-and-miles card built around the free checked bag and preferred boarding, not a rate to maximize daily spend on. No mileage cap.",
+  "points": {
+    "currency": "AAdvantage Miles",
+    "redemption_options": [
+      {
+        "method": "Statement / low-end award",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Average redemption",
+        "cpp": 1.4,
+        "best": true
+      },
+      {
+        "method": "Premium-cabin / partner sweet spots",
+        "cpp": 2.0,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,000–$1,400",
+    "note": "AAdvantage has used dynamic pricing with no published award chart since 2016, so value swings by route and date. No blackout dates on award redemptions, and miles don't expire as long as there's qualifying account activity at least once every 18 months."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "AAdvantage miles aren't a transferable bank-points currency — there's no way to move them out to another loyalty program, and (unlike United MileagePlus) no bank card lets you transfer points in either.",
+    "recent_changes": "Citi became the sole issuer of AAdvantage-branded consumer credit cards as Barclays exited the co-brand partnership (announced Dec 2024, Barclays stopped issuing new AAdvantage cards Sept 30, 2025); Barclays AAdvantage cardholders began transitioning to equivalent Citi-issued cards starting April 2026, with some legacy Barclays benefits temporarily carried over."
+  },
+  "credits": [
+    {
+      "id": "flight-discount",
+      "name": "AA Flight Discount",
+      "subtitle": "$125 · after $20k spend + renewal",
+      "max_annual": 125,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "A $125 American Airlines flight discount voucher after spending $20,000 or more on the card in an account anniversary year and renewing your card membership.",
+      "tips": [
+        "High spend bar — only relevant if you're already putting $20k/yr on this card for other reasons."
+      ]
+    }
+  ],
+  "insurance": [],
+  "protection_note": "Citi's public marketing pages for this card don't disclose any travel insurance or purchase-protection benefits (no trip delay, trip cancellation, baggage, or purchase protection called out) — a step down from the paid Executive card, which does advertise a real travel-insurance suite. Treat this tier as carrying none of that coverage unless your Guide to Benefits says otherwise.",
+  "rental_note": "No rental car coverage advertised for this tier — the Executive card adds worldwide rental car insurance; Platinum Select does not.",
+  "status_perks": [
+    {
+      "name": "Loyalty Points",
+      "strength": 2,
+      "note": "1 Loyalty Point per eligible mile earned from purchases toward AAdvantage status — faster accrual than MileUp thanks to the broader 2x categories, but still a slow path without a lot of qualifying flying."
+    }
+  ],
+  "services": [
+    {
+      "name": "Free first checked bag",
+      "detail": "First checked bag free on domestic American Airlines flights for the cardholder plus up to 4 companions on the same reservation."
+    },
+    {
+      "name": "Preferred boarding",
+      "detail": "Priority boarding group on American Airlines flights for the cardholder and up to 4 companions traveling on the same reservation."
+    },
+    {
+      "name": "25% back on inflight purchases",
+      "detail": "Uncapped statement credit rebate on food, beverage, and Wi-Fi purchased onboard American Airlines flights."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "$0 on purchases made outside the US."
+    },
+    {
+      "name": "Citi Entertainment",
+      "detail": "Presale ticket access to concerts, sports, and other events."
+    },
+    {
+      "name": "No blackout dates",
+      "detail": "Standard AAdvantage award redemption term across the whole card family."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add — no additional annual fee",
+            "included": true
+          },
+          {
+            "text": "Earns AAdvantage miles on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Shares the free-bag and preferred-boarding benefit only when traveling with the primary cardholder on the same reservation",
+            "included": true
+          },
+          {
+            "text": "No separate Loyalty Points allotment of their own",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add — the free-bag and preferred-boarding perks extend to an authorized user only when they're actually traveling with the primary cardholder on the same reservation."
+  },
+  "timeline": [
+    {
+      "date": "Apr 2026",
+      "type": "neutral",
+      "badge": "Issuer transition",
+      "text": "Citi became the sole issuer of AAdvantage-branded consumer credit cards as Barclays exited the partnership; transitioning Barclays cardholders began receiving Citi-issued cards in April 2026, with some legacy Barclays benefits temporarily carried over."
+    }
+  ]
+}

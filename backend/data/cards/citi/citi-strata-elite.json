@@ -1,0 +1,260 @@
+{
+  "id": "citi-strata-elite",
+  "name": "Strata Elite",
+  "issuer": "Citi",
+  "network": "WORLD LEGEND MASTERCARD",
+  "points_program": "ThankYou Rewards",
+  "accent_color": "#1B1B1B",
+  "annual_fee": 595,
+  "effective_cost": "Moderate — ~$620 in easy annual credits roughly offsets the fee if you use the hotel and Blacklane credits",
+  "verdict": {
+    "status": "situational",
+    "text": "Citi's answer to Amex Platinum/Venture X/Sapphire Reserve — free Marriott Gold + Hilton Gold status and Admirals Club access are genuinely unique, but the $300 hotel and $200 Blacklane credits are narrow, and cash redemption is capped at 0.75¢/point"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🏨",
+      "multiplier": "12×",
+      "category": "Hotels, car rentals & attractions — booked via cititravel.com",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "✈️",
+      "multiplier": "6×",
+      "category": "Air travel — booked via cititravel.com",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🌙",
+      "multiplier": "6×",
+      "category": "Restaurants — \"Citi Nights\": Fri–Sat, 6pm–6am ET",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "3×",
+      "category": "Restaurants — all other times",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1.5×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The 12x/6x rates only apply to bookings made directly on the Citi Travel platform — flights or hotels booked elsewhere (even direct with the airline/hotel) fall to the 1.5x base. The Citi Nights 6x window (Friday/Saturday 6pm–6am ET) is a genuinely unusual gimmick: great if your dining spend skews to weekend nights, irrelevant otherwise.",
+  "points": {
+    "currency": "ThankYou Points",
+    "redemption_options": [
+      {
+        "method": "Statement credit / direct deposit / check",
+        "cpp": 0.75,
+        "best": false
+      },
+      {
+        "method": "Citi Travel portal",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Transfer partners (avg)",
+        "cpp": 1.7,
+        "best": true
+      }
+    ],
+    "per_100k": "$1,700+",
+    "note": "Like Strata Premier, cash/statement-credit redemption sits at 0.75¢/point (cut from 1¢ in Aug 2025) — well behind Double Cash's 1¢ cash rate. Linking a Double Cash account lets you redeem any pooled ThankYou Points at Double Cash's 1¢ rate instead, but the real value here is still 1:1 transfers to airline and hotel partners, including American Airlines and Admirals-Club-adjacent Star/oneworld options."
+  },
+  "transfer_partners": {
+    "airline_count": 16,
+    "hotel_count": 5,
+    "highlight": "The same 22-partner list as Strata Premier, at the same full 1:1 ratio (Emirates ~1:0.8) — American Airlines, JetBlue, Flying Blue, Virgin Atlantic/Virgin Red, Turkish, Cathay Pacific, Singapore, Avianca, plus Choice, Wyndham, Accor Live Limitless, and Preferred Hotels & Resorts. Strata Elite doesn't unlock any partners the $95 Premier lacks — the fee premium buys credits and lounge access, not better transfer value.",
+    "recent_changes": "American Airlines AAdvantage returned as a permanent transfer partner in July 2025, shortly before this card launched — Citi leaned on the AA relationship heavily in the Strata Elite launch marketing (4 free Admirals Club passes/year)."
+  },
+  "credits": [
+    {
+      "id": "hotel-credit",
+      "name": "Annual Hotel Benefit",
+      "subtitle": "2+ night stay · via Citi Travel",
+      "max_annual": 300,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Up to $300 off a single hotel stay of 2 nights or more, booked through cititravel.com, once per calendar year.",
+      "tips": [
+        "Portal-only, like the Premier's $100 credit — you have to route the booking through Citi Travel, which can mean losing brand loyalty points/status credit on that stay.",
+        "The 2-night minimum makes this less flexible than a flat per-stay credit."
+      ]
+    },
+    {
+      "id": "splurge",
+      "name": "Splurge Credit",
+      "subtitle": "up to 2 brands · $100 each",
+      "max_annual": 200,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Up to $200/year in statement credits (in $100 increments) on purchases at up to 2 of: 1stDibs, American Airlines, Best Buy, Future Personal Training, or Live Nation.",
+      "tips": [
+        "Only valuable if you already spend at 1–2 of these five specific brands — it's not a general travel or dining credit.",
+        "American Airlines is the most broadly useful option for most travelers."
+      ]
+    },
+    {
+      "id": "blacklane",
+      "name": "Blacklane Credit",
+      "subtitle": "$100 Jan–Jun + $100 Jul–Dec",
+      "max_annual": 200,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Up to $200/year in statement credits on Blacklane premium chauffeur bookings, split into two $100 half-year windows that don't roll over.",
+      "tips": [
+        "Blacklane is a niche premium car service — most US cardholders will need to actively seek it out rather than use it organically.",
+        "Split into two 6-month windows, so you effectively need two separate bookings to capture the full $200."
+      ]
+    },
+    {
+      "id": "global-entry",
+      "name": "Global Entry / TSA PreCheck Credit",
+      "subtitle": "$120 · every 4 years",
+      "max_annual": 30,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Statement credit up to $120 every four years for the Global Entry, TSA PreCheck, or NEXUS application fee. Shown here amortized to an annual figure.",
+      "tips": [
+        "Apply for Global Entry rather than TSA PreCheck alone — it includes PreCheck and is the better use of the same credit."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Common carrier trip cancellation & interruption — Citi does not publish a per-trip cap in its marketing pages",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "$500/trip · after 6 hrs · 2 claims per 12 months",
+      "level": "good"
+    },
+    {
+      "coverage": "Baggage delay/loss",
+      "detail": "$5,000/trip ($2,000 for NY residents) for lost/damaged baggage; delay coverage not offered",
+      "level": "good"
+    },
+    {
+      "coverage": "Rental car (MasterRental)",
+      "detail": "Secondary domestically, primary internationally · loss-of-use up to $500 · 31-day cap",
+      "level": "mid"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "$10,000/item · $50,000/yr · 90 days",
+      "level": "strong"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Offered — terms not itemized in Citi's consumer-facing pages",
+      "level": "good"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not covered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "Strong purchase protection ($10k/item, $50k/yr — on par with the Venture X) is the standout here. Trip protections exist but Citi doesn't publish exact cancellation caps the way Chase does, so budget conservatively for that one. Rental coverage flips to primary only outside the US, which is a real gap for domestic renters compared to the Venture X's always-primary $75k coverage.",
+  "rental_note": "MasterRental is secondary in the US (pays after your personal auto policy) but becomes primary on international rentals. If you rent domestically often, pair this with a card that offers primary coverage everywhere.",
+  "status_perks": [
+    {
+      "name": "Marriott Bonvoy Gold Elite",
+      "strength": 3,
+      "note": "Complimentary, no minimum spend — room upgrades when available, late checkout, bonus points on paid stays."
+    },
+    {
+      "name": "Hilton Honors Gold",
+      "strength": 3,
+      "note": "Complimentary, no minimum spend — space-available upgrades, 5th night free on award stays, bonus points."
+    },
+    {
+      "name": "Admirals Club access",
+      "strength": 4,
+      "note": "4 single-visit Admirals Club passes per calendar year (~50 lounges) — a genuinely rare perk outside of an AA co-brand card, but capped at 4 visits, not unlimited membership."
+    },
+    {
+      "name": "Priority Pass Select",
+      "strength": 3,
+      "note": "1,500+ lounges worldwide, complimentary for the primary cardholder, authorized users, and up to 2 guests each."
+    },
+    {
+      "name": "Mastercard World Legend perks",
+      "strength": 2,
+      "note": "Citi is the first issuer on Mastercard's new top-tier World Legend product, which layers in priority dining reservations (TheFork in Europe) and event access — new and still being built out."
+    }
+  ],
+  "services": [
+    {
+      "name": "No foreign transaction fees",
+      "detail": "Zero added cost on purchases made outside the US."
+    },
+    {
+      "name": "Citi Entertainment",
+      "detail": "Presale access to concert, sports, and event tickets."
+    },
+    {
+      "name": "Citigold banking credits",
+      "detail": "Separate from the card: Citigold and Citigold Private Client banking relationships carry their own $145–$595 annual credits, but they require a qualifying deposit/investment relationship, not just the card."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$75/yr",
+        "is_free": false,
+        "benefits": [
+          {
+            "text": "Own Priority Pass Select membership, including 2 guests",
+            "included": true
+          },
+          {
+            "text": "Earns ThankYou Points on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "No separate Admirals Club passes — only the primary cardholder's 4 passes/year",
+            "included": false
+          },
+          {
+            "text": "No separate Marriott/Hilton status — only the primary cardholder is enrolled",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Unlike the Venture X (free AUs) or CSR ($75), Strata Elite charges $75/yr per authorized user — worth it mainly for a partner who'll use the Priority Pass access; the hotel status and Admirals passes don't extend to them."
+  },
+  "timeline": [
+    {
+      "date": "Jul 28, 2025",
+      "type": "add",
+      "badge": "Launch",
+      "text": "Citi Strata Elite launches at $595/yr ($75/yr per authorized user) as the new flagship of the ThankYou 'Strata' family — the first genuinely new top-tier Citi personal card since Citi Prestige stopped taking new applicants in 2021. It is not a conversion of Prestige: existing Prestige cardholders were not automatically moved to Strata Elite and could continue holding their (closed-to-new-applicants) Prestige card. Citi Strata Elite is also the first card issued on Mastercard's new World Legend tier, above World Elite."
+    },
+    {
+      "date": "Aug 24, 2025",
+      "type": "cut",
+      "badge": "Redemption cut",
+      "text": "Statement credit / cash redemption value cut 25%, from 1¢ to 0.75¢ per ThankYou Point, matching the same cut applied to Strata Premier."
+    }
+  ]
+}
