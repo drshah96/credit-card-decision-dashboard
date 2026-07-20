@@ -1,0 +1,159 @@
+{
+  "id": "capital-one-venture-one",
+  "name": "VentureOne",
+  "issuer": "Capital One",
+  "network": "DISCOVER",
+  "points_program": "Capital One Miles",
+  "accent_color": "#F2969C",
+  "annual_fee": 0,
+  "effective_cost": "Free — no annual fee",
+  "verdict": {
+    "status": "keep",
+    "text": "Keep — free entry into the Capital One Miles ecosystem, though 1.25× lags flat cash-back competitors on non-travel spend"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🏨",
+      "multiplier": "5×",
+      "category": "Hotels, vacation rentals, rental cars & activities — via Capital One Travel",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🌐",
+      "multiplier": "1.25×",
+      "category": "Everything else — no categories",
+      "highlight": true,
+      "is_base": true
+    }
+  ],
+  "earn_note": "1.25× is below the Freedom Unlimited's 1.5% or Blue Cash Everyday's 1%-plus-bonus-categories on pure cash value, but VentureOne's miles carry transfer-partner upside that flat cash back never can.",
+  "points": {
+    "currency": "Capital One Miles",
+    "redemption_options": [
+      {
+        "method": "Purchase Eraser / Capital One Travel",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Transfer partners (avg)",
+        "cpp": 1.85,
+        "best": true
+      }
+    ],
+    "per_100k": "$1,850+",
+    "note": "The only truly no-fee card in Capital One's lineup with full transfer-partner access — Quicksilver and other no-fee Capital One cards are pure cash back capped at 1¢."
+  },
+  "transfer_partners": {
+    "airline_count": 18,
+    "hotel_count": 4,
+    "highlight": "Same 18 airline + 4 hotel partner chart as Venture and Venture X, at the same ratios — Capital One doesn't restrict transfer access by card tier.",
+    "recent_changes": "JAL Mileage Bank, Qatar Airways Privilege Club, and I Prefer Hotel Rewards added Sept 2025, shared across the whole Capital One Miles lineup."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Secondary only — pays after your personal auto insurance",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Baggage delay/loss",
+      "detail": "Not advertised as a standalone benefit",
+      "level": "none"
+    },
+    {
+      "coverage": "Emergency medical",
+      "detail": "None",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not listed on the current cardholder page — confirm against your Cardholder Benefits Guide before relying on it",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not listed on the current cardholder page — confirm against your Cardholder Benefits Guide before relying on it",
+      "level": "none"
+    }
+  ],
+  "protection_note": "This is Capital One's most stripped-down travel card — only secondary rental CDW is clearly confirmed. Purchase protection and extended warranty aren't advertised the way they are for the standard Venture card; verify against your Cardholder Benefits Guide and use a card with confirmed purchase protection for big-ticket items.",
+  "rental_note": "Secondary only — your personal auto insurance pays first, and this covers the gap (deductible, loss-of-use, towing) if you decline the rental counter's own CDW.",
+  "status_perks": [
+    {
+      "name": "Hertz Five Star",
+      "strength": 2,
+      "note": "Complimentary mid-tier Hertz Gold Plus Rewards status, same as the standard Venture card."
+    }
+  ],
+  "services": [
+    {
+      "name": "No foreign transaction fees",
+      "detail": "Zero FX fees on purchases made outside the US."
+    },
+    {
+      "name": "Discover network transition",
+      "detail": "New VentureOne accounts are being originated on the Discover network instead of Visa as of early 2026 — existing cards keep Visa until reissue."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Hertz Five Star status",
+            "included": true
+          },
+          {
+            "text": "Earns 1.25× miles (into your account)",
+            "included": true
+          },
+          {
+            "text": "No lounge access either way — nothing lost by adding one",
+            "included": true
+          }
+        ]
+      }
+    ],
+    "note": "Free to add, and since this card has no lounge access or premium perks to gate, there's little downside to adding trusted users."
+  },
+  "timeline": [
+    {
+      "date": "Early 2026",
+      "type": "neutral",
+      "badge": "Network shift",
+      "text": "New VentureOne accounts are being issued on the Discover network instead of Visa; existing cards keep Visa until reissue."
+    },
+    {
+      "date": "Sept 2025",
+      "type": "add",
+      "badge": "Add",
+      "text": "JAL Mileage Bank, Qatar Airways Privilege Club, and I Prefer Hotel Rewards added as transfer partners, shared across the whole Capital One Miles lineup including VentureOne."
+    }
+  ]
+}

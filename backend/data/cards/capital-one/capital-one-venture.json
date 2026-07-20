@@ -1,0 +1,218 @@
+{
+  "id": "capital-one-venture",
+  "name": "Venture",
+  "issuer": "Capital One",
+  "network": "DISCOVER",
+  "points_program": "Capital One Miles",
+  "accent_color": "#C41230",
+  "annual_fee": 95,
+  "effective_cost": "~$65/yr net (GE/TSA credit amortized over 4 yrs; no other recurring credits)",
+  "verdict": {
+    "status": "situational",
+    "text": "Situational — a solid flat 2× earner with full transfer-partner access, but redundant if you already carry the Venture X"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🏨",
+      "multiplier": "5×",
+      "category": "Hotels, vacation rentals & rental cars — via Capital One Travel",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🎟️",
+      "multiplier": "5×",
+      "category": "Live entertainment — via Capital One Entertainment",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🌐",
+      "multiplier": "2×",
+      "category": "Everything else — no categories",
+      "highlight": true,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The flat 2× matches the Venture X's floor rate at less than a quarter of the fee — you're paying the $95 mainly for transfer-partner access and the once-per-4-years Global Entry/TSA credit, not for a higher everyday earn rate.",
+  "points": {
+    "currency": "Capital One Miles",
+    "redemption_options": [
+      {
+        "method": "Purchase Eraser / Capital One Travel",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Transfer partners (avg)",
+        "cpp": 1.85,
+        "best": true
+      }
+    ],
+    "per_100k": "$1,850+",
+    "note": "Same mile currency and transfer chart as the Venture X — a Venture mile transfers for exactly the same value as a Venture X mile, there's no lesser tier."
+  },
+  "transfer_partners": {
+    "airline_count": 18,
+    "hotel_count": 4,
+    "highlight": "Full access to all 18 airline and 4 hotel partners — Capital One doesn't gate transfer partners behind its priciest card. Same sweet spots as Venture X: Turkish (Star Alliance short-hauls), Flying Blue, Virgin Red, JAL Mileage Bank.",
+    "recent_changes": "JAL Mileage Bank, Qatar Airways Privilege Club, and I Prefer Hotel Rewards were added Sept 2025, growing the airline list from 15 to 18."
+  },
+  "credits": [
+    {
+      "id": "ge_tsa",
+      "name": "Global Entry / TSA PreCheck Credit",
+      "subtitle": "$120 · once per 4 years",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "A statement credit of up to $120 toward your Global Entry or TSA PreCheck application fee, available once every 4 years per account.",
+      "tips": [
+        "Amortized, this is worth ~$30/yr — don't count it as a real annual credit when comparing to fee-offsetting cards.",
+        "Time your renewal to this card if another card in your wallet doesn't already cover it."
+      ]
+    },
+    {
+      "id": "experience",
+      "name": "Lifestyle Collection Experience Credit",
+      "subtitle": "$50/stay · Capital One Travel",
+      "max_annual": 50,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "A $50 experience credit (spa, dining, resort credit, etc.) at roughly 600 Lifestyle Collection hotels booked through Capital One Travel, plus room upgrades and late checkout when available. Per stay, no annual cap.",
+      "tips": [
+        "Only valuable if you're already booking through the Capital One Travel portal at a Lifestyle Collection property — don't go out of your way for it."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Secondary in the US · primary outside the US",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Not included on the standard (Visa Signature/Discover) version",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Baggage delay/loss",
+      "detail": "$1,500/incident · 2 claims/yr",
+      "level": "mid"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "$1M · common carrier, accidental death/dismemberment",
+      "level": "good"
+    },
+    {
+      "coverage": "Emergency medical",
+      "detail": "None",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "$10k/item · $50k/yr · 90 days",
+      "level": "strong"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "+1 yr on ≤3-yr warranties · $10k/claim · $50k/yr",
+      "level": "good"
+    }
+  ],
+  "protection_note": "Purchase protection and extended warranty are surprisingly strong — identical caps to the Venture X. But travel insurance is thin: no trip cancellation/interruption, no trip delay, no emergency medical, and no cell-phone protection, all of which the Venture X includes.",
+  "rental_note": "Secondary CDW inside the US only (primary abroad) — the opposite of the Venture X's always-primary $75k coverage. If you rent domestically often, pair this with a primary-coverage card or buy the rental counter's waiver.",
+  "status_perks": [
+    {
+      "name": "Hertz Five Star",
+      "strength": 2,
+      "note": "Mid-tier Hertz Gold Plus Rewards status — faster pickup, occasional upgrades. One tier below the Venture X's President's Circle."
+    },
+    {
+      "name": "Capital One Lounge access",
+      "strength": 1,
+      "note": "Not included — pay $45/visit ($25 for kids 17 and under) to enter Capital One Lounges. No Priority Pass, unlike Venture X."
+    }
+  ],
+  "services": [
+    {
+      "name": "No foreign transaction fees",
+      "detail": "Zero FX fees on purchases made outside the US."
+    },
+    {
+      "name": "Discover network transition",
+      "detail": "New accounts are being originated on the Discover network instead of Visa Signature/World Elite Mastercard as of early 2026 — existing cards keep their network until reissue. Worth checking Discover acceptance before relying on it abroad."
+    },
+    {
+      "name": "Capital One Entertainment & Dining",
+      "detail": "Presale tickets and curated restaurant reservations through Capital One's event and dining platforms."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Hertz Five Star status",
+            "included": true
+          },
+          {
+            "text": "Earns 2× miles (into your account)",
+            "included": true
+          },
+          {
+            "text": "Covered by purchase protection & extended warranty",
+            "included": true
+          },
+          {
+            "text": "Capital One Lounge access still costs $45/visit",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add, but since the primary card itself doesn't include lounge access, adding users doesn't change the lounge math the way it does on Venture X."
+  },
+  "timeline": [
+    {
+      "date": "Early 2026",
+      "type": "neutral",
+      "badge": "Network shift",
+      "text": "New Venture accounts are being issued on the Discover network instead of Visa Signature/World Elite Mastercard; existing cards keep their network until reissue."
+    },
+    {
+      "date": "2025",
+      "type": "add",
+      "badge": "Increase",
+      "text": "The Global Entry/TSA PreCheck credit rose to $120 to match the TSA's application-fee increase."
+    },
+    {
+      "date": "Sept 2025",
+      "type": "add",
+      "badge": "Add",
+      "text": "JAL Mileage Bank, Qatar Airways Privilege Club, and I Prefer Hotel Rewards added as transfer partners."
+    }
+  ]
+}

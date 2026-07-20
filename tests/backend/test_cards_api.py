@@ -8,7 +8,7 @@ client = TestClient(app)
 CARD_IDS = [
     "amex-platinum",
     "chase-sapphire-reserve",
-    "venturex",
+    "capital-one-venture-x",
     "amex-delta-skymiles-platinum",
     "amex-gold",
     "amex-green",
@@ -40,6 +40,13 @@ CARD_IDS = [
     "chase-ihg-one-rewards-traveler",
     "chase-disney-premier",
     "chase-amazon-prime-visa",
+    "capital-one-venture",
+    "capital-one-venture-one",
+    "capital-one-savor",
+    "capital-one-savor-one",
+    "capital-one-quicksilver",
+    "capital-one-quicksilver-one",
+    "capital-one-platinum",
 ]
 
 
@@ -76,9 +83,9 @@ def test_get_card_detail(card_id: str) -> None:
     assert "credits" in data
     assert "insurance" in data
     assert "timeline" in data
-    # Slate Edge has no rewards program at all (0% APR + APR-reduction mechanic
-    # instead of cash back/points) — every other card earns something.
-    if card_id != "chase-slate-edge":
+    # Slate Edge and Capital One Platinum have no rewards program at all — every
+    # other card earns something.
+    if card_id not in ("chase-slate-edge", "capital-one-platinum"):
         assert len(data["earn_rates"]) > 0
 
 
@@ -92,7 +99,7 @@ def test_annual_fees_are_correct() -> None:
     fees = {c["id"]: c["annual_fee"] for c in response.json()}
     assert fees["amex-platinum"] == 895
     assert fees["chase-sapphire-reserve"] == 795
-    assert fees["venturex"] == 395
+    assert fees["capital-one-venture-x"] == 395
     assert fees["amex-delta-skymiles-platinum"] == 350
     assert fees["amex-gold"] == 325
     assert fees["amex-green"] == 150
@@ -124,6 +131,13 @@ def test_annual_fees_are_correct() -> None:
     assert fees["chase-ihg-one-rewards-traveler"] == 0
     assert fees["chase-disney-premier"] == 49
     assert fees["chase-amazon-prime-visa"] == 0
+    assert fees["capital-one-venture"] == 95
+    assert fees["capital-one-venture-one"] == 0
+    assert fees["capital-one-savor"] == 0
+    assert fees["capital-one-savor-one"] == 39
+    assert fees["capital-one-quicksilver"] == 0
+    assert fees["capital-one-quicksilver-one"] == 39
+    assert fees["capital-one-platinum"] == 0
 
 
 def test_easy_credits_not_negative() -> None:

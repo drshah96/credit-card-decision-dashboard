@@ -1,0 +1,155 @@
+{
+  "id": "capital-one-quicksilver-one",
+  "name": "QuicksilverOne Cash Rewards",
+  "issuer": "Capital One",
+  "network": "MASTERCARD",
+  "points_program": "Cash Back",
+  "accent_color": "#6B7280",
+  "annual_fee": 39,
+  "effective_cost": "$39/year — no offsetting credits",
+  "verdict": {
+    "status": "situational",
+    "text": "Only makes sense while you're rebuilding credit and can't yet qualify for a no-fee card — the earning rate is identical to the free Quicksilver, so graduate off this one the moment your score allows."
+  },
+  "earn_rates": [
+    {
+      "emoji": "🏨",
+      "multiplier": "5%",
+      "category": "Hotels, vacation rentals & rental cars — via Capital One Travel",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🎟️",
+      "multiplier": "5%",
+      "category": "Capital One Entertainment purchases",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1.5%",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "Capital One's own comparison page confirms QuicksilverOne earns exactly what the no-fee Quicksilver earns — 1.5% flat plus the same 5% Capital One Travel and Entertainment categories. The entire premium here is credit access (approvals down to fair credit), not a richer rewards rate; there's no sign-up bonus and no intro APR. Like Quicksilver, some accounts are being migrated to the Discover network starting May 2026 with an added 3% at grocery stores and gas stations (opt-out available, affected old cards stopped working July 9, 2026).",
+  "points": {
+    "currency": "Cash Back",
+    "redemption_options": [
+      {
+        "method": "Statement credit, check, direct deposit, or gift cards",
+        "cpp": 1.0,
+        "best": true
+      }
+    ],
+    "per_100k": "$1,500",
+    "note": "Same flat 1¢-per-point cash back as Quicksilver, with no minimum redemption and no expiration while the account is open — the $39 annual fee doesn't buy a better rate, only easier approval."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer currency — straight cash back only.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Purchase protection",
+      "detail": "$1,000/item · $25,000/yr · 90 days",
+      "level": "mid"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Doubles eligible manufacturer warranties of ≤1 yr, up to 24 months total",
+      "level": "good"
+    },
+    {
+      "coverage": "Price protection",
+      "detail": "$250/claim · up to 4 claims/yr · 120 days",
+      "level": "mid"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Secondary · up to 31 days",
+      "level": "mid"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "Up to $1M · when fare is charged to the card",
+      "level": "good"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not covered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "Capital One's materials don't call out any protection differences from the no-fee Quicksilver, so treat this as the same standard suite: purchase protection, doubled extended warranty, and price protection, but no trip cancellation, baggage, or medical coverage.",
+  "rental_note": "Secondary auto rental collision/theft coverage, up to 31 days — pays out after your personal auto policy. Decline the counter's CDW/LDW and charge the entire rental to this card to activate it; excludes luxury/exotic vehicles and business or peer-to-peer rentals.",
+  "status_perks": [
+    {
+      "name": "Hertz Five Star status",
+      "strength": 2,
+      "note": "Skip-the-counter access and a wider vehicle selection at select Hertz locations."
+    }
+  ],
+  "services": [
+    {
+      "name": "No intro APR",
+      "detail": "Unlike Quicksilver, there's no 0% introductory period — a variable 28.99% APR applies to purchases, balance transfers, and cash advances from day one."
+    },
+    {
+      "name": "Automatic credit line review",
+      "detail": "Capital One automatically considers cardholders for a higher credit line after 6 months of on-time payments — the main reason to hold this card at all."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "$0 on purchases made outside the US."
+    },
+    {
+      "name": "Complimentary concierge",
+      "detail": "24/7, 365-day concierge for dining, entertainment, and travel arrangements."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns cash back on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Same purchase protection as the primary card",
+            "included": true
+          }
+        ]
+      }
+    ],
+    "note": "Free to add — useful for building a trusted household member's credit history alongside your own."
+  },
+  "timeline": [
+    {
+      "date": "May 2026",
+      "type": "add",
+      "badge": "Network shift",
+      "text": "Capital One begins mailing Discover-network replacement cards to select Quicksilver and QuicksilverOne accounts, adding an unlimited 3% cash back category at grocery stores and gas stations. Affected old Mastercards stopped working July 9, 2026; the change is opt-out, not universal, and the $39 annual fee is unchanged."
+    },
+    {
+      "date": "May 2025",
+      "type": "neutral",
+      "badge": "Acquisition",
+      "text": "Capital One completes its acquisition of Discover Financial Services, setting up the network migration above."
+    }
+  ]
+}
