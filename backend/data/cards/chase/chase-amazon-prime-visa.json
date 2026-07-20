@@ -1,0 +1,155 @@
+{
+  "id": "chase-amazon-prime-visa",
+  "name": "Prime Visa",
+  "issuer": "Chase",
+  "network": "VISA SIGNATURE",
+  "points_program": "Cash Back",
+  "accent_color": "#FF9900",
+  "annual_fee": 0,
+  "effective_cost": "Free — no annual fee",
+  "verdict": {
+    "status": "situational",
+    "text": "Only earns its keep alongside an active Prime membership — otherwise the signature rate quietly halves"
+  },
+  "earn_rates": [
+    {
+      "emoji": "📦",
+      "multiplier": "5%",
+      "category": "Amazon.com, Audible.com & Whole Foods Market — with Prime membership",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "✈️",
+      "multiplier": "5%",
+      "category": "Chase Travel purchases",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "⛽",
+      "multiplier": "2%",
+      "category": "Gas stations",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "2%",
+      "category": "Restaurants",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "🚕",
+      "multiplier": "2%",
+      "category": "Local transit & commuting, incl. rideshare",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1%",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The headline 5% at Amazon and Whole Foods requires an active Prime membership ($139/yr or $14.99/mo, billed separately) — without it, that rate drops to 3%. This is the single most important thing to know about the card: let Prime lapse and you lose a third of its value overnight, on top of losing Prime itself. No caps on any category.",
+  "points": {
+    "currency": "Cash Back",
+    "redemption_options": [
+      {
+        "method": "Amazon.com checkout, statement credit, bank deposit, or gift cards via Chase.com",
+        "cpp": 1.0,
+        "best": true
+      }
+    ],
+    "per_100k": "$1,000",
+    "note": "Technically Chase Ultimate Rewards points under the hood, but on this card alone they're worth a flat 1¢ each with no travel-portal bonus. They can't be moved into a separate premium Ultimate Rewards account (Sapphire Preferred/Reserve) to unlock transfer partners — for all practical purposes, treat this as straight cash back."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners on this card. Points earned here are a separate pool from a premium Ultimate Rewards account and can't be combined with a Sapphire card's balance to reach airline/hotel partners.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Extended warranty",
+      "detail": "+1 year on eligible warranties of 3 years or less (up to 4 yrs total)",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "$500/item · 120 days (90 days for NY residents)",
+      "level": "mid"
+    },
+    {
+      "coverage": "Baggage delay",
+      "detail": "$100/day · up to 3 days · after 6 hrs",
+      "level": "mid"
+    },
+    {
+      "coverage": "Lost luggage reimbursement",
+      "detail": "Up to $3,000",
+      "level": "mid"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "Up to $500,000",
+      "level": "good"
+    }
+  ],
+  "protection_note": "A stronger-than-expected protection suite for a no-fee retail card, courtesy of its Visa Signature status — purchase protection, extended warranty, baggage delay, lost luggage, and travel accident insurance are all included. There's no trip cancellation/interruption coverage and no cell phone protection, so it's still not a substitute for a dedicated travel card.",
+  "rental_note": "Secondary auto rental collision damage waiver (standard Visa Signature benefit) — decline the counter's CDW and pay with this card. Excludes exotic/luxury makes and rentals over 31 days; pays out after your personal auto policy.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "Prime membership required for full value",
+      "detail": "The 5% Amazon/Whole Foods rate needs an active Prime membership. Prime itself is a separate paid subscription ($139/yr or $14.99/mo) — this card doesn't include or discount it."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "0% on purchases made outside the US — unusual for a no-fee retail card."
+    },
+    {
+      "name": "Next-day Amazon redemption",
+      "detail": "Cash back can be applied directly at Amazon.com checkout as soon as the next day, with no minimum balance required."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns cash back on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Same purchase protection as the primary card",
+            "included": true
+          }
+        ]
+      }
+    ],
+    "note": "Additional cards are free — no reason not to add a trusted household member, especially one who shops Amazon or Whole Foods regularly."
+  },
+  "timeline": [
+    {
+      "date": "May 1, 2023",
+      "type": "neutral",
+      "badge": "Rebrand",
+      "text": "Chase & Amazon renamed the Amazon Prime Rewards Visa Signature Card to Prime Visa (and the no-fee Amazon Rewards Visa Signature Card to Amazon Visa), alongside a design refresh and expanded 2% categories (gas, restaurants, local transit)."
+    }
+  ]
+}

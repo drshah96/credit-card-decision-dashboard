@@ -7,7 +7,7 @@ client = TestClient(app)
 
 CARD_IDS = [
     "amex-platinum",
-    "csr",
+    "chase-sapphire-reserve",
     "venturex",
     "amex-delta-skymiles-platinum",
     "amex-gold",
@@ -22,6 +22,24 @@ CARD_IDS = [
     "amex-delta-skymiles-gold",
     "amex-delta-skymiles-reserve",
     "amex-delta-skymiles-blue",
+    "chase-sapphire-preferred",
+    "chase-freedom-unlimited",
+    "chase-freedom-flex",
+    "chase-freedom-rise",
+    "chase-slate-edge",
+    "chase-united-explorer",
+    "chase-united-quest",
+    "chase-united-club-infinite",
+    "chase-southwest-rapid-rewards-plus",
+    "chase-southwest-rapid-rewards-premier",
+    "chase-southwest-rapid-rewards-priority",
+    "chase-world-of-hyatt",
+    "chase-marriott-bonvoy-boundless",
+    "chase-marriott-bonvoy-bold",
+    "chase-ihg-one-rewards-premier",
+    "chase-ihg-one-rewards-traveler",
+    "chase-disney-premier",
+    "chase-amazon-prime-visa",
 ]
 
 
@@ -58,7 +76,10 @@ def test_get_card_detail(card_id: str) -> None:
     assert "credits" in data
     assert "insurance" in data
     assert "timeline" in data
-    assert len(data["earn_rates"]) > 0
+    # Slate Edge has no rewards program at all (0% APR + APR-reduction mechanic
+    # instead of cash back/points) — every other card earns something.
+    if card_id != "chase-slate-edge":
+        assert len(data["earn_rates"]) > 0
 
 
 def test_get_card_not_found() -> None:
@@ -70,7 +91,7 @@ def test_annual_fees_are_correct() -> None:
     response = client.get("/api/cards")
     fees = {c["id"]: c["annual_fee"] for c in response.json()}
     assert fees["amex-platinum"] == 895
-    assert fees["csr"] == 795
+    assert fees["chase-sapphire-reserve"] == 795
     assert fees["venturex"] == 395
     assert fees["amex-delta-skymiles-platinum"] == 350
     assert fees["amex-gold"] == 325
@@ -85,6 +106,24 @@ def test_annual_fees_are_correct() -> None:
     assert fees["amex-delta-skymiles-gold"] == 150
     assert fees["amex-delta-skymiles-reserve"] == 650
     assert fees["amex-delta-skymiles-blue"] == 0
+    assert fees["chase-sapphire-preferred"] == 95
+    assert fees["chase-freedom-unlimited"] == 0
+    assert fees["chase-freedom-flex"] == 0
+    assert fees["chase-freedom-rise"] == 0
+    assert fees["chase-slate-edge"] == 0
+    assert fees["chase-united-explorer"] == 150
+    assert fees["chase-united-quest"] == 350
+    assert fees["chase-united-club-infinite"] == 695
+    assert fees["chase-southwest-rapid-rewards-plus"] == 99
+    assert fees["chase-southwest-rapid-rewards-premier"] == 149
+    assert fees["chase-southwest-rapid-rewards-priority"] == 229
+    assert fees["chase-world-of-hyatt"] == 95
+    assert fees["chase-marriott-bonvoy-boundless"] == 95
+    assert fees["chase-marriott-bonvoy-bold"] == 0
+    assert fees["chase-ihg-one-rewards-premier"] == 99
+    assert fees["chase-ihg-one-rewards-traveler"] == 0
+    assert fees["chase-disney-premier"] == 49
+    assert fees["chase-amazon-prime-visa"] == 0
 
 
 def test_easy_credits_not_negative() -> None:

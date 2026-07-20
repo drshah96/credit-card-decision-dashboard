@@ -1,0 +1,305 @@
+{
+  "id": "chase-united-explorer",
+  "name": "United Explorer Card",
+  "issuer": "Chase",
+  "network": "VISA SIGNATURE",
+  "points_program": "MileagePlus",
+  "accent_color": "#4A90D2",
+  "annual_fee": 150,
+  "effective_cost": "Low if you check bags and fly United",
+  "verdict": {
+    "status": "situational",
+    "text": "Keep only if the free bag + 2 lounge passes clear the fee for you"
+  },
+  "earn_rates": [
+    {
+      "emoji": "✈️",
+      "multiplier": "3×",
+      "category": "United purchases",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🏨",
+      "multiplier": "2×",
+      "category": "Hotels — booked direct",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "2×",
+      "category": "Dining, incl. eligible delivery",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "Chase markets '9x total miles' on United flights, but 6x of that is the base MileagePlus member earn you'd get on any United ticket regardless of card — the Explorer itself only adds 3x. Thin earning outside United/hotels/dining; this is a perks card, not an everyday-spend card.",
+  "points": {
+    "currency": "MileagePlus",
+    "redemption_options": [
+      {
+        "method": "Statement / low-end",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Average redemption",
+        "cpp": 1.3,
+        "best": true
+      },
+      {
+        "method": "Premium-cabin sweet spots (Star Alliance partners)",
+        "cpp": 2.5,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,200–1,400",
+    "note": "United uses dynamic pricing with no published award chart, so value swings by route and date. No blackout dates and miles never expire. Cardholders get a baseline 10%+ discount on award tickets (15%+ once you hold Premier status)."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "MileagePlus can't be transferred out to other loyalty programs — miles earned here are locked into United.",
+    "recent_changes": "You can transfer INTO MileagePlus from Chase Ultimate Rewards (1:1, via a Sapphire or Ink Preferred card) and from Marriott Bonvoy — useful for topping up an award a few thousand miles short."
+  },
+  "credits": [
+    {
+      "id": "bags",
+      "name": "Free Checked Bag",
+      "subtitle": "1st bag · you + 1 companion",
+      "max_annual": 70,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "First checked bag free on United-operated flights for the primary cardholder and one companion on the same reservation.",
+      "tips": [
+        "~$35 each way — one round trip for two people covers most of the annual fee on its own.",
+        "You don't need to buy the ticket with this card, just have it in your wallet and be a Cardmember on the reservation."
+      ]
+    },
+    {
+      "id": "united-travel",
+      "name": "United Travel Credit",
+      "subtitle": "$100 · after $10k spend",
+      "max_annual": 100,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Statement credit toward United purchases after you spend $10,000 on the card within a calendar year.",
+      "tips": [
+        "Only worth counting on if you're already spending $10k/yr on this card for other reasons."
+      ]
+    },
+    {
+      "id": "hotels",
+      "name": "United Hotels Credit",
+      "subtitle": "$50 × 2 · prepaid stays",
+      "max_annual": 100,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Two separate $50 statement credits on prepaid hotel stays booked through United's hotel portal.",
+      "tips": [
+        "Requires prepaying through United's portal, not a direct hotel booking — check the property list first."
+      ]
+    },
+    {
+      "id": "rideshare",
+      "name": "Rideshare Credit",
+      "subtitle": "$5/mo · enroll",
+      "max_annual": 60,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "Monthly U.S. rideshare statement credit after enrollment.",
+      "tips": [
+        "Small but nearly automatic if you already take rideshares — one ride a month captures it."
+      ]
+    },
+    {
+      "id": "avis-budget",
+      "name": "Avis/Budget Credit",
+      "subtitle": "$25 × 2 rentals",
+      "max_annual": 50,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Statement credit on up to two Avis or Budget rentals per year.",
+      "tips": [
+        "Only useful if you already rent from Avis/Budget specifically."
+      ]
+    },
+    {
+      "id": "jsx",
+      "name": "JSX Flight Credit",
+      "subtitle": "up to $100/yr",
+      "max_annual": 100,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Statement credit on bookings with JSX, a semi-private hop-on jet service in limited U.S. markets.",
+      "tips": [
+        "Irrelevant unless JSX actually flies a route you use — it's a small regional network."
+      ]
+    },
+    {
+      "id": "instacart",
+      "name": "Instacart Credit",
+      "subtitle": "$10/mo + 3-mo Instacart+",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Up to $10/month in Instacart statement credits, plus a 3-month complimentary Instacart+ trial (then 25% off the annual rate).",
+      "tips": [
+        "Monthly, no rollover — needs a recurring Instacart order to capture in full."
+      ]
+    },
+    {
+      "id": "global-entry",
+      "name": "Global Entry / TSA PreCheck / NEXUS Credit",
+      "subtitle": "$120 · every 4 years",
+      "max_annual": 30,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Statement credit for a Global Entry, TSA PreCheck, or NEXUS application fee, once every four years. Shown here amortized to an annual figure.",
+      "tips": [
+        "Apply for Global Entry, not just TSA PreCheck — it includes TSA PreCheck and covers the same credit."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Primary · up to $60,000 (secondary for NY residents)",
+      "level": "strong"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "$1,500/person · $6,000/trip",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "$500/person · after 12 hrs",
+      "level": "mid"
+    },
+    {
+      "coverage": "Baggage delay",
+      "detail": "$100/day · up to 3 days",
+      "level": "good"
+    },
+    {
+      "coverage": "Lost/damaged baggage",
+      "detail": "$3,000/traveler",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "$10,000/item · 120 days",
+      "level": "strong"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "+1 year",
+      "level": "good"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not covered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "Solid on baggage and purchase protection, and the primary rental CDW is free and real ($60k, matches CSR's structure). The weak spot is trip cancellation/interruption — $1,500/person and $6,000/trip is thin next to CSR's $10,000/person, and the 12-hour trip-delay trigger is double CSR's 6-hour window.",
+  "rental_note": "Primary coverage up to $60,000 (secondary only for New York residents) — decline the counter's CDW and pay with the card. Slightly lower cap than CSR's $75k but still free, real primary coverage.",
+  "status_perks": [
+    {
+      "name": "United Club one-time passes",
+      "strength": 2,
+      "note": "Two passes per year (one at account opening, one each anniversary) — enough for an occasional lounge visit, not real access. Club Infinite is the card for that."
+    },
+    {
+      "name": "Premier Qualifying Points",
+      "strength": 1,
+      "note": "1 PQP per $20 spent, capped at 1,000/yr — a slow crawl toward Premier Silver (5,000 PQP), not a real status-earning card."
+    }
+  ],
+  "services": [
+    {
+      "name": "Priority boarding",
+      "detail": "Priority boarding on United-operated flights for the primary cardholder and companions on the reservation."
+    },
+    {
+      "name": "25% back on inflight purchases",
+      "detail": "Uncapped statement credit rebate on food, beverages, and Wi-Fi purchased onboard United-operated flights."
+    },
+    {
+      "name": "Award flight discount",
+      "detail": "10,000-mile discount on an award redemption after $20,000 in annual card spend."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "Zero FX fees on international spend."
+    },
+    {
+      "name": "Visa Signature Concierge",
+      "detail": "24/7 concierge for reservations, tickets, and travel arrangements."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add — no published annual fee for authorized users",
+            "included": true
+          },
+          {
+            "text": "10,000 bonus miles for adding one within the first 3 months (new accounts)",
+            "included": true
+          },
+          {
+            "text": "Earns MileagePlus miles (into the primary account)",
+            "included": true
+          },
+          {
+            "text": "Own United Club one-time passes or PQP allotment",
+            "included": false
+          },
+          {
+            "text": "Free checked bag only when traveling with the primary cardholder on the same reservation",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Adding an authorized user is free and was worth 10,000 bonus miles during the current offer, but it doesn't add its own set of lounge passes or PQP — the free-bag perk only applies when the AU is actually traveling with the primary cardholder."
+  },
+  "timeline": [
+    {
+      "date": "Jan 1, 2026",
+      "type": "add",
+      "badge": "Refresh",
+      "text": "Fee $99 → $150 for existing cardholders; added United Hotels, rideshare, Avis/Budget, JSX, and Instacart credits alongside the existing free bag and Global Entry credit."
+    },
+    {
+      "date": "2025",
+      "type": "neutral",
+      "badge": "Signal",
+      "text": "Chase and United announced a broad refresh across the whole United card lineup, moving from a single lounge-light benefit set toward a bundle of smaller category credits."
+    }
+  ]
+}

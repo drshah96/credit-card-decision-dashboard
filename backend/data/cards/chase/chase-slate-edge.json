@@ -1,0 +1,76 @@
+{
+  "id": "chase-slate-edge",
+  "name": "Slate Edge",
+  "issuer": "Chase",
+  "network": "VISA",
+  "points_program": "None — no rewards program",
+  "accent_color": "#37474F",
+  "annual_fee": 0,
+  "effective_cost": "Free — no annual fee, but no longer available to new applicants",
+  "verdict": {
+    "status": "reconsider",
+    "text": "Discontinued for new applicants as of Feb 2026 — existing holders can keep it, but new credit-builders should look at Freedom Rise or the relaunched Chase Slate instead"
+  },
+  "earn_rates": [],
+  "earn_note": "Slate Edge never earned cash back or points — it's built entirely around a 0% intro APR and an ongoing APR-reduction mechanic, not rewards. If you want cash back on a starter/credit-building Chase card, use Freedom Rise instead.",
+  "points": {
+    "currency": "None",
+    "redemption_options": [],
+    "per_100k": "$0 — no rewards program",
+    "note": "This card has no points or cash-back program of any kind. Its entire value proposition is interest-rate management: a 0% intro APR window plus an ongoing 2% APR reduction each account anniversary (down to a floor rate) for cardholders who spend $1,000/year and pay on time."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No rewards currency exists on this card, so there is nothing to transfer.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Purchase protection",
+      "detail": "$500/item · 120 days (90 days for NY residents)",
+      "level": "mid"
+    }
+  ],
+  "protection_note": "Minimal by design — this is a credit-building/APR-management card, not a travel or rewards card. No trip cancellation, baggage, rental car, or cell phone coverage.",
+  "rental_note": "No rental car coverage at all — use a different card for rentals.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "0% intro APR",
+      "detail": "0% for 18 months on purchases and balance transfers, then a variable ~22–30% ongoing rate."
+    },
+    {
+      "name": "Automatic APR reduction",
+      "detail": "Cardholders who spend at least $1,000 and pay on time in an account year get an automatic 2-percentage-point APR cut at each account anniversary, potentially down to a floor around 18–19%."
+    },
+    {
+      "name": "Automatic credit line reviews",
+      "detail": "Chase automatically checks the account for a credit line increase roughly every 6 months."
+    },
+    {
+      "name": "Foreign transaction fee likely applies",
+      "detail": "Not listed among Chase's no-foreign-transaction-fee cards; treat it as carrying the standard fee abroad."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [],
+    "note": "No distinct authorized-user program is marketed for this card, and it's no longer accepting new applicants of any kind as of February 2026."
+  },
+  "timeline": [
+    {
+      "date": "Jan 2026",
+      "type": "cut",
+      "badge": "Discontinued",
+      "text": "Chase stops accepting new Slate Edge applications and reintroduces a plain Chase Slate card (0% intro APR for 21 months on balance transfers, but without the ongoing APR-reduction feature) as its replacement for new applicants."
+    },
+    {
+      "date": "Jul 19, 2021",
+      "type": "add",
+      "badge": "Launch",
+      "text": "Chase introduces Slate Edge as a no-annual-fee card built around an interest rate that could go down over time with responsible use, rather than around rewards. Launched with a 12-month 0% intro APR and a $100 statement credit for spending $500 in the first 6 months."
+    }
+  ]
+}
