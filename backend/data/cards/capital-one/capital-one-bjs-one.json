@@ -1,0 +1,130 @@
+{
+  "id": "capital-one-bjs-one",
+  "name": "BJ's One Mastercard",
+  "issuer": "Capital One",
+  "network": "MASTERCARD",
+  "points_program": "BJ's Rewards",
+  "accent_color": "#CC0000",
+  "annual_fee": 0,
+  "effective_cost": "Free — no annual fee on the card itself (requires paid BJ's membership)",
+  "verdict": {
+    "status": "situational",
+    "text": "Only makes sense layered on top of a BJ's membership you already pay for — the card itself is free, but it's useless without an active club membership"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🏬",
+      "multiplier": "3%",
+      "category": "In-club at BJ's, BJs.com & the BJ's app",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "⛽",
+      "multiplier": "10¢/gal",
+      "category": "BJ's Gas — discount at the pump, not a rewards rate",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1.5%",
+      "category": "Everywhere else Mastercard is accepted",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "This is the base tier: 3% at BJ's and 1.5% everywhere else, paired with the standard Inner Circle membership (~$55/yr). The richer BJ's One+ card earns 5%/2% but requires upgrading to the pricier Perks+ membership (~$110/yr) — don't confuse the two. Gas at BJ's Gas is a per-gallon discount taken at the pump, not rewards points, and doesn't stack with the earn rate. Excludes BJ's membership fees, alcohol, tobacco, lottery, gift cards, and a few other categories.",
+  "points": {
+    "currency": "BJ's Rewards (cash back)",
+    "redemption_options": [
+      {
+        "method": "In-club, BJs.com, or BJ's app — applied like cash toward purchases",
+        "cpp": 1.0,
+        "best": true
+      }
+    ],
+    "per_100k": "Not applicable — rewards accrue as a dollar balance, not a points currency",
+    "note": "A flat cash-back balance, not points. Redeemable once it hits a $10 minimum, in any increment above that, only at BJ's. Doesn't expire as long as the account stays open. There's no cash-out to a bank account or statement credit — it's locked to BJ's."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners and no travel redemption — rewards are a closed-loop balance usable only at BJ's.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "Not included",
+      "level": "none"
+    }
+  ],
+  "protection_note": "A bare-bones retail Mastercard with none of the usual Mastercard World/World Elite protection suite documented in its terms — no purchase protection, no extended warranty, no travel coverage. Treat it as a pure earn-and-redeem tool, not a card to charge big purchases on for protection reasons.",
+  "rental_note": "No rental car coverage of any kind.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "BJ's membership required",
+      "detail": "You must be an active, paying BJ's member (Inner Circle, ~$55/yr) to apply for or use this card — it's not a substitute for membership and doesn't discount it."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "0% on purchases made outside the US, per the cardholder agreement."
+    },
+    {
+      "name": "Card lock & account management",
+      "detail": "Mobile app card lock, autopay, and flexible due-date selection via Capital One's servicing platform."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns the same rewards rate (into your account)",
+            "included": true
+          }
+        ]
+      }
+    ],
+    "note": "Free to add, but the household still needs its own BJ's membership card at the register — this credit card doesn't grant club access on its own."
+  },
+  "timeline": [
+    {
+      "date": "Feb 27, 2023",
+      "type": "neutral",
+      "badge": "Rebrand",
+      "text": "Capital One took over as issuer from Comenity, relaunching the BJ's Perks Plus Mastercard as BJ's One and the BJ's Perks Elite Mastercard as BJ's One+, on the Mastercard network."
+    }
+  ]
+}
