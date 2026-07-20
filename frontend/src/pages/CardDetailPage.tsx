@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, type ReactNode } from "react";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 import { fetchCard } from "../api/cards";
+import { ISSUERS } from "../utils/cardTaxonomy";
 import type {
   Card,
   Credit,
@@ -786,12 +787,15 @@ export default function CardDetailPage() {
   });
 
   const is404 = error instanceof Error && error.message.includes("404");
+  const issuer = card ? ISSUERS.find((i) => i.issuerField === card.issuer) : undefined;
+  const backTo = issuer ? `/issuer/${issuer.slug}` : "/";
+  const backLabel = issuer ? `${issuer.label} cards` : "All issuers";
 
   return (
     <div style={{ minHeight: "100vh" }}>
       <div className="wrap" style={{ paddingTop: 48, paddingBottom: 80 }}>
         <Link
-          to="/"
+          to={backTo}
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -805,7 +809,7 @@ export default function CardDetailPage() {
           onMouseEnter={(e) => (e.currentTarget.style.color = "var(--muted)")}
           onMouseLeave={(e) => (e.currentTarget.style.color = "var(--faint)")}
         >
-          ← All cards
+          ← {backLabel}
         </Link>
 
         {isLoading && <DetailSkeleton />}
@@ -834,7 +838,7 @@ export default function CardDetailPage() {
               to="/"
               style={{ fontSize: 13, color: "rgba(242,112,138,.6)", textDecoration: "underline" }}
             >
-              Back to dashboard
+              Back to all issuers
             </Link>
           </div>
         )}

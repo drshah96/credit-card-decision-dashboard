@@ -1,0 +1,163 @@
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import IssuerCardsPage from "@/pages/IssuerCardsPage";
+import type { Card, CardSummary } from "@/types/cards";
+
+vi.mock("@/api/cards", () => ({
+  fetchCards: vi.fn(),
+  fetchCard: vi.fn(),
+}));
+
+import { fetchCard, fetchCards } from "@/api/cards";
+
+// ─── Fixtures ─────────────────────────────────────────────────────────────────
+
+function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
+  return {
+    id: "amex-platinum",
+    name: "The Platinum Card",
+    issuer: "American Express",
+    network: "AMERICAN EXPRESS",
+    points_program: "Membership Rewards",
+    accent_color: "#C4CBD8",
+    annual_fee: 895,
+    effective_cost: "Depends on usage",
+    verdict: { status: "keep", text: "Keep if you use the credits" },
+    total_easy_credits: 0,
+    total_max_credits: 2984,
+    ...overrides,
+  };
+}
+
+function makeCard(overrides: Partial<Card> = {}): Card {
+  const summary = makeSummary(overrides);
+  return {
+    ...summary,
+    earn_rates: [],
+    earn_note: "",
+    points: { currency: summary.points_program, redemption_options: [], per_100k: "", note: "" },
+    transfer_partners: { airline_count: 0, hotel_count: 0, highlight: "", recent_changes: "" },
+    credits: [],
+    insurance: [],
+    protection_note: "",
+    rental_note: "",
+    status_perks: [],
+    services: [],
+    additional_cards: { title: "", options: [], note: "" },
+    timeline: [],
+    ...overrides,
+  };
+}
+
+const AMEX_SUMMARIES: CardSummary[] = [
+  makeSummary({ id: "amex-platinum", name: "The Platinum Card" }),
+  makeSummary({ id: "amex-delta-skymiles-gold", name: "Delta SkyMiles Gold", points_program: "Delta SkyMiles" }),
+  makeSummary({ id: "amex-hilton-honors-aspire", name: "Hilton Honors Aspire", points_program: "Hilton Honors" }),
+  makeSummary({ id: "amex-marriott-bonvoy-bevy", name: "Marriott Bonvoy Bevy", points_program: "Marriott Bonvoy" }),
+];
+
+function mockFetchCardImpl(id: string): Promise<Card> {
+  const summary = AMEX_SUMMARIES.find((c) => c.id === id);
+  if (!summary) return Promise.reject(new Error(`unknown fixture id: ${id}`));
+  return Promise.resolve(makeCard(summary));
+}
+
+function renderPage(slug = "amex") {
+  const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <MemoryRouter initialEntries={[`/issuer/${slug}`]}>
+        <Routes>
+          <Route path="/issuer/:issuerSlug" element={<IssuerCardsPage />} />
+          <Route path="/" element={<div>Issuers home</div>} />
+          <Route path="/cards/:id" element={<div>Card detail</div>} />
+        </Routes>
+      </MemoryRouter>
+    </QueryClientProvider>,
+  );
+}
+
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.mocked(fetchCard).mockImplementation(mockFetchCardImpl);
+});
+
+describe("IssuerCardsPage", () => {
+  it("shows an unknown-issuer message for a bad slug and a link home", () => {
+    vi.mocked(fetchCards).mockReturnValue(new Promise(() => {}));
+    renderPage("not-a-real-bank");
+
+    expect(screen.getByText("Unknown issuer.")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /all issuers/i })).toHaveAttribute("href", "/");
+  });
+
+  it("shows the issuer name and card count once loaded", async () => {
+    vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
+    renderPage("amex");
+
+    expect(screen.getByRole("heading", { name: "American Express Cards" })).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText("4 cards")).toBeInTheDocument();
+    });
+  });
+
+  it("defaults to the All Cards filter, grouped into sections", async () => {
+    vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
+    renderPage("amex");
+
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "All Cards" })).toHaveAttribute("aria-pressed", "true");
+    });
+    expect(screen.getByText("Flagship Cards")).toBeInTheDocument();
+    // Only one airline brand (Delta SkyMiles) in this fixture -> stays flat.
+    expect(screen.getByText("Airline Cards")).toBeInTheDocument();
+    // Two hotel brands (Hilton, Marriott) -> each gets its own section.
+    expect(screen.getByText("Hilton Honors Cards")).toBeInTheDocument();
+    expect(screen.getByText("Marriott Bonvoy Cards")).toBeInTheDocument();
+  });
+
+  it("only shows filter chips that actually apply to this issuer's cards", async () => {
+    vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
+    renderPage("amex");
+
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "Airline" })).toBeInTheDocument();
+    });
+    expect(screen.getByRole("button", { name: "Delta SkyMiles" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Hilton Honors" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Marriott Bonvoy" })).toBeInTheDocument();
+    // No card in this fixture is on the Southwest program, so that chip
+    // shouldn't render at all.
+    expect(screen.queryByRole("button", { name: "Southwest Rapid Rewards" })).not.toBeInTheDocument();
+  });
+
+  it("switches to a flat filtered grid when a chip is clicked", async () => {
+    vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
+    renderPage("amex");
+
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "Airline" })).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Airline" }));
+
+    expect(screen.getByRole("button", { name: "Airline" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.queryByText("Flagship Cards")).not.toBeInTheDocument();
+    expect(screen.getByText("Delta SkyMiles Gold")).toBeInTheDocument();
+    expect(screen.queryByText("The Platinum Card")).not.toBeInTheDocument();
+  });
+
+  it("links each card tile to its detail page", async () => {
+    vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
+    renderPage("amex");
+
+    await waitFor(() => {
+      expect(screen.getByRole("link", { name: /view the platinum card details/i })).toHaveAttribute(
+        "href",
+        "/cards/amex-platinum",
+      );
+    });
+  });
+});
