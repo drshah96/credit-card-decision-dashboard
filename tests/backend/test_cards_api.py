@@ -72,6 +72,13 @@ CARD_IDS = [
     "citi-home-depot-consumer",
     "citi-att-points-plus",
     "citi-exxonmobil-smart-card-plus",
+    "citi-macys",
+    "citi-bloomingdales",
+    "citi-dillards",
+    "citi-wayfair",
+    "citi-goodyear",
+    "citi-llbean",
+    "citi-tractor-supply",
 ]
 
 
@@ -118,6 +125,7 @@ def test_get_card_detail(card_id: str) -> None:
         "citi-simplicity",
         "citi-secured",
         "citi-home-depot-consumer",
+        "citi-goodyear",
     )
     if card_id not in NO_REWARDS_CARDS:
         assert len(data["earn_rates"]) > 0
@@ -197,6 +205,13 @@ def test_annual_fees_are_correct() -> None:
     assert fees["citi-home-depot-consumer"] == 0
     assert fees["citi-att-points-plus"] == 0
     assert fees["citi-exxonmobil-smart-card-plus"] == 0
+    assert fees["citi-macys"] == 0
+    assert fees["citi-bloomingdales"] == 0
+    assert fees["citi-dillards"] == 0
+    assert fees["citi-wayfair"] == 0
+    assert fees["citi-goodyear"] == 0
+    assert fees["citi-llbean"] == 0
+    assert fees["citi-tractor-supply"] == 0
 
 
 def test_easy_credits_not_negative() -> None:
