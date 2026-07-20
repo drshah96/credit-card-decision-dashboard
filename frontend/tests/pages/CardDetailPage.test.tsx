@@ -187,7 +187,7 @@ describe("CardDetailPage", () => {
       renderPage("bad-id");
 
       await waitFor(() => {
-        expect(screen.getByRole("link", { name: /back to dashboard/i })).toBeInTheDocument();
+        expect(screen.getByRole("link", { name: /back to all issuers/i })).toBeInTheDocument();
       });
     });
 
@@ -329,13 +329,15 @@ describe("CardDetailPage", () => {
       expect(screen.getByText("Major refresh.")).toBeInTheDocument();
     });
 
-    it("renders the back navigation link", async () => {
+    it("renders a back navigation link to the card's issuer page", async () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
 
       await waitFor(() => {
-        expect(screen.getByRole("link", { name: /all cards/i })).toBeInTheDocument();
+        const link = screen.getByRole("link", { name: /american express cards/i });
+        expect(link).toBeInTheDocument();
+        expect(link).toHaveAttribute("href", "/issuer/amex");
       });
     });
 
