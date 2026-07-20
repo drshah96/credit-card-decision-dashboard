@@ -47,6 +47,8 @@ CARD_IDS = [
     "capital-one-quicksilver",
     "capital-one-quicksilver-one",
     "capital-one-platinum",
+    "capital-one-key-rewards",
+    "capital-one-rei-co-op",
 ]
 
 
@@ -138,6 +140,8 @@ def test_annual_fees_are_correct() -> None:
     assert fees["capital-one-quicksilver"] == 0
     assert fees["capital-one-quicksilver-one"] == 39
     assert fees["capital-one-platinum"] == 0
+    assert fees["capital-one-key-rewards"] == 0
+    assert fees["capital-one-rei-co-op"] == 0
 
 
 def test_easy_credits_not_negative() -> None:
