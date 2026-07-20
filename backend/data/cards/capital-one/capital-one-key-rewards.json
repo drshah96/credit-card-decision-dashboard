@@ -1,0 +1,168 @@
+{
+  "id": "capital-one-key-rewards",
+  "name": "Key Rewards® Visa (Pottery Barn / Williams Sonoma / West Elm)",
+  "issuer": "Capital One",
+  "network": "VISA SIGNATURE",
+  "points_program": "Key Rewards Certificates",
+  "accent_color": "#4A3B2C",
+  "annual_fee": 0,
+  "effective_cost": "Free — no annual fee",
+  "verdict": {
+    "status": "situational",
+    "text": "Only worth carrying if you regularly buy from the Williams-Sonoma Inc. family of brands — rewards lock into store certificates you can't spend anywhere else"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🛋️",
+      "multiplier": "5%",
+      "category": "Williams Sonoma, Williams Sonoma Home, Pottery Barn, Pottery Barn Kids/Teen, West Elm, Rejuvenation & Mark & Graham",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "4%",
+      "category": "Grocery stores, dining & food delivery",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1%",
+      "category": "Everything else Visa is accepted",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "New cardmembers get 10% back at the family of brands for the first 30 days, dropping to a standing 5% after that. Rewards purchased on 0% promotional financing plans (12 equal payments, $750+) don't earn any rewards at all — pick one or the other on a big purchase, not both. Rate applies identically across all eight brands regardless of which one's name is on your card; there's no per-store bonus.",
+  "points": {
+    "currency": "Key Rewards Certificates",
+    "redemption_options": [
+      {
+        "method": "$20 merchandise certificates, issued automatically ~30 days after earning, redeemable at the family-of-brands stores or online",
+        "cpp": 1.0,
+        "best": true
+      }
+    ],
+    "per_100k": "$1,000 in store certificates (family-of-brands only)",
+    "note": "This is not cash back despite the percentage marketing — it's a locked merchandise-certificate currency. No statement credit, no bank deposit, no gift cards to other retailers, no travel redemption. If you don't shop these brands, the rewards are close to worthless to you."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners of any kind. Certificates are good only at Williams Sonoma, Williams Sonoma Home, Pottery Barn, Pottery Barn Kids, Pottery Barn Teen, West Elm, Rejuvenation, and Mark & Graham — a closed loop within Williams-Sonoma, Inc.'s brand family.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Baggage delay / lost luggage",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not included",
+      "level": "none"
+    }
+  ],
+  "protection_note": "Despite the Visa Signature label, the specific benefits guide Capital One issues for this card (\"Visa Signature Registered Card,\" Williams-Sonoma Inc. brands) carries none of the purchase protection, extended warranty, or trip/baggage insurance a typical Visa Signature card has. What's actually included is a referral-only concierge line, travel/emergency assistance (you pay for anything arranged), and a pay-per-use roadside dispatch service — none of which are insurance.",
+  "rental_note": "No rental car coverage of any kind. Roadside Dispatch (a separate, unrelated benefit) is a pay-per-use towing/locksmith referral service — around $80 per call as of the card's Dec 2024 benefits guide — not a collision damage waiver.",
+  "status_perks": [
+    {
+      "name": "Visa Signature Luxury Hotel Collection",
+      "strength": 1,
+      "note": "Perks at 900+ partner hotels, but this is a generic Visa Signature perk, not something Williams-Sonoma or Capital One added specifically for this card."
+    },
+    {
+      "name": "Troon Rewards",
+      "strength": 1,
+      "note": "Discounts on golf fees and merchandise via Troon-managed courses — niche, another generic Visa Signature add-on."
+    }
+  ],
+  "services": [
+    {
+      "name": "Free standard shipping",
+      "detail": "Free standard shipping at Williams Sonoma when paying with the card (site-specific; not confirmed at the other family brands)."
+    },
+    {
+      "name": "$25 birthday reward",
+      "detail": "One $25 certificate per 12-month period, sent by email around your account anniversary/birthday; must be redeemed within 30 days of issuance."
+    },
+    {
+      "name": "Early access to sales & events",
+      "detail": "Cardmembers get early access windows to sales and in-store/online events across the family of brands."
+    },
+    {
+      "name": "Visa Signature Concierge",
+      "detail": "24/7 referral line for reservations, tickets, and travel planning — you pay for anything booked through it."
+    },
+    {
+      "name": "Roadside Dispatch",
+      "detail": "Pay-per-use towing, tire change, jump-start, lockout, and fuel-delivery dispatch. No membership fee, but each call carries its own service charge."
+    },
+    {
+      "name": "No foreign transaction fee",
+      "detail": "Standard across Capital One's consumer card lineup, though not explicitly called out on this card's own product page."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns rewards on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "No dedicated insurance or purchase protections to share — this card doesn't have any",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add, but there's little extra benefit beyond pooling spend toward the 5% category — the card has no protections worth extending to a second cardholder."
+  },
+  "timeline": [
+    {
+      "date": "Dec 31, 2025",
+      "type": "neutral",
+      "badge": "Repriced",
+      "text": "Current cardholder agreement lists 29.24% variable APR (up from 26.49% in the original 2022 agreement) and a $5-or-5% cash advance fee (up from $10-or-4%). Terms shift periodically with the Prime Rate and repricing — check your own agreement for the exact number in effect."
+    },
+    {
+      "date": "Late 2021",
+      "type": "add",
+      "badge": "Launch",
+      "text": "Williams-Sonoma, Inc. moved its store-card portfolio from Comenity Bank to Capital One and relaunched the loyalty program as \"The Key Rewards,\" issuing it under four brand-specific card names (Williams Sonoma, Pottery Barn, West Elm, and a plain Key Rewards Visa) that share one underlying product, one credit card agreement, and one rewards structure."
+    }
+  ]
+}

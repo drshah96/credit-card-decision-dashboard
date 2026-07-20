@@ -47,6 +47,15 @@ CARD_IDS = [
     "capital-one-quicksilver",
     "capital-one-quicksilver-one",
     "capital-one-platinum",
+    "capital-one-key-rewards",
+    "capital-one-rei-co-op",
+    "capital-one-bjs-one",
+    "capital-one-bjs-one-plus",
+    "capital-one-kohls-rewards",
+    "capital-one-tmobile",
+    "capital-one-bass-pro-cabelas-club",
+    "capital-one-quicksilver-secured",
+    "capital-one-platinum-secured",
 ]
 
 
@@ -83,9 +92,9 @@ def test_get_card_detail(card_id: str) -> None:
     assert "credits" in data
     assert "insurance" in data
     assert "timeline" in data
-    # Slate Edge and Capital One Platinum have no rewards program at all — every
-    # other card earns something.
-    if card_id not in ("chase-slate-edge", "capital-one-platinum"):
+    # Slate Edge and both Capital One Platinum variants have no rewards program
+    # at all — every other card earns something.
+    if card_id not in ("chase-slate-edge", "capital-one-platinum", "capital-one-platinum-secured"):
         assert len(data["earn_rates"]) > 0
 
 
@@ -138,6 +147,15 @@ def test_annual_fees_are_correct() -> None:
     assert fees["capital-one-quicksilver"] == 0
     assert fees["capital-one-quicksilver-one"] == 39
     assert fees["capital-one-platinum"] == 0
+    assert fees["capital-one-key-rewards"] == 0
+    assert fees["capital-one-rei-co-op"] == 0
+    assert fees["capital-one-bjs-one"] == 0
+    assert fees["capital-one-bjs-one-plus"] == 0
+    assert fees["capital-one-kohls-rewards"] == 0
+    assert fees["capital-one-tmobile"] == 0
+    assert fees["capital-one-bass-pro-cabelas-club"] == 0
+    assert fees["capital-one-quicksilver-secured"] == 0
+    assert fees["capital-one-platinum-secured"] == 0
 
 
 def test_easy_credits_not_negative() -> None:
