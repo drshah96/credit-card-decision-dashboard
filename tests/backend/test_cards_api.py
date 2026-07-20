@@ -44,6 +44,9 @@ CARD_IDS = [
     "capital-one-venture-one",
     "capital-one-savor",
     "capital-one-savor-one",
+    "capital-one-quicksilver",
+    "capital-one-quicksilver-one",
+    "capital-one-platinum",
 ]
 
 
@@ -80,9 +83,9 @@ def test_get_card_detail(card_id: str) -> None:
     assert "credits" in data
     assert "insurance" in data
     assert "timeline" in data
-    # Slate Edge has no rewards program at all (0% APR + APR-reduction mechanic
-    # instead of cash back/points) — every other card earns something.
-    if card_id != "chase-slate-edge":
+    # Slate Edge and Capital One Platinum have no rewards program at all — every
+    # other card earns something.
+    if card_id not in ("chase-slate-edge", "capital-one-platinum"):
         assert len(data["earn_rates"]) > 0
 
 
@@ -132,6 +135,9 @@ def test_annual_fees_are_correct() -> None:
     assert fees["capital-one-venture-one"] == 0
     assert fees["capital-one-savor"] == 0
     assert fees["capital-one-savor-one"] == 39
+    assert fees["capital-one-quicksilver"] == 0
+    assert fees["capital-one-quicksilver-one"] == 39
+    assert fees["capital-one-platinum"] == 0
 
 
 def test_easy_credits_not_negative() -> None:
