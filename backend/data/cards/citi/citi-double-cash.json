@@ -1,0 +1,129 @@
+{
+  "id": "citi-double-cash",
+  "name": "Double Cash",
+  "issuer": "Citi",
+  "network": "MASTERCARD",
+  "points_program": "ThankYou Rewards",
+  "accent_color": "#00629B",
+  "annual_fee": 0,
+  "effective_cost": "Free — no annual fee",
+  "verdict": {
+    "status": "keep",
+    "text": "Still the best true flat-rate card — 2% on everything, uncapped, no categories to track, and it's the cheapest way to unlock a full 1¢ cash-out rate on ThankYou Points earned by other Citi cards"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🏨",
+      "multiplier": "5%",
+      "category": "Hotels, car rentals & attractions — booked via Citi Travel",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "2%",
+      "category": "Everything else — 1% when you buy, 1% when you pay it off",
+      "highlight": true,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The 2% is really two separate 1% events: 1 ThankYou Point per dollar spent, plus 1 more point per dollar once that spend is paid off. Carrying a balance or only making minimum payments delays (or effectively forfeits, on written-off debt) the second 1% — this card assumes you pay in full.",
+  "points": {
+    "currency": "ThankYou Points",
+    "redemption_options": [
+      {
+        "method": "Statement credit / direct deposit / check",
+        "cpp": 1.0,
+        "best": true
+      },
+      {
+        "method": "Citi Travel portal",
+        "cpp": 1.0,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,000",
+    "note": "As of a 2024 program change, Double Cash earns ThankYou Points rather than a separate 'cash back' currency — but on its own it's still capped at a flat 1¢/point for cash, gift cards, or Amazon, with no transfer partners. The nuance: this card's points can be pooled with a Strata Premier or Strata Elite account (link them in Citi's online banking) to become transferable at 1:1 to airline/hotel partners — turning otherwise-capped cash-back points into travel currency. On its own, Double Cash is a pure 2% cash-back card in every way that matters."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners on this account alone — Double Cash's ThankYou Points are cash-and-merchandise-only unless pooled with a linked Strata Premier or Strata Elite account, which unlocks the full 22-partner list at 1:1 for the combined balance.",
+    "recent_changes": "Double Cash moved from a distinct 'cash back' ledger to the ThankYou Points ledger in 2024, enabling the pooling/transfer trick above for the first time — previously its rewards couldn't become travel points at all."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not offered (removed in 2019 and never reinstated)",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Doubles the manufacturer's warranty up to 24 months · capped at original purchase price, $1,000/claim",
+      "level": "mid"
+    },
+    {
+      "coverage": "Rental car coverage",
+      "detail": "Not offered",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip protections",
+      "detail": "Not offered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "Minimal by design — this is a cash-back card, not a travel card. Citi stripped purchase protection and rental coverage from Double Cash in 2019 and hasn't brought them back; the one thing it does have is a decent 24-month extended warranty, which most no-fee cards don't bother with.",
+  "rental_note": "No rental car coverage at all — use a different card for rentals.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "Foreign transaction fee applies",
+      "detail": "3% on purchases made outside the US — not built for international use."
+    },
+    {
+      "name": "Citi Entertainment",
+      "detail": "Presale access to concert, sports, and event tickets."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Additional Card",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns 2% on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Same limited protections as the primary card",
+            "included": true
+          }
+        ]
+      }
+    ],
+    "note": "Free to add — an easy way to consolidate household spend onto the flat 2% rate."
+  },
+  "timeline": [
+    {
+      "date": "2024",
+      "type": "neutral",
+      "badge": "Program change",
+      "text": "Double Cash's rewards were moved onto the ThankYou Points ledger instead of a separate cash-back currency. Day-to-day value didn't change (still 1¢/point cash-out), but it made this card poolable with a Strata Premier or Strata Elite account for 1:1 airline/hotel transfers — a capability it never had before."
+    },
+    {
+      "date": "2019",
+      "type": "cut",
+      "badge": "Cut",
+      "text": "Citi removed purchase protection and rental car coverage industry-wide from lower-tier cards, including Double Cash; a 24-month extended warranty benefit was added back later as a partial offset."
+    }
+  ]
+}
