@@ -98,6 +98,9 @@ CARD_IDS = [
     "bofa-unlimited-cash-rewards-secured",
     "bofa-bankamericard-secured",
     "bofa-travel-rewards-secured",
+    "bilt-blue",
+    "bilt-obsidian",
+    "bilt-palladium",
 ]
 
 
