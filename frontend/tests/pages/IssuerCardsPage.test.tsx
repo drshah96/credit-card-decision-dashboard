@@ -282,5 +282,23 @@ describe("IssuerCardsPage", () => {
         "/compare?cards=amex-platinum",
       );
     });
+
+    it("mounting with cards already picked (e.g. back from a detail page) starts in select mode, not 'Select cards'", async () => {
+      localStorage.setItem("compare-cards", JSON.stringify(["amex-platinum"]));
+      vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
+      renderPage("amex");
+
+      await waitFor(() => {
+        expect(screen.getByRole("button", { name: "Done selecting" })).toHaveAttribute(
+          "aria-pressed",
+          "true",
+        );
+      });
+      expect(screen.queryByRole("button", { name: "Select cards" })).not.toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: /remove the platinum card from compare/i }),
+      ).toBeInTheDocument();
+      expect(screen.getByRole("link", { name: "Compare (1)" })).toBeInTheDocument();
+    });
   });
 });

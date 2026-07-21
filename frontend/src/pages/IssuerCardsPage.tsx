@@ -47,8 +47,11 @@ export default function IssuerCardsPage() {
   const { issuerSlug } = useParams<{ issuerSlug: string }>();
   const issuer = getIssuerBySlug(issuerSlug);
   const [activeFilter, setActiveFilter] = useState<string>(ALL_CARDS_FILTER);
-  const [selectMode, setSelectMode] = useState(false);
   const { compareIds } = useCompareList();
+  // Defaults to "on" whenever picks already exist (e.g. returning from a
+  // card's detail page) — otherwise the toggle would misleadingly read
+  // "Select cards" even though cards are, in fact, already selected.
+  const [selectMode, setSelectMode] = useState(() => compareIds.length > 0);
 
   const { data: allCards, isLoading, isError, error } = useQuery({
     queryKey: ["cards"],
