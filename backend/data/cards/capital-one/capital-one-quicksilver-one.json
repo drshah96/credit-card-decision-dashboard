@@ -6,17 +6,17 @@
   "points_program": "Cash Back",
   "accent_color": "#6B7280",
   "annual_fee": 39,
-  "effective_cost": "$39/year — no offsetting credits",
+  "effective_cost": "$39/year, no offsetting credits",
   "verdict": {
     "status": "situational",
-    "text": "Same earn rate as the free Quicksilver — graduate once your score allows",
+    "text": "Same earn rate as the free Quicksilver: graduate once your score allows",
     "short_tag": "Credit Building"
   },
   "earn_rates": [
     {
       "emoji": "🏨",
       "multiplier": "5%",
-      "category": "Hotels, vacation rentals & rental cars — via Capital One Travel",
+      "category": "Hotels, vacation rentals & rental cars, via Capital One Travel",
       "highlight": true,
       "is_base": false
     },
@@ -35,7 +35,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Capital One's own comparison page confirms QuicksilverOne earns exactly what the no-fee Quicksilver earns — 1.5% flat plus the same 5% Capital One Travel and Entertainment categories. The entire premium here is credit access (approvals down to fair credit), not a richer rewards rate; there's no sign-up bonus and no intro APR. Like Quicksilver, some accounts are being migrated to the Discover network starting May 2026 with an added 3% at grocery stores and gas stations (opt-out available, affected old cards stopped working July 9, 2026).",
+  "earn_note": "Capital One's own comparison page confirms QuicksilverOne earns exactly what the no-fee Quicksilver earns: 1.5% flat plus the same 5% Capital One Travel and Entertainment categories. The entire premium here is credit access (approvals down to fair credit), not a richer rewards rate; there's no sign-up bonus and no intro APR. Like Quicksilver, some accounts are being migrated to the Discover network starting May 2026 with an added 3% at grocery stores and gas stations (opt-out available, affected old cards stopped working July 9, 2026).",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
@@ -46,12 +46,12 @@
       }
     ],
     "per_100k": "$1,500",
-    "note": "Same flat 1¢-per-point cash back as Quicksilver, with no minimum redemption and no expiration while the account is open — the $39 annual fee doesn't buy a better rate, only easier approval."
+    "note": "Same flat 1¢-per-point cash back as Quicksilver, with no minimum redemption and no expiration while the account is open. The $39 annual fee doesn't buy a better rate, only easier approval."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer currency — straight cash back only.",
+    "highlight": "No transfer currency: straight cash back only.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -88,7 +88,7 @@
     }
   ],
   "protection_note": "Capital One's materials don't call out any protection differences from the no-fee Quicksilver, so treat this as the same standard suite: purchase protection, doubled extended warranty, and price protection, but no trip cancellation, baggage, or medical coverage.",
-  "rental_note": "Secondary auto rental collision/theft coverage, up to 31 days — pays out after your personal auto policy. Decline the counter's CDW/LDW and charge the entire rental to this card to activate it; excludes luxury/exotic vehicles and business or peer-to-peer rentals.",
+  "rental_note": "Secondary auto rental collision/theft coverage, up to 31 days, pays out after your personal auto policy. Decline the counter's CDW/LDW and charge the entire rental to this card to activate it; excludes luxury/exotic vehicles and business or peer-to-peer rentals.",
   "status_perks": [
     {
       "name": "Hertz Five Star status",
@@ -99,11 +99,11 @@
   "services": [
     {
       "name": "No intro APR",
-      "detail": "Unlike Quicksilver, there's no 0% introductory period — a variable 28.99% APR applies to purchases, balance transfers, and cash advances from day one."
+      "detail": "Unlike Quicksilver, there's no 0% introductory period. A variable 28.99% APR applies to purchases, balance transfers, and cash advances from day one."
     },
     {
       "name": "Automatic credit line review",
-      "detail": "Capital One automatically considers cardholders for a higher credit line after 6 months of on-time payments — the main reason to hold this card at all."
+      "detail": "Capital One automatically considers cardholders for a higher credit line after 6 months of on-time payments, the main reason to hold this card at all."
     },
     {
       "name": "No foreign transaction fees",
@@ -137,7 +137,7 @@
         ]
       }
     ],
-    "note": "Free to add — useful for building a trusted household member's credit history alongside your own."
+    "note": "Free to add: useful for building a trusted household member's credit history alongside your own."
   },
   "timeline": [
     {
