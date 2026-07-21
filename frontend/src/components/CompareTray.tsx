@@ -13,7 +13,7 @@ import { CARD_IMAGES } from "../utils/cardImages";
  * already shows full-size versions of the same cards.
  */
 export function CompareTray() {
-  const { compareIds, removeCard } = useCompareList();
+  const { compareIds, removeCard, setCompareIds } = useCompareList();
   const location = useLocation();
   const { data: allCards } = useQuery({
     queryKey: ["cards"],
@@ -55,6 +55,13 @@ export function CompareTray() {
             );
           })}
         </div>
+        <button
+          type="button"
+          onClick={() => setCompareIds([])}
+          className="filter-chip compare-tray-remove-all"
+        >
+          Remove Selection
+        </button>
         <Link to={`/compare?cards=${compareIds.join(",")}`} className="compare-cta compare-tray-cta">
           Compare ({compareIds.length})
         </Link>

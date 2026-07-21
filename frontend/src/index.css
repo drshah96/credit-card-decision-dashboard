@@ -724,4 +724,5 @@ body {
   font-family: inherit;
 }
 .compare-tray-remove:hover { color: var(--red); border-color: var(--red); }
+.compare-tray-remove-all { flex-shrink: 0; white-space: nowrap; }
 .compare-tray-cta { flex-shrink: 0; }

@@ -47,7 +47,7 @@ export default function IssuerCardsPage() {
   const { issuerSlug } = useParams<{ issuerSlug: string }>();
   const issuer = getIssuerBySlug(issuerSlug);
   const [activeFilter, setActiveFilter] = useState<string>(ALL_CARDS_FILTER);
-  const { compareIds, setCompareIds } = useCompareList();
+  const { compareIds } = useCompareList();
   // Defaults to "on" whenever picks already exist (e.g. returning from a
   // card's detail page) — otherwise the toggle would misleadingly read
   // "Select cards" even though cards are, in fact, already selected.
@@ -222,39 +222,18 @@ export default function IssuerCardsPage() {
               ))}
             </div>
 
-            {/* Once anything is picked, the toggle becomes "Remove Selection"
-                (clears every pick) alongside a persistent Compare CTA —
-                otherwise it's the plain Select/Done-selecting toggle. */}
-            <div style={{ display: "flex", justifyContent: "flex-end", gap: 8, marginBottom: 16 }}>
-              {compareIds.length > 0 ? (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setCompareIds([]);
-                    setSelectMode(false);
-                  }}
-                  className="filter-chip"
-                >
-                  Remove Selection
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => setSelectMode((v) => !v)}
-                  aria-pressed={selectMode}
-                  className={`filter-chip ${selectMode ? "active" : ""}`}
-                >
-                  {selectMode ? "Done selecting" : "Select cards"}
-                </button>
-              )}
-              {compareIds.length > 0 && (
-                <Link
-                  to={`/compare?cards=${compareIds.join(",")}`}
-                  className="compare-cta"
-                >
-                  Compare ({compareIds.length})
-                </Link>
-              )}
+            {/* Select-mode toggle only — "Remove Selection" and the Compare
+                CTA both live in the persistent CompareTray now, so there's
+                just one of each visible at a time instead of two. */}
+            <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
+              <button
+                type="button"
+                onClick={() => setSelectMode((v) => !v)}
+                aria-pressed={selectMode}
+                className={`filter-chip ${selectMode ? "active" : ""}`}
+              >
+                {selectMode ? "Done selecting" : "Select cards"}
+              </button>
             </div>
 
             {/* All Cards: grouped sections. Otherwise: a flat filtered grid. */}

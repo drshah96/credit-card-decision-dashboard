@@ -107,4 +107,18 @@ describe("CompareTray", () => {
       expect(screen.getByText("amex-platinum")).toBeInTheDocument();
     });
   });
+
+  it("'Remove Selection' clears every picked card at once", async () => {
+    localStorage.setItem("compare-cards", JSON.stringify(["amex-platinum", "chase-sapphire-reserve"]));
+    renderTray();
+
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "Remove Selection" })).toBeInTheDocument();
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Remove Selection" }));
+
+    expect(JSON.parse(localStorage.getItem("compare-cards")!)).toEqual([]);
+    expect(screen.queryByText("The Platinum Card")).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: /compare \(/i })).not.toBeInTheDocument();
+  });
 });
