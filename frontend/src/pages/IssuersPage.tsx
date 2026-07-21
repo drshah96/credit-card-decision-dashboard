@@ -6,6 +6,7 @@ import capitalOneLogo from "../assets/logos/capital-one.svg";
 import citiLogo from "../assets/logos/citi.svg";
 import usBankLogo from "../assets/logos/us-bank.svg";
 import bofaLogo from "../assets/logos/bofa.svg";
+import biltLogo from "../assets/logos/bilt.svg";
 
 const ISSUER_LOGOS: Record<string, string> = {
   amex: amexLogo,
@@ -14,6 +15,7 @@ const ISSUER_LOGOS: Record<string, string> = {
   citi: citiLogo,
   "us-bank": usBankLogo,
   bofa: bofaLogo,
+  bilt: biltLogo,
 };
 
 export default function IssuersPage() {

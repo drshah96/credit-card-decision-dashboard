@@ -1,0 +1,198 @@
+{
+  "id": "bilt-obsidian",
+  "name": "Bilt Obsidian Card",
+  "issuer": "Bilt",
+  "network": "WORLD ELITE MASTERCARD",
+  "points_program": "Bilt Rewards",
+  "accent_color": "#1A1A1A",
+  "annual_fee": 95,
+  "effective_cost": "Low — the $100 annual hotel credit alone covers most of the $95 fee if you book 2+ night stays through Bilt Travel",
+  "verdict": {
+    "status": "situational",
+    "text": "Worth the $95 if you'll actually book 2+ Bilt Travel hotel stays a year to capture the $100 credit and lean on the 3x choice-category dining/grocery rate — otherwise the Blue Card covers the same rent-rewards core for free",
+    "short_tag": "Dining & Grocery Pick"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🍽️",
+      "multiplier": "Up to 6×",
+      "category": "Bilt partner restaurants (20,000+ U.S. locations)",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "3×",
+      "category": "Choice of other dining or grocery (grocery capped at $25K/yr)",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🏨",
+      "multiplier": "4×",
+      "category": "Hotels — booked on the Bilt Travel Portal",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "✈️",
+      "multiplier": "3×",
+      "category": "Flights — booked on the Bilt Travel Portal",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "🧳",
+      "multiplier": "2×",
+      "category": "Other travel",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "🚗",
+      "multiplier": "3×",
+      "category": "Lyft — after linking Bilt and Lyft accounts",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The 3x 'choice' category is a one-time-per-account pick between ongoing dining or grocery spend, separate from the uncapped restaurant bonus (which pays up to 6x at 20,000+ partner restaurants regardless of which choice you make). Grocery under the choice category is capped at $25,000/year. Housing rewards use the same up-to-1.25x mechanic as every Bilt Card, tied to how much of your rent/mortgage payment your everyday spend covers that cycle. New cardholders get $200 in Bilt Cash on account opening, with no spending requirement.",
+  "points": {
+    "currency": "Bilt Points",
+    "redemption_options": [
+      {
+        "method": "Transfer to airline/hotel partners (19 airlines, 7 hotels, mostly 1:1)",
+        "cpp": 2.2,
+        "best": true
+      },
+      {
+        "method": "Book travel directly through the Bilt Travel Portal",
+        "cpp": 1.5,
+        "best": false
+      },
+      {
+        "method": "Statement credit, rent/mortgage credit, or Lyft rides",
+        "cpp": 1.0,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,500–$2,200+",
+    "note": "Same transfer-partner ceiling as every Bilt Card — 2.2¢/point per The Points Guy on well-chosen transfers, 1¢/point on cash-equivalent redemptions."
+  },
+  "transfer_partners": {
+    "airline_count": 19,
+    "hotel_count": 7,
+    "highlight": "19 airline and 7 hotel partners, almost all at 1:1 (Accor Live Limitless is 3:2) — Hyatt, Marriott, Hilton, IHG, Wyndham, and I Prefer on the hotel side; United, Air France/KLM, Emirates, Cathay Pacific, and Southwest among the airlines.",
+    "recent_changes": "Wyndham Rewards and I Prefer Hotel Rewards (Preferred Hotels & Resorts, 700+ independent properties) were both added as transfer partners in 2026."
+  },
+  "credits": [
+    {
+      "id": "travel-hotel-credit",
+      "name": "Bilt Travel Hotel Credit",
+      "subtitle": "$50 twice a year · Bilt Travel Portal hotel bookings only",
+      "max_annual": 100,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Up to $50 applied to a qualifying hotel booking (2+ nights, made through the Bilt Travel Portal) from January–June, and another $50 from July–December, for $100/year total. You must toggle the credit on at checkout; for pay-at-hotel bookings it posts as a statement credit after your stay.",
+      "tips": [
+        "Only applies to bookings made through the Bilt Travel Portal, not hotels booked directly — and only to stays of 2 nights or longer.",
+        "Each $50 window is use-it-or-lose-it — unused credit in the January–June period doesn't roll into July–December."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Zero liability",
+      "detail": "Not responsible for fraudulent transactions once reported — standard Mastercard protection",
+      "level": "good"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "MasterRental coverage applies first, before your personal auto insurance. Exact per-rental and annual limits are in the Guide to Benefits, not public marketing.",
+      "level": "good"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Confirmed benefit added over the Blue Card; exact per-trip and annual dollar limits are in the Guide to Benefits, not public marketing.",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "Trip Delay Reimbursement is a confirmed benefit; exact per-day and annual limits are in the Guide to Benefits, not public marketing.",
+      "level": "mid"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Purchase Assurance is a confirmed benefit; exact per-item and annual dollar limits are in the Guide to Benefits, not public marketing.",
+      "level": "mid"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Confirmed benefit added over the Blue Card; exact extension length is in the Guide to Benefits, not public marketing.",
+      "level": "mid"
+    },
+    {
+      "coverage": "Cell phone protection",
+      "detail": "Cellular Wireless Telephone Protection is a confirmed benefit for phones on a bill paid with this card; exact deductible and annual limits are in the Guide to Benefits, not public marketing.",
+      "level": "mid"
+    }
+  ],
+  "protection_note": "Adds trip cancellation/interruption, trip delay, and extended warranty on top of the Blue Card's baseline — a meaningfully fuller travel-protection set, though exact dollar limits sit in the non-public Guide to Benefits.",
+  "rental_note": "MasterRental coverage applies first, ahead of your personal auto policy — decline the counter's CDW and pay with this card. Exact dollar limits are in the Guide to Benefits.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "No transaction fee on rent, mortgage, and HOA payments",
+      "detail": "Pay housing costs through Bilt with no card-processing fee — funds are debited from a linked bank account within 24 hours, not your credit line."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "$0 on purchases made outside the US."
+    },
+    {
+      "name": "10% intro APR",
+      "detail": "10% on new eligible purchases for the first 12 billing cycles, then a variable 26.74%–34.74% APR applies."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$50/yr",
+        "is_free": false,
+        "benefits": [
+          {
+            "text": "Earns Bilt Points on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Manage directly in the Bilt app",
+            "included": true
+          },
+          {
+            "text": "No separate hotel credit or Bilt Cash of their own",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "$50/year per Authorized User on the Obsidian Card — free on Blue, $95 on Palladium."
+  },
+  "timeline": [
+    {
+      "date": "2026",
+      "type": "add",
+      "badge": "Relaunch",
+      "text": "Bilt Card 2.0 launches as a three-tier lineup (Blue/Obsidian/Palladium), replacing the original single Bilt Mastercard and removing its 5-transaction-per-month requirement to earn on rent."
+    }
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "id": "bilt-palladium",
+  "name": "Bilt Palladium Card",
+  "issuer": "Bilt",
+  "network": "WORLD LEGEND MASTERCARD",
+  "points_program": "Bilt Rewards",
+  "accent_color": "#B8B4AA",
+  "annual_fee": 495,
+  "effective_cost": "Moderate — $200 Bilt Cash + $400 in hotel credits ($600 total) can more than cover the fee if you use both, plus Priority Pass lounge access",
+  "verdict": {
+    "status": "situational",
+    "text": "Keep if you'll actually use Priority Pass lounge access and book enough Bilt Travel hotel stays to capture the $400 credit — otherwise Obsidian gets most of the earning rate for a fraction of the fee",
+    "short_tag": "Lounge Access + Housing"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🍽️",
+      "multiplier": "Up to 5×",
+      "category": "Bilt partner restaurants (20,000+ U.S. locations)",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🏨",
+      "multiplier": "4×",
+      "category": "Hotels — booked on the Bilt Travel Portal",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "✈️",
+      "multiplier": "3×",
+      "category": "Flights — booked on the Bilt Travel Portal",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "🚗",
+      "multiplier": "4×",
+      "category": "Lyft — after linking Bilt and Lyft accounts",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "2×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "Palladium is the only Bilt Card with a 2x uncapped base rate on everything else — Blue and Obsidian earn 1x on non-bonused spend. Housing rewards use the same up-to-1.25x mechanic as every Bilt Card. New cardholders get $300 in Bilt Cash on account opening (no spend required), plus a separate 50,000-point + Gold Elite Status bonus after $4,000 in everyday spend (excluding rent/mortgage) within 90 days.",
+  "points": {
+    "currency": "Bilt Points",
+    "redemption_options": [
+      {
+        "method": "Transfer to airline/hotel partners (19 airlines, 7 hotels, mostly 1:1)",
+        "cpp": 2.2,
+        "best": true
+      },
+      {
+        "method": "Book travel directly through the Bilt Travel Portal",
+        "cpp": 1.5,
+        "best": false
+      },
+      {
+        "method": "Statement credit, rent/mortgage credit, or Lyft rides",
+        "cpp": 1.0,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,500–$2,200+",
+    "note": "Same transfer-partner ceiling as every Bilt Card — 2.2¢/point per The Points Guy on well-chosen transfers, 1¢/point on cash-equivalent redemptions."
+  },
+  "transfer_partners": {
+    "airline_count": 19,
+    "hotel_count": 7,
+    "highlight": "19 airline and 7 hotel partners, almost all at 1:1 (Accor Live Limitless is 3:2) — Hyatt, Marriott, Hilton, IHG, Wyndham, and I Prefer on the hotel side; United, Air France/KLM, Emirates, Cathay Pacific, and Southwest among the airlines.",
+    "recent_changes": "Wyndham Rewards and I Prefer Hotel Rewards (Preferred Hotels & Resorts, 700+ independent properties) were both added as transfer partners in 2026."
+  },
+  "credits": [
+    {
+      "id": "bilt-cash-annual",
+      "name": "Annual Bilt Cash",
+      "subtitle": "$200 · issued every year, up to $100 rolls over",
+      "max_annual": 200,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "$200 in Bilt Cash issued annually, on top of the one-time $300 welcome bonus. Bilt Cash can be spent at partner merchants (Lyft, Bilt Travel hotels, SoulCycle, Grubhub, Walgreens, GoPuff) or unlocked toward rent/mortgage points. Up to $100 of unused balance carries into the next calendar year; anything above that expires December 31.",
+      "tips": [
+        "Spend down to the $100 rollover threshold before year-end so nothing above it expires unused.",
+        "Bilt Cash also unlocks a point accelerator adding 1x to your choice category, up to $5,000 in spend."
+      ]
+    },
+    {
+      "id": "travel-hotel-credit",
+      "name": "Bilt Travel Hotel Credit",
+      "subtitle": "$200 twice a year · Bilt Travel Portal hotel bookings only",
+      "max_annual": 400,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Up to $200 applied to a qualifying hotel booking (2+ nights, made through the Bilt Travel Portal) from January–June, and another $200 from July–December, for $400/year total. You must toggle the credit on at checkout; for pay-at-hotel bookings it posts as a statement credit after your stay.",
+      "tips": [
+        "Only applies to bookings made through the Bilt Travel Portal, not hotels booked directly — and only to stays of 2 nights or longer.",
+        "Each $200 window is use-it-or-lose-it — unused credit in the January–June period doesn't roll into July–December."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Zero liability",
+      "detail": "Not responsible for fraudulent transactions once reported — standard Mastercard protection",
+      "level": "good"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "MasterRental coverage applies first, before your personal auto insurance. Exact per-rental and annual limits are in the Guide to Benefits, not public marketing.",
+      "level": "good"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Confirmed benefit; exact per-trip and annual dollar limits are in the Guide to Benefits, not public marketing.",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "Trip Delay Reimbursement is a confirmed benefit; exact per-day and annual limits are in the Guide to Benefits, not public marketing.",
+      "level": "mid"
+    },
+    {
+      "coverage": "Baggage delay",
+      "detail": "Baggage Delay Insurance added exclusively at the Palladium tier; exact per-day and annual limits are in the Guide to Benefits, not public marketing.",
+      "level": "mid"
+    },
+    {
+      "coverage": "Lost/damaged luggage",
+      "detail": "Lost or Damaged Luggage Insurance added exclusively at the Palladium tier; exact per-item and annual limits are in the Guide to Benefits, not public marketing.",
+      "level": "mid"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Purchase Assurance is a confirmed benefit; exact per-item and annual dollar limits are in the Guide to Benefits, not public marketing.",
+      "level": "mid"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Confirmed benefit; exact extension length is in the Guide to Benefits, not public marketing.",
+      "level": "mid"
+    },
+    {
+      "coverage": "Cell phone protection",
+      "detail": "Cellular Wireless Telephone Protection is a confirmed benefit for phones on a bill paid with this card; exact deductible and annual limits are in the Guide to Benefits, not public marketing.",
+      "level": "mid"
+    },
+    {
+      "coverage": "Price drop protection",
+      "detail": "Price Drop Protection added exclusively at the Palladium tier; exact eligibility window and reimbursement limits are in the Guide to Benefits, not public marketing.",
+      "level": "mid"
+    }
+  ],
+  "protection_note": "The fullest travel-protection set of any Bilt Card — adds baggage delay, lost/damaged luggage, and price drop protection on top of Obsidian's benefits — though exact dollar limits sit in the non-public Guide to Benefits.",
+  "rental_note": "MasterRental coverage applies first, ahead of your personal auto policy — decline the counter's CDW and pay with this card. Exact dollar limits are in the Guide to Benefits.",
+  "status_perks": [
+    {
+      "name": "Priority Pass",
+      "strength": 4,
+      "note": "Marketed as 'worth $469/year' — Bilt doesn't publicly specify a guest allowance or membership count, unlike some competitors' explicit multi-membership Priority Pass perks, so confirm exact terms before counting on it for a group."
+    },
+    {
+      "name": "Bilt Gold Elite Status",
+      "strength": 3,
+      "note": "Awarded with the welcome bonus after meeting the $4,000/90-day spending requirement; valid through January 15th of the second calendar year following qualification."
+    }
+  ],
+  "services": [
+    {
+      "name": "No transaction fee on rent, mortgage, and HOA payments",
+      "detail": "Pay housing costs through Bilt with no card-processing fee — funds are debited from a linked bank account within 24 hours, not your credit line."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "$0 on purchases made outside the US."
+    },
+    {
+      "name": "10% intro APR",
+      "detail": "10% on new eligible purchases for the first 12 billing cycles, then a variable 26.74%–34.74% APR applies."
+    },
+    {
+      "name": "Stainless steel card",
+      "detail": "Premium metal card body; a limited-edition mirror-finish design has also been offered."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$95/yr",
+        "is_free": false,
+        "benefits": [
+          {
+            "text": "Earns Bilt Points on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Manage directly in the Bilt app",
+            "included": true
+          },
+          {
+            "text": "No separate Priority Pass, Bilt Cash, or hotel credit of their own",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "$95/year per Authorized User on the Palladium Card — the highest of the three tiers ($0 on Blue, $50 on Obsidian)."
+  },
+  "timeline": [
+    {
+      "date": "2026",
+      "type": "add",
+      "badge": "Relaunch",
+      "text": "Bilt Card 2.0 launches as a three-tier lineup (Blue/Obsidian/Palladium), replacing the original single Bilt Mastercard and removing its 5-transaction-per-month requirement to earn on rent."
+    }
+  ]
+}
