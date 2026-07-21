@@ -276,6 +276,37 @@ def test_credit_default_does_not_exceed_max() -> None:
             )
 
 
+def test_earn_rate_multiplier_preserves_original_unit() -> None:
+    """Percentage-based cash-back cards must render as "5%", not "5×" — the
+    API used to reconstruct the multiplier string from a parsed float with a
+    hardcoded × suffix, silently corrupting every %-based card's earn rate."""
+    response = client.get("/api/cards/chase-freedom-flex")
+    multipliers = [r["multiplier"] for r in response.json()["earn_rates"]]
+    assert all("%" in m for m in multipliers), multipliers
+
+
+def test_earn_rate_multiplier_preserves_ceiling_framing() -> None:
+    """ "Up to N×"-style ceiling framing (and any trailing annotation like a
+    footnote asterisk) must survive verbatim, not collapse to a bare "N×"."""
+    response = client.get("/api/cards/bilt-blue")
+    rates = {r["category"]: r["multiplier"] for r in response.json()["earn_rates"]}
+    assert rates["Rent or mortgage (Bilt Housing Rewards)"] == "Up to 1.25×*"
+    assert rates["Bilt partner restaurants (20,000+ U.S. locations)"] == "Up to 4×"
+
+
+def test_verdict_text_fits_two_lines() -> None:
+    """The verdict badge on the card detail page is a fixed 280px-wide box —
+    text much beyond ~80 characters wraps past 2 lines and gets clipped
+    against the card art next to it. This is a length proxy, not a pixel
+    measurement (jsdom can't lay out real text), calibrated against the
+    longest verdict that's confirmed to render at exactly 2 lines."""
+    response = client.get("/api/cards")
+    long_verdicts = [
+        (c["id"], c["verdict"]["text"]) for c in response.json() if len(c["verdict"]["text"]) > 80
+    ]
+    assert long_verdicts == []
+
+
 def test_health_endpoint() -> None:
     response = client.get("/health")
     assert response.status_code == 200

@@ -165,6 +165,7 @@ def upsert_card(session: Session, data: dict) -> CardModel:
         EarnRate(
             emoji=r.get("emoji"),
             multiplier_x=_parse_multiplier(r["multiplier"]),
+            multiplier_label=r["multiplier"],
             category=r["category"],
             is_highlight=r.get("highlight", False),
             is_base=r.get("is_base", False),

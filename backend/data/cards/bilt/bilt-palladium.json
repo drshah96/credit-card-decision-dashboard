@@ -9,10 +9,17 @@
   "effective_cost": "Moderate — $200 Bilt Cash + $400 in hotel credits ($600 total) can more than cover the fee if you use both, plus Priority Pass lounge access",
   "verdict": {
     "status": "situational",
-    "text": "Keep if you'll actually use Priority Pass lounge access and book enough Bilt Travel hotel stays to capture the $400 credit — otherwise Obsidian gets most of the earning rate for a fraction of the fee",
+    "text": "Keep if you'll use Priority Pass and capture the $400 hotel credit",
     "short_tag": "Lounge Access + Housing"
   },
   "earn_rates": [
+    {
+      "emoji": "🏠",
+      "multiplier": "Up to 1.25×*",
+      "category": "Rent or mortgage (Bilt Housing Rewards)",
+      "highlight": true,
+      "is_base": false
+    },
     {
       "emoji": "🍽️",
       "multiplier": "Up to 5×",
@@ -49,7 +56,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Palladium is the only Bilt Card with a 2x uncapped base rate on everything else — Blue and Obsidian earn 1x on non-bonused spend. Housing rewards use the same up-to-1.25x mechanic as every Bilt Card. New cardholders get $300 in Bilt Cash on account opening (no spend required), plus a separate 50,000-point + Gold Elite Status bonus after $4,000 in everyday spend (excluding rent/mortgage) within 90 days.",
+  "earn_note": "*Housing Rewards isn't a flat rate — it uses the same up-to-1.25x mechanic as every Bilt Card. Terms and conditions apply. Palladium is the only Bilt Card with a 2x uncapped base rate on everything else — Blue and Obsidian earn 1x on non-bonused spend. New cardholders get $300 in Bilt Cash on account opening (no spend required), plus a separate 50,000-point + Gold Elite Status bonus after $4,000 in everyday spend (excluding rent/mortgage) within 90 days.",
   "points": {
     "currency": "Bilt Points",
     "redemption_options": [

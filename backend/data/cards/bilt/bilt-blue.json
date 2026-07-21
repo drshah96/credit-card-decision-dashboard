@@ -9,10 +9,17 @@
   "effective_cost": "Free — $0 annual fee every year, with no spending requirement to waive it",
   "verdict": {
     "status": "keep",
-    "text": "The only $0-fee card that earns points on rent or mortgage with no transaction fee — worth holding for that alone, even before the dining/Lyft/travel multipliers",
+    "text": "The only $0-fee card earning points on rent, with no transaction fee",
     "short_tag": "Free Rent Rewards"
   },
   "earn_rates": [
+    {
+      "emoji": "🏠",
+      "multiplier": "Up to 1.25×*",
+      "category": "Rent or mortgage (Bilt Housing Rewards)",
+      "highlight": true,
+      "is_base": false
+    },
     {
       "emoji": "🍽️",
       "multiplier": "Up to 4×",
@@ -49,7 +56,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Housing rewards run on a separate mechanic from the earn rates above: selecting 'Housing-only rewards' earns up to 1.25x points on rent or mortgage payments, scaled by how much of that payment your everyday card spend covers in the same billing cycle (25% of the housing payment = 0.5x, 100%+ = 1.25x; falling short of 25% still earns a flat 250 points). There's no 5-transaction monthly minimum, unlike the original Bilt Card. The restaurant bonus varies by location and is shown in the Bilt app at checkout — up to 4x is the ceiling, not a flat rate. New cardholders get $100 in Bilt Cash on account opening, with no spending requirement.",
+  "earn_note": "*Housing Rewards isn't a flat rate — it scales with your everyday spend: selecting 'Housing-only rewards' earns up to 1.25x on rent or mortgage, based on how much of that payment your card spend covers in the same billing cycle (25% of the payment = 0.5x, 100%+ = 1.25x; below 25% still earns a flat 250 points). Terms and conditions apply. There's no 5-transaction monthly minimum, unlike the original Bilt Card. The restaurant bonus varies by location and is shown in the Bilt app at checkout — up to 4x is the ceiling, not a flat rate. New cardholders get $100 in Bilt Cash on account opening, with no spending requirement.",
   "points": {
     "currency": "Bilt Points",
     "redemption_options": [

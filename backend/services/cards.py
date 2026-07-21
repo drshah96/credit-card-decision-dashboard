@@ -56,10 +56,6 @@ _SUMMARY_OPTIONS = (
 )
 
 
-def _multiplier_label(value: float) -> str:
-    return f"{value:g}×"
-
-
 def _to_card(c: CardModel) -> Card:
     return Card(
         id=c.slug,
@@ -76,7 +72,7 @@ def _to_card(c: CardModel) -> Card:
         earn_rates=[
             EarnRate(
                 emoji=r.emoji or "",
-                multiplier=_multiplier_label(r.multiplier_x),
+                multiplier=r.multiplier_label,
                 category=r.category,
                 highlight=r.is_highlight,
                 is_base=r.is_base,
