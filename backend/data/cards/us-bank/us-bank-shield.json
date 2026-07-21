@@ -6,29 +6,29 @@
   "points_program": "Cash Back",
   "accent_color": "#1B1B1B",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee, and a genuinely long 21-cycle 0% intro APR window",
+  "effective_cost": "Free, with no annual fee, and a genuinely long 21-cycle 0% intro APR window",
   "verdict": {
     "status": "situational",
-    "text": "Keep for the 21-cycle 0% APR — cell phone protection is the real perk",
+    "text": "Keep for the 21-cycle 0% APR: cell phone protection is the real perk",
     "short_tag": "Balance Transfer"
   },
   "earn_rates": [
     {
       "emoji": "🏨",
       "multiplier": "4%",
-      "category": "Prepaid air, hotel & car — Travel Center only",
+      "category": "Prepaid air, hotel & car, Travel Center only",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "💳",
       "multiplier": "0%",
-      "category": "Everything else — no rewards program",
+      "category": "Everything else, no rewards program",
       "highlight": false,
       "is_base": true
     }
   ],
-  "earn_note": "Shield isn't built to be an everyday earner — the only rewards category is a 4% Travel Center bonus. The actual pitch is a 0% intro APR for 21 billing cycles (roughly 21 months) on purchases and balance transfers, one of the longest 0% windows U.S. Bank offers, plus a $20 annual statement credit after 11 consecutive months of purchases.",
+  "earn_note": "Shield isn't built to be an everyday earner. The only rewards category is a 4% Travel Center bonus. The actual pitch is a 0% intro APR for 21 billing cycles (roughly 21 months) on purchases and balance transfers, one of the longest 0% windows U.S. Bank offers, plus a $20 annual statement credit after 11 consecutive months of purchases.",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
@@ -44,12 +44,12 @@
       }
     ],
     "per_100k": "$0–$4,000",
-    "note": "There's no everyday earn rate — value comes entirely from the 4% Travel Center category and the $20/year statement credit, not from broad spend."
+    "note": "There's no everyday earn rate; value comes entirely from the 4% Travel Center category and the $20/year statement credit, not from broad spend."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer currency — the 4% Travel Center rate is the only rewards category on this card.",
+    "highlight": "No transfer currency: the 4% Travel Center rate is the only rewards category on this card.",
     "recent_changes": "Not applicable."
   },
   "credits": [
@@ -63,7 +63,7 @@
       "removed": false,
       "description": "A $20 statement credit automatically applied after 11 consecutive calendar months of purchases, once per 12-month period, if the account is in good standing.",
       "tips": [
-        "Requires a purchase in every one of the 11 months, not just $20 in total spend — a quiet month resets the streak."
+        "Requires a purchase in every one of the 11 months, not just $20 in total spend; a quiet month resets the streak."
       ]
     }
   ],
@@ -94,13 +94,13 @@
       "level": "good"
     }
   ],
-  "protection_note": "Genuinely the best-documented protection suite of any no-fee U.S. Bank personal card — the Guide to Benefits publishes real dollar figures instead of leaving it to guesswork. Cell phone protection is the standout: $600/claim against a $100 deductible, as long as you pay your monthly cell bill with this card.",
-  "rental_note": "Secondary coverage — pays after your personal auto policy, up to the vehicle's Actual Cash Value. Decline the counter's CDW/LDW and charge the full rental to this card; excludes exotic/luxury makes (Porsche, Tesla, Ferrari, etc.), trucks, vans, and rentals over 15 days domestic / 31 international.",
+  "protection_note": "Genuinely the best-documented protection suite of any no-fee U.S. Bank personal card: the Guide to Benefits publishes real dollar figures instead of leaving it to guesswork. Cell phone protection is the standout: $600/claim against a $100 deductible, as long as you pay your monthly cell bill with this card.",
+  "rental_note": "Secondary coverage: pays after your personal auto policy, up to the vehicle's Actual Cash Value. Decline the counter's CDW/LDW and charge the full rental to this card; excludes exotic/luxury makes (Porsche, Tesla, Ferrari, etc.), trucks, vans, and rentals over 15 days domestic / 31 international.",
   "status_perks": [],
   "services": [
     {
       "name": "0% intro APR",
-      "detail": "0% on purchases and balance transfers for the first 21 billing cycles, then 16.99%–27.99% variable — one of U.S. Bank's longest 0% windows."
+      "detail": "0% on purchases and balance transfers for the first 21 billing cycles, then 16.99%–27.99% variable, one of U.S. Bank's longest 0% windows."
     },
     {
       "name": "Annual $0 fee ExtendPay Plan",
@@ -130,7 +130,7 @@
         ]
       }
     ],
-    "note": "No cost to add — mainly useful for spreading balance-transfer or large-purchase spend across the household during the 21-month 0% window."
+    "note": "No cost to add, mainly useful for spreading balance-transfer or large-purchase spend across the household during the 21-month 0% window."
   },
   "timeline": []
 }

@@ -6,24 +6,24 @@
   "points_program": "None",
   "accent_color": "#37474F",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee, but earns nothing and requires a refundable $300–$5,000 deposit",
+  "effective_cost": "Free, with no annual fee, but earns nothing and requires a refundable $300–$5,000 deposit",
   "verdict": {
     "status": "reconsider",
-    "text": "No rewards — Cash+ Secured earns the same for the same deposit",
+    "text": "No rewards: Cash+ Secured earns the same for the same deposit",
     "short_tag": "No Rewards"
   },
   "earn_rates": [],
-  "earn_note": "This is the bare-bones version of U.S. Bank's secured lineup — same deposit range and $0 annual fee as Cash+ Secured and Altitude Go Secured, but no cash back or points at all. There's no earn-rate reason to pick this over either of those unless you specifically want the simplest possible product.",
+  "earn_note": "This is the bare-bones version of U.S. Bank's secured lineup: same deposit range and $0 annual fee as Cash+ Secured and Altitude Go Secured, but no cash back or points at all. There's no earn-rate reason to pick this over either of those unless you specifically want the simplest possible product.",
   "points": {
     "currency": "None",
     "redemption_options": [],
-    "per_100k": "$0 — no rewards program",
+    "per_100k": "$0, no rewards program",
     "note": "Nothing to redeem. Value is purely the credit-building mechanism, not any earning."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No rewards program — nothing to transfer.",
+    "highlight": "No rewards program, nothing to transfer.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -88,7 +88,7 @@
             "included": true
           },
           {
-            "text": "No rewards earned — this card has no rewards program to share",
+            "text": "No rewards earned: this card has no rewards program to share",
             "included": false
           }
         ]

@@ -6,31 +6,31 @@
   "points_program": "Cash Back",
   "accent_color": "#6B2C39",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee, but requires a refundable $300–$5,000 security deposit to set your limit",
+  "effective_cost": "Free, with no annual fee, but requiring a refundable $300–$5,000 security deposit to set your limit",
   "verdict": {
     "status": "situational",
-    "text": "Same flexible 5%/2% categories — good for rebuilding credit",
+    "text": "Same flexible 5%/2% categories, good for rebuilding credit",
     "short_tag": "Credit Building"
   },
   "earn_rates": [
     {
       "emoji": "🛍️",
       "multiplier": "5%",
-      "category": "Two categories you choose each quarter — first $2,000 combined, then 1%",
+      "category": "Two categories you choose each quarter, first $2,000 combined, then 1%",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "🏨",
       "multiplier": "5%",
-      "category": "Prepaid air, hotel & car — Travel Center only",
+      "category": "Prepaid air, hotel & car, Travel Center only",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "⛽",
       "multiplier": "2%",
-      "category": "One everyday category you choose — gas/EV, groceries, or dining",
+      "category": "One everyday category you choose: gas/EV, groceries, or dining",
       "highlight": true,
       "is_base": false
     },
@@ -42,7 +42,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Identical category structure to the unsecured Cash+ — categories must be actively enrolled each quarter or everything defaults to 1%. Discount stores/supercenters and wholesale clubs are excluded from grocery- and gas-category bonus rates.",
+  "earn_note": "Identical category structure to the unsecured Cash+: categories must be actively enrolled each quarter or everything defaults to 1%. Discount stores/supercenters and wholesale clubs are excluded from grocery- and gas-category bonus rates.",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
@@ -58,12 +58,12 @@
       }
     ],
     "per_100k": "$2,000–$2,800",
-    "note": "Same redemption menu and category math as the unsecured Cash+ — max out both 5% categories every quarter for the best blended rate."
+    "note": "Same redemption menu and category math as the unsecured Cash+: max out both 5% categories every quarter for the best blended rate."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer currency — straight cash back, not a points program.",
+    "highlight": "No transfer currency: straight cash back, not a points program.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -134,7 +134,7 @@
         ]
       }
     ],
-    "note": "Free to add — since this account reports to all three bureaus, an authorized user benefits from the payment history alongside the primary cardholder."
+    "note": "Free to add. Since this account reports to all three bureaus, an authorized user benefits from the payment history alongside the primary cardholder."
   },
   "timeline": []
 }
