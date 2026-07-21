@@ -14,19 +14,19 @@ import {
   summaryTags,
 } from "../utils/cardTaxonomy";
 
-function CardTile({ card }: { card: CardSummary }) {
+function CardTile({ card, selectMode }: { card: CardSummary; selectMode: boolean }) {
   return (
     <Link
       to={`/cards/${card.id}`}
       aria-label={`View ${card.name} details`}
       style={{ display: "block", height: "100%", textDecoration: "none" }}
     >
-      <CardSummaryCard card={card} />
+      <CardSummaryCard card={card} selectMode={selectMode} />
     </Link>
   );
 }
 
-function CardGrid({ cards }: { cards: CardSummary[] }) {
+function CardGrid({ cards, selectMode }: { cards: CardSummary[]; selectMode: boolean }) {
   return (
     <div
       style={{
@@ -36,7 +36,7 @@ function CardGrid({ cards }: { cards: CardSummary[] }) {
       }}
     >
       {cards.map((card) => (
-        <CardTile key={card.id} card={card} />
+        <CardTile key={card.id} card={card} selectMode={selectMode} />
       ))}
     </div>
   );
@@ -46,6 +46,7 @@ export default function IssuerCardsPage() {
   const { issuerSlug } = useParams<{ issuerSlug: string }>();
   const issuer = getIssuerBySlug(issuerSlug);
   const [activeFilter, setActiveFilter] = useState<string>(ALL_CARDS_FILTER);
+  const [selectMode, setSelectMode] = useState(false);
 
   const { data: allCards, isLoading, isError, error } = useQuery({
     queryKey: ["cards"],
@@ -216,6 +217,18 @@ export default function IssuerCardsPage() {
               ))}
             </div>
 
+            {/* Select-mode toggle */}
+            <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
+              <button
+                type="button"
+                onClick={() => setSelectMode((v) => !v)}
+                aria-pressed={selectMode}
+                className={`filter-chip ${selectMode ? "active" : ""}`}
+              >
+                {selectMode ? "Done selecting" : "Select cards"}
+              </button>
+            </div>
+
             {/* All Cards: grouped sections. Otherwise: a flat filtered grid. */}
             {sections ? (
               <div style={{ display: "flex", flexDirection: "column", gap: 40 }}>
@@ -225,12 +238,12 @@ export default function IssuerCardsPage() {
                       <span className="lbl">{section.cards.length}</span>
                       <h3>{section.label}</h3>
                     </div>
-                    <CardGrid cards={section.cards} />
+                    <CardGrid cards={section.cards} selectMode={selectMode} />
                   </div>
                 ))}
               </div>
             ) : filteredCards.length > 0 ? (
-              <CardGrid cards={filteredCards} />
+              <CardGrid cards={filteredCards} selectMode={selectMode} />
             ) : (
               <p style={{ color: "var(--faint)", fontSize: 14 }}>
                 No cards match "{activeFilter}" yet — try another filter.

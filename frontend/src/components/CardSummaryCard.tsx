@@ -5,6 +5,7 @@ import type { CardSummary } from "../types/cards";
 
 interface Props {
   card: CardSummary;
+  selectMode?: boolean;
 }
 
 // Source data mixes word order ("VISA INFINITE" vs "WORLD ELITE MASTERCARD"),
@@ -22,7 +23,7 @@ function splitNetwork(network: string): { brand: string; tier: string | null } {
   return { brand, tier: tier || null };
 }
 
-export function CardSummaryCard({ card }: Props) {
+export function CardSummaryCard({ card, selectMode = false }: Props) {
   const netCost = card.annual_fee - card.total_max_credits;
   const cardImage = CARD_IMAGES[card.id];
   const { brand, tier } = splitNetwork(card.network);
@@ -37,13 +38,42 @@ export function CardSummaryCard({ card }: Props) {
 
   return (
     <div className="relative h-full rounded-2xl border border-black/10 bg-black/[0.02] p-6 flex flex-col gap-4 hover:border-black/20 transition-colors">
-      {isCompared && (
-        <div
-          aria-hidden="true"
-          className="absolute -top-2 -right-2 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 text-xs font-bold text-white shadow-md"
+      {selectMode ? (
+        <button
+          type="button"
+          aria-pressed={isCompared}
+          aria-label={
+            isCompared
+              ? `Remove ${card.name} from compare`
+              : compareFull
+                ? `${card.name} — compare is full`
+                : `Add ${card.name} to compare`
+          }
+          disabled={compareFull}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleCompare();
+          }}
+          className={`absolute top-3 right-3 z-10 flex h-6 w-6 items-center justify-center rounded-full border-2 text-xs font-bold shadow-md transition-colors ${
+            isCompared
+              ? "border-emerald-500 bg-emerald-500 text-white"
+              : compareFull
+                ? "border-black/15 bg-white text-transparent cursor-not-allowed"
+                : "border-black/25 bg-white text-transparent hover:border-emerald-500"
+          }`}
         >
           ✓
-        </div>
+        </button>
+      ) : (
+        isCompared && (
+          <div
+            aria-hidden="true"
+            className="absolute top-3 right-3 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 text-xs font-bold text-white shadow-md"
+          >
+            ✓
+          </div>
+        )
       )}
 
       {/* Header */}
@@ -52,39 +82,7 @@ export function CardSummaryCard({ card }: Props) {
           <p className="text-xs uppercase tracking-widest text-black/40 mb-1">
             {card.issuer}
           </p>
-          <h2
-            role="button"
-            tabIndex={0}
-            aria-pressed={isCompared}
-            aria-label={
-              isCompared
-                ? `Remove ${card.name} from compare`
-                : compareFull
-                  ? `${card.name} — compare is full`
-                  : `Add ${card.name} to compare`
-            }
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              toggleCompare();
-            }}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                e.stopPropagation();
-                toggleCompare();
-              }
-            }}
-            className={`text-xl font-semibold transition-colors ${
-              isCompared
-                ? "text-emerald-700"
-                : compareFull
-                  ? "text-black/30 cursor-not-allowed"
-                  : "text-black cursor-pointer hover:text-emerald-700"
-            }`}
-          >
-            {card.name}
-          </h2>
+          <h2 className="text-xl font-semibold text-black">{card.name}</h2>
           <p className="text-sm text-black/50 mt-0.5">{card.points_program}</p>
         </div>
         <div className="flex flex-col items-end gap-2 shrink-0 max-w-[45%]">
