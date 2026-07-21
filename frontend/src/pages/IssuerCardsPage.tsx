@@ -3,6 +3,7 @@ import { useQueries, useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 import { fetchCard, fetchCards } from "../api/cards";
 import { CardSummaryCard } from "../components/CardSummaryCard";
+import { useCompareList } from "../hooks/useCompareList";
 import type { Card, CardSummary } from "../types/cards";
 import {
   ALL_CARDS_FILTER,
@@ -47,6 +48,7 @@ export default function IssuerCardsPage() {
   const issuer = getIssuerBySlug(issuerSlug);
   const [activeFilter, setActiveFilter] = useState<string>(ALL_CARDS_FILTER);
   const [selectMode, setSelectMode] = useState(false);
+  const { compareIds } = useCompareList();
 
   const { data: allCards, isLoading, isError, error } = useQuery({
     queryKey: ["cards"],
@@ -217,16 +219,28 @@ export default function IssuerCardsPage() {
               ))}
             </div>
 
-            {/* Select-mode toggle */}
+            {/* Select-mode toggle — once at least one card is picked, this
+                becomes the CTA to go compare them instead of just exiting
+                select mode. */}
             <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
-              <button
-                type="button"
-                onClick={() => setSelectMode((v) => !v)}
-                aria-pressed={selectMode}
-                className={`filter-chip ${selectMode ? "active" : ""}`}
-              >
-                {selectMode ? "Done selecting" : "Select cards"}
-              </button>
+              {selectMode && compareIds.length > 0 ? (
+                <Link
+                  to={`/compare?cards=${compareIds.join(",")}`}
+                  className="filter-chip active"
+                  style={{ textDecoration: "none" }}
+                >
+                  Compare ({compareIds.length})
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setSelectMode((v) => !v)}
+                  aria-pressed={selectMode}
+                  className={`filter-chip ${selectMode ? "active" : ""}`}
+                >
+                  {selectMode ? "Done selecting" : "Select cards"}
+                </button>
+              )}
             </div>
 
             {/* All Cards: grouped sections. Otherwise: a flat filtered grid. */}

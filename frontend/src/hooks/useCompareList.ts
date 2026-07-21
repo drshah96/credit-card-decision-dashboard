@@ -2,6 +2,14 @@ import { useCallback, useEffect, useState } from "react";
 
 const STORAGE_KEY = "compare-cards";
 const MAX_COMPARE = 4;
+// The native `storage` event only fires in *other* tabs/windows, never the
+// one that made the write — so two components in the same page (e.g. a
+// CardSummaryCard's circle toggle and IssuerCardsPage's own "Compare (N)"
+// button) each hold an independent useState and would otherwise drift out
+// of sync with each other after either one writes. This custom event is
+// dispatched on every write and heard by every mounted instance, same tab
+// included, to keep them all in lockstep.
+const LOCAL_CHANGE_EVENT = "compare-cards-changed";
 
 function readStoredIds(): string[] {
   try {
@@ -22,6 +30,7 @@ function writeStoredIds(ids: string[]) {
     // Storage unavailable (private browsing, quota) — compare list just
     // won't persist across pages this session, which is a safe fallback.
   }
+  window.dispatchEvent(new Event(LOCAL_CHANGE_EVENT));
 }
 
 /**
@@ -38,8 +47,15 @@ export function useCompareList() {
     function onStorage(e: StorageEvent) {
       if (e.key === STORAGE_KEY) setIds(readStoredIds());
     }
+    function onLocalChange() {
+      setIds(readStoredIds());
+    }
     window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
+    window.addEventListener(LOCAL_CHANGE_EVENT, onLocalChange);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener(LOCAL_CHANGE_EVENT, onLocalChange);
+    };
   }, []);
 
   const replace = useCallback((next: string[]) => {

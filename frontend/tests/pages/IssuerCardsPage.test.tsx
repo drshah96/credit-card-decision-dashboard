@@ -219,5 +219,41 @@ describe("IssuerCardsPage", () => {
         screen.queryByRole("button", { name: /add the platinum card to compare/i }),
       ).not.toBeInTheDocument();
     });
+
+    it("once at least one card is picked, 'Done selecting' becomes a Compare link to /compare", async () => {
+      vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
+      renderPage("amex");
+
+      await waitFor(() => {
+        expect(screen.getByRole("button", { name: "Select cards" })).toBeInTheDocument();
+      });
+      fireEvent.click(screen.getByRole("button", { name: "Select cards" }));
+      fireEvent.click(screen.getByRole("button", { name: /add the platinum card to compare/i }));
+
+      expect(screen.queryByRole("button", { name: "Done selecting" })).not.toBeInTheDocument();
+      expect(screen.getByRole("link", { name: "Compare (1)" })).toHaveAttribute(
+        "href",
+        "/compare?cards=amex-platinum",
+      );
+    });
+
+    it("picking a second card updates the Compare link's count and query string", async () => {
+      vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
+      renderPage("amex");
+
+      await waitFor(() => {
+        expect(screen.getByRole("button", { name: "Select cards" })).toBeInTheDocument();
+      });
+      fireEvent.click(screen.getByRole("button", { name: "Select cards" }));
+      fireEvent.click(screen.getByRole("button", { name: /add the platinum card to compare/i }));
+      fireEvent.click(
+        screen.getByRole("button", { name: /add delta skymiles gold to compare/i }),
+      );
+
+      expect(screen.getByRole("link", { name: "Compare (2)" })).toHaveAttribute(
+        "href",
+        "/compare?cards=amex-platinum,amex-delta-skymiles-gold",
+      );
+    });
   });
 });

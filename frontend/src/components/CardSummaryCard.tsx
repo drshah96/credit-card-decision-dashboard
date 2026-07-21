@@ -55,7 +55,7 @@ export function CardSummaryCard({ card, selectMode = false }: Props) {
             e.stopPropagation();
             toggleCompare();
           }}
-          className={`absolute top-3 right-3 z-10 flex h-6 w-6 items-center justify-center rounded-full border-2 text-xs font-bold shadow-md transition-colors ${
+          className={`absolute top-[5px] right-[5px] z-10 flex h-4 w-4 items-center justify-center rounded-full border text-[9px] font-bold leading-none shadow-md transition-colors ${
             isCompared
               ? "border-emerald-500 bg-emerald-500 text-white"
               : compareFull
@@ -69,7 +69,7 @@ export function CardSummaryCard({ card, selectMode = false }: Props) {
         isCompared && (
           <div
             aria-hidden="true"
-            className="absolute top-3 right-3 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 text-xs font-bold text-white shadow-md"
+            className="absolute top-[5px] right-[5px] z-10 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-500 text-[9px] font-bold leading-none text-white shadow-md"
           >
             ✓
           </div>
