@@ -4,12 +4,14 @@ import amexLogo from "../assets/logos/amex.svg";
 import chaseLogo from "../assets/logos/chase.svg";
 import capitalOneLogo from "../assets/logos/capital-one.svg";
 import citiLogo from "../assets/logos/citi.svg";
+import usBankLogo from "../assets/logos/us-bank.svg";
 
 const ISSUER_LOGOS: Record<string, string> = {
   amex: amexLogo,
   chase: chaseLogo,
   "capital-one": capitalOneLogo,
   citi: citiLogo,
+  "us-bank": usBankLogo,
 };
 
 export default function IssuersPage() {

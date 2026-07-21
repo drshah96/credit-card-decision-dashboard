@@ -1,0 +1,147 @@
+{
+  "id": "us-bank-cash-plus",
+  "name": "Cash+ Visa Signature Card",
+  "issuer": "U.S. Bank",
+  "network": "VISA SIGNATURE",
+  "points_program": "Cash Back",
+  "accent_color": "#8A1538",
+  "annual_fee": 0,
+  "effective_cost": "Free — no annual fee",
+  "verdict": {
+    "status": "keep",
+    "text": "Keep if you'll actually enroll new categories every quarter — the 5%/2% picks are unusually flexible for a no-fee card",
+    "short_tag": "Choose-Your-Own Categories"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🛍️",
+      "multiplier": "5%",
+      "category": "Two categories you choose each quarter — first $2,000 combined, then 1%",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🏨",
+      "multiplier": "5%",
+      "category": "Prepaid air, hotel & car — Travel Center only",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "⛽",
+      "multiplier": "2%",
+      "category": "One everyday category you choose — gas/EV, groceries, or dining",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1%",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "Categories must be actively enrolled each quarter — miss the deadline and everything defaults to 1%. The two 5% picks come from a list of 12 (fast food, home utilities, streaming, department stores, cell phone, electronics, sporting goods, furniture, movie theaters, ground transportation, gyms, select clothing); the 2% pick is limited to gas/EV charging, groceries, or restaurants. Discount stores/supercenters and wholesale clubs are excluded from grocery- and gas-category bonus rates.",
+  "points": {
+    "currency": "Cash Back",
+    "redemption_options": [
+      {
+        "method": "Deposit to a U.S. Bank checking or savings account",
+        "cpp": 1.0,
+        "best": true
+      },
+      {
+        "method": "Statement credit, rewards card, or merchant gift cards",
+        "cpp": 1.0,
+        "best": false
+      }
+    ],
+    "per_100k": "$2,000–$2,800",
+    "note": "Actual value depends heavily on hitting the $2,000/quarter cap in your two 5% categories — max out both every quarter and the blended rate on $8,000/year of category spend plus 1% elsewhere lands well above a flat 2% card. Redemption value is highest when deposited to a U.S. Bank account; other redemption paths may pay less."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer currency — straight cash back, not a points program.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Zero fraud liability",
+      "detail": "Not responsible for unauthorized transactions once reported",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not covered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "U.S. Bank doesn't publish a purchase-protection or extended-warranty guide for this card the way it does for Shield — check your actual Guide to Benefits after approval rather than assuming standard Visa Signature protections apply.",
+  "rental_note": "No auto rental coverage documented publicly for this card as of this writing.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "0% intro APR",
+      "detail": "0% on purchases and balance transfers for the first 15 billing cycles, then 17.74%–27.99% variable."
+    },
+    {
+      "name": "$250 welcome bonus",
+      "detail": "One-time $250 cash bonus after $1,000 in eligible purchases within the first 90 days."
+    },
+    {
+      "name": "U.S. Bank ExtendPay Plan",
+      "detail": "Pay off up to 50% of your credit line in fixed installments with a $0 fee offer for plans opened in the first 60 days."
+    },
+    {
+      "name": "Cash-back deals",
+      "detail": "Personalized merchant offers in the U.S. Bank Mobile App based on past spending, stacked on top of the base earn rate."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns cash back on their spend (into your account)",
+            "included": true
+          }
+        ]
+      }
+    ],
+    "note": "No cost to add users — spend still counts toward the same $2,000/quarter category caps as the primary cardholder's."
+  },
+  "timeline": [
+    {
+      "date": "2026",
+      "type": "add",
+      "badge": "Bonus increase",
+      "text": "Welcome offer increased from $200 to $250 cash back after $1,000 in spend within 90 days."
+    }
+  ]
+}
