@@ -6,7 +6,7 @@
   "points_program": "Cash Back",
   "accent_color": "#6B7280",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee, but requires a refundable $200–$5,000 security deposit to set your limit",
+  "effective_cost": "Free, with no annual fee, but requiring a refundable $200–$5,000 security deposit to set your limit",
   "verdict": {
     "status": "situational",
     "text": "Same 2%-then-1.5% rate, no categories to manage while rebuilding",
@@ -16,12 +16,12 @@
     {
       "emoji": "💳",
       "multiplier": "2%",
-      "category": "Everything — first year only, then 1.5%",
+      "category": "Everything, first year only, then 1.5%",
       "highlight": true,
       "is_base": true
     }
   ],
-  "earn_note": "Identical earn structure to the unsecured Unlimited Cash Rewards — 2% for the first 12 months, then a flat 1.5% with no caps. Secured card products are not eligible for the BofA Rewards relationship bonus that boosts the unsecured card's rates by 10–75%.",
+  "earn_note": "Identical earn structure to the unsecured Unlimited Cash Rewards: 2% for the first 12 months, then a flat 1.5% with no caps. Secured card products are not eligible for the BofA Rewards relationship bonus that boosts the unsecured card's rates by 10–75%.",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
@@ -37,12 +37,12 @@
       }
     ],
     "per_100k": "$1,500–$2,000",
-    "note": "Same flat-rate redemption menu as the unsecured card — no minimum redemption, no expiration while the account stays open."
+    "note": "Same flat-rate redemption menu as the unsecured card: no minimum redemption, no expiration while the account stays open."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer currency — straight cash back, not a points program.",
+    "highlight": "No transfer currency: straight cash back, not a points program.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -83,7 +83,7 @@
     },
     {
       "name": "Deposit review for return",
-      "detail": "Bank of America periodically reviews your account and, based on credit history, may qualify you to have your deposit returned — not guaranteed for all customers."
+      "detail": "Bank of America periodically reviews your account and, based on credit history, may qualify you to have your deposit returned; not guaranteed for all customers."
     }
   ],
   "additional_cards": {
@@ -109,7 +109,7 @@
         ]
       }
     ],
-    "note": "Free to add — since this account reports to the credit bureaus, an authorized user benefits from the payment history alongside the primary cardholder."
+    "note": "Free to add. Since this account reports to the credit bureaus, an authorized user benefits from the payment history alongside the primary cardholder."
   },
   "timeline": []
 }

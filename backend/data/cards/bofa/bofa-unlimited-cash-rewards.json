@@ -6,17 +6,17 @@
   "points_program": "Cash Back",
   "accent_color": "#8A1538",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee",
+  "effective_cost": "Free, with no annual fee",
   "verdict": {
     "status": "situational",
-    "text": "1.5% ongoing is average — Customized Cash earns more if you'll manage it",
+    "text": "1.5% ongoing is average; Customized Cash earns more if you'll manage it",
     "short_tag": "Flat Cash Back"
   },
   "earn_rates": [
     {
       "emoji": "💳",
       "multiplier": "2%",
-      "category": "Everything — first year only, then 1.5%",
+      "category": "Everything, first year only, then 1.5%",
       "highlight": true,
       "is_base": true
     }
@@ -42,7 +42,7 @@
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer currency — straight cash back, not a points program.",
+    "highlight": "No transfer currency: straight cash back, not a points program.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -73,7 +73,7 @@
       "level": "none"
     }
   ],
-  "protection_note": "Bank of America's purchase/travel protection suite is only advertised on the Premium Rewards cards — it isn't published for this card despite the shared Visa Signature network tier.",
+  "protection_note": "Bank of America's purchase/travel protection suite is only advertised on the Premium Rewards cards; it isn't published for this card despite the shared Visa Signature network tier.",
   "rental_note": "No auto rental coverage documented publicly for this card as of this writing.",
   "status_perks": [],
   "services": [
@@ -113,7 +113,7 @@
         ]
       }
     ],
-    "note": "No cost to add — flat-rate earning means there's no category math to coordinate across users."
+    "note": "No cost to add: flat-rate earning means there's no category math to coordinate across users."
   },
   "timeline": []
 }
