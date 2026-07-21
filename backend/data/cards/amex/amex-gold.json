@@ -1,6 +1,6 @@
 {
   "id": "amex-gold",
-  "name": "Gold Card",
+  "name": "American Express® Gold Card",
   "issuer": "American Express",
   "network": "AMERICAN EXPRESS",
   "points_program": "Membership Rewards",
@@ -9,7 +9,8 @@
   "effective_cost": "Low if you use the monthly credits",
   "verdict": {
     "status": "situational",
-    "text": "Keep if dining/grocery spend and the monthly credits are real habits"
+    "text": "Keep if dining/grocery spend and the monthly credits are real habits",
+    "short_tag": "Dining & Grocery"
   },
   "earn_rates": [
     {

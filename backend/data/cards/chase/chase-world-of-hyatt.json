@@ -9,7 +9,8 @@
   "effective_cost": "Low if you actually book the free night awards",
   "verdict": {
     "status": "situational",
-    "text": "Keep if you stay at Hyatt hotels — the free nights are the whole card"
+    "text": "Keep if you stay at Hyatt hotels — the free nights are the whole card",
+    "short_tag": "Hyatt Free Nights"
   },
   "earn_rates": [
     {

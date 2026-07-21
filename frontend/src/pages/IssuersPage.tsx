@@ -1,14 +1,18 @@
-import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { fetchCards } from "../api/cards";
 import { ISSUERS } from "../utils/cardTaxonomy";
+import amexLogo from "../assets/logos/amex.svg";
+import chaseLogo from "../assets/logos/chase.svg";
+import capitalOneLogo from "../assets/logos/capital-one.svg";
+import citiLogo from "../assets/logos/citi.svg";
+
+const ISSUER_LOGOS: Record<string, string> = {
+  amex: amexLogo,
+  chase: chaseLogo,
+  "capital-one": capitalOneLogo,
+  citi: citiLogo,
+};
 
 export default function IssuersPage() {
-  const { data: cards, isLoading, isError, error } = useQuery({
-    queryKey: ["cards"],
-    queryFn: fetchCards,
-  });
-
   return (
     <div style={{ minHeight: "100vh" }}>
       <div className="wrap" style={{ paddingTop: 48, paddingBottom: 80 }}>
@@ -60,70 +64,23 @@ export default function IssuersPage() {
           </p>
         </header>
 
-        {/* Loading skeletons */}
-        {isLoading && (
-          <div className="issuer-grid">
-            {[...Array(4)].map((_, i) => (
-              <div
-                key={i}
-                style={{
-                  borderRadius: 16,
-                  border: "1px solid var(--line)",
-                  background: "var(--panel-s)",
-                  minHeight: 156,
-                  animation: "pulse 1.5s ease-in-out infinite",
-                  opacity: 0.6,
-                }}
-              />
-            ))}
-          </div>
-        )}
-
-        {/* Error */}
-        {isError && (
-          <div
-            style={{
-              borderRadius: 16,
-              border: "1px solid rgba(242,112,138,.3)",
-              background: "rgba(242,112,138,.08)",
-              padding: 24,
-              color: "var(--red)",
-            }}
-          >
-            <p style={{ fontWeight: 600, margin: "0 0 4px" }}>Failed to load cards</p>
-            <p style={{ fontSize: 13.5, color: "rgba(242,112,138,.7)", margin: 0 }}>
-              {error instanceof Error ? error.message : "Unknown error"}
-            </p>
-          </div>
-        )}
-
         {/* Issuer tiles */}
-        {cards && (
-          <div className="issuer-grid">
-            {ISSUERS.map((issuer) => {
-              const issuerCards = cards.filter((c) => c.issuer === issuer.issuerField);
-              const keepCount = issuerCards.filter((c) => c.verdict.status === "keep").length;
-              return (
-                <Link
-                  key={issuer.slug}
-                  to={`/issuer/${issuer.slug}`}
-                  aria-label={`View ${issuer.label} cards`}
-                  className="issuer-tile"
-                >
-                  <p className="issuer-tile-label">{issuer.label}</p>
-                  <p className="issuer-tile-count">
-                    {issuerCards.length} {issuerCards.length === 1 ? "card" : "cards"}
-                  </p>
-                  <p className="issuer-tile-sub">
-                    {keepCount > 0
-                      ? `${keepCount} rated "keep"`
-                      : "See full lineup"}
-                  </p>
-                </Link>
-              );
-            })}
-          </div>
-        )}
+        <div className="issuer-grid">
+          {ISSUERS.map((issuer) => (
+            <Link
+              key={issuer.slug}
+              to={`/issuer/${issuer.slug}`}
+              aria-label={`View ${issuer.label} cards`}
+              className="issuer-tile"
+            >
+              <img
+                src={ISSUER_LOGOS[issuer.slug]}
+                alt=""
+                className="issuer-tile-logo"
+              />
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );

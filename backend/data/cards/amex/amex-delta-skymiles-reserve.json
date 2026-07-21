@@ -9,7 +9,8 @@
   "effective_cost": "Depends on Sky Club use and companion cert",
   "verdict": {
     "status": "situational",
-    "text": "Keep if you fly Delta often and actually use the lounges"
+    "text": "Keep if you fly Delta often and actually use the lounges",
+    "short_tag": "Delta Lounges"
   },
   "earn_rates": [
     {

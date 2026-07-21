@@ -9,7 +9,8 @@
   "effective_cost": "Free — no annual fee",
   "verdict": {
     "status": "situational",
-    "text": "Only earns its keep alongside an active Prime membership — otherwise the signature rate quietly halves"
+    "text": "Only earns its keep alongside an active Prime membership — otherwise the signature rate quietly halves",
+    "short_tag": "Prime Membership"
   },
   "earn_rates": [
     {

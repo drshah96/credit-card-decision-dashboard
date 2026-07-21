@@ -9,7 +9,8 @@
   "effective_cost": "Depends on usage",
   "verdict": {
     "status": "situational",
-    "text": "Keep if you use the credits + fly"
+    "text": "Keep if you use the credits + fly",
+    "short_tag": "Travel & Credits"
   },
   "earn_rates": [
     {

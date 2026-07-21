@@ -70,7 +70,7 @@ def _to_card(c: CardModel) -> Card:
         accent_color=c.accent_color,
         annual_fee=c.annual_fee_cents // 100,
         effective_cost=c.effective_cost_label,
-        verdict=Verdict(status=c.verdict_status, text=c.verdict_text),
+        verdict=Verdict(status=c.verdict_status, text=c.verdict_text, short_tag=c.verdict_short_tag),
         earn_rates=[
             EarnRate(
                 emoji=r.emoji or "",
@@ -168,7 +168,7 @@ def _to_card_summary(c: CardModel) -> CardSummary:
         accent_color=c.accent_color,
         annual_fee=c.annual_fee_cents // 100,
         effective_cost=c.effective_cost_label,
-        verdict=Verdict(status=c.verdict_status, text=c.verdict_text),
+        verdict=Verdict(status=c.verdict_status, text=c.verdict_text, short_tag=c.verdict_short_tag),
         total_easy_credits=easy_total,
         total_max_credits=max_total,
     )

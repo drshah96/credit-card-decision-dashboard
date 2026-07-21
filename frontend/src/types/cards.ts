@@ -8,6 +8,7 @@ export type TimelineEventType = "add" | "cut" | "neutral" | "future";
 export interface Verdict {
   status: VerdictStatus;
   text: string;
+  short_tag?: string | null;
 }
 
 interface CardBase {

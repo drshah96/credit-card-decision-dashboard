@@ -9,7 +9,8 @@
   "effective_cost": "Free — no annual fee, but requires a paid Costco membership ($65/yr or more) to hold the card at all",
   "verdict": {
     "status": "situational",
-    "text": "An excellent card if you're already a paying Costco member and drive regularly — the gas and Costco-purchase rates are hard to beat. If you'd cancel your Costco membership without this card, don't get it for the card alone."
+    "text": "Excellent if you're already a paying Costco member who drives regularly",
+    "short_tag": "Costco Members"
   },
   "earn_rates": [
     {

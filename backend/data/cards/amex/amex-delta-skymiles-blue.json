@@ -9,7 +9,8 @@
   "effective_cost": "Free — no annual fee",
   "verdict": {
     "status": "keep",
-    "text": "Free SkyMiles earner — fine as a backup, not a reason to fly Delta"
+    "text": "Free SkyMiles earner — fine as a backup, not a reason to fly Delta",
+    "short_tag": "Backup SkyMiles"
   },
   "earn_rates": [
     {

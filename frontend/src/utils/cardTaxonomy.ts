@@ -174,23 +174,14 @@ export function groupCardsForAllView(cards: CardSummary[]): CardSection[] {
   if (flagship.length > 0) {
     sections.push({ label: "Flagship Cards", cards: [...flagship].sort(byFeeDescThenName) });
   }
-  // Split into one section per brand only when an issuer has more than one
-  // airline/hotel program (United vs. Southwest, Hilton vs. Marriott) — a
-  // single program's cards just sit under the flat "Airline"/"Hotel Cards"
-  // umbrella, since a one-brand heading wouldn't tell you anything a
-  // section named after the group already did.
-  for (const [byBrand, singularLabel] of [
-    [airlineByBrand, "Airline Cards"],
-    [hotelByBrand, "Hotel Cards"],
-  ] as const) {
+  // One section per airline/hotel program, always named after its brand
+  // (e.g. "Delta SkyMiles Cards", "Southwest Rapid Rewards Cards") — even
+  // when an issuer only has one program in that group, so naming stays
+  // consistent across issuers instead of collapsing to a generic label.
+  for (const byBrand of [airlineByBrand, hotelByBrand]) {
     const brands = [...byBrand.entries()].sort((a, b) => a[0].localeCompare(b[0]));
-    if (brands.length === 1) {
-      const [, brandCards] = brands[0];
-      sections.push({ label: singularLabel, cards: [...brandCards].sort(byFeeDescThenName) });
-    } else {
-      for (const [brand, brandCards] of brands) {
-        sections.push({ label: `${brand} Cards`, cards: [...brandCards].sort(byFeeDescThenName) });
-      }
+    for (const [brand, brandCards] of brands) {
+      sections.push({ label: `${brand} Cards`, cards: [...brandCards].sort(byFeeDescThenName) });
     }
   }
   if (cobrand.length > 0) {

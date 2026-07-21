@@ -9,7 +9,8 @@
   "effective_cost": "Free — no annual fee on the standard tier (a $59/yr Gold tier exists for thinner-credit applicants, with a richer 6% Best Buy rate)",
   "verdict": {
     "status": "situational",
-    "text": "Only worth it for regular Best Buy shoppers who want the 5% rate without giving up general-purpose use — rewards only redeem at Best Buy, so it's a worse everyday card than a flat cash-back card for someone who doesn't shop there often"
+    "text": "Only worth it for regular Best Buy shoppers — rewards are store-locked",
+    "short_tag": "Best Buy Shoppers"
   },
   "earn_rates": [
     {

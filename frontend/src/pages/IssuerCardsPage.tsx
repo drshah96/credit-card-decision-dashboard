@@ -19,7 +19,7 @@ function CardTile({ card }: { card: CardSummary }) {
     <Link
       to={`/cards/${card.id}`}
       aria-label={`View ${card.name} details`}
-      style={{ display: "block", textDecoration: "none" }}
+      style={{ display: "block", height: "100%", textDecoration: "none" }}
     >
       <CardSummaryCard card={card} />
     </Link>
@@ -31,7 +31,7 @@ function CardGrid({ cards }: { cards: CardSummary[] }) {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+        gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
         gap: 16,
       }}
     >
@@ -184,7 +184,7 @@ export default function IssuerCardsPage() {
             }}
           >
             <p style={{ fontWeight: 600, margin: "0 0 4px" }}>Failed to load cards</p>
-            <p style={{ fontSize: 13.5, color: "rgba(242,112,138,.7)", margin: 0 }}>
+            <p style={{ fontSize: 13.5, color: "var(--red)", margin: 0 }}>
               {error instanceof Error ? error.message : "Unknown error"}
             </p>
           </div>

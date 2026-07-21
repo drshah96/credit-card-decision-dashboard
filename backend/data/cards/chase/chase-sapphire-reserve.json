@@ -9,7 +9,8 @@
   "effective_cost": "Medium",
   "verdict": {
     "status": "situational",
-    "text": "Best all-rounder if you use the credits"
+    "text": "Best all-rounder if you use the credits",
+    "short_tag": "Credits & Travel"
   },
   "earn_rates": [
     {

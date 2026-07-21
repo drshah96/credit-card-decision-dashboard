@@ -6,6 +6,7 @@ from pydantic import BaseModel
 class Verdict(BaseModel):
     status: Literal["keep", "situational", "reconsider"]
     text: str
+    short_tag: str | None = None
 
 
 class EarnRate(BaseModel):

@@ -9,7 +9,8 @@
   "effective_cost": "High sticker fee, but a standalone Admirals Club membership runs $850+/yr on its own, so this can be a net saver if you actually use the lounges",
   "verdict": {
     "status": "situational",
-    "text": "Keep only if you fly American often enough to make real use of the Admirals Club — that membership alone is worth more than the fee if you're in the lounge regularly. Without consistent AA travel, the fee (recently raised from $450 to $595) is hard to justify next to the mid-tier Platinum Select."
+    "text": "Keep only if you fly American enough to use the Admirals Club",
+    "short_tag": "Admirals Club Access"
   },
   "earn_rates": [
     {

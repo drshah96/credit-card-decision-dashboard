@@ -3,6 +3,7 @@ import { skipToken, useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 import { fetchCard } from "../api/cards";
 import { ISSUERS } from "../utils/cardTaxonomy";
+import { CARD_IMAGES } from "../utils/cardImages";
 import type {
   Card,
   Credit,
@@ -311,7 +312,7 @@ function CreditCalculator({
       <div className="calc-verdict">{verdict}</div>
       <div className="calc-disc">
         Counts statement credits + cash-like perks only (not points earning, lounge value, or insurance).
-        Move the sliders to match your real usage. The white line marks the annual fee.
+        Move the sliders to match your real usage. The dark line marks the annual fee.
       </div>
     </div>
   );
@@ -507,6 +508,7 @@ function CardDetail({ card }: { card: Card }) {
     .filter((c) => !c.removed)
     .reduce((sum, c) => sum + c.max_annual, 0);
   const netCost = card.annual_fee - totalMaxCredits;
+  const cardImage = CARD_IMAGES[card.id];
 
   return (
     <div>
@@ -518,11 +520,11 @@ function CardDetail({ card }: { card: Card }) {
             flexWrap: "wrap",
             alignItems: "flex-start",
             justifyContent: "space-between",
-            gap: 16,
+            gap: 24,
             marginBottom: 6,
           }}
         >
-          <div>
+          <div style={{ flex: "1 1 320px" }}>
             <p
               style={{
                 fontSize: 11.5,
@@ -557,36 +559,65 @@ function CardDetail({ card }: { card: Card }) {
             >
               {card.points_program} · {card.network}
             </p>
-          </div>
-          <div className={`verdict-badge ${card.verdict.status}`}>
-            {card.verdict.text}
-          </div>
-        </div>
 
-        {/* Fee stat row */}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 20, margin: "4px 0 0" }}>
-          {[
-            { k: "Annual fee", v: `$${card.annual_fee}` },
-            { k: "Max credits", v: `$${totalMaxCredits}` },
-            {
-              k: "Best-case net",
-              v: netCost <= 0 ? `+$${Math.abs(netCost)}` : `$${netCost}`,
-            },
-            { k: "Effective cost", v: card.effective_cost },
-          ].map(({ k, v }) => (
-            <div key={k}>
+            {/* Fee stat row */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 20, margin: "4px 0 0" }}>
+              {[
+                { k: "Annual fee", v: `$${card.annual_fee}` },
+                { k: "Max credits", v: `$${totalMaxCredits}` },
+                {
+                  k: "Best-case net",
+                  v: netCost <= 0 ? `+$${Math.abs(netCost)}` : `$${netCost}`,
+                  color: netCost <= 0 ? "var(--green)" : "var(--red)",
+                },
+              ].map(({ k, v, color }) => (
+                <div key={k}>
+                  <div
+                    style={{ fontSize: 10.5, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--faint)" }}
+                  >
+                    {k}
+                  </div>
+                  <div
+                    style={{ fontFamily: '"Fraunces Variable", serif', fontSize: 22, fontWeight: 600, marginTop: 2, color: color ?? "var(--ink)", fontVariantNumeric: "tabular-nums" }}
+                  >
+                    {v}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Effective cost — always its own row since it's a sentence, not a short stat */}
+            <div style={{ margin: "16px 0 0" }}>
               <div
                 style={{ fontSize: 10.5, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--faint)" }}
               >
-                {k}
+                Effective cost
               </div>
               <div
-                style={{ fontFamily: '"Fraunces Variable", serif', fontSize: 22, fontWeight: 600, marginTop: 2, color: "var(--ink)", fontVariantNumeric: "tabular-nums" }}
+                style={{ fontFamily: '"Fraunces Variable", serif', fontSize: 22, fontWeight: 600, marginTop: 2, color: "var(--ink)" }}
               >
-                {v}
+                {card.effective_cost}
               </div>
             </div>
-          ))}
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 14, maxWidth: 280 }}>
+            <div className={`verdict-badge ${card.verdict.status}`}>
+              {card.verdict.text}
+            </div>
+            {cardImage && (
+              <img
+                src={cardImage}
+                alt={`${card.name} card art`}
+                style={{
+                  width: 220,
+                  maxWidth: "100%",
+                  borderRadius: 12,
+                  boxShadow: "0 12px 28px -12px rgba(15, 23, 42, 0.35)",
+                }}
+              />
+            )}
+          </div>
         </div>
       </header>
 
@@ -827,7 +858,7 @@ export default function CardDetailPage() {
             <p style={{ fontWeight: 600, margin: "0 0 4px" }}>
               {is404 ? "Card not found" : "Failed to load card"}
             </p>
-            <p style={{ fontSize: 13.5, color: "rgba(242,112,138,.7)", margin: "0 0 12px" }}>
+            <p style={{ fontSize: 13.5, color: "var(--red)", margin: "0 0 12px" }}>
               {is404
                 ? "This card doesn't exist. Check the URL or return to the dashboard."
                 : error instanceof Error
@@ -836,7 +867,7 @@ export default function CardDetailPage() {
             </p>
             <Link
               to="/"
-              style={{ fontSize: 13, color: "rgba(242,112,138,.6)", textDecoration: "underline" }}
+              style={{ fontSize: 13, color: "var(--red)", textDecoration: "underline" }}
             >
               Back to all issuers
             </Link>

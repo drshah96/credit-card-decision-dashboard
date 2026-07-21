@@ -9,7 +9,8 @@
   "effective_cost": "Free — no annual fee, but purely a store-financing tool with no rewards and no use outside Goodyear and its fuel-station partners",
   "verdict": {
     "status": "situational",
-    "text": "This is a tire/auto-service financing card, not a rewards card — only worth opening around a specific 0%-interest tire or repair purchase you can pay off within the promo window. It earns nothing and only works at Goodyear locations and partner Exxon/Mobil stations."
+    "text": "A tire financing card, not rewards — only for a specific 0% purchase",
+    "short_tag": "Tire Financing"
   },
   "earn_rates": [],
   "earn_note": "This card has no cash-back or points program — its value proposition is deferred-interest financing (\"no interest if paid in full within 6 months\" on purchases of $250+) plus periodic rebates on tire purchases and welcome offers (e.g., $50 back on a first purchase of $250+). Unlike Citi's Best Buy or Wayfair co-brands, no open-loop Visa/Mastercard version of this card exists — it's a single, closed-loop product usable only at Goodyear's roughly 17,000 locations and about 11,500 participating Exxon and Mobil fuel stations.",

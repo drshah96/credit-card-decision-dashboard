@@ -9,7 +9,8 @@
   "effective_cost": "Low, but only if you're already spending at Disney",
   "verdict": {
     "status": "situational",
-    "text": "Situational — only a keep if you regularly book Disney trips, stream Disney+/Hulu/ESPN+, or shop at Disney parks"
+    "text": "Situational — only a keep if you regularly book Disney trips, stream Disney+/Hulu/ESPN+, or shop at Disney parks",
+    "short_tag": "Disney Trips"
   },
   "earn_rates": [
     {

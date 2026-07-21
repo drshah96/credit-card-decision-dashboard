@@ -9,7 +9,8 @@
   "effective_cost": "Free — no annual fee, and can net a recurring statement credit if you already spend $1,000+/cycle",
   "verdict": {
     "status": "situational",
-    "text": "Genuinely useful only for households already paying AT&T wireless or internet bills — the recurring bill discounts are worth more than the ThankYou Points earning on its own. Non-AT&T customers get an unremarkable no-fee earning card with no premium protections."
+    "text": "Only useful if you already pay AT&T bills — the bill discount is the value",
+    "short_tag": "AT&T Customers"
   },
   "earn_rates": [
     {

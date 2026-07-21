@@ -9,7 +9,8 @@
   "effective_cost": "Depends on hotel loyalty and free-night use",
   "verdict": {
     "status": "situational",
-    "text": "Keep if you're loyal to Marriott and actually book the free night"
+    "text": "Keep if you're loyal to Marriott and actually book the free night",
+    "short_tag": "Marriott Free Nights"
   },
   "earn_rates": [
     {

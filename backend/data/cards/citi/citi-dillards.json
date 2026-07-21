@@ -9,7 +9,8 @@
   "effective_cost": "Free — no annual fee",
   "verdict": {
     "status": "situational",
-    "text": "Thin rewards (roughly 1.3% back at Dillard's/gas/groceries, 0.67% everywhere else, redeemable only at Dillard's) and a very high APR make this worth having only for regular Dillard's shoppers who pay in full every month. Not a general-purpose rewards card."
+    "text": "Thin rewards and high APR — only for Dillard's regulars who pay in full",
+    "short_tag": "Dillard's Shoppers"
   },
   "earn_rates": [
     {

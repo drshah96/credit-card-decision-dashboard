@@ -9,7 +9,8 @@
   "effective_cost": "Free card, but requires BJ's Perks+ membership (~$110/yr) to hold it",
   "verdict": {
     "status": "situational",
-    "text": "The best BJ's card by far if you're already paying for Perks+ membership — but that membership, not the card, is the real cost of entry"
+    "text": "The best BJ's card by far if you're already paying for Perks+ membership — but that membership, not the card, is the real cost of entry",
+    "short_tag": "BJ's Perks+ Members"
   },
   "earn_rates": [
     {

@@ -9,7 +9,8 @@
   "effective_cost": "Depends entirely on hotel loyalty — no statement credits",
   "verdict": {
     "status": "reconsider",
-    "text": "Thin on credits — hard to justify without heavy Marriott spend"
+    "text": "Thin on credits — hard to justify without heavy Marriott spend",
+    "short_tag": "Marriott Spend"
   },
   "earn_rates": [
     {

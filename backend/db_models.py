@@ -106,6 +106,7 @@ class CardModel(Base):
     effective_cost_label: Mapped[str]
     verdict_status: Mapped[str]
     verdict_text: Mapped[str]
+    verdict_short_tag: Mapped[str | None] = mapped_column(default=None)
     earn_note: Mapped[str | None] = mapped_column(default=None)
     points_per_100k_label: Mapped[str] = mapped_column(default="")
     points_note: Mapped[str | None] = mapped_column(default=None)

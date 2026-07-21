@@ -9,7 +9,8 @@
   "effective_cost": "Medium — depends on the $200 travel credit and 2 free bags",
   "verdict": {
     "status": "situational",
-    "text": "Keep if you check two bags and can auto-use the $200 credit"
+    "text": "Keep if you check two bags and can auto-use the $200 credit",
+    "short_tag": "Checked Bags"
   },
   "earn_rates": [
     {

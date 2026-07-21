@@ -9,7 +9,8 @@
   "effective_cost": "Highest fee in the family — needs frequent flying or A-List pursuit to clear",
   "verdict": {
     "status": "situational",
-    "text": "Only earns back its $229 for frequent flyers chasing A-List or leaning on the uncapped 2× — the $75 travel credit that used to offset the fee is gone"
+    "text": "Only earns back its $229 for frequent flyers chasing A-List or leaning on the uncapped 2× — the $75 travel credit that used to offset the fee is gone",
+    "short_tag": "Frequent Flyers"
   },
   "earn_rates": [
     {

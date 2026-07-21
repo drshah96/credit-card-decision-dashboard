@@ -9,7 +9,8 @@
   "effective_cost": "$39/year — no offsetting credits",
   "verdict": {
     "status": "situational",
-    "text": "Only makes sense while you're rebuilding credit and can't yet qualify for a no-fee card — the earning rate is identical to the free Quicksilver, so graduate off this one the moment your score allows."
+    "text": "Same earn rate as the free Quicksilver — graduate once your score allows",
+    "short_tag": "Credit Building"
   },
   "earn_rates": [
     {

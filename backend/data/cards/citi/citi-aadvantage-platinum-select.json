@@ -9,7 +9,8 @@
   "effective_cost": "Free the first year (fee waived), $99/yr after — the free checked bag alone can clear that for a couple flying American once a year",
   "verdict": {
     "status": "situational",
-    "text": "Keep if you fly American at least once or twice a year and check bags — the free first bag for you plus up to 4 companions covers the $99 fee in a single round trip for two. If you rarely fly AA, the no-fee MileUp earns similar miles without the annual fee, just without the bag or boarding perks."
+    "text": "Keep if you check bags on American at least once or twice a year",
+    "short_tag": "AA Bags & Flights"
   },
   "earn_rates": [
     {

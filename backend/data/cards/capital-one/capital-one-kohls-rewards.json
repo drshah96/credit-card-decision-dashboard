@@ -9,7 +9,8 @@
   "effective_cost": "Free — no annual fee",
   "verdict": {
     "status": "situational",
-    "text": "A strong pick only for households that already shop Kohl's regularly and will actually spend fast-expiring Kohl's Cash — everywhere-else spend is locked into store-only rewards"
+    "text": "Strong only for regular Kohl's shoppers who'll spend the Kohl's Cash",
+    "short_tag": "Kohl's Shoppers"
   },
   "earn_rates": [
     {

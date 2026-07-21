@@ -9,7 +9,8 @@
   "effective_cost": "Low for grocery-heavy households",
   "verdict": {
     "status": "keep",
-    "text": "Easy keep if your grocery spend clears ~$1,600/yr"
+    "text": "Easy keep if your grocery spend clears ~$1,600/yr",
+    "short_tag": "Grocery Spend"
   },
   "earn_rates": [
     {

@@ -9,7 +9,8 @@
   "effective_cost": "Free — no annual fee",
   "verdict": {
     "status": "situational",
-    "text": "Only makes sense if you're already an active T-Mobile postpaid customer, since T-Mobile Rewards can't be cashed out — they're only redeemable toward your T-Mobile bill or T-Mobile devices. If you'd ever switch carriers, a flat 2% cash-back card is more flexible for the same effort."
+    "text": "Only makes sense for active T-Mobile customers — rewards aren't cashable",
+    "short_tag": "T-Mobile Customers"
   },
   "earn_rates": [
     {
