@@ -220,17 +220,21 @@ describe("IssuerCardsPage", () => {
       ).not.toBeInTheDocument();
     });
 
-    it("once at least one card is picked, 'Done selecting' becomes a Compare link to /compare", async () => {
+    it("once at least one card is picked, a Compare link appears alongside 'Done selecting'", async () => {
       vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
       renderPage("amex");
 
       await waitFor(() => {
         expect(screen.getByRole("button", { name: "Select cards" })).toBeInTheDocument();
       });
+      expect(screen.queryByRole("link", { name: /compare \(/i })).not.toBeInTheDocument();
+
       fireEvent.click(screen.getByRole("button", { name: "Select cards" }));
       fireEvent.click(screen.getByRole("button", { name: /add the platinum card to compare/i }));
 
-      expect(screen.queryByRole("button", { name: "Done selecting" })).not.toBeInTheDocument();
+      // Both controls coexist — "Done selecting" still hides the circles,
+      // "Compare (1)" is a separate, always-available way to jump to /compare.
+      expect(screen.getByRole("button", { name: "Done selecting" })).toBeInTheDocument();
       expect(screen.getByRole("link", { name: "Compare (1)" })).toHaveAttribute(
         "href",
         "/compare?cards=amex-platinum",
@@ -253,6 +257,29 @@ describe("IssuerCardsPage", () => {
       expect(screen.getByRole("link", { name: "Compare (2)" })).toHaveAttribute(
         "href",
         "/compare?cards=amex-platinum,amex-delta-skymiles-gold",
+      );
+    });
+
+    it("the Compare link survives leaving select mode entirely — the reported bug", async () => {
+      vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
+      renderPage("amex");
+
+      await waitFor(() => {
+        expect(screen.getByRole("button", { name: "Select cards" })).toBeInTheDocument();
+      });
+      fireEvent.click(screen.getByRole("button", { name: "Select cards" }));
+      fireEvent.click(screen.getByRole("button", { name: /add the platinum card to compare/i }));
+      // Exit select mode entirely (mirrors selectMode resetting after
+      // navigating to a card detail page and back).
+      fireEvent.click(screen.getByRole("button", { name: "Done selecting" }));
+
+      expect(screen.getByRole("button", { name: "Select cards" })).toHaveAttribute(
+        "aria-pressed",
+        "false",
+      );
+      expect(screen.getByRole("link", { name: "Compare (1)" })).toHaveAttribute(
+        "href",
+        "/compare?cards=amex-platinum",
       );
     });
   });

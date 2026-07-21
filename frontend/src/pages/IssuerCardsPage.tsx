@@ -219,27 +219,27 @@ export default function IssuerCardsPage() {
               ))}
             </div>
 
-            {/* Select-mode toggle — once at least one card is picked, this
-                becomes the CTA to go compare them instead of just exiting
-                select mode. */}
-            <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
-              {selectMode && compareIds.length > 0 ? (
+            {/* Select-mode toggle, plus a persistent Compare CTA that shows
+                up whenever anything is picked — independent of selectMode,
+                so cards picked earlier still show a way to compare them
+                after navigating away and back (selectMode itself resets on
+                remount, but the picks in localStorage don't). */}
+            <div style={{ display: "flex", justifyContent: "flex-end", gap: 8, marginBottom: 16 }}>
+              <button
+                type="button"
+                onClick={() => setSelectMode((v) => !v)}
+                aria-pressed={selectMode}
+                className={`filter-chip ${selectMode ? "active" : ""}`}
+              >
+                {selectMode ? "Done selecting" : "Select cards"}
+              </button>
+              {compareIds.length > 0 && (
                 <Link
                   to={`/compare?cards=${compareIds.join(",")}`}
-                  className="filter-chip active"
-                  style={{ textDecoration: "none" }}
+                  className="compare-cta"
                 >
                   Compare ({compareIds.length})
                 </Link>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => setSelectMode((v) => !v)}
-                  aria-pressed={selectMode}
-                  className={`filter-chip ${selectMode ? "active" : ""}`}
-                >
-                  {selectMode ? "Done selecting" : "Select cards"}
-                </button>
               )}
             </div>
 

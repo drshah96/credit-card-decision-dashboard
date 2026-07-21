@@ -391,6 +391,25 @@ body {
   border-color: var(--accent);
 }
 
+/* ─── Compare CTA (issuer page) ─────────────────────────────────────────────── */
+.compare-cta {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--blue);
+  border: 1px solid var(--blue);
+  border-radius: 100px;
+  padding: 8px 16px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+}
+.compare-cta:hover {
+  background: color-mix(in srgb, var(--blue) 85%, black);
+  border-color: color-mix(in srgb, var(--blue) 85%, black);
+}
+
 /* ─── Page tabs (home / compare) ───────────────────────────────────────────── */
 .page-tabs {
   display: flex;
