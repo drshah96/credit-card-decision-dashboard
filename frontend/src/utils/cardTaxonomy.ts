@@ -15,6 +15,7 @@ export const ISSUERS: IssuerInfo[] = [
   { slug: "capital-one", label: "Capital One", issuerField: "Capital One" },
   { slug: "citi", label: "Citi", issuerField: "Citi" },
   { slug: "us-bank", label: "U.S. Bank", issuerField: "U.S. Bank" },
+  { slug: "bofa", label: "Bank of America", issuerField: "Bank of America" },
 ];
 
 export function getIssuerBySlug(slug: string | undefined): IssuerInfo | undefined {
@@ -138,6 +139,18 @@ export const CLASSIFICATION: Record<string, Classification> = {
   "us-bank-shield": { group: "personal" },
   "us-bank-smartly": { group: "personal" },
   "us-bank-split": { group: "personal" },
+
+  // ── Bank of America ──
+  "bofa-customized-cash-rewards": { group: "personal" },
+  "bofa-unlimited-cash-rewards": { group: "personal" },
+  "bofa-bankamericard": { group: "personal" },
+  "bofa-travel-rewards": { group: "personal" },
+  "bofa-premium-rewards": { group: "personal" },
+  "bofa-premium-rewards-elite": { group: "personal" },
+  "bofa-cash-rewards-secured": { group: "personal" },
+  "bofa-unlimited-cash-rewards-secured": { group: "personal" },
+  "bofa-bankamericard-secured": { group: "personal" },
+  "bofa-travel-rewards-secured": { group: "personal" },
 };
 
 export function classify(cardId: string): Classification {

@@ -1,0 +1,100 @@
+{
+  "id": "bofa-bankamericard-secured",
+  "name": "BankAmericard Secured Credit Card",
+  "issuer": "Bank of America",
+  "network": "MASTERCARD",
+  "points_program": "None",
+  "accent_color": "#37474F",
+  "annual_fee": 0,
+  "effective_cost": "Free — no annual fee, but earns nothing and requires a refundable $200–$5,000 deposit",
+  "verdict": {
+    "status": "reconsider",
+    "text": "No rewards and no intro APR — the Cash Rewards Secured or Unlimited Cash Rewards Secured earn while building credit for the same deposit and $0 fee",
+    "short_tag": "No Rewards"
+  },
+  "earn_rates": [],
+  "earn_note": "This is the secured version of BankAmericard, and it inherits the same no-rewards structure — but secured card products also aren't eligible for BankAmericard's signature 0% intro APR offer, so there's no APR-focused reason to pick this over the unsecured card either. There's no earn-rate or APR reason to choose this over Cash Rewards Secured or Unlimited Cash Rewards Secured, which cost the same to open.",
+  "points": {
+    "currency": "None",
+    "redemption_options": [],
+    "per_100k": "$0 — no rewards program",
+    "note": "Nothing to redeem. Value is purely the credit-building mechanism, not any earning."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No rewards program — nothing to transfer.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Zero liability",
+      "detail": "Not responsible for fraudulent transactions once reported",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Not covered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "No purchase-protection or extended-warranty guide published for this card.",
+  "rental_note": "No auto rental coverage documented publicly for this card.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "Refundable security deposit",
+      "detail": "$200–$5,000 sets your credit limit dollar-for-dollar."
+    },
+    {
+      "name": "Standard APR",
+      "detail": "25.99% variable — secured card products aren't eligible for an introductory APR or a new-account bonus offer of any kind."
+    },
+    {
+      "name": "Deposit review for return",
+      "detail": "Bank of America periodically reviews your account and, based on credit history, may qualify you to have your deposit returned — not guaranteed for all customers."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Their activity is reported to the credit bureaus too, on the same account",
+            "included": true
+          },
+          {
+            "text": "No rewards earned — this card has no rewards program to share",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add, and since this account reports to the credit bureaus, an authorized user can benefit from the payment history even though there's no rewards program to share."
+  },
+  "timeline": []
+}

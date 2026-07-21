@@ -88,6 +88,16 @@ CARD_IDS = [
     "us-bank-altitude-go-secured",
     "us-bank-cash-plus-secured",
     "us-bank-secured",
+    "bofa-customized-cash-rewards",
+    "bofa-unlimited-cash-rewards",
+    "bofa-bankamericard",
+    "bofa-travel-rewards",
+    "bofa-premium-rewards",
+    "bofa-premium-rewards-elite",
+    "bofa-cash-rewards-secured",
+    "bofa-unlimited-cash-rewards-secured",
+    "bofa-bankamericard-secured",
+    "bofa-travel-rewards-secured",
 ]
 
 
@@ -137,6 +147,8 @@ def test_get_card_detail(card_id: str) -> None:
         "citi-goodyear",
         "us-bank-split",
         "us-bank-secured",
+        "bofa-bankamericard",
+        "bofa-bankamericard-secured",
     )
     if card_id not in NO_REWARDS_CARDS:
         assert len(data["earn_rates"]) > 0

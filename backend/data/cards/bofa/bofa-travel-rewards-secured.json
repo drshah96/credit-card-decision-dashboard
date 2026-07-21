@@ -1,0 +1,119 @@
+{
+  "id": "bofa-travel-rewards-secured",
+  "name": "Travel Rewards Secured Credit Card",
+  "issuer": "Bank of America",
+  "network": "VISA",
+  "points_program": "Bank of America Rewards",
+  "accent_color": "#2E6F9E",
+  "annual_fee": 0,
+  "effective_cost": "Free — no annual fee, but requires a refundable $200–$5,000 security deposit to set your limit",
+  "verdict": {
+    "status": "situational",
+    "text": "Same flat 1.5x travel/dining earn rate as the unsecured Travel Rewards, with no foreign transaction fees while you rebuild credit",
+    "short_tag": "Credit Building"
+  },
+  "earn_rates": [
+    {
+      "emoji": "💳",
+      "multiplier": "1.5×",
+      "category": "Everything, everywhere",
+      "highlight": true,
+      "is_base": true
+    }
+  ],
+  "earn_note": "Identical flat 1.5x rate to the unsecured Travel Rewards card, with the same statement-credit redemption against travel and dining purchases. Secured card products are not eligible for the BofA Rewards relationship bonus that boosts the unsecured card's rate by 10–75%.",
+  "points": {
+    "currency": "Bank of America Rewards",
+    "redemption_options": [
+      {
+        "method": "Statement credit against travel or dining purchases",
+        "cpp": 1.0,
+        "best": true
+      },
+      {
+        "method": "Deposit to a Bank of America checking or savings account, or gift cards",
+        "cpp": 1.0,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,500",
+    "note": "Same redemption menu as the unsecured card — value tops out around 1¢/point, with no transfer-partner program."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners — points redeem directly as a statement credit against travel/dining purchases, or for cash/gift cards.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Zero liability",
+      "detail": "Not responsible for fraudulent transactions once reported",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Not covered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "No purchase-protection or extended-warranty guide published specifically for this card.",
+  "rental_note": "No auto rental coverage documented publicly for this card.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "Refundable security deposit",
+      "detail": "$200–$5,000 sets your credit limit dollar-for-dollar."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "$0 on purchases made outside the US — a rare perk on a secured card."
+    },
+    {
+      "name": "Deposit review for return",
+      "detail": "Bank of America periodically reviews your account and, based on credit history, may qualify you to have your deposit returned — not guaranteed for all customers."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns points on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Their activity is reported to the credit bureaus too, on the same account",
+            "included": true
+          }
+        ]
+      }
+    ],
+    "note": "Free to add — since this account reports to the credit bureaus, an authorized user benefits from the payment history alongside the primary cardholder."
+  },
+  "timeline": []
+}
