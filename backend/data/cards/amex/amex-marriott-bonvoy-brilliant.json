@@ -42,7 +42,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 6× hotel rate only applies at Marriott-participating properties — this card earns like a mid-tier card everywhere else. It's built around hotel loyalty, not general spend.",
+  "earn_note": "The 6× hotel rate only applies at Marriott-participating properties; this card earns like a mid-tier card everywhere else. It's built around hotel loyalty, not general spend.",
   "points": {
     "currency": "Marriott Bonvoy",
     "redemption_options": [
@@ -63,12 +63,12 @@
       }
     ],
     "per_100k": "$800",
-    "note": "Bonvoy points are worth the most redeemed for a free night at a hotel you'd actually book — cashing out or transferring to airline miles both land well below that. The $800/100k figure assumes a typical free-night redemption, not a guarantee."
+    "note": "Bonvoy points are worth the most redeemed for a free night at a hotel you'd actually book. Cashing out or transferring to airline miles both land well below that. The $800/100k figure assumes a typical free-night redemption, not a guarantee."
   },
   "transfer_partners": {
     "airline_count": 40,
     "hotel_count": 0,
-    "highlight": "Marriott Bonvoy transfers to 40+ airline programs at 3:1, with a 5,000-mile bonus for every 60,000 points transferred in a single transaction — but it doesn't transfer to any other hotel program, since it already is one.",
+    "highlight": "Marriott Bonvoy transfers to 40+ airline programs at 3:1, with a 5,000-mile bonus for every 60,000 points transferred in a single transaction, but it doesn't transfer to any other hotel program, since it already is one.",
     "recent_changes": "No confirmed recent changes to the airline transfer chart."
   },
   "credits": [
@@ -82,7 +82,7 @@
       "removed": false,
       "description": "Up to $25/month in statement credits for purchases at restaurants worldwide.",
       "tips": [
-        "No enrollment required — just use the card at a restaurant."
+        "No enrollment required; just use the card at a restaurant."
       ]
     },
     {
@@ -95,7 +95,7 @@
       "removed": false,
       "description": "Statement credit for a Global Entry ($120) or TSA PreCheck ($85) application fee, once every 4 years. Shown here amortized to an annual figure.",
       "tips": [
-        "Apply for Global Entry, not just TSA PreCheck — it includes TSA PreCheck and covers the same credit."
+        "Apply for Global Entry, not just TSA PreCheck; it includes TSA PreCheck and covers the same credit."
       ]
     },
     {
@@ -108,7 +108,7 @@
       "removed": false,
       "description": "Up to $100 property credit for qualifying charges at The Ritz-Carlton or St. Regis when booking a 2+ night stay direct at a special rate.",
       "tips": [
-        "Only pays off if you're already booking a Ritz-Carlton or St. Regis stay — not a general-purpose credit."
+        "Only pays off if you're already booking a Ritz-Carlton or St. Regis stay; not a general-purpose credit."
       ]
     },
     {
@@ -121,7 +121,7 @@
       "removed": false,
       "description": "One free night award every year after your card renewal month, redeemable at hotels with a redemption level at or under 85,000 Marriott Bonvoy points.",
       "tips": [
-        "Value swings hard by property — a Category 1 redemption wastes most of the award's ceiling; aim for a hotel priced near the 85k cap.",
+        "Value swings hard by property. A Category 1 redemption wastes most of the award's ceiling; aim for a hotel priced near the 85k cap.",
         "$300 here is a conservative mid-range estimate, not what any specific hotel actually costs."
       ]
     }
@@ -129,7 +129,7 @@
   "insurance": [
     {
       "coverage": "Rental car CDW",
-      "detail": "Car Rental Loss & Damage Insurance — up to $75,000, secondary, no liability coverage",
+      "detail": "Car Rental Loss & Damage Insurance, up to $75,000, secondary, no liability coverage",
       "level": "mid"
     },
     {
@@ -153,13 +153,13 @@
       "level": "strong"
     }
   ],
-  "protection_note": "Trip cancellation coverage matches Amex's most premium travel cards ($10k/trip), but trip delay is thinner ($500 vs $500-plus on some cards, capped at 2 claims/yr) — this card leans on hotel loyalty perks, not being the strongest travel-protection card in your wallet.",
-  "rental_note": "Rental coverage is secondary and excludes liability — put the rental on a card with primary coverage if you rent often, and use this one for the points instead.",
+  "protection_note": "Trip cancellation coverage matches Amex's most premium travel cards ($10k/trip), but trip delay is thinner ($500 vs $500-plus on some cards, capped at 2 claims/yr). This card leans on hotel loyalty perks, not being the strongest travel-protection card in your wallet.",
+  "rental_note": "Rental coverage is secondary and excludes liability; put the rental on a card with primary coverage if you rent often, and use this one for the points instead.",
   "status_perks": [
     {
       "name": "Marriott Bonvoy Platinum Elite Status",
       "strength": 4,
-      "note": "Complimentary with the card — includes room upgrades (space-available), 25% bonus points, and enhanced guarantees. Plus 25 Elite Night Credits/year toward the next status tier."
+      "note": "Complimentary with the card: includes room upgrades (space-available), 25% bonus points, and enhanced guarantees. Plus 25 Elite Night Credits/year toward the next status tier."
     },
     {
       "name": "Priority Pass Select",
@@ -191,7 +191,7 @@
         ]
       }
     ],
-    "note": "Additional cards are free for the first three — a cheap way to pool household spend toward the 6× hotel rate and the annual free night."
+    "note": "Additional cards are free for the first three, a cheap way to pool household spend toward the 6× hotel rate and the annual free night."
   },
   "timeline": []
 }

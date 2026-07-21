@@ -16,21 +16,21 @@
     {
       "emoji": "✈️",
       "multiplier": "5×",
-      "category": "Flights — direct or via Amex Travel (first $500k/yr)",
+      "category": "Flights, direct or via Amex Travel (first $500k/yr)",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "🏨",
       "multiplier": "5×",
-      "category": "Prepaid hotels — via Amex Travel",
+      "category": "Prepaid hotels, via Amex Travel",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "🛍️",
       "multiplier": "2×",
-      "category": "Big purchases — $5,000+ (up to $2M/yr)",
+      "category": "Big purchases, $5,000+ (up to $2M/yr)",
       "highlight": false,
       "is_base": false
     },
@@ -42,7 +42,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 1× base is the real weakness — put everyday, dining and grocery spend on a 2× card (Venture X) and use the Platinum for flights and prepaid hotels.",
+  "earn_note": "The 1× base is the real weakness. Put everyday, dining and grocery spend on a 2× card (Venture X) and use the Platinum for flights and prepaid hotels.",
   "points": {
     "currency": "Membership Rewards",
     "redemption_options": [
@@ -63,7 +63,7 @@
       }
     ],
     "per_100k": "$2,000",
-    "note": "Cashing out at 0.6¢ is a trap — always transfer. MR is the only bank currency that moves to Delta SkyMiles 1:1."
+    "note": "Cashing out at 0.6¢ is a trap: always transfer. MR is the only bank currency that moves to Delta SkyMiles 1:1."
   },
   "transfer_partners": {
     "airline_count": 17,
@@ -82,8 +82,8 @@
       "removed": false,
       "description": "Monthly Uber Cash for U.S. rides and Uber Eats.",
       "tips": [
-        "Add the Platinum in the Uber app wallet — the cash won't appear until you do.",
-        "December is $35, not $15 — time a bigger order then."
+        "Add the Platinum in the Uber app wallet; the cash won't appear until you do.",
+        "December is $35, not $15; time a bigger order then."
       ]
     },
     {
@@ -96,7 +96,7 @@
       "removed": false,
       "description": "Monthly credit across Disney+, Hulu, ESPN+, Peacock, Paramount+, NYT, WSJ, YouTube Premium & TV.",
       "tips": [
-        "Bill annual plans monthly instead — a lump-sum annual charge blows past the $25 cap.",
+        "Bill annual plans monthly instead; a lump-sum annual charge blows past the $25 cap.",
         "Stack two services to hit exactly $25/mo."
       ]
     },
@@ -111,7 +111,7 @@
       "description": "Covers a CLEAR+ membership at 55+ airports.",
       "tips": [
         "Pair with your Global Entry credit for the fastest lane combo.",
-        "$0 to you if you don't fly through CLEAR airports — drag the slider down."
+        "$0 to you if you don't fly through CLEAR airports; drag the slider down."
       ]
     },
     {
@@ -124,7 +124,7 @@
       "removed": false,
       "description": "Semi-annual credit on prepaid FHR / Hotel Collection stays via Amex Travel. FHR spans ~1,700+ luxury properties with guaranteed perks: breakfast for two, room upgrade, noon check-in, 4pm checkout, and a $100 property credit.",
       "tips": [
-        "FHR works on ONE-night stays — book a single night to trigger both the $300 credit AND the $100 property credit.",
+        "FHR works on ONE-night stays: book a single night to trigger both the $300 credit AND the $100 property credit.",
         "Semi-annual is the catch: you must spend in both H1 and H2.",
         "The ~1,700-property network is the widest of any card program."
       ]
@@ -137,10 +137,10 @@
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "Quarterly credit at 10,000+ U.S. Resy restaurants (Amex owns Resy). No reservation needed — just pay with the card.",
+      "description": "Quarterly credit at 10,000+ U.S. Resy restaurants (Amex owns Resy). No reservation needed; just pay with the card.",
       "tips": [
         "10,000+ restaurants in 1,600+ cities is broad, unlike Chase's ~400-restaurant list.",
-        "Quarterly with no rollover — set four reminders so a missed quarter doesn't cost you $100.",
+        "Quarterly with no rollover; set four reminders so a missed quarter doesn't cost you $100.",
         "Resy skews trendy/urban; scout your area in the app to confirm your usual spots qualify."
       ]
     },
@@ -154,9 +154,9 @@
       "removed": false,
       "description": "Incidental fees (checked bags, seat assignments, day passes) on one airline you select each year.",
       "tips": [
-        "The old United TravelBank cash-loading trick DIED in mid-2026 — you now need real incidentals.",
+        "The old United TravelBank cash-loading trick DIED in mid-2026; you now need real incidentals.",
         "Select your airline in-account first; covers bags/seats, not airfare.",
-        "If you fly carry-on-only basic economy, this is now hard to fully use — set the slider low."
+        "If you fly carry-on-only basic economy, this is now hard to fully use; set the slider low."
       ]
     },
     {
@@ -183,7 +183,7 @@
       "removed": false,
       "description": "Credit toward an Oura Ring at ouraring.com.",
       "tips": [
-        "Covers the ring, not the subscription — effectively one-time. $0 unless you're buying a ring."
+        "Covers the ring, not the subscription; effectively one-time. $0 unless you're buying a ring."
       ]
     },
     {
@@ -227,7 +227,7 @@
     },
     {
       "id": "saks",
-      "name": "Saks — REMOVED",
+      "name": "Saks (Removed)",
       "subtitle": "gone Jul 1, 2026",
       "max_annual": 0,
       "default_value": 0,
@@ -235,7 +235,7 @@
       "removed": true,
       "description": "The $100/yr Saks credit was permanently removed for all cardholders on July 1, 2026.",
       "tips": [
-        "If any benefits list still shows Saks, it's out of date — it's gone."
+        "If any benefits list still shows Saks, it's out of date; it's gone."
       ]
     }
   ],
@@ -281,13 +281,13 @@
       "level": "strong"
     }
   ],
-  "protection_note": "Amex does cover emergency medical evacuation/transport at no cost (uncapped) when coordinated through Premium Global Assist. It carries a Baggage Insurance Plan for lost/damaged/stolen bags (secondary) — only baggage delay is missing. Purchase protection here is the strongest of the four.",
+  "protection_note": "Amex does cover emergency medical evacuation/transport at no cost (uncapped) when coordinated through Premium Global Assist. It carries a Baggage Insurance Plan for lost/damaged/stolen bags (secondary); only baggage delay is missing. Purchase protection here is the strongest of the four.",
   "rental_note": "The Amex Platinum's complimentary coverage is secondary in the U.S. (primary only when you rent abroad). Its Premium Car Rental Protection gives true primary coverage but it's a separate paid product (~$19.95–$24.95 per rental). Easiest move: charge rentals to the CSR or Venture X.",
   "status_perks": [
     {
       "name": "Hilton Honors Gold",
       "strength": 3,
-      "note": "The useful one — free breakfast/food credit and space-available upgrades at most Hiltons."
+      "note": "The useful one: free breakfast/food credit and space-available upgrades at most Hiltons."
     },
     {
       "name": "Marriott Bonvoy Gold",
@@ -297,7 +297,7 @@
     {
       "name": "Global Lounge Collection",
       "strength": 5,
-      "note": "Best in class — 1,550+ lounges: Centurion, Priority Pass, Plaza Premium, plus 10 Delta Sky Club visits/yr on Delta flights. From Jul 8, 2026, Centurion entry is within 5 hrs of departure and guests must be on your flight."
+      "note": "Best in class. 1,550+ lounges: Centurion, Priority Pass, Plaza Premium, plus 10 Delta Sky Club visits/yr on Delta flights. From Jul 8, 2026, Centurion entry is within 5 hrs of departure and guests must be on your flight."
     }
   ],
   "services": [
@@ -307,7 +307,7 @@
     },
     {
       "name": "Platinum Card Concierge",
-      "detail": "24/7 help booking dining, tickets, and travel — call the number on the card."
+      "detail": "24/7 help booking dining, tickets, and travel; call the number on the card."
     },
     {
       "name": "Car Rental Privileges",
@@ -319,7 +319,7 @@
     },
     {
       "name": "International Airline Program",
-      "detail": "Platinum Member Airfares — discounted premium-cabin international fares booked through Amex Travel."
+      "detail": "Platinum Member Airfares: discounted premium-cabin international fares booked through Amex Travel."
     },
     {
       "name": "By Invitation Only & No FX fees",
@@ -384,7 +384,7 @@
         ]
       }
     ],
-    "note": "Up to 3 Additional Platinum cards ($195 each), users 13+. The $600 hotel credit and other statement credits stay with the primary account — so a $0 Companion card is plenty for a partner who just wants to spend + earn, while $195 makes sense only if they'll travel solo and use lounges."
+    "note": "Up to 3 Additional Platinum cards ($195 each), users 13+. The $600 hotel credit and other statement credits stay with the primary account, so a $0 Companion card is plenty for a partner who just wants to spend + earn, while $195 makes sense only if they'll travel solo and use lounges."
   },
   "timeline": [
     {

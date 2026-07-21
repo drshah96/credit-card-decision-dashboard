@@ -16,7 +16,7 @@
     {
       "emoji": "🏨",
       "multiplier": "5×",
-      "category": "Prepaid hotels — via Amex Travel",
+      "category": "Prepaid hotels, via Amex Travel",
       "highlight": true,
       "is_base": false
     },
@@ -37,14 +37,14 @@
     {
       "emoji": "✈️",
       "multiplier": "3×",
-      "category": "Flights — via Amex Travel or direct with airlines",
+      "category": "Flights, via Amex Travel or direct with airlines",
       "highlight": false,
       "is_base": false
     },
     {
       "emoji": "🚗",
       "multiplier": "2×",
-      "category": "Prepaid car rentals & cruises — via Amex Travel",
+      "category": "Prepaid car rentals & cruises, via Amex Travel",
       "highlight": false,
       "is_base": false
     },
@@ -77,12 +77,12 @@
       }
     ],
     "per_100k": "$2,000",
-    "note": "Same Membership Rewards currency as the Platinum — cashing out at 0.6¢ throws away most of the value; the same transfer partners apply."
+    "note": "Same Membership Rewards currency as the Platinum. Cashing out at 0.6¢ throws away most of the value; the same transfer partners apply."
   },
   "transfer_partners": {
     "airline_count": 17,
     "hotel_count": 3,
-    "highlight": "Shares the Platinum's full Membership Rewards transfer chart — 17 airline and 3 hotel partners.",
+    "highlight": "Shares the Platinum's full Membership Rewards transfer chart: 17 airline and 3 hotel partners.",
     "recent_changes": "Subject to the same program-wide changes as any other Membership Rewards card (see the Platinum's transfer partner notes)."
   },
   "credits": [
@@ -109,7 +109,7 @@
       "removed": false,
       "description": "$10 in Uber Cash loaded monthly for U.S. Uber rides and Uber Eats orders.",
       "tips": [
-        "Add the card in the Uber app wallet — the cash won't appear until you do."
+        "Add the card in the Uber app wallet; the cash won't appear until you do."
       ]
     },
     {
@@ -136,7 +136,7 @@
       "description": "Up to $50 in statement credits twice a year (Jan–Jun, Jul–Dec) at qualifying Resy restaurants.",
       "tips": [
         "Enrollment required.",
-        "No rollover between halves — an unused H1 doesn't carry into H2."
+        "No rollover between halves; an unused H1 doesn't carry into H2."
       ]
     },
     {
@@ -147,7 +147,7 @@
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "$100 credit toward eligible charges at 1,300+ Hotel Collection properties booked via Amex Travel — no cap on number of qualifying stays per year.",
+      "description": "$100 credit toward eligible charges at 1,300+ Hotel Collection properties booked via Amex Travel, no cap on number of qualifying stays per year.",
       "tips": [
         "Stacks with the 5× points rate on the same prepaid hotel booking."
       ]
@@ -156,7 +156,7 @@
   "insurance": [
     {
       "coverage": "Rental car CDW",
-      "detail": "Car Rental Loss & Damage Insurance — secondary in the US",
+      "detail": "Car Rental Loss & Damage Insurance, secondary in the US",
       "level": "mid"
     },
     {
@@ -171,17 +171,17 @@
     },
     {
       "coverage": "Emergency assistance",
-      "detail": "24/7 Global Assist Hotline (coordination only — cardholder pays for services rendered)",
+      "detail": "24/7 Global Assist Hotline (coordination only; cardholder pays for services rendered)",
       "level": "mid"
     }
   ],
-  "protection_note": "Noticeably thinner than the Platinum or Sapphire Reserve — trip delay caps at $300/trip and rental coverage is secondary. This card isn't built to be your primary travel-protection card.",
+  "protection_note": "Noticeably thinner than the Platinum or Sapphire Reserve: trip delay caps at $300/trip and rental coverage is secondary. This card isn't built to be your primary travel-protection card.",
   "rental_note": "Rental coverage is secondary in the US. If you rent often, put the charge on your Venture X or Sapphire Reserve instead and use those cards' free primary coverage.",
   "status_perks": [
     {
       "name": "Hertz Five Star Status",
       "strength": 2,
-      "note": "A step below full elite tiers — faster pickup counter and occasional upgrades, enrollment required. No hotel status or lounge access on this card."
+      "note": "A step below full elite tiers: faster pickup counter and occasional upgrades, enrollment required. No hotel status or lounge access on this card."
     }
   ],
   "services": [
@@ -213,7 +213,7 @@
         ]
       }
     ],
-    "note": "Up to five Additional Cards are free — a cheap way to add earning power across a household without raising the $325 primary fee."
+    "note": "Up to five Additional Cards are free, a cheap way to add earning power across a household without raising the $325 primary fee."
   },
   "timeline": [
     {

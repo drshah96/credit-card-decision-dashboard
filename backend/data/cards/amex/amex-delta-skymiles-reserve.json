@@ -28,7 +28,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Narrow earning by design — 3× on Delta, flat 1× on everything else. This is a lounge-and-companion-cert card, not an everyday spend card.",
+  "earn_note": "Narrow earning by design: 3× on Delta, flat 1× on everything else. This is a lounge-and-companion-cert card, not an everyday spend card.",
   "points": {
     "currency": "Delta SkyMiles",
     "redemption_options": [
@@ -49,13 +49,13 @@
       }
     ],
     "per_100k": "$1,100–1,200",
-    "note": "Same SkyMiles currency and dynamic pricing as the Gold and Platinum tiers — the Reserve's value is mostly in lounge access and the companion cert, not in how it earns."
+    "note": "Same SkyMiles currency and dynamic pricing as the Gold and Platinum tiers; the Reserve's value is mostly in lounge access and the companion cert, not in how it earns."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "SkyMiles can't be transferred out — they're stuck in Delta's program.",
-    "recent_changes": "You can transfer INTO SkyMiles from Amex MR (1:1), Chase UR and Capital One — useful for topping up an award."
+    "highlight": "SkyMiles can't be transferred out; they're stuck in Delta's program.",
+    "recent_changes": "You can transfer INTO SkyMiles from Amex MR (1:1), Chase UR and Capital One, useful for topping up an award."
   },
   "credits": [
     {
@@ -81,7 +81,7 @@
       "removed": false,
       "description": "Up to $20/month in statement credits at U.S. Resy restaurants via Global Dining Access.",
       "tips": [
-        "Double the Gold/Platinum tiers' Resy credit — worth checking if you already dine at Resy restaurants monthly."
+        "Double the Gold/Platinum tiers' Resy credit, worth checking if you already dine at Resy restaurants monthly."
       ]
     },
     {
@@ -107,7 +107,7 @@
       "removed": false,
       "description": "Up to $200/yr (calendar year) on prepaid hotels or vacation rentals booked through Delta Stays on delta.com.",
       "tips": [
-        "Resets on the calendar year, not renewal — a new cardholder can use it twice on one annual fee."
+        "Resets on the calendar year, not renewal, so a new cardholder can use it twice on one annual fee."
       ]
     },
     {
@@ -120,7 +120,7 @@
       "removed": false,
       "description": "Statement credit for a Global Entry ($120) or TSA PreCheck ($85) application fee, once every 4 years. Shown here amortized to an annual figure.",
       "tips": [
-        "Apply for Global Entry, not just TSA PreCheck — it includes TSA PreCheck and covers the same credit."
+        "Apply for Global Entry, not just TSA PreCheck; it includes TSA PreCheck and covers the same credit."
       ]
     },
     {
@@ -131,9 +131,9 @@
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "Each year after renewal, one round-trip companion ticket valid in any cabin — including Delta First, Premium Select, or Comfort+ — with the purchase of an eligible published fare. Companion pays only taxes/fees.",
+      "description": "Each year after renewal, one round-trip companion ticket valid in any cabin (including Delta First, Premium Select, or Comfort+) with the purchase of an eligible published fare. Companion pays only taxes/fees.",
       "tips": [
-        "The Reserve's companion cert works in First Class, unlike the Platinum's Main-Cabin-only version — the value swing is huge on routes where First is expensive.",
+        "The Reserve's companion cert works in First Class, unlike the Platinum's Main-Cabin-only version. The value swing is huge on routes where First is expensive.",
         "$600 here is a conservative estimate; a premium-cabin redemption on a long route can be worth far more."
       ]
     }
@@ -161,7 +161,7 @@
     }
   ],
   "protection_note": "Meaningfully better than the Gold and Platinum tiers on trip delay window (6 hrs, matching the best cards here) and rental coverage (primary outside the US). Still capped at 2 trip-delay claims/yr like every other Amex travel card.",
-  "rental_note": "Primary coverage only outside the US — domestic rentals still fall back to secondary. For US rentals, Venture X or Sapphire Reserve's free primary coverage is stronger.",
+  "rental_note": "Primary coverage only outside the US; domestic rentals still fall back to secondary. For US rentals, Venture X or Sapphire Reserve's free primary coverage is stronger.",
   "status_perks": [
     {
       "name": "Delta Sky Club Access",
@@ -171,12 +171,12 @@
     {
       "name": "Centurion Lounge Access",
       "strength": 3,
-      "note": "Complimentary access when you book your Delta flight with this card — narrower than the Amex Platinum's blanket Centurion access."
+      "note": "Complimentary access when you book your Delta flight with this card, narrower than the Amex Platinum's blanket Centurion access."
     },
     {
       "name": "Medallion head start",
       "strength": 4,
-      "note": "$2,500 MQD annually plus $1 MQD per $10 spent — double the earn rate of the Platinum's $1-per-$20."
+      "note": "$2,500 MQD annually plus $1 MQD per $10 spent, double the earn rate of the Platinum's $1-per-$20."
     }
   ],
   "services": [
@@ -198,7 +198,7 @@
         "is_free": true,
         "benefits": [
           {
-            "text": "Free to add — no annual fee for additional Reserve cards",
+            "text": "Free to add: no annual fee for additional Reserve cards",
             "included": true
           },
           {
@@ -214,13 +214,13 @@
             "included": true
           },
           {
-            "text": "Shares the account's Sky Club visits and companion cert — no separate set",
+            "text": "Shares the account's Sky Club visits and companion cert, no separate set",
             "included": false
           }
         ]
       }
     ],
-    "note": "Additional Reserve cards are free, and each one gets its own free-bag and priority-boarding perk — but Sky Club visits and the companion certificate are tied to the primary account."
+    "note": "Additional Reserve cards are free, and each one gets its own free-bag and priority-boarding perk, but Sky Club visits and the companion certificate are tied to the primary account."
   },
   "timeline": []
 }
