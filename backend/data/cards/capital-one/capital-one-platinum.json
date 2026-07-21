@@ -9,7 +9,8 @@
   "effective_cost": "Free — no annual fee, but earns nothing",
   "verdict": {
     "status": "situational",
-    "text": "Not a rewards card at all — situational only for people who need to build or rebuild credit and can't yet qualify for a cash-back card. Graduate to QuicksilverOne or the no-fee Quicksilver once your score allows; there's no reason to keep this once you qualify for something that earns."
+    "text": "Not a rewards card — situational for building credit until you qualify for Quicksilver",
+    "short_tag": "Credit Building"
   },
   "earn_rates": [],
   "earn_note": "Capital One Platinum never earned cash back or points — it's built entirely around credit access (approvals for fair/average credit) and an automatic credit-line review, not rewards. If you want cash back on a Capital One credit-building card, use QuicksilverOne (1.5%, $39/yr) instead.",

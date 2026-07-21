@@ -147,6 +147,7 @@ def upsert_card(session: Session, data: dict) -> CardModel:
     card.effective_cost_label = data["effective_cost"]
     card.verdict_status = data["verdict"]["status"]
     card.verdict_text = data["verdict"]["text"]
+    card.verdict_short_tag = data["verdict"].get("short_tag")
     card.earn_note = data.get("earn_note")
     card.points_per_100k_label = data["points"]["per_100k"]
     card.points_note = data["points"].get("note")

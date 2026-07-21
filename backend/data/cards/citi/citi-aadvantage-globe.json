@@ -9,7 +9,8 @@
   "effective_cost": "~$100–150 net for a traveler who uses the Turo and inflight credits, before the year-two companion certificate",
   "verdict": {
     "status": "situational",
-    "text": "Only earns its $350 fee back if you actually fly American and use the Turo/inflight/splurge credits — a card built for a mid-frequency AA flyer, not a general-purpose travel card"
+    "text": "Only earns back its fee if you fly American and use the travel credits",
+    "short_tag": "AA Flyer Perks"
   },
   "earn_rates": [
     {

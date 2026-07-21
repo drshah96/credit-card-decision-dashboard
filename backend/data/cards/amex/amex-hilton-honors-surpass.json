@@ -9,7 +9,8 @@
   "effective_cost": "Low if you spend $200+/yr at Hilton",
   "verdict": {
     "status": "keep",
-    "text": "Fee pays for itself with modest Hilton spend"
+    "text": "Fee pays for itself with modest Hilton spend",
+    "short_tag": "Hilton Spend"
   },
   "earn_rates": [
     {

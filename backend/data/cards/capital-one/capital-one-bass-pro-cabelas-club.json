@@ -9,7 +9,8 @@
   "effective_cost": "Free — no annual fee",
   "verdict": {
     "status": "situational",
-    "text": "Only earns its keep for frequent Bass Pro Shops / Cabela's shoppers who can climb the spend tiers — the 1% base rate elsewhere is weak, and CLUB Points are a closed-loop currency good only for merchandise at those two chains (plus Mack's Prairie Wings). Skip it if you shop there occasionally rather than as your outdoor-gear default."
+    "text": "Only worth it for frequent Bass Pro / Cabela's shoppers — points are store-locked",
+    "short_tag": "Bass Pro Shoppers"
   },
   "earn_rates": [
     {

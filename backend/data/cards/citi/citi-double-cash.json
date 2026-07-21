@@ -9,7 +9,8 @@
   "effective_cost": "Free — no annual fee",
   "verdict": {
     "status": "keep",
-    "text": "Still the best true flat-rate card — 2% on everything, uncapped, no categories to track, and it's the cheapest way to unlock a full 1¢ cash-out rate on ThankYou Points earned by other Citi cards"
+    "text": "Still the best flat-rate card — 2% on everything, uncapped",
+    "short_tag": "Flat 2% Cash Back"
   },
   "earn_rates": [
     {

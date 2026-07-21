@@ -9,7 +9,8 @@
   "effective_cost": "$39/yr — no sign-up bonus or credits to offset it; must be earned back through ~$1,300/yr of 3%-category spend",
   "verdict": {
     "status": "reconsider",
-    "text": "Reconsider — identical 3% categories to the no-fee Savor, now behind a $39 fee with no sign-up bonus; makes sense mainly as a fair-credit stepping stone"
+    "text": "Reconsider — same categories as the no-fee Savor, now behind a $39 fee",
+    "short_tag": "Fair-Credit Stepping Stone"
   },
   "earn_rates": [
     {

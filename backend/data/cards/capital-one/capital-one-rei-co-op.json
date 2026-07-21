@@ -9,7 +9,8 @@
   "effective_cost": "Free — no annual fee, but requires an active REI Co-op membership ($30 one-time fee)",
   "verdict": {
     "status": "situational",
-    "text": "Solid if you're already an REI regular — 5% at REI plus a real $50 experiences credit — but the 1.5% base rate is unremarkable and it only exists for Co-op members"
+    "text": "Solid for REI regulars — 5% at REI, but base rate is unremarkable",
+    "short_tag": "REI Shoppers"
   },
   "earn_rates": [
     {

@@ -9,7 +9,8 @@
   "effective_cost": "Low if you actually use the United Club",
   "verdict": {
     "status": "situational",
-    "text": "Keep only if you fly United enough to live in the Club"
+    "text": "Keep only if you fly United enough to live in the Club",
+    "short_tag": "United Club Access"
   },
   "earn_rates": [
     {

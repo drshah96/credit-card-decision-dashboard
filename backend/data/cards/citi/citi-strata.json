@@ -9,7 +9,8 @@
   "effective_cost": "Free — no annual fee",
   "verdict": {
     "status": "keep",
-    "text": "A genuinely broad no-fee earner — 5x travel, 3x groceries/gas/transit, plus a rotating pick — but its cash-back rate is capped at half a cent per point unless paired with a fee-paying Strata card"
+    "text": "Broad no-fee earner, though cash-back is capped at half a cent/point",
+    "short_tag": "Broad No-Fee Earner"
   },
   "earn_rates": [
     {

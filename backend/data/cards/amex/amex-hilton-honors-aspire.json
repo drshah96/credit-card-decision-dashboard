@@ -9,7 +9,8 @@
   "effective_cost": "Low if you use the resort + flight credits",
   "verdict": {
     "status": "situational",
-    "text": "Keep if you actually book Hilton resort stays — the credits are narrow"
+    "text": "Keep if you actually book Hilton resort stays — the credits are narrow",
+    "short_tag": "Hilton Resorts"
   },
   "earn_rates": [
     {

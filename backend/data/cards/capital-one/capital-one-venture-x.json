@@ -9,7 +9,8 @@
   "effective_cost": "~$0 net",
   "verdict": {
     "status": "keep",
-    "text": "Keep — the value anchor"
+    "text": "Keep — the value anchor",
+    "short_tag": "Value Anchor"
   },
   "earn_rates": [
     {

@@ -9,7 +9,8 @@
   "effective_cost": "Low if you redeem the annual free night award",
   "verdict": {
     "status": "situational",
-    "text": "Keep if you'll actually book the annual free night — otherwise a mid-pack earner"
+    "text": "Keep if you'll actually book the annual free night — otherwise a mid-pack earner",
+    "short_tag": "Annual Free Night"
   },
   "earn_rates": [
     {

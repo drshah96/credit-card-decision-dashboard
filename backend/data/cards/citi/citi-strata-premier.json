@@ -9,7 +9,8 @@
   "effective_cost": "Low — the $100 hotel credit alone covers most of the fee",
   "verdict": {
     "status": "keep",
-    "text": "A strong $95 travel card on paper — 10x on Citi Travel hotels/cars, 3x on flights/dining/groceries/gas — but Citi cut cash redemption to 0.75¢/point in Aug 2025, so transfer partners are now the only way to get full value"
+    "text": "Strong $95 travel card, but cash redemption is capped at 0.75¢/point",
+    "short_tag": "Travel & Transfers"
   },
   "earn_rates": [
     {

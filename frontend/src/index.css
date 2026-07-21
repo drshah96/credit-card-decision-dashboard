@@ -2,21 +2,21 @@
 
 /* ─── Design tokens ────────────────────────────────────────────────────────── */
 :root {
-  --base: #0A0D12;
-  --panel-s: #141A24;
-  --panel-2: #1A212E;
-  --panel-3: #222C3D;
-  --ink: #EEF1F7;
-  --muted: #98A2B5;
-  --faint: #69748A;
-  --line: rgba(255, 255, 255, 0.09);
-  --line-2: rgba(255, 255, 255, 0.15);
-  --green: #5FD0A3;
-  --gold: #E3B778;
-  --red: #F2708A;
-  --blue: #7FB4E8;
-  --accent: #AEB6C6;
-  --accent-soft: rgba(174, 182, 198, 0.14);
+  --base: #FFFFFF;
+  --panel-s: #F4F5F7;
+  --panel-2: #ECEEF2;
+  --panel-3: #E3E6ED;
+  --ink: #14171C;
+  --muted: #5B6472;
+  --faint: #6B7280;
+  --line: rgba(15, 23, 42, 0.09);
+  --line-2: rgba(15, 23, 42, 0.16);
+  --green: #15803D;
+  --gold: #B45309;
+  --red: #C0293F;
+  --blue: #1D4ED8;
+  --accent: #475569;
+  --accent-soft: rgba(71, 85, 105, 0.10);
 }
 
 /* ─── Base ─────────────────────────────────────────────────────────────────── */
@@ -36,8 +36,8 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(1200px 620px at 80% -10%, rgba(70, 90, 140, 0.16), transparent 60%),
-    radial-gradient(900px 520px at 5% 3%, rgba(120, 80, 120, 0.10), transparent 55%),
+    radial-gradient(1200px 620px at 80% -10%, rgba(70, 90, 140, 0.10), transparent 60%),
+    radial-gradient(900px 520px at 5% 3%, rgba(120, 80, 120, 0.06), transparent 55%),
     var(--base);
   background-attachment: fixed;
   color: var(--ink);
@@ -299,7 +299,7 @@ body {
 .tnode.future .badge { color: var(--blue); background: rgba(127, 180, 232, 0.12); }
 
 /* ─── Verdict badge ────────────────────────────────────────────────────────── */
-.verdict-badge { display: inline-flex; align-items: center; border-radius: 100px; padding: 7px 14px; font-size: 12.5px; font-weight: 600; border: 1px solid var(--line-2); }
+.verdict-badge { display: inline-flex; align-items: center; border-radius: 14px; padding: 7px 14px; font-size: 12.5px; font-weight: 600; line-height: 1.45; border: 1px solid var(--line-2); text-align: right; }
 .verdict-badge.keep { color: var(--green); background: rgba(95, 208, 163, 0.10); border-color: rgba(95, 208, 163, 0.3); }
 .verdict-badge.situational { color: var(--gold); background: rgba(227, 183, 120, 0.10); border-color: rgba(227, 183, 120, 0.3); }
 .verdict-badge.reconsider { color: var(--red); background: rgba(242, 112, 138, 0.10); border-color: rgba(242, 112, 138, 0.3); }
@@ -344,7 +344,10 @@ body {
   gap: 16px;
 }
 .issuer-tile {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 168px;
   border-radius: 16px;
   border: 1px solid var(--line);
   background: var(--panel-s);
@@ -356,22 +359,12 @@ body {
   border-color: var(--line-2);
   transform: translateY(-2px);
 }
-.issuer-tile-label {
-  font-family: "Fraunces Variable", serif;
-  font-weight: 600;
-  font-size: 22px;
-  color: var(--ink);
-  margin: 0 0 8px;
-}
-.issuer-tile-count {
-  font-size: 13px;
-  color: var(--muted);
-  margin: 0 0 4px;
-}
-.issuer-tile-sub {
-  font-size: 12px;
-  color: var(--faint);
-  margin: 0;
+.issuer-tile-logo {
+  display: block;
+  height: 76px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 /* ─── Filter chips (issuer page) ───────────────────────────────────────────── */

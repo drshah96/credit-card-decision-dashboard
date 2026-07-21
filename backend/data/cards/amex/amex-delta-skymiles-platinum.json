@@ -9,7 +9,8 @@
   "effective_cost": "Low if you fly Delta",
   "verdict": {
     "status": "situational",
-    "text": "Keep only if you fly Delta with a companion"
+    "text": "Keep only if you fly Delta with a companion",
+    "short_tag": "Companion Fare"
   },
   "earn_rates": [
     {

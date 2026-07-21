@@ -9,7 +9,8 @@
   "effective_cost": "Free — no annual fee, but usable only at Exxon and Mobil branded stations",
   "verdict": {
     "status": "situational",
-    "text": "Only makes sense for someone who fuels up almost exclusively at Exxon/Mobil stations — the discount is applied instantly at the pump, but there's no earning anywhere else, no signup bonus, and a steep standard APR if you carry a balance."
+    "text": "Only makes sense if you fuel up almost exclusively at Exxon/Mobil",
+    "short_tag": "Exxon/Mobil Drivers"
   },
   "earn_rates": [
     {

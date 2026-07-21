@@ -9,7 +9,8 @@
   "effective_cost": "Free — no annual fee, refundable deposit sets your credit line",
   "verdict": {
     "status": "situational",
-    "text": "Not a rewards card — same non-earning story as the unsecured Platinum, but built for applicants who can't get approved without a deposit. If you can afford to fund the deposit, the Quicksilver Secured earns 1.5% cash back for the same $0 annual fee, so use this only if you're specifically declined for Quicksilver Secured or want the lowest possible minimum deposit."
+    "text": "Not a rewards card — use only if declined for Quicksilver Secured",
+    "short_tag": "Credit Building"
   },
   "earn_rates": [],
   "earn_note": "Like the unsecured Platinum, this card earns no cash back or points at all — it exists purely for credit access. If you want a secured Capital One card that actually earns rewards, use Quicksilver Secured (1.5% flat, same $0 annual fee) instead.",

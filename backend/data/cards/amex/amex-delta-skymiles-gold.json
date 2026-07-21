@@ -9,7 +9,8 @@
   "effective_cost": "Low if you check a bag on Delta",
   "verdict": {
     "status": "situational",
-    "text": "Worth it if you check bags on Delta more than once a year"
+    "text": "Worth it if you check bags on Delta more than once a year",
+    "short_tag": "Checked Bags"
   },
   "earn_rates": [
     {

@@ -81,21 +81,21 @@ describe("CardSummaryCard", () => {
     render(<CardSummaryCard card={makeCard({ verdict: { status: "situational", text: "Situational" } })} />);
 
     const badge = screen.getByText("Situational");
-    expect(badge).toHaveClass("text-amber-400");
+    expect(badge).toHaveClass("text-amber-700");
   });
 
   it("applies green verdict styles for keep status", () => {
     render(<CardSummaryCard card={makeCard({ verdict: { status: "keep", text: "Keep it" } })} />);
 
     const badge = screen.getByText("Keep it");
-    expect(badge).toHaveClass("text-emerald-400");
+    expect(badge).toHaveClass("text-emerald-700");
   });
 
   it("applies red verdict styles for reconsider status", () => {
     render(<CardSummaryCard card={makeCard({ verdict: { status: "reconsider", text: "Consider cutting" } })} />);
 
     const badge = screen.getByText("Consider cutting");
-    expect(badge).toHaveClass("text-red-400");
+    expect(badge).toHaveClass("text-red-700");
   });
 
   it("renders network and effective cost in footer", () => {
@@ -111,6 +111,6 @@ describe("CardSummaryCard", () => {
 
     // "$0" only appears once — as max credits (best-case net shows "$395")
     const zeroEl = screen.getByText("$0");
-    expect(zeroEl).toHaveClass("text-white/30");
+    expect(zeroEl).toHaveClass("text-black/30");
   });
 });

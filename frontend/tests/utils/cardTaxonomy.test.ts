@@ -117,7 +117,7 @@ function makeCard(overrides: Partial<Card> = {}): Card {
 // ─── groupCardsForAllView ───────────────────────────────────────────────────────
 
 describe("groupCardsForAllView", () => {
-  it("keeps a single-brand airline group flat but splits hotels with 2+ brands", () => {
+  it("names every airline/hotel section after its brand, even with a single brand", () => {
     const cards = [
       makeSummary({ id: "amex-platinum" }), // flagship
       makeSummary({ id: "amex-delta-skymiles-gold" }), // airline: Delta SkyMiles (only airline brand)
@@ -129,7 +129,7 @@ describe("groupCardsForAllView", () => {
 
     expect(sections.map((s) => s.label)).toEqual([
       "Flagship Cards",
-      "Airline Cards", // only one airline brand present -> stays flat, not "Delta SkyMiles Cards"
+      "Delta SkyMiles Cards", // named after its brand even though it's the only airline program
       "Hilton Honors Cards",
       "Marriott Bonvoy Cards",
     ]);

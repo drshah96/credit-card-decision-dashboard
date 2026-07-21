@@ -9,7 +9,8 @@
   "effective_cost": "Free — no annual fee, but the everyday earning rate depends heavily on which Star Rewards tier you're in",
   "verdict": {
     "status": "situational",
-    "text": "Only worth carrying for frequent Macy's shoppers who spend enough ($1,200+/yr) to reach Platinum status, where 5% back every day is genuinely good. Below that, Silver and Gold tiers mostly earn only on scheduled Star Money Days, not everyday purchases — a much weaker deal than the marketing implies."
+    "text": "Only strong for frequent Macy's shoppers who reach Platinum status",
+    "short_tag": "Macy's Shoppers"
   },
   "earn_rates": [
     {

@@ -9,7 +9,8 @@
   "effective_cost": "Free — no annual fee, but purely a store-financing tool with no rewards and no use outside Home Depot",
   "verdict": {
     "status": "situational",
-    "text": "This is a project-financing card, not a rewards card — only worth opening around a specific 0%-interest Home Depot purchase you can pay off within the promo window. It earns nothing and can't be used anywhere but Home Depot."
+    "text": "A project-financing card, not rewards — only for a 0% Home Depot purchase",
+    "short_tag": "0% Project Financing"
   },
   "earn_rates": [],
   "earn_note": "This card has no cash-back or points program of any kind — its entire value proposition is deferred-interest financing (\"no interest if paid in full within the promotional period\") on Home Depot purchases, plus a modest new-account discount and an extended return window. If you want rewards for home-improvement spend, a general-purpose card with a home-improvement or everyday-purchases category will out-earn this every time.",

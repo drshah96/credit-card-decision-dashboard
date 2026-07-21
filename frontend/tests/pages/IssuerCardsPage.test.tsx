@@ -111,8 +111,8 @@ describe("IssuerCardsPage", () => {
       expect(screen.getByRole("button", { name: "All Cards" })).toHaveAttribute("aria-pressed", "true");
     });
     expect(screen.getByText("Flagship Cards")).toBeInTheDocument();
-    // Only one airline brand (Delta SkyMiles) in this fixture -> stays flat.
-    expect(screen.getByText("Airline Cards")).toBeInTheDocument();
+    // Named after its brand even though it's the only airline program in this fixture.
+    expect(screen.getByText("Delta SkyMiles Cards")).toBeInTheDocument();
     // Two hotel brands (Hilton, Marriott) -> each gets its own section.
     expect(screen.getByText("Hilton Honors Cards")).toBeInTheDocument();
     expect(screen.getByText("Marriott Bonvoy Cards")).toBeInTheDocument();

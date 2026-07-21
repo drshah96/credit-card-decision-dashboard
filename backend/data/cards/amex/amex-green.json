@@ -9,7 +9,8 @@
   "effective_cost": "Low if you use CLEAR and travel/transit spend",
   "verdict": {
     "status": "keep",
-    "text": "Low-commitment MR earner if you use transit + the CLEAR credit"
+    "text": "Low-commitment MR earner if you use transit + the CLEAR credit",
+    "short_tag": "Transit & CLEAR"
   },
   "earn_rates": [
     {
