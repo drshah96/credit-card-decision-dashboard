@@ -1,0 +1,115 @@
+{
+  "id": "bofa-unlimited-cash-rewards-secured",
+  "name": "Unlimited Cash Rewards Secured Credit Card",
+  "issuer": "Bank of America",
+  "network": "VISA",
+  "points_program": "Cash Back",
+  "accent_color": "#6B7280",
+  "annual_fee": 0,
+  "effective_cost": "Free — no annual fee, but requires a refundable $200–$5,000 security deposit to set your limit",
+  "verdict": {
+    "status": "situational",
+    "text": "Same 2%-then-1.5% flat earn rate as the unsecured Unlimited Cash Rewards, with no categories to manage while you rebuild credit",
+    "short_tag": "Credit Building"
+  },
+  "earn_rates": [
+    {
+      "emoji": "💳",
+      "multiplier": "2%",
+      "category": "Everything — first year only, then 1.5%",
+      "highlight": true,
+      "is_base": true
+    }
+  ],
+  "earn_note": "Identical earn structure to the unsecured Unlimited Cash Rewards — 2% for the first 12 months, then a flat 1.5% with no caps. Secured card products are not eligible for the BofA Rewards relationship bonus that boosts the unsecured card's rates by 10–75%.",
+  "points": {
+    "currency": "Cash Back",
+    "redemption_options": [
+      {
+        "method": "Deposit to a Bank of America checking or savings account",
+        "cpp": 1.0,
+        "best": true
+      },
+      {
+        "method": "Statement credit or gift cards",
+        "cpp": 1.0,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,500–$2,000",
+    "note": "Same flat-rate redemption menu as the unsecured card — no minimum redemption, no expiration while the account stays open."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer currency — straight cash back, not a points program.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Zero liability",
+      "detail": "Not responsible for fraudulent transactions once reported",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Not covered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "No purchase-protection or extended-warranty guide published specifically for this card.",
+  "rental_note": "No auto rental coverage documented publicly for this card.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "Refundable security deposit",
+      "detail": "$200–$5,000 sets your credit limit dollar-for-dollar."
+    },
+    {
+      "name": "Deposit review for return",
+      "detail": "Bank of America periodically reviews your account and, based on credit history, may qualify you to have your deposit returned — not guaranteed for all customers."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns cash back on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Their activity is reported to the credit bureaus too, on the same account",
+            "included": true
+          }
+        ]
+      }
+    ],
+    "note": "Free to add — since this account reports to the credit bureaus, an authorized user benefits from the payment history alongside the primary cardholder."
+  },
+  "timeline": []
+}
