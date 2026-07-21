@@ -1,0 +1,155 @@
+{
+  "id": "us-bank-altitude-go",
+  "name": "Altitude Go Visa Signature Card",
+  "issuer": "U.S. Bank",
+  "network": "VISA SIGNATURE",
+  "points_program": "U.S. Bank Rewards",
+  "accent_color": "#3F5D3A",
+  "annual_fee": 0,
+  "effective_cost": "Free — no annual fee",
+  "verdict": {
+    "status": "keep",
+    "text": "Keep if dining is a real category for you — 4x on the first $2,000/quarter is a strong no-fee rate",
+    "short_tag": "Dining Earner"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🍽️",
+      "multiplier": "4×",
+      "category": "Dining, takeout & restaurant delivery — first $2,000/qtr, then 1×",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "2×",
+      "category": "Grocery stores & gas stations/EV charging",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "📺",
+      "multiplier": "2×",
+      "category": "Streaming services",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "Discount stores/supercenters and wholesale clubs are excluded from the grocery and gas bonus categories — a Walmart or Costco grocery run earns the 1× base, not 2×. Points earn as 1 base + bonus, so the categories shown are the total rate, not stacked on top of the base separately.",
+  "points": {
+    "currency": "U.S. Bank Rewards",
+    "redemption_options": [
+      {
+        "method": "Deposit to a U.S. Bank checking or savings account",
+        "cpp": 1.0,
+        "best": true
+      },
+      {
+        "method": "Merchandise, gift cards, travel, or statement credit",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Charity donation match",
+        "cpp": 2.0,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,000–$1,600",
+    "note": "U.S. Bank matches charity redemptions 100% — donate points and the charity effectively receives double. Otherwise, redemption value tops out around 1¢/point regardless of method, since there's no transfer-partner ecosystem behind this program."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners — points redeem directly for cash, travel, merchandise, or gift cards at a flat rate.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [
+    {
+      "id": "streaming-credit",
+      "name": "Streaming Credit",
+      "subtitle": "auto-applies · 11 consecutive months of streaming purchases",
+      "max_annual": 15,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "A $15 statement credit automatically applied after 11 consecutive calendar months of eligible streaming purchases (Netflix, Hulu, Apple Music, and similar), if the account is in good standing.",
+      "tips": [
+        "Stacks with the 2× streaming earn rate — you get the points and the credit."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Zero fraud liability",
+      "detail": "Not responsible for unauthorized transactions once reported",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not covered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "U.S. Bank doesn't publish a purchase-protection or extended-warranty guide for this card the way it does for Shield — check your actual Guide to Benefits after approval rather than assuming standard Visa Signature protections apply.",
+  "rental_note": "No auto rental coverage documented publicly for this card as of this writing.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "20,000-point welcome bonus",
+      "detail": "After $1,000 in net purchases within the first 90 days. Not eligible if you've received a new-account bonus for this card in the last 5 years."
+    },
+    {
+      "name": "0% intro APR",
+      "detail": "0% on purchases and balance transfers for the first 15 billing cycles, then 17.49%–27.49% variable."
+    },
+    {
+      "name": "U.S. Bank ExtendPay Plan",
+      "detail": "Pay off up to 50% of your credit line in fixed installments with a $0 fee offer for plans opened in the first 60 days."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns points on their spend (into your account)",
+            "included": true
+          }
+        ]
+      }
+    ],
+    "note": "No cost to add — a simple way to pool a partner's or teenager's dining and grocery spend into the 4x/2x categories."
+  },
+  "timeline": []
+}

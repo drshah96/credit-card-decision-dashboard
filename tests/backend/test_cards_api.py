@@ -79,6 +79,15 @@ CARD_IDS = [
     "citi-goodyear",
     "citi-llbean",
     "citi-tractor-supply",
+    "us-bank-smartly",
+    "us-bank-cash-plus",
+    "us-bank-shield",
+    "us-bank-split",
+    "us-bank-altitude-go",
+    "us-bank-altitude-connect",
+    "us-bank-altitude-go-secured",
+    "us-bank-cash-plus-secured",
+    "us-bank-secured",
 ]
 
 
@@ -126,6 +135,8 @@ def test_get_card_detail(card_id: str) -> None:
         "citi-secured",
         "citi-home-depot-consumer",
         "citi-goodyear",
+        "us-bank-split",
+        "us-bank-secured",
     )
     if card_id not in NO_REWARDS_CARDS:
         assert len(data["earn_rates"]) > 0

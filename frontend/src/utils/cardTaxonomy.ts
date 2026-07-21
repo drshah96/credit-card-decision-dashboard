@@ -14,6 +14,7 @@ export const ISSUERS: IssuerInfo[] = [
   { slug: "chase", label: "Chase", issuerField: "Chase" },
   { slug: "capital-one", label: "Capital One", issuerField: "Capital One" },
   { slug: "citi", label: "Citi", issuerField: "Citi" },
+  { slug: "us-bank", label: "U.S. Bank", issuerField: "U.S. Bank" },
 ];
 
 export function getIssuerBySlug(slug: string | undefined): IssuerInfo | undefined {
@@ -126,6 +127,17 @@ export const CLASSIFICATION: Record<string, Classification> = {
   "citi-strata": { group: "personal" },
   "citi-tractor-supply": { group: "cobrand", brand: "Tractor Supply" },
   "citi-wayfair": { group: "cobrand", brand: "Wayfair" },
+
+  // ── U.S. Bank ──
+  "us-bank-altitude-connect": { group: "personal" },
+  "us-bank-altitude-go-secured": { group: "personal" },
+  "us-bank-altitude-go": { group: "personal" },
+  "us-bank-cash-plus-secured": { group: "personal" },
+  "us-bank-cash-plus": { group: "personal" },
+  "us-bank-secured": { group: "personal" },
+  "us-bank-shield": { group: "personal" },
+  "us-bank-smartly": { group: "personal" },
+  "us-bank-split": { group: "personal" },
 };
 
 export function classify(cardId: string): Classification {

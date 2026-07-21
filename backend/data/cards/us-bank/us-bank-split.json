@@ -1,0 +1,103 @@
+{
+  "id": "us-bank-split",
+  "name": "Split World Mastercard",
+  "issuer": "U.S. Bank",
+  "network": "WORLD MASTERCARD",
+  "points_program": "None",
+  "accent_color": "#4B2E83",
+  "annual_fee": 0,
+  "effective_cost": "Free — no annual fee, but this is a BNPL card with no rewards program at all",
+  "verdict": {
+    "status": "reconsider",
+    "text": "Not a rewards card — every purchase is forced into a 3-month installment plan whether you want that or not",
+    "short_tag": "Built-In Installments"
+  },
+  "earn_rates": [],
+  "earn_note": "Split isn't a rewards card — it's U.S. Bank's buy-now-pay-later product wearing a Mastercard. Every purchase of $100+ is automatically split into 3 interest-free monthly payments; purchases under $100 in a billing cycle are bundled into one Small Purchase Plan and split the same way. You can extend a Plan to 6 or 12 months for a fixed monthly Plan Fee, but the 3-month default can't be turned off — there's no way to just carry a normal revolving balance.",
+  "points": {
+    "currency": "None",
+    "redemption_options": [],
+    "per_100k": "$0 — no rewards program",
+    "note": "There is nothing to redeem. The entire value proposition is interest-free installment financing, not earning."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No rewards program — nothing to transfer.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Zero fraud liability",
+      "detail": "Not responsible for unauthorized transactions once reported",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not covered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "No purchase-protection or extended-warranty guide published for this card — it's positioned purely as a payment-plan product, not a benefits card.",
+  "rental_note": "No auto rental coverage documented publicly for this card.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "3-month Plans, no fee, no interest",
+      "detail": "Every purchase $100+ is automatically divided into 3 equal monthly payments with no interest and no Plan Fee."
+    },
+    {
+      "name": "6- or 12-month extension",
+      "detail": "Extend any Plan to 6 or 12 months, still interest-free, for a small fixed monthly Plan Fee disclosed at the time of extension."
+    },
+    {
+      "name": "Plan management",
+      "detail": "View and extend Plans in the U.S. Bank Mobile App or online banking before the billing cycle in which the Plan was created closes."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Their purchases follow the same automatic 3-month Plan structure",
+            "included": true
+          }
+        ]
+      }
+    ],
+    "note": "No cost to add — but every authorized user's spend gets split into Plans the same way the primary cardholder's does."
+  },
+  "timeline": [
+    {
+      "date": "2026",
+      "type": "add",
+      "badge": "Launch",
+      "text": "U.S. Bank launches the Split World Mastercard, its first card built entirely around automatic installment-plan purchases rather than a traditional rewards or revolving-balance structure."
+    }
+  ]
+}

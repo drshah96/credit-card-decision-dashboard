@@ -1,0 +1,119 @@
+{
+  "id": "us-bank-smartly",
+  "name": "Smartly Visa Signature Card",
+  "issuer": "U.S. Bank",
+  "network": "VISA SIGNATURE",
+  "points_program": "Cash Back",
+  "accent_color": "#1F5C3D",
+  "annual_fee": 0,
+  "effective_cost": "Free — no annual fee",
+  "verdict": {
+    "status": "situational",
+    "text": "Keep if you bank with U.S. Bank Smartly — the flat 2% only becomes worth chasing with a real deposit balance",
+    "short_tag": "U.S. Bank Relationship"
+  },
+  "earn_rates": [
+    {
+      "emoji": "💳",
+      "multiplier": "2%",
+      "category": "Everything else — no caps",
+      "highlight": true,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The uncapped 2% base is genuinely competitive on its own, but the card's real pitch is the Smartly Earning Bonus: pair it with a U.S. Bank Smartly Savings account plus a qualifying Smartly Checking/Safe Debit balance and earn up to 4% on your first $10,000 in net purchases each billing cycle — 2.5% at $10k–$49,999, 3% at $50k–$99,999, 4% at $100k+. Purchases over $10k/cycle, and categories like gift cards, tax, and education, fall back to the plain 2% base.",
+  "points": {
+    "currency": "Cash Back",
+    "redemption_options": [
+      {
+        "method": "Deposit to a U.S. Bank checking or savings account",
+        "cpp": 1.0,
+        "best": true
+      },
+      {
+        "method": "Statement credit, rewards card, or merchant gift cards",
+        "cpp": 1.0,
+        "best": false
+      }
+    ],
+    "per_100k": "$2,000+",
+    "note": "The advertised cash-back rates only apply when redeemed as a deposit into an eligible U.S. Bank account — other redemption paths (statement credit, gift cards) may pay out at a reduced rate. Points expire after 12 consecutive statement cycles with no reward, purchase, or balance activity."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer currency — straight cash back, not a points program.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Zero fraud liability",
+      "detail": "Not responsible for unauthorized transactions once reported",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not covered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "U.S. Bank's marketing for this card doesn't publish a purchase-protection or extended-warranty guide the way it does for Shield — unlike Amex/Chase premium cards, don't assume Visa Signature-standard purchase protections apply without checking your actual Guide to Benefits after approval.",
+  "rental_note": "No auto rental coverage documented publicly for this card as of this writing.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "0% intro APR",
+      "detail": "0% on purchases and balance transfers for the first 12 billing cycles, then 18.24%–28.24% variable."
+    },
+    {
+      "name": "U.S. Bank ExtendPay Plan",
+      "detail": "Pay off up to 50% of your credit line in fixed installments with a $0 fee offer for plans opened in the first 60 days."
+    },
+    {
+      "name": "Cash-back deals",
+      "detail": "Personalized merchant offers in the U.S. Bank Mobile App based on past spending, stacked on top of the base earn rate."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns the same 2% base on their spend",
+            "included": true
+          },
+          {
+            "text": "Their deposit balances don't count toward your Smartly Earning Bonus tier",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add, but the Smartly Earning Bonus tier is based only on the primary cardholder's (or, for joint accounts, whichever cardholder has the higher) qualifying balance."
+  },
+  "timeline": []
+}
