@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { CompareTray } from "./components/CompareTray";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { Footer } from "./components/Footer";
 import CardDetailPage from "./pages/CardDetailPage";
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/cards/:id" element={<CardDetailPage />} />
         </Routes>
       </ErrorBoundary>
+      <CompareTray />
       <Footer />
     </>
   );
