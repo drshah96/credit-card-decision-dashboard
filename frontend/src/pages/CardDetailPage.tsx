@@ -610,7 +610,8 @@ function CardDetail({ card }: { card: Card }) {
                 src={cardImage}
                 alt={`${card.name} card art`}
                 style={{
-                  width: 220,
+                  height: 140,
+                  width: "auto",
                   maxWidth: "100%",
                   borderRadius: 12,
                   boxShadow: "0 12px 28px -12px rgba(15, 23, 42, 0.35)",

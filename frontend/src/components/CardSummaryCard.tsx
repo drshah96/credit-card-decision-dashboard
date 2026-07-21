@@ -47,7 +47,7 @@ export function CardSummaryCard({ card }: Props) {
             <img
               src={cardImage}
               alt=""
-              className="w-24 rounded-md shadow-[0_8px_16px_-8px_rgba(15,23,42,0.35)]"
+              className="h-16 w-auto max-w-24 rounded-md shadow-[0_8px_16px_-8px_rgba(15,23,42,0.35)]"
             />
           )}
         </div>
