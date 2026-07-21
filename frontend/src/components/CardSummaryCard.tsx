@@ -1,4 +1,5 @@
 import { VERDICT_STYLES } from "../constants/styles";
+import { useCompareList } from "../hooks/useCompareList";
 import { CARD_IMAGES } from "../utils/cardImages";
 import type { CardSummary } from "../types/cards";
 
@@ -25,6 +26,9 @@ export function CardSummaryCard({ card }: Props) {
   const netCost = card.annual_fee - card.total_max_credits;
   const cardImage = CARD_IMAGES[card.id];
   const { brand, tier } = splitNetwork(card.network);
+  const { compareIds, addCard, removeCard, maxCompare } = useCompareList();
+  const isCompared = compareIds.includes(card.id);
+  const compareFull = compareIds.length >= maxCompare && !isCompared;
 
   return (
     <div className="h-full rounded-2xl border border-black/10 bg-black/[0.02] p-6 flex flex-col gap-4 hover:border-black/20 transition-colors">
@@ -50,6 +54,27 @@ export function CardSummaryCard({ card }: Props) {
               className="h-16 w-auto max-w-24 rounded-md shadow-[0_8px_16px_-8px_rgba(15,23,42,0.35)]"
             />
           )}
+          <button
+            type="button"
+            aria-pressed={isCompared}
+            aria-label={isCompared ? `Remove ${card.name} from compare` : `Add ${card.name} to compare`}
+            disabled={compareFull}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (isCompared) removeCard(card.id);
+              else if (!compareFull) addCard(card.id);
+            }}
+            className={`text-[11px] font-semibold px-2.5 py-1 rounded-full border whitespace-nowrap transition-colors ${
+              isCompared
+                ? "bg-emerald-500/10 text-emerald-700 border-emerald-500/30"
+                : compareFull
+                  ? "bg-black/[0.02] text-black/25 border-black/10 cursor-not-allowed"
+                  : "bg-black/[0.02] text-black/50 border-black/10 hover:text-black hover:border-black/20"
+            }`}
+          >
+            {isCompared ? "✓ Compare" : "+ Compare"}
+          </button>
         </div>
       </div>
 

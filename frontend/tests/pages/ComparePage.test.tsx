@@ -109,6 +109,7 @@ function renderPage(initialPath = "/compare") {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  localStorage.clear();
   vi.mocked(fetchCards).mockResolvedValue(ALL_SUMMARIES);
   vi.mocked(fetchCard).mockImplementation(mockFetchCardImpl);
 });
@@ -293,5 +294,33 @@ describe("ComparePage", () => {
       expect(screen.queryByLabelText("Search cards")).not.toBeInTheDocument();
     });
     expect(screen.getAllByRole("button", { name: "+ Add a card" })).toHaveLength(4);
+  });
+
+  it("seeds the URL from a previously-persisted compare list when none is in the URL", async () => {
+    localStorage.setItem("compare-cards", JSON.stringify(["amex-platinum", "bilt-blue"]));
+    renderPage("/compare");
+
+    await waitFor(() => {
+      expect(screen.getByRole("columnheader", { name: /the platinum card/i })).toBeInTheDocument();
+    });
+    expect(screen.getByRole("columnheader", { name: /bilt blue card/i })).toBeInTheDocument();
+  });
+
+  it("keeps the persisted compare list in sync with slot edits made on this page", async () => {
+    renderPage("/compare?cards=amex-platinum");
+
+    await waitFor(() => {
+      expect(screen.getByRole("columnheader", { name: /the platinum card/i })).toBeInTheDocument();
+    });
+    fireEvent.click(screen.getAllByRole("button", { name: "+ Add a card" })[0]);
+    fireEvent.change(screen.getByLabelText("Search cards"), { target: { value: "sapphire" } });
+    fireEvent.click(await screen.findByRole("button", { name: /sapphire reserve/i }));
+
+    await waitFor(() => {
+      expect(JSON.parse(localStorage.getItem("compare-cards")!)).toEqual([
+        "amex-platinum",
+        "chase-sapphire-reserve",
+      ]);
+    });
   });
 });

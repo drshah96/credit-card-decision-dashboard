@@ -1,7 +1,11 @@
-import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { CardSummaryCard } from "@/components/CardSummaryCard";
 import type { CardSummary } from "@/types/cards";
+
+beforeEach(() => {
+  localStorage.clear();
+});
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 
@@ -157,5 +161,74 @@ describe("CardSummaryCard", () => {
     // "$0" only appears once — as max credits (best-case net shows "$395")
     const zeroEl = screen.getByText("$0");
     expect(zeroEl).toHaveClass("text-black/30");
+  });
+
+  describe("compare button", () => {
+    it("adds the card to compare and persists it, without following a wrapping link", () => {
+      const onLinkClick = vi.fn();
+      render(
+        // Mirrors IssuerCardsPage.tsx's CardTile, which wraps CardSummaryCard in a <Link>.
+        <a href="/cards/amex" onClick={onLinkClick}>
+          <CardSummaryCard card={makeCard({ id: "amex" })} />
+        </a>,
+      );
+
+      fireEvent.click(screen.getByRole("button", { name: /add the platinum card to compare/i }));
+
+      expect(
+        screen.getByRole("button", { name: /remove the platinum card from compare/i }),
+      ).toBeInTheDocument();
+      expect(onLinkClick).not.toHaveBeenCalled();
+      expect(JSON.parse(localStorage.getItem("compare-cards")!)).toEqual(["amex"]);
+    });
+
+    it("removes the card from compare on a second click", () => {
+      render(<CardSummaryCard card={makeCard({ id: "amex" })} />);
+
+      fireEvent.click(screen.getByRole("button", { name: /add the platinum card to compare/i }));
+      fireEvent.click(
+        screen.getByRole("button", { name: /remove the platinum card from compare/i }),
+      );
+
+      expect(
+        screen.getByRole("button", { name: /add the platinum card to compare/i }),
+      ).toBeInTheDocument();
+      expect(JSON.parse(localStorage.getItem("compare-cards")!)).toEqual([]);
+    });
+
+    it("disables the button for a new card once 4 others are already picked", () => {
+      localStorage.setItem(
+        "compare-cards",
+        JSON.stringify(["chase-a", "chase-b", "chase-c", "chase-d"]),
+      );
+      render(<CardSummaryCard card={makeCard({ id: "amex" })} />);
+
+      const button = screen.getByRole("button", { name: /add the platinum card to compare/i });
+      expect(button).toBeDisabled();
+
+      fireEvent.click(button);
+      expect(JSON.parse(localStorage.getItem("compare-cards")!)).toEqual([
+        "chase-a",
+        "chase-b",
+        "chase-c",
+        "chase-d",
+      ]);
+    });
+
+    it("still allows removing an already-picked card even when the list is full", () => {
+      localStorage.setItem(
+        "compare-cards",
+        JSON.stringify(["amex", "chase-b", "chase-c", "chase-d"]),
+      );
+      render(<CardSummaryCard card={makeCard({ id: "amex" })} />);
+
+      const button = screen.getByRole("button", { name: /remove the platinum card from compare/i });
+      expect(button).not.toBeDisabled();
+      fireEvent.click(button);
+
+      expect(
+        screen.getByRole("button", { name: /add the platinum card to compare/i }),
+      ).toBeInTheDocument();
+    });
   });
 });

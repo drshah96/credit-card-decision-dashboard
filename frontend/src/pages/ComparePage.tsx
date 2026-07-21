@@ -1,9 +1,10 @@
-import { useMemo, type ReactNode } from "react";
+import { useEffect, useMemo, type ReactNode } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { Link, useSearchParams } from "react-router-dom";
 import { fetchCard, fetchCards } from "../api/cards";
 import { PageTabs } from "../components/PageTabs";
 import { CompareSlot } from "../components/CompareSlot";
+import { useCompareList } from "../hooks/useCompareList";
 import { CARD_IMAGES } from "../utils/cardImages";
 import type { Card, CardSummary } from "../types/cards";
 
@@ -33,7 +34,22 @@ function Row({ label, children }: { label: string; children: ReactNode }) {
 
 export default function ComparePage() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { compareIds, setCompareIds } = useCompareList();
   const selectedIds = useMemo(() => parseSelectedIds(searchParams.get("cards")), [searchParams]);
+
+  // Arriving at /compare with no ?cards param (e.g. clicking the bare tab
+  // link) — seed the URL from whatever was picked earlier via "Add to
+  // Compare" on card detail pages, so the link is immediately shareable.
+  // Self-limiting: once the URL has a cards param the guard below skips it,
+  // and updateSelection() always clears searchParams and compareIds
+  // together, so this can't loop or fight the user's own edits.
+  useEffect(() => {
+    if (!searchParams.has("cards") && compareIds.length > 0) {
+      const params = new URLSearchParams(searchParams);
+      params.set("cards", compareIds.join(","));
+      setSearchParams(params, { replace: true });
+    }
+  }, [searchParams, compareIds, setSearchParams]);
 
   const updateSelection = (next: string[]) => {
     const params = new URLSearchParams(searchParams);
@@ -43,6 +59,7 @@ export default function ComparePage() {
       params.delete("cards");
     }
     setSearchParams(params);
+    setCompareIds(next);
   };
 
   const {
