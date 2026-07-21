@@ -37,9 +37,18 @@ npm run dev
 
 Backend: `http://localhost:8000` (API docs at `/docs`). Frontend: `http://localhost:5173`.
 
-A fresh database starts empty. Seed it by promoting each card's JSON through the
-review queue (see [`backend/README.md`](backend/README.md#adding-or-updating-a-card)
-for the full add → review → promote flow):
+A fresh database starts empty. The fastest way to populate it with every card
+already committed to this repo is the bulk seed script:
+
+```bash
+uv run python -m backend.scripts.seed_catalog
+```
+
+It re-upserts every JSON file under `backend/data/cards/`, so it's also the
+way to resync your local database after pulling a data or schema change. It
+skips the review queue — that's only for adding a genuinely new card (see
+[`backend/README.md`](backend/README.md#adding-or-updating-a-card) for the
+full add → review → promote flow):
 
 ```bash
 uv run python -m backend.scripts.drafts add amex-platinum "<source url>" backend/data/cards/amex/amex-platinum.json
