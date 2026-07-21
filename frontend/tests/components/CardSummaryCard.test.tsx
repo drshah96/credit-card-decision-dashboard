@@ -163,8 +163,8 @@ describe("CardSummaryCard", () => {
     expect(zeroEl).toHaveClass("text-black/30");
   });
 
-  describe("compare button", () => {
-    it("adds the card to compare and persists it, without following a wrapping link", () => {
+  describe("compare toggle (card title)", () => {
+    it("clicking the title adds the card to compare and persists it, without following a wrapping link", () => {
       const onLinkClick = vi.fn();
       render(
         // Mirrors IssuerCardsPage.tsx's CardTile, which wraps CardSummaryCard in a <Link>.
@@ -177,12 +177,20 @@ describe("CardSummaryCard", () => {
 
       expect(
         screen.getByRole("button", { name: /remove the platinum card from compare/i }),
-      ).toBeInTheDocument();
+      ).toHaveAttribute("aria-pressed", "true");
       expect(onLinkClick).not.toHaveBeenCalled();
       expect(JSON.parse(localStorage.getItem("compare-cards")!)).toEqual(["amex"]);
     });
 
-    it("removes the card from compare on a second click", () => {
+    it("shows a green checkmark badge only once the card is selected", () => {
+      const { container } = render(<CardSummaryCard card={makeCard({ id: "amex" })} />);
+
+      expect(container.querySelector('[aria-hidden="true"]')).not.toBeInTheDocument();
+      fireEvent.click(screen.getByRole("button", { name: /add the platinum card to compare/i }));
+      expect(container.querySelector('[aria-hidden="true"]')).toHaveTextContent("✓");
+    });
+
+    it("removes the card from compare on a second click of the title", () => {
       render(<CardSummaryCard card={makeCard({ id: "amex" })} />);
 
       fireEvent.click(screen.getByRole("button", { name: /add the platinum card to compare/i }));
@@ -192,21 +200,29 @@ describe("CardSummaryCard", () => {
 
       expect(
         screen.getByRole("button", { name: /add the platinum card to compare/i }),
-      ).toBeInTheDocument();
+      ).toHaveAttribute("aria-pressed", "false");
       expect(JSON.parse(localStorage.getItem("compare-cards")!)).toEqual([]);
     });
 
-    it("disables the button for a new card once 4 others are already picked", () => {
+    it("toggles via the keyboard (Enter/Space), since the title isn't a native button", () => {
+      render(<CardSummaryCard card={makeCard({ id: "amex" })} />);
+
+      const title = screen.getByRole("button", { name: /add the platinum card to compare/i });
+      fireEvent.keyDown(title, { key: "Enter" });
+
+      expect(JSON.parse(localStorage.getItem("compare-cards")!)).toEqual(["amex"]);
+    });
+
+    it("does nothing for a new card once 4 others are already picked", () => {
       localStorage.setItem(
         "compare-cards",
         JSON.stringify(["chase-a", "chase-b", "chase-c", "chase-d"]),
       );
       render(<CardSummaryCard card={makeCard({ id: "amex" })} />);
 
-      const button = screen.getByRole("button", { name: /add the platinum card to compare/i });
-      expect(button).toBeDisabled();
+      const title = screen.getByRole("button", { name: /compare is full/i });
+      fireEvent.click(title);
 
-      fireEvent.click(button);
       expect(JSON.parse(localStorage.getItem("compare-cards")!)).toEqual([
         "chase-a",
         "chase-b",
@@ -222,9 +238,8 @@ describe("CardSummaryCard", () => {
       );
       render(<CardSummaryCard card={makeCard({ id: "amex" })} />);
 
-      const button = screen.getByRole("button", { name: /remove the platinum card from compare/i });
-      expect(button).not.toBeDisabled();
-      fireEvent.click(button);
+      const title = screen.getByRole("button", { name: /remove the platinum card from compare/i });
+      fireEvent.click(title);
 
       expect(
         screen.getByRole("button", { name: /add the platinum card to compare/i }),
