@@ -47,7 +47,7 @@ export default function IssuerCardsPage() {
   const { issuerSlug } = useParams<{ issuerSlug: string }>();
   const issuer = getIssuerBySlug(issuerSlug);
   const [activeFilter, setActiveFilter] = useState<string>(ALL_CARDS_FILTER);
-  const { compareIds } = useCompareList();
+  const { compareIds, setCompareIds } = useCompareList();
   // Defaults to "on" whenever picks already exist (e.g. returning from a
   // card's detail page) — otherwise the toggle would misleadingly read
   // "Select cards" even though cards are, in fact, already selected.
@@ -222,20 +222,31 @@ export default function IssuerCardsPage() {
               ))}
             </div>
 
-            {/* Select-mode toggle, plus a persistent Compare CTA that shows
-                up whenever anything is picked — independent of selectMode,
-                so cards picked earlier still show a way to compare them
-                after navigating away and back (selectMode itself resets on
-                remount, but the picks in localStorage don't). */}
+            {/* Once anything is picked, the toggle becomes "Remove Selection"
+                (clears every pick) alongside a persistent Compare CTA —
+                otherwise it's the plain Select/Done-selecting toggle. */}
             <div style={{ display: "flex", justifyContent: "flex-end", gap: 8, marginBottom: 16 }}>
-              <button
-                type="button"
-                onClick={() => setSelectMode((v) => !v)}
-                aria-pressed={selectMode}
-                className={`filter-chip ${selectMode ? "active" : ""}`}
-              >
-                {selectMode ? "Done selecting" : "Select cards"}
-              </button>
+              {compareIds.length > 0 ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCompareIds([]);
+                    setSelectMode(false);
+                  }}
+                  className="filter-chip"
+                >
+                  Remove Selection
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setSelectMode((v) => !v)}
+                  aria-pressed={selectMode}
+                  className={`filter-chip ${selectMode ? "active" : ""}`}
+                >
+                  {selectMode ? "Done selecting" : "Select cards"}
+                </button>
+              )}
               {compareIds.length > 0 && (
                 <Link
                   to={`/compare?cards=${compareIds.join(",")}`}

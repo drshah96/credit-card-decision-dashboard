@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor, fireEvent } from "@testing-library/react";
+import { render, screen, waitFor, fireEvent, cleanup } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import IssuerCardsPage from "@/pages/IssuerCardsPage";
@@ -201,7 +201,7 @@ describe("IssuerCardsPage", () => {
       expect(screen.getByRole("heading", { name: "American Express Cards" })).toBeInTheDocument();
     });
 
-    it("clicking 'Done selecting' hides the compare circles again", async () => {
+    it("clicking 'Done selecting' hides the compare circles again (while nothing is picked yet)", async () => {
       vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
       renderPage("amex");
 
@@ -220,7 +220,7 @@ describe("IssuerCardsPage", () => {
       ).not.toBeInTheDocument();
     });
 
-    it("once at least one card is picked, a Compare link appears alongside 'Done selecting'", async () => {
+    it("once at least one card is picked, 'Done selecting' is replaced by 'Remove Selection' alongside Compare", async () => {
       vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
       renderPage("amex");
 
@@ -232,9 +232,8 @@ describe("IssuerCardsPage", () => {
       fireEvent.click(screen.getByRole("button", { name: "Select cards" }));
       fireEvent.click(screen.getByRole("button", { name: /add the platinum card to compare/i }));
 
-      // Both controls coexist — "Done selecting" still hides the circles,
-      // "Compare (1)" is a separate, always-available way to jump to /compare.
-      expect(screen.getByRole("button", { name: "Done selecting" })).toBeInTheDocument();
+      expect(screen.queryByRole("button", { name: "Done selecting" })).not.toBeInTheDocument();
+      expect(screen.getByRole("button", { name: "Remove Selection" })).toBeInTheDocument();
       expect(screen.getByRole("link", { name: "Compare (1)" })).toHaveAttribute(
         "href",
         "/compare?cards=amex-platinum",
@@ -260,7 +259,7 @@ describe("IssuerCardsPage", () => {
       );
     });
 
-    it("the Compare link survives leaving select mode entirely — the reported bug", async () => {
+    it("'Remove Selection' clears every picked card and reverts to 'Select cards'", async () => {
       vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
       renderPage("amex");
 
@@ -269,30 +268,51 @@ describe("IssuerCardsPage", () => {
       });
       fireEvent.click(screen.getByRole("button", { name: "Select cards" }));
       fireEvent.click(screen.getByRole("button", { name: /add the platinum card to compare/i }));
-      // Exit select mode entirely (mirrors selectMode resetting after
-      // navigating to a card detail page and back).
-      fireEvent.click(screen.getByRole("button", { name: "Done selecting" }));
+      fireEvent.click(
+        screen.getByRole("button", { name: /add delta skymiles gold to compare/i }),
+      );
+      fireEvent.click(screen.getByRole("button", { name: "Remove Selection" }));
 
       expect(screen.getByRole("button", { name: "Select cards" })).toHaveAttribute(
         "aria-pressed",
         "false",
       );
-      expect(screen.getByRole("link", { name: "Compare (1)" })).toHaveAttribute(
-        "href",
-        "/compare?cards=amex-platinum",
-      );
+      expect(screen.queryByRole("button", { name: "Remove Selection" })).not.toBeInTheDocument();
+      expect(screen.queryByRole("link", { name: /compare \(/i })).not.toBeInTheDocument();
+      expect(JSON.parse(localStorage.getItem("compare-cards")!)).toEqual([]);
     });
 
-    it("mounting with cards already picked (e.g. back from a detail page) starts in select mode, not 'Select cards'", async () => {
+    it("the Compare link survives navigating to a card and back — the reported bug", async () => {
+      vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
+      renderPage("amex");
+
+      await waitFor(() => {
+        expect(screen.getByRole("button", { name: "Select cards" })).toBeInTheDocument();
+      });
+      fireEvent.click(screen.getByRole("button", { name: "Select cards" }));
+      fireEvent.click(screen.getByRole("button", { name: /add the platinum card to compare/i }));
+
+      // Simulate the remount that happens after visiting a card's detail
+      // page and hitting the browser back button.
+      cleanup();
+      renderPage("amex");
+
+      await waitFor(() => {
+        expect(screen.getByRole("link", { name: "Compare (1)" })).toHaveAttribute(
+          "href",
+          "/compare?cards=amex-platinum",
+        );
+      });
+      expect(screen.getByRole("button", { name: "Remove Selection" })).toBeInTheDocument();
+    });
+
+    it("mounting with cards already picked (e.g. back from a detail page) shows Remove Selection, not 'Select cards'", async () => {
       localStorage.setItem("compare-cards", JSON.stringify(["amex-platinum"]));
       vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
       renderPage("amex");
 
       await waitFor(() => {
-        expect(screen.getByRole("button", { name: "Done selecting" })).toHaveAttribute(
-          "aria-pressed",
-          "true",
-        );
+        expect(screen.getByRole("button", { name: "Remove Selection" })).toBeInTheDocument();
       });
       expect(screen.queryByRole("button", { name: "Select cards" })).not.toBeInTheDocument();
       expect(
