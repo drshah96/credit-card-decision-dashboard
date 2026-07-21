@@ -276,14 +276,18 @@ describe("CardDetailPage", () => {
       expect(screen.getByText("Fine Hotels + Resorts")).toBeInTheDocument();
     });
 
-    it("renders removed credits with Removed badge", async () => {
+    it("does not render a credit marked removed in the Credits section — it's tracked in History instead", async () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
 
       await waitFor(() => {
-        expect(screen.getByText("Removed")).toBeInTheDocument();
+        expect(screen.getByText("Fine Hotels + Resorts")).toBeInTheDocument();
       });
+      expect(screen.queryByText("Saks — REMOVED")).not.toBeInTheDocument();
+      expect(screen.queryByText("Removed")).not.toBeInTheDocument();
+      // The removal is still visible — just in the History timeline, not Credits.
+      expect(screen.getByText("Saks credit removed.")).toBeInTheDocument();
     });
 
     it("renders earn rates", async () => {
@@ -987,21 +991,6 @@ describe("CardDetailPage", () => {
 
       fireEvent.keyDown(document, { key: "Escape" });
       expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
-    });
-
-    it("opens the modal for a removed credit", async () => {
-      vi.mocked(fetchCard).mockResolvedValue(makeCard());
-
-      renderPage();
-
-      await waitFor(() => {
-        expect(screen.getByRole("button", { name: "Saks — REMOVED" })).toBeInTheDocument();
-      });
-
-      fireEvent.click(screen.getByRole("button", { name: "Saks — REMOVED" }));
-
-      expect(screen.getByRole("dialog")).toBeInTheDocument();
-      expect(screen.getByText("The $100/yr Saks credit was removed.")).toBeInTheDocument();
     });
 
     it("shows warn:: tips with red ! bullet", async () => {

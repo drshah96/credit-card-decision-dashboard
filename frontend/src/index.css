@@ -167,7 +167,6 @@ body {
 .credit-card.t-easy { border-left: 3px solid var(--green); }
 .credit-card.t-plan { border-left: 3px solid var(--blue); }
 .credit-card.t-niche { border-left: 3px solid var(--gold); }
-.credit-card.removed { opacity: 0.6; }
 .credit-r1 { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
 .credit-name-btn {
   text-align: left; background: none; border: 0; cursor: pointer; padding: 0;

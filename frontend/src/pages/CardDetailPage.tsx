@@ -148,40 +148,6 @@ interface CreditRowProps {
 
 function CreditRow({ credit, value, tierIdx, onSlider, onTierMove, onOpenModal }: CreditRowProps) {
   const currentTier = TIER_ORDER[Math.max(0, Math.min(tierIdx, TIER_ORDER.length - 1))];
-
-  if (credit.removed) {
-    return (
-      <div className={`credit-card t-${credit.tier} removed`}>
-        <div className="credit-r1">
-          <button
-            type="button"
-            className="credit-name-btn"
-            onClick={() => onOpenModal(credit, credit.tier)}
-          >
-            {credit.name}
-            <i className="info-icon" aria-hidden="true">i</i>
-          </button>
-          <span
-            style={{
-              fontSize: 10,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              padding: "2px 7px",
-              borderRadius: 100,
-              background: "rgba(242,112,138,0.12)",
-              color: "var(--red)",
-              fontWeight: 600,
-              flexShrink: 0,
-            }}
-          >
-            Removed
-          </span>
-        </div>
-        <div className="credit-sub">{credit.subtitle}</div>
-      </div>
-    );
-  }
-
   const canMoveUp = tierIdx > 0;
   const canMoveDown = tierIdx < TIER_ORDER.length - 1;
 
@@ -322,8 +288,10 @@ function CreditCalculator({
 // ─── Credits section ──────────────────────────────────────────────────────────
 
 function CreditsSection({ credits, annualFee }: { credits: Credit[]; annualFee: number }) {
+  // Credits an issuer has discontinued are tracked in the History timeline
+  // below (as a "Cut" entry) instead — showing them here too, in a section
+  // that's otherwise exclusively "credits you can use," was confusing.
   const active = credits.filter((c) => !c.removed);
-  const removed = credits.filter((c) => c.removed);
 
   const [values, setValues] = useState<Record<string, number>>(
     () => Object.fromEntries(active.map((c) => [c.id, c.default_value])),
@@ -401,23 +369,6 @@ function CreditsSection({ credits, annualFee }: { credits: Credit[]; annualFee: 
           );
         })}
       </div>
-
-      {removed.length > 0 && (
-        <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid var(--line)" }}>
-          {removed.map((c) => (
-            <div key={c.id} style={{ marginTop: 9 }}>
-              <CreditRow
-                credit={c}
-                value={0}
-                tierIdx={TIER_ORDER.indexOf(c.tier)}
-                onSlider={() => {}}
-                onTierMove={() => {}}
-                onOpenModal={handleOpenModal}
-              />
-            </div>
-          ))}
-        </div>
-      )}
 
       <CreditCalculator
         totalUsed={totalUsed}
