@@ -9,10 +9,17 @@
   "effective_cost": "Low — the $100 annual hotel credit alone covers most of the $95 fee if you book 2+ night stays through Bilt Travel",
   "verdict": {
     "status": "situational",
-    "text": "Worth the $95 if you'll actually book 2+ Bilt Travel hotel stays a year to capture the $100 credit and lean on the 3x choice-category dining/grocery rate — otherwise the Blue Card covers the same rent-rewards core for free",
+    "text": "Worth it if you'll book 2+ Bilt Travel stays a year for the $100 credit",
     "short_tag": "Dining & Grocery Pick"
   },
   "earn_rates": [
+    {
+      "emoji": "🏠",
+      "multiplier": "Up to 1.25×*",
+      "category": "Rent or mortgage (Bilt Housing Rewards)",
+      "highlight": true,
+      "is_base": false
+    },
     {
       "emoji": "🍽️",
       "multiplier": "Up to 6×",
@@ -63,7 +70,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 3x 'choice' category is a one-time-per-account pick between ongoing dining or grocery spend, separate from the uncapped restaurant bonus (which pays up to 6x at 20,000+ partner restaurants regardless of which choice you make). Grocery under the choice category is capped at $25,000/year. Housing rewards use the same up-to-1.25x mechanic as every Bilt Card, tied to how much of your rent/mortgage payment your everyday spend covers that cycle. New cardholders get $200 in Bilt Cash on account opening, with no spending requirement.",
+  "earn_note": "*Housing Rewards isn't a flat rate — it uses the same up-to-1.25x mechanic as every Bilt Card, tied to how much of your rent/mortgage payment your everyday spend covers that cycle. Terms and conditions apply. The 3x 'choice' category is a one-time-per-account pick between ongoing dining or grocery spend, separate from the uncapped restaurant bonus (which pays up to 6x at 20,000+ partner restaurants regardless of which choice you make). Grocery under the choice category is capped at $25,000/year. New cardholders get $200 in Bilt Cash on account opening, with no spending requirement.",
   "points": {
     "currency": "Bilt Points",
     "redemption_options": [

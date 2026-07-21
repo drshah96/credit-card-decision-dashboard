@@ -9,7 +9,7 @@
   "effective_cost": "Free — no annual fee, but this is a BNPL card with no rewards program at all",
   "verdict": {
     "status": "reconsider",
-    "text": "Not a rewards card — every purchase is forced into a 3-month installment plan whether you want that or not",
+    "text": "Not a rewards card — forces every purchase into an installment plan",
     "short_tag": "Built-In Installments"
   },
   "earn_rates": [],

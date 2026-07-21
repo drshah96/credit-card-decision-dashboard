@@ -9,7 +9,7 @@
   "effective_cost": "Free — no annual fee on the card itself (requires paid BJ's membership)",
   "verdict": {
     "status": "situational",
-    "text": "Only makes sense layered on top of a BJ's membership you already pay for — the card itself is free, but it's useless without an active club membership",
+    "text": "Only useful layered onto a BJ's membership you already pay for",
     "short_tag": "BJ's Members"
   },
   "earn_rates": [

@@ -169,6 +169,7 @@ class EarnRate(Base):
     )
     emoji: Mapped[str | None] = mapped_column(default=None)
     multiplier_x: Mapped[float]
+    multiplier_label: Mapped[str]
     category: Mapped[str]
     is_highlight: Mapped[bool] = mapped_column(default=False)
     is_base: Mapped[bool] = mapped_column(default=False)

@@ -229,6 +229,39 @@ def test_upsert_multiplier_parsed_onto_earn_rate(session):
     assert rates["Everything else"] == 1.0
 
 
+def test_upsert_multiplier_label_preserves_original_string(session):
+    """multiplier_label must store the source string verbatim — multiplier_x
+    only ever holds a parsed numeric value for potential sorting/filtering,
+    it must never be reconstructed back into a display string (regressing
+    "5%" cash back or "Up to 4×" ceiling framing into a bare "5×"/"4×")."""
+    data = make_card_data(
+        {
+            "earn_rates": [
+                {
+                    "emoji": "\U0001f3e0",
+                    "multiplier": "Up to 1.25×*",
+                    "category": "Housing",
+                    "highlight": True,
+                    "is_base": False,
+                },
+                {
+                    "emoji": "\U0001f4b3",
+                    "multiplier": "5%",
+                    "category": "Cash back",
+                    "highlight": False,
+                    "is_base": True,
+                },
+            ]
+        }
+    )
+    card = upsert_card(session, data)
+    session.commit()
+
+    labels = {r.category: r.multiplier_label for r in card.earn_rates}
+    assert labels["Housing"] == "Up to 1.25×*"
+    assert labels["Cash back"] == "5%"
+
+
 def test_upsert_warn_prefixed_tip_marked_as_warning(session):
     card = upsert_card(session, make_card_data())
     session.commit()
