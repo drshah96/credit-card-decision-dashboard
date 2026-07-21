@@ -1,7 +1,11 @@
-import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { CardSummaryCard } from "@/components/CardSummaryCard";
 import type { CardSummary } from "@/types/cards";
+
+beforeEach(() => {
+  localStorage.clear();
+});
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 
@@ -157,5 +161,97 @@ describe("CardSummaryCard", () => {
     // "$0" only appears once — as max credits (best-case net shows "$395")
     const zeroEl = screen.getByText("$0");
     expect(zeroEl).toHaveClass("text-black/30");
+  });
+
+  describe("compare selection", () => {
+    it("the title is plain text, not a compare toggle, so clicking it does nothing special", () => {
+      render(<CardSummaryCard card={makeCard({ id: "amex" })} />);
+
+      expect(screen.queryByRole("button")).not.toBeInTheDocument();
+      expect(screen.getByText("The Platinum Card").tagName).toBe("H2");
+    });
+
+    it("outside select mode, shows a passive (non-interactive) checkmark badge once compared", () => {
+      localStorage.setItem("compare-cards", JSON.stringify(["amex"]));
+      const { container } = render(<CardSummaryCard card={makeCard({ id: "amex" })} />);
+
+      const badge = container.querySelector('[aria-hidden="true"]');
+      expect(badge).toHaveTextContent("✓");
+      expect(screen.queryByRole("button")).not.toBeInTheDocument();
+    });
+
+    it("in select mode, an empty circle toggle appears and adds the card to compare", () => {
+      render(<CardSummaryCard card={makeCard({ id: "amex" })} selectMode />);
+
+      fireEvent.click(screen.getByRole("button", { name: /add the platinum card to compare/i }));
+
+      expect(
+        screen.getByRole("button", { name: /remove the platinum card from compare/i }),
+      ).toHaveAttribute("aria-pressed", "true");
+      expect(JSON.parse(localStorage.getItem("compare-cards")!)).toEqual(["amex"]);
+    });
+
+    it("in select mode, clicking the circle doesn't follow a wrapping link", () => {
+      const onLinkClick = vi.fn();
+      render(
+        // Mirrors IssuerCardsPage.tsx's CardTile, which wraps CardSummaryCard in a <Link>.
+        <a href="/cards/amex" onClick={onLinkClick}>
+          <CardSummaryCard card={makeCard({ id: "amex" })} selectMode />
+        </a>,
+      );
+
+      fireEvent.click(screen.getByRole("button", { name: /add the platinum card to compare/i }));
+
+      expect(onLinkClick).not.toHaveBeenCalled();
+    });
+
+    it("removes the card from compare on a second click of the circle", () => {
+      render(<CardSummaryCard card={makeCard({ id: "amex" })} selectMode />);
+
+      fireEvent.click(screen.getByRole("button", { name: /add the platinum card to compare/i }));
+      fireEvent.click(
+        screen.getByRole("button", { name: /remove the platinum card from compare/i }),
+      );
+
+      expect(
+        screen.getByRole("button", { name: /add the platinum card to compare/i }),
+      ).toHaveAttribute("aria-pressed", "false");
+      expect(JSON.parse(localStorage.getItem("compare-cards")!)).toEqual([]);
+    });
+
+    it("disables the circle for a new card once 4 others are already picked", () => {
+      localStorage.setItem(
+        "compare-cards",
+        JSON.stringify(["chase-a", "chase-b", "chase-c", "chase-d"]),
+      );
+      render(<CardSummaryCard card={makeCard({ id: "amex" })} selectMode />);
+
+      const circle = screen.getByRole("button", { name: /compare is full/i });
+      expect(circle).toBeDisabled();
+
+      fireEvent.click(circle);
+      expect(JSON.parse(localStorage.getItem("compare-cards")!)).toEqual([
+        "chase-a",
+        "chase-b",
+        "chase-c",
+        "chase-d",
+      ]);
+    });
+
+    it("still allows removing an already-picked card even when the list is full", () => {
+      localStorage.setItem(
+        "compare-cards",
+        JSON.stringify(["amex", "chase-b", "chase-c", "chase-d"]),
+      );
+      render(<CardSummaryCard card={makeCard({ id: "amex" })} selectMode />);
+
+      const circle = screen.getByRole("button", { name: /remove the platinum card from compare/i });
+      expect(circle).not.toBeDisabled();
+      fireEvent.click(circle);
+
+      expect(
+        screen.getByRole("button", { name: /add the platinum card to compare/i }),
+      ).toBeInTheDocument();
+    });
   });
 });

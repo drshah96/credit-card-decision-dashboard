@@ -390,3 +390,339 @@ body {
   background: var(--panel-3);
   border-color: var(--accent);
 }
+
+/* ─── Compare CTA (issuer page) ─────────────────────────────────────────────── */
+.compare-cta {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--blue);
+  border: 1px solid var(--blue);
+  border-radius: 100px;
+  padding: 8px 16px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+}
+.compare-cta:hover {
+  background: color-mix(in srgb, var(--blue) 85%, black);
+  border-color: color-mix(in srgb, var(--blue) 85%, black);
+}
+
+/* ─── Page tabs (home / compare) ───────────────────────────────────────────── */
+.page-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 32px;
+}
+.page-tab {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--faint);
+  text-decoration: none;
+  padding: 10px 4px;
+  margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.page-tab + .page-tab { margin-left: 20px; }
+.page-tab:hover { color: var(--ink); }
+.page-tab.active {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+/* ─── Compare page: slots ──────────────────────────────────────────────────── */
+.compare-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+.compare-slot {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel-s);
+  padding: 18px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.compare-slot-empty {
+  align-items: center;
+  justify-content: center;
+}
+.compare-slot-add {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--faint);
+  background: transparent;
+  border: 1px dashed var(--line-2);
+  border-radius: 12px;
+  padding: 14px 20px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.compare-slot-add:hover {
+  color: var(--ink);
+  border-color: var(--accent);
+}
+.compare-slot-remove {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 14px;
+  display: grid;
+  place-items: center;
+  font-family: inherit;
+}
+.compare-slot-remove:hover { color: var(--ink); border-color: var(--line-2); }
+.compare-slot-art { height: 44px; width: auto; max-width: 100%; border-radius: 6px; margin-bottom: 4px; }
+.compare-slot-issuer { font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+.compare-slot-name { font-size: 14.5px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+
+/* ─── Compare page: card picker ────────────────────────────────────────────── */
+.card-picker {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  min-width: 260px;
+  max-height: 340px;
+  display: flex;
+  flex-direction: column;
+  background: var(--base);
+  border: 1px solid var(--line-2);
+  border-radius: 14px;
+  box-shadow: 0 20px 44px -16px rgba(15, 23, 42, 0.28);
+  overflow: hidden;
+}
+.card-picker-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 10px 10px 14px;
+  border-bottom: 1px solid var(--line);
+}
+.card-picker-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 13.5px;
+  color: var(--ink);
+  background: transparent;
+}
+.card-picker-search button {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 14px;
+  display: grid;
+  place-items: center;
+  font-family: inherit;
+  flex-shrink: 0;
+}
+.card-picker-results { overflow-y: auto; padding: 8px; }
+.card-picker-empty { font-size: 13px; color: var(--faint); padding: 12px; margin: 0; }
+.card-picker-group { margin-bottom: 6px; }
+.card-picker-group-label {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding: 8px 8px 4px;
+}
+.card-picker-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+}
+.card-picker-result:hover { background: var(--panel-2); }
+.card-picker-result .cpr-name { font-weight: 500; }
+.card-picker-result .cpr-fee { color: var(--faint); font-size: 12px; flex-shrink: 0; }
+
+/* ─── Compare page: comparison table ───────────────────────────────────────── */
+.compare-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel-s);
+}
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+}
+.compare-table th,
+.compare-table td {
+  padding: 14px 16px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--muted);
+}
+.compare-table thead th {
+  vertical-align: bottom;
+  background: var(--panel-2);
+}
+.compare-table tbody th {
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--faint);
+  white-space: nowrap;
+  font-weight: 600;
+}
+.compare-table tbody tr:last-child th,
+.compare-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.compare-table-art { height: 36px; width: auto; max-width: 100%; border-radius: 5px; margin-bottom: 8px; }
+.compare-table-issuer { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+.compare-table-name {
+  font-family: "Fraunces Variable", serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 2px 0 8px;
+  line-height: 1.25;
+}
+.compare-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.compare-list li { line-height: 1.5; }
+.compare-list b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.compare-loading { color: var(--faint); font-style: italic; }
+.compare-detail-link { color: var(--accent); font-size: 13px; font-weight: 500; text-decoration: none; }
+.compare-detail-link:hover { text-decoration: underline; }
+
+/* ─── Compare widget (card detail page) ────────────────────────────────────── */
+.compare-widget-btn {
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--panel-s);
+  border: 1px solid var(--line-2);
+  border-radius: 100px;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+.compare-widget-btn:hover { color: var(--ink); border-color: var(--accent); }
+.compare-widget-btn.added {
+  color: var(--green);
+  background: rgba(95, 208, 163, 0.1);
+  border-color: rgba(95, 208, 163, 0.3);
+}
+.compare-widget-link { font-size: 12.5px; font-weight: 500; color: var(--accent); text-decoration: none; white-space: nowrap; }
+.compare-widget-link:hover { text-decoration: underline; }
+
+/* ─── Compare tray (persistent, shows whenever >=1 card is picked) ─────────── */
+.compare-tray {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  background: var(--base);
+  border-top: 1px solid var(--line-2);
+  box-shadow: 0 -8px 24px -12px rgba(15, 23, 42, 0.18);
+}
+.compare-tray-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.compare-tray-cards {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+  flex: 1;
+  min-width: 0;
+}
+.compare-tray-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  width: 72px;
+}
+.compare-tray-art {
+  height: 34px;
+  width: 54px;
+  object-fit: cover;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px -4px rgba(15, 23, 42, 0.35);
+}
+.compare-tray-art-fallback {
+  height: 34px;
+  width: 54px;
+  border-radius: 5px;
+  background: var(--panel-3);
+}
+.compare-tray-name {
+  font-size: 10px;
+  line-height: 1.25;
+  color: var(--muted);
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+.compare-tray-remove {
+  position: absolute;
+  top: -6px;
+  right: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid var(--line-2);
+  background: var(--base);
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-family: inherit;
+}
+.compare-tray-remove:hover { color: var(--red); border-color: var(--red); }
+.compare-tray-remove-all { flex-shrink: 0; white-space: nowrap; }
+.compare-tray-cta { flex-shrink: 0; }

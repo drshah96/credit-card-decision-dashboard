@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, type ReactNode } from "react";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 import { fetchCard } from "../api/cards";
+import { useCompareList } from "../hooks/useCompareList";
 import { ISSUERS } from "../utils/cardTaxonomy";
 import { CARD_IMAGES } from "../utils/cardImages";
 import type {
@@ -448,6 +449,44 @@ function Pips({ strength }: { strength: number }) {
   );
 }
 
+// ─── Compare widget ───────────────────────────────────────────────────────────
+
+function CompareWidget({ cardId }: { cardId: string }) {
+  const { compareIds, addCard, removeCard, maxCompare } = useCompareList();
+  const isAdded = compareIds.includes(cardId);
+  const isFull = compareIds.length >= maxCompare;
+
+  if (isAdded) {
+    return (
+      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <button type="button" className="compare-widget-btn added" onClick={() => removeCard(cardId)}>
+          ✓ In Compare
+        </button>
+        <Link to={`/compare?cards=${compareIds.join(",")}`} className="compare-widget-link">
+          View Compare ({compareIds.length}) →
+        </Link>
+      </div>
+    );
+  }
+
+  if (isFull) {
+    return (
+      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <span style={{ fontSize: 12.5, color: "var(--faint)" }}>Compare full (4/4)</span>
+        <Link to={`/compare?cards=${compareIds.join(",")}`} className="compare-widget-link">
+          View Compare →
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <button type="button" className="compare-widget-btn" onClick={() => addCard(cardId)}>
+      + Add to Compare
+    </button>
+  );
+}
+
 // ─── Section block ────────────────────────────────────────────────────────────
 
 function Block({
@@ -618,6 +657,7 @@ function CardDetail({ card }: { card: Card }) {
                 }}
               />
             )}
+            <CompareWidget cardId={card.id} />
           </div>
         </div>
       </header>

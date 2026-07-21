@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { PageTabs } from "../components/PageTabs";
 import { ISSUERS } from "../utils/cardTaxonomy";
 import amexLogo from "../assets/logos/amex.svg";
 import chaseLogo from "../assets/logos/chase.svg";
@@ -69,6 +70,8 @@ export default function IssuersPage() {
             rates, and insurance for the one you're deciding on.
           </p>
         </header>
+
+        <PageTabs active="issuers" />
 
         {/* Issuer tiles */}
         <div className="issuer-grid">

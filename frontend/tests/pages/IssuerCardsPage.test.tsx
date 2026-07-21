@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor, fireEvent } from "@testing-library/react";
+import { render, screen, waitFor, fireEvent, cleanup } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import IssuerCardsPage from "@/pages/IssuerCardsPage";
@@ -81,6 +81,7 @@ function renderPage(slug = "amex") {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  localStorage.clear();
   vi.mocked(fetchCard).mockImplementation(mockFetchCardImpl);
 });
 
@@ -158,6 +159,131 @@ describe("IssuerCardsPage", () => {
         "href",
         "/cards/amex-platinum",
       );
+    });
+  });
+
+  describe("select cards mode", () => {
+    it("hides compare toggles until 'Select cards' is clicked, then reveals them", async () => {
+      vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
+      renderPage("amex");
+
+      await waitFor(() => {
+        expect(screen.getByRole("button", { name: "Select cards" })).toBeInTheDocument();
+      });
+      expect(screen.queryByRole("button", { name: /add the platinum card to compare/i })).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getByRole("button", { name: "Select cards" }));
+
+      expect(screen.getByRole("button", { name: "Done selecting" })).toHaveAttribute(
+        "aria-pressed",
+        "true",
+      );
+      expect(
+        screen.getByRole("button", { name: /add the platinum card to compare/i }),
+      ).toBeInTheDocument();
+    });
+
+    it("clicking a card's compare circle in select mode adds it without navigating", async () => {
+      vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
+      renderPage("amex");
+
+      await waitFor(() => {
+        expect(screen.getByRole("button", { name: "Select cards" })).toBeInTheDocument();
+      });
+      fireEvent.click(screen.getByRole("button", { name: "Select cards" }));
+      fireEvent.click(screen.getByRole("button", { name: /add the platinum card to compare/i }));
+
+      expect(
+        screen.getByRole("button", { name: /remove the platinum card from compare/i }),
+      ).toHaveAttribute("aria-pressed", "true");
+      expect(JSON.parse(localStorage.getItem("compare-cards")!)).toEqual(["amex-platinum"]);
+      // Still on the issuer page — the click didn't follow the tile's link.
+      expect(screen.getByRole("heading", { name: "American Express Cards" })).toBeInTheDocument();
+    });
+
+    it("clicking 'Done selecting' hides the compare circles again", async () => {
+      vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
+      renderPage("amex");
+
+      await waitFor(() => {
+        expect(screen.getByRole("button", { name: "Select cards" })).toBeInTheDocument();
+      });
+      fireEvent.click(screen.getByRole("button", { name: "Select cards" }));
+      fireEvent.click(screen.getByRole("button", { name: "Done selecting" }));
+
+      expect(screen.getByRole("button", { name: "Select cards" })).toHaveAttribute(
+        "aria-pressed",
+        "false",
+      );
+      expect(
+        screen.queryByRole("button", { name: /add the platinum card to compare/i }),
+      ).not.toBeInTheDocument();
+    });
+
+    it("picking cards persists them, but this page's own toolbar has no Remove Selection or Compare link — those live in the CompareTray", async () => {
+      vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
+      renderPage("amex");
+
+      await waitFor(() => {
+        expect(screen.getByRole("button", { name: "Select cards" })).toBeInTheDocument();
+      });
+      fireEvent.click(screen.getByRole("button", { name: "Select cards" }));
+      fireEvent.click(screen.getByRole("button", { name: /add the platinum card to compare/i }));
+      fireEvent.click(
+        screen.getByRole("button", { name: /add delta skymiles gold to compare/i }),
+      );
+
+      expect(JSON.parse(localStorage.getItem("compare-cards")!)).toEqual([
+        "amex-platinum",
+        "amex-delta-skymiles-gold",
+      ]);
+      expect(screen.queryByRole("button", { name: "Remove Selection" })).not.toBeInTheDocument();
+      expect(screen.queryByRole("link", { name: /compare \(/i })).not.toBeInTheDocument();
+      // The toggle itself still works normally alongside the picks.
+      expect(screen.getByRole("button", { name: "Done selecting" })).toHaveAttribute(
+        "aria-pressed",
+        "true",
+      );
+    });
+
+    it("picks survive navigating to a card and back — the reported bug", async () => {
+      vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
+      renderPage("amex");
+
+      await waitFor(() => {
+        expect(screen.getByRole("button", { name: "Select cards" })).toBeInTheDocument();
+      });
+      fireEvent.click(screen.getByRole("button", { name: "Select cards" }));
+      fireEvent.click(screen.getByRole("button", { name: /add the platinum card to compare/i }));
+
+      // Simulate the remount that happens after visiting a card's detail
+      // page and hitting the browser back button.
+      cleanup();
+      renderPage("amex");
+
+      await waitFor(() => {
+        expect(
+          screen.getByRole("button", { name: /remove the platinum card from compare/i }),
+        ).toHaveAttribute("aria-pressed", "true");
+      });
+      expect(JSON.parse(localStorage.getItem("compare-cards")!)).toEqual(["amex-platinum"]);
+    });
+
+    it("mounting with cards already picked (e.g. back from a detail page) starts in select mode, not 'Select cards'", async () => {
+      localStorage.setItem("compare-cards", JSON.stringify(["amex-platinum"]));
+      vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
+      renderPage("amex");
+
+      await waitFor(() => {
+        expect(screen.getByRole("button", { name: "Done selecting" })).toHaveAttribute(
+          "aria-pressed",
+          "true",
+        );
+      });
+      expect(screen.queryByRole("button", { name: "Select cards" })).not.toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: /remove the platinum card from compare/i }),
+      ).toBeInTheDocument();
     });
   });
 });

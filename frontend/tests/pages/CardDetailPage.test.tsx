@@ -144,6 +144,7 @@ function renderPage(cardId = "amex") {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  localStorage.clear();
 });
 
 describe("CardDetailPage", () => {
@@ -1069,6 +1070,64 @@ describe("CardDetailPage", () => {
       );
 
       expect(vi.mocked(fetchCard)).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("compare widget", () => {
+    it("shows an Add to Compare button when the card isn't picked yet", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard());
+      renderPage();
+
+      await waitFor(() => {
+        expect(screen.getByRole("button", { name: "+ Add to Compare" })).toBeInTheDocument();
+      });
+    });
+
+    it("adding to compare switches to the In Compare state with a View Compare link", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard());
+      renderPage();
+
+      await waitFor(() => {
+        expect(screen.getByRole("button", { name: "+ Add to Compare" })).toBeInTheDocument();
+      });
+      fireEvent.click(screen.getByRole("button", { name: "+ Add to Compare" }));
+
+      expect(screen.getByRole("button", { name: "✓ In Compare" })).toBeInTheDocument();
+      const link = screen.getByRole("link", { name: /view compare \(1\)/i });
+      expect(link).toHaveAttribute("href", "/compare?cards=amex");
+      expect(JSON.parse(localStorage.getItem("compare-cards")!)).toEqual(["amex"]);
+    });
+
+    it("clicking In Compare removes the card again", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard());
+      renderPage();
+
+      await waitFor(() => {
+        expect(screen.getByRole("button", { name: "+ Add to Compare" })).toBeInTheDocument();
+      });
+      fireEvent.click(screen.getByRole("button", { name: "+ Add to Compare" }));
+      fireEvent.click(screen.getByRole("button", { name: "✓ In Compare" }));
+
+      expect(screen.getByRole("button", { name: "+ Add to Compare" })).toBeInTheDocument();
+      expect(JSON.parse(localStorage.getItem("compare-cards")!)).toEqual([]);
+    });
+
+    it("shows a full-compare message once 4 other cards are already picked", async () => {
+      localStorage.setItem(
+        "compare-cards",
+        JSON.stringify(["chase-a", "chase-b", "chase-c", "chase-d"]),
+      );
+      vi.mocked(fetchCard).mockResolvedValue(makeCard());
+      renderPage();
+
+      await waitFor(() => {
+        expect(screen.getByText("Compare full (4/4)")).toBeInTheDocument();
+      });
+      expect(screen.queryByRole("button", { name: "+ Add to Compare" })).not.toBeInTheDocument();
+      expect(screen.getByRole("link", { name: /view compare/i })).toHaveAttribute(
+        "href",
+        "/compare?cards=chase-a,chase-b,chase-c,chase-d",
+      );
     });
   });
 });

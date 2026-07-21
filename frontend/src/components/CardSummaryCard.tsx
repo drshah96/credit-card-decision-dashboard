@@ -1,9 +1,11 @@
 import { VERDICT_STYLES } from "../constants/styles";
+import { useCompareList } from "../hooks/useCompareList";
 import { CARD_IMAGES } from "../utils/cardImages";
 import type { CardSummary } from "../types/cards";
 
 interface Props {
   card: CardSummary;
+  selectMode?: boolean;
 }
 
 // Source data mixes word order ("VISA INFINITE" vs "WORLD ELITE MASTERCARD"),
@@ -21,13 +23,59 @@ function splitNetwork(network: string): { brand: string; tier: string | null } {
   return { brand, tier: tier || null };
 }
 
-export function CardSummaryCard({ card }: Props) {
+export function CardSummaryCard({ card, selectMode = false }: Props) {
   const netCost = card.annual_fee - card.total_max_credits;
   const cardImage = CARD_IMAGES[card.id];
   const { brand, tier } = splitNetwork(card.network);
+  const { compareIds, addCard, removeCard, maxCompare } = useCompareList();
+  const isCompared = compareIds.includes(card.id);
+  const compareFull = compareIds.length >= maxCompare && !isCompared;
+
+  const toggleCompare = () => {
+    if (isCompared) removeCard(card.id);
+    else if (!compareFull) addCard(card.id);
+  };
 
   return (
-    <div className="h-full rounded-2xl border border-black/10 bg-black/[0.02] p-6 flex flex-col gap-4 hover:border-black/20 transition-colors">
+    <div className="relative h-full rounded-2xl border border-black/10 bg-black/[0.02] p-6 flex flex-col gap-4 hover:border-black/20 transition-colors">
+      {selectMode ? (
+        <button
+          type="button"
+          aria-pressed={isCompared}
+          aria-label={
+            isCompared
+              ? `Remove ${card.name} from compare`
+              : compareFull
+                ? `${card.name} — compare is full`
+                : `Add ${card.name} to compare`
+          }
+          disabled={compareFull}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleCompare();
+          }}
+          className={`absolute top-[5px] right-[5px] z-10 flex h-4 w-4 items-center justify-center rounded-full border text-[9px] font-bold leading-none shadow-md transition-colors ${
+            isCompared
+              ? "border-emerald-500 bg-emerald-500 text-white"
+              : compareFull
+                ? "border-black/15 bg-white text-transparent cursor-not-allowed"
+                : "border-black/25 bg-white text-transparent hover:border-emerald-500"
+          }`}
+        >
+          ✓
+        </button>
+      ) : (
+        isCompared && (
+          <div
+            aria-hidden="true"
+            className="absolute top-[5px] right-[5px] z-10 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-500 text-[9px] font-bold leading-none text-white shadow-md"
+          >
+            ✓
+          </div>
+        )
+      )}
+
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div>
