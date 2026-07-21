@@ -27,6 +27,30 @@ from backend.scripts.upsert import upsert_card
 DEFAULT_PATTERN = "backend/data/cards/**/*.json"
 
 
+def seed_catalog(pattern: str) -> int:
+    """Upsert every JSON file matching `pattern`. Returns how many were seeded;
+    exits the process on the first file that isn't a valid Card."""
+    files = sorted(glob.glob(pattern, recursive=True))
+    if not files:
+        sys.exit(f"error: no files matched {pattern!r}")
+
+    with session_scope() as session:
+        for path in files:
+            with open(path) as f:
+                data = json.load(f)
+            if not isinstance(data, dict):
+                sys.exit(
+                    f"error: {path} does not contain a JSON object (got {type(data).__name__})"
+                )
+            try:
+                Card(**data)
+            except ValidationError as exc:
+                sys.exit(f"error: {path} does not match the Card schema:\n{exc}")
+            upsert_card(session, data)
+
+    return len(files)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Bulk-seed the card catalog from JSON files")
     parser.add_argument(
@@ -36,21 +60,8 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    files = sorted(glob.glob(args.pattern, recursive=True))
-    if not files:
-        sys.exit(f"error: no files matched {args.pattern!r}")
-
-    with session_scope() as session:
-        for path in files:
-            with open(path) as f:
-                data = json.load(f)
-            try:
-                Card(**data)
-            except ValidationError as exc:
-                sys.exit(f"error: {path} does not match the Card schema:\n{exc}")
-            upsert_card(session, data)
-
-    print(f"seeded {len(files)} cards from {args.pattern!r}")
+    count = seed_catalog(args.pattern)
+    print(f"seeded {count} cards from {args.pattern!r}")
 
 
 if __name__ == "__main__":

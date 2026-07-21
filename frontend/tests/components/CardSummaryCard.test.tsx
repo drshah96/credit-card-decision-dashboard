@@ -105,6 +105,51 @@ describe("CardSummaryCard", () => {
     expect(screen.getByText("Depends on usage")).toBeInTheDocument();
   });
 
+  it("prefers the short_tag over the full verdict text when both are present", () => {
+    render(
+      <CardSummaryCard
+        card={makeCard({
+          verdict: { status: "keep", text: "A much longer explanation", short_tag: "Short Tag" },
+        })}
+      />,
+    );
+
+    expect(screen.getByText("Short Tag")).toBeInTheDocument();
+    expect(screen.queryByText("A much longer explanation")).not.toBeInTheDocument();
+  });
+
+  it("splits a network with a tier onto two lines regardless of word order", () => {
+    const { container: infinite } = render(
+      <CardSummaryCard card={makeCard({ network: "VISA INFINITE" })} />,
+    );
+    expect(infinite.querySelector("span.shrink-0")).toHaveTextContent("VISAINFINITE");
+
+    const { container: worldElite } = render(
+      <CardSummaryCard card={makeCard({ network: "WORLD ELITE MASTERCARD" })} />,
+    );
+    expect(worldElite.querySelector("span.shrink-0")).toHaveTextContent("MASTERCARDWORLD ELITE");
+  });
+
+  it("falls back to the raw string for a network that matches no known brand", () => {
+    render(<CardSummaryCard card={makeCard({ network: "SOME FUTURE NETWORK" })} />);
+
+    expect(screen.getByText("SOME FUTURE NETWORK")).toBeInTheDocument();
+  });
+
+  it("shows a short 'Proprietary' label for closed-loop store networks instead of the full sentence", () => {
+    render(
+      <CardSummaryCard
+        card={makeCard({
+          network:
+            "PROPRIETARY (Goodyear / Citi Retail Services — closed-loop, not Visa or Mastercard)",
+        })}
+      />,
+    );
+
+    expect(screen.getByText("Proprietary")).toBeInTheDocument();
+    expect(screen.queryByText(/closed-loop/)).not.toBeInTheDocument();
+  });
+
   it("applies muted style to max credits when there are no credits", () => {
     // fee=$395, credits=$0 → netCost=395 (positive int) → displays "$395" for best-case net
     render(<CardSummaryCard card={makeCard({ annual_fee: 395, total_max_credits: 0 })} />);

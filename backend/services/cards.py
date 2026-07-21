@@ -187,12 +187,6 @@ def _query(session: Session, *options):
     )
 
 
-def get_all_cards() -> list[Card]:
-    with session_scope() as session:
-        cards = _query(session, *_DETAIL_OPTIONS).all()
-        return [_to_card(c) for c in cards]
-
-
 def get_card(card_id: str) -> Card | None:
     with session_scope() as session:
         card = (
