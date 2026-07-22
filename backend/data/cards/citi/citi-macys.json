@@ -60,7 +60,7 @@
       }
     ],
     "per_100k": "$1,000 in Star Money, but only accessible if points are actually being earned (i.e., you've reached Platinum, or it's a Star Money Day)",
-    "note": "1,000 points = $10 in Star Money. Star Money expires 30 days after issuance, so it has to be used quickly rather than banked. This isn't a flexible cash-back currency — it's spendable at Macy's/macys.com only."
+    "note": "1,000 points = $10 in Star Money. Star Money expires 30 days after issuance, so it has to be used quickly rather than banked. This isn't a flexible cash-back currency; it's spendable at Macy's/macys.com only."
   },
   "transfer_partners": {
     "airline_count": 0,
