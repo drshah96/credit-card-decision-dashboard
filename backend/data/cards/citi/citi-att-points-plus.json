@@ -58,7 +58,7 @@
       }
     ],
     "per_100k": "$1,000, or somewhat more through select travel/gift-card redemptions",
-    "note": "This is base-tier ThankYou Points (not the Premier/Prestige tier), so there's no transfer-partner access — redemption is capped at roughly 1¢/point via gift cards, merchandise, and the ThankYou travel portal. Points don't expire while the account is open."
+    "note": "This is base-tier ThankYou Points (not the Premier/Prestige tier), so there's no transfer-partner access. Redemption is capped at roughly 1¢/point via gift cards, merchandise, and the ThankYou travel portal. Points don't expire while the account is open."
   },
   "transfer_partners": {
     "airline_count": 0,

@@ -6,7 +6,7 @@
   "points_program": "Cash Back",
   "accent_color": "#005DAA",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee, but requires a paid Costco membership ($65/yr or more) to hold the card at all",
+  "effective_cost": "Free, with no annual fee, but requiring a paid Costco membership ($65/yr or more) to hold the card at all",
   "verdict": {
     "status": "situational",
     "text": "Excellent if you're already a paying Costco member who drives regularly",
@@ -16,14 +16,14 @@
     {
       "emoji": "⛽",
       "multiplier": "5%",
-      "category": "Gas at Costco (worldwide) — first $7,000/yr combined with other gas/EV charging, then 1%",
+      "category": "Gas at Costco (worldwide): first $7,000/yr combined with other gas/EV charging, then 1%",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "🔌",
       "multiplier": "4%",
-      "category": "Gas & EV charging elsewhere — first $7,000/yr combined with Costco gas, then 1%",
+      "category": "Gas & EV charging elsewhere: first $7,000/yr combined with Costco gas, then 1%",
       "highlight": true,
       "is_base": false
     },
@@ -49,40 +49,40 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 5%/4% gas rate is capped at a combined $7,000/year in Costco + other gas/EV-charging spend (about $350 in rewards), dropping to 1% after that — heavy drivers will hit this cap well before year-end. Requires an active, paid Costco membership to apply for or keep the card; if your membership lapses, so does the card. No annual cap on the 3% or 2% categories found.",
+  "earn_note": "The 5%/4% gas rate is capped at a combined $7,000/year in Costco + other gas/EV-charging spend (about $350 in rewards), dropping to 1% after that. Heavy drivers will hit this cap well before year-end. Requires an active, paid Costco membership to apply for or keep the card; if your membership lapses, so does the card. No annual cap on the 3% or 2% categories found.",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
       {
-        "method": "Annual reward certificate, issued once your February billing statement closes — redeemable for cash or merchandise at any U.S. Costco warehouse (incl. Puerto Rico)",
+        "method": "Annual reward certificate, issued once your February billing statement closes, redeemable for cash or merchandise at any U.S. Costco warehouse (incl. Puerto Rico)",
         "cpp": 1.0,
         "best": true
       }
     ],
-    "per_100k": "Not applicable — this is a cash-back card with no points currency; a $1,000-equivalent year of 2–5% earning becomes a roughly $20–50 certificate depending on category mix",
-    "note": "Unlike most cash-back cards, rewards aren't a running statement credit — they accrue all year and pay out once annually as a single certificate you have to physically redeem in a Costco warehouse (or online per Costco's current process). If you close the account before the certificate is issued, you can lose accrued rewards, so time closures carefully."
+    "per_100k": "Not applicable: this is a cash-back card with no points currency; a $1,000-equivalent year of 2–5% earning becomes a roughly $20–50 certificate depending on category mix",
+    "note": "Unlike most cash-back cards, rewards aren't a running statement credit. They accrue all year and pay out once annually as a single certificate you have to physically redeem in a Costco warehouse (or online per Costco's current process). If you close the account before the certificate is issued, you can lose accrued rewards, so time closures carefully."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners — straight cash back with no points currency to move anywhere.",
+    "highlight": "No transfer partners: straight cash back with no points currency to move anywhere.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
   "insurance": [
     {
       "coverage": "Purchase protection",
-      "detail": "Damage & theft coverage · 120 days (90 days for NY residents) — per-item/per-year caps not published on Citi's public page",
+      "detail": "Damage & theft coverage · 120 days (90 days for NY residents); per-item/per-year caps not published on Citi's public page",
       "level": "mid"
     },
     {
       "coverage": "Rental car CDW",
-      "detail": "Worldwide Car Rental Insurance when you decline the rental company's own collision coverage — secondary/primary status not confirmed",
+      "detail": "Worldwide Car Rental Insurance when you decline the rental company's own collision coverage; secondary/primary status not confirmed",
       "level": "mid"
     },
     {
       "coverage": "Travel accident insurance",
-      "detail": "Named benefit — dollar limit not published on Citi's public page",
+      "detail": "Named benefit; dollar limit not published on Citi's public page",
       "level": "mid"
     },
     {
@@ -101,7 +101,7 @@
       "level": "none"
     }
   ],
-  "protection_note": "A standard Visa (not Visa Signature) no-fee card's protection suite: purchase protection, rental car coverage, and travel accident insurance are named benefits, but Citi's public pages don't publish the exact dollar caps — check your Guide to Benefits for specifics. No trip cancellation/interruption, baggage delay, or cell phone protection, so this isn't a substitute for a dedicated travel card on bigger trips.",
+  "protection_note": "A standard Visa (not Visa Signature) no-fee card's protection suite: purchase protection, rental car coverage, and travel accident insurance are named benefits, but Citi's public pages don't publish the exact dollar caps; check your Guide to Benefits for specifics. No trip cancellation/interruption, baggage delay, or cell phone protection, so this isn't a substitute for a dedicated travel card on bigger trips.",
   "rental_note": "Worldwide Car Rental Insurance applies when you decline the counter's own collision/theft coverage and charge the full rental to this card; Citi's public page doesn't confirm whether it pays primary or secondary to your personal auto policy.",
   "status_perks": [],
   "services": [
@@ -149,7 +149,7 @@
         ]
       }
     ],
-    "note": "Free to add — a natural fit for a household member who also shops at Costco, since all spend rolls into one annual certificate."
+    "note": "Free to add: a natural fit for a household member who also shops at Costco, since all spend rolls into one annual certificate."
   },
   "timeline": [
     {
