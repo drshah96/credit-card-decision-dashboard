@@ -9,14 +9,14 @@
   "effective_cost": "Low if you actually book the free night awards",
   "verdict": {
     "status": "situational",
-    "text": "Keep if you stay at Hyatt hotels — the free nights are the whole card",
+    "text": "Keep if you stay at Hyatt hotels: the free nights are the whole card",
     "short_tag": "Hyatt Free Nights"
   },
   "earn_rates": [
     {
       "emoji": "🏨",
       "multiplier": "4×",
-      "category": "Hyatt hotels — direct",
+      "category": "Hyatt hotels, direct",
       "highlight": true,
       "is_base": false
     },
@@ -35,7 +35,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 4× hotel rate is Hyatt-direct only — book through an OTA and you earn nothing extra. The 2× bucket (dining, direct airfare, transit, gyms) is broader than most hotel cards' second tier, but 1× on general spend is well below a flat-rate card.",
+  "earn_note": "The 4× hotel rate is Hyatt-direct only; book through an OTA and you earn nothing extra. The 2× bucket (dining, direct airfare, transit, gyms) is broader than most hotel cards' second tier, but 1× on general spend is well below a flat-rate card.",
   "points": {
     "currency": "World of Hyatt",
     "redemption_options": [
@@ -51,12 +51,12 @@
       }
     ],
     "per_100k": "$1,800",
-    "note": "World of Hyatt is routinely the highest-valued major hotel currency per point — NerdWallet pegged it around 1.8¢ in 2026. A new five-tier award chart (up from three tiers) rolled out in May 2026 and pushed most redemptions to cost more points than before, so treat 1.8¢ as a median, not a floor. Transferring out to airlines at 5:2 is a rounding error by comparison."
+    "note": "World of Hyatt is routinely the highest-valued major hotel currency per point (NerdWallet pegged it around 1.8¢ in 2026). A new five-tier award chart (up from three tiers) rolled out in May 2026 and pushed most redemptions to cost more points than before, so treat 1.8¢ as a median, not a floor. Transferring out to airlines at 5:2 is a rounding error by comparison."
   },
   "transfer_partners": {
     "airline_count": 25,
     "hotel_count": 0,
-    "highlight": "World of Hyatt transfers to roughly 25 airline partners at a 5:2 ratio (5,000 Hyatt points → 2,000 miles), with a few better ratios like Virgin Atlantic (5:3) and Aeromexico (5:4) — but cashing out to airlines is rarely a good trade for a currency this strong at hotels.",
+    "highlight": "World of Hyatt transfers to roughly 25 airline partners at a 5:2 ratio (5,000 Hyatt points → 2,000 miles), with a few better ratios like Virgin Atlantic (5:3) and Aeromexico (5:4), but cashing out to airlines is rarely a good trade for a currency this strong at hotels.",
     "recent_changes": "No changes to the airline transfer chart itself; the May 2026 award chart overhaul affects in-program hotel redemptions, not transfers."
   },
   "credits": [
@@ -70,7 +70,7 @@
       "removed": false,
       "description": "One free night award each year after your cardmember anniversary month, redeemable at Category 1–4 Hyatt hotels and resorts (room charge only; resort/facility fees are waived). Excludes Miraval, Hyatt Zilara, and Hyatt Ziva.",
       "tips": [
-        "Valid for 12 months from issuance and subject to availability — book ahead, especially at popular Category 4 properties.",
+        "Valid for 12 months from issuance and subject to availability; book ahead, especially at popular Category 4 properties.",
         "$200 here is a conservative mid-range estimate for a Category 1–4 redemption, not a guarantee for any specific hotel."
       ]
     },
@@ -84,7 +84,7 @@
       "removed": false,
       "description": "An additional free night award at Category 1–4 Hyatt properties after spending $15,000 on the card within a calendar year.",
       "tips": [
-        "Only worth counting if you're already going to hit $15,000/yr in spend — don't chase the threshold just for this."
+        "Only worth counting if you're already going to hit $15,000/yr in spend; don't chase the threshold just for this."
       ]
     },
     {
@@ -97,7 +97,7 @@
       "removed": false,
       "description": "Complimentary 12-month DashPass membership (covers DoorDash and Caviar, waives delivery fees) plus up to $10 off per month on non-restaurant DoorDash orders, both active through December 31, 2027.",
       "tips": [
-        "Requires activation through Chase's benefit portal — it doesn't turn on automatically.",
+        "Requires activation through Chase's benefit portal; it doesn't turn on automatically.",
         "Set the slider toward $0 if you're not already a regular DoorDash user."
       ]
     }
@@ -130,17 +130,17 @@
     },
     {
       "coverage": "Trip delay",
-      "detail": "Not stated in card terms — no dedicated trip delay benefit found",
+      "detail": "Not stated in card terms; no dedicated trip delay benefit found",
       "level": "none"
     }
   ],
-  "protection_note": "Respectable mid-tier protections for a $95 fee — trip cancellation, baggage, and rental car coverage are all present. Purchase protection tops out at just $500/item, and there's no dedicated trip delay benefit (separate from baggage delay), both well below premium travel cards.",
-  "rental_note": "Rental coverage is secondary in the US and covers theft/collision only, not liability — decline the counter's CDW to use it, but put rentals on a card with primary coverage if you rent often.",
+  "protection_note": "Respectable mid-tier protections for a $95 fee: trip cancellation, baggage, and rental car coverage are all present. Purchase protection tops out at just $500/item, and there's no dedicated trip delay benefit (separate from baggage delay), both well below premium travel cards.",
+  "rental_note": "Rental coverage is secondary in the US and covers theft/collision only, not liability. Decline the counter's CDW to use it, but put rentals on a card with primary coverage if you rent often.",
   "status_perks": [
     {
       "name": "World of Hyatt Discoverist Status",
       "strength": 2,
-      "note": "Complimentary with the card — includes a welcome amenity, free in-room WiFi, and 5 Elite Night Credits/year automatically, plus 2 more for every $5,000 spent. Discoverist is Hyatt's entry-level tier, well below Explorist/Globalist."
+      "note": "Complimentary with the card: includes a welcome amenity, free in-room WiFi, and 5 Elite Night Credits/year automatically, plus 2 more for every $5,000 spent. Discoverist is Hyatt's entry-level tier, well below Explorist/Globalist."
     }
   ],
   "services": [
@@ -176,14 +176,14 @@
         ]
       }
     ],
-    "note": "Additional cards are free — a way to pool household spend toward the $15,000 threshold for the second free night."
+    "note": "Additional cards are free: a way to pool household spend toward the $15,000 threshold for the second free night."
   },
   "timeline": [
     {
       "date": "May 20, 2026",
       "type": "neutral",
       "badge": "Refresh",
-      "text": "World of Hyatt program moved from a 3-tier to a 5-tier award chart, pushing most in-program point redemptions higher. The card's free night awards (capped at Category 1–4) are affected the same way — expect less headroom than before at popular properties."
+      "text": "World of Hyatt program moved from a 3-tier to a 5-tier award chart, pushing most in-program point redemptions higher. The card's free night awards (capped at Category 1–4) are affected the same way; expect less headroom than before at popular properties."
     }
   ]
 }
