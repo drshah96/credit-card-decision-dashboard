@@ -6,7 +6,7 @@
   "points_program": "IHG One Rewards",
   "accent_color": "#E8A15C",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee",
+  "effective_cost": "Free, with no annual fee",
   "verdict": {
     "status": "keep",
     "text": "Free IHG points earner, upgraded with World Elite perks in 2025",
@@ -51,12 +51,12 @@
       }
     ],
     "per_100k": "$600",
-    "note": "Same IHG One Rewards currency as the Premier card — NerdWallet valued points around 0.6¢ in 2026. This card just earns it for free, without the Premier's anniversary free night certificate or Platinum status. Never transfer to airlines; the ~5:1 ratio guts the value."
+    "note": "Same IHG One Rewards currency as the Premier card (NerdWallet valued points around 0.6¢ in 2026). This card just earns it for free, without the Premier's anniversary free night certificate or Platinum status. Never transfer to airlines; the ~5:1 ratio guts the value."
   },
   "transfer_partners": {
     "airline_count": 34,
     "hotel_count": 0,
-    "highlight": "IHG One Rewards transfers to roughly 34 airline partners, mostly at a 5:1 ratio (5,000 IHG points → 1,000 miles) — transfers must be initiated by phone, not online.",
+    "highlight": "IHG One Rewards transfers to roughly 34 airline partners, mostly at a 5:1 ratio (5,000 IHG points → 1,000 miles); transfers must be initiated by phone, not online.",
     "recent_changes": "No confirmed recent changes to the airline transfer chart."
   },
   "credits": [
@@ -70,7 +70,7 @@
       "removed": false,
       "description": "10,000 bonus IHG One Rewards points each calendar year you spend at least $10,000 on the card.",
       "tips": [
-        "Only count this if you're already going to hit $10,000/yr — the points aren't worth chasing the spend on their own."
+        "Only count this if you're already going to hit $10,000/yr; the points aren't worth chasing the spend on their own."
       ]
     },
     {
@@ -110,7 +110,7 @@
       "removed": false,
       "description": "On any reward-night stay of 4 or more consecutive nights at the same property, the 4th night is free (unlimited redemptions per year).",
       "tips": [
-        "Only pays off on award stays already 4+ nights long — not a general-purpose credit.",
+        "Only pays off on award stays already 4+ nights long; not a general-purpose credit.",
         "$100 here is a rough single-stay estimate."
       ]
     }
@@ -142,13 +142,13 @@
       "level": "mid"
     }
   ],
-  "protection_note": "Unusually complete protections for a $0 card — trip cancellation and rental car coverage are both present, a direct result of the 2025 upgrade to Mastercard World Elite. Limits still trail the paid Premier and any premium travel card.",
-  "rental_note": "Secondary coverage for theft and collision — decline the counter's CDW and pay with this card, but use a card with primary coverage if you rent often.",
+  "protection_note": "Unusually complete protections for a $0 card: trip cancellation and rental car coverage are both present, a direct result of the 2025 upgrade to Mastercard World Elite. Limits still trail the paid Premier and any premium travel card.",
+  "rental_note": "Secondary coverage for theft and collision: decline the counter's CDW and pay with this card, but use a card with primary coverage if you rent often.",
   "status_perks": [
     {
       "name": "IHG One Rewards Silver Elite Status",
       "strength": 1,
-      "note": "Complimentary with the card for as long as you hold it — a light welcome amenity and modest bonus points. Gold Elite unlocks after $20,000 in card spend per calendar year."
+      "note": "Complimentary with the card for as long as you hold it: a light welcome amenity and modest bonus points. Gold Elite unlocks after $20,000 in card spend per calendar year."
     }
   ],
   "services": [
@@ -158,7 +158,7 @@
     },
     {
       "name": "Mastercard World Elite Benefits",
-      "detail": "Lyft ride credits, Booking.com prepaid-stay discounts (up to 7% off), Zero Liability protection, and other World Elite Mastercard perks — added July 24, 2025."
+      "detail": "Lyft ride credits, Booking.com prepaid-stay discounts (up to 7% off), Zero Liability protection, and other World Elite Mastercard perks, added July 24, 2025."
     },
     {
       "name": "Points purchase discount",
@@ -195,7 +195,7 @@
       "date": "Jul 24, 2025",
       "type": "add",
       "badge": "Upgrade",
-      "text": "Card network upgraded from standard Mastercard to Mastercard World Elite for new and existing cardholders — added Lyft, Booking.com, and other World Elite perks on top of the existing IHG earning structure, with no fee change."
+      "text": "Card network upgraded from standard Mastercard to Mastercard World Elite for new and existing cardholders, adding Lyft, Booking.com, and other World Elite perks on top of the existing IHG earning structure, with no fee change."
     },
     {
       "date": "2025",

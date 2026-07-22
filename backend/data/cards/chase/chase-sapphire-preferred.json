@@ -6,10 +6,10 @@
   "points_program": "Ultimate Rewards",
   "accent_color": "#4A6FA5",
   "annual_fee": 95,
-  "effective_cost": "Low — the $100 hotel credit alone covers most of the fee",
+  "effective_cost": "Low: the $100 hotel credit alone covers most of the fee",
   "verdict": {
     "status": "keep",
-    "text": "The best $95 travel card — broad 3x categories, ~2¢/point via transfers",
+    "text": "The best $95 travel card: broad 3x categories, ~2¢/point via transfers",
     "short_tag": "Travel & Transfers"
   },
   "earn_rates": [
@@ -30,7 +30,7 @@
     {
       "emoji": "✈️",
       "multiplier": "2×",
-      "category": "Other travel — booked direct",
+      "category": "Other travel, booked direct",
       "highlight": false,
       "is_base": false
     },
@@ -42,7 +42,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The Jun 2026 refresh folded gas, EV charging, and vacation rentals (Airbnb/Vrbo) into the 3x tier alongside dining, streaming, and online groceries — one of the broadest mid-tier bonus structures around. Travel booked outside the Chase portal only earns 2×.",
+  "earn_note": "The Jun 2026 refresh folded gas, EV charging, and vacation rentals (Airbnb/Vrbo) into the 3x tier alongside dining, streaming, and online groceries, one of the broadest mid-tier bonus structures around. Travel booked outside the Chase portal only earns 2×.",
   "points": {
     "currency": "Ultimate Rewards",
     "redemption_options": [
@@ -63,13 +63,13 @@
       }
     ],
     "per_100k": "$2,000+",
-    "note": "CSP lost its old 25% Chase Travel redemption bonus in the Jun 2025 overhaul and — unlike the Reserve — wasn't given a strong Points Boost to replace it (capped around 1.5¢ on hotels, 1.75¢ on select premium-cabin flights). Transferring to airline/hotel partners is still the best play for this card."
+    "note": "CSP lost its old 25% Chase Travel redemption bonus in the Jun 2025 overhaul and, unlike the Reserve, wasn't given a strong Points Boost to replace it (capped around 1.5¢ on hotels, 1.75¢ on select premium-cabin flights). Transferring to airline/hotel partners is still the best play for this card."
   },
   "transfer_partners": {
     "airline_count": 10,
     "hotel_count": 4,
-    "highlight": "Same partner list as the Reserve — World of Hyatt, Aeroplan, Virgin Atlantic, Flying Blue, Singapore, and more, mostly at 1:1.",
-    "recent_changes": "Cardholders who apply for CSP on or after Jun 15, 2026 transfer to World of Hyatt at a reduced 4:3 ratio. Existing cardholders keep 1:1 through Sep 30, 2026, then move to 4:3 too — a real value cut on the single best partner in the program."
+    "highlight": "Same partner list as the Reserve: World of Hyatt, Aeroplan, Virgin Atlantic, Flying Blue, Singapore, and more, mostly at 1:1.",
+    "recent_changes": "Cardholders who apply for CSP on or after Jun 15, 2026 transfer to World of Hyatt at a reduced 4:3 ratio. Existing cardholders keep 1:1 through Sep 30, 2026, then move to 4:3 too, a real value cut on the single best partner in the program."
   },
   "credits": [
     {
@@ -82,7 +82,7 @@
       "removed": false,
       "description": "Statement credit automatically applied to hotel accommodations booked and paid for through Chase Travel, up to $100/year.",
       "tips": [
-        "Only counts hotel stays booked via the Chase Travel portal — not hotels booked direct or through other OTAs.",
+        "Only counts hotel stays booked via the Chase Travel portal, not hotels booked direct or through other OTAs.",
         "Raised from $50 to $100 in the Jun 2026 refresh."
       ]
     },
@@ -96,8 +96,8 @@
       "removed": false,
       "description": "One statement credit up to $120 every four years after the Global Entry, TSA PreCheck, or NEXUS application fee is charged to the card. Shown here amortized to an annual figure.",
       "tips": [
-        "New for CSP as of the Jun 2026 refresh — this credit used to be Reserve-only.",
-        "Apply for Global Entry, not just TSA PreCheck — it includes TSA PreCheck and covers the same credit."
+        "New for CSP as of the Jun 2026 refresh; this credit used to be Reserve-only.",
+        "Apply for Global Entry, not just TSA PreCheck; it includes TSA PreCheck and covers the same credit."
       ]
     },
     {
@@ -110,7 +110,7 @@
       "removed": false,
       "description": "A complimentary 12-month Apple TV subscription (not the full Apple One bundle, and not Apple Music) if activated by December 31, 2026.",
       "tips": [
-        "One-time, limited-time offer — not an ongoing annual credit like the Reserve's Apple TV+/Music benefit.",
+        "One-time, limited-time offer, not an ongoing annual credit like the Reserve's Apple TV+/Music benefit.",
         "Already pay for Apple TV? Cancel the paid plan for the free year, but remember to resume payment after it ends."
       ]
     },
@@ -124,7 +124,7 @@
       "removed": false,
       "description": "Complimentary DashPass membership for 12 months ($0 delivery fees), plus a $10/month statement credit on non-restaurant (grocery/retail) DoorDash orders through Dec 2027.",
       "tips": [
-        "Activate DashPass through the Chase app before the deadline — it doesn't turn on automatically.",
+        "Activate DashPass through the Chase app before the deadline; it doesn't turn on automatically.",
         "The $10/mo grocery credit is use-it-or-lose-it each month.",
         "DashPass reverts to a paid membership after 12 months unless you cancel it."
       ]
@@ -177,8 +177,8 @@
       "level": "good"
     }
   ],
-  "protection_note": "Punches well above its $95 fee — primary rental coverage and trip cancellation limits that match the $795 Reserve. The gaps are purchase protection ($500/item vs. the Reserve's $10k/claim), a 12-hour trip-delay trigger (vs. 6 hrs on Reserve), and no cell phone protection at all.",
-  "rental_note": "Primary coverage up to $60,000 — it pays before your personal auto policy. Decline the rental counter's CDW and pay the full rental with this card.",
+  "protection_note": "Punches well above its $95 fee: primary rental coverage and trip cancellation limits that match the $795 Reserve. The gaps are purchase protection ($500/item vs. the Reserve's $10k/claim), a 12-hour trip-delay trigger (vs. 6 hrs on Reserve), and no cell phone protection at all.",
+  "rental_note": "Primary coverage up to $60,000: it pays before your personal auto policy. Decline the rental counter's CDW and pay the full rental with this card.",
   "status_perks": [],
   "services": [
     {
@@ -191,7 +191,7 @@
     },
     {
       "name": "No foreign transaction fees",
-      "detail": "Visa Signature — no added cost on purchases made outside the US."
+      "detail": "Visa Signature, no added cost on purchases made outside the US."
     }
   ],
   "additional_cards": {
@@ -203,7 +203,7 @@
         "is_free": true,
         "benefits": [
           {
-            "text": "Free to add — no per-card fee, unlike the Reserve's $195",
+            "text": "Free to add: no per-card fee, unlike the Reserve's $195",
             "included": true
           },
           {
@@ -221,7 +221,7 @@
         ]
       }
     ],
-    "note": "Free authorized users are one of CSP's quiet strengths — pooling a partner's or family member's spend into the 3x categories adds up fast at no extra cost."
+    "note": "Free authorized users are one of CSP's quiet strengths: pooling a partner's or family member's spend into the 3x categories adds up fast at no extra cost."
   },
   "timeline": [
     {
@@ -252,7 +252,7 @@
       "date": "2009",
       "type": "add",
       "badge": "Launch",
-      "text": "Card launches with a $95 annual fee (waived the first year) — the fee itself has never changed since."
+      "text": "Card launches with a $95 annual fee (waived the first year); the fee itself has never changed since."
     }
   ]
 }
