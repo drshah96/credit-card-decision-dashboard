@@ -6,17 +6,17 @@
   "points_program": "My Best Buy Rewards",
   "accent_color": "#0046BE",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee on the standard tier (a $59/yr Gold tier exists for thinner-credit applicants, with a richer 6% Best Buy rate)",
+  "effective_cost": "Free, with no annual fee on the standard tier (a $59/yr Gold tier exists for thinner-credit applicants, with a richer 6% Best Buy rate)",
   "verdict": {
     "status": "situational",
-    "text": "Only worth it for regular Best Buy shoppers — rewards are store-locked",
+    "text": "Only worth it for regular Best Buy shoppers: rewards are store-locked",
     "short_tag": "Best Buy Shoppers"
   },
   "earn_rates": [
     {
       "emoji": "🛒",
       "multiplier": "5%",
-      "category": "Best Buy purchases (in-store & BestBuy.com) — 6% for My Best Buy Elite Plus members",
+      "category": "Best Buy purchases (in-store & BestBuy.com): 6% for My Best Buy Elite Plus members",
       "highlight": true,
       "is_base": false
     },
@@ -42,7 +42,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "This is the open-loop Visa version of Best Buy's card — it earns outside Best Buy, unlike the closed-loop, store-only My Best Buy Credit Card, which earns 5% at Best Buy but nothing anywhere else and can't be swiped elsewhere. Choosing 0% promotional financing on a purchase forfeits the reward-earning on that purchase. Best Buy periodically runs limited-time bonus categories and a 10%-back first-day offer for new cardholders — check current terms before applying.",
+  "earn_note": "This is the open-loop Visa version of Best Buy's card: it earns outside Best Buy, unlike the closed-loop, store-only My Best Buy Credit Card, which earns 5% at Best Buy but nothing anywhere else and can't be swiped elsewhere. Choosing 0% promotional financing on a purchase forfeits the reward-earning on that purchase. Best Buy periodically runs limited-time bonus categories and a 10%-back first-day offer for new cardholders; check current terms before applying.",
   "points": {
     "currency": "My Best Buy Rewards Certificates",
     "redemption_options": [
@@ -53,12 +53,12 @@
       }
     ],
     "per_100k": "$1,000 in Best Buy certificates (or a lower effective value if redeemed for third-party gift cards)",
-    "note": "Despite the open-loop Visa network letting you earn everywhere, redemption is still closed-loop — rewards come back as Best Buy certificates, not cash or a statement credit. A small third-party gift-card catalog exists but isn't a substitute for flexible cash back."
+    "note": "Despite the open-loop Visa network letting you earn everywhere, redemption is still closed-loop: rewards come back as Best Buy certificates, not cash or a statement credit. A small third-party gift-card catalog exists but isn't a substitute for flexible cash back."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners — My Best Buy Rewards redeem only at Best Buy or through its fixed gift-card catalog.",
+    "highlight": "No transfer partners: My Best Buy Rewards redeem only at Best Buy or through its fixed gift-card catalog.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -94,7 +94,7 @@
       "level": "none"
     }
   ],
-  "protection_note": "Citi and Best Buy's public marketing pages for this card don't list purchase protection, extended warranty, or travel insurance — a standard (not Signature) Visa tier, and no benefits guide with those terms was found in research. Treat this as a rewards-and-financing card with no meaningful insurance suite, not a card to rely on for large or fragile purchases.",
+  "protection_note": "Citi and Best Buy's public marketing pages for this card don't list purchase protection, extended warranty, or travel insurance. A standard (not Signature) Visa tier, and no benefits guide with those terms was found in research. Treat this as a rewards-and-financing card with no meaningful insurance suite, not a card to rely on for large or fragile purchases.",
   "rental_note": "No rental car coverage found for this card.",
   "status_perks": [
     {
@@ -106,7 +106,7 @@
   "services": [
     {
       "name": "Special financing offers",
-      "detail": "Deferred-interest and reduced-APR promotional financing on qualifying Best Buy purchases — using it forfeits reward-earning on that purchase and requires paying off the full balance before the promo period ends to avoid retroactive interest."
+      "detail": "Deferred-interest and reduced-APR promotional financing on qualifying Best Buy purchases; using it forfeits reward-earning on that purchase and requires paying off the full balance before the promo period ends to avoid retroactive interest."
     },
     {
       "name": "No foreign transaction fees",
@@ -114,7 +114,7 @@
     },
     {
       "name": "Gold tier available",
-      "detail": "A $59/yr My Best Buy Visa Gold tier exists, generally offered to applicants with thinner credit files, trading the annual fee for approval odds — the standard no-fee tier is the better deal if you qualify."
+      "detail": "A $59/yr My Best Buy Visa Gold tier exists, generally offered to applicants with thinner credit files, trading the annual fee for approval odds; the standard no-fee tier is the better deal if you qualify."
     }
   ],
   "additional_cards": {
@@ -134,7 +134,7 @@
             "included": true
           },
           {
-            "text": "No dedicated insurance to share — this card doesn't carry a confirmed protection suite",
+            "text": "No dedicated insurance to share: this card doesn't carry a confirmed protection suite",
             "included": false
           }
         ]
@@ -147,7 +147,7 @@
       "date": "Ongoing",
       "type": "neutral",
       "badge": "Two-product lineup",
-      "text": "Best Buy/Citi issue two distinct card products under similar names: the closed-loop, store-only My Best Buy Credit Card (5% at Best Buy, unusable elsewhere) and this open-loop My Best Buy Visa Card (5% at Best Buy plus 1–3% elsewhere). Confirm which one you're comparing — they are not the same card with different names."
+      "text": "Best Buy/Citi issue two distinct card products under similar names: the closed-loop, store-only My Best Buy Credit Card (5% at Best Buy, unusable elsewhere) and this open-loop My Best Buy Visa Card (5% at Best Buy plus 1–3% elsewhere). Confirm which one you're comparing; they are not the same card with different names."
     }
   ]
 }
