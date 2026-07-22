@@ -18,7 +18,7 @@
     "currency": "None",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
-    "note": "No points or cash back exist on this card. Value comes entirely from promotional 0%-interest financing windows on qualifying purchases, which revert to a high standard variable APR (roughly 22%–27% per Citi's disclosures) if the balance isn't paid in full by the deadline — including retroactive interest back to the purchase date under deferred-interest terms."
+    "note": "No points or cash back exist on this card. Value comes entirely from promotional 0%-interest financing windows on qualifying purchases, which revert to a high standard variable APR (roughly 22%–27% per Citi's disclosures) if the balance isn't paid in full by the deadline, including retroactive interest back to the purchase date under deferred-interest terms."
   },
   "transfer_partners": {
     "airline_count": 0,
