@@ -6,7 +6,7 @@
   "points_program": "Rapid Rewards",
   "accent_color": "#1E3F8F",
   "annual_fee": 229,
-  "effective_cost": "Highest fee in the family — needs frequent flying or A-List pursuit to clear",
+  "effective_cost": "Highest fee in the family: needs frequent flying or A-List pursuit to clear",
   "verdict": {
     "status": "situational",
     "text": "Only earns back its fee for frequent flyers chasing A-List",
@@ -23,7 +23,7 @@
     {
       "emoji": "⛽",
       "multiplier": "2×",
-      "category": "Gas stations & restaurants — uncapped",
+      "category": "Gas stations & restaurants, uncapped",
       "highlight": true,
       "is_base": false
     },
@@ -35,7 +35,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The only uncapped bonus category in the family — Plus and Premier both cap their second category at $5k–$8k/yr — plus the fastest Southwest multiplier at 4×. Still a 1× base, though; a flat-rate card like Venture X beats it on uncategorized spend.",
+  "earn_note": "The only uncapped bonus category in the family (Plus and Premier both cap their second category at $5k–$8k/yr), plus the fastest Southwest multiplier at 4×. Still a 1× base, though; a flat-rate card like Venture X beats it on uncategorized spend.",
   "points": {
     "currency": "Rapid Rewards",
     "redemption_options": [
@@ -56,12 +56,12 @@
       }
     ],
     "per_100k": "$1,200–1,500",
-    "note": "Same closed-loop Rapid Rewards currency and dynamic pricing (since March 2025) as the rest of the family — Priority just earns it fastest, especially on Southwest-direct spend."
+    "note": "Same closed-loop Rapid Rewards currency and dynamic pricing (since March 2025) as the rest of the family; Priority just earns it fastest, especially on Southwest-direct spend."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "Rapid Rewards points only redeem for Southwest travel (or a short list of gift-card/merchandise partners at poor value) — there's no way to move them to another airline or hotel program.",
+    "highlight": "Rapid Rewards points only redeem for Southwest travel (or a short list of gift-card/merchandise partners at poor value); there's no way to move them to another airline or hotel program.",
     "recent_changes": "Closed-loop currency, unchanged in structure across all three Southwest personal cards. Chase Ultimate Rewards can convert into this account, but nothing moves out of it.",
     "partners": []
   },
@@ -74,10 +74,10 @@
       "default_value": 0,
       "tier": "easy",
       "removed": false,
-      "description": "Southwest ended free checked bags for everyone on May 28, 2025 ($35 first bag / $45 second bag on most fares). Rapid Rewards cardmembers keep their first checked bag free — for the cardholder and up to 8 companions on the same reservation.",
+      "description": "Southwest ended free checked bags for everyone on May 28, 2025 ($35 first bag / $45 second bag on most fares). Rapid Rewards cardmembers keep their first checked bag free, for the cardholder and up to 8 companions on the same reservation.",
       "tips": [
-        "Only the first bag is free on this card, same as Plus and Premier — even Priority doesn't unlock a free second bag; that requires A-List Preferred status or a Choice Extra fare.",
-        "It covers everyone on the reservation, not just the cardholder — a family checking one bag each on a round trip can clear a meaningful chunk of the $229 fee in a single trip."
+        "Only the first bag is free on this card, same as Plus and Premier. Even Priority doesn't unlock a free second bag; that requires A-List Preferred status or a Choice Extra fare.",
+        "It covers everyone on the reservation, not just the cardholder: a family checking one bag each on a round trip can clear a meaningful chunk of the $229 fee in a single trip."
       ]
     },
     {
@@ -88,10 +88,10 @@
       "default_value": 0,
       "tier": "niche",
       "removed": false,
-      "description": "Up to $10/month in Instacart credit on one qualifying $10+ order, available with an active Instacart+ membership (3 months complimentary) — added in the July 2025 refresh, running through the Dec 31, 2027 promo window.",
+      "description": "Up to $10/month in Instacart credit on one qualifying $10+ order, available with an active Instacart+ membership (3 months complimentary), added in the July 2025 refresh, running through the Dec 31, 2027 promo window.",
       "tips": [
-        "Requires enrolling in Instacart+ (free for the first 3 months, a paid membership after) — only worth carrying if you'd keep the subscription anyway.",
-        "The monthly credit doesn't roll over — a month skipped is a month lost."
+        "Requires enrolling in Instacart+ (free for the first 3 months, a paid membership after); only worth carrying if you'd keep the subscription anyway.",
+        "The monthly credit doesn't roll over; a month skipped is a month lost."
       ]
     }
   ],
@@ -132,33 +132,33 @@
       "level": "good"
     }
   ],
-  "protection_note": "Identical Visa Signature protections to Plus and Premier — the $229 fee buys faster earning and better boarding/seating perks, not stronger insurance. Still no trip cancellation/interruption coverage at any tier, and rental car coverage is secondary domestically.",
+  "protection_note": "Identical Visa Signature protections to Plus and Premier: the $229 fee buys faster earning and better boarding/seating perks, not stronger insurance. Still no trip cancellation/interruption coverage at any tier, and rental car coverage is secondary domestically.",
   "rental_note": "Secondary for domestic rentals (pays after your own auto policy), primary only outside the US, capped at $60,000 and 31 consecutive days. Decline the counter's CDW and pay with the card, but don't rely on it as your only coverage for a US rental.",
   "status_perks": [
     {
       "name": "Companion Pass progress",
       "strength": 2,
-      "note": "A 10,000-point boost toward the 135,000 Companion Pass qualifying points needed each year — identical across all three Southwest cards, so it's not a reason to pick this tier over Plus or Premier."
+      "note": "A 10,000-point boost toward the 135,000 Companion Pass qualifying points needed each year, identical across all three Southwest cards, so it's not a reason to pick this tier over Plus or Premier."
     },
     {
       "name": "A-List tier points",
       "strength": 4,
-      "note": "2,500 Tier Qualifying Points per $5,000 spent (doubled from 1,500 in the July 2025 refresh) — the fastest card-spend path to the 35,000-TQP A-List bar of any Southwest personal card."
+      "note": "2,500 Tier Qualifying Points per $5,000 spent (doubled from 1,500 in the July 2025 refresh), the fastest card-spend path to the 35,000-TQP A-List bar of any Southwest personal card."
     },
     {
       "name": "Boarding position",
       "strength": 3,
-      "note": "Group 5 boarding — the same slot as Plus and Premier — but paired with Preferred seat selection at booking (not just within 48 hours) and unlimited Extra Legroom upgrades within 48 hours of departure."
+      "note": "Group 5 boarding, the same slot as Plus and Premier, but paired with Preferred seat selection at booking (not just within 48 hours) and unlimited Extra Legroom upgrades within 48 hours of departure."
     }
   ],
   "services": [
     {
       "name": "Seat selection & upgrades",
-      "detail": "Preferred seat selection at booking (earlier than Plus/Premier's 48-hour window), plus unlimited complimentary upgrades to Extra Legroom seats within 48 hours of departure, when available — for you + up to 8 companions."
+      "detail": "Preferred seat selection at booking (earlier than Plus/Premier's 48-hour window), plus unlimited complimentary upgrades to Extra Legroom seats within 48 hours of departure, when available, for you + up to 8 companions."
     },
     {
       "name": "Anniversary bonus",
-      "detail": "7,500 Rapid Rewards points automatically deposited every account anniversary — the largest in the family."
+      "detail": "7,500 Rapid Rewards points automatically deposited every account anniversary, the largest in the family."
     },
     {
       "name": "Inflight purchase credit",
@@ -166,7 +166,7 @@
     },
     {
       "name": "Partner perks (through 2027)",
-      "detail": "3-month complimentary Instacart+ trial (see the Instacart credit above), 12-month complimentary DashPass (activate by Dec 31, 2027), and 5× Rapid Rewards points on Lyft rides through Dec 2027 — the richest multiplier in the family."
+      "detail": "3-month complimentary Instacart+ trial (see the Instacart credit above), 12-month complimentary DashPass (activate by Dec 31, 2027), and 5× Rapid Rewards points on Lyft rides through Dec 2027, the richest multiplier in the family."
     },
     {
       "name": "No foreign transaction fees",
@@ -200,14 +200,14 @@
         ]
       }
     ],
-    "note": "Authorized users are free on all three Southwest personal cards. The free checked bag and Group 5 boarding apply to whoever is booked on the same reservation as the cardholder (up to 8 people) — you don't need to add someone as an authorized user for them to get it, just book them on your itinerary."
+    "note": "Authorized users are free on all three Southwest personal cards. The free checked bag and Group 5 boarding apply to whoever is booked on the same reservation as the cardholder (up to 8 people). You don't need to add someone as an authorized user for them to get it, just book them on your itinerary."
   },
   "timeline": [
     {
       "date": "May 28, 2025",
       "type": "neutral",
       "badge": "Context",
-      "text": "Southwest ended free checked bags for all passengers ($35 first bag / $45 second bag on most fares) — this card's free first bag went from a redundant perk to a real one overnight."
+      "text": "Southwest ended free checked bags for all passengers ($35 first bag / $45 second bag on most fares); this card's free first bag went from a redundant perk to a real one overnight."
     },
     {
       "date": "Jul 24, 2025",
