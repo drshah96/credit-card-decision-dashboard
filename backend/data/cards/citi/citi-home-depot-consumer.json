@@ -2,23 +2,23 @@
   "id": "citi-home-depot-consumer",
   "name": "The Home Depot® Consumer Credit Card",
   "issuer": "Citi",
-  "network": "PROPRIETARY (Home Depot / Citi Retail Services — closed-loop, not Visa or Mastercard)",
-  "points_program": "None — no rewards program",
+  "network": "PROPRIETARY (Home Depot / Citi Retail Services, closed-loop, not Visa or Mastercard)",
+  "points_program": "None, no rewards program",
   "accent_color": "#F96302",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee, but purely a store-financing tool with no rewards and no use outside Home Depot",
+  "effective_cost": "Free, with no annual fee, but purely a store-financing tool with no rewards and no use outside Home Depot",
   "verdict": {
     "status": "situational",
-    "text": "A project-financing card, not rewards — only for a 0% Home Depot purchase",
+    "text": "A project-financing card, not rewards: only for a 0% Home Depot purchase",
     "short_tag": "0% Project Financing"
   },
   "earn_rates": [],
-  "earn_note": "This card has no cash-back or points program of any kind — its entire value proposition is deferred-interest financing (\"no interest if paid in full within the promotional period\") on Home Depot purchases, plus a modest new-account discount and an extended return window. If you want rewards for home-improvement spend, a general-purpose card with a home-improvement or everyday-purchases category will out-earn this every time.",
+  "earn_note": "This card has no cash-back or points program of any kind. Its entire value proposition is deferred-interest financing (\"no interest if paid in full within the promotional period\") on Home Depot purchases, plus a modest new-account discount and an extended return window. If you want rewards for home-improvement spend, a general-purpose card with a home-improvement or everyday-purchases category will out-earn this every time.",
   "points": {
     "currency": "None",
     "redemption_options": [],
-    "per_100k": "$0 — no rewards program",
-    "note": "No points or cash back exist on this card. Its value is entirely about financing terms: promotional 0%-interest windows (commonly 6 months on purchases of $299+, with longer up-to-24-month windows during special promotions) that revert to a high standard variable APR (published around 29.99% as of Citi's 2025/2026 disclosures) if not paid in full by the deadline — including retroactive interest back to the purchase date under deferred-interest terms, which is a real risk if you carry a balance past the promo window."
+    "per_100k": "$0, no rewards program",
+    "note": "No points or cash back exist on this card. Its value is entirely about financing terms: promotional 0%-interest windows (commonly 6 months on purchases of $299+, with longer up-to-24-month windows during special promotions) that revert to a high standard variable APR (published around 29.99% as of Citi's 2025/2026 disclosures) if not paid in full by the deadline, including retroactive interest back to the purchase date under deferred-interest terms, which is a real risk if you carry a balance past the promo window."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -59,8 +59,8 @@
       "level": "none"
     }
   ],
-  "protection_note": "None of the usual card protections apply — this is a closed-loop retail financing account, not a Visa/Mastercard, so there's no purchase protection, extended warranty, or travel insurance of any kind. $0 liability on unauthorized charges is the only fraud-related benefit found.",
-  "rental_note": "No rental car coverage — this card can't be used for rentals or anywhere outside Home Depot and homedepot.com.",
+  "protection_note": "None of the usual card protections apply: this is a closed-loop retail financing account, not a Visa/Mastercard, so there's no purchase protection, extended warranty, or travel insurance of any kind. $0 liability on unauthorized charges is the only fraud-related benefit found.",
+  "rental_note": "No rental car coverage; this card can't be used for rentals or anywhere outside Home Depot and homedepot.com.",
   "status_perks": [],
   "services": [
     {
@@ -69,7 +69,7 @@
     },
     {
       "name": "New-account discount",
-      "detail": "Save up to $100 on qualifying purchases when opening a new account — exact terms/tiers vary by promotion."
+      "detail": "Save up to $100 on qualifying purchases when opening a new account; exact terms/tiers vary by promotion."
     },
     {
       "name": "Extended return window",
@@ -87,7 +87,7 @@
   "additional_cards": {
     "title": "Authorized users",
     "options": [],
-    "note": "No distinct authorized-user program or benefit was found for this card — it's a single-purpose store-financing account."
+    "note": "No distinct authorized-user program or benefit was found for this card; it's a single-purpose store-financing account."
   },
   "timeline": [
     {
