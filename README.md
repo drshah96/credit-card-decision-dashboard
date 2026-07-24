@@ -90,4 +90,7 @@ credit-card-decision-dashboard/
 
 ## License
 
-MIT, see [LICENSE](LICENSE).
+MIT, see [LICENSE](LICENSE), for this project's code and original written
+content. Issuer logos and card art under `frontend/src/assets/` are
+trademarks/copyrighted material of their respective owners and are not
+covered by that license, see [NOTICE](NOTICE).
