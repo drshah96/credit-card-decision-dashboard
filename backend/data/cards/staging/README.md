@@ -16,6 +16,6 @@ Workflow:
    ```
 
 A file sitting in an issuer folder (`amex/`, `chase/`, `capital-one/`, ...) means "this card is live in
-`card_catalog.db`." A file sitting here means "drafted, not yet promoted" — the test fixture in
+`card_catalog.db`." A file sitting here means "drafted, not yet promoted": the test fixture in
 `tests/backend/conftest.py` skips this folder for exactly that reason, keeping the promoted/pending
 boundary visible in the file tree itself, not just in the `card_drafts` table.
