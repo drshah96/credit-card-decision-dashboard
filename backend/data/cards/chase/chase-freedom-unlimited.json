@@ -6,10 +6,10 @@
   "points_program": "Ultimate Rewards",
   "accent_color": "#1F4E8C",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee",
+  "effective_cost": "Free, with no annual fee",
   "verdict": {
     "status": "keep",
-    "text": "No annual fee with a genuinely flat 1.5% floor — an easy long-term keep",
+    "text": "No annual fee with a genuinely flat 1.5% floor: an easy long-term keep",
     "short_tag": "Flat Cash Back"
   },
   "earn_rates": [
@@ -23,7 +23,7 @@
     {
       "emoji": "🍽️",
       "multiplier": "3%",
-      "category": "Dining — restaurants, takeout, eligible delivery",
+      "category": "Dining: restaurants, takeout, eligible delivery",
       "highlight": true,
       "is_base": false
     },
@@ -53,12 +53,12 @@
       }
     ],
     "per_100k": "$1,000",
-    "note": "Technically Ultimate Rewards points, not a distinct cash-back currency — on their own they're worth a flat 1¢ each. If this account is paired with a Chase Sapphire or Ink Business card, the combined points inherit that card's full redemption value, including airline/hotel transfers, instead of being capped at 1¢."
+    "note": "Technically Ultimate Rewards points, not a distinct cash-back currency; on their own they're worth a flat 1¢ each. If this account is paired with a Chase Sapphire or Ink Business card, the combined points inherit that card's full redemption value, including airline/hotel transfers, instead of being capped at 1¢."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "Not a standalone transfer currency on its own — see the points note above on pairing with a premium Chase card.",
+    "highlight": "Not a standalone transfer currency on its own; see the points note above on pairing with a premium Chase card.",
     "recent_changes": "Not applicable."
   },
   "credits": [
@@ -72,7 +72,7 @@
       "removed": false,
       "description": "6 months of complimentary DashPass membership ($0 delivery fees on DoorDash/Caviar), which then auto-renews at the regular paid rate unless canceled. Separately, up to $10/quarter in statement credits on non-restaurant (grocery/retail) DoorDash orders through Dec 2027.",
       "tips": [
-        "Cancel DashPass before the 6-month free trial ends if you don't want to start paying for it — it auto-enrolls at the regular rate.",
+        "Cancel DashPass before the 6-month free trial ends if you don't want to start paying for it; it auto-enrolls at the regular rate.",
         "The $10/quarter non-restaurant credit is the only ongoing recurring value here; the free DashPass trial is one-time."
       ]
     }
@@ -104,13 +104,13 @@
       "level": "good"
     }
   ],
-  "protection_note": "Modest but real for a $0 card — trip cancellation and purchase protection exist, but at lower limits than fee-paying travel cards. No trip delay or baggage delay coverage, and rental coverage is secondary only.",
-  "rental_note": "Secondary coverage only — it pays after your personal auto insurance, covering what's left (deductibles, etc). Use a primary-coverage card, like the Sapphire Preferred, for rentals when possible.",
+  "protection_note": "Modest but real for a $0 card: trip cancellation and purchase protection exist, but at lower limits than fee-paying travel cards. No trip delay or baggage delay coverage, and rental coverage is secondary only.",
+  "rental_note": "Secondary coverage only: it pays after your personal auto insurance, covering what's left (deductibles, etc). Use a primary-coverage card, like the Sapphire Preferred, for rentals when possible.",
   "status_perks": [],
   "services": [
     {
       "name": "Foreign transaction fee applies",
-      "detail": "3% on purchases made outside the US — this card is not built for international use."
+      "detail": "3% on purchases made outside the US; this card is not built for international use."
     },
     {
       "name": "Lyft bonus",
@@ -140,7 +140,7 @@
         ]
       }
     ],
-    "note": "No cost to add users — an easy way to consolidate household spend onto the flat 1.5% base."
+    "note": "No cost to add users: an easy way to consolidate household spend onto the flat 1.5% base."
   },
   "timeline": [
     {
@@ -153,7 +153,7 @@
       "date": "Sep 15, 2020",
       "type": "add",
       "badge": "Refresh",
-      "text": "Added the 3% dining and 3% drugstore categories alongside the Freedom Flex launch — previously the card earned a flat 1.5% on everything."
+      "text": "Added the 3% dining and 3% drugstore categories alongside the Freedom Flex launch, previously the card earned a flat 1.5% on everything."
     }
   ]
 }

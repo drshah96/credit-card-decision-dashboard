@@ -23,7 +23,7 @@
     {
       "emoji": "⛽",
       "multiplier": "15¢/gal",
-      "category": "BJ's Gas — discount at the pump, not a rewards rate",
+      "category": "BJ's Gas, discount at the pump, not a rewards rate",
       "highlight": false,
       "is_base": false
     },
@@ -35,23 +35,23 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 5%/2% rate requires the card to be paired with a BJ's Perks+ membership (~$110/yr, the club's premium tier) — apply with the base Inner Circle membership and BJ's issues the lesser BJ's One card instead (3%/1.5%). Perks+ membership itself already bundles 2% back on in-club spend regardless of payment method, so the card's 5% is really a +3-point card bonus on top of what the membership alone pays. Gas at BJ's Gas is a per-gallon pump discount, not points, and doesn't stack with the earn rate. Same exclusions as BJ's One: membership fees, alcohol, tobacco, lottery, gift cards.",
+  "earn_note": "The 5%/2% rate requires the card to be paired with a BJ's Perks+ membership (~$110/yr, the club's premium tier). Apply with the base Inner Circle membership and BJ's issues the lesser BJ's One card instead (3%/1.5%). Perks+ membership itself already bundles 2% back on in-club spend regardless of payment method, so the card's 5% is really a +3-point card bonus on top of what the membership alone pays. Gas at BJ's Gas is a per-gallon pump discount, not points, and doesn't stack with the earn rate. Same exclusions as BJ's One: membership fees, alcohol, tobacco, lottery, gift cards.",
   "points": {
     "currency": "BJ's Rewards (cash back)",
     "redemption_options": [
       {
-        "method": "In-club, BJs.com, or BJ's app — applied like cash toward purchases",
+        "method": "In-club, BJs.com, or BJ's app, applied like cash toward purchases",
         "cpp": 1.0,
         "best": true
       }
     ],
-    "per_100k": "Not applicable — rewards accrue as a dollar balance, not a points currency",
-    "note": "A flat cash-back balance, not points. Redeemable once it hits a $10 minimum, in any increment above that, only at BJ's. Doesn't expire as long as the account stays open. No cash-out to a bank account or statement credit — locked to BJ's, same as the base card."
+    "per_100k": "Not applicable: rewards accrue as a dollar balance, not a points currency",
+    "note": "A flat cash-back balance, not points. Redeemable once it hits a $10 minimum, in any increment above that, only at BJ's. Doesn't expire as long as the account stays open. No cash-out to a bank account or statement credit; locked to BJ's, same as the base card."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners and no travel redemption — rewards are a closed-loop balance usable only at BJ's.",
+    "highlight": "No transfer partners and no travel redemption: rewards are a closed-loop balance usable only at BJ's.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -82,13 +82,13 @@
       "level": "none"
     }
   ],
-  "protection_note": "No purchase protection, extended warranty, or travel coverage documented in the cardholder agreement — identical thin protection profile to the base BJ's One. The higher earn rate is the entire pitch; there's no insurance upside to holding the '+' version.",
+  "protection_note": "No purchase protection, extended warranty, or travel coverage documented in the cardholder agreement: identical thin protection profile to the base BJ's One. The higher earn rate is the entire pitch; there's no insurance upside to holding the '+' version.",
   "rental_note": "No rental car coverage of any kind.",
   "status_perks": [],
   "services": [
     {
       "name": "BJ's Perks+ membership required",
-      "detail": "Only available to BJ's Perks+ members (~$110/yr, the club's premium tier) — Inner Circle members are issued the lower-earning BJ's One card instead. Membership is billed separately and isn't discounted by the card."
+      "detail": "Only available to BJ's Perks+ members (~$110/yr, the club's premium tier); Inner Circle members are issued the lower-earning BJ's One card instead. Membership is billed separately and isn't discounted by the card."
     },
     {
       "name": "No foreign transaction fees",
@@ -118,7 +118,7 @@
         ]
       }
     ],
-    "note": "Free to add, but the household still needs its own BJ's membership card at the register — this credit card doesn't grant club access on its own."
+    "note": "Free to add, but the household still needs its own BJ's membership card at the register; this credit card doesn't grant club access on its own."
   },
   "timeline": [
     {

@@ -6,7 +6,7 @@
   "points_program": "Bean Bucks",
   "accent_color": "#1F5C3D",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee",
+  "effective_cost": "Free, with no annual fee",
   "verdict": {
     "status": "situational",
     "text": "Decent 4% at L.L.Bean, but weak elsewhere and store-locked redemption",
@@ -35,7 +35,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Unlike Macy's, Bloomingdale's, or Wayfair, L.L.Bean has issued this as a single open-loop Mastercard from the start — no separate closed-loop, store-only L.L.Bean card was found. New cardholders get 20% off their first L.L.Bean purchase upon approval. Each Bean Buck equals $1 in savings at L.L.Bean, and Bean Bucks don't expire as long as the account stays open and active.",
+  "earn_note": "Unlike Macy's, Bloomingdale's, or Wayfair, L.L.Bean has issued this as a single open-loop Mastercard from the start; no separate closed-loop, store-only L.L.Bean card was found. New cardholders get 20% off their first L.L.Bean purchase upon approval. Each Bean Buck equals $1 in savings at L.L.Bean, and Bean Bucks don't expire as long as the account stays open and active.",
   "points": {
     "currency": "Bean Bucks",
     "redemption_options": [
@@ -45,13 +45,13 @@
         "best": true
       }
     ],
-    "per_100k": "Not applicable — Bean Bucks accrue and redeem in dollars directly, 1 Bean Buck = $1",
-    "note": "Bean Bucks redeem only at L.L.Bean — no cash, statement credit, or third-party redemption. They don't expire while the account remains open, which is more forgiving than the 30-day expiration on some competing store-card currencies (e.g. Macy's Star Money)."
+    "per_100k": "Not applicable: Bean Bucks accrue and redeem in dollars directly, 1 Bean Buck = $1",
+    "note": "Bean Bucks redeem only at L.L.Bean: no cash, statement credit, or third-party redemption. They don't expire while the account remains open, which is more forgiving than the 30-day expiration on some competing store-card currencies (e.g. Macy's Star Money)."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners — Bean Bucks redeem only at L.L.Bean.",
+    "highlight": "No transfer partners: Bean Bucks redeem only at L.L.Bean.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -105,7 +105,7 @@
     },
     {
       "name": "Foreign transaction fee",
-      "detail": "Up to 3% on purchases made outside the US, per third-party reporting — not independently confirmed on Citi's rendered product page."
+      "detail": "Up to 3% on purchases made outside the US, per third-party reporting; not independently confirmed on Citi's rendered product page."
     },
     {
       "name": "$0 liability on unauthorized charges",
@@ -129,7 +129,7 @@
             "included": true
           },
           {
-            "text": "No dedicated insurance to share — this card doesn't carry a confirmed protection suite",
+            "text": "No dedicated insurance to share: this card doesn't carry a confirmed protection suite",
             "included": false
           }
         ]
@@ -142,7 +142,7 @@
       "date": "Ongoing",
       "type": "neutral",
       "badge": "Single-product co-brand",
-      "text": "Unlike Macy's, Bloomingdale's, or Wayfair, L.L.Bean does not appear to offer a separate closed-loop, store-only card — this open-loop Mastercard from Citi is the sole L.L.Bean-branded credit card product found."
+      "text": "Unlike Macy's, Bloomingdale's, or Wayfair, L.L.Bean does not appear to offer a separate closed-loop, store-only card; this open-loop Mastercard from Citi is the sole L.L.Bean-branded credit card product found."
     }
   ]
 }

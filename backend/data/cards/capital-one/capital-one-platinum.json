@@ -3,21 +3,21 @@
   "name": "Platinum",
   "issuer": "Capital One",
   "network": "MASTERCARD",
-  "points_program": "None — no rewards program",
+  "points_program": "None, no rewards program",
   "accent_color": "#9CA3AF",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee, but earns nothing",
+  "effective_cost": "Free, with no annual fee, but earns nothing",
   "verdict": {
     "status": "situational",
-    "text": "Not a rewards card — just a stepping stone to Quicksilver",
+    "text": "Not a rewards card: just a stepping stone to Quicksilver",
     "short_tag": "Credit Building"
   },
   "earn_rates": [],
-  "earn_note": "Capital One Platinum never earned cash back or points — it's built entirely around credit access (approvals for fair/average credit) and an automatic credit-line review, not rewards. If you want cash back on a Capital One credit-building card, use QuicksilverOne (1.5%, $39/yr) instead.",
+  "earn_note": "Capital One Platinum never earned cash back or points; it's built entirely around credit access (approvals for fair/average credit) and an automatic credit-line review, not rewards. If you want cash back on a Capital One credit-building card, use QuicksilverOne (1.5%, $39/yr) instead.",
   "points": {
     "currency": "None",
     "redemption_options": [],
-    "per_100k": "$0 — no rewards program",
+    "per_100k": "$0, no rewards program",
     "note": "This card has no points or cash-back program of any kind. Its entire value proposition is credit access: reporting to all three credit bureaus and an automatic review for a higher credit line after 6 months of on-time payments."
   },
   "transfer_partners": {
@@ -28,8 +28,8 @@
   },
   "credits": [],
   "insurance": [],
-  "protection_note": "Bare-bones by design, more so than Capital One's own Quicksilver family — Capital One's official Platinum materials don't advertise purchase protection, extended warranty, price protection, or travel accident insurance the way the Quicksilver benefits pages do. Treat this card as carrying no meaningful purchase or travel protections rather than assuming standard Mastercard perks carry over; independent sources disagree on this point, so confirm your specific Guide to Benefits before relying on it.",
-  "rental_note": "No rental car coverage is advertised for this card — use a different card for rentals.",
+  "protection_note": "Bare-bones by design, more so than Capital One's own Quicksilver family. Capital One's official Platinum materials don't advertise purchase protection, extended warranty, price protection, or travel accident insurance the way the Quicksilver benefits pages do. Treat this card as carrying no meaningful purchase or travel protections rather than assuming standard Mastercard perks carry over; independent sources disagree on this point, so confirm your specific Guide to Benefits before relying on it.",
+  "rental_note": "No rental car coverage is advertised for this card; use a different card for rentals.",
   "status_perks": [],
   "services": [
     {
@@ -38,7 +38,7 @@
     },
     {
       "name": "Automatic credit line review",
-      "detail": "Capital One automatically considers cardholders for a higher credit line after 6 months of on-time payments — the core reason this card exists."
+      "detail": "Capital One automatically considers cardholders for a higher credit line after 6 months of on-time payments, the core reason this card exists."
     },
     {
       "name": "No foreign transaction fees",
@@ -70,7 +70,7 @@
             "included": true
           },
           {
-            "text": "No rewards earned — this card has no rewards program to share",
+            "text": "No rewards earned: this card has no rewards program to share",
             "included": false
           }
         ]

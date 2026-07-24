@@ -9,14 +9,14 @@
   "effective_cost": "Low if you use the resort + flight credits",
   "verdict": {
     "status": "situational",
-    "text": "Keep if you actually book Hilton resort stays — the credits are narrow",
+    "text": "Keep if you actually book Hilton resort stays; the credits are narrow",
     "short_tag": "Hilton Resorts"
   },
   "earn_rates": [
     {
       "emoji": "🏨",
       "multiplier": "14×",
-      "category": "Hilton portfolio hotels — direct",
+      "category": "Hilton portfolio hotels, direct",
       "highlight": true,
       "is_base": false
     },
@@ -35,7 +35,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "14× only applies to Hilton-direct hotel bookings — third-party OTAs earn nothing. The 7× tier is broad enough (flights, some car rentals, US dining) to matter for everyday spend.",
+  "earn_note": "14× only applies to Hilton-direct hotel bookings; third-party OTAs earn nothing. The 7× tier is broad enough (flights, some car rentals, US dining) to matter for everyday spend.",
   "points": {
     "currency": "Hilton Honors",
     "redemption_options": [
@@ -51,12 +51,12 @@
       }
     ],
     "per_100k": "$500",
-    "note": "Hilton Honors points are issued generously (highest point-earning rates of any hotel program) but redeem for roughly half the value of Marriott Bonvoy or bank currencies. Never transfer to airlines — the ~10:1 ratio guts the value."
+    "note": "Hilton Honors points are issued generously (highest point-earning rates of any hotel program) but redeem for roughly half the value of Marriott Bonvoy or bank currencies. Never transfer to airlines: the ~10:1 ratio guts the value."
   },
   "transfer_partners": {
     "airline_count": 26,
     "hotel_count": 0,
-    "highlight": "26 airline transfer partners, but almost all at a poor 10:1 ratio (a few exceptions like Virgin Atlantic at 20:3) — Hilton points are built to be spent on hotel stays, not transferred out.",
+    "highlight": "26 airline transfer partners, but almost all at a poor 10:1 ratio (a few exceptions like Virgin Atlantic at 20:3). Hilton points are built to be spent on hotel stays, not transferred out.",
     "recent_changes": "No confirmed recent changes to the airline transfer chart itself."
   },
   "credits": [
@@ -70,7 +70,7 @@
       "removed": false,
       "description": "Up to $50 in statement credits each quarter on flights booked directly with an airline, AmexTravel.com, or the Amex Travel app.",
       "tips": [
-        "Quarterly with no rollover — four separate windows to hit, not one lump sum."
+        "Quarterly with no rollover: four separate windows to hit, not one lump sum."
       ]
     },
     {
@@ -96,8 +96,8 @@
       "removed": false,
       "description": "Up to $200 in statement credits twice a year on eligible purchases made directly with participating Hilton Resorts.",
       "tips": [
-        "Only applies at a specific list of participating resort properties, not any Hilton — check the list before assuming a stay qualifies.",
-        "No rollover between halves — an unused H1 doesn't carry into H2."
+        "Only applies at a specific list of participating resort properties, not any Hilton; check the list before assuming a stay qualifies.",
+        "No rollover between halves; an unused H1 doesn't carry into H2."
       ]
     },
     {
@@ -110,7 +110,7 @@
       "removed": false,
       "description": "One free night reward from Hilton Honors in your first year of card membership and every year on renewal, with no stated point-value ceiling.",
       "tips": [
-        "Unlike Marriott's capped free night, this one has no published point ceiling — but real-world value still depends entirely on which property you redeem it at.",
+        "Unlike Marriott's capped free night, this one has no published point ceiling, but real-world value still depends entirely on which property you redeem it at.",
         "$250 here is a conservative estimate, not a guarantee for any specific hotel."
       ]
     }
@@ -142,13 +142,13 @@
       "level": "good"
     }
   ],
-  "protection_note": "Solid but not top-tier — trip cancellation and rental coverage are comparable to other premium Amex cards, but this card no longer carries airport lounge access, which used to be part of its pitch.",
-  "rental_note": "Rental coverage is primary outside the US but only secondary domestically — put US rentals on a card with primary US coverage if you rent often.",
+  "protection_note": "Solid but not top-tier: trip cancellation and rental coverage are comparable to other premium Amex cards, but this card no longer carries airport lounge access, which used to be part of its pitch.",
+  "rental_note": "Rental coverage is primary outside the US but only secondary domestically; put US rentals on a card with primary US coverage if you rent often.",
   "status_perks": [
     {
       "name": "Hilton Honors Diamond Status",
       "strength": 5,
-      "note": "Top Hilton tier, complimentary with the card — 100% bonus points on stays, space-available room upgrades, premium Wi-Fi, and executive lounge access at select properties."
+      "note": "Top Hilton tier, complimentary with the card: 100% bonus points on stays, space-available room upgrades, premium Wi-Fi, and executive lounge access at select properties."
     }
   ],
   "services": [],
@@ -175,7 +175,7 @@
         ]
       }
     ],
-    "note": "Authorized users are free — an easy way to pool household spend toward the 14× Hilton rate."
+    "note": "Authorized users are free: an easy way to pool household spend toward the 14× Hilton rate."
   },
   "timeline": [
     {

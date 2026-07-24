@@ -16,7 +16,7 @@
     {
       "emoji": "🏨",
       "multiplier": "12×",
-      "category": "Hilton portfolio hotels — direct",
+      "category": "Hilton portfolio hotels, direct",
       "highlight": true,
       "is_base": false
     },
@@ -42,7 +42,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Strong middle-tier earning — 12× at Hilton and a 3× catch-all beats most no-fee cards outright. Sits between the free Hilton Honors card and the $550 Aspire.",
+  "earn_note": "Strong middle-tier earning: 12× at Hilton and a 3× catch-all beats most no-fee cards outright. Sits between the free Hilton Honors card and the $550 Aspire.",
   "points": {
     "currency": "Hilton Honors",
     "redemption_options": [
@@ -58,12 +58,12 @@
       }
     ],
     "per_100k": "$500",
-    "note": "Same Hilton Honors currency as the free card and the Aspire — the Surpass earns it faster and adds Gold status, without the Aspire's resort credit or free night."
+    "note": "Same Hilton Honors currency as the free card and the Aspire; the Surpass earns it faster and adds Gold status, without the Aspire's resort credit or free night."
   },
   "transfer_partners": {
     "airline_count": 26,
     "hotel_count": 0,
-    "highlight": "26 airline transfer partners, almost all at a poor 10:1 ratio — Hilton points are built to be spent on hotel stays, not transferred out.",
+    "highlight": "26 airline transfer partners, almost all at a poor 10:1 ratio. Hilton points are built to be spent on hotel stays, not transferred out.",
     "recent_changes": "No confirmed recent changes to the airline transfer chart."
   },
   "credits": [
@@ -77,7 +77,7 @@
       "removed": false,
       "description": "Up to $50 in statement credits each quarter on eligible Hilton purchases.",
       "tips": [
-        "By itself, this credit covers the $150 annual fee if you spend $200/yr at Hilton — the lowest bar of any credit in this dashboard."
+        "By itself, this credit covers the $150 annual fee if you spend $200/yr at Hilton, the lowest bar of any credit in this dashboard."
       ]
     },
     {
@@ -90,7 +90,7 @@
       "removed": false,
       "description": "One free night reward earned after spending $15,000 on the card in a calendar year.",
       "tips": [
-        "A high spend threshold for a $150-fee card — don't count this unless you're already going to hit $15,000/yr."
+        "A high spend threshold for a $150-fee card; don't count this unless you're already going to hit $15,000/yr."
       ]
     }
   ],
@@ -111,13 +111,13 @@
       "level": "mid"
     }
   ],
-  "protection_note": "No trip cancellation, trip delay, or emergency medical/evacuation coverage — those start at the Aspire tier. This card's value is in earning and status, not trip protection.",
-  "rental_note": "Secondary only — put rentals on a card with primary coverage if you rent often.",
+  "protection_note": "No trip cancellation, trip delay, or emergency medical/evacuation coverage; those start at the Aspire tier. This card's value is in earning and status, not trip protection.",
+  "rental_note": "Secondary only; put rentals on a card with primary coverage if you rent often.",
   "status_perks": [
     {
       "name": "Hilton Honors Gold Status",
       "strength": 3,
-      "note": "Complimentary with the card — space-available room upgrades, 80% bonus points on stays, and executive lounge access at select properties. Upgrades to Diamond if you spend $40,000/yr on the card."
+      "note": "Complimentary with the card: space-available room upgrades, 80% bonus points on stays, and executive lounge access at select properties. Upgrades to Diamond if you spend $40,000/yr on the card."
     }
   ],
   "services": [
@@ -153,7 +153,7 @@
         ]
       }
     ],
-    "note": "Additional cards are free — an easy way to pool household spend toward the 12× hotel rate and the $40,000 Diamond-status threshold."
+    "note": "Additional cards are free: an easy way to pool household spend toward the 12× hotel rate and the $40,000 Diamond-status threshold."
   },
   "timeline": []
 }

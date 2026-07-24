@@ -6,10 +6,10 @@
   "points_program": "Marriott Bonvoy",
   "accent_color": "#8C4A5C",
   "annual_fee": 250,
-  "effective_cost": "Depends entirely on hotel loyalty — no statement credits",
+  "effective_cost": "Depends entirely on hotel loyalty; no statement credits",
   "verdict": {
     "status": "reconsider",
-    "text": "Thin on credits — hard to justify without heavy Marriott spend",
+    "text": "Thin on credits: hard to justify without heavy Marriott spend",
     "short_tag": "Marriott Spend"
   },
   "earn_rates": [
@@ -35,7 +35,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Unlike the Brilliant, dining and groceries share one combined $15,000/yr cap rather than separate ones — easier to blow through if you use both categories heavily.",
+  "earn_note": "Unlike the Brilliant, dining and groceries share one combined $15,000/yr cap rather than separate ones, easier to blow through if you use both categories heavily.",
   "points": {
     "currency": "Marriott Bonvoy",
     "redemption_options": [
@@ -56,12 +56,12 @@
       }
     ],
     "per_100k": "$800",
-    "note": "Same Bonvoy currency and redemption math as the Brilliant — the Bevy just has far fewer ways to earn its fee back."
+    "note": "Same Bonvoy currency and redemption math as the Brilliant; the Bevy just has far fewer ways to earn its fee back."
   },
   "transfer_partners": {
     "airline_count": 40,
     "hotel_count": 0,
-    "highlight": "Marriott Bonvoy transfers to 40+ airline programs at 3:1, with a 5,000-mile bonus for every 60,000 points transferred — same chart as every other Bonvoy card.",
+    "highlight": "Marriott Bonvoy transfers to 40+ airline programs at 3:1, with a 5,000-mile bonus for every 60,000 points transferred, same chart as every other Bonvoy card.",
     "recent_changes": "No confirmed recent changes to the airline transfer chart."
   },
   "credits": [
@@ -75,7 +75,7 @@
       "removed": false,
       "description": "One free night award earned after spending $15,000 on the card in a calendar year, redeemable at hotels with a redemption level at or under 50,000 Marriott Bonvoy points.",
       "tips": [
-        "A real spend threshold, not a renewal-based freebie like the Brilliant's — don't count this unless you're already going to hit $15,000/yr.",
+        "A real spend threshold, not a renewal-based freebie like the Brilliant's; don't count this unless you're already going to hit $15,000/yr.",
         "$250 here is a conservative mid-range estimate for a capped-value redemption."
       ]
     }
@@ -108,12 +108,12 @@
     }
   ],
   "protection_note": "No trip cancellation/interruption coverage, and the 12-hour trip delay trigger is weaker than the Brilliant's 6-hour window. This card's protections sit closer to a no-fee card than a $250-fee one.",
-  "rental_note": "Secondary and capped lower than the Brilliant's rental coverage — put rentals on a card with primary coverage if you rent often.",
+  "rental_note": "Secondary and capped lower than the Brilliant's rental coverage; put rentals on a card with primary coverage if you rent often.",
   "status_perks": [
     {
       "name": "Marriott Bonvoy Gold Elite Status",
       "strength": 3,
-      "note": "Complimentary with the card — 25% bonus points on stays and space-available upgrades where available. One tier below the Brilliant's Platinum status. Plus 15 Elite Night Credits/year toward the next tier."
+      "note": "Complimentary with the card: 25% bonus points on stays and space-available upgrades where available. One tier below the Brilliant's Platinum status. Plus 15 Elite Night Credits/year toward the next tier."
     }
   ],
   "services": [
@@ -145,7 +145,7 @@
         ]
       }
     ],
-    "note": "Additional cards are free — a way to pool household spend toward the $15,000 Free Night Award threshold."
+    "note": "Additional cards are free: a way to pool household spend toward the $15,000 Free Night Award threshold."
   },
   "timeline": []
 }

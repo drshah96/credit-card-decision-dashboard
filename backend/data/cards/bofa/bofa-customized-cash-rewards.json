@@ -6,17 +6,17 @@
   "points_program": "Cash Back",
   "accent_color": "#B31942",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee",
+  "effective_cost": "Free, with no annual fee",
   "verdict": {
     "status": "keep",
-    "text": "Keep if you'll rotate your 6% category — $2,500 cap still earns well",
+    "text": "Keep if you'll rotate your 6% category: $2,500 cap still earns well",
     "short_tag": "Choose-Your-Own Categories"
   },
   "earn_rates": [
     {
       "emoji": "🛍️",
       "multiplier": "6%",
-      "category": "Choice category (1st year) — gas/EV, online shopping, dining, travel, drug stores, or home improvement",
+      "category": "Choice category (1st year): gas/EV, online shopping, dining, travel, drug stores, or home improvement",
       "highlight": true,
       "is_base": false
     },
@@ -51,12 +51,12 @@
       }
     ],
     "per_100k": "$2,300–$3,300",
-    "note": "Value depends on hitting the $2,500/quarter cap in your choice category — maxing it out every quarter during the first-year 6% bonus period pushes the blended rate well above a flat 2% card."
+    "note": "Value depends on hitting the $2,500/quarter cap in your choice category: maxing it out every quarter during the first-year 6% bonus period pushes the blended rate well above a flat 2% card."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer currency — straight cash back, not a points program.",
+    "highlight": "No transfer currency: straight cash back, not a points program.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -87,7 +87,7 @@
       "level": "none"
     }
   ],
-  "protection_note": "Bank of America's purchase/travel protection suite (Return Protection, Purchase Security, Auto Rental CDW, trip insurance) is only advertised on the Premium Rewards cards — it isn't published for this card despite the shared Visa Signature network tier.",
+  "protection_note": "Bank of America's purchase/travel protection suite (Return Protection, Purchase Security, Auto Rental CDW, trip insurance) is only advertised on the Premium Rewards cards; it isn't published for this card despite the shared Visa Signature network tier.",
   "rental_note": "No auto rental coverage documented publicly for this card as of this writing.",
   "status_perks": [],
   "services": [
@@ -127,7 +127,7 @@
         ]
       }
     ],
-    "note": "No cost to add — a simple way to pool a partner's or family member's spend into your quarterly category caps."
+    "note": "No cost to add: a simple way to pool a partner's or family member's spend into your quarterly category caps."
   },
   "timeline": []
 }

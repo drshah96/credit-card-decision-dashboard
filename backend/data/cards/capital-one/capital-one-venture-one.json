@@ -6,24 +6,24 @@
   "points_program": "Capital One Miles",
   "accent_color": "#F2969C",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee",
+  "effective_cost": "Free, with no annual fee",
   "verdict": {
     "status": "keep",
-    "text": "Keep — free entry to Miles, though 1.25x lags flat cash-back cards",
+    "text": "Keep: free entry to Miles, though 1.25x lags flat cash-back cards",
     "short_tag": "Miles Entry Point"
   },
   "earn_rates": [
     {
       "emoji": "🏨",
       "multiplier": "5×",
-      "category": "Hotels, vacation rentals, rental cars & activities — via Capital One Travel",
+      "category": "Hotels, vacation rentals, rental cars & activities, via Capital One Travel",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "🌐",
       "multiplier": "1.25×",
-      "category": "Everything else — no categories",
+      "category": "Everything else, no categories",
       "highlight": true,
       "is_base": true
     }
@@ -44,19 +44,19 @@
       }
     ],
     "per_100k": "$1,850+",
-    "note": "The only truly no-fee card in Capital One's lineup with full transfer-partner access — Quicksilver and other no-fee Capital One cards are pure cash back capped at 1¢."
+    "note": "The only truly no-fee card in Capital One's lineup with full transfer-partner access. Quicksilver and other no-fee Capital One cards are pure cash back capped at 1¢."
   },
   "transfer_partners": {
     "airline_count": 18,
     "hotel_count": 4,
-    "highlight": "Same 18 airline + 4 hotel partner chart as Venture and Venture X, at the same ratios — Capital One doesn't restrict transfer access by card tier.",
+    "highlight": "Same 18 airline + 4 hotel partner chart as Venture and Venture X, at the same ratios. Capital One doesn't restrict transfer access by card tier.",
     "recent_changes": "JAL Mileage Bank, Qatar Airways Privilege Club, and I Prefer Hotel Rewards added Sept 2025, shared across the whole Capital One Miles lineup."
   },
   "credits": [],
   "insurance": [
     {
       "coverage": "Rental car CDW",
-      "detail": "Secondary only — pays after your personal auto insurance",
+      "detail": "Secondary only: pays after your personal auto insurance",
       "level": "mid"
     },
     {
@@ -86,17 +86,17 @@
     },
     {
       "coverage": "Purchase protection",
-      "detail": "Not listed on the current cardholder page — confirm against your Cardholder Benefits Guide before relying on it",
+      "detail": "Not listed on the current cardholder page; confirm against your Cardholder Benefits Guide before relying on it",
       "level": "none"
     },
     {
       "coverage": "Extended warranty",
-      "detail": "Not listed on the current cardholder page — confirm against your Cardholder Benefits Guide before relying on it",
+      "detail": "Not listed on the current cardholder page; confirm against your Cardholder Benefits Guide before relying on it",
       "level": "none"
     }
   ],
-  "protection_note": "This is Capital One's most stripped-down travel card — only secondary rental CDW is clearly confirmed. Purchase protection and extended warranty aren't advertised the way they are for the standard Venture card; verify against your Cardholder Benefits Guide and use a card with confirmed purchase protection for big-ticket items.",
-  "rental_note": "Secondary only — your personal auto insurance pays first, and this covers the gap (deductible, loss-of-use, towing) if you decline the rental counter's own CDW.",
+  "protection_note": "This is Capital One's most stripped-down travel card: only secondary rental CDW is clearly confirmed. Purchase protection and extended warranty aren't advertised the way they are for the standard Venture card; verify against your Cardholder Benefits Guide and use a card with confirmed purchase protection for big-ticket items.",
+  "rental_note": "Secondary only: your personal auto insurance pays first, and this covers the gap (deductible, loss-of-use, towing) if you decline the rental counter's own CDW.",
   "status_perks": [
     {
       "name": "Hertz Five Star",
@@ -111,7 +111,7 @@
     },
     {
       "name": "Discover network transition",
-      "detail": "New VentureOne accounts are being originated on the Discover network instead of Visa as of early 2026 — existing cards keep Visa until reissue."
+      "detail": "New VentureOne accounts are being originated on the Discover network instead of Visa as of early 2026; existing cards keep Visa until reissue."
     }
   ],
   "additional_cards": {
@@ -135,7 +135,7 @@
             "included": true
           },
           {
-            "text": "No lounge access either way — nothing lost by adding one",
+            "text": "No lounge access either way, nothing lost by adding one",
             "included": true
           }
         ]

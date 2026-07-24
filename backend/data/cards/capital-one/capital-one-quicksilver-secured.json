@@ -6,7 +6,7 @@
   "points_program": "Cash Back",
   "accent_color": "#8A93A0",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee, refundable deposit sets your credit line",
+  "effective_cost": "Free, with no annual fee; refundable deposit sets your credit line",
   "verdict": {
     "status": "situational",
     "text": "Rare secured card that earns 1.5% cash back like its unsecured sibling",
@@ -16,7 +16,7 @@
     {
       "emoji": "🏨",
       "multiplier": "5%",
-      "category": "Hotels, vacation rentals & rental cars — via Capital One Travel",
+      "category": "Hotels, vacation rentals & rental cars, via Capital One Travel",
       "highlight": true,
       "is_base": false
     },
@@ -28,7 +28,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Unlike the non-rewards Platinum Secured, this card earns the exact same unlimited 1.5% flat cash back as the unsecured Quicksilver, plus 5% on Capital One Travel hotel/rental-car bookings — the security deposit buys approval, not a worse rewards rate. No sign-up bonus and no 0% intro APR, unlike the unsecured Quicksilver.",
+  "earn_note": "Unlike the non-rewards Platinum Secured, this card earns the exact same unlimited 1.5% flat cash back as the unsecured Quicksilver, plus 5% on Capital One Travel hotel/rental-car bookings. The security deposit buys approval, not a worse rewards rate. No sign-up bonus and no 0% intro APR, unlike the unsecured Quicksilver.",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
@@ -39,12 +39,12 @@
       }
     ],
     "per_100k": "$1,500",
-    "note": "Straight 1¢-per-point cash back with no minimum redemption and no expiration while the account is open — identical redemption terms to the unsecured Quicksilver."
+    "note": "Straight 1¢-per-point cash back with no minimum redemption and no expiration while the account is open, identical redemption terms to the unsecured Quicksilver."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer currency — straight cash back only.",
+    "highlight": "No transfer currency: straight cash back only.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -65,8 +65,8 @@
       "level": "none"
     }
   ],
-  "protection_note": "Capital One's own pages for this card focus entirely on the deposit mechanics and cash-back rate — they don't call out the purchase protection, extended warranty, or price protection suite that the unsecured Quicksilver advertises. Treat this as a bare-bones protection package unless your Guide to Benefits says otherwise.",
-  "rental_note": "No rental car coverage is advertised for this card — use a different card for rentals.",
+  "protection_note": "Capital One's own pages for this card focus entirely on the deposit mechanics and cash-back rate. They don't call out the purchase protection, extended warranty, or price protection suite that the unsecured Quicksilver advertises. Treat this as a bare-bones protection package unless your Guide to Benefits says otherwise.",
+  "rental_note": "No rental car coverage is advertised for this card; use a different card for rentals.",
   "status_perks": [],
   "services": [
     {
@@ -83,7 +83,7 @@
     },
     {
       "name": "Credit bureau reporting",
-      "detail": "Reports to all three major credit bureaus every month — the core reason to hold a secured card."
+      "detail": "Reports to all three major credit bureaus every month, the core reason to hold a secured card."
     },
     {
       "name": "APR",
@@ -113,7 +113,7 @@
         ]
       }
     ],
-    "note": "Free to add — since this card actually earns rewards, an authorized user's spend adds real cash back on top of the credit-building benefit."
+    "note": "Free to add. Since this card actually earns rewards, an authorized user's spend adds real cash back on top of the credit-building benefit."
   },
   "timeline": []
 }

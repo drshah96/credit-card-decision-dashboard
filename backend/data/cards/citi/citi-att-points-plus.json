@@ -6,10 +6,10 @@
   "points_program": "ThankYou® Points",
   "accent_color": "#00A8E0",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee, and can net a recurring statement credit if you already spend $1,000+/cycle",
+  "effective_cost": "Free, with no annual fee, and can net a recurring statement credit if you already spend $1,000+/cycle",
   "verdict": {
     "status": "situational",
-    "text": "Only useful if you already pay AT&T bills — the bill discount is the value",
+    "text": "Only useful if you already pay AT&T bills: the bill discount is the value",
     "short_tag": "AT&T Customers"
   },
   "earn_rates": [
@@ -42,7 +42,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "A separate, repeating $20 statement credit is issued each billing cycle you spend $1,000 or more on the card — effectively a standing 2% rebate on top of ThankYou Points once you clear that threshold, but $0 if you stay under it. New cardholders also get a $200 statement credit after $1,000 spend in the first 3 months. No caps found on the bonus-category earning.",
+  "earn_note": "A separate, repeating $20 statement credit is issued each billing cycle you spend $1,000 or more on the card, effectively a standing 2% rebate on top of ThankYou Points once you clear that threshold, but $0 if you stay under it. New cardholders also get a $200 statement credit after $1,000 spend in the first 3 months. No caps found on the bonus-category earning.",
   "points": {
     "currency": "ThankYou® Points",
     "redemption_options": [
@@ -58,19 +58,19 @@
       }
     ],
     "per_100k": "$1,000, or somewhat more through select travel/gift-card redemptions",
-    "note": "This is base-tier ThankYou Points (not the Premier/Prestige tier), so there's no transfer-partner access — redemption is capped at roughly 1¢/point via gift cards, merchandise, and the ThankYou travel portal. Points don't expire while the account is open."
+    "note": "This is base-tier ThankYou Points (not the Premier/Prestige tier), so there's no transfer-partner access. Redemption is capped at roughly 1¢/point via gift cards, merchandise, and the ThankYou travel portal. Points don't expire while the account is open."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners on this tier of ThankYou Points — that access is reserved for Citi's premium ThankYou cards (Premier, Prestige), not this no-fee co-brand.",
+    "highlight": "No transfer partners on this tier of ThankYou Points: that access is reserved for Citi's premium ThankYou cards (Premier, Prestige), not this no-fee co-brand.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
   "insurance": [
     {
       "coverage": "Cell phone",
-      "detail": "Not included — a notable gap given this is a phone carrier's own co-branded card",
+      "detail": "Not included, a notable gap given this is a phone carrier's own co-branded card",
       "level": "none"
     },
     {
@@ -94,7 +94,7 @@
       "level": "none"
     }
   ],
-  "protection_note": "A bare-bones standard Mastercard — Citi and third-party reviews both confirm this card carries no purchase protection, extended warranty, travel insurance, or (most notably) cell phone protection, despite being a wireless carrier's own card. Its value is entirely in the AT&T bill discounts and everyday ThankYou Points earning, not in a protection suite.",
+  "protection_note": "A bare-bones standard Mastercard: Citi and third-party reviews both confirm this card carries no purchase protection, extended warranty, travel insurance, or (most notably) cell phone protection, despite being a wireless carrier's own card. Its value is entirely in the AT&T bill discounts and everyday ThankYou Points earning, not in a protection suite.",
   "rental_note": "No rental car coverage found for this card.",
   "status_perks": [],
   "services": [
@@ -104,7 +104,7 @@
     },
     {
       "name": "AT&T internet bill discount",
-      "detail": "$10/month discount on eligible AT&T internet bills under the same AutoPay/paperless-billing conditions — stacks with the wireless-line discount if you have both services."
+      "detail": "$10/month discount on eligible AT&T internet bills under the same AutoPay/paperless-billing conditions; stacks with the wireless-line discount if you have both services."
     },
     {
       "name": "No foreign transaction fees",
@@ -112,7 +112,7 @@
     },
     {
       "name": "Citi Quick Lock & fraud monitoring",
-      "detail": "Standard Citi account-security tools — lock the card from the app, 24-hour fraud alerts."
+      "detail": "Standard Citi account-security tools: lock the card from the app, 24-hour fraud alerts."
     }
   ],
   "additional_cards": {
@@ -132,7 +132,7 @@
             "included": true
           },
           {
-            "text": "No protections to share — this card doesn't carry a confirmed insurance suite",
+            "text": "No protections to share: this card doesn't carry a confirmed insurance suite",
             "included": false
           }
         ]

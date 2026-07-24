@@ -6,24 +6,24 @@
   "points_program": "None",
   "accent_color": "#5C7A9E",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee, and a genuinely long 21-cycle 0% intro APR window",
+  "effective_cost": "Free, with no annual fee, and a genuinely long 21-cycle 0% intro APR window",
   "verdict": {
     "status": "situational",
-    "text": "No rewards at all — only for the 21-cycle 0% intro APR",
+    "text": "No rewards at all: only for the 21-cycle 0% intro APR",
     "short_tag": "0% APR Focus"
   },
   "earn_rates": [],
-  "earn_note": "BankAmericard isn't a rewards card — it's built entirely around a long 0% intro APR window and no penalty APR. There's no everyday earn rate of any kind.",
+  "earn_note": "BankAmericard isn't a rewards card. It's built entirely around a long 0% intro APR window and no penalty APR. There's no everyday earn rate of any kind.",
   "points": {
     "currency": "None",
     "redemption_options": [],
-    "per_100k": "$0 — no rewards program",
+    "per_100k": "$0, no rewards program",
     "note": "Nothing to redeem. The entire value proposition is the intro APR window, not earning."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No rewards program — nothing to transfer.",
+    "highlight": "No rewards program, nothing to transfer.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -54,13 +54,13 @@
       "level": "none"
     }
   ],
-  "protection_note": "No purchase-protection or extended-warranty guide published for this card — it's positioned purely as a low-interest/balance-transfer product.",
+  "protection_note": "No purchase-protection or extended-warranty guide published for this card; it's positioned purely as a low-interest/balance-transfer product.",
   "rental_note": "No auto rental coverage documented publicly for this card.",
   "status_perks": [],
   "services": [
     {
       "name": "0% intro APR",
-      "detail": "0% on purchases and balance transfers (within 60 days) for the first 21 billing cycles, then 14.99%–25.99% variable — one of the longest 0% windows available."
+      "detail": "0% on purchases and balance transfers (within 60 days) for the first 21 billing cycles, then 14.99%–25.99% variable, one of the longest 0% windows available."
     },
     {
       "name": "Balance transfer fee",
@@ -90,7 +90,7 @@
         ]
       }
     ],
-    "note": "No cost to add — mainly useful for spreading balance-transfer or large-purchase spend across the household during the 21-month 0% window."
+    "note": "No cost to add, mainly useful for spreading balance-transfer or large-purchase spend across the household during the 21-month 0% window."
   },
   "timeline": []
 }

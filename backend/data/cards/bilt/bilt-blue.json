@@ -6,7 +6,7 @@
   "points_program": "Bilt Rewards",
   "accent_color": "#1E3A5F",
   "annual_fee": 0,
-  "effective_cost": "Free — $0 annual fee every year, with no spending requirement to waive it",
+  "effective_cost": "Free, with $0 annual fee every year and no spending requirement to waive it",
   "verdict": {
     "status": "keep",
     "text": "The only $0-fee card earning points on rent, with no transaction fee",
@@ -30,21 +30,21 @@
     {
       "emoji": "🏨",
       "multiplier": "3×",
-      "category": "Hotels — booked on the Bilt Travel Portal",
+      "category": "Hotels, booked on the Bilt Travel Portal",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "✈️",
       "multiplier": "2×",
-      "category": "Flights — booked on the Bilt Travel Portal",
+      "category": "Flights, booked on the Bilt Travel Portal",
       "highlight": false,
       "is_base": false
     },
     {
       "emoji": "🚗",
       "multiplier": "3×",
-      "category": "Lyft — after linking Bilt and Lyft accounts",
+      "category": "Lyft, after linking Bilt and Lyft accounts",
       "highlight": false,
       "is_base": false
     },
@@ -56,7 +56,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "*Housing Rewards isn't a flat rate — it scales with your everyday spend: selecting 'Housing-only rewards' earns up to 1.25x on rent or mortgage, based on how much of that payment your card spend covers in the same billing cycle (25% of the payment = 0.5x, 100%+ = 1.25x; below 25% still earns a flat 250 points). Terms and conditions apply. There's no 5-transaction monthly minimum, unlike the original Bilt Card. The restaurant bonus varies by location and is shown in the Bilt app at checkout — up to 4x is the ceiling, not a flat rate. New cardholders get $100 in Bilt Cash on account opening, with no spending requirement.",
+  "earn_note": "*Housing Rewards isn't a flat rate. It scales with your everyday spend: selecting 'Housing-only rewards' earns up to 1.25x on rent or mortgage, based on how much of that payment your card spend covers in the same billing cycle (25% of the payment = 0.5x, 100%+ = 1.25x; below 25% still earns a flat 250 points). Terms and conditions apply. There's no 5-transaction monthly minimum, unlike the original Bilt Card. The restaurant bonus varies by location and is shown in the Bilt app at checkout, and up to 4x is just the ceiling, not a flat rate. New cardholders get $100 in Bilt Cash on account opening, with no spending requirement.",
   "points": {
     "currency": "Bilt Points",
     "redemption_options": [
@@ -77,24 +77,24 @@
       }
     ],
     "per_100k": "$1,500–$2,200+",
-    "note": "The Points Guy values Bilt Points at 2.2¢ each — among the highest of any bank currency — but that ceiling only applies to well-chosen airline/hotel transfers. Cash-equivalent redemptions (statement credit, rent credit) are a flat 1¢/point."
+    "note": "The Points Guy values Bilt Points at 2.2¢ each, among the highest of any bank currency, but that ceiling only applies to well-chosen airline/hotel transfers. Cash-equivalent redemptions (statement credit, rent credit) are a flat 1¢/point."
   },
   "transfer_partners": {
     "airline_count": 19,
     "hotel_count": 7,
-    "highlight": "19 airline and 7 hotel partners, almost all at 1:1 (Accor Live Limitless is 3:2) — Hyatt, Marriott, Hilton, IHG, Wyndham, and I Prefer on the hotel side; United, Air France/KLM, Emirates, Cathay Pacific, and Southwest among the airlines.",
+    "highlight": "19 airline and 7 hotel partners, almost all at 1:1 (Accor Live Limitless is 3:2): Hyatt, Marriott, Hilton, IHG, Wyndham, and I Prefer on the hotel side; United, Air France/KLM, Emirates, Cathay Pacific, and Southwest among the airlines.",
     "recent_changes": "Wyndham Rewards and I Prefer Hotel Rewards (Preferred Hotels & Resorts, 700+ independent properties) were both added as transfer partners in 2026."
   },
   "credits": [],
   "insurance": [
     {
       "coverage": "Zero liability",
-      "detail": "Not responsible for fraudulent transactions once reported — standard Mastercard protection",
+      "detail": "Not responsible for fraudulent transactions once reported, per standard Mastercard protection",
       "level": "good"
     },
     {
       "coverage": "Rental car CDW",
-      "detail": "MasterRental coverage applies first, before your personal auto insurance — no personal claim needed. Exact per-rental and annual limits are in the Guide to Benefits, not public marketing.",
+      "detail": "MasterRental coverage applies first, before your personal auto insurance, so no personal claim is needed. Exact per-rental and annual limits are in the Guide to Benefits, not public marketing.",
       "level": "good"
     },
     {
@@ -109,22 +109,22 @@
     },
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "Not included on the Blue Card — this benefit starts at the Obsidian tier",
+      "detail": "Not included on the Blue Card; this benefit starts at the Obsidian tier",
       "level": "none"
     },
     {
       "coverage": "Extended warranty",
-      "detail": "Not included on the Blue Card — this benefit starts at the Obsidian tier",
+      "detail": "Not included on the Blue Card; this benefit starts at the Obsidian tier",
       "level": "none"
     }
   ],
-  "protection_note": "A real primary rental CDW and confirmed purchase/cell-phone protections for a $0-fee card, but no trip cancellation, trip delay, or extended warranty coverage — those start at Obsidian.",
-  "rental_note": "MasterRental coverage applies first, ahead of your personal auto policy — decline the counter's CDW and pay with this card. Exact dollar limits are in the Guide to Benefits.",
+  "protection_note": "A real primary rental CDW and confirmed purchase/cell-phone protections for a $0-fee card, but no trip cancellation, trip delay, or extended warranty coverage; those start at Obsidian.",
+  "rental_note": "MasterRental coverage applies first, ahead of your personal auto policy, so decline the counter's CDW and pay with this card. Exact dollar limits are in the Guide to Benefits.",
   "status_perks": [],
   "services": [
     {
       "name": "No transaction fee on rent, mortgage, and HOA payments",
-      "detail": "Pay housing costs through Bilt with no card-processing fee, even if your landlord's portal normally charges one — funds are debited from a linked bank account within 24 hours, not your credit line."
+      "detail": "Pay housing costs through Bilt with no card-processing fee, even if your landlord's portal normally charges one. Funds are debited from a linked bank account within 24 hours, not your credit line."
     },
     {
       "name": "No foreign transaction fees",
@@ -158,7 +158,7 @@
         ]
       }
     ],
-    "note": "Free on the Blue Card — the $50/$95 Authorized User fee only kicks in on the Obsidian and Palladium tiers."
+    "note": "Free on the Blue Card. The $50/$95 Authorized User fee only kicks in on the Obsidian and Palladium tiers."
   },
   "timeline": [
     {

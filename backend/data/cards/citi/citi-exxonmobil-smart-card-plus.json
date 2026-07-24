@@ -2,11 +2,11 @@
   "id": "citi-exxonmobil-smart-card-plus",
   "name": "Exxon Mobil Smart Card+™ Credit Card",
   "issuer": "Citi",
-  "network": "PROPRIETARY (Exxon Mobil / Citi Retail Services — closed-loop, not Visa or Mastercard)",
+  "network": "PROPRIETARY (Exxon Mobil / Citi Retail Services, closed-loop, not Visa or Mastercard)",
   "points_program": "Instant fuel discount + statement credit (no points currency)",
   "accent_color": "#ED1C24",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee, but usable only at Exxon and Mobil branded stations",
+  "effective_cost": "Free, with no annual fee, but usable only at Exxon and Mobil branded stations",
   "verdict": {
     "status": "situational",
     "text": "Only makes sense if you fuel up almost exclusively at Exxon/Mobil",
@@ -30,14 +30,14 @@
     {
       "emoji": "🏪",
       "multiplier": "5%",
-      "category": "Convenience-store purchases at Exxon/Mobil (snacks, drinks, car washes) — first $1,200/yr, then presumably 0%",
+      "category": "Convenience-store purchases at Exxon/Mobil (snacks, drinks, car washes): first $1,200/yr, then presumably 0%",
       "highlight": false,
       "is_base": false
     }
   ],
-  "earn_note": "This is a closed-loop, proprietary card — it isn't a Visa or Mastercard and can't be used anywhere except participating Exxon and Mobil branded stations. There's no earning at all outside Exxon/Mobil, no general-purpose base rate, and no signup bonus. The 5% convenience-store credit excludes fuel, lottery tickets, money orders, and gift cards, and caps at $1,200 in qualifying spend per year ($60 max credit). Discounts stack with the separate Exxon Mobil Rewards+ loyalty program.",
+  "earn_note": "This is a closed-loop, proprietary card. It isn't a Visa or Mastercard and can't be used anywhere except participating Exxon and Mobil branded stations. There's no earning at all outside Exxon/Mobil, no general-purpose base rate, and no signup bonus. The 5% convenience-store credit excludes fuel, lottery tickets, money orders, and gift cards, and caps at $1,200 in qualifying spend per year ($60 max credit). Discounts stack with the separate Exxon Mobil Rewards+ loyalty program.",
   "points": {
-    "currency": "None — instant per-gallon discount plus a capped statement credit",
+    "currency": "None, instant per-gallon discount plus a capped statement credit",
     "redemption_options": [
       {
         "method": "Fuel discount applied instantly at the pump",
@@ -50,13 +50,13 @@
         "best": false
       }
     ],
-    "per_100k": "Not applicable — value is a per-gallon cents-off discount and a capped statement credit, not a points balance",
-    "note": "There's no points balance to redeem or track — the fuel discount posts automatically at checkout, and the convenience-store credit posts as a monthly statement credit up to its $1,200/year spend cap. Nothing here is portable or worth anything outside an Exxon/Mobil fuel purchase."
+    "per_100k": "Not applicable: value is a per-gallon cents-off discount and a capped statement credit, not a points balance",
+    "note": "There's no points balance to redeem or track. The fuel discount posts automatically at checkout, and the convenience-store credit posts as a monthly statement credit up to its $1,200/year spend cap. Nothing here is portable or worth anything outside an Exxon/Mobil fuel purchase."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners — this is a closed-loop discount card with no points currency of any kind to transfer.",
+    "highlight": "No transfer partners: this is a closed-loop discount card with no points currency of any kind to transfer.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -92,13 +92,13 @@
       "level": "none"
     }
   ],
-  "protection_note": "No purchase, warranty, or travel protections of any kind — this is a closed-loop fuel-discount card, not a Visa/Mastercard, so none of the usual network-level benefits apply. $0 liability on unauthorized charges is the only fraud-related protection found.",
-  "rental_note": "No rental car coverage — the card can't be used for rentals or anywhere outside participating Exxon/Mobil stations.",
+  "protection_note": "No purchase, warranty, or travel protections of any kind: this is a closed-loop fuel-discount card, not a Visa/Mastercard, so none of the usual network-level benefits apply. $0 liability on unauthorized charges is the only fraud-related protection found.",
+  "rental_note": "No rental car coverage; the card can't be used for rentals or anywhere outside participating Exxon/Mobil stations.",
   "status_perks": [],
   "services": [
     {
       "name": "Instant pump discount",
-      "detail": "12¢/gal off Synergy Supreme+ premium and 10¢/gal off regular/mid-grade/diesel, applied automatically at the pump — no signup process or minimum spend required to activate."
+      "detail": "12¢/gal off Synergy Supreme+ premium and 10¢/gal off regular/mid-grade/diesel, applied automatically at the pump; no signup process or minimum spend required to activate."
     },
     {
       "name": "Stacks with Exxon Mobil Rewards+",
@@ -123,7 +123,7 @@
       "date": "Ongoing",
       "type": "neutral",
       "badge": "Fuel-discount-only",
-      "text": "Standard APR runs notably high for a fuel card (roughly 33% variable as of late 2025 disclosures), with no introductory APR period offered — this card is built for people who pay in full monthly and fuel up almost exclusively at Exxon/Mobil, not for carrying a balance."
+      "text": "Standard APR runs notably high for a fuel card (roughly 33% variable as of late 2025 disclosures), with no introductory APR period offered. This card is built for people who pay in full monthly and fuel up almost exclusively at Exxon/Mobil, not for carrying a balance."
     }
   ]
 }

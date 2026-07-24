@@ -6,17 +6,17 @@
   "points_program": "U.S. Bank Rewards",
   "accent_color": "#3F5D3A",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee",
+  "effective_cost": "Free, with no annual fee",
   "verdict": {
     "status": "keep",
-    "text": "Keep if dining is a real category — 4x on the first $2K/quarter",
+    "text": "Keep if dining is a real category: 4x on the first $2K/quarter",
     "short_tag": "Dining Earner"
   },
   "earn_rates": [
     {
       "emoji": "🍽️",
       "multiplier": "4×",
-      "category": "Dining, takeout & restaurant delivery — first $2,000/qtr, then 1×",
+      "category": "Dining, takeout & restaurant delivery, first $2,000/qtr, then 1×",
       "highlight": true,
       "is_base": false
     },
@@ -42,7 +42,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Discount stores/supercenters and wholesale clubs are excluded from the grocery and gas bonus categories — a Walmart or Costco grocery run earns the 1× base, not 2×. Points earn as 1 base + bonus, so the categories shown are the total rate, not stacked on top of the base separately.",
+  "earn_note": "Discount stores/supercenters and wholesale clubs are excluded from the grocery and gas bonus categories, so a Walmart or Costco grocery run earns the 1× base, not 2×. Points earn as 1 base + bonus, so the categories shown are the total rate, not stacked on top of the base separately.",
   "points": {
     "currency": "U.S. Bank Rewards",
     "redemption_options": [
@@ -63,12 +63,12 @@
       }
     ],
     "per_100k": "$1,000–$1,600",
-    "note": "U.S. Bank matches charity redemptions 100% — donate points and the charity effectively receives double. Otherwise, redemption value tops out around 1¢/point regardless of method, since there's no transfer-partner ecosystem behind this program."
+    "note": "U.S. Bank matches charity redemptions 100%: donate points and the charity effectively receives double. Otherwise, redemption value tops out around 1¢/point regardless of method, since there's no transfer-partner ecosystem behind this program."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners — points redeem directly for cash, travel, merchandise, or gift cards at a flat rate.",
+    "highlight": "No transfer partners: points redeem directly for cash, travel, merchandise, or gift cards at a flat rate.",
     "recent_changes": "Not applicable."
   },
   "credits": [
@@ -82,7 +82,7 @@
       "removed": false,
       "description": "A $15 statement credit automatically applied after 11 consecutive calendar months of eligible streaming purchases (Netflix, Hulu, Apple Music, and similar), if the account is in good standing.",
       "tips": [
-        "Stacks with the 2× streaming earn rate — you get the points and the credit."
+        "Stacks with the 2× streaming earn rate, so you get the points and the credit."
       ]
     }
   ],
@@ -113,7 +113,7 @@
       "level": "none"
     }
   ],
-  "protection_note": "U.S. Bank doesn't publish a purchase-protection or extended-warranty guide for this card the way it does for Shield — check your actual Guide to Benefits after approval rather than assuming standard Visa Signature protections apply.",
+  "protection_note": "U.S. Bank doesn't publish a purchase-protection or extended-warranty guide for this card the way it does for Shield, so check your actual Guide to Benefits after approval rather than assuming standard Visa Signature protections apply.",
   "rental_note": "No auto rental coverage documented publicly for this card as of this writing.",
   "status_perks": [],
   "services": [
@@ -149,7 +149,7 @@
         ]
       }
     ],
-    "note": "No cost to add — a simple way to pool a partner's or teenager's dining and grocery spend into the 4x/2x categories."
+    "note": "No cost to add: a simple way to pool a partner's or teenager's dining and grocery spend into the 4x/2x categories."
   },
   "timeline": []
 }

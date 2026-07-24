@@ -6,17 +6,17 @@
   "points_program": "T-Mobile Rewards",
   "accent_color": "#E20074",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee",
+  "effective_cost": "Free, with no annual fee",
   "verdict": {
     "status": "situational",
-    "text": "Only makes sense for active T-Mobile customers — rewards aren't cashable",
+    "text": "Only makes sense for active T-Mobile customers: rewards aren't cashable",
     "short_tag": "T-Mobile Customers"
   },
   "earn_rates": [
     {
       "emoji": "📱",
       "multiplier": "5%",
-      "category": "Phones, devices & accessories — T-Mobile stores, T-Mobile.com & the T-Life app",
+      "category": "Phones, devices & accessories: T-Mobile stores, T-Mobile.com & the T-Life app",
       "highlight": true,
       "is_base": false
     },
@@ -28,7 +28,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Capital One and T-Mobile's own terms exclude device equipment installment plans, wireless service fees, and prepaid service from the 5% device rate — the 5% is for buying a phone or accessory outright, not for paying your monthly bill. There's no cap on either rate and rewards don't expire for the life of the account. No standing sign-up bonus at launch; a limited-time $100 bonus (after $500 in non-T-Mobile spend within 90 days) has circulated with an application deadline around July 23, 2026 — confirm it's still live before counting on it.",
+  "earn_note": "Capital One and T-Mobile's own terms exclude device equipment installment plans, wireless service fees, and prepaid service from the 5% device rate: the 5% is for buying a phone or accessory outright, not for paying your monthly bill. There's no cap on either rate and rewards don't expire for the life of the account. No standing sign-up bonus at launch; a limited-time $100 bonus (after $500 in non-T-Mobile spend within 90 days) has circulated with an application deadline around July 23, 2026; confirm it's still live before counting on it.",
   "points": {
     "currency": "T-Mobile Rewards",
     "redemption_options": [
@@ -38,13 +38,13 @@
         "best": true
       }
     ],
-    "per_100k": "$1,000 toward a T-Mobile bill or device — no other redemption exists",
-    "note": "A closed-loop currency, not cash back — there's no statement credit, gift card, or Capital One redemption option. Balances don't expire while the account is open, but they're stranded if you ever leave T-Mobile."
+    "per_100k": "$1,000 toward a T-Mobile bill or device, no other redemption exists",
+    "note": "A closed-loop currency, not cash back: there's no statement credit, gift card, or Capital One redemption option. Balances don't expire while the account is open, but they're stranded if you ever leave T-Mobile."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners — T-Mobile Rewards are a closed-loop currency good only at T-Mobile, not Capital One miles or transferable points.",
+    "highlight": "No transfer partners: T-Mobile Rewards are a closed-loop currency good only at T-Mobile, not Capital One miles or transferable points.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -71,12 +71,12 @@
     },
     {
       "coverage": "Cell phone protection",
-      "detail": "Not included — a notable gap given this is a phone carrier's own card",
+      "detail": "Not included, a notable gap given this is a phone carrier's own card",
       "level": "none"
     }
   ],
-  "protection_note": "These figures come from Capital One's standard Visa Signature Guide to Benefits, since a T-Mobile-specific guide wasn't independently confirmed — treat them as the baseline you should get, not a guarantee. The most surprising omission is cell phone protection: despite being T-Mobile's own card, it doesn't insure the phone you're paying it off with. There's no trip cancellation/interruption or baggage delay coverage either, only lost-luggage reimbursement.",
-  "rental_note": "Secondary auto rental collision/theft coverage via Visa Signature, up to 15 days domestically or 31 days internationally — decline the counter's own CDW/LDW and charge the entire rental to this card to activate it; pays out after your personal auto policy.",
+  "protection_note": "These figures come from Capital One's standard Visa Signature Guide to Benefits, since a T-Mobile-specific guide wasn't independently confirmed; treat them as the baseline you should get, not a guarantee. The most surprising omission is cell phone protection: despite being T-Mobile's own card, it doesn't insure the phone you're paying it off with. There's no trip cancellation/interruption or baggage delay coverage either, only lost-luggage reimbursement.",
+  "rental_note": "Secondary auto rental collision/theft coverage via Visa Signature, up to 15 days domestically or 31 days internationally. Decline the counter's own CDW/LDW and charge the entire rental to this card to activate it; pays out after your personal auto policy.",
   "status_perks": [],
   "services": [
     {
@@ -85,7 +85,7 @@
     },
     {
       "name": "T-Mobile AutoPay discount",
-      "detail": "$5/month per line (up to 8 lines) off an eligible T-Mobile wireless plan when AutoPay is set to this card — separate from, and stackable with, the T-Mobile Rewards earned on purchases."
+      "detail": "$5/month per line (up to 8 lines) off an eligible T-Mobile wireless plan when AutoPay is set to this card, separate from, and stackable with, the T-Mobile Rewards earned on purchases."
     },
     {
       "name": "No foreign transaction fees",
@@ -130,7 +130,7 @@
       "date": "Nov 3, 2025",
       "type": "add",
       "badge": "Launch",
-      "text": "Capital One and T-Mobile launch the T-Mobile Visa, the carrier's first co-branded credit card — 5% back on T-Mobile device purchases and 2% elsewhere, redeemable only within the T-Mobile ecosystem, with no annual fee."
+      "text": "Capital One and T-Mobile launch the T-Mobile Visa, the carrier's first co-branded credit card: 5% back on T-Mobile device purchases and 2% elsewhere, redeemable only within the T-Mobile ecosystem, with no annual fee."
     }
   ]
 }

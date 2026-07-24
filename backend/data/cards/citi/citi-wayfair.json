@@ -6,10 +6,10 @@
   "points_program": "Wayfair Rewards",
   "accent_color": "#7F187F",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee",
+  "effective_cost": "Free, with no annual fee",
   "verdict": {
     "status": "situational",
-    "text": "Strong 7% for Wayfair-family spend — worth it if you furnish a home over time",
+    "text": "Strong 7% for Wayfair-family spend, worth it if you furnish a home over time",
     "short_tag": "Wayfair Shoppers"
   },
   "earn_rates": [
@@ -42,7 +42,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "This is the open-loop Mastercard version of Wayfair's card — it earns outside the Wayfair family of brands, unlike the closed-loop, store-only Wayfair Credit Card, which earns the same 7%/5% at Wayfair brands but nothing elsewhere. Reward Dollars are capped at a maximum $2,500 redeemable per month across participating Wayfair sites. New cardholders get $40 off a first qualifying order of $250+. Citi has issued this program since 2020, after it moved from Comenity Bank.",
+  "earn_note": "This is the open-loop Mastercard version of Wayfair's card: it earns outside the Wayfair family of brands, unlike the closed-loop, store-only Wayfair Credit Card, which earns the same 7%/5% at Wayfair brands but nothing elsewhere. Reward Dollars are capped at a maximum $2,500 redeemable per month across participating Wayfair sites. New cardholders get $40 off a first qualifying order of $250+. Citi has issued this program since 2020, after it moved from Comenity Bank.",
   "points": {
     "currency": "Wayfair Reward Dollars",
     "redemption_options": [
@@ -52,13 +52,13 @@
         "best": true
       }
     ],
-    "per_100k": "Not applicable — Wayfair Rewards accrue and redeem in dollars directly (no separate points conversion), capped at $2,500 redeemable per month",
+    "per_100k": "Not applicable: Wayfair Rewards accrue and redeem in dollars directly (no separate points conversion), capped at $2,500 redeemable per month",
     "note": "Reward Dollars have no cash value and can't be redeemed anywhere outside the Wayfair family of brands. Rewards never expire while the account stays open, but the $2,500/month redemption cap matters for anyone making a large furniture purchase and trying to use accumulated rewards toward it in one go."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners — Wayfair Reward Dollars redeem only across the Wayfair family of brands.",
+    "highlight": "No transfer partners: Wayfair Reward Dollars redeem only across the Wayfair family of brands.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -94,13 +94,13 @@
       "level": "none"
     }
   ],
-  "protection_note": "A standard (not World Elite) Mastercard tier with no confirmed purchase protection, extended warranty, or travel insurance. Treat this as a rewards-and-financing card with no meaningful insurance suite — a real gap for a card marketed around furniture and home-goods purchases that could otherwise benefit from purchase protection or extended warranty.",
+  "protection_note": "A standard (not World Elite) Mastercard tier with no confirmed purchase protection, extended warranty, or travel insurance. Treat this as a rewards-and-financing card with no meaningful insurance suite, a real gap for a card marketed around furniture and home-goods purchases that could otherwise benefit from purchase protection or extended warranty.",
   "rental_note": "No rental car coverage found for this card.",
   "status_perks": [],
   "services": [
     {
       "name": "Special financing offers",
-      "detail": "Promotional financing plans available across participating Wayfair sites on qualifying items, selectable at checkout — using promotional financing on a purchase drops the earn rate from 7% to 5% on that purchase."
+      "detail": "Promotional financing plans available across participating Wayfair sites on qualifying items, selectable at checkout; using promotional financing on a purchase drops the earn rate from 7% to 5% on that purchase."
     },
     {
       "name": "Foreign transaction fee",
@@ -128,7 +128,7 @@
             "included": true
           },
           {
-            "text": "No dedicated insurance to share — this card doesn't carry a confirmed protection suite",
+            "text": "No dedicated insurance to share: this card doesn't carry a confirmed protection suite",
             "included": false
           }
         ]
@@ -147,7 +147,7 @@
       "date": "Ongoing",
       "type": "neutral",
       "badge": "Two-product lineup",
-      "text": "Wayfair/Citi issue two distinct card products: the closed-loop, store-only Wayfair Credit Card (7%/5% at Wayfair brands, unusable elsewhere) and this open-loop Wayfair Mastercard (same 7%/5% at Wayfair brands, plus 3%/2%/1% elsewhere). Confirm which one you're comparing — they are not the same card."
+      "text": "Wayfair/Citi issue two distinct card products: the closed-loop, store-only Wayfair Credit Card (7%/5% at Wayfair brands, unusable elsewhere) and this open-loop Wayfair Mastercard (same 7%/5% at Wayfair brands, plus 3%/2%/1% elsewhere). Confirm which one you're comparing; they are not the same card."
     }
   ]
 }

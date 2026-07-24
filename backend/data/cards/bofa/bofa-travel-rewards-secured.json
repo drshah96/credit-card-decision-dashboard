@@ -6,7 +6,7 @@
   "points_program": "Bank of America Rewards",
   "accent_color": "#2E6F9E",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee, but requires a refundable $200–$5,000 security deposit to set your limit",
+  "effective_cost": "Free, with no annual fee, but requiring a refundable $200–$5,000 security deposit to set your limit",
   "verdict": {
     "status": "situational",
     "text": "Same flat 1.5x as Travel Rewards, no foreign fees while rebuilding",
@@ -37,12 +37,12 @@
       }
     ],
     "per_100k": "$1,500",
-    "note": "Same redemption menu as the unsecured card — value tops out around 1¢/point, with no transfer-partner program."
+    "note": "Same redemption menu as the unsecured card: value tops out around 1¢/point, with no transfer-partner program."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners — points redeem directly as a statement credit against travel/dining purchases, or for cash/gift cards.",
+    "highlight": "No transfer partners: points redeem directly as a statement credit against travel/dining purchases, or for cash/gift cards.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -83,11 +83,11 @@
     },
     {
       "name": "No foreign transaction fees",
-      "detail": "$0 on purchases made outside the US — a rare perk on a secured card."
+      "detail": "$0 on purchases made outside the US, a rare perk on a secured card."
     },
     {
       "name": "Deposit review for return",
-      "detail": "Bank of America periodically reviews your account and, based on credit history, may qualify you to have your deposit returned — not guaranteed for all customers."
+      "detail": "Bank of America periodically reviews your account and, based on credit history, may qualify you to have your deposit returned; not guaranteed for all customers."
     }
   ],
   "additional_cards": {
@@ -113,7 +113,7 @@
         ]
       }
     ],
-    "note": "Free to add — since this account reports to the credit bureaus, an authorized user benefits from the payment history alongside the primary cardholder."
+    "note": "Free to add. Since this account reports to the credit bureaus, an authorized user benefits from the payment history alongside the primary cardholder."
   },
   "timeline": []
 }

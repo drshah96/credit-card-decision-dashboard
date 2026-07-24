@@ -42,7 +42,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "No spend caps on any tier, which is unusual for a sub-$50 co-brand card. But the real catch isn't a subscription requirement — it's that every dollar earned becomes Disney Rewards Dollars, a currency with almost no use outside Disney. Don't get this card for the earn rate; get it for the park perks and Disney-locked spend.",
+  "earn_note": "No spend caps on any tier, which is unusual for a sub-$50 co-brand card. But the real catch isn't a subscription requirement. It's that every dollar earned becomes Disney Rewards Dollars, a currency with almost no use outside Disney. Don't get this card for the earn rate; get it for the park perks and Disney-locked spend.",
   "points": {
     "currency": "Disney Rewards Dollars",
     "redemption_options": [
@@ -53,12 +53,12 @@
       }
     ],
     "per_100k": "$1,000",
-    "note": "Disney Rewards Dollars are dollar-denominated and always worth 1¢ — there's no bonus redemption to chase. The catch is where you can spend them: Disney parks, resorts, cruises, shopping, dining, and (via Pay Yourself Back) airline statement credits. No cash-out option and no transfer partners."
+    "note": "Disney Rewards Dollars are dollar-denominated and always worth 1¢; there's no bonus redemption to chase. The catch is where you can spend them: Disney parks, resorts, cruises, shopping, dining, and (via Pay Yourself Back) airline statement credits. No cash-out option and no transfer partners."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "Disney Rewards Dollars aren't a transferable currency — they're locked to Disney spend (or, via Pay Yourself Back, a statement credit toward airfare). No airline or hotel transfer partners.",
+    "highlight": "Disney Rewards Dollars aren't a transferable currency. They're locked to Disney spend (or, via Pay Yourself Back, a statement credit toward airfare). No airline or hotel transfer partners.",
     "recent_changes": "Not applicable."
   },
   "credits": [
@@ -72,7 +72,7 @@
       "removed": false,
       "description": "Complimentary 12-month DashPass membership ($0 delivery fees, lower service fees), plus up to $10 off per quarter on non-restaurant orders through Dec 2027.",
       "tips": [
-        "Activate it — otherwise it's pure unused value.",
+        "Activate it; otherwise it's pure unused value.",
         "After 12 months it auto-renews at DashPass's then-current monthly rate unless you cancel. Set a reminder."
       ]
     }
@@ -94,8 +94,8 @@
       "level": "mid"
     }
   ],
-  "protection_note": "A retail card's protection suite, not a travel card's — purchase protection, extended warranty, and baggage delay are here as standard Visa Signature benefits, but there's no trip cancellation/interruption, no emergency medical, and no cell phone protection.",
-  "rental_note": "Secondary auto rental collision damage waiver (standard Visa Signature benefit) — decline the counter's CDW and pay with this card. Excludes exotic/luxury makes and rentals over 31 days; pays out after your personal auto policy.",
+  "protection_note": "A retail card's protection suite, not a travel card's: purchase protection, extended warranty, and baggage delay are here as standard Visa Signature benefits, but there's no trip cancellation/interruption, no emergency medical, and no cell phone protection.",
+  "rental_note": "Secondary auto rental collision damage waiver (standard Visa Signature benefit): decline the counter's CDW and pay with this card. Excludes exotic/luxury makes and rentals over 31 days; pays out after your personal auto policy.",
   "status_perks": [],
   "services": [
     {
@@ -112,7 +112,7 @@
     },
     {
       "name": "Foreign transaction fee applies",
-      "detail": "3% on purchases made outside the US — not built for international use, including at Disneyland Paris."
+      "detail": "3% on purchases made outside the US, not built for international use, including at Disneyland Paris."
     }
   ],
   "additional_cards": {
@@ -138,7 +138,7 @@
         ]
       }
     ],
-    "note": "Additional cards are free — no reason not to add a trusted household member, especially if they'll be doing the theme-park spending."
+    "note": "Additional cards are free: no reason not to add a trusted household member, especially if they'll be doing the theme-park spending."
   },
   "timeline": [
     {
@@ -151,7 +151,7 @@
       "date": "2026",
       "type": "neutral",
       "badge": "Offer change",
-      "text": "Welcome offer restructured from a $400 statement credit (after $1,000 spend) to a $200 Disney Gift Card eGift on approval plus a $100 statement credit after $500 spend — same $300 total, lower spend requirement, but split into a gift card instead of a full statement credit."
+      "text": "Welcome offer restructured from a $400 statement credit (after $1,000 spend) to a $200 Disney Gift Card eGift on approval plus a $100 statement credit after $500 spend: same $300 total, lower spend requirement, but split into a gift card instead of a full statement credit."
     }
   ]
 }

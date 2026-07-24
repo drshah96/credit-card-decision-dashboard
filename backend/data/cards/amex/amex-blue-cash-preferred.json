@@ -49,7 +49,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 6% supermarket rate caps at $6,000/yr (max $360/yr) — a household spending even half that already covers the $95 fee several times over. Streaming, gas, and transit round it out well beyond a single-category card.",
+  "earn_note": "The 6% supermarket rate caps at $6,000/yr (max $360/yr). A household spending even half that already covers the $95 fee several times over. Streaming, gas, and transit round it out well beyond a single-category card.",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
@@ -60,12 +60,12 @@
       }
     ],
     "per_100k": "$1,000",
-    "note": "Not a points program — cash back here is always worth exactly 1¢, redeemed as a statement credit. No transfer partners, no premium redemption to chase."
+    "note": "Not a points program: cash back here is always worth exactly 1¢, redeemed as a statement credit. No transfer partners, no premium redemption to chase."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "Cash back isn't a transferable currency — it's a straight statement credit, always worth face value.",
+    "highlight": "Cash back isn't a transferable currency. It's a straight statement credit, always worth face value.",
     "recent_changes": "Not applicable."
   },
   "credits": [
@@ -79,7 +79,7 @@
       "removed": false,
       "description": "Up to $10/month in statement credits toward Disney+, Hulu, or ESPN+ (including the Disney Bundle). Enrollment required.",
       "tips": [
-        "Only worth it if you already subscribe to a Disney streaming service — otherwise it's $0 to you."
+        "Only worth it if you already subscribe to a Disney streaming service; otherwise it's $0 to you."
       ]
     }
   ],
@@ -100,13 +100,13 @@
       "level": "mid"
     }
   ],
-  "protection_note": "This is a cash-back card, not a travel card — no trip delay, trip cancellation, or rental car coverage. What it does have (extended warranty, return protection) is a step up from the fee-free Blue Cash Everyday.",
-  "rental_note": "No rental car coverage at all — use a different card for rentals.",
+  "protection_note": "This is a cash-back card, not a travel card: no trip delay, trip cancellation, or rental car coverage. What it does have (extended warranty, return protection) is a step up from the fee-free Blue Cash Everyday.",
+  "rental_note": "No rental car coverage at all; use a different card for rentals.",
   "status_perks": [],
   "services": [
     {
       "name": "Foreign transaction fee applies",
-      "detail": "2.7% on purchases made outside the US — not built for international use."
+      "detail": "2.7% on purchases made outside the US; not built for international use."
     }
   ],
   "additional_cards": {
@@ -132,7 +132,7 @@
         ]
       }
     ],
-    "note": "Additional cards are free — no reason not to add a trusted household member."
+    "note": "Additional cards are free: no reason not to add a trusted household member."
   },
   "timeline": [
     {

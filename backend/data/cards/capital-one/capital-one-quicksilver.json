@@ -6,17 +6,17 @@
   "points_program": "Cash Back",
   "accent_color": "#7C8792",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee",
+  "effective_cost": "Free, with no annual fee",
   "verdict": {
     "status": "keep",
-    "text": "No annual fee, flat 1.5% cash back — an easy long-term keep",
+    "text": "No annual fee, flat 1.5% cash back: an easy long-term keep",
     "short_tag": "Flat Cash Back"
   },
   "earn_rates": [
     {
       "emoji": "🏨",
       "multiplier": "5%",
-      "category": "Hotels, vacation rentals & rental cars — via Capital One Travel",
+      "category": "Hotels, vacation rentals & rental cars, via Capital One Travel",
       "highlight": true,
       "is_base": false
     },
@@ -35,7 +35,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 1.5% flat base with no rotating categories is the whole pitch. Comes with a one-time $200 cash bonus for spending $500 in the first 3 months. Since May 2026, Capital One has been quietly migrating some Quicksilver and QuicksilverOne accounts (those who got an email notice) onto the Discover network, adding an unlimited 3% cash back category at grocery stores and gas stations on top of the existing 1.5% base and 5% travel rate — not universal yet, and cardholders can opt out and keep their current card.",
+  "earn_note": "The 1.5% flat base with no rotating categories is the whole pitch. Comes with a one-time $200 cash bonus for spending $500 in the first 3 months. Since May 2026, Capital One has been quietly migrating some Quicksilver and QuicksilverOne accounts (those who got an email notice) onto the Discover network, adding an unlimited 3% cash back category at grocery stores and gas stations on top of the existing 1.5% base and 5% travel rate. Not universal yet, and cardholders can opt out and keep their current card.",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
@@ -46,12 +46,12 @@
       }
     ],
     "per_100k": "$1,500",
-    "note": "Straight 1¢-per-point cash back with no minimum redemption and no expiration while the account stays open — there's no premium-card multiplier to chase since this isn't part of a transferable Capital One Miles pool."
+    "note": "Straight 1¢-per-point cash back with no minimum redemption and no expiration while the account stays open. There's no premium-card multiplier to chase since this isn't part of a transferable Capital One Miles pool."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer currency — this is straight cash back, not Capital One Miles.",
+    "highlight": "No transfer currency: this is straight cash back, not Capital One Miles.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -87,13 +87,13 @@
       "level": "none"
     }
   ],
-  "protection_note": "A solid suite for a no-fee card — purchase protection, doubled extended warranty, and even price protection, none of which most $0 cash-back cards bother with. No trip cancellation/interruption, baggage, or medical coverage, so it's still not a travel-card substitute.",
-  "rental_note": "Secondary auto rental collision/theft coverage, up to 31 days — pays out after your personal auto policy. Decline the counter's CDW/LDW and charge the entire rental to this card to activate it; excludes luxury/exotic vehicles and business or peer-to-peer rentals.",
+  "protection_note": "A solid suite for a no-fee card: purchase protection, doubled extended warranty, and even price protection, none of which most $0 cash-back cards bother with. No trip cancellation/interruption, baggage, or medical coverage, so it's still not a travel-card substitute.",
+  "rental_note": "Secondary auto rental collision/theft coverage, up to 31 days, pays out after your personal auto policy. Decline the counter's CDW/LDW and charge the entire rental to this card to activate it; excludes luxury/exotic vehicles and business or peer-to-peer rentals.",
   "status_perks": [
     {
       "name": "Hertz Five Star status",
       "strength": 2,
-      "note": "Skip-the-counter access and a wider vehicle selection at select Hertz locations — a nice-to-have, not a real upgrade guarantee."
+      "note": "Skip-the-counter access and a wider vehicle selection at select Hertz locations, a nice-to-have, not a real upgrade guarantee."
     }
   ],
   "services": [
@@ -137,7 +137,7 @@
         ]
       }
     ],
-    "note": "No cost to add users — a simple way to consolidate household spend onto the flat 1.5% base."
+    "note": "No cost to add users: a simple way to consolidate household spend onto the flat 1.5% base."
   },
   "timeline": [
     {
