@@ -7,6 +7,7 @@
   "accent_color": "#4B2E83",
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee, but this is a BNPL card with no rewards program at all",
+  "official_url": "https://www.usbank.com/credit-cards/split-card-world-mastercard-credit-card.html",
   "verdict": {
     "status": "reconsider",
     "text": "Not a rewards card: forces every purchase into an installment plan",

@@ -104,6 +104,7 @@ class CardModel(Base):
     accent_color: Mapped[str]
     annual_fee_cents: Mapped[int]
     effective_cost_label: Mapped[str]
+    official_url: Mapped[str | None] = mapped_column(default=None)
     verdict_status: Mapped[str]
     verdict_text: Mapped[str]
     verdict_short_tag: Mapped[str | None] = mapped_column(default=None)

@@ -108,6 +108,7 @@ class Card(BaseModel):
     accent_color: str
     annual_fee: int
     effective_cost: str
+    official_url: str | None = None
     verdict: Verdict
     earn_rates: list[EarnRate]
     earn_note: str

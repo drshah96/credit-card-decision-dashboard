@@ -536,7 +536,19 @@ function CardDetail({ card }: { card: Card }) {
                 color: "var(--ink)",
               }}
             >
-              {card.name}
+              {card.official_url ? (
+                <a
+                  href={card.official_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "inherit", textDecoration: "none" }}
+                  title={`Open ${card.name} on ${card.issuer}'s site`}
+                >
+                  {card.name}
+                </a>
+              ) : (
+                card.name
+              )}
             </h2>
             <p
               style={{
@@ -595,19 +607,33 @@ function CardDetail({ card }: { card: Card }) {
             <div className={`verdict-badge ${card.verdict.status}`}>
               {card.verdict.text}
             </div>
-            {cardImage && (
-              <img
-                src={cardImage}
-                alt={`${card.name} card art`}
-                style={{
-                  height: 140,
-                  width: "auto",
-                  maxWidth: "100%",
-                  borderRadius: 12,
-                  boxShadow: "0 12px 28px -12px rgba(15, 23, 42, 0.35)",
-                }}
-              />
-            )}
+            {cardImage && (() => {
+              const img = (
+                <img
+                  src={cardImage}
+                  alt={`${card.name} card art`}
+                  style={{
+                    height: 140,
+                    width: "auto",
+                    maxWidth: "100%",
+                    borderRadius: 12,
+                    boxShadow: "0 12px 28px -12px rgba(15, 23, 42, 0.35)",
+                  }}
+                />
+              );
+              return card.official_url ? (
+                <a
+                  href={card.official_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={`Open ${card.name} on ${card.issuer}'s site`}
+                >
+                  {img}
+                </a>
+              ) : (
+                img
+              );
+            })()}
             <CompareWidget cardId={card.id} />
           </div>
         </div>

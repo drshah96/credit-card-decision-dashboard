@@ -1,12 +1,13 @@
 {
   "id": "amex-marriott-bonvoy-bevy",
-  "name": "Marriott Bonvoy Bevy® Card",
+  "name": "Marriott Bonvoy Bevy® American Express® Card",
   "issuer": "American Express",
   "network": "AMERICAN EXPRESS",
   "points_program": "Marriott Bonvoy",
   "accent_color": "#8C4A5C",
   "annual_fee": 250,
   "effective_cost": "Depends entirely on hotel loyalty; no statement credits",
+  "official_url": "https://www.americanexpress.com/us/credit-cards/card/marriott-bonvoy-bevy/",
   "verdict": {
     "status": "reconsider",
     "text": "Thin on credits: hard to justify without heavy Marriott spend",

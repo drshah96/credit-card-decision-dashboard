@@ -1,12 +1,13 @@
 {
   "id": "capital-one-key-rewards",
-  "name": "Key Rewards® Visa (Pottery Barn / Williams Sonoma / West Elm)",
+  "name": "The Key Rewards® Visa",
   "issuer": "Capital One",
   "network": "VISA SIGNATURE",
   "points_program": "Key Rewards Certificates",
   "accent_color": "#4A3B2C",
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee",
+  "official_url": "https://www.capitalone.com/credit-cards/thekeyrewards/",
   "verdict": {
     "status": "situational",
     "text": "Only worth it if you shop Williams-Sonoma, Pottery Barn, or West Elm",

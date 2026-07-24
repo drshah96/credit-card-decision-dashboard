@@ -113,6 +113,7 @@ export interface TimelineEvent {
 
 /** Returned by GET /api/cards/:id */
 export interface Card extends CardBase {
+  official_url?: string | null;
   earn_rates: EarnRate[];
   earn_note: string;
   points: Points;

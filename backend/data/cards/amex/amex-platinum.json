@@ -1,12 +1,13 @@
 {
   "id": "amex-platinum",
-  "name": "The Platinum Card",
+  "name": "Platinum Card®",
   "issuer": "American Express",
   "network": "AMERICAN EXPRESS",
   "points_program": "Membership Rewards",
   "accent_color": "#C4CBD8",
   "annual_fee": 895,
   "effective_cost": "Depends on usage",
+  "official_url": "https://www.americanexpress.com/us/credit-cards/card/platinum/?inav=en_us_menu_cards_personal_cards_platinum_card",
   "verdict": {
     "status": "situational",
     "text": "Keep if you use the credits + fly",

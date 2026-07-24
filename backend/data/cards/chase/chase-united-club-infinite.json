@@ -1,12 +1,13 @@
 {
   "id": "chase-united-club-infinite",
-  "name": "United Club Infinite Card",
+  "name": "United Club℠ Card",
   "issuer": "Chase",
   "network": "VISA INFINITE",
   "points_program": "MileagePlus",
   "accent_color": "#0B2E5C",
   "annual_fee": 695,
   "effective_cost": "Low if you actually use the United Club",
+  "official_url": "https://creditcards.chase.com/travel-credit-cards/united/club-infinite",
   "verdict": {
     "status": "situational",
     "text": "Keep only if you fly United enough to live in the Club",
