@@ -6,10 +6,10 @@
   "points_program": "Cash Back",
   "accent_color": "#4A7FB5",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee",
+  "effective_cost": "Free, with no annual fee",
   "verdict": {
     "status": "keep",
-    "text": "No annual fee — an easy keep if you shop groceries, gas, or online",
+    "text": "No annual fee: an easy keep if you shop groceries, gas, or online",
     "short_tag": "Groceries & Gas"
   },
   "earn_rates": [
@@ -42,7 +42,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Each 3% category caps at $6,000/yr in spend (max $180/yr per category, $540/yr across all three) before dropping to 1% — generous for a no-fee card, but track your spend if you're close to a cap.",
+  "earn_note": "Each 3% category caps at $6,000/yr in spend (max $180/yr per category, $540/yr across all three) before dropping to 1%. Generous for a no-fee card, but track your spend if you're close to a cap.",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
@@ -53,12 +53,12 @@
       }
     ],
     "per_100k": "$1,000",
-    "note": "Not a points program — cash back here is always worth exactly 1¢, redeemed as a statement credit. No transfer partners, no premium redemption to chase."
+    "note": "Not a points program: cash back here is always worth exactly 1¢, redeemed as a statement credit. No transfer partners, no premium redemption to chase."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "Cash back isn't a transferable currency — it's a straight statement credit, always worth face value.",
+    "highlight": "Cash back isn't a transferable currency. It's a straight statement credit, always worth face value.",
     "recent_changes": "Not applicable."
   },
   "credits": [
@@ -72,7 +72,7 @@
       "removed": false,
       "description": "Monthly statement credit toward a Disney Bundle subscription (Disney+, Hulu, ESPN+).",
       "tips": [
-        "Only worth it if you already subscribe to the Disney Bundle — otherwise it's $0 to you."
+        "Only worth it if you already subscribe to the Disney Bundle; otherwise it's $0 to you."
       ]
     }
   ],
@@ -83,13 +83,13 @@
       "level": "mid"
     }
   ],
-  "protection_note": "Thin by design — this is a no-fee cash-back card, not a travel card. No trip delay, trip cancellation, baggage, or rental car coverage, and no extended warranty (that's reserved for the paid Blue Cash Preferred tier).",
-  "rental_note": "No rental car coverage at all — use a different card for rentals.",
+  "protection_note": "Thin by design: this is a no-fee cash-back card, not a travel card. No trip delay, trip cancellation, baggage, or rental car coverage, and no extended warranty (that's reserved for the paid Blue Cash Preferred tier).",
+  "rental_note": "No rental car coverage at all; use a different card for rentals.",
   "status_perks": [],
   "services": [
     {
       "name": "Foreign transaction fee applies",
-      "detail": "2.7% on purchases made outside the US — unlike the premium cards in this dashboard, this one is not built for international use."
+      "detail": "2.7% on purchases made outside the US. Unlike the premium cards in this dashboard, this one is not built for international use."
     }
   ],
   "additional_cards": {
@@ -115,7 +115,7 @@
         ]
       }
     ],
-    "note": "Additional cards are free — no reason not to add a trusted household member."
+    "note": "Additional cards are free: no reason not to add a trusted household member."
   },
   "timeline": []
 }

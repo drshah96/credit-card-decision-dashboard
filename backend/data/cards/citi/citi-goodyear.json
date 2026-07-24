@@ -2,23 +2,23 @@
   "id": "citi-goodyear",
   "name": "Goodyear Credit Card",
   "issuer": "Citi",
-  "network": "PROPRIETARY (Goodyear / Citi Retail Services — closed-loop, not Visa or Mastercard)",
-  "points_program": "None — no rewards program",
+  "network": "PROPRIETARY (Goodyear / Citi Retail Services, closed-loop, not Visa or Mastercard)",
+  "points_program": "None, no rewards program",
   "accent_color": "#00287A",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee, but purely a store-financing tool with no rewards and no use outside Goodyear and its fuel-station partners",
+  "effective_cost": "Free, with no annual fee, but purely a store-financing tool with no rewards and no use outside Goodyear and its fuel-station partners",
   "verdict": {
     "status": "situational",
-    "text": "A tire financing card, not rewards — only for a specific 0% purchase",
+    "text": "A tire financing card, not rewards: only for a specific 0% purchase",
     "short_tag": "Tire Financing"
   },
   "earn_rates": [],
-  "earn_note": "This card has no cash-back or points program — its value proposition is deferred-interest financing (\"no interest if paid in full within 6 months\" on purchases of $250+) plus periodic rebates on tire purchases and welcome offers (e.g., $50 back on a first purchase of $250+). Unlike Citi's Best Buy or Wayfair co-brands, no open-loop Visa/Mastercard version of this card exists — it's a single, closed-loop product usable only at Goodyear's roughly 17,000 locations and about 11,500 participating Exxon and Mobil fuel stations.",
+  "earn_note": "This card has no cash-back or points program. Its value proposition is deferred-interest financing (\"no interest if paid in full within 6 months\" on purchases of $250+) plus periodic rebates on tire purchases and welcome offers (e.g., $50 back on a first purchase of $250+). Unlike Citi's Best Buy or Wayfair co-brands, no open-loop Visa/Mastercard version of this card exists; it's a single, closed-loop product usable only at Goodyear's roughly 17,000 locations and about 11,500 participating Exxon and Mobil fuel stations.",
   "points": {
     "currency": "None",
     "redemption_options": [],
-    "per_100k": "$0 — no rewards program",
-    "note": "No points or cash back exist on this card. Value comes entirely from promotional 0%-interest financing windows on qualifying purchases, which revert to a high standard variable APR (roughly 22%–27% per Citi's disclosures) if the balance isn't paid in full by the deadline — including retroactive interest back to the purchase date under deferred-interest terms."
+    "per_100k": "$0, no rewards program",
+    "note": "No points or cash back exist on this card. Value comes entirely from promotional 0%-interest financing windows on qualifying purchases, which revert to a high standard variable APR (roughly 22%–27% per Citi's disclosures) if the balance isn't paid in full by the deadline, including retroactive interest back to the purchase date under deferred-interest terms."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -59,8 +59,8 @@
       "level": "none"
     }
   ],
-  "protection_note": "None of the usual card protections apply — this is a closed-loop retail financing account, not a Visa/Mastercard, so there's no purchase protection, extended warranty, or travel insurance of any kind. $0 liability on unauthorized charges is the only fraud-related benefit found.",
-  "rental_note": "No rental car coverage — this card can't be used for rentals or anywhere outside Goodyear locations and participating Exxon/Mobil stations.",
+  "protection_note": "None of the usual card protections apply: this is a closed-loop retail financing account, not a Visa/Mastercard, so there's no purchase protection, extended warranty, or travel insurance of any kind. $0 liability on unauthorized charges is the only fraud-related benefit found.",
+  "rental_note": "No rental car coverage; this card can't be used for rentals or anywhere outside Goodyear locations and participating Exxon/Mobil stations.",
   "status_perks": [],
   "services": [
     {
@@ -69,11 +69,11 @@
     },
     {
       "name": "Welcome offer",
-      "detail": "$50 back on a first purchase of $250+ (offer terms and expiration vary — confirmed valid through 12/31/2026 as of research)."
+      "detail": "$50 back on a first purchase of $250+ (offer terms and expiration vary; confirmed valid through 12/31/2026 as of research)."
     },
     {
       "name": "Usable at partner fuel stations",
-      "detail": "Accepted at over 17,000 Goodyear locations plus roughly 11,500 participating Exxon and Mobil fuel stations nationwide — broader than a typical single-retailer store card, but still closed-loop."
+      "detail": "Accepted at over 17,000 Goodyear locations plus roughly 11,500 participating Exxon and Mobil fuel stations nationwide, broader than a typical single-retailer store card, but still closed-loop."
     },
     {
       "name": "Periodic tire rebates",
@@ -87,14 +87,14 @@
   "additional_cards": {
     "title": "Authorized users",
     "options": [],
-    "note": "No distinct authorized-user program or benefit was found for this card — it's a single-purpose store-financing account."
+    "note": "No distinct authorized-user program or benefit was found for this card; it's a single-purpose store-financing account."
   },
   "timeline": [
     {
       "date": "Ongoing",
       "type": "neutral",
       "badge": "Financing-only, single product",
-      "text": "Unlike several other Citi retail co-brands (Best Buy, Wayfair, Macy's), Goodyear has no open-loop Visa/Mastercard counterpart — this closed-loop card is the only product offered. Value comes entirely from 0%-interest promotional financing windows on tire and service purchases, not from earning rewards."
+      "text": "Unlike several other Citi retail co-brands (Best Buy, Wayfair, Macy's), Goodyear has no open-loop Visa/Mastercard counterpart; this closed-loop card is the only product offered. Value comes entirely from 0%-interest promotional financing windows on tire and service purchases, not from earning rewards."
     }
   ]
 }

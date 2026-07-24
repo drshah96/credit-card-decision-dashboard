@@ -23,14 +23,14 @@
     {
       "emoji": "🏨",
       "multiplier": "3×",
-      "category": "Hotels — booked direct",
+      "category": "Hotels, booked direct",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "🍽️",
       "multiplier": "2×",
-      "category": "Restaurants — worldwide (incl. U.S. takeout/delivery)",
+      "category": "Restaurants, worldwide (incl. U.S. takeout/delivery)",
       "highlight": false,
       "is_base": false
     },
@@ -49,7 +49,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Fine for Delta spend, but you earn SkyMiles — the weakest currency here. For everyday spend, Venture X earns more and more flexibly.",
+  "earn_note": "Fine for Delta spend, but you earn SkyMiles, the weakest currency here. For everyday spend, Venture X earns more and more flexibly.",
   "points": {
     "currency": "Delta SkyMiles",
     "redemption_options": [
@@ -75,8 +75,8 @@
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "SkyMiles can't be transferred out — they're stuck in Delta's program.",
-    "recent_changes": "You can transfer INTO SkyMiles from Amex MR (1:1), Chase UR and Capital One — useful for topping up an award."
+    "highlight": "SkyMiles can't be transferred out; they're stuck in Delta's program.",
+    "recent_changes": "You can transfer INTO SkyMiles from Amex MR (1:1), Chase UR and Capital One, useful for topping up an award."
   },
   "credits": [
     {
@@ -89,7 +89,7 @@
       "removed": false,
       "description": "First checked bag free on Delta flights (you + up to 8 on the reservation); second bag free domestic.",
       "tips": [
-        "~$35 each way per bag per person — a family checking bags on one round trip clears most of the fee.",
+        "~$35 each way per bag per person, so a family checking bags on one round trip clears most of the fee.",
         "You don't even need to pay for the flight with this card."
       ]
     },
@@ -114,9 +114,9 @@
       "default_value": 0,
       "tier": "easy",
       "removed": false,
-      "description": "Up to $10/month at 10,000+ U.S. Resy restaurants (via Global Dining Access by Resy) — added in the 2026 refresh.",
+      "description": "Up to $10/month at 10,000+ U.S. Resy restaurants (via Global Dining Access by Resy), added in the 2026 refresh.",
       "tips": [
-        "Stacks with your Amex Platinum's $400 Resy credit — two cards paying you at the same restaurants.",
+        "Stacks with your Amex Platinum's $400 Resy credit: two cards paying you at the same restaurants.",
         "Monthly, no rollover; one Resy meal a month captures it."
       ]
     },
@@ -128,10 +128,10 @@
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "Each year after renewal, one round-trip Main Cabin companion ticket to the U.S., Caribbean, or Central America — companion pays only taxes/fees ($22–$250).",
+      "description": "Each year after renewal, one round-trip Main Cabin companion ticket to the U.S., Caribbean, or Central America; companion pays only taxes/fees ($22–$250).",
       "tips": [
-        "One qualifying round trip erases the $350 fee. Best on expensive routes — value the slider by the fare you'd save.",
-        "Book fare classes L, U, T, X or V — the cheapest basic buckets sometimes don't qualify."
+        "One qualifying round trip erases the $350 fee. Best on expensive routes; value the slider by the fare you'd save.",
+        "Book fare classes L, U, T, X or V; the cheapest basic buckets sometimes don't qualify."
       ]
     },
     {
@@ -144,7 +144,7 @@
       "removed": false,
       "description": "Up to $150/yr (calendar year) on prepaid hotels or vacation rentals booked through Delta Stays on delta.com.",
       "tips": [
-        "Resets on the calendar year, not renewal — a new cardholder can use it twice on one annual fee.",
+        "Resets on the calendar year, not renewal, so a new cardholder can use it twice on one annual fee.",
         "Use it on a Delta Stays booking you'd make anyway."
       ]
     }
@@ -191,18 +191,18 @@
       "level": "good"
     }
   ],
-  "protection_note": "Thinner than the others — note the weaker $300/12-hour trip delay (vs. $500/6 hrs elsewhere) and secondary rental. It does keep Amex cell-phone protection and Premium Global Assist (incl. no-cost emergency evacuation coordination). Charge trips you want fully insured to the Sapphire Reserve.",
-  "rental_note": "Secondary only — it pays after your own auto policy. For rentals, your CSR or Venture X (free primary) is the better card to put it on.",
+  "protection_note": "Thinner than the others: note the weaker $300/12-hour trip delay (vs. $500/6 hrs elsewhere) and secondary rental. It does keep Amex cell-phone protection and Premium Global Assist (incl. no-cost emergency evacuation coordination). Charge trips you want fully insured to the Sapphire Reserve.",
+  "rental_note": "Secondary only: it pays after your own auto policy. For rentals, your CSR or Venture X (free primary) is the better card to put it on.",
   "status_perks": [
     {
       "name": "Medallion head start",
       "strength": 3,
-      "note": "$2,500 MQD annually plus a spend boost — a meaningful shortcut to Silver/Gold if you're pursuing Delta status."
+      "note": "$2,500 MQD annually plus a spend boost: a meaningful shortcut to Silver/Gold if you're pursuing Delta status."
     },
     {
       "name": "Hertz Five Star",
       "strength": 2,
-      "note": "Mid-tier Hertz status (counter skip, free additional driver, upgrades) — a step below Venture X's President's Circle."
+      "note": "Mid-tier Hertz status (counter skip, free additional driver, upgrades), a step below Venture X's President's Circle."
     },
     {
       "name": "Lounge access",
@@ -237,7 +237,7 @@
         "is_free": true,
         "benefits": [
           {
-            "text": "Free to add — no annual fee for additional Platinum cards",
+            "text": "Free to add: no annual fee for additional Platinum cards",
             "included": true
           },
           {
@@ -253,13 +253,13 @@
             "included": true
           },
           {
-            "text": "Shares the account's credits — no separate set",
+            "text": "Shares the account's credits, no separate set",
             "included": false
           }
         ]
       }
     ],
-    "note": "Additional Delta Platinum cards are free, and each one extends the free-checked-bag + priority-boarding perk — so a travel companion on the account effectively gets their own free bag when you all fly Delta together."
+    "note": "Additional Delta Platinum cards are free, and each one extends the free-checked-bag + priority-boarding perk, so a travel companion on the account effectively gets their own free bag when you all fly Delta together."
   },
   "timeline": [
     {

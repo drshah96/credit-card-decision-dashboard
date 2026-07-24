@@ -6,7 +6,7 @@
   "points_program": "Kohl's Cash",
   "accent_color": "#000E62",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee",
+  "effective_cost": "Free, with no annual fee",
   "verdict": {
     "status": "situational",
     "text": "Strong only for regular Kohl's shoppers who'll spend the Kohl's Cash",
@@ -42,7 +42,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 7.5% at Kohl's is Capital One's marketing framing of 5% base Kohl's-member reward plus 2.5% for using this card instead of the store-only Kohl's Card. Every category — Kohl's, gas, grocery, and everything else — pays out in Kohl's Cash, not usable dollars, so the gas/grocery rates are really 'discounts good only at Kohl's,' not general cash back. No caps disclosed, but plenty of exclusions apply at Kohl's itself (Sephora, certain brands, gift cards).",
+  "earn_note": "The 7.5% at Kohl's is Capital One's marketing framing of 5% base Kohl's-member reward plus 2.5% for using this card instead of the store-only Kohl's Card. Every category (Kohl's, gas, grocery, and everything else) pays out in Kohl's Cash, not usable dollars, so the gas/grocery rates are really 'discounts good only at Kohl's,' not general cash back. No caps disclosed, but plenty of exclusions apply at Kohl's itself (Sephora, certain brands, gift cards).",
   "points": {
     "currency": "Kohl's Cash",
     "redemption_options": [
@@ -52,13 +52,13 @@
         "best": true
       }
     ],
-    "per_100k": "Not applicable — rewards accrue as a Kohl's Cash balance, not a points currency",
-    "note": "Rewards convert to $5 Kohl's Cash increments on the 1st of the following month and expire just 30 days later. This short, hard-cutoff expiration is the single biggest catch on the card — unspent balances are simply forfeited, unlike BJ's or most cash-back cards where rewards sit indefinitely."
+    "per_100k": "Not applicable: rewards accrue as a Kohl's Cash balance, not a points currency",
+    "note": "Rewards convert to $5 Kohl's Cash increments on the 1st of the following month and expire just 30 days later. This short, hard-cutoff expiration is the single biggest catch on the card: unspent balances are simply forfeited, unlike BJ's or most cash-back cards where rewards sit indefinitely."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners — Kohl's Cash is a closed-loop, single-retailer currency with no travel or cash-out option.",
+    "highlight": "No transfer partners: Kohl's Cash is a closed-loop, single-retailer currency with no travel or cash-out option.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -89,7 +89,7 @@
       "level": "none"
     }
   ],
-  "protection_note": "Visa Signature status brings 24/7 concierge and travel/emergency assistance, but Capital One's public terms don't document purchase protection, extended warranty, or trip coverage for this specific card — unlike some Visa Signature issuers, these benefits don't appear to be layered on here. Treat it as unprotected for big-ticket purchases.",
+  "protection_note": "Visa Signature status brings 24/7 concierge and travel/emergency assistance, but Capital One's public terms don't document purchase protection, extended warranty, or trip coverage for this specific card. Unlike some Visa Signature issuers, these benefits don't appear to be layered on here. Treat it as unprotected for big-ticket purchases.",
   "rental_note": "No rental car coverage documented for this card.",
   "status_perks": [
     {
@@ -131,7 +131,7 @@
         ]
       }
     ],
-    "note": "Free to add — useful for consolidating a household's Kohl's spend to hit MVC status faster, but doesn't help beat the 30-day Kohl's Cash expiration."
+    "note": "Free to add: useful for consolidating a household's Kohl's spend to hit MVC status faster, but doesn't help beat the 30-day Kohl's Cash expiration."
   },
   "timeline": [
     {

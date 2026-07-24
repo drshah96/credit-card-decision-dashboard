@@ -6,10 +6,10 @@
   "points_program": "Neighbor's Club Rewards",
   "accent_color": "#DA291C",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee",
+  "effective_cost": "Free, with no annual fee",
   "verdict": {
     "status": "situational",
-    "text": "Strong 5% for regular farm/ranch shoppers — still a specialty card",
+    "text": "Strong 5% for regular farm/ranch shoppers, still a specialty card",
     "short_tag": "Farm & Ranch Shoppers"
   },
   "earn_rates": [
@@ -35,7 +35,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "This is the open-loop Visa version of Tractor Supply's card — it earns outside Tractor Supply/Petsense, unlike the closed-loop, store-only TSC Store Card, which earns the same 5% at Tractor Supply/Petsense but nothing elsewhere. Cardholders are automatically enrolled as Preferred Plus Neighbors, the highest tier of Tractor Supply's separate Neighbor's Club loyalty program. Special financing offers (e.g., a 3.99% promotional rate on purchases of $1,599+) periodically run at TractorSupply.com/TSCCard on purchases of $199 and up.",
+  "earn_note": "This is the open-loop Visa version of Tractor Supply's card: it earns outside Tractor Supply/Petsense, unlike the closed-loop, store-only TSC Store Card, which earns the same 5% at Tractor Supply/Petsense but nothing elsewhere. Cardholders are automatically enrolled as Preferred Plus Neighbors, the highest tier of Tractor Supply's separate Neighbor's Club loyalty program. Special financing offers (e.g., a 3.99% promotional rate on purchases of $1,599+) periodically run at TractorSupply.com/TSCCard on purchases of $199 and up.",
   "points": {
     "currency": "Neighbor's Club Rewards",
     "redemption_options": [
@@ -45,13 +45,13 @@
         "best": true
       }
     ],
-    "per_100k": "$1,000 in Tractor Supply / Petsense rewards — no other redemption exists",
-    "note": "A closed-loop currency despite the open-loop Visa network — rewards come back as Tractor Supply/Petsense credit, not cash or a statement credit."
+    "per_100k": "$1,000 in Tractor Supply / Petsense rewards, no other redemption exists",
+    "note": "A closed-loop currency despite the open-loop Visa network: rewards come back as Tractor Supply/Petsense credit, not cash or a statement credit."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners — Neighbor's Club Rewards redeem only at Tractor Supply and Petsense.",
+    "highlight": "No transfer partners: Neighbor's Club Rewards redeem only at Tractor Supply and Petsense.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -127,7 +127,7 @@
             "included": true
           },
           {
-            "text": "No dedicated insurance to share — this card doesn't carry a confirmed protection suite",
+            "text": "No dedicated insurance to share: this card doesn't carry a confirmed protection suite",
             "included": false
           }
         ]
@@ -140,7 +140,7 @@
       "date": "Ongoing",
       "type": "neutral",
       "badge": "Two-product lineup",
-      "text": "Tractor Supply/Citi issue two distinct card products: the closed-loop, store-only TSC Store Card (5% at Tractor Supply/Petsense, unusable elsewhere) and this open-loop TSC Visa Card (same 5%, plus 3% gas/grocery/vet and 1% elsewhere). Confirm which one you're comparing — they are not the same card."
+      "text": "Tractor Supply/Citi issue two distinct card products: the closed-loop, store-only TSC Store Card (5% at Tractor Supply/Petsense, unusable elsewhere) and this open-loop TSC Visa Card (same 5%, plus 3% gas/grocery/vet and 1% elsewhere). Confirm which one you're comparing; they are not the same card."
     }
   ]
 }

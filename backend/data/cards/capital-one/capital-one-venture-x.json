@@ -9,33 +9,33 @@
   "effective_cost": "~$0 net",
   "verdict": {
     "status": "keep",
-    "text": "Keep — the value anchor",
+    "text": "Keep: the value anchor",
     "short_tag": "Value Anchor"
   },
   "earn_rates": [
     {
       "emoji": "🏨",
       "multiplier": "10×",
-      "category": "Hotels & rental cars — via Capital One Travel",
+      "category": "Hotels & rental cars, via Capital One Travel",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "✈️",
       "multiplier": "5×",
-      "category": "Flights & vacation rentals — via Capital One Travel",
+      "category": "Flights & vacation rentals, via Capital One Travel",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "🌐",
       "multiplier": "2×",
-      "category": "Everything else — no categories",
+      "category": "Everything else, no categories",
       "highlight": true,
       "is_base": false
     }
   ],
-  "earn_note": "The flat 2× on everything is the quiet star — it beats the 1× base on both the Amex Platinum and Sapphire Reserve, with nothing to track.",
+  "earn_note": "The flat 2× on everything is the quiet star. It beats the 1× base on both the Amex Platinum and Sapphire Reserve, with nothing to track.",
   "points": {
     "currency": "Capital One Miles",
     "redemption_options": [
@@ -56,13 +56,13 @@
       }
     ],
     "per_100k": "$1,850+",
-    "note": "Guaranteed 1¢ floor as a travel eraser on any travel charge — no other card here has that safety net."
+    "note": "Guaranteed 1¢ floor as a travel eraser on any travel charge; no other card here has that safety net."
   },
   "transfer_partners": {
     "airline_count": 18,
     "hotel_count": 4,
     "highlight": "18 airline partners (up from 15) and 4 hotel partners (Choice, Wyndham, I Prefer, Accor Live Limitless). Best sweet spots: Turkish (Star Alliance short-hauls, exclusive partner), Flying Blue, Virgin Red, JAL.",
-    "recent_changes": "The gap vs. Chase: no Hyatt and no U.S. legacy airline — but the 1¢ eraser floor means miles are never worthless. Hotel side grew from 3 to 4 partners with Accor Live Limitless."
+    "recent_changes": "The gap vs. Chase: no Hyatt and no U.S. legacy airline. But the 1¢ eraser floor means miles are never worthless. Hotel side grew from 3 to 4 partners with Accor Live Limitless."
   },
   "credits": [
     {
@@ -75,8 +75,8 @@
       "removed": false,
       "description": "A $300 credit on bookings through the Capital One Travel portal, resetting each anniversary.",
       "tips": [
-        "Portal-only — book something you'd buy anyway. It price-matches within 24 hrs.",
-        "Resets on your anniversary, not Jan 1 — don't let it lapse."
+        "Portal-only: book something you'd buy anyway. It price-matches within 24 hrs.",
+        "Resets on your anniversary, not Jan 1; don't let it lapse."
       ]
     },
     {
@@ -87,9 +87,9 @@
       "default_value": 0,
       "tier": "easy",
       "removed": false,
-      "description": "10,000 miles (≥$100 toward travel) deposited automatically every anniversary — no spend required.",
+      "description": "10,000 miles (≥$100 toward travel) deposited automatically every anniversary, no spend required.",
       "tips": [
-        "Totally passive. With the $300 credit, that's ~$400 against a $395 fee — the card pays for itself."
+        "Totally passive. With the $300 credit, that's ~$400 against a $395 fee; the card pays for itself."
       ]
     },
     {
@@ -149,13 +149,13 @@
       "level": "strong"
     }
   ],
-  "protection_note": "Well-rounded for the price: primary rental, cell-phone, purchase AND return protection — it's the only one of the four with return protection. The catch is a low $2,000 trip-cancellation cap and no medical, so charge big prepaid or international trips to the Sapphire Reserve.",
-  "rental_note": "Like the CSR, the Venture X gives free primary coverage (up to $75k) — pays before your own policy. Between this and the CSR, you never need the Amex's paid Premium Car Rental Protection.",
+  "protection_note": "Well-rounded for the price: primary rental, cell-phone, purchase AND return protection. It's the only one of the four with return protection. The catch is a low $2,000 trip-cancellation cap and no medical, so charge big prepaid or international trips to the Sapphire Reserve.",
+  "rental_note": "Like the CSR, the Venture X gives free primary coverage (up to $75k), paying before your own policy. Between this and the CSR, you never need the Amex's paid Premium Car Rental Protection.",
   "status_perks": [
     {
       "name": "Hertz President's Circle",
       "strength": 3,
-      "note": "Top-tier Hertz status — better fleet and upgrades. Useful only if you rent often."
+      "note": "Top-tier Hertz status: better fleet and upgrades. Useful only if you rent often."
     },
     {
       "name": "Capital One Travel upgrades",
@@ -191,7 +191,7 @@
         "is_free": true,
         "benefits": [
           {
-            "text": "Free to add — up to 4 authorized users",
+            "text": "Free to add: up to 4 authorized users",
             "included": true
           },
           {
@@ -213,7 +213,7 @@
         ]
       }
     ],
-    "note": "Up to 4 authorized users are free — the best AU deal here. The only catch is the new $125-per-user lounge fee from Feb 2026; skip it for a user who won't use lounges and they still keep status + protections at no cost."
+    "note": "Up to 4 authorized users are free, the best AU deal here. The only catch is the new $125-per-user lounge fee from Feb 2026; skip it for a user who won't use lounges and they still keep status + protections at no cost."
   },
   "timeline": [
     {
@@ -226,7 +226,7 @@
       "date": "2025",
       "type": "add",
       "badge": "Add",
-      "text": "Japan Airlines added as a transfer partner — a rare, high-value option for Japan travel."
+      "text": "Japan Airlines added as a transfer partner, a rare, high-value option for Japan travel."
     },
     {
       "date": "2022–24",
@@ -238,7 +238,7 @@
       "date": "2021",
       "type": "add",
       "badge": "Launch",
-      "text": "Debuts at $395 — dramatically undercutting the Amex Platinum and Sapphire Reserve."
+      "text": "Debuts at $395, dramatically undercutting the Amex Platinum and Sapphire Reserve."
     }
   ]
 }

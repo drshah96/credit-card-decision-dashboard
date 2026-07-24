@@ -6,10 +6,10 @@
   "points_program": "Bank of America Rewards",
   "accent_color": "#1E3F8F",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee, and no foreign transaction fees",
+  "effective_cost": "Free, with no annual fee, and no foreign transaction fees",
   "verdict": {
     "status": "keep",
-    "text": "Solid no-fee travel earner — flat 1.5x, no blackout dates",
+    "text": "Solid no-fee travel earner: flat 1.5x, no blackout dates",
     "short_tag": "No Foreign Fees"
   },
   "earn_rates": [
@@ -21,7 +21,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "A genuinely flat rate with no categories or caps. Points redeem as a statement credit against any travel purchase — flights, hotels, vacation rentals, baggage fees — and also against dining, including takeout. Enrolled BofA Rewards members get a 10–75% bonus on top of the 1.5x rate depending on combined deposit/investment balance.",
+  "earn_note": "A genuinely flat rate with no categories or caps. Points redeem as a statement credit against any travel purchase (flights, hotels, vacation rentals, baggage fees) and also against dining, including takeout. Enrolled BofA Rewards members get a 10–75% bonus on top of the 1.5x rate depending on combined deposit/investment balance.",
   "points": {
     "currency": "Bank of America Rewards",
     "redemption_options": [
@@ -37,12 +37,12 @@
       }
     ],
     "per_100k": "$1,500–$1,700",
-    "note": "Value tops out around 1¢/point regardless of redemption method — there's no transfer-partner ecosystem behind this program, just a flat, no-fuss statement-credit redemption."
+    "note": "Value tops out around 1¢/point regardless of redemption method. There's no transfer-partner ecosystem behind this program, just a flat, no-fuss statement-credit redemption."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners — points redeem directly as a statement credit against travel/dining purchases, or for cash/gift cards.",
+    "highlight": "No transfer partners: points redeem directly as a statement credit against travel/dining purchases, or for cash/gift cards.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -73,13 +73,13 @@
       "level": "none"
     }
   ],
-  "protection_note": "Bank of America's purchase/travel protection suite (Return Protection, Purchase Security, Auto Rental CDW, trip insurance) is only advertised on the Premium Rewards cards — it isn't published for this card.",
+  "protection_note": "Bank of America's purchase/travel protection suite (Return Protection, Purchase Security, Auto Rental CDW, trip insurance) is only advertised on the Premium Rewards cards; it isn't published for this card.",
   "rental_note": "No auto rental coverage documented publicly for this card as of this writing.",
   "status_perks": [],
   "services": [
     {
       "name": "25,000-point welcome bonus",
-      "detail": "After $1,000 in purchases within the first 90 days — a $250 value toward travel or dining."
+      "detail": "After $1,000 in purchases within the first 90 days, a $250 value toward travel or dining."
     },
     {
       "name": "0% intro APR",
@@ -117,7 +117,7 @@
         ]
       }
     ],
-    "note": "No cost to add — flat-rate earning means there's no category math to coordinate across users."
+    "note": "No cost to add: flat-rate earning means there's no category math to coordinate across users."
   },
   "timeline": []
 }

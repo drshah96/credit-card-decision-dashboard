@@ -6,7 +6,7 @@
   "points_program": "Key Rewards Certificates",
   "accent_color": "#4A3B2C",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee",
+  "effective_cost": "Free, with no annual fee",
   "verdict": {
     "status": "situational",
     "text": "Only worth it if you shop Williams-Sonoma, Pottery Barn, or West Elm",
@@ -35,7 +35,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "New cardmembers get 10% back at the family of brands for the first 30 days, dropping to a standing 5% after that. Rewards purchased on 0% promotional financing plans (12 equal payments, $750+) don't earn any rewards at all — pick one or the other on a big purchase, not both. Rate applies identically across all eight brands regardless of which one's name is on your card; there's no per-store bonus.",
+  "earn_note": "New cardmembers get 10% back at the family of brands for the first 30 days, dropping to a standing 5% after that. Rewards purchased on 0% promotional financing plans (12 equal payments, $750+) don't earn any rewards at all; pick one or the other on a big purchase, not both. Rate applies identically across all eight brands regardless of which one's name is on your card; there's no per-store bonus.",
   "points": {
     "currency": "Key Rewards Certificates",
     "redemption_options": [
@@ -46,12 +46,12 @@
       }
     ],
     "per_100k": "$1,000 in store certificates (family-of-brands only)",
-    "note": "This is not cash back despite the percentage marketing — it's a locked merchandise-certificate currency. No statement credit, no bank deposit, no gift cards to other retailers, no travel redemption. If you don't shop these brands, the rewards are close to worthless to you."
+    "note": "This is not cash back despite the percentage marketing; it's a locked merchandise-certificate currency. No statement credit, no bank deposit, no gift cards to other retailers, no travel redemption. If you don't shop these brands, the rewards are close to worthless to you."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners of any kind. Certificates are good only at Williams Sonoma, Williams Sonoma Home, Pottery Barn, Pottery Barn Kids, Pottery Barn Teen, West Elm, Rejuvenation, and Mark & Graham — a closed loop within Williams-Sonoma, Inc.'s brand family.",
+    "highlight": "No transfer partners of any kind. Certificates are good only at Williams Sonoma, Williams Sonoma Home, Pottery Barn, Pottery Barn Kids, Pottery Barn Teen, West Elm, Rejuvenation, and Mark & Graham, a closed loop within Williams-Sonoma, Inc.'s brand family.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -87,8 +87,8 @@
       "level": "none"
     }
   ],
-  "protection_note": "Despite the Visa Signature label, the specific benefits guide Capital One issues for this card (\"Visa Signature Registered Card,\" Williams-Sonoma Inc. brands) carries none of the purchase protection, extended warranty, or trip/baggage insurance a typical Visa Signature card has. What's actually included is a referral-only concierge line, travel/emergency assistance (you pay for anything arranged), and a pay-per-use roadside dispatch service — none of which are insurance.",
-  "rental_note": "No rental car coverage of any kind. Roadside Dispatch (a separate, unrelated benefit) is a pay-per-use towing/locksmith referral service — around $80 per call as of the card's Dec 2024 benefits guide — not a collision damage waiver.",
+  "protection_note": "Despite the Visa Signature label, the specific benefits guide Capital One issues for this card (\"Visa Signature Registered Card,\" Williams-Sonoma Inc. brands) carries none of the purchase protection, extended warranty, or trip/baggage insurance a typical Visa Signature card has. What's actually included is a referral-only concierge line, travel/emergency assistance (you pay for anything arranged), and a pay-per-use roadside dispatch service; none of which are insurance.",
+  "rental_note": "No rental car coverage of any kind. Roadside Dispatch (a separate, unrelated benefit) is a pay-per-use towing/locksmith referral service (around $80 per call as of the card's Dec 2024 benefits guide), not a collision damage waiver.",
   "status_perks": [
     {
       "name": "Visa Signature Luxury Hotel Collection",
@@ -98,7 +98,7 @@
     {
       "name": "Troon Rewards",
       "strength": 1,
-      "note": "Discounts on golf fees and merchandise via Troon-managed courses — niche, another generic Visa Signature add-on."
+      "note": "Discounts on golf fees and merchandise via Troon-managed courses, niche, another generic Visa Signature add-on."
     }
   ],
   "services": [
@@ -116,7 +116,7 @@
     },
     {
       "name": "Visa Signature Concierge",
-      "detail": "24/7 referral line for reservations, tickets, and travel planning — you pay for anything booked through it."
+      "detail": "24/7 referral line for reservations, tickets, and travel planning; you pay for anything booked through it."
     },
     {
       "name": "Roadside Dispatch",
@@ -144,20 +144,20 @@
             "included": true
           },
           {
-            "text": "No dedicated insurance or purchase protections to share — this card doesn't have any",
+            "text": "No dedicated insurance or purchase protections to share: this card doesn't have any",
             "included": false
           }
         ]
       }
     ],
-    "note": "Free to add, but there's little extra benefit beyond pooling spend toward the 5% category — the card has no protections worth extending to a second cardholder."
+    "note": "Free to add, but there's little extra benefit beyond pooling spend toward the 5% category; the card has no protections worth extending to a second cardholder."
   },
   "timeline": [
     {
       "date": "Dec 31, 2025",
       "type": "neutral",
       "badge": "Repriced",
-      "text": "Current cardholder agreement lists 29.24% variable APR (up from 26.49% in the original 2022 agreement) and a $5-or-5% cash advance fee (up from $10-or-4%). Terms shift periodically with the Prime Rate and repricing — check your own agreement for the exact number in effect."
+      "text": "Current cardholder agreement lists 29.24% variable APR (up from 26.49% in the original 2022 agreement) and a $5-or-5% cash advance fee (up from $10-or-4%). Terms shift periodically with the Prime Rate and repricing; check your own agreement for the exact number in effect."
     },
     {
       "date": "Late 2021",

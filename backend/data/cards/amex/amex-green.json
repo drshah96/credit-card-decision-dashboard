@@ -16,14 +16,14 @@
     {
       "emoji": "✈️",
       "multiplier": "3×",
-      "category": "Travel — flights, hotels, cruises, car rentals, vacation rentals",
+      "category": "Travel: flights, hotels, cruises, car rentals, vacation rentals",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "🚕",
       "multiplier": "3×",
-      "category": "Transit — trains, rideshare, tolls, parking, buses, subways",
+      "category": "Transit: trains, rideshare, tolls, parking, buses, subways",
       "highlight": true,
       "is_base": false
     },
@@ -42,7 +42,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The broadest 3× categories of any no-fee-adjacent Amex — travel, transit, and dining all qualify, which covers most day-to-day spend for someone who commutes or travels regularly.",
+  "earn_note": "The broadest 3× categories of any no-fee-adjacent Amex: travel, transit, and dining all qualify, which covers most day-to-day spend for someone who commutes or travels regularly.",
   "points": {
     "currency": "Membership Rewards",
     "redemption_options": [
@@ -63,12 +63,12 @@
       }
     ],
     "per_100k": "$2,000",
-    "note": "Same Membership Rewards currency and transfer partner chart as the Platinum and Gold — cashing out at 0.6¢ throws away most of the value."
+    "note": "Same Membership Rewards currency and transfer partner chart as the Platinum and Gold. Cashing out at 0.6¢ throws away most of the value."
   },
   "transfer_partners": {
     "airline_count": 17,
     "hotel_count": 3,
-    "highlight": "Full access to the same Membership Rewards transfer chart as the Platinum and Gold — 17 airline and 3 hotel partners.",
+    "highlight": "Full access to the same Membership Rewards transfer chart as the Platinum and Gold: 17 airline and 3 hotel partners.",
     "recent_changes": "Subject to the same program-wide changes as any other Membership Rewards card."
   },
   "credits": [
@@ -108,8 +108,8 @@
       "level": "mid"
     }
   ],
-  "protection_note": "Standard-tier Amex protection across the board — purchase protection caps at $1,000/item (not the $10,000 premium-card tier), and the 12-hour trip delay trigger is one of the weaker windows in this dashboard.",
-  "rental_note": "Secondary coverage only — put rentals on a card with primary coverage if you rent often.",
+  "protection_note": "Standard-tier Amex protection across the board. Purchase protection caps at $1,000/item (not the $10,000 premium-card tier), and the 12-hour trip delay trigger is one of the weaker windows in this dashboard.",
+  "rental_note": "Secondary coverage only; put rentals on a card with primary coverage if you rent often.",
   "status_perks": [],
   "services": [
     {
@@ -134,7 +134,7 @@
         "is_free": true,
         "benefits": [
           {
-            "text": "Free to add — no authorized user fee",
+            "text": "Free to add: no authorized user fee",
             "included": true
           },
           {

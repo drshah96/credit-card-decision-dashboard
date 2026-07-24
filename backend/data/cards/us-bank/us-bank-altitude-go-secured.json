@@ -6,17 +6,17 @@
   "points_program": "U.S. Bank Rewards",
   "accent_color": "#5C7A9E",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee, but requires a refundable $300–$5,000 security deposit to set your limit",
+  "effective_cost": "Free, with no annual fee, but requiring a refundable $300–$5,000 security deposit to set your limit",
   "verdict": {
     "status": "situational",
-    "text": "Same 4x dining as the unsecured Altitude Go — good for rebuilding credit",
+    "text": "Same 4x dining as the unsecured Altitude Go, good for rebuilding credit",
     "short_tag": "Credit Building"
   },
   "earn_rates": [
     {
       "emoji": "🍽️",
       "multiplier": "4×",
-      "category": "Dining, takeout & restaurant delivery — first $2,000/qtr, then 1×",
+      "category": "Dining, takeout & restaurant delivery, first $2,000/qtr, then 1×",
       "highlight": true,
       "is_base": false
     },
@@ -42,7 +42,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Identical earn structure to the unsecured Altitude Go — this is one of the few secured cards that doesn't earn a worse rate than its unsecured sibling. Discount stores/supercenters and wholesale clubs are excluded from the grocery and gas bonus categories.",
+  "earn_note": "Identical earn structure to the unsecured Altitude Go: this is one of the few secured cards that doesn't earn a worse rate than its unsecured sibling. Discount stores/supercenters and wholesale clubs are excluded from the grocery and gas bonus categories.",
   "points": {
     "currency": "U.S. Bank Rewards",
     "redemption_options": [
@@ -58,12 +58,12 @@
       }
     ],
     "per_100k": "$1,000–$1,600",
-    "note": "Same redemption menu as the unsecured card — value tops out around 1¢/point regardless of method."
+    "note": "Same redemption menu as the unsecured card: value tops out around 1¢/point regardless of method."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners — points redeem directly for cash, travel, merchandise, or gift cards at a flat rate.",
+    "highlight": "No transfer partners: points redeem directly for cash, travel, merchandise, or gift cards at a flat rate.",
     "recent_changes": "Not applicable."
   },
   "credits": [
@@ -77,7 +77,7 @@
       "removed": false,
       "description": "A $15 statement credit automatically applied after 11 consecutive calendar months of eligible streaming purchases, if the account is in good standing.",
       "tips": [
-        "Stacks with the 2× streaming earn rate — you get the points and the credit."
+        "Stacks with the 2× streaming earn rate, so you get the points and the credit."
       ]
     }
   ],
@@ -148,7 +148,7 @@
         ]
       }
     ],
-    "note": "Free to add — since this account reports to all three bureaus, an authorized user benefits from the payment history alongside the primary cardholder."
+    "note": "Free to add. Since this account reports to all three bureaus, an authorized user benefits from the payment history alongside the primary cardholder."
   },
   "timeline": []
 }

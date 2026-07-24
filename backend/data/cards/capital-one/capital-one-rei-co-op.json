@@ -6,10 +6,10 @@
   "points_program": "REI Co-op Mastercard Rewards",
   "accent_color": "#2F5233",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee, but requires an active REI Co-op membership ($30 one-time fee)",
+  "effective_cost": "Free, with no annual fee, but requiring an active REI Co-op membership ($30 one-time fee)",
   "verdict": {
     "status": "situational",
-    "text": "Solid for REI regulars — 5% at REI, but base rate is unremarkable",
+    "text": "Solid for REI regulars: 5% at REI, but base rate is unremarkable",
     "short_tag": "REI Shoppers"
   },
   "earn_rates": [
@@ -35,23 +35,23 @@
       "is_base": true
     }
   ],
-  "earn_note": "Rewards post as they're earned and never expire for the life of the account — better than most store cards' certificate-and-clock model. The 1.5% base rate is fine but unexceptional; this card earns its keep almost entirely at REI itself. An active REI Co-op membership ($30 one-time fee, separate from the card) is required to hold the card at all.",
+  "earn_note": "Rewards post as they're earned and never expire for the life of the account, better than most store cards' certificate-and-clock model. The 1.5% base rate is fine but unexceptional; this card earns its keep almost entirely at REI itself. An active REI Co-op membership ($30 one-time fee, separate from the card) is required to hold the card at all.",
   "points": {
     "currency": "REI Co-op Mastercard Rewards (cash-equivalent, REI-redeemable)",
     "redemption_options": [
       {
-        "method": "Redeemed at REI (in-store or online) as they're earned — no minimum threshold, no expiration",
+        "method": "Redeemed at REI (in-store or online) as they're earned, no minimum threshold, no expiration",
         "cpp": 1.0,
         "best": true
       }
     ],
     "per_100k": "$1,500 (at the 1.5% base rate on non-REI spend)",
-    "note": "Functions like cash back but is spent at REI rather than deposited or applied as a statement credit — check REI's own redemption flow for whether non-REI cash-out is offered before assuming full flexibility."
+    "note": "Functions like cash back but is spent at REI rather than deposited or applied as a statement credit; check REI's own redemption flow for whether non-REI cash-out is offered before assuming full flexibility."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners — this is a retail rewards currency tied to REI, not a travel points program.",
+    "highlight": "No transfer partners: this is a retail rewards currency tied to REI, not a travel points program.",
     "recent_changes": "Not applicable."
   },
   "credits": [
@@ -65,7 +65,7 @@
       "removed": false,
       "description": "A $50 statement credit, once per calendar year, when you book an REI Co-op Experience (classes/events) with the card. Excludes REI gear rentals. Credit posts 6–8 weeks after purchase.",
       "tips": [
-        "Only useful if you actually take an REI class or guided outing each year — it doesn't apply to rentals or gear.",
+        "Only useful if you actually take an REI class or guided outing each year; it doesn't apply to rentals or gear.",
         "One credit per calendar year, so time a $50+ Experience purchase deliberately rather than letting it go unused."
       ]
     }
@@ -102,19 +102,19 @@
       "level": "none"
     }
   ],
-  "protection_note": "A genuinely solid World Elite Mastercard insurance suite for a no-fee card — extended warranty in particular ($10,000/claim, doubles up to 2 years) beats most no-fee cash-back cards outright. Trip cancellation and luggage coverage are both secondary and capped modestly, so don't rely on this alone for an expensive international trip.",
-  "rental_note": "Secondary CDW via Mastercard's MasterRental program — decline the rental counter's own waiver, pay for the entire rental with this card, and it covers physical damage/theft up to 31 days. Pays after your personal auto policy, and excludes personal injury/liability.",
+  "protection_note": "A genuinely solid World Elite Mastercard insurance suite for a no-fee card: extended warranty in particular ($10,000/claim, doubles up to 2 years) beats most no-fee cash-back cards outright. Trip cancellation and luggage coverage are both secondary and capped modestly, so don't rely on this alone for an expensive international trip.",
+  "rental_note": "Secondary CDW via Mastercard's MasterRental program: decline the rental counter's own waiver, pay for the entire rental with this card, and it covers physical damage/theft up to 31 days. Pays after your personal auto policy, and excludes personal injury/liability.",
   "status_perks": [
     {
       "name": "LoungeKey airport lounge access",
       "strength": 1,
-      "note": "Not complimentary — cardholders get LoungeKey membership with pay-as-you-go visits at $32/person, across 1,000+ lounges in 120+ countries. A minor perk, not free lounge access."
+      "note": "Not complimentary: cardholders get LoungeKey membership with pay-as-you-go visits at $32/person, across 1,000+ lounges in 120+ countries. A minor perk, not free lounge access."
     }
   ],
   "services": [
     {
       "name": "REI Co-op membership required",
-      "detail": "The card is only available to REI Co-op members, which requires a separate one-time $30 lifetime membership fee — not included in or waived by the card."
+      "detail": "The card is only available to REI Co-op members, which requires a separate one-time $30 lifetime membership fee; not included in or waived by the card."
     },
     {
       "name": "$100 REI gift card welcome bonus",
@@ -126,7 +126,7 @@
     },
     {
       "name": "World Elite Mastercard Concierge",
-      "detail": "24/7 referral line for travel, dining, and event bookings — you pay for anything arranged through it."
+      "detail": "24/7 referral line for travel, dining, and event bookings; you pay for anything arranged through it."
     },
     {
       "name": "Travel & Emergency Assistance",
@@ -142,7 +142,7 @@
     },
     {
       "name": "$2M annual donation to REI Cooperative Action Fund",
-      "detail": "Capital One commits an annual donation funded by the card program — a brand-level perk, not a personal cardholder benefit."
+      "detail": "Capital One commits an annual donation funded by the card program, a brand-level perk, not a personal cardholder benefit."
     }
   ],
   "additional_cards": {
@@ -168,7 +168,7 @@
         ]
       }
     ],
-    "note": "Free to add, and authorized users share the card's above-average purchase protection and extended warranty coverage — a real benefit given this card's insurance suite is stronger than most no-fee cards."
+    "note": "Free to add, and authorized users share the card's above-average purchase protection and extended warranty coverage, a real benefit given this card's insurance suite is stronger than most no-fee cards."
   },
   "timeline": [
     {

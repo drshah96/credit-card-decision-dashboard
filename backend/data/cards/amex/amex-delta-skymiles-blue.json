@@ -6,10 +6,10 @@
   "points_program": "Delta SkyMiles",
   "accent_color": "#A8D8F0",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee",
+  "effective_cost": "Free, with no annual fee",
   "verdict": {
     "status": "keep",
-    "text": "Free SkyMiles earner — fine as a backup, not a reason to fly Delta",
+    "text": "Free SkyMiles earner: fine as a backup, not a reason to fly Delta",
     "short_tag": "Backup SkyMiles"
   },
   "earn_rates": [
@@ -35,7 +35,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "No annual fee means no free checked bag either — this card earns SkyMiles slowly and gives up the one benefit (the free bag) that makes the paid Delta tiers worth carrying.",
+  "earn_note": "No annual fee means no free checked bag either. This card earns SkyMiles slowly and gives up the one benefit (the free bag) that makes the paid Delta tiers worth carrying.",
   "points": {
     "currency": "Delta SkyMiles",
     "redemption_options": [
@@ -56,13 +56,13 @@
       }
     ],
     "per_100k": "$1,100–1,200",
-    "note": "Same SkyMiles currency as the rest of the Delta lineup — this card is purely about earning it for free, not about any card-side perks."
+    "note": "Same SkyMiles currency as the rest of the Delta lineup; this card is purely about earning it for free, not about any card-side perks."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "SkyMiles can't be transferred out — they're stuck in Delta's program.",
-    "recent_changes": "You can transfer INTO SkyMiles from Amex MR (1:1), Chase UR and Capital One — useful for topping up an award."
+    "highlight": "SkyMiles can't be transferred out; they're stuck in Delta's program.",
+    "recent_changes": "You can transfer INTO SkyMiles from Amex MR (1:1), Chase UR and Capital One, useful for topping up an award."
   },
   "credits": [],
   "insurance": [
@@ -82,8 +82,8 @@
       "level": "mid"
     }
   ],
-  "protection_note": "The thinnest protection in the Delta lineup — no trip cancellation, no trip delay, no baggage coverage, and no emergency medical/evacuation assistance. This is a free card with free-card-level protection.",
-  "rental_note": "Secondary only — put rentals on a card with primary coverage if you rent often.",
+  "protection_note": "The thinnest protection in the Delta lineup: no trip cancellation, no trip delay, no baggage coverage, and no emergency medical/evacuation assistance. This is a free card with free-card-level protection.",
+  "rental_note": "Secondary only; put rentals on a card with primary coverage if you rent often.",
   "status_perks": [],
   "services": [
     {

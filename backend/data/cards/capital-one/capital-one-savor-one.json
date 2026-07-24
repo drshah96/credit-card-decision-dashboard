@@ -6,17 +6,17 @@
   "points_program": "Cash Back",
   "accent_color": "#F5B25C",
   "annual_fee": 39,
-  "effective_cost": "$39/yr — no sign-up bonus or credits to offset it; must be earned back through ~$1,300/yr of 3%-category spend",
+  "effective_cost": "$39/yr, no sign-up bonus or credits to offset it; must be earned back through ~$1,300/yr of 3%-category spend",
   "verdict": {
     "status": "reconsider",
-    "text": "Reconsider — same categories as the no-fee Savor, now behind a $39 fee",
+    "text": "Reconsider: same categories as the no-fee Savor, now behind a $39 fee",
     "short_tag": "Fair-Credit Stepping Stone"
   },
   "earn_rates": [
     {
       "emoji": "🍽️",
       "multiplier": "3%",
-      "category": "Dining — restaurants, cafes, takeout, bars",
+      "category": "Dining: restaurants, cafes, takeout, bars",
       "highlight": true,
       "is_base": false
     },
@@ -30,21 +30,21 @@
     {
       "emoji": "🎬",
       "multiplier": "3%",
-      "category": "Entertainment — movies, concerts, sporting events, amusement parks",
+      "category": "Entertainment: movies, concerts, sporting events, amusement parks",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "📺",
       "multiplier": "3%",
-      "category": "Popular streaming services — Netflix, Hulu, Disney+",
+      "category": "Popular streaming services: Netflix, Hulu, Disney+",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "🏨",
       "multiplier": "5%",
-      "category": "Hotels, vacation rentals & rental cars — via Capital One Travel",
+      "category": "Hotels, vacation rentals & rental cars, via Capital One Travel",
       "highlight": true,
       "is_base": false
     },
@@ -63,7 +63,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Same category rates as the no-fee Savor card — the only differences are this one charges $39/yr, skips the sign-up bonus, and targets fair credit (FICO roughly 580-669) rather than excellent credit. It exists as an approval path, not a better rewards card.",
+  "earn_note": "Same category rates as the no-fee Savor card; the only differences are this one charges $39/yr, skips the sign-up bonus, and targets fair credit (FICO roughly 580-669) rather than excellent credit. It exists as an approval path, not a better rewards card.",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
@@ -74,19 +74,19 @@
       }
     ],
     "per_100k": "$1,000",
-    "note": "A straight cash-back currency, not miles — no transfer partners, no premium redemption to chase, always worth exactly 1¢."
+    "note": "A straight cash-back currency, not miles: no transfer partners, no premium redemption to chase, always worth exactly 1¢."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "Cash back isn't transferable — it's a flat statement credit, check, gift card, or Capital One Travel/Entertainment redemption, always at face value.",
+    "highlight": "Cash back isn't transferable. It's a flat statement credit, check, gift card, or Capital One Travel/Entertainment redemption, always at face value.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
   "insurance": [
     {
       "coverage": "Rental car CDW",
-      "detail": "Secondary — pays after your personal auto insurance",
+      "detail": "Secondary: pays after your personal auto insurance",
       "level": "mid"
     },
     {
@@ -120,8 +120,8 @@
       "level": "none"
     }
   ],
-  "protection_note": "Identical thin protection to the no-fee Savor — secondary rental coverage and a modest $1,000-per-claim extended warranty, no purchase protection or trip coverage. You get no extra protection for the $39 fee.",
-  "rental_note": "Secondary CDW only — decline the rental counter's own waiver and pay in full with this card to activate it, but your personal auto policy pays first.",
+  "protection_note": "Identical thin protection to the no-fee Savor: secondary rental coverage and a modest $1,000-per-claim extended warranty, no purchase protection or trip coverage. You get no extra protection for the $39 fee.",
+  "rental_note": "Secondary CDW only: decline the rental counter's own waiver and pay in full with this card to activate it, but your personal auto policy pays first.",
   "status_perks": [],
   "services": [
     {
@@ -160,14 +160,14 @@
         ]
       }
     ],
-    "note": "No cost to add trusted users — an easy way to consolidate household dining/grocery spend onto the flat 3% categories."
+    "note": "No cost to add trusted users: an easy way to consolidate household dining/grocery spend onto the flat 3% categories."
   },
   "timeline": [
     {
       "date": "2025",
       "type": "add",
       "badge": "Relaunch",
-      "text": "Capital One revived the SavorOne name for a new $39-annual-fee, fair-credit product — a separate card from the no-fee Savor (the old SavorOne, renamed in Oct 2024)."
+      "text": "Capital One revived the SavorOne name for a new $39-annual-fee, fair-credit product, a separate card from the no-fee Savor (the old SavorOne, renamed in Oct 2024)."
     },
     {
       "date": "Oct 2024",

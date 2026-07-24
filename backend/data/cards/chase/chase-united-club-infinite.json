@@ -30,7 +30,7 @@
     {
       "emoji": "🏨",
       "multiplier": "5×",
-      "category": "Renowned Hotels — prepaid",
+      "category": "Renowned Hotels, prepaid",
       "highlight": true,
       "is_base": false
     },
@@ -49,7 +49,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The advertised 11x on United flights bundles the 6x base MileagePlus member earn with the card's own multiplier — still the richest United-flight earn of the three cards. Earning is a side benefit here, though; the Club is the reason to hold this card.",
+  "earn_note": "The advertised 11x on United flights bundles the 6x base MileagePlus member earn with the card's own multiplier, still the richest United-flight earn of the three cards. Earning is a side benefit here, though; the Club is the reason to hold this card.",
   "points": {
     "currency": "MileagePlus",
     "redemption_options": [
@@ -75,8 +75,8 @@
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "MileagePlus can't be transferred out to other loyalty programs — miles earned here are locked into United.",
-    "recent_changes": "You can transfer INTO MileagePlus from Chase Ultimate Rewards (1:1, via a Sapphire or Ink Preferred card) and from Marriott Bonvoy — useful for topping up an award a few thousand miles short."
+    "highlight": "MileagePlus can't be transferred out to other loyalty programs; miles earned here are locked into United.",
+    "recent_changes": "You can transfer INTO MileagePlus from Chase Ultimate Rewards (1:1, via a Sapphire or Ink Preferred card) and from Marriott Bonvoy, useful for topping up an award a few thousand miles short."
   },
   "credits": [
     {
@@ -89,7 +89,7 @@
       "removed": false,
       "description": "First and second checked bags free on United-operated flights for the primary cardholder and one companion on the same reservation (up to $440 in potential round-trip savings per Chase's marketing).",
       "tips": [
-        "Pairs with the Club access — most cardholders are already checking bags on the same trips."
+        "Pairs with the Club access; most cardholders are already checking bags on the same trips."
       ]
     },
     {
@@ -141,7 +141,7 @@
       "removed": false,
       "description": "Combined monthly Instacart statement credits, plus a complimentary full Instacart+ membership (not just a trial, unlike Explorer/Quest).",
       "tips": [
-        "Monthly, no rollover — needs recurring Instacart orders to capture in full."
+        "Monthly, no rollover; needs recurring Instacart orders to capture in full."
       ]
     },
     {
@@ -167,7 +167,7 @@
       "removed": false,
       "description": "Statement credit for a Global Entry, TSA PreCheck, or NEXUS application fee, once every four years, usable by the primary or an authorized user. Shown here amortized to an annual figure.",
       "tips": [
-        "Apply for Global Entry, not just TSA PreCheck — it includes TSA PreCheck and covers the same credit."
+        "Apply for Global Entry, not just TSA PreCheck; it includes TSA PreCheck and covers the same credit."
       ]
     }
   ],
@@ -218,13 +218,13 @@
       "level": "none"
     }
   ],
-  "protection_note": "A real step up from Explorer/Quest on trip cancellation — $10,000/person matches CSR outright — plus a return-protection benefit neither cheaper United card gets. The 12-hour trip-delay trigger is still dated (CSR triggers at 6 hrs), and there's still no cell-phone protection.",
-  "rental_note": "Primary coverage up to $60,000 — decline the counter's CDW and pay with the card. Same cap as Explorer/Quest; CSR and Venture X go higher at $75k.",
+  "protection_note": "A real step up from Explorer/Quest on trip cancellation: $10,000/person matches CSR outright, plus a return-protection benefit neither cheaper United card gets. The 12-hour trip-delay trigger is still dated (CSR triggers at 6 hrs), and there's still no cell-phone protection.",
+  "rental_note": "Primary coverage up to $60,000: decline the counter's CDW and pay with the card. Same cap as Explorer/Quest; CSR and Venture X go higher at $75k.",
   "status_perks": [
     {
       "name": "United Club membership",
       "strength": 5,
-      "note": "Unlimited access for you and one guest to United Club locations and participating Star Alliance lounges — Chase markets this at $750+/yr on its own, more than the entire annual fee."
+      "note": "Unlimited access for you and one guest to United Club locations and participating Star Alliance lounges. Chase markets this at $750+/yr on its own, more than the entire annual fee."
     },
     {
       "name": "Premier Access",
@@ -234,17 +234,17 @@
     {
       "name": "Premier Qualifying Points",
       "strength": 4,
-      "note": "1,500 PQP bonus annually plus 1 PQP per $15 spent (up to 28,000/yr) — the strongest status-earning of the three United cards."
+      "note": "1,500 PQP bonus annually plus 1 PQP per $15 spent (up to 28,000/yr), the strongest status-earning of the three United cards."
     },
     {
       "name": "IHG One Rewards Platinum Elite",
       "strength": 2,
-      "note": "Automatic mid-tier IHG status — modest upgrades and bonus points, a lightweight add-on rather than a reason to hold the card."
+      "note": "Automatic mid-tier IHG status: modest upgrades and bonus points, a lightweight add-on rather than a reason to hold the card."
     },
     {
       "name": "Avis President's Club",
       "strength": 2,
-      "note": "Elevated Avis status — expedited pickup and upgrade availability, layered on top of the Avis/Budget rental credit."
+      "note": "Elevated Avis status: expedited pickup and upgrade availability, layered on top of the Avis/Budget rental credit."
     }
   ],
   "services": [
@@ -300,7 +300,7 @@
         ]
       }
     ],
-    "note": "At $75/yr, an authorized user gets their own United Club access — the same lounge benefit the primary pays $695 for — which is a strong deal if a travel companion also flies United regularly. A standalone United Club membership runs several times that on its own."
+    "note": "At $75/yr, an authorized user gets their own United Club access (the same lounge benefit the primary pays $695 for), which is a strong deal if a travel companion also flies United regularly. A standalone United Club membership runs several times that on its own."
   },
   "timeline": [
     {
@@ -313,7 +313,7 @@
       "date": "2025",
       "type": "neutral",
       "badge": "Signal",
-      "text": "Chase and United announced a broad refresh across the whole United card lineup — higher fees paired with a wider bundle of category credits and richer status-earning."
+      "text": "Chase and United announced a broad refresh across the whole United card lineup: higher fees paired with a wider bundle of category credits and richer status-earning."
     }
   ]
 }

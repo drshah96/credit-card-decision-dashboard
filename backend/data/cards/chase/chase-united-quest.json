@@ -6,7 +6,7 @@
   "points_program": "MileagePlus",
   "accent_color": "#1D5DA6",
   "annual_fee": 350,
-  "effective_cost": "Medium — depends on the $200 travel credit and 2 free bags",
+  "effective_cost": "Medium: depends on the $200 travel credit and 2 free bags",
   "verdict": {
     "status": "situational",
     "text": "Keep if you check two bags and can auto-use the $200 credit",
@@ -16,7 +16,7 @@
     {
       "emoji": "🏨",
       "multiplier": "5×",
-      "category": "Renowned Hotels — prepaid",
+      "category": "Renowned Hotels, prepaid",
       "highlight": true,
       "is_base": false
     },
@@ -56,7 +56,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Chase markets '10x total miles' on United flights, but 6x of that is the base MileagePlus member earn on any United ticket — the card itself only adds 4x. The broader 2x travel/dining/streaming categories are genuinely useful, though, wider than Explorer's.",
+  "earn_note": "Chase markets '10x total miles' on United flights, but 6x of that is the base MileagePlus member earn on any United ticket; the card itself only adds 4x. The broader 2x travel/dining/streaming categories are genuinely useful, though, wider than Explorer's.",
   "points": {
     "currency": "MileagePlus",
     "redemption_options": [
@@ -77,13 +77,13 @@
       }
     ],
     "per_100k": "$1,200–1,400",
-    "note": "Same dynamically-priced MileagePlus currency as the Explorer and Club Infinite — no published award chart, no blackout dates, miles never expire. Quest adds a 10,000-mile anniversary award discount plus a baseline 10%+ discount on award tickets (15%+ with Premier status)."
+    "note": "Same dynamically-priced MileagePlus currency as the Explorer and Club Infinite: no published award chart, no blackout dates, miles never expire. Quest adds a 10,000-mile anniversary award discount plus a baseline 10%+ discount on award tickets (15%+ with Premier status)."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "MileagePlus can't be transferred out to other loyalty programs — miles earned here are locked into United.",
-    "recent_changes": "You can transfer INTO MileagePlus from Chase Ultimate Rewards (1:1, via a Sapphire or Ink Preferred card) and from Marriott Bonvoy — useful for topping up an award a few thousand miles short."
+    "highlight": "MileagePlus can't be transferred out to other loyalty programs; miles earned here are locked into United.",
+    "recent_changes": "You can transfer INTO MileagePlus from Chase Ultimate Rewards (1:1, via a Sapphire or Ink Preferred card) and from Marriott Bonvoy, useful for topping up an award a few thousand miles short."
   },
   "credits": [
     {
@@ -94,9 +94,9 @@
       "default_value": 0,
       "tier": "easy",
       "removed": false,
-      "description": "$200 in United TravelBank cash, deposited automatically at account opening and again each account anniversary — no spend threshold required.",
+      "description": "$200 in United TravelBank cash, deposited automatically at account opening and again each account anniversary; no spend threshold required.",
       "tips": [
-        "The easiest credit on this card — it lands automatically and TravelBank cash can be used toward almost any United ticket."
+        "The easiest credit on this card: it lands automatically and TravelBank cash can be used toward almost any United ticket."
       ]
     },
     {
@@ -109,7 +109,7 @@
       "removed": false,
       "description": "First and second checked bags free on United-operated flights for the primary cardholder and one companion on the same reservation.",
       "tips": [
-        "~$35 + $45 each way per bag — a family checking two bags on one round trip clears a big chunk of the fee.",
+        "~$35 + $45 each way per bag; a family checking two bags on one round trip clears a big chunk of the fee.",
         "You don't need to buy the ticket with this card, just be on the reservation."
       ]
     },
@@ -175,7 +175,7 @@
       "removed": false,
       "description": "Combined monthly Instacart statement credits, plus a 3-month complimentary Instacart+ trial (then 50% off the annual rate through 12/31/27).",
       "tips": [
-        "Monthly, no rollover — needs recurring Instacart orders to capture in full."
+        "Monthly, no rollover; needs recurring Instacart orders to capture in full."
       ]
     },
     {
@@ -188,7 +188,7 @@
       "removed": false,
       "description": "Statement credit for a Global Entry, TSA PreCheck, or NEXUS application fee, once every four years. Shown here amortized to an annual figure.",
       "tips": [
-        "Apply for Global Entry, not just TSA PreCheck — it includes TSA PreCheck and covers the same credit."
+        "Apply for Global Entry, not just TSA PreCheck; it includes TSA PreCheck and covers the same credit."
       ]
     }
   ],
@@ -234,23 +234,23 @@
       "level": "none"
     }
   ],
-  "protection_note": "Identical protection package to the Explorer — solid free primary rental CDW and purchase protection, but trip cancellation ($1,500/person) and the 12-hour trip-delay trigger are both dated next to CSR's $10,000/person and 6-hour thresholds. Paying $200 more than Explorer buys bigger credits and a second free bag, not better insurance.",
-  "rental_note": "Primary coverage up to $60,000 (secondary only for New York residents) — decline the counter's CDW and pay with the card.",
+  "protection_note": "Identical protection package to the Explorer: solid free primary rental CDW and purchase protection, but trip cancellation ($1,500/person) and the 12-hour trip-delay trigger are both dated next to CSR's $10,000/person and 6-hour thresholds. Paying $200 more than Explorer buys bigger credits and a second free bag, not better insurance.",
+  "rental_note": "Primary coverage up to $60,000 (secondary only for New York residents); decline the counter's CDW and pay with the card.",
   "status_perks": [
     {
       "name": "Premier Qualifying Points",
       "strength": 3,
-      "note": "1,000 PQP bonus annually plus 1 PQP per $20 spent, capped at 18,000/yr — a real dent toward Premier Silver/Gold if you already fly United a lot."
+      "note": "1,000 PQP bonus annually plus 1 PQP per $20 spent, capped at 18,000/yr, a real dent toward Premier Silver/Gold if you already fly United a lot."
     },
     {
       "name": "Global Economy Plus upgrades",
       "strength": 2,
-      "note": "Two complimentary Economy Plus upgrades after $40,000 in annual card spend — a high bar for most cardholders."
+      "note": "Two complimentary Economy Plus upgrades after $40,000 in annual card spend, a high bar for most cardholders."
     },
     {
       "name": "United Club access",
       "strength": 1,
-      "note": "None. Unlike the cheaper Explorer's 2 annual one-time passes, Quest currently includes no lounge passes — step up to Club Infinite for real access."
+      "note": "None. Unlike the cheaper Explorer's 2 annual one-time passes, Quest currently includes no lounge passes; step up to Club Infinite for real access."
     }
   ],
   "services": [
@@ -284,7 +284,7 @@
         "is_free": true,
         "benefits": [
           {
-            "text": "Free to add — no published annual fee for authorized users",
+            "text": "Free to add: no published annual fee for authorized users",
             "included": true
           },
           {
@@ -306,7 +306,7 @@
         ]
       }
     ],
-    "note": "Adding an authorized user is free and was worth 10,000 bonus miles during the current offer, but the second-bag and priority-boarding perks only apply when the AU is actually traveling with the primary cardholder — there's no separate PQP or upgrade allotment for them."
+    "note": "Adding an authorized user is free and was worth 10,000 bonus miles during the current offer, but the second-bag and priority-boarding perks only apply when the AU is actually traveling with the primary cardholder; there's no separate PQP or upgrade allotment for them."
   },
   "timeline": [
     {
@@ -319,7 +319,7 @@
       "date": "2025",
       "type": "cut",
       "badge": "Cut",
-      "text": "United Club one-time passes removed from Quest as part of the same refresh that raised the fee — lounge access is now Explorer (2 passes) or Club Infinite (unlimited) only."
+      "text": "United Club one-time passes removed from Quest as part of the same refresh that raised the fee; lounge access is now Explorer (2 passes) or Club Infinite (unlimited) only."
     }
   ]
 }

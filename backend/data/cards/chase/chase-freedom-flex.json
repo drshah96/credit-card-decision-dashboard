@@ -6,17 +6,17 @@
   "points_program": "Ultimate Rewards",
   "accent_color": "#7B4B94",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee",
+  "effective_cost": "Free, with no annual fee",
   "verdict": {
     "status": "situational",
-    "text": "Great if you'll activate the rotating 5% — a chore otherwise",
+    "text": "Great if you'll activate the rotating 5%; a chore otherwise",
     "short_tag": "Rotating Categories"
   },
   "earn_rates": [
     {
       "emoji": "🔄",
       "multiplier": "5%",
-      "category": "Rotating quarterly categories — activation required (up to $1,500/qtr combined, then 1%)",
+      "category": "Rotating quarterly categories, activation required (up to $1,500/qtr combined, then 1%)",
       "highlight": true,
       "is_base": false
     },
@@ -53,12 +53,12 @@
       }
     ],
     "per_100k": "$1,000",
-    "note": "Technically Ultimate Rewards points, not a distinct cash-back currency — on their own they're worth a flat 1¢ each. Pairing this account with a Chase Sapphire or Ink Business card lets the combined points inherit that card's full redemption value, including airline/hotel transfers."
+    "note": "Technically Ultimate Rewards points, not a distinct cash-back currency; on their own they're worth a flat 1¢ each. Pairing this account with a Chase Sapphire or Ink Business card lets the combined points inherit that card's full redemption value, including airline/hotel transfers."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "Not a standalone transfer currency on its own — see the points note above on pairing with a premium Chase card.",
+    "highlight": "Not a standalone transfer currency on its own; see the points note above on pairing with a premium Chase card.",
     "recent_changes": "Not applicable."
   },
   "credits": [
@@ -72,7 +72,7 @@
       "removed": false,
       "description": "6 months of complimentary DashPass membership ($0 delivery fees on DoorDash/Caviar), which then auto-renews at the regular paid rate unless canceled. Separately, up to $10/quarter in statement credits on non-restaurant (grocery/retail) DoorDash orders through Dec 2027.",
       "tips": [
-        "Cancel DashPass before the 6-month free trial ends if you don't want to start paying for it — it auto-enrolls at the regular rate.",
+        "Cancel DashPass before the 6-month free trial ends if you don't want to start paying for it; it auto-enrolls at the regular rate.",
         "The $10/quarter non-restaurant credit is the only ongoing recurring value here; the free DashPass trial is one-time."
       ]
     }
@@ -90,7 +90,7 @@
     },
     {
       "coverage": "Cell phone",
-      "detail": "Through Sep 19, 2026 only: up to $800/claim, $1,000/yr, 2 claims/yr, $50 deductible — pay your monthly wireless bill with this card to enroll. Benefit ends Sep 20, 2026.",
+      "detail": "Through Sep 19, 2026 only: up to $800/claim, $1,000/yr, 2 claims/yr, $50 deductible. Pay your monthly wireless bill with this card to enroll. Benefit ends Sep 20, 2026.",
       "level": "good"
     },
     {
@@ -104,12 +104,12 @@
       "level": "good"
     }
   ],
-  "protection_note": "Currently the strongest no-fee Chase card for cell phone protection, but that benefit is being discontinued on Sep 20, 2026 — after that date this card's protections are basically identical to the fee-free Freedom Unlimited. Trip cancellation and purchase protection are modest, and rental coverage is secondary only.",
-  "rental_note": "Secondary coverage only — it pays after your personal auto insurance, covering what's left. Use a primary-coverage card, like the Sapphire Preferred, for rentals when possible.",
+  "protection_note": "Currently the strongest no-fee Chase card for cell phone protection, but that benefit is being discontinued on Sep 20, 2026. After that date this card's protections are basically identical to the fee-free Freedom Unlimited. Trip cancellation and purchase protection are modest, and rental coverage is secondary only.",
+  "rental_note": "Secondary coverage only: it pays after your personal auto insurance, covering what's left. Use a primary-coverage card, like the Sapphire Preferred, for rentals when possible.",
   "status_perks": [],
   "services": [
     {
-      "name": "Foreign transaction fee — being eliminated",
+      "name": "Foreign transaction fee, being eliminated",
       "detail": "Currently 3% on purchases outside the US, but Chase is removing this fee entirely starting Sep 20, 2026, the same date cell phone protection ends."
     },
     {

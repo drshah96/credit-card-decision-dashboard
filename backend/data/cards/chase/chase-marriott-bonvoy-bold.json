@@ -6,7 +6,7 @@
   "points_program": "Marriott Bonvoy",
   "accent_color": "#C48793",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee",
+  "effective_cost": "Free, with no annual fee",
   "verdict": {
     "status": "keep",
     "text": "Free Marriott points earner with genuinely broad bonus categories",
@@ -35,7 +35,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 2× bucket is unusually broad for a no-fee card — groceries, rideshare, delivery apps, streaming, and home internet/phone bills all qualify with no stated cap. There's no free night award on this card, unlike the Boundless — its value is built around everyday categories and Pay Yourself Back.",
+  "earn_note": "The 2× bucket is unusually broad for a no-fee card: groceries, rideshare, delivery apps, streaming, and home internet/phone bills all qualify with no stated cap. There's no free night award on this card, unlike the Boundless; its value is built around everyday categories and Pay Yourself Back.",
   "points": {
     "currency": "Marriott Bonvoy",
     "redemption_options": [
@@ -56,12 +56,12 @@
       }
     ],
     "per_100k": "$800",
-    "note": "No card-granted free night award to chase here — Pay Yourself Back at $100 per 12,500 points (0.8¢/point) is the best redemption without booking an award stay directly, but it's capped at $750 in statement credits per year (about 93,750 points). A larger balance still needs a real hotel stay to cash out at full value."
+    "note": "No card-granted free night award to chase here. Pay Yourself Back at $100 per 12,500 points (0.8¢/point) is the best redemption without booking an award stay directly, but it's capped at $750 in statement credits per year (about 93,750 points). A larger balance still needs a real hotel stay to cash out at full value."
   },
   "transfer_partners": {
     "airline_count": 40,
     "hotel_count": 0,
-    "highlight": "Marriott Bonvoy transfers to 40+ airline programs at 3:1, with a 5,000-mile bonus for every 60,000 points transferred in a single transaction — same chart as every other Bonvoy card.",
+    "highlight": "Marriott Bonvoy transfers to 40+ airline programs at 3:1, with a 5,000-mile bonus for every 60,000 points transferred in a single transaction, same chart as every other Bonvoy card.",
     "recent_changes": "No confirmed recent changes to the airline transfer chart."
   },
   "credits": [
@@ -89,7 +89,7 @@
       "removed": false,
       "description": "One year of complimentary DashPass membership plus up to $10 off quarterly on non-restaurant DoorDash orders, active through December 31, 2027.",
       "tips": [
-        "Skip this if you're not already a DoorDash user — not worth chasing on its own."
+        "Skip this if you're not already a DoorDash user; not worth chasing on its own."
       ]
     }
   ],
@@ -125,13 +125,13 @@
       "level": "none"
     }
   ],
-  "protection_note": "Nearly identical insurance to the paid Boundless card — baggage delay, lost luggage, trip delay, and purchase protection are all present at the same limits, which is a pleasant surprise for $0. Neither Chase Marriott card offers trip cancellation or rental car coverage.",
-  "rental_note": "No rental car coverage at all — use a different card for rentals.",
+  "protection_note": "Nearly identical insurance to the paid Boundless card: baggage delay, lost luggage, trip delay, and purchase protection are all present at the same limits, which is a pleasant surprise for $0. Neither Chase Marriott card offers trip cancellation or rental car coverage.",
+  "rental_note": "No rental car coverage at all; use a different card for rentals.",
   "status_perks": [
     {
       "name": "Marriott Bonvoy Silver Elite Status",
       "strength": 2,
-      "note": "Complimentary with the card — priority late checkout where available and 10% bonus points on stays. Only 5 Elite Night Credits/year (cut from 15 in a 2025 change), below the Boundless's automatic count."
+      "note": "Complimentary with the card: priority late checkout where available and 10% bonus points on stays. Only 5 Elite Night Credits/year (cut from 15 in a 2025 change), below the Boundless's automatic count."
     }
   ],
   "services": [
@@ -167,7 +167,7 @@
         ]
       }
     ],
-    "note": "Additional cards are free — an easy way to pool household spend toward the 3× hotel rate and Pay Yourself Back redemptions."
+    "note": "Additional cards are free: an easy way to pool household spend toward the 3× hotel rate and Pay Yourself Back redemptions."
   },
   "timeline": [
     {

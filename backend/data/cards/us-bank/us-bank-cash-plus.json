@@ -6,31 +6,31 @@
   "points_program": "Cash Back",
   "accent_color": "#8A1538",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee",
+  "effective_cost": "Free, with no annual fee",
   "verdict": {
     "status": "keep",
-    "text": "Keep if you'll enroll new categories — flexible 5%/2% picks",
+    "text": "Keep if you'll enroll new categories: flexible 5%/2% picks",
     "short_tag": "Choose-Your-Own Categories"
   },
   "earn_rates": [
     {
       "emoji": "🛍️",
       "multiplier": "5%",
-      "category": "Two categories you choose each quarter — first $2,000 combined, then 1%",
+      "category": "Two categories you choose each quarter, first $2,000 combined, then 1%",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "🏨",
       "multiplier": "5%",
-      "category": "Prepaid air, hotel & car — Travel Center only",
+      "category": "Prepaid air, hotel & car, Travel Center only",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "⛽",
       "multiplier": "2%",
-      "category": "One everyday category you choose — gas/EV, groceries, or dining",
+      "category": "One everyday category you choose: gas/EV, groceries, or dining",
       "highlight": true,
       "is_base": false
     },
@@ -42,7 +42,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Categories must be actively enrolled each quarter — miss the deadline and everything defaults to 1%. The two 5% picks come from a list of 12 (fast food, home utilities, streaming, department stores, cell phone, electronics, sporting goods, furniture, movie theaters, ground transportation, gyms, select clothing); the 2% pick is limited to gas/EV charging, groceries, or restaurants. Discount stores/supercenters and wholesale clubs are excluded from grocery- and gas-category bonus rates.",
+  "earn_note": "Categories must be actively enrolled each quarter; miss the deadline and everything defaults to 1%. The two 5% picks come from a list of 12 (fast food, home utilities, streaming, department stores, cell phone, electronics, sporting goods, furniture, movie theaters, ground transportation, gyms, select clothing); the 2% pick is limited to gas/EV charging, groceries, or restaurants. Discount stores/supercenters and wholesale clubs are excluded from grocery- and gas-category bonus rates.",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
@@ -58,12 +58,12 @@
       }
     ],
     "per_100k": "$2,000–$2,800",
-    "note": "Actual value depends heavily on hitting the $2,000/quarter cap in your two 5% categories — max out both every quarter and the blended rate on $8,000/year of category spend plus 1% elsewhere lands well above a flat 2% card. Redemption value is highest when deposited to a U.S. Bank account; other redemption paths may pay less."
+    "note": "Actual value depends heavily on hitting the $2,000/quarter cap in your two 5% categories: max out both every quarter and the blended rate on $8,000/year of category spend plus 1% elsewhere lands well above a flat 2% card. Redemption value is highest when deposited to a U.S. Bank account; other redemption paths may pay less."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer currency — straight cash back, not a points program.",
+    "highlight": "No transfer currency: straight cash back, not a points program.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -94,7 +94,7 @@
       "level": "none"
     }
   ],
-  "protection_note": "U.S. Bank doesn't publish a purchase-protection or extended-warranty guide for this card the way it does for Shield — check your actual Guide to Benefits after approval rather than assuming standard Visa Signature protections apply.",
+  "protection_note": "U.S. Bank doesn't publish a purchase-protection or extended-warranty guide for this card the way it does for Shield, so check your actual Guide to Benefits after approval rather than assuming standard Visa Signature protections apply.",
   "rental_note": "No auto rental coverage documented publicly for this card as of this writing.",
   "status_perks": [],
   "services": [
@@ -134,7 +134,7 @@
         ]
       }
     ],
-    "note": "No cost to add users — spend still counts toward the same $2,000/quarter category caps as the primary cardholder's."
+    "note": "No cost to add users: spend still counts toward the same $2,000/quarter category caps as the primary cardholder's."
   },
   "timeline": [
     {

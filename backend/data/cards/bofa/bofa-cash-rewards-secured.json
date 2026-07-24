@@ -6,17 +6,17 @@
   "points_program": "Cash Back",
   "accent_color": "#6B2C39",
   "annual_fee": 0,
-  "effective_cost": "Free — no annual fee, but requires a refundable $200–$5,000 security deposit to set your limit",
+  "effective_cost": "Free, with no annual fee, but requiring a refundable $200–$5,000 security deposit to set your limit",
   "verdict": {
     "status": "situational",
-    "text": "Same 6%/2% structure as Customized Cash Rewards — good for rebuilding",
+    "text": "Same 6%/2% structure as Customized Cash Rewards, good for rebuilding",
     "short_tag": "Credit Building"
   },
   "earn_rates": [
     {
       "emoji": "🛍️",
       "multiplier": "6%",
-      "category": "Choice category (1st year) — gas/EV, online shopping, dining, travel, drug stores, or home improvement",
+      "category": "Choice category (1st year): gas/EV, online shopping, dining, travel, drug stores, or home improvement",
       "highlight": true,
       "is_base": false
     },
@@ -51,12 +51,12 @@
       }
     ],
     "per_100k": "$2,300–$3,300",
-    "note": "Same redemption menu and category math as the unsecured card — max out the $2,500/quarter choice-category cap for the best blended rate."
+    "note": "Same redemption menu and category math as the unsecured card: max out the $2,500/quarter choice-category cap for the best blended rate."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer currency — straight cash back, not a points program.",
+    "highlight": "No transfer currency: straight cash back, not a points program.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -97,7 +97,7 @@
     },
     {
       "name": "Deposit review for return",
-      "detail": "Bank of America periodically reviews your account and, based on credit history, may qualify you to have your deposit returned — not guaranteed for all customers."
+      "detail": "Bank of America periodically reviews your account and, based on credit history, may qualify you to have your deposit returned; not guaranteed for all customers."
     }
   ],
   "additional_cards": {
@@ -123,7 +123,7 @@
         ]
       }
     ],
-    "note": "Free to add — since this account reports to the credit bureaus, an authorized user benefits from the payment history alongside the primary cardholder."
+    "note": "Free to add. Since this account reports to the credit bureaus, an authorized user benefits from the payment history alongside the primary cardholder."
   },
   "timeline": []
 }
