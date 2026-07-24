@@ -1,8 +1,12 @@
 name: Deploy to Render
 
+# Paused during development — no Render service exists yet, so this failed
+# on every push to main since the repo's first commit (there's no deploy
+# hook URL to configure until a Render service actually exists to generate
+# one). Switch back to `push: branches: [main]` once RENDER_DEPLOY_HOOK_URL
+# is set as a real repo secret; until then, trigger manually if needed.
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 jobs:
   deploy:
