@@ -162,6 +162,24 @@ def test_get_card_not_found() -> None:
     assert response.status_code == 404
 
 
+def test_amex_platinum_official_url() -> None:
+    response = client.get("/api/cards/amex-platinum")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["official_url"] == (
+        "https://www.americanexpress.com/us/credit-cards/card/platinum/"
+        "?inav=en_us_menu_cards_personal_cards_platinum_card"
+    )
+
+
+@pytest.mark.parametrize("card_id", CARD_IDS)
+def test_official_url_is_string_or_none(card_id: str) -> None:
+    response = client.get(f"/api/cards/{card_id}")
+    assert response.json()["official_url"] is None or isinstance(
+        response.json()["official_url"], str
+    )
+
+
 def test_annual_fees_are_correct() -> None:
     response = client.get("/api/cards")
     fees = {c["id"]: c["annual_fee"] for c in response.json()}

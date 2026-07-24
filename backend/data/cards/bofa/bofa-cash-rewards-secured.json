@@ -1,12 +1,13 @@
 {
   "id": "bofa-cash-rewards-secured",
-  "name": "Cash Rewards Secured Credit Card",
+  "name": "Customized Cash Rewards Secured Credit Card",
   "issuer": "Bank of America",
   "network": "VISA",
   "points_program": "Cash Back",
   "accent_color": "#6B2C39",
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee, but requiring a refundable $200–$5,000 security deposit to set your limit",
+  "official_url": "https://www.bankofamerica.com/credit-cards/products/cash-back-secured-credit-card/",
   "verdict": {
     "status": "situational",
     "text": "Same 6%/2% structure as Customized Cash Rewards, good for rebuilding",

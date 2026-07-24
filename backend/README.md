@@ -90,6 +90,7 @@ erDiagram
         string accent_color
         int annual_fee_cents
         string effective_cost_label
+        string official_url
         string verdict_status
         string verdict_text
         string earn_note

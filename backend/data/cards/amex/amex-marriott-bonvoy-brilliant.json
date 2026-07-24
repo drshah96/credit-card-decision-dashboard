@@ -1,12 +1,13 @@
 {
   "id": "amex-marriott-bonvoy-brilliant",
-  "name": "Marriott Bonvoy Brilliant® Card",
+  "name": "Marriott Bonvoy Brilliant® American Express® Card",
   "issuer": "American Express",
   "network": "AMERICAN EXPRESS",
   "points_program": "Marriott Bonvoy",
   "accent_color": "#6B2C39",
   "annual_fee": 650,
   "effective_cost": "Depends on hotel loyalty and free-night use",
+  "official_url": "https://www.americanexpress.com/us/credit-cards/card/marriott-bonvoy-brilliant/",
   "verdict": {
     "status": "situational",
     "text": "Keep if you're loyal to Marriott and actually book the free night",

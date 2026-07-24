@@ -66,6 +66,7 @@ def _to_card(c: CardModel) -> Card:
         accent_color=c.accent_color,
         annual_fee=c.annual_fee_cents // 100,
         effective_cost=c.effective_cost_label,
+        official_url=c.official_url,
         verdict=Verdict(
             status=c.verdict_status, text=c.verdict_text, short_tag=c.verdict_short_tag
         ),

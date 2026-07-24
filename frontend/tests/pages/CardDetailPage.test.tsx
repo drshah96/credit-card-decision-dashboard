@@ -228,6 +228,62 @@ describe("CardDetailPage", () => {
       expect(screen.getByText("American Express")).toBeInTheDocument();
     });
 
+    it("links the card name to official_url when present", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({ official_url: "https://www.americanexpress.com/us/credit-cards/card/platinum/" }),
+      );
+
+      renderPage();
+
+      const link = await screen.findByRole("link", { name: "The Platinum Card" });
+      expect(link).toHaveAttribute(
+        "href",
+        "https://www.americanexpress.com/us/credit-cards/card/platinum/",
+      );
+      expect(link).toHaveAttribute("target", "_blank");
+      expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    });
+
+    it("renders the card name as plain text (no link) when official_url is absent", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard({ official_url: null }));
+
+      renderPage();
+
+      await waitFor(() => {
+        expect(screen.getByRole("heading", { name: "The Platinum Card" })).toBeInTheDocument();
+      });
+      expect(screen.queryByRole("link", { name: "The Platinum Card" })).not.toBeInTheDocument();
+    });
+
+    it("links the card image to official_url when present", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({
+          id: "amex-platinum",
+          official_url: "https://www.americanexpress.com/us/credit-cards/card/platinum/",
+        }),
+      );
+
+      renderPage("amex-platinum");
+
+      const img = await screen.findByAltText("The Platinum Card card art");
+      const link = img.closest("a");
+      expect(link).toHaveAttribute(
+        "href",
+        "https://www.americanexpress.com/us/credit-cards/card/platinum/",
+      );
+      expect(link).toHaveAttribute("target", "_blank");
+      expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    });
+
+    it("renders the card image without a link when official_url is absent", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard({ id: "amex-platinum", official_url: null }));
+
+      renderPage("amex-platinum");
+
+      const img = await screen.findByAltText("The Platinum Card card art");
+      expect(img.closest("a")).toBeNull();
+    });
+
     it("renders the verdict badge", async () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
