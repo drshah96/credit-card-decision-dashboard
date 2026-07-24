@@ -1,0 +1,146 @@
+{
+  "id": "citi-dillards",
+  "name": "Dillard's Mastercard®",
+  "issuer": "Citi",
+  "network": "MASTERCARD",
+  "points_program": "Dillard's Rewards",
+  "accent_color": "#4B2E83",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee",
+  "verdict": {
+    "status": "situational",
+    "text": "Thin rewards and high APR: only for Dillard's regulars who pay in full",
+    "short_tag": "Dillard's Shoppers"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🛍️",
+      "multiplier": "2 pts/$1",
+      "category": "Dillard's & dillards.com",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "⛽",
+      "multiplier": "2 pts/$1",
+      "category": "Supermarkets & gas stations",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1 pt/$1",
+      "category": "All other purchases where Mastercard is accepted",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "This is the open-loop Mastercard version of Dillard's card: it earns outside Dillard's, unlike the closed-loop, store-only Dillard's Credit Card, which earns the same 2 pts/$1 at Dillard's but nothing anywhere else. Citi acquired Dillard's card portfolio (private-label and co-branded) from Wells Fargo in January 2024; both card products are now issued by Citibank, N.A. New cardholders get a 10%-off shopping pass (up to $100) after $100 spent on the day of approval.",
+  "points": {
+    "currency": "Dillard's Rewards Points",
+    "redemption_options": [
+      {
+        "method": "Every 1,500 points converts to either a 10% Off Shopping Pass or a $10 Reward Certificate, redeemable at Dillard's/dillards.com",
+        "cpp": 1.0,
+        "best": true
+      }
+    ],
+    "per_100k": "About $667–$1,000 in Dillard's rewards, depending on whether points are redeemed as $10 certificates or 10%-off passes",
+    "note": "Rewards redeem only at Dillard's: no cash, statement credit, or third-party gift cards. At 1,500 points = $10, the 2 pts/$1 rate at Dillard's/gas/groceries works out to roughly 1.3% back, and the 1 pt/$1 base rate to about 0.67%, both well below a typical flat-rate cash-back card."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners: Dillard's Rewards points redeem only at Dillard's.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not confirmed on Citi's or Dillard's public product pages for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not confirmed on Citi's or Dillard's public product pages for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Baggage delay",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not included",
+      "level": "none"
+    }
+  ],
+  "protection_note": "A standard (not World Elite) Mastercard tier with no confirmed purchase protection, extended warranty, or travel insurance beyond baseline Mastercard ID Theft Protection and Zero Liability Protection referenced in third-party reviews. Treat this as a rewards-and-financing card with no meaningful insurance suite.",
+  "rental_note": "No rental car coverage found for this card.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "Special financing offers",
+      "detail": "In-store-only (not online) promotional financing periodically offered on qualifying Dillard's purchases; check current terms before financing."
+    },
+    {
+      "name": "Foreign transaction fee",
+      "detail": "3% of the U.S. dollar amount of each purchase made outside the US, per Citi's cardholder agreement on file with the CFPB (as of mid-2026)."
+    },
+    {
+      "name": "$0 liability on unauthorized charges",
+      "detail": "Standard fraud-liability protection."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns rewards on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "No dedicated insurance to share: this card doesn't carry a confirmed protection suite",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add, useful mainly for pooling a household's Dillard's/gas/grocery spend toward the redemption thresholds."
+  },
+  "timeline": [
+    {
+      "date": "Jan 2024",
+      "type": "neutral",
+      "badge": "Issuer change",
+      "text": "Citi purchased Dillard's private-label and co-branded credit card portfolios from Wells Fargo, becoming the new issuer of both the closed-loop Dillard's Credit Card and this open-loop Dillard's Mastercard."
+    },
+    {
+      "date": "Ongoing",
+      "type": "neutral",
+      "badge": "Two-product lineup",
+      "text": "Dillard's/Citi issue two distinct card products: the closed-loop, store-only Dillard's Credit Card (2 pts/$1 at Dillard's, unusable elsewhere) and this open-loop Dillard's Mastercard (same 2 pts/$1 at Dillard's/gas/groceries, plus 1 pt/$1 everywhere else Mastercard is accepted). Confirm which one you're comparing; they are not the same card."
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "id": "bofa-customized-cash-rewards",
+  "name": "Customized Cash Rewards Credit Card",
+  "issuer": "Bank of America",
+  "network": "VISA SIGNATURE",
+  "points_program": "Cash Back",
+  "accent_color": "#B31942",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee",
+  "verdict": {
+    "status": "keep",
+    "text": "Keep if you'll rotate your 6% category: $2,500 cap still earns well",
+    "short_tag": "Choose-Your-Own Categories"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🛍️",
+      "multiplier": "6%",
+      "category": "Choice category (1st year): gas/EV, online shopping, dining, travel, drug stores, or home improvement",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "2%",
+      "category": "Grocery stores & wholesale clubs",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1%",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The 6% choice-category rate is a first-year bonus on top of the standing 3%; after year one it drops to 3%. Both the choice category and grocery/wholesale-club 2% share a single $2,500/quarter combined spending cap, after which they fall to 1%. You can change your choice category once per calendar month in online/mobile banking. Enrolled BofA Rewards members get a 10–75% bonus on top of these rates depending on combined deposit/investment balance (Member/Preferred Plus/Preferred Honors/Premier tiers).",
+  "points": {
+    "currency": "Cash Back",
+    "redemption_options": [
+      {
+        "method": "Deposit to a Bank of America checking or savings account",
+        "cpp": 1.0,
+        "best": true
+      },
+      {
+        "method": "Statement credit or gift cards",
+        "cpp": 1.0,
+        "best": false
+      }
+    ],
+    "per_100k": "$2,300–$3,300",
+    "note": "Value depends on hitting the $2,500/quarter cap in your choice category: maxing it out every quarter during the first-year 6% bonus period pushes the blended rate well above a flat 2% card."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer currency: straight cash back, not a points program.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Zero liability",
+      "detail": "Not responsible for fraudulent transactions once reported",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Not covered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "Bank of America's purchase/travel protection suite (Return Protection, Purchase Security, Auto Rental CDW, trip insurance) is only advertised on the Premium Rewards cards; it isn't published for this card despite the shared Visa Signature network tier.",
+  "rental_note": "No auto rental coverage documented publicly for this card as of this writing.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "$200 welcome bonus",
+      "detail": "One-time $200 cash bonus after $1,000 in purchases within the first 90 days."
+    },
+    {
+      "name": "0% intro APR",
+      "detail": "0% on purchases and balance transfers (within 60 days) for the first 15 billing cycles, then 17.49%–27.49% variable."
+    },
+    {
+      "name": "Intro balance transfer fee",
+      "detail": "3% for the first 60 days the account is open, then 5% on all future transfers."
+    },
+    {
+      "name": "BofA Rewards bonus",
+      "detail": "10% (Member), 25% (Preferred Plus), 50% (Preferred Honors), or 75% (Premier) bonus on cash back earned, based on combined Bank of America/Merrill balance."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns cash back on their spend (into your account)",
+            "included": true
+          }
+        ]
+      }
+    ],
+    "note": "No cost to add: a simple way to pool a partner's or family member's spend into your quarterly category caps."
+  },
+  "timeline": []
+}

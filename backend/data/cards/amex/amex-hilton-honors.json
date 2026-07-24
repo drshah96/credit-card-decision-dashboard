@@ -1,0 +1,123 @@
+{
+  "id": "amex-hilton-honors",
+  "name": "Hilton Honors American Express Card",
+  "issuer": "American Express",
+  "network": "AMERICAN EXPRESS",
+  "points_program": "Hilton Honors",
+  "accent_color": "#8FA8C9",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee",
+  "verdict": {
+    "status": "keep",
+    "text": "Free Hilton points earner with no downside",
+    "short_tag": "Free Hilton Points"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🏨",
+      "multiplier": "7×",
+      "category": "Hilton portfolio hotels, direct",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "5×",
+      "category": "U.S. restaurants",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "5×",
+      "category": "U.S. supermarkets and gas stations",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "3×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "Unusually strong base rate for a no-fee card: 3× on everything else is higher than most paid cards' catch-all rate. The 5× dining/grocery/gas categories have no stated annual cap.",
+  "points": {
+    "currency": "Hilton Honors",
+    "redemption_options": [
+      {
+        "method": "Standard hotel stays",
+        "cpp": 0.5,
+        "best": true
+      },
+      {
+        "method": "Transfer to airline miles (~10:1)",
+        "cpp": 0.13,
+        "best": false
+      }
+    ],
+    "per_100k": "$500",
+    "note": "Same Hilton Honors currency as the Surpass and Aspire tiers; this card just earns it for free, without any of the paid tiers' credits or elite-status boost."
+  },
+  "transfer_partners": {
+    "airline_count": 26,
+    "hotel_count": 0,
+    "highlight": "26 airline transfer partners, almost all at a poor 10:1 ratio. Hilton points are built to be spent on hotel stays, not transferred out.",
+    "recent_changes": "No confirmed recent changes to the airline transfer chart."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Extended warranty",
+      "detail": "+1 year on warranties of 5 years or less (US purchases)",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "90 days from purchase",
+      "level": "mid"
+    }
+  ],
+  "protection_note": "No travel insurance of any kind: no trip delay, trip cancellation, baggage, or rental car coverage. This is a free card built purely for earning Hilton points, not for protecting trips.",
+  "rental_note": "No rental car coverage at all; use a different card for rentals.",
+  "status_perks": [
+    {
+      "name": "Hilton Honors Silver Status",
+      "strength": 2,
+      "note": "Complimentary with the card: 20% bonus points on stays and a free 5th night on award bookings of 4+ nights. The lightest Hilton status tier."
+    }
+  ],
+  "services": [
+    {
+      "name": "No foreign transaction fees",
+      "detail": "Zero FX fees on international spend."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Additional Card",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns Hilton Honors points on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Does not get their own Silver status independently",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Additional cards are free: an easy way to pool household spend toward the 7× hotel rate."
+  },
+  "timeline": []
+}

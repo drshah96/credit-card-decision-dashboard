@@ -1,0 +1,139 @@
+{
+  "id": "citi-bloomingdales",
+  "name": "Bloomingdale's American Express® Card",
+  "issuer": "Citi",
+  "network": "AMERICAN EXPRESS",
+  "points_program": "Loyallist Rewards",
+  "accent_color": "#000000",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee",
+  "verdict": {
+    "status": "situational",
+    "text": "Unremarkable outside Bloomingdale's: a flat 2% card beats it elsewhere",
+    "short_tag": "Bloomingdale's Shoppers"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🛍️",
+      "multiplier": "3 pts/$1",
+      "category": "Bloomingdale's, bloomingdales.com, Bloomingdale's The Outlet Store & everywhere Amex is accepted: Loyallist tier (default)",
+      "highlight": true,
+      "is_base": true
+    },
+    {
+      "emoji": "⭐",
+      "multiplier": "4 pts/$1",
+      "category": "Same categories, at Top of the List / Top of the List Unlocked status tiers",
+      "highlight": true,
+      "is_base": false
+    }
+  ],
+  "earn_note": "This is the open-loop American Express version of Bloomingdale's card: it earns outside Bloomingdale's, unlike the closed-loop, store-only Bloomingdale's Credit Card, which can earn up to 10 pts/$1 at Bloomingdale's at the top status tier but earns nothing anywhere else. On the Amex version, the rate is flat regardless of where you spend: 3 pts/$1 at Loyallist status, rising to 4 pts/$1 once you reach Top of the List status (exact annual-spend thresholds for tier advancement weren't published on Citi's or Bloomingdale's public pages at the time of writing).",
+  "points": {
+    "currency": "Loyallist Points",
+    "redemption_options": [
+      {
+        "method": "Reward redeemable the day after earning, applied at Bloomingdale's or bloomingdales.com",
+        "cpp": 0.5,
+        "best": true
+      }
+    ],
+    "per_100k": "$500 in Bloomingdale's rewards (5,000 points = $25, so 100,000 points ≈ $500)",
+    "note": "Despite the open-loop Amex network letting you earn everywhere, redemption is closed-loop: rewards come back as Bloomingdale's-only credit, not cash or a statement credit. At 3 pts/$1 and 5,000 pts = $25, the effective cash-back rate is about 1.5%, rising to roughly 2% at 4 pts/$1."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners: Loyallist points redeem only at Bloomingdale's or bloomingdales.com.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not confirmed on Citi's or Bloomingdale's public product pages for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not confirmed on Citi's or Bloomingdale's public product pages for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Baggage delay",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not included",
+      "level": "none"
+    }
+  ],
+  "protection_note": "Despite running on the American Express network, this is a Citi-issued retail co-brand, not a standard Amex-issued card. The usual Amex purchase-protection/extended-warranty suite is not confirmed to apply. Treat this as a rewards-and-financing card with no meaningful insurance suite.",
+  "rental_note": "No rental car coverage found for this card.",
+  "status_perks": [
+    {
+      "name": "Loyallist status tiers",
+      "strength": 2,
+      "note": "Loyallist (default) → Top of the List → Top of the List Unlocked, based on annual spend. Higher tiers earn more points per dollar and get earlier access to sales/events; exact spend thresholds weren't published on Citi's public page."
+    }
+  ],
+  "services": [
+    {
+      "name": "International transaction fee",
+      "detail": "3% on purchases and cash advances made in a foreign currency, per Bloomingdale's cardholder terms."
+    },
+    {
+      "name": "Special financing offers",
+      "detail": "Deferred-interest/promotional financing periodically offered on qualifying Bloomingdale's purchases; check current terms before financing."
+    },
+    {
+      "name": "$0 liability on unauthorized charges",
+      "detail": "Standard fraud-liability protection."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns rewards on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "No dedicated insurance to share: this card doesn't carry a confirmed protection suite",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add, useful mainly for pooling a household's spend toward reaching a higher Loyallist tier faster."
+  },
+  "timeline": [
+    {
+      "date": "Ongoing",
+      "type": "neutral",
+      "badge": "Two-product lineup",
+      "text": "Bloomingdale's/Citi issue two distinct card products: the closed-loop, store-only Bloomingdale's Credit Card (up to 10 pts/$1 at Bloomingdale's at top status, unusable elsewhere) and this open-loop Bloomingdale's American Express Card (3–4 pts/$1 flat, anywhere Amex is accepted). Confirm which one you're comparing; they are not the same card."
+    }
+  ]
+}

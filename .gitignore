@@ -32,3 +32,8 @@ htmlcov/
 # Frontend
 node_modules/
 frontend/dist/
+frontend/coverage/
+
+# Database
+*.db
+*.db-journal

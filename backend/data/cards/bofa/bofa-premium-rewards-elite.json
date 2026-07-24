@@ -1,0 +1,212 @@
+{
+  "id": "bofa-premium-rewards-elite",
+  "name": "Premium Rewards Elite Credit Card",
+  "issuer": "Bank of America",
+  "network": "VISA INFINITE",
+  "points_program": "Bank of America Rewards",
+  "accent_color": "#000000",
+  "annual_fee": 550,
+  "effective_cost": "Moderate: $570 in potential credits can more than cover the fee if you use the airline, lifestyle, and Global Entry/TSA credits",
+  "verdict": {
+    "status": "situational",
+    "text": "Keep if you'll use multiple Priority Pass memberships; steep fee otherwise",
+    "short_tag": "4 Lounge Memberships"
+  },
+  "earn_rates": [
+    {
+      "emoji": "✈️",
+      "multiplier": "2×",
+      "category": "Travel",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "2×",
+      "category": "Dining",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1.5×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "Same 2x/2x/1.5x structure as the regular Premium Rewards card. The Elite tier's value is almost entirely in the credits and Priority Pass access, not a richer earn rate. Enrolled BofA Rewards members get a 10–75% bonus on top of these rates depending on combined deposit/investment balance. Redeeming points for airfare also gets a 20% discount versus paying cash.",
+  "points": {
+    "currency": "Bank of America Rewards",
+    "redemption_options": [
+      {
+        "method": "Deposit to a Bank of America checking or savings account",
+        "cpp": 1.0,
+        "best": true
+      },
+      {
+        "method": "Airfare at a 20% points discount",
+        "cpp": 1.25,
+        "best": true
+      },
+      {
+        "method": "Statement credit against travel purchases, or gift cards",
+        "cpp": 1.0,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,800–$2,500",
+    "note": "The 20% airfare discount when redeeming points is the best play here; it's the only redemption path on this card that beats a flat 1¢/point. Otherwise value tops out around 1¢/point, since there's no transfer-partner program."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners: points redeem directly for cash, a 20%-discounted airfare purchase, travel statement credit, or gift cards.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [
+    {
+      "id": "airline-incidental",
+      "name": "Airline Incidental Statement Credit",
+      "subtitle": "auto-applies · seat upgrades, bags, in-flight, lounge fees",
+      "max_annual": 300,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Up to $300 annually in statement credits for qualifying airline incidental purchases: seat upgrades, baggage fees, in-flight services, and airline lounge day-pass fees.",
+      "tips": [
+        "Triple the limit on the regular Premium Rewards card ($100 vs. $300)."
+      ]
+    },
+    {
+      "id": "lifestyle-credit",
+      "name": "Lifestyle Statement Credit",
+      "subtitle": "auto-applies · streaming, food delivery, fitness, rideshare",
+      "max_annual": 150,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Up to $150 annually in statement credits for video streaming services, food delivery, fitness subscriptions, and rideshare services.",
+      "tips": [
+        "The broadest of the three credits, covering everyday recurring subscriptions rather than only travel-specific spend."
+      ]
+    },
+    {
+      "id": "global-entry-tsa",
+      "name": "Global Entry / TSA PreCheck Credit",
+      "subtitle": "$120 · every 4 years",
+      "max_annual": 30,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Statement credit covering the application fee (up to $120) for Global Entry or TSA PreCheck, once every 4 years, when the fee is charged to this card. Shown here amortized to an annual figure.",
+      "tips": [
+        "Apply for Global Entry rather than just TSA PreCheck; it includes TSA PreCheck and still qualifies for this credit."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
+      "level": "mid"
+    },
+    {
+      "coverage": "Baggage delay",
+      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
+      "level": "mid"
+    },
+    {
+      "coverage": "Lost luggage",
+      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
+      "level": "mid"
+    },
+    {
+      "coverage": "Emergency evacuation",
+      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
+      "level": "mid"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Covered: exact terms are in the Guide to Benefits, not public marketing",
+      "level": "mid"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Covered (Purchase Security): exact limits are in the Guide to Benefits, not public marketing",
+      "level": "mid"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Covered (Warranty Manager Service): exact limits are in the Guide to Benefits, not public marketing",
+      "level": "mid"
+    },
+    {
+      "coverage": "Zero liability",
+      "detail": "Not responsible for fraudulent transactions once reported",
+      "level": "good"
+    }
+  ],
+  "protection_note": "Same confirmed travel-insurance and purchase-protection categories as the regular Premium Rewards card (trip delay/cancellation/interruption, baggage, lost luggage, emergency evacuation, Return Protection, Purchase Security). Bank of America doesn't publish whether Elite gets higher dollar limits, so treat these as at least as good as the $95 card's, not confirmed better.",
+  "rental_note": "Auto Rental Collision Damage Waiver is included, plus 24/7 Roadside Dispatch; exact coverage terms aren't published publicly.",
+  "status_perks": [
+    {
+      "name": "Priority Pass Select",
+      "strength": 5,
+      "note": "Up to 4 complimentary Priority Pass Select memberships: enough to cover a primary cardholder plus 3 authorized users, or one person's repeated guest visits, without buying extra memberships."
+    }
+  ],
+  "services": [
+    {
+      "name": "75,000-point welcome bonus",
+      "detail": "A $750 value, after $5,000 in purchases within the first 90 days."
+    },
+    {
+      "name": "24/7 full-service concierge",
+      "detail": "Book travel, dinner reservations, and event tickets through a dedicated concierge line."
+    },
+    {
+      "name": "Visa Signature Luxury Hotel Collection",
+      "detail": "Room upgrades, late checkout, and other perks when booking through the Visa Signature Luxury Hotel Collection."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "$0 on purchases made outside the US."
+    },
+    {
+      "name": "BofA Rewards bonus",
+      "detail": "10% (Member), 25% (Preferred Plus), 50% (Preferred Honors), or 75% (Premier) bonus on points earned, based on combined Bank of America/Merrill balance."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns points on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Can be one of the up-to-4 complimentary Priority Pass memberships",
+            "included": true
+          }
+        ]
+      }
+    ],
+    "note": "No cost to add, and unlike many premium cards, authorized users can share in the complimentary Priority Pass memberships rather than needing their own paid enrollment."
+  },
+  "timeline": []
+}

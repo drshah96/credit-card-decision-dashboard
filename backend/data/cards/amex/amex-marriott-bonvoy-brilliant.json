@@ -1,0 +1,197 @@
+{
+  "id": "amex-marriott-bonvoy-brilliant",
+  "name": "Marriott Bonvoy Brilliant® Card",
+  "issuer": "American Express",
+  "network": "AMERICAN EXPRESS",
+  "points_program": "Marriott Bonvoy",
+  "accent_color": "#6B2C39",
+  "annual_fee": 650,
+  "effective_cost": "Depends on hotel loyalty and free-night use",
+  "verdict": {
+    "status": "situational",
+    "text": "Keep if you're loyal to Marriott and actually book the free night",
+    "short_tag": "Marriott Free Nights"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🏨",
+      "multiplier": "6×",
+      "category": "Marriott Bonvoy participating hotels",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "3×",
+      "category": "Restaurants worldwide",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "✈️",
+      "multiplier": "3×",
+      "category": "Flights booked direct with airlines",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "2×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The 6× hotel rate only applies at Marriott-participating properties; this card earns like a mid-tier card everywhere else. It's built around hotel loyalty, not general spend.",
+  "points": {
+    "currency": "Marriott Bonvoy",
+    "redemption_options": [
+      {
+        "method": "Cash + Points",
+        "cpp": 0.5,
+        "best": false
+      },
+      {
+        "method": "Transfer to airline miles (3:1, +5,000 bonus per 60,000 transferred)",
+        "cpp": 0.45,
+        "best": false
+      },
+      {
+        "method": "Free Night Award (category-dependent)",
+        "cpp": 0.8,
+        "best": true
+      }
+    ],
+    "per_100k": "$800",
+    "note": "Bonvoy points are worth the most redeemed for a free night at a hotel you'd actually book. Cashing out or transferring to airline miles both land well below that. The $800/100k figure assumes a typical free-night redemption, not a guarantee."
+  },
+  "transfer_partners": {
+    "airline_count": 40,
+    "hotel_count": 0,
+    "highlight": "Marriott Bonvoy transfers to 40+ airline programs at 3:1, with a 5,000-mile bonus for every 60,000 points transferred in a single transaction, but it doesn't transfer to any other hotel program, since it already is one.",
+    "recent_changes": "No confirmed recent changes to the airline transfer chart."
+  },
+  "credits": [
+    {
+      "id": "dining",
+      "name": "Brilliant Dining Credit",
+      "subtitle": "$25/mo",
+      "max_annual": 300,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "Up to $25/month in statement credits for purchases at restaurants worldwide.",
+      "tips": [
+        "No enrollment required; just use the card at a restaurant."
+      ]
+    },
+    {
+      "id": "global-entry",
+      "name": "Global Entry / TSA PreCheck Credit",
+      "subtitle": "$120 GE or $85 TSA · every 4 years",
+      "max_annual": 30,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Statement credit for a Global Entry ($120) or TSA PreCheck ($85) application fee, once every 4 years. Shown here amortized to an annual figure.",
+      "tips": [
+        "Apply for Global Entry, not just TSA PreCheck; it includes TSA PreCheck and covers the same credit."
+      ]
+    },
+    {
+      "id": "property-credit",
+      "name": "Ritz-Carlton / St. Regis Property Credit",
+      "subtitle": "$100 · 2-night minimum, direct booking",
+      "max_annual": 100,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Up to $100 property credit for qualifying charges at The Ritz-Carlton or St. Regis when booking a 2+ night stay direct at a special rate.",
+      "tips": [
+        "Only pays off if you're already booking a Ritz-Carlton or St. Regis stay; not a general-purpose credit."
+      ]
+    },
+    {
+      "id": "free-night",
+      "name": "Annual Free Night Award",
+      "subtitle": "up to 85,000-point category · after renewal month",
+      "max_annual": 300,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "One free night award every year after your card renewal month, redeemable at hotels with a redemption level at or under 85,000 Marriott Bonvoy points.",
+      "tips": [
+        "Value swings hard by property. A Category 1 redemption wastes most of the award's ceiling; aim for a hotel priced near the 85k cap.",
+        "$300 here is a conservative mid-range estimate, not what any specific hotel actually costs."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Car Rental Loss & Damage Insurance, up to $75,000, secondary, no liability coverage",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "$10,000/trip · $20,000/yr · 7 covered reasons, zero deductible",
+      "level": "good"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "$500/trip · after 6 hrs · 2 claims/yr",
+      "level": "mid"
+    },
+    {
+      "coverage": "Baggage Insurance Plan",
+      "detail": "$3,000 combined ($2,000 checked / $1,000 carry-on) · $500 sub-limit on electronics/jewelry/watches",
+      "level": "mid"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "$10,000/claim · $50,000/yr · 90 days",
+      "level": "strong"
+    }
+  ],
+  "protection_note": "Trip cancellation coverage matches Amex's most premium travel cards ($10k/trip), but trip delay is thinner ($500 vs $500-plus on some cards, capped at 2 claims/yr). This card leans on hotel loyalty perks, not being the strongest travel-protection card in your wallet.",
+  "rental_note": "Rental coverage is secondary and excludes liability; put the rental on a card with primary coverage if you rent often, and use this one for the points instead.",
+  "status_perks": [
+    {
+      "name": "Marriott Bonvoy Platinum Elite Status",
+      "strength": 4,
+      "note": "Complimentary with the card: includes room upgrades (space-available), 25% bonus points, and enhanced guarantees. Plus 25 Elite Night Credits/year toward the next status tier."
+    },
+    {
+      "name": "Priority Pass Select",
+      "strength": 3,
+      "note": "Unlimited visits to 1,200+ airport lounges worldwide, enrollment required."
+    }
+  ],
+  "services": [],
+  "additional_cards": {
+    "title": "Additional Cards",
+    "options": [
+      {
+        "name": "Additional Bonvoy Brilliant Card",
+        "fee": "$0 (first 3)",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free for up to 3 additional cards",
+            "included": true
+          },
+          {
+            "text": "Earns Marriott Bonvoy points on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Does not get their own Free Night Award or Elite status",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Additional cards are free for the first three, a cheap way to pool household spend toward the 6× hotel rate and the annual free night."
+  },
+  "timeline": []
+}

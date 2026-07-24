@@ -1,0 +1,100 @@
+{
+  "id": "citi-home-depot-consumer",
+  "name": "The Home Depot® Consumer Credit Card",
+  "issuer": "Citi",
+  "network": "PROPRIETARY (Home Depot / Citi Retail Services, closed-loop, not Visa or Mastercard)",
+  "points_program": "None, no rewards program",
+  "accent_color": "#F96302",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee, but purely a store-financing tool with no rewards and no use outside Home Depot",
+  "verdict": {
+    "status": "situational",
+    "text": "A project-financing card, not rewards: only for a 0% Home Depot purchase",
+    "short_tag": "0% Project Financing"
+  },
+  "earn_rates": [],
+  "earn_note": "This card has no cash-back or points program of any kind. Its entire value proposition is deferred-interest financing (\"no interest if paid in full within the promotional period\") on Home Depot purchases, plus a modest new-account discount and an extended return window. If you want rewards for home-improvement spend, a general-purpose card with a home-improvement or everyday-purchases category will out-earn this every time.",
+  "points": {
+    "currency": "None",
+    "redemption_options": [],
+    "per_100k": "$0, no rewards program",
+    "note": "No points or cash back exist on this card. Its value is entirely about financing terms: promotional 0%-interest windows (commonly 6 months on purchases of $299+, with longer up-to-24-month windows during special promotions) that revert to a high standard variable APR (published around 29.99% as of Citi's 2025/2026 disclosures) if not paid in full by the deadline, including retroactive interest back to the purchase date under deferred-interest terms, which is a real risk if you carry a balance past the promo window."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No rewards currency exists on this card, so there is nothing to transfer.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Baggage delay",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not included",
+      "level": "none"
+    }
+  ],
+  "protection_note": "None of the usual card protections apply: this is a closed-loop retail financing account, not a Visa/Mastercard, so there's no purchase protection, extended warranty, or travel insurance of any kind. $0 liability on unauthorized charges is the only fraud-related benefit found.",
+  "rental_note": "No rental car coverage; this card can't be used for rentals or anywhere outside Home Depot and homedepot.com.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "Deferred-interest project financing",
+      "detail": "6 months no-interest financing on purchases of $299+ if paid in full within the promo window; special promotions extend this up to 24 months at times. Missing the deadline triggers retroactive interest back to the purchase date."
+    },
+    {
+      "name": "New-account discount",
+      "detail": "Save up to $100 on qualifying purchases when opening a new account; exact terms/tiers vary by promotion."
+    },
+    {
+      "name": "Extended return window",
+      "detail": "Cardholders get 1 year to make returns instead of Home Depot's standard 90-day window, subject to Home Depot's Returns Policy exclusions."
+    },
+    {
+      "name": "Flexible due date",
+      "detail": "Choose a payment due date at the beginning, middle, or end of the month."
+    },
+    {
+      "name": "$0 liability on unauthorized charges",
+      "detail": "Standard fraud-liability protection."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [],
+    "note": "No distinct authorized-user program or benefit was found for this card; it's a single-purpose store-financing account."
+  },
+  "timeline": [
+    {
+      "date": "Ongoing",
+      "type": "neutral",
+      "badge": "Financing-only",
+      "text": "Structurally similar to other big-box store financing cards (e.g. Chase Slate Edge for credit-building): no rewards program, value comes entirely from 0%-interest promotional financing windows on qualifying purchases, not from earning anything back."
+    }
+  ]
+}

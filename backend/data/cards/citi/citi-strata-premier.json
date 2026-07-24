@@ -1,0 +1,197 @@
+{
+  "id": "citi-strata-premier",
+  "name": "Strata Premier",
+  "issuer": "Citi",
+  "network": "WORLD ELITE MASTERCARD",
+  "points_program": "ThankYou Rewards",
+  "accent_color": "#003D79",
+  "annual_fee": 95,
+  "effective_cost": "Low: the $100 hotel credit alone covers most of the fee",
+  "verdict": {
+    "status": "keep",
+    "text": "Strong $95 travel card, but cash redemption is capped at 0.75¢/point",
+    "short_tag": "Travel & Transfers"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🏨",
+      "multiplier": "10×",
+      "category": "Hotels, car rentals & attractions, booked via cititravel.com",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "✈️",
+      "multiplier": "3×",
+      "category": "Air travel & other hotel purchases (outside Citi Travel)",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "3×",
+      "category": "Restaurants",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "3×",
+      "category": "Supermarkets",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "⛽",
+      "multiplier": "3×",
+      "category": "Gas & EV charging stations",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The 3x tier is unusually broad for a $95 card: flights, dining, groceries, and gas/EV charging all qualify, no rotation or activation needed. EV charging was added as part of the May 2025 Strata rebrand, alongside extending the 10x rate to car rentals and attractions (not just hotels) booked on cititravel.com.",
+  "points": {
+    "currency": "ThankYou Points",
+    "redemption_options": [
+      {
+        "method": "Statement credit / direct deposit / check",
+        "cpp": 0.75,
+        "best": false
+      },
+      {
+        "method": "Citi Travel portal",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Transfer partners (avg)",
+        "cpp": 1.7,
+        "best": true
+      }
+    ],
+    "per_100k": "$1,700+",
+    "note": "Citi cut the statement-credit/cash rate from 1¢ to 0.75¢/point on Aug 24, 2025, a real 25% haircut. Points still transfer 1:1 to the full partner list from this card, so the smart play is transferring to airline/hotel partners rather than cashing out. Points also never expire as long as the account is open, and pool with a linked Strata or Strata Elite account."
+  },
+  "transfer_partners": {
+    "airline_count": 16,
+    "hotel_count": 5,
+    "highlight": "22 total partners at a full 1:1 ratio (Emirates Skywards is the exception, at roughly 1:0.8): American Airlines, JetBlue, Air France-KLM Flying Blue, Virgin Atlantic/Virgin Red, Turkish Airlines, Cathay Pacific, Singapore Airlines, Avianca LifeMiles, plus Choice Privileges, Wyndham Rewards, Accor Live Limitless, and Preferred Hotels & Resorts (I Prefer).",
+    "recent_changes": "Preferred Hotels & Resorts (I Prefer) joined as a hotel transfer partner in late October 2024, and American Airlines AAdvantage returned as a permanent partner in July 2025 after a multi-year absence."
+  },
+  "credits": [
+    {
+      "id": "hotel-credit",
+      "name": "Annual Hotel Benefit",
+      "subtitle": "once/year · $500+ stay via Citi Travel",
+      "max_annual": 100,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Once per calendar year, $100 off a single hotel stay of $500 or more (excluding taxes and fees) booked through cititravel.com or by phone.",
+      "tips": [
+        "Requires a single stay of $500+; smaller bookings don't qualify.",
+        "Portal-only, like the Chase Sapphire Preferred's hotel credit, so it only helps if you're already booking through Citi Travel."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Common carrier trip cancellation & interruption. Limits not published by Citi; secondary sources cite a per-trip range in the low thousands",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "$500/trip · after 6 hrs · 2 claims per 12 months",
+      "level": "good"
+    },
+    {
+      "coverage": "Baggage delay/loss",
+      "detail": "$3,000/trip · 2 claims per 12 months",
+      "level": "good"
+    },
+    {
+      "coverage": "Rental car (MasterRental)",
+      "detail": "Secondary · loss-of-use up to $500",
+      "level": "mid"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "$0 liability on unauthorized charges only; no purchase protection benefit",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not offered",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not covered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "Decent trip coverage for a $95 card: Citi reintroduced trip cancellation/interruption, trip delay, and baggage coverage in the May 2025 refresh after years without them. The gaps are real, though: no purchase protection, no extended warranty, no cell phone protection, and rental coverage is secondary only. Citi hasn't published exact trip cancellation caps the way Chase does; treat it as solid-but-unquantified until Citi's Guide to Benefits is checked at claim time.",
+  "rental_note": "MasterRental coverage is secondary: it pays after your personal auto policy, covering the gap (deductible, etc). For primary coverage, use a card like the Sapphire Preferred or Venture X instead.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "No foreign transaction fees",
+      "detail": "Zero added cost on purchases made outside the US."
+    },
+    {
+      "name": "Citi Entertainment",
+      "detail": "Presale access to concert, sports, and event tickets."
+    },
+    {
+      "name": "Digital wallet & Flex Pay",
+      "detail": "Add to Apple Pay/Google Pay; convert eligible purchases to fixed monthly payments while still earning points."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add: no per-card fee",
+            "included": true
+          },
+          {
+            "text": "Earns ThankYou Points on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "No lounge access or hotel status (the primary doesn't get these either)",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free authorized users pool spend into the broad 3x categories at no extra cost, similar to the Sapphire Preferred."
+  },
+  "timeline": [
+    {
+      "date": "Aug 24, 2025",
+      "type": "cut",
+      "badge": "Redemption cut",
+      "text": "Statement credit / cash redemption value cut 25%, from 1¢ to 0.75¢ per ThankYou Point. Travel-portal and transfer-partner redemption values were unaffected."
+    },
+    {
+      "date": "May 12, 2024",
+      "type": "neutral",
+      "badge": "Rebrand",
+      "text": "Citi Premier was renamed Citi Strata Premier, the first move in the ThankYou 'Strata' family rebrand that later added the no-fee Strata (2025) and flagship Strata Elite (2025). The upgrade was automatic: existing Premier cardholders kept their account, credit line, and $95 fee, and simply received a new Strata Premier card the next time a card was reissued. The rebrand added EV charging to the 3x category, extended the 10x Citi Travel rate to car rentals and attractions (previously hotels only), and reintroduced trip cancellation, trip delay, baggage, and rental car protections that Citi had stripped from the card in 2019."
+    }
+  ]
+}

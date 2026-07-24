@@ -8,10 +8,10 @@ export type TimelineEventType = "add" | "cut" | "neutral" | "future";
 export interface Verdict {
   status: VerdictStatus;
   text: string;
+  short_tag?: string | null;
 }
 
-/** Returned by GET /api/cards */
-export interface CardSummary {
+interface CardBase {
   id: string;
   name: string;
   issuer: string;
@@ -21,6 +21,10 @@ export interface CardSummary {
   annual_fee: number;
   effective_cost: string;
   verdict: Verdict;
+}
+
+/** Returned by GET /api/cards */
+export interface CardSummary extends CardBase {
   total_easy_credits: number;
   total_max_credits: number;
 }
@@ -108,7 +112,7 @@ export interface TimelineEvent {
 }
 
 /** Returned by GET /api/cards/:id */
-export interface Card extends CardSummary {
+export interface Card extends CardBase {
   earn_rates: EarnRate[];
   earn_note: string;
   points: Points;

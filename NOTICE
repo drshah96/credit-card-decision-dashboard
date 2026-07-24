@@ -1,0 +1,21 @@
+This project's source code, structure, and original written content (card
+analysis, verdicts, tips, etc.) are licensed under the MIT License, see
+LICENSE.
+
+That license does not extend to third-party trademarks or copyrighted
+material bundled in this repository, specifically:
+
+- Issuer and network logos under `frontend/src/assets/logos/`
+- Card art images under `frontend/src/assets/cards/`
+
+These are trademarks and/or copyrighted material of their respective owners
+(American Express, Chase, Citi, Bank of America, U.S. Bank, Capital One,
+Bilt, and others). They are used here solely to identify the credit card
+products being described and to illustrate this project's own commentary.
+No affiliation, sponsorship, or endorsement by any issuer or network is
+implied.
+
+If you fork or reuse this project, you are responsible for your own use of
+these assets and should not assume the MIT License grants you any rights to
+them. Rights holders who want an asset removed can reach out via the
+repository's issue tracker.

@@ -1,0 +1,188 @@
+{
+  "id": "bofa-premium-rewards",
+  "name": "Premium Rewards Credit Card",
+  "issuer": "Bank of America",
+  "network": "VISA SIGNATURE",
+  "points_program": "Bank of America Rewards",
+  "accent_color": "#1B2A56",
+  "annual_fee": 95,
+  "effective_cost": "Moderate: $200 in travel credits offset roughly two-thirds of the fee if you use both",
+  "verdict": {
+    "status": "keep",
+    "text": "Keep if the $200 credits offset the fee: solid no-frills 2x rate",
+    "short_tag": "Travel & Dining"
+  },
+  "earn_rates": [
+    {
+      "emoji": "✈️",
+      "multiplier": "2×",
+      "category": "Travel",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "2×",
+      "category": "Dining",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1.5×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "No caps on the 2x categories or the 1.5x base, a genuinely simple structure for a $95 card. Enrolled BofA Rewards members get a 10–75% bonus on top of these rates depending on combined deposit/investment balance.",
+  "points": {
+    "currency": "Bank of America Rewards",
+    "redemption_options": [
+      {
+        "method": "Deposit to a Bank of America checking or savings account",
+        "cpp": 1.0,
+        "best": true
+      },
+      {
+        "method": "Statement credit against travel purchases, or gift cards",
+        "cpp": 1.0,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,800–$2,000",
+    "note": "Redemption tops out around 1¢/point regardless of method. There's no transfer-partner program behind these points, so the ceiling is lower than a transferable-currency card at this price point."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners: points redeem directly for cash, travel statement credit, or gift cards at a flat rate.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [
+    {
+      "id": "airline-incidental",
+      "name": "Airline Incidental Statement Credit",
+      "subtitle": "auto-applies · seat upgrades, bags, in-flight, lounge fees",
+      "max_annual": 100,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Up to $100 annually in statement credits for qualifying airline incidental purchases: seat upgrades, baggage fees, in-flight services, and airline lounge day-pass fees.",
+      "tips": [
+        "Covers one-off airline lounge day passes, but this card doesn't include a lounge membership the way Premium Rewards Elite does."
+      ]
+    },
+    {
+      "id": "global-entry-tsa",
+      "name": "Global Entry / TSA PreCheck Credit",
+      "subtitle": "$100 · every 4 years",
+      "max_annual": 25,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Statement credit covering the application fee (up to $100) for Global Entry or TSA PreCheck, once every 4 years, when the fee is charged to this card. Shown here amortized to an annual figure.",
+      "tips": [
+        "Apply for Global Entry rather than just TSA PreCheck; it includes TSA PreCheck and still qualifies for this credit."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
+      "level": "mid"
+    },
+    {
+      "coverage": "Baggage delay",
+      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
+      "level": "mid"
+    },
+    {
+      "coverage": "Lost luggage",
+      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
+      "level": "mid"
+    },
+    {
+      "coverage": "Emergency evacuation",
+      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
+      "level": "mid"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Covered: exact terms are in the Guide to Benefits, not public marketing",
+      "level": "mid"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Covered (Purchase Security): exact limits are in the Guide to Benefits, not public marketing",
+      "level": "mid"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Covered (Warranty Manager Service): exact limits are in the Guide to Benefits, not public marketing",
+      "level": "mid"
+    },
+    {
+      "coverage": "Zero liability",
+      "detail": "Not responsible for fraudulent transactions once reported",
+      "level": "good"
+    }
+  ],
+  "protection_note": "Bank of America confirms this card includes a real travel-insurance and purchase-protection suite (trip delay/cancellation/interruption, baggage delay, lost luggage, emergency evacuation, Return Protection, and Purchase Security), but doesn't publish exact dollar limits or day thresholds on the product page the way Amex/Chase do. Check your Guide to Benefits after approval for the real numbers.",
+  "rental_note": "Auto Rental Collision Damage Waiver is included, plus 24/7 Roadside Dispatch, but exact coverage terms (primary vs. secondary, dollar limits, excluded vehicles) aren't published publicly.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "60,000-point welcome bonus",
+      "detail": "A $600 value, after $4,000 in purchases within the first 90 days."
+    },
+    {
+      "name": "Visa Signature Luxury Hotel Collection",
+      "detail": "Room upgrades, late checkout, and other perks when booking through the Visa Signature Luxury Hotel Collection."
+    },
+    {
+      "name": "24/7 concierge",
+      "detail": "Visa Signature concierge service for travel planning, dining reservations, and event tickets."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "$0 on purchases made outside the US."
+    },
+    {
+      "name": "BofA Rewards bonus",
+      "detail": "10% (Member), 25% (Preferred Plus), 50% (Preferred Honors), or 75% (Premier) bonus on points earned, based on combined Bank of America/Merrill balance."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns points on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Covered by the same purchase and travel protections",
+            "included": true
+          }
+        ]
+      }
+    ],
+    "note": "No cost to add: a simple way to pool a partner's or family member's travel/dining spend into the 2x categories."
+  },
+  "timeline": []
+}

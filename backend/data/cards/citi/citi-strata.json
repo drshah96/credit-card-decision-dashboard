@@ -1,0 +1,165 @@
+{
+  "id": "citi-strata",
+  "name": "Strata",
+  "issuer": "Citi",
+  "network": "MASTERCARD",
+  "points_program": "ThankYou Rewards",
+  "accent_color": "#5B9BD5",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee",
+  "verdict": {
+    "status": "keep",
+    "text": "Broad no-fee earner, though cash-back is capped at half a cent/point",
+    "short_tag": "Broad No-Fee Earner"
+  },
+  "earn_rates": [
+    {
+      "emoji": "✈️",
+      "multiplier": "5×",
+      "category": "Hotels, car rentals & attractions, booked via cititravel.com",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "3×",
+      "category": "Supermarkets",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "⛽",
+      "multiplier": "3×",
+      "category": "Gas, EV charging & select transit",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🎯",
+      "multiplier": "3×",
+      "category": "Self-Select category: one choice, changeable quarterly",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "2×",
+      "category": "Restaurants",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The Self-Select category defaults to streaming services and can be swapped once per calendar quarter among fitness clubs, streaming, live entertainment, cosmetics/barber/salon, or pet supply stores. It's a nice bit of flexibility for a $0 card, though the categories are narrower than the flat 3x/2x tiers on Chase Freedom Unlimited or Amex Blue Cash.",
+  "points": {
+    "currency": "ThankYou Points",
+    "redemption_options": [
+      {
+        "method": "Statement credit / direct deposit / check",
+        "cpp": 0.5,
+        "best": false
+      },
+      {
+        "method": "Citi Travel portal",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Transfer partners, reduced 1:0.7 ratio",
+        "cpp": 1.2,
+        "best": true
+      }
+    ],
+    "per_100k": "$500–$1,200",
+    "note": "The catch with a no-fee ThankYou card: cash-back redemption is only 0.5¢/point (half of what Strata Premier/Elite cardholders get) and transfers to airline/hotel partners go through at a reduced 1:0.7 ratio instead of 1:1. Linking this account to a Strata Premier or Strata Elite card in Citi's online banking pools the points and unlocks the full 1¢ cash rate and 1:1 transfers on everything this card earns, the main reason serious users pair it with a fee-paying Citi card rather than holding it alone."
+  },
+  "transfer_partners": {
+    "airline_count": 16,
+    "hotel_count": 5,
+    "highlight": "Same 22-partner roster as Strata Premier and Strata Elite (American Airlines, JetBlue, Flying Blue, Virgin Atlantic, Choice, Wyndham, Preferred Hotels, and more), but every transfer from this card alone goes through at a reduced 1:0.7 ratio.",
+    "recent_changes": "American Airlines AAdvantage was reinstated as a permanent ThankYou transfer partner in July 2025 after being dropped in 2022."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not offered",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not offered",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car coverage",
+      "detail": "Not offered",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip protections",
+      "detail": "Not offered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "This is a bare-bones no-fee card on the protection side: Citi stripped trip, purchase, and warranty coverage from its lower-tier cards years ago and never added them back here. What's left is standard fraud monitoring and Mastercard ID Theft Protection, nothing more.",
+  "rental_note": "No rental car coverage of any kind. Use a different card, or decline this one, when renting.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "Foreign transaction fee applies",
+      "detail": "3% on purchases made outside the US; not built for international use."
+    },
+    {
+      "name": "Citi Entertainment",
+      "detail": "Presale access to concert, sports, and event tickets."
+    },
+    {
+      "name": "Citi Flex Pay",
+      "detail": "Convert eligible purchases to fixed monthly payments while still earning points."
+    },
+    {
+      "name": "Free FICO Score access",
+      "detail": "View your FICO Score at no cost through the Citi app or site."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns ThankYou Points on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "No status, lounge access, or meaningful protections to share: this tier doesn't have them",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "No cost to add users, but there's little to share beyond the earn rate; this card's value is almost entirely in the points, not in perks."
+  },
+  "timeline": [
+    {
+      "date": "Jul 20, 2025",
+      "type": "neutral",
+      "badge": "Rebrand",
+      "text": "Citi Rewards+ was restructured and renamed Citi Strata as part of the broader ThankYou 'Strata' family rebrand (Citi Premier had already become Strata Premier in May 2024; Strata Elite launched separately later in 2025). Existing Rewards+ accounts were converted automatically on this date. Cardholders kept their account, credit line, and $0 fee, and were mailed a new Strata-branded card; no application or hard pull was required. Two signature Rewards+ perks were dropped in the process and did not carry over: the automatic round-up to the nearest 10 points on every purchase, and the 10% points rebate on the first 100,000 points redeemed each year. In exchange, cardholders got the current 5x/3x/2x category structure, which earns faster for most spending patterns."
+    }
+  ]
+}

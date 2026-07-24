@@ -1,0 +1,192 @@
+{
+  "id": "us-bank-altitude-connect",
+  "name": "Altitude Connect Visa Signature Card",
+  "issuer": "U.S. Bank",
+  "network": "VISA SIGNATURE",
+  "points_program": "U.S. Bank Rewards",
+  "accent_color": "#1E3F8F",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee, and genuinely premium travel perks for a $0 card",
+  "verdict": {
+    "status": "keep",
+    "text": "Strongest no-fee travel card: Priority Pass and Global Entry credit",
+    "short_tag": "Free Lounge Access"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🏨",
+      "multiplier": "5×",
+      "category": "Prepaid hotels & car rentals, Travel Center only",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "✈️",
+      "multiplier": "4×",
+      "category": "Travel: airlines, hotels, car rentals, trains, cruises",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "⛽",
+      "multiplier": "4×",
+      "category": "Gas & EV charging, first $1,000/qtr, then 1×",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "2×",
+      "category": "Dining, streaming & grocery stores",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The Travel Center 5x and general-travel 4x categories don't overlap: prepaid hotel/car bookings made in U.S. Bank's own Travel Center earn 5x instead of the 4x travel rate. Discount stores/supercenters, wholesale clubs, and grocery stores are excluded from the gas-category bonus; discount stores/supercenters and wholesale clubs are excluded from the grocery bonus.",
+  "points": {
+    "currency": "U.S. Bank Rewards",
+    "redemption_options": [
+      {
+        "method": "Deposit to a U.S. Bank checking or savings account, or travel",
+        "cpp": 1.0,
+        "best": true
+      },
+      {
+        "method": "Merchandise, gift cards, or statement credit",
+        "cpp": 1.0,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,000–$1,700",
+    "note": "Redemption tops out around 1¢/point regardless of method. There's no transfer-partner program behind these points, so the ceiling is lower than a transferable-currency card, but the earn rates and included travel perks largely make up for it on a no-fee card."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners: points redeem directly for cash, travel, merchandise, or gift cards at a flat rate.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [
+    {
+      "id": "global-entry-tsa",
+      "name": "Global Entry / TSA PreCheck Credit",
+      "subtitle": "$100 · every 4 years",
+      "max_annual": 25,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Statement credit covering the application fee (up to $100) for Global Entry or TSA PreCheck, once every 4 years, when the fee is charged to this card. Shown here amortized to an annual figure.",
+      "tips": [
+        "Apply for Global Entry rather than just TSA PreCheck; it includes TSA PreCheck and still qualifies for this credit."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Coverage requires booking the trip on this card; see Guide to Benefits for limits",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "Via SmartDelay: register your flight at altitudeconnect.smartdelay.com",
+      "level": "mid"
+    },
+    {
+      "coverage": "Zero fraud liability",
+      "detail": "Not responsible for unauthorized transactions once reported",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not covered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "Trip cancellation/interruption and trip delay coverage are real and confirmed, but exact dollar limits live in the Guide to Benefits you receive after approval, not in U.S. Bank's public marketing. SmartDelay in particular requires you to proactively register each flight; it isn't automatic.",
+  "rental_note": "No auto rental coverage documented publicly for this card as of this writing.",
+  "status_perks": [
+    {
+      "name": "Priority Pass Select",
+      "strength": 4,
+      "note": "Complimentary 12-month membership (enroll separately at prioritypass.com/usbankaltitudeconnect) for airport lounge access worldwide, including accompanying guests. Free enrollment is limited to one cardholder per account, including authorized users."
+    }
+  ],
+  "services": [
+    {
+      "name": "20,000-point welcome bonus",
+      "detail": "After $1,000 in net purchases within the first 90 days. Not eligible if you've received a new-account bonus for this card in the last 5 years."
+    },
+    {
+      "name": "GigSky global data",
+      "detail": "Complimentary GigSky mobile data plans in over 175 countries; register at gigsky.com/visa-usb-ac. Benefit redeemable through Nov 30, 2026."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "$0 on purchases made outside the US."
+    },
+    {
+      "name": "0% intro APR",
+      "detail": "0% on purchases and balance transfers for the first 15 billing cycles, then 17.49%–27.49% variable."
+    },
+    {
+      "name": "U.S. Bank ExtendPay Plan",
+      "detail": "Pay off up to 50% of your credit line in fixed installments with a $0 fee offer for plans opened in the first 60 days."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns points on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Free Priority Pass enrollment is limited to one cardholder per account. An authorized user can take that slot, but not in addition to the primary",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add, but only one person on the account (primary or authorized user) gets the complimentary Priority Pass enrollment."
+  },
+  "timeline": [
+    {
+      "date": "Nov 30, 2026",
+      "type": "future",
+      "badge": "Upcoming",
+      "text": "The complimentary GigSky global data benefit is redeemable through this date under current terms."
+    }
+  ]
+}

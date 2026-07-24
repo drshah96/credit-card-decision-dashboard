@@ -5,14 +5,110 @@ from backend.main import app
 
 client = TestClient(app)
 
-CARD_IDS = ["amex", "csr", "venturex", "delta"]
+CARD_IDS = [
+    "amex-platinum",
+    "chase-sapphire-reserve",
+    "capital-one-venture-x",
+    "amex-delta-skymiles-platinum",
+    "amex-gold",
+    "amex-green",
+    "amex-blue-cash-everyday",
+    "amex-blue-cash-preferred",
+    "amex-marriott-bonvoy-brilliant",
+    "amex-marriott-bonvoy-bevy",
+    "amex-hilton-honors",
+    "amex-hilton-honors-surpass",
+    "amex-hilton-honors-aspire",
+    "amex-delta-skymiles-gold",
+    "amex-delta-skymiles-reserve",
+    "amex-delta-skymiles-blue",
+    "chase-sapphire-preferred",
+    "chase-freedom-unlimited",
+    "chase-freedom-flex",
+    "chase-freedom-rise",
+    "chase-slate-edge",
+    "chase-united-explorer",
+    "chase-united-quest",
+    "chase-united-club-infinite",
+    "chase-southwest-rapid-rewards-plus",
+    "chase-southwest-rapid-rewards-premier",
+    "chase-southwest-rapid-rewards-priority",
+    "chase-world-of-hyatt",
+    "chase-marriott-bonvoy-boundless",
+    "chase-marriott-bonvoy-bold",
+    "chase-ihg-one-rewards-premier",
+    "chase-ihg-one-rewards-traveler",
+    "chase-disney-premier",
+    "chase-amazon-prime-visa",
+    "capital-one-venture",
+    "capital-one-venture-one",
+    "capital-one-savor",
+    "capital-one-savor-one",
+    "capital-one-quicksilver",
+    "capital-one-quicksilver-one",
+    "capital-one-platinum",
+    "capital-one-key-rewards",
+    "capital-one-rei-co-op",
+    "capital-one-bjs-one",
+    "capital-one-bjs-one-plus",
+    "capital-one-kohls-rewards",
+    "capital-one-tmobile",
+    "capital-one-bass-pro-cabelas-club",
+    "capital-one-quicksilver-secured",
+    "capital-one-platinum-secured",
+    "citi-strata",
+    "citi-strata-premier",
+    "citi-strata-elite",
+    "citi-double-cash",
+    "citi-diamond-preferred",
+    "citi-simplicity",
+    "citi-secured",
+    "citi-aadvantage-platinum-select",
+    "citi-aadvantage-executive",
+    "citi-aadvantage-mileup",
+    "citi-aadvantage-globe",
+    "citi-costco-anywhere-visa",
+    "citi-best-buy-visa",
+    "citi-home-depot-consumer",
+    "citi-att-points-plus",
+    "citi-exxonmobil-smart-card-plus",
+    "citi-macys",
+    "citi-bloomingdales",
+    "citi-dillards",
+    "citi-wayfair",
+    "citi-goodyear",
+    "citi-llbean",
+    "citi-tractor-supply",
+    "us-bank-smartly",
+    "us-bank-cash-plus",
+    "us-bank-shield",
+    "us-bank-split",
+    "us-bank-altitude-go",
+    "us-bank-altitude-connect",
+    "us-bank-altitude-go-secured",
+    "us-bank-cash-plus-secured",
+    "us-bank-secured",
+    "bofa-customized-cash-rewards",
+    "bofa-unlimited-cash-rewards",
+    "bofa-bankamericard",
+    "bofa-travel-rewards",
+    "bofa-premium-rewards",
+    "bofa-premium-rewards-elite",
+    "bofa-cash-rewards-secured",
+    "bofa-unlimited-cash-rewards-secured",
+    "bofa-bankamericard-secured",
+    "bofa-travel-rewards-secured",
+    "bilt-blue",
+    "bilt-obsidian",
+    "bilt-palladium",
+]
 
 
-def test_list_cards_returns_all_four() -> None:
+def test_list_cards_returns_all_cards() -> None:
     response = client.get("/api/cards")
     assert response.status_code == 200
     data = response.json()
-    assert len(data) == 4
+    assert len(data) == len(CARD_IDS)
     ids = [c["id"] for c in data]
     assert set(ids) == set(CARD_IDS)
 
@@ -41,7 +137,24 @@ def test_get_card_detail(card_id: str) -> None:
     assert "credits" in data
     assert "insurance" in data
     assert "timeline" in data
-    assert len(data["earn_rates"]) > 0
+    # These cards have no rewards program at all (pure APR/credit-access/
+    # financing products) — every other card earns something.
+    NO_REWARDS_CARDS = (
+        "chase-slate-edge",
+        "capital-one-platinum",
+        "capital-one-platinum-secured",
+        "citi-diamond-preferred",
+        "citi-simplicity",
+        "citi-secured",
+        "citi-home-depot-consumer",
+        "citi-goodyear",
+        "us-bank-split",
+        "us-bank-secured",
+        "bofa-bankamericard",
+        "bofa-bankamericard-secured",
+    )
+    if card_id not in NO_REWARDS_CARDS:
+        assert len(data["earn_rates"]) > 0
 
 
 def test_get_card_not_found() -> None:
@@ -52,10 +165,79 @@ def test_get_card_not_found() -> None:
 def test_annual_fees_are_correct() -> None:
     response = client.get("/api/cards")
     fees = {c["id"]: c["annual_fee"] for c in response.json()}
-    assert fees["amex"] == 895
-    assert fees["csr"] == 795
-    assert fees["venturex"] == 395
-    assert fees["delta"] == 350
+    assert fees["amex-platinum"] == 895
+    assert fees["chase-sapphire-reserve"] == 795
+    assert fees["capital-one-venture-x"] == 395
+    assert fees["amex-delta-skymiles-platinum"] == 350
+    assert fees["amex-gold"] == 325
+    assert fees["amex-green"] == 150
+    assert fees["amex-blue-cash-everyday"] == 0
+    assert fees["amex-blue-cash-preferred"] == 95
+    assert fees["amex-marriott-bonvoy-brilliant"] == 650
+    assert fees["amex-marriott-bonvoy-bevy"] == 250
+    assert fees["amex-hilton-honors"] == 0
+    assert fees["amex-hilton-honors-surpass"] == 150
+    assert fees["amex-hilton-honors-aspire"] == 550
+    assert fees["amex-delta-skymiles-gold"] == 150
+    assert fees["amex-delta-skymiles-reserve"] == 650
+    assert fees["amex-delta-skymiles-blue"] == 0
+    assert fees["chase-sapphire-preferred"] == 95
+    assert fees["chase-freedom-unlimited"] == 0
+    assert fees["chase-freedom-flex"] == 0
+    assert fees["chase-freedom-rise"] == 0
+    assert fees["chase-slate-edge"] == 0
+    assert fees["chase-united-explorer"] == 150
+    assert fees["chase-united-quest"] == 350
+    assert fees["chase-united-club-infinite"] == 695
+    assert fees["chase-southwest-rapid-rewards-plus"] == 99
+    assert fees["chase-southwest-rapid-rewards-premier"] == 149
+    assert fees["chase-southwest-rapid-rewards-priority"] == 229
+    assert fees["chase-world-of-hyatt"] == 95
+    assert fees["chase-marriott-bonvoy-boundless"] == 95
+    assert fees["chase-marriott-bonvoy-bold"] == 0
+    assert fees["chase-ihg-one-rewards-premier"] == 99
+    assert fees["chase-ihg-one-rewards-traveler"] == 0
+    assert fees["chase-disney-premier"] == 49
+    assert fees["chase-amazon-prime-visa"] == 0
+    assert fees["capital-one-venture"] == 95
+    assert fees["capital-one-venture-one"] == 0
+    assert fees["capital-one-savor"] == 0
+    assert fees["capital-one-savor-one"] == 39
+    assert fees["capital-one-quicksilver"] == 0
+    assert fees["capital-one-quicksilver-one"] == 39
+    assert fees["capital-one-platinum"] == 0
+    assert fees["capital-one-key-rewards"] == 0
+    assert fees["capital-one-rei-co-op"] == 0
+    assert fees["capital-one-bjs-one"] == 0
+    assert fees["capital-one-bjs-one-plus"] == 0
+    assert fees["capital-one-kohls-rewards"] == 0
+    assert fees["capital-one-tmobile"] == 0
+    assert fees["capital-one-bass-pro-cabelas-club"] == 0
+    assert fees["capital-one-quicksilver-secured"] == 0
+    assert fees["capital-one-platinum-secured"] == 0
+    assert fees["citi-strata"] == 0
+    assert fees["citi-strata-premier"] == 95
+    assert fees["citi-strata-elite"] == 595
+    assert fees["citi-double-cash"] == 0
+    assert fees["citi-diamond-preferred"] == 0
+    assert fees["citi-simplicity"] == 0
+    assert fees["citi-secured"] == 0
+    assert fees["citi-aadvantage-platinum-select"] == 99
+    assert fees["citi-aadvantage-executive"] == 595
+    assert fees["citi-aadvantage-mileup"] == 0
+    assert fees["citi-aadvantage-globe"] == 350
+    assert fees["citi-costco-anywhere-visa"] == 0
+    assert fees["citi-best-buy-visa"] == 0
+    assert fees["citi-home-depot-consumer"] == 0
+    assert fees["citi-att-points-plus"] == 0
+    assert fees["citi-exxonmobil-smart-card-plus"] == 0
+    assert fees["citi-macys"] == 0
+    assert fees["citi-bloomingdales"] == 0
+    assert fees["citi-dillards"] == 0
+    assert fees["citi-wayfair"] == 0
+    assert fees["citi-goodyear"] == 0
+    assert fees["citi-llbean"] == 0
+    assert fees["citi-tractor-supply"] == 0
 
 
 def test_easy_credits_not_negative() -> None:
@@ -67,14 +249,14 @@ def test_easy_credits_not_negative() -> None:
 
 def test_removed_credits_excluded_from_totals() -> None:
     """Credits marked removed=true must not contribute to easy/max credit totals."""
-    response = client.get("/api/cards/amex")
+    response = client.get("/api/cards/amex-platinum")
     card = response.json()
     # Saks is removed (max_annual=0, removed=true) — verify it's in data but excluded from totals
     saks = next(c for c in card["credits"] if c["id"] == "saks")
     assert saks["removed"] is True
     # Recalculate totals manually and compare to summary
     summary_response = client.get("/api/cards")
-    amex_summary = next(c for c in summary_response.json() if c["id"] == "amex")
+    amex_summary = next(c for c in summary_response.json() if c["id"] == "amex-platinum")
     manual_easy = sum(
         c["default_value"] for c in card["credits"] if c["tier"] == "easy" and not c["removed"]
     )
@@ -92,6 +274,37 @@ def test_credit_default_does_not_exceed_max() -> None:
                 f"{card_id}/{credit['id']}: "
                 f"default {credit['default_value']} > max {credit['max_annual']}"
             )
+
+
+def test_earn_rate_multiplier_preserves_original_unit() -> None:
+    """Percentage-based cash-back cards must render as "5%", not "5×" — the
+    API used to reconstruct the multiplier string from a parsed float with a
+    hardcoded × suffix, silently corrupting every %-based card's earn rate."""
+    response = client.get("/api/cards/chase-freedom-flex")
+    multipliers = [r["multiplier"] for r in response.json()["earn_rates"]]
+    assert all("%" in m for m in multipliers), multipliers
+
+
+def test_earn_rate_multiplier_preserves_ceiling_framing() -> None:
+    """ "Up to N×"-style ceiling framing (and any trailing annotation like a
+    footnote asterisk) must survive verbatim, not collapse to a bare "N×"."""
+    response = client.get("/api/cards/bilt-blue")
+    rates = {r["category"]: r["multiplier"] for r in response.json()["earn_rates"]}
+    assert rates["Rent or mortgage (Bilt Housing Rewards)"] == "Up to 1.25×*"
+    assert rates["Bilt partner restaurants (20,000+ U.S. locations)"] == "Up to 4×"
+
+
+def test_verdict_text_fits_two_lines() -> None:
+    """The verdict badge on the card detail page is a fixed 280px-wide box —
+    text much beyond ~80 characters wraps past 2 lines and gets clipped
+    against the card art next to it. This is a length proxy, not a pixel
+    measurement (jsdom can't lay out real text), calibrated against the
+    longest verdict that's confirmed to render at exactly 2 lines."""
+    response = client.get("/api/cards")
+    long_verdicts = [
+        (c["id"], c["verdict"]["text"]) for c in response.json() if len(c["verdict"]["text"]) > 80
+    ]
+    assert long_verdicts == []
 
 
 def test_health_endpoint() -> None:

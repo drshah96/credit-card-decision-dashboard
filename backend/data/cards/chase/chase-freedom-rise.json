@@ -1,0 +1,142 @@
+{
+  "id": "chase-freedom-rise",
+  "name": "Freedom Rise",
+  "issuer": "Chase",
+  "network": "VISA",
+  "points_program": "Ultimate Rewards",
+  "accent_color": "#6FA8DC",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee",
+  "verdict": {
+    "status": "keep",
+    "text": "Best starter card: no credit history needed, real Chase relationship",
+    "short_tag": "Credit Building"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🍽️",
+      "multiplier": "3%",
+      "category": "Dining, first 6 months, up to $6,000 spent (then 1.5%)",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1.5%",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The only starter/credit-builder card on the market with a flat 1.5% base; most competitors in this segment cap around 1%. The 3% dining intro rate is a limited-time offer for new cardholders' first 6 months, not a permanent category.",
+  "points": {
+    "currency": "Ultimate Rewards (cash back)",
+    "redemption_options": [
+      {
+        "method": "Statement credit / direct deposit / cash back",
+        "cpp": 1.0,
+        "best": true
+      }
+    ],
+    "per_100k": "$1,000",
+    "note": "Technically Ultimate Rewards points, worth a flat 1¢ each with no minimum redemption threshold. Cash back doesn't expire as long as the account stays open. No transfer value; this card is designed purely as a credit-building tool, not a points play."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "Not a transferable currency: Freedom Rise is a straightforward cash-back starter card.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [
+    {
+      "id": "autopay-bonus",
+      "name": "Autopay Enrollment Bonus",
+      "subtitle": "$25 one-time · first 3 months",
+      "max_annual": 25,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "One-time $25 statement credit for enrolling in automatic payments within the first 3 months of account opening and staying enrolled for at least 90 days.",
+      "tips": [
+        "This is a one-time new-cardholder bonus, not an annual credit; it won't recur in future years.",
+        "Autopay also protects your on-time payment history, which matters more for a starter card than almost anything else on it."
+      ]
+    },
+    {
+      "id": "dashpass",
+      "name": "DoorDash DashPass",
+      "subtitle": "6 mo free, then $10/quarter promo",
+      "max_annual": 40,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "6 months of complimentary DashPass membership ($0 delivery fees on DoorDash/Caviar). Separately, up to $10/quarter in statement credits on non-restaurant (grocery/retail) DoorDash orders through Dec 2027.",
+      "tips": [
+        "Cancel DashPass before the 6-month free trial ends if you don't want to start paying for it.",
+        "The $10/quarter non-restaurant credit is the only ongoing recurring value here."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "$1,500/person · $6,000/trip",
+      "level": "mid"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "$500/item · 120 days",
+      "level": "mid"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "+1 year (on warranties ≤3 years, up to 4 years total)",
+      "level": "good"
+    }
+  ],
+  "protection_note": "Thin, as expected for a starter card: the basics (purchase protection, extended warranty, modest trip cancellation) are there, but no rental car coverage and no cell phone protection.",
+  "rental_note": "No rental car coverage at all; use a different card for rentals.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "No prior credit history required",
+      "detail": "Designed for first-time cardholders: no minimum credit score, though a Chase checking/savings account with $250+ can improve approval odds (not required)."
+    },
+    {
+      "name": "Automatic credit limit review",
+      "detail": "After 6 months of responsible use (on-time payments, manageable balances), Chase automatically reviews the account for a credit line increase."
+    },
+    {
+      "name": "Lyft bonus",
+      "detail": "2% total cash back on Lyft rides, bikes, and scooters through Sep 30, 2027 (an extra 0.5% on top of the 1.5% base)."
+    },
+    {
+      "name": "Foreign transaction fee likely applies",
+      "detail": "Chase doesn't list Freedom Rise among its no-foreign-transaction-fee cards; treat it as carrying the standard ~3% fee abroad and confirm before international use."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [],
+    "note": "Chase doesn't market a distinct authorized-user program for Freedom Rise the way it does for its rewards cards; this is a single-cardholder credit-building product."
+  },
+  "timeline": [
+    {
+      "date": "Early 2024",
+      "type": "add",
+      "badge": "Expanded",
+      "text": "Freedom Rise becomes available for digital application, previously in-branch only."
+    },
+    {
+      "date": "Jun 12, 2023",
+      "type": "add",
+      "badge": "Launch",
+      "text": "Chase launches Freedom Rise as its first dedicated starter/credit-building card, requiring no prior credit history and initially available only in branches."
+    }
+  ]
+}

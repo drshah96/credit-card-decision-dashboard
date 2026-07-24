@@ -1,0 +1,226 @@
+{
+  "id": "amex-delta-skymiles-reserve",
+  "name": "Delta SkyMiles® Reserve American Express Card",
+  "issuer": "American Express",
+  "network": "AMERICAN EXPRESS",
+  "points_program": "Delta SkyMiles",
+  "accent_color": "#9B1B30",
+  "annual_fee": 650,
+  "effective_cost": "Depends on Sky Club use and companion cert",
+  "verdict": {
+    "status": "situational",
+    "text": "Keep if you fly Delta often and actually use the lounges",
+    "short_tag": "Delta Lounges"
+  },
+  "earn_rates": [
+    {
+      "emoji": "✈️",
+      "multiplier": "3×",
+      "category": "Delta purchases",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "Narrow earning by design: 3× on Delta, flat 1× on everything else. This is a lounge-and-companion-cert card, not an everyday spend card.",
+  "points": {
+    "currency": "Delta SkyMiles",
+    "redemption_options": [
+      {
+        "method": "Statement / low-end",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Average redemption",
+        "cpp": 1.15,
+        "best": true
+      },
+      {
+        "method": "Premium-cabin sweet spots",
+        "cpp": 2.2,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,100–1,200",
+    "note": "Same SkyMiles currency and dynamic pricing as the Gold and Platinum tiers; the Reserve's value is mostly in lounge access and the companion cert, not in how it earns."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "SkyMiles can't be transferred out; they're stuck in Delta's program.",
+    "recent_changes": "You can transfer INTO SkyMiles from Amex MR (1:1), Chase UR and Capital One, useful for topping up an award."
+  },
+  "credits": [
+    {
+      "id": "bags",
+      "name": "Free Checked Bags",
+      "subtitle": "1st + 2nd (domestic)",
+      "max_annual": 140,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "First checked bag free on Delta flights (you + up to 8 on the reservation); second bag free domestic.",
+      "tips": [
+        "You don't need to pay for the flight with this card to get the free bag."
+      ]
+    },
+    {
+      "id": "resy",
+      "name": "Resy Dining Credit",
+      "subtitle": "$20/mo",
+      "max_annual": 240,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "Up to $20/month in statement credits at U.S. Resy restaurants via Global Dining Access.",
+      "tips": [
+        "Double the Gold/Platinum tiers' Resy credit, worth checking if you already dine at Resy restaurants monthly."
+      ]
+    },
+    {
+      "id": "rideshare",
+      "name": "Rideshare Credit",
+      "subtitle": "$10/mo",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "Monthly U.S. rideshare credit with select providers.",
+      "tips": [
+        "One qualifying ride a month recovers the full $120."
+      ]
+    },
+    {
+      "id": "stays",
+      "name": "Delta Stays Credit",
+      "subtitle": "prepaid hotels · calendar year",
+      "max_annual": 200,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Up to $200/yr (calendar year) on prepaid hotels or vacation rentals booked through Delta Stays on delta.com.",
+      "tips": [
+        "Resets on the calendar year, not renewal, so a new cardholder can use it twice on one annual fee."
+      ]
+    },
+    {
+      "id": "global-entry",
+      "name": "Global Entry / TSA PreCheck Credit",
+      "subtitle": "$120 GE or $85 TSA · every 4 years",
+      "max_annual": 30,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Statement credit for a Global Entry ($120) or TSA PreCheck ($85) application fee, once every 4 years. Shown here amortized to an annual figure.",
+      "tips": [
+        "Apply for Global Entry, not just TSA PreCheck; it includes TSA PreCheck and covers the same credit."
+      ]
+    },
+    {
+      "id": "companion",
+      "name": "Companion Certificate",
+      "subtitle": "any cabin, incl. First Class · annual",
+      "max_annual": 600,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Each year after renewal, one round-trip companion ticket valid in any cabin (including Delta First, Premium Select, or Comfort+) with the purchase of an eligible published fare. Companion pays only taxes/fees.",
+      "tips": [
+        "The Reserve's companion cert works in First Class, unlike the Platinum's Main-Cabin-only version. The value swing is huge on routes where First is expensive.",
+        "$600 here is a conservative estimate; a premium-cabin redemption on a long route can be worth far more."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Primary outside the US up to $75,000; secondary in the US",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "$10,000/trip · $20,000/yr",
+      "level": "good"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "$500/trip · after 6 hrs · 2 claims/yr",
+      "level": "mid"
+    },
+    {
+      "coverage": "Baggage Insurance Plan",
+      "detail": "$3,000 combined",
+      "level": "mid"
+    }
+  ],
+  "protection_note": "Meaningfully better than the Gold and Platinum tiers on trip delay window (6 hrs, matching the best cards here) and rental coverage (primary outside the US). Still capped at 2 trip-delay claims/yr like every other Amex travel card.",
+  "rental_note": "Primary coverage only outside the US; domestic rentals still fall back to secondary. For US rentals, Venture X or Sapphire Reserve's free primary coverage is stronger.",
+  "status_perks": [
+    {
+      "name": "Delta Sky Club Access",
+      "strength": 5,
+      "note": "15 visits per Medallion Year when flying Delta, plus 4 guest passes/yr ($50/guest after). Unlimited visits unlock after $75,000/yr in card spend."
+    },
+    {
+      "name": "Centurion Lounge Access",
+      "strength": 3,
+      "note": "Complimentary access when you book your Delta flight with this card, narrower than the Amex Platinum's blanket Centurion access."
+    },
+    {
+      "name": "Medallion head start",
+      "strength": 4,
+      "note": "$2,500 MQD annually plus $1 MQD per $10 spent, double the earn rate of the Platinum's $1-per-$20."
+    }
+  ],
+  "services": [
+    {
+      "name": "Priority boarding & upgrade priority",
+      "detail": "Zone 5 priority boarding, plus upgrade list placement above Gold/Platinum cardholders (below Medallion elites)."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "Zero FX fees on international spend."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Additional Card",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add: no annual fee for additional Reserve cards",
+            "included": true
+          },
+          {
+            "text": "1st free checked bag + priority boarding when flying Delta",
+            "included": true
+          },
+          {
+            "text": "Own Global Entry / TSA PreCheck credit",
+            "included": true
+          },
+          {
+            "text": "Earns SkyMiles (into your account)",
+            "included": true
+          },
+          {
+            "text": "Shares the account's Sky Club visits and companion cert, no separate set",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Additional Reserve cards are free, and each one gets its own free-bag and priority-boarding perk, but Sky Club visits and the companion certificate are tied to the primary account."
+  },
+  "timeline": []
+}

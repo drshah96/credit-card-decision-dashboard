@@ -1,0 +1,90 @@
+{
+  "id": "citi-secured",
+  "name": "Secured Mastercard",
+  "issuer": "Citi",
+  "network": "MASTERCARD",
+  "points_program": "None, no rewards program",
+  "accent_color": "#90A4AE",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee; refundable deposit sets your credit line",
+  "verdict": {
+    "status": "situational",
+    "text": "Straightforward credit-building card with a clear graduation path",
+    "short_tag": "Credit Building"
+  },
+  "earn_rates": [],
+  "earn_note": "The Citi Secured Mastercard earns no cash back or points. Citi's own product page for this card mentions only optional Merchant Offers (opt-in, targeted discounts at select retailers), not a real rewards currency. If you want a secured card that earns actual cash back, that's not this issuer's secured product; Capital One's Quicksilver Secured is the closer match.",
+  "points": {
+    "currency": "None",
+    "redemption_options": [],
+    "per_100k": "$0, no rewards program",
+    "note": "No points or cash-back program of any kind. The entire value proposition is the refundable security deposit, monthly reporting to all three credit bureaus, and a defined path to an unsecured Citi card."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No rewards currency exists on this card, so there is nothing to transfer.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [],
+  "protection_note": "Bare-bones by design: Citi's page for this card doesn't advertise purchase protection, extended warranty, or travel insurance. What you get instead is $0 liability on unauthorized charges and Mastercard ID Theft Protection, the same baseline fraud tools Citi puts on all of its cards.",
+  "rental_note": "No rental car coverage advertised; use a different card for rentals.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "Refundable security deposit sets your credit line",
+      "detail": "A $200–$2,500 deposit, in $100 increments, opens the account at that exact credit line; you choose how much to put down within that range."
+    },
+    {
+      "name": "Path to an unsecured card",
+      "detail": "Citi reviews accounts for possible graduation to the unsecured Diamond Preferred card as early as 9 months (early review) or by 12 months (standard review) of responsible use; the deposit is refunded on graduation."
+    },
+    {
+      "name": "Credit bureau reporting",
+      "detail": "Reports payment activity to all three major credit bureaus every month, the core reason to hold a secured card."
+    },
+    {
+      "name": "APR",
+      "detail": "Variable rate based on creditworthiness, reported in the mid-to-high-20s% by recent reviews. Citi doesn't publish an exact figure on its public summary page, so check your card agreement for the precise rate."
+    },
+    {
+      "name": "Foreign transaction fee applies",
+      "detail": "3% of the U.S. dollar amount of each transaction."
+    },
+    {
+      "name": "Free FICO Score access",
+      "detail": "View your FICO Score at no cost through the Citi app or site."
+    },
+    {
+      "name": "Citi Quick Lock",
+      "detail": "Instantly lock and unlock the card from the app if it's misplaced."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Can help build the authorized user's credit history too",
+            "included": true
+          },
+          {
+            "text": "No rewards earned: this card has no rewards program to share",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add, and since this account reports to all three bureaus, an authorized user can benefit from the payment history even though there's no rewards program to share."
+  },
+  "timeline": []
+}

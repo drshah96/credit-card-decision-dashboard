@@ -1,0 +1,243 @@
+{
+  "id": "chase-ihg-one-rewards-premier",
+  "name": "IHG One Rewards Premier Credit Card",
+  "issuer": "Chase",
+  "network": "MASTERCARD WORLD ELITE",
+  "points_program": "IHG One Rewards",
+  "accent_color": "#D2601A",
+  "annual_fee": 99,
+  "effective_cost": "Low if you use the free nights and spend-based credits",
+  "verdict": {
+    "status": "situational",
+    "text": "Keep if you stay at IHG properties a few times a year; thin otherwise",
+    "short_tag": "IHG Stays"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🏨",
+      "multiplier": "10×",
+      "category": "IHG Hotels & Resorts",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "✈️",
+      "multiplier": "5×",
+      "category": "Travel, dining & gas stations",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "3×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "3× on general spend is a strong base rate for a $99 card, well above most co-brand hotel cards' catch-all tier. The 5× bucket (travel, dining, gas) is broad enough to matter for everyday spend, on top of the 10× IHG-direct rate.",
+  "points": {
+    "currency": "IHG One Rewards",
+    "redemption_options": [
+      {
+        "method": "Standard hotel stays",
+        "cpp": 0.6,
+        "best": true
+      },
+      {
+        "method": "Transfer to airline miles (~5:1, ~34 partners)",
+        "cpp": 0.13,
+        "best": false
+      }
+    ],
+    "per_100k": "$600",
+    "note": "IHG points are worth less per point than Marriott or Hyatt (NerdWallet valued them around 0.6¢ in 2026), but the card issues them generously (up to 26X combined at IHG properties) and the 4th-night-free benefit plus anniversary certificate meaningfully boost real-world redemption value beyond the raw cpp. Never transfer to airlines; the ~5:1 ratio guts the value."
+  },
+  "transfer_partners": {
+    "airline_count": 34,
+    "hotel_count": 0,
+    "highlight": "IHG One Rewards transfers to roughly 34 airline partners, mostly at a 5:1 ratio (5,000 IHG points → 1,000 miles); transfers must be initiated by phone, not online, and typically take weeks to post.",
+    "recent_changes": "No confirmed recent changes to the airline transfer chart."
+  },
+  "credits": [
+    {
+      "id": "spend-bonus",
+      "name": "Annual Spend Bonus",
+      "subtitle": "$100 credit + 10,000 pts · after $20,000/yr spend",
+      "max_annual": 100,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "A $100 statement credit plus 10,000 bonus points each calendar year you spend at least $20,000 on the card.",
+      "tips": [
+        "Only count this if you're already going to hit $20,000/yr; it's not a small, easy threshold."
+      ]
+    },
+    {
+      "id": "instacart",
+      "name": "Instacart Credit",
+      "subtitle": "$10/mo · up to $120/yr · + 3-mo Instacart+",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "A complimentary 3-month Instacart+ trial plus up to $10 in monthly Instacart credits (through Dec 31, 2027). An active Instacart+ membership is required to receive the monthly credit; after the trial you're auto-enrolled at Instacart's standard rate unless you cancel.",
+      "tips": [
+        "Set a reminder to cancel Instacart+ after the free trial if you don't want to keep paying for it.",
+        "$0 to you if you don't already grocery-shop through Instacart."
+      ]
+    },
+    {
+      "id": "dashpass",
+      "name": "DoorDash DashPass + Credit",
+      "subtitle": "12-mo complimentary + $10/qtr non-restaurant · thru 2027",
+      "max_annual": 160,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "One year of complimentary DashPass membership (DoorDash and Caviar) plus up to $10 off quarterly on non-restaurant DoorDash orders, both active through December 31, 2027.",
+      "tips": [
+        "Requires activation and payment with this card at checkout to earn the quarterly credit."
+      ]
+    },
+    {
+      "id": "global-entry",
+      "name": "Global Entry / TSA PreCheck / NEXUS Credit",
+      "subtitle": "$120 · every 4 years",
+      "max_annual": 30,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Statement credit up to $120 every four years for a Global Entry, TSA PreCheck, or NEXUS application fee. Shown here amortized to an annual figure.",
+      "tips": [
+        "Apply for Global Entry, not just TSA PreCheck; it includes TSA PreCheck and covers the same credit."
+      ]
+    },
+    {
+      "id": "united-travelbank",
+      "name": "United TravelBank Cash",
+      "subtitle": "$25 × 2 · after registering MileagePlus",
+      "max_annual": 50,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Up to $50 annually ($25 twice a year) in United TravelBank Cash after registering your United MileagePlus account with the card.",
+      "tips": [
+        "Only useful if you actually fly United: TravelBank Cash only applies toward United tickets."
+      ]
+    },
+    {
+      "id": "free-night",
+      "name": "Anniversary Free Night Certificate",
+      "subtitle": "up to 40,000-point category · every card anniversary",
+      "max_annual": 150,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "One free night certificate earned each account anniversary year, redeemable at IHG properties with a redemption cap of 40,000 points. Extra points from your IHG account can top off a higher-category stay. Must be redeemed within 12 months.",
+      "tips": [
+        "$150 here is a conservative estimate for a capped-value redemption; actual value swings a lot by property category.",
+        "Use points to bridge the gap at a hotel priced just above the 40k cap rather than wasting the certificate on a cheap property."
+      ]
+    },
+    {
+      "id": "fourth-night-free",
+      "name": "4th Reward Night Free",
+      "subtitle": "on 4+ consecutive award nights, same property",
+      "max_annual": 100,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "On any reward-night stay of 4 or more consecutive nights at the same property, the 4th night is free (unlimited redemptions per year).",
+      "tips": [
+        "Only pays off on award stays already 4+ nights long; not a general-purpose credit.",
+        "$100 here is a rough single-stay estimate; frequent long award stays could be worth more."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "$5,000/person · $10,000/trip",
+      "level": "good"
+    },
+    {
+      "coverage": "Baggage delay",
+      "detail": "$100/day · up to 3 days",
+      "level": "mid"
+    },
+    {
+      "coverage": "Lost luggage",
+      "detail": "$3,000 per person",
+      "level": "mid"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Theft & collision, secondary in the US, rentals of 31 days or less",
+      "level": "mid"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "$500/item · $50,000/cardholder · 120 days",
+      "level": "mid"
+    }
+  ],
+  "protection_note": "Solid mid-tier protections bundled with Mastercard World Elite: trip cancellation and rental car coverage are both present, though rental coverage caps out at 31-day rental terms and is secondary in the US. Nothing here beats a premium travel card's limits.",
+  "rental_note": "Secondary coverage for theft and collision on rentals of 31 days or less, in the US and abroad. Decline the counter's CDW and pay with this card, but use a card with primary coverage if you rent for longer stretches.",
+  "status_perks": [
+    {
+      "name": "IHG One Rewards Platinum Elite Status",
+      "strength": 3,
+      "note": "Complimentary with the card for as long as you hold it: includes room upgrades when available, a welcome amenity, and bonus points on stays. Diamond Elite (IHG's top tier) unlocks after $40,000 in card spend per calendar year."
+    }
+  ],
+  "services": [
+    {
+      "name": "No foreign transaction fees",
+      "detail": "Zero FX fees on international spend."
+    },
+    {
+      "name": "Mastercard World Elite Benefits",
+      "detail": "Lyft ride credits, Booking.com prepaid-stay discounts (up to 7% off), and other World Elite Mastercard perks bundled with the card."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized Users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add, plus a 10,000-point bonus for adding one within 3 months of account opening",
+            "included": true
+          },
+          {
+            "text": "Earns IHG One Rewards points on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Does not get their own Platinum status or Free Night Certificate",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Authorized users are free, and adding one within the first 3 months earns an extra 10,000-point bonus on top of the welcome offer."
+  },
+  "timeline": [
+    {
+      "date": "2025",
+      "type": "add",
+      "badge": "Add",
+      "text": "Instacart ($10/mo credit + 3-month Instacart+ trial) and DashPass benefits added, active through Dec 31, 2027."
+    },
+    {
+      "date": "Sep 2022",
+      "type": "neutral",
+      "badge": "Rename",
+      "text": "IHG Rewards Club program and cards rebranded to IHG One Rewards."
+    }
+  ]
+}

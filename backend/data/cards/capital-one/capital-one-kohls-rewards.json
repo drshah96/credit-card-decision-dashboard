@@ -1,0 +1,150 @@
+{
+  "id": "capital-one-kohls-rewards",
+  "name": "Kohl's Rewards Visa",
+  "issuer": "Capital One",
+  "network": "VISA SIGNATURE",
+  "points_program": "Kohl's Cash",
+  "accent_color": "#000E62",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee",
+  "verdict": {
+    "status": "situational",
+    "text": "Strong only for regular Kohl's shoppers who'll spend the Kohl's Cash",
+    "short_tag": "Kohl's Shoppers"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🛍️",
+      "multiplier": "7.5%",
+      "category": "Kohl's & Kohls.com purchases",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "⛽",
+      "multiplier": "3%",
+      "category": "Gas stations",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "2%",
+      "category": "Grocery stores",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1%",
+      "category": "Everywhere else Visa is accepted",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The 7.5% at Kohl's is Capital One's marketing framing of 5% base Kohl's-member reward plus 2.5% for using this card instead of the store-only Kohl's Card. Every category (Kohl's, gas, grocery, and everything else) pays out in Kohl's Cash, not usable dollars, so the gas/grocery rates are really 'discounts good only at Kohl's,' not general cash back. No caps disclosed, but plenty of exclusions apply at Kohl's itself (Sephora, certain brands, gift cards).",
+  "points": {
+    "currency": "Kohl's Cash",
+    "redemption_options": [
+      {
+        "method": "In-store or Kohls.com, in $5 increments",
+        "cpp": 1.0,
+        "best": true
+      }
+    ],
+    "per_100k": "Not applicable: rewards accrue as a Kohl's Cash balance, not a points currency",
+    "note": "Rewards convert to $5 Kohl's Cash increments on the 1st of the following month and expire just 30 days later. This short, hard-cutoff expiration is the single biggest catch on the card: unspent balances are simply forfeited, unlike BJ's or most cash-back cards where rewards sit indefinitely."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners: Kohl's Cash is a closed-loop, single-retailer currency with no travel or cash-out option.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not disclosed in available terms",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not disclosed in available terms",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not disclosed in available terms",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "Not included",
+      "level": "none"
+    }
+  ],
+  "protection_note": "Visa Signature status brings 24/7 concierge and travel/emergency assistance, but Capital One's public terms don't document purchase protection, extended warranty, or trip coverage for this specific card. Unlike some Visa Signature issuers, these benefits don't appear to be layered on here. Treat it as unprotected for big-ticket purchases.",
+  "rental_note": "No rental car coverage documented for this card.",
+  "status_perks": [
+    {
+      "name": "Most Valuable Customer (MVC)",
+      "strength": 2,
+      "note": "Spend $600+ at Kohl's in a calendar year and unlock free standard shipping on Kohls.com for the following year."
+    }
+  ],
+  "services": [
+    {
+      "name": "24-hour Visa Signature Concierge",
+      "detail": "Reservation and travel-assistance concierge, standard Visa Signature benefit."
+    },
+    {
+      "name": "Kohl's-only promotions",
+      "detail": "Monthly exclusive discounts and an annual cardholder-anniversary offer on top of standard Kohl's Cash earnings."
+    },
+    {
+      "name": "Card lock & account management",
+      "detail": "Mobile app card lock, autopay, and flexible due-date selection via Capital One's servicing platform."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns the same Kohl's Cash rate (into your account)",
+            "included": true
+          }
+        ]
+      }
+    ],
+    "note": "Free to add: useful for consolidating a household's Kohl's spend to hit MVC status faster, but doesn't help beat the 30-day Kohl's Cash expiration."
+  },
+  "timeline": [
+    {
+      "date": "2023",
+      "type": "add",
+      "badge": "Launch",
+      "text": "Capital One introduced the Visa-branded Kohl's Rewards Visa alongside the long-standing store-only Kohl's Card, letting cardholders earn Kohl's Cash on purchases made anywhere Visa is accepted, not just at Kohl's."
+    },
+    {
+      "date": "2011",
+      "type": "neutral",
+      "badge": "Issuer change",
+      "text": "Capital One became the issuer of Kohl's private-label credit cards, acquiring the existing portfolio from JPMorgan Chase."
+    }
+  ]
+}

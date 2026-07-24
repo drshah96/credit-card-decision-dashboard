@@ -1,0 +1,150 @@
+{
+  "id": "capital-one-bass-pro-cabelas-club",
+  "name": "Bass Pro Shops & Cabela's CLUB Card",
+  "issuer": "Capital One",
+  "network": "MASTERCARD",
+  "points_program": "CLUB Points",
+  "accent_color": "#3F5D3A",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee",
+  "verdict": {
+    "status": "situational",
+    "text": "Only worth it for frequent Bass Pro / Cabela's shoppers",
+    "short_tag": "Bass Pro Shoppers"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🎣",
+      "multiplier": "2%",
+      "category": "Bass Pro Shops, Cabela's & participating Cenex: CLUB Classic (default tier)",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🏕️",
+      "multiplier": "3%",
+      "category": "Bass Pro Shops & Cabela's: CLUB Silver, after $10,000 in annual spend",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🏆",
+      "multiplier": "5%",
+      "category": "Bass Pro Shops & Cabela's: CLUB Black, after $25,000 in annual spend",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1%",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "One card issued and marketed under two brand names since Bass Pro Shops acquired Cabela's. Capital One's Bass Pro Shops CLUB page and Cabela's CLUB page describe identical terms: same $0 fee, same tiered 2%/3%/5% rates at either chain, same welcome offer, same Mastercard network. Every account is auto-enrolled at CLUB Classic and climbs to Silver/Black based on trailing annual spend, with no separate application needed. Cardholders also get 9.99% APR financing on Bass Pro/Cabela's purchases and a 5% price-beat guarantee against competitors' listed prices.",
+  "points": {
+    "currency": "CLUB Points",
+    "redemption_options": [
+      {
+        "method": "Merchandise, gear & experiences at Bass Pro Shops, Cabela's & Mack's Prairie Wings (100 points = $1)",
+        "cpp": 1.0,
+        "best": true
+      }
+    ],
+    "per_100k": "$1,000 in Bass Pro Shops/Cabela's merchandise",
+    "note": "CLUB Points never expire on an open account and there's no earning cap, but there's no cash-back or statement-credit option; every point has to be spent back into the Bass Pro/Cabela's ecosystem, including big-ticket redemptions like boats and ATVs."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners: CLUB Points are a closed-loop merchandise currency, not Capital One miles or cash back.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not listed in Capital One's own Guide to Benefits for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not listed in Capital One's own Guide to Benefits for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "Not listed in Capital One's own Guide to Benefits for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not listed in Capital One's own Guide to Benefits for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Mastercard ID Theft Protection",
+      "detail": "Dark-web/credit monitoring and resolution support, enrollment required",
+      "level": "mid"
+    }
+  ],
+  "protection_note": "Thinner than most co-brand cards: Capital One's official Guide to Benefits for the Cabela's/Bass Pro CLUB Mastercard covers only Mastercard ID Theft Protection, a Concierge Service, Mastercard Travel & Lifestyle Services (hotel rate/stay guarantees via a third-party lifestyle manager), and Airport Concierge discounts. It does not list purchase protection, extended warranty, price protection, travel accident insurance, or rental car coverage, despite some third-party reviews implying otherwise. Don't assume standard Mastercard World Elite purchase insurance carries over here without confirming your specific cardholder agreement.",
+  "rental_note": "No rental car coverage is listed in Capital One's Guide to Benefits for this card; use a different card for rental cars.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "No annual fee",
+      "detail": "$0/year across all three CLUB tiers."
+    },
+    {
+      "name": "9.99% APR on Bass Pro/Cabela's purchases",
+      "detail": "A reduced promotional rate specifically for purchases at either chain; standard variable APR applies elsewhere."
+    },
+    {
+      "name": "5% price-beat guarantee",
+      "detail": "CLUB members get a price match plus 5% against competitors on eligible items at Bass Pro Shops and Cabela's."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "$0 on purchases made outside the US."
+    },
+    {
+      "name": "Mastercard Concierge & Travel Services",
+      "detail": "24/7 concierge line, hotel rate/stay guarantees through a third-party lifestyle manager, and Airport Concierge meet-and-greet discounts."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Their spend counts toward the account's tier thresholds",
+            "included": true
+          },
+          {
+            "text": "No purchase protection to share: this card doesn't advertise any",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add, and useful for households that share Bass Pro/Cabela's shopping, since an authorized user's spend counts toward the $10,000/$25,000 tier thresholds."
+  },
+  "timeline": [
+    {
+      "date": "2018",
+      "type": "neutral",
+      "badge": "Consolidation",
+      "text": "Following Bass Pro Shops' 2017 acquisition of Cabela's, the two loyalty programs were combined onto a single Capital One-issued Mastercard, replacing the old Cabela's CLUB Visa that had been issued by Cabela's own World's Foremost Bank."
+    }
+  ]
+}

@@ -1,0 +1,350 @@
+{
+  "id": "chase-sapphire-reserve",
+  "name": "Sapphire Reserve",
+  "issuer": "Chase",
+  "network": "VISA INFINITE",
+  "points_program": "Ultimate Rewards",
+  "accent_color": "#6C97FF",
+  "annual_fee": 795,
+  "effective_cost": "Medium",
+  "verdict": {
+    "status": "situational",
+    "text": "Best all-rounder if you use the credits",
+    "short_tag": "Credits & Travel"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🌐",
+      "multiplier": "8×",
+      "category": "Chase Travel portal",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "✈️",
+      "multiplier": "4×",
+      "category": "Flights & hotels, booked direct",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "3×",
+      "category": "Dining, worldwide",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🚗",
+      "multiplier": "5×",
+      "category": "Lyft (through Mar 2027)",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "Strong bonus categories (dining and direct travel), but the 1× base still lags Venture X for uncategorized spend.",
+  "points": {
+    "currency": "Ultimate Rewards",
+    "redemption_options": [
+      {
+        "method": "Cash back",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Points Boost (travel)",
+        "cpp": 2.0,
+        "best": true
+      },
+      {
+        "method": "Transfer partners (avg)",
+        "cpp": 2.05,
+        "best": true
+      }
+    ],
+    "per_100k": "$2,050+",
+    "note": "Legacy points earned before Oct 26, 2025 keep a 1.5¢ floor until Oct 26, 2027; burn those first. Otherwise, transfer for the most value."
+  },
+  "transfer_partners": {
+    "airline_count": 10,
+    "hotel_count": 4,
+    "highlight": "World of Hyatt is the crown jewel: 1:1 and exclusive to Chase & Bilt, routinely 2–3¢+. Also Aeroplan, Virgin Atlantic, Flying Blue, Singapore. Wyndham added Feb 2026.",
+    "recent_changes": "Fewer airlines than Amex, but the hotel side (esp. Hyatt) is the strongest of any bank."
+  },
+  "credits": [
+    {
+      "id": "travel",
+      "name": "Annual Travel Credit",
+      "subtitle": "auto-applies",
+      "max_annual": 300,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "A flat statement credit against broad travel: airlines, hotels, tolls, parking, transit, rideshare.",
+      "tips": [
+        "The single easiest credit in your whole wallet. It posts automatically against almost anything travel-coded.",
+        "Value it at the full $300; it quietly drops the real fee to $495."
+      ]
+    },
+    {
+      "id": "apple",
+      "name": "Apple TV+ & Apple Music",
+      "subtitle": "through Jun 2027",
+      "max_annual": 250,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "Complimentary Apple TV+ AND Apple Music, two separate services (~$250/yr combined). NOT the full Apple One bundle.",
+      "tips": [
+        "Activate each service individually through Chase's app; they don't turn on together.",
+        "Already paying for either? Cancel the paid plan and switch to the complimentary one.",
+        "Android/Spotify household? Set the slider toward $0."
+      ]
+    },
+    {
+      "id": "edit",
+      "name": "The Edit Hotel Credit",
+      "subtitle": "$250 × 2 · 2-night min",
+      "max_annual": 500,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Semi-annual credit on ~1,400 luxury hotels via The Edit by Chase Travel. Breakfast for two + $100 property credit; upgrades/late checkout are availability-only (not guaranteed like FHR).",
+      "tips": [
+        "Harder to spend than FHR: two-night minimum, smaller network, and prepaid-rate-only.",
+        "2026 adds a $250 promo at Select brands (IHG, Montage, Pendry, Omni, Virgin), up to $500 back on one booking.",
+        "Set the slider to how many 2-night luxe stays you'll actually prepay."
+      ]
+    },
+    {
+      "id": "dining",
+      "name": "Dining Credit",
+      "subtitle": "$150 × 2 · Exclusive Tables",
+      "max_annual": 300,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Semi-annual credit, but ONLY at ~400 'Exclusive Tables' restaurants on OpenTable across ~26 cities.",
+      "tips": [
+        "~400 restaurants vs. Amex Resy's 10,000+. Hard to spend outside major metros or with dietary limits.",
+        "Vegas was gutted to one spot in mid-2026; re-check first."
+      ]
+    },
+    {
+      "id": "stubhub",
+      "name": "StubHub / viagogo",
+      "subtitle": "$150 × 2 · enroll",
+      "max_annual": 300,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Semi-annual credit toward concerts and events.",
+      "tips": [
+        "Enroll, then apply it to an event you'd attend anyway.",
+        "Compare against face value; resale markups can erase the 'credit.'"
+      ]
+    },
+    {
+      "id": "dashpass",
+      "name": "DoorDash DashPass",
+      "subtitle": "+ $10/mo non-restaurant",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Complimentary DashPass ($0 delivery fees) plus a $10/mo promo on non-restaurant (grocery/retail) orders.",
+      "tips": [
+        "Activate DashPass by the deadline; it auto-covers delivery fees.",
+        "The $10/mo non-restaurant promo is use-it-or-lose-it; a monthly grocery DoorDash order captures it."
+      ]
+    },
+    {
+      "id": "global-entry",
+      "name": "Global Entry / TSA PreCheck / NEXUS Credit",
+      "subtitle": "$120 · every 4 years",
+      "max_annual": 30,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "One statement credit up to $120 every four years after the Global Entry, TSA PreCheck, or NEXUS application fee is charged to the card (by you or an authorized user). Shown here amortized to an annual figure.",
+      "tips": [
+        "Apply for Global Entry, not just TSA PreCheck; it includes TSA PreCheck and covers the same credit.",
+        "Must be paid directly to DHS or an authorized enrollment provider; third-party application services don't qualify."
+      ]
+    },
+    {
+      "id": "peloton",
+      "name": "Peloton",
+      "subtitle": "$10/mo + 10× gear",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Monthly credit toward a Peloton membership, plus 10× on equipment (up to 50k pts).",
+      "tips": [
+        "Only meaningful if you're a subscriber."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Primary · $75k (free)",
+      "level": "strong"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "$10,000 / person",
+      "level": "strong"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "$500 · after 6 hrs",
+      "level": "good"
+    },
+    {
+      "coverage": "Baggage delay",
+      "detail": "$100/day · up to 5 days",
+      "level": "good"
+    },
+    {
+      "coverage": "Emergency medical",
+      "detail": "$2,500 + $100k evacuation",
+      "level": "mid"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "$10k/claim · 120 days",
+      "level": "strong"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "+1 year",
+      "level": "good"
+    }
+  ],
+  "protection_note": "The best travel insurance of the four: primary rental, real trip-cancellation limits, baggage delay, and emergency evacuation with a dollar limit. The one glaring gap: no cell-phone protection (Amex and Venture X have it).",
+  "rental_note": "The CSR includes free primary coverage (up to $75k), paying first, before your own auto policy. Decline the counter's CDW and pay with the card.",
+  "status_perks": [
+    {
+      "name": "IHG One Rewards Platinum",
+      "strength": 2,
+      "note": "Modest: some upgrades and bonus points; IHG elite is among the weakest hotel tiers."
+    },
+    {
+      "name": "$75k spend unlocks",
+      "strength": 4,
+      "note": "IHG Diamond, World of Hyatt status, Southwest A-List + $500 credit, $250 Shops at Chase. Valuable, but only if you'd spend $75k anyway."
+    },
+    {
+      "name": "Lounge access",
+      "strength": 4,
+      "note": "Chase Sapphire Lounges + Priority Pass: Priority Pass includes 2 guests free (unlike Amex)."
+    }
+  ],
+  "services": [
+    {
+      "name": "Visa Infinite Concierge",
+      "detail": "24/7 concierge for reservations, tickets, and travel arrangements."
+    },
+    {
+      "name": "Visa Infinite Luxury Hotel Collection",
+      "detail": "Elite-like perks (breakfast, upgrades, late checkout, property credit) at 900+ hotels, on top of The Edit."
+    },
+    {
+      "name": "DoorDash DashPass + Lyft",
+      "detail": "Complimentary DashPass ($0 delivery fees) and 5× on Lyft rides through Mar 2027."
+    },
+    {
+      "name": "Points Boost",
+      "detail": "Up to 2¢/point on select Chase Travel bookings, CSR's redemption edge."
+    },
+    {
+      "name": "Visa Infinite travel & roadside",
+      "detail": "Travel & emergency assistance services and roadside dispatch, plus no foreign transaction fees."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$195 ea",
+        "is_free": false,
+        "benefits": [
+          {
+            "text": "Own Priority Pass Select + Chase Sapphire Lounge access",
+            "included": true
+          },
+          {
+            "text": "Complimentary DoorDash DashPass",
+            "included": true
+          },
+          {
+            "text": "Covered by Chase's travel & purchase protections",
+            "included": true
+          },
+          {
+            "text": "Earns Ultimate Rewards (into your account)",
+            "included": true
+          },
+          {
+            "text": "No separate statement credits",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "After the 2025 refresh, CSR authorized users cost $195 each, a real jump from the old $75. Worth it mainly if a travel companion needs their own lounge access; otherwise the primary can already bring 2 guests into Priority Pass for free."
+  },
+  "timeline": [
+    {
+      "date": "Oct 26, 2027",
+      "type": "future",
+      "badge": "Upcoming",
+      "text": "Legacy 1.5¢ redemption on pre-Oct-2025 points expires; after this, only Points Boost or 1¢ remain."
+    },
+    {
+      "date": "Jul 2026",
+      "type": "cut",
+      "badge": "Reshuffle",
+      "text": "Exclusive Tables dining list churned (net +27 restaurants but Las Vegas gutted to one)."
+    },
+    {
+      "date": "Jan 1, 2026",
+      "type": "add",
+      "badge": "Add",
+      "text": "Enhanced hotel credits begin."
+    },
+    {
+      "date": "Oct 26, 2025",
+      "type": "neutral",
+      "badge": "Live",
+      "text": "New perks activate; the $795 fee (and $195 AU fee) apply at each renewal after this date."
+    },
+    {
+      "date": "Jun 23, 2025",
+      "type": "add",
+      "badge": "Overhaul",
+      "text": "Fee $550 → $795; new credits (Edit $500, dining $300, StubHub $300, Apple, DashPass). Flat 50% travel bonus replaced by Points Boost."
+    },
+    {
+      "date": "2016",
+      "type": "add",
+      "badge": "Launch",
+      "text": "Debuts with a legendary 100k bonus and a $450 fee, the enthusiast benchmark."
+    }
+  ]
+}

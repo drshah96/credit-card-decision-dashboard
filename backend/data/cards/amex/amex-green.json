@@ -1,0 +1,154 @@
+{
+  "id": "amex-green",
+  "name": "American Express® Green Card",
+  "issuer": "American Express",
+  "network": "AMERICAN EXPRESS",
+  "points_program": "Membership Rewards",
+  "accent_color": "#4E8D7C",
+  "annual_fee": 150,
+  "effective_cost": "Low if you use CLEAR and travel/transit spend",
+  "verdict": {
+    "status": "keep",
+    "text": "Low-commitment MR earner if you use transit + the CLEAR credit",
+    "short_tag": "Transit & CLEAR"
+  },
+  "earn_rates": [
+    {
+      "emoji": "✈️",
+      "multiplier": "3×",
+      "category": "Travel: flights, hotels, cruises, car rentals, vacation rentals",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🚕",
+      "multiplier": "3×",
+      "category": "Transit: trains, rideshare, tolls, parking, buses, subways",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "3×",
+      "category": "Restaurants worldwide (incl. U.S. takeout/delivery)",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The broadest 3× categories of any no-fee-adjacent Amex: travel, transit, and dining all qualify, which covers most day-to-day spend for someone who commutes or travels regularly.",
+  "points": {
+    "currency": "Membership Rewards",
+    "redemption_options": [
+      {
+        "method": "Statement credit",
+        "cpp": 0.6,
+        "best": false
+      },
+      {
+        "method": "Amex Travel portal",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Transfer partners (avg)",
+        "cpp": 2.0,
+        "best": true
+      }
+    ],
+    "per_100k": "$2,000",
+    "note": "Same Membership Rewards currency and transfer partner chart as the Platinum and Gold. Cashing out at 0.6¢ throws away most of the value."
+  },
+  "transfer_partners": {
+    "airline_count": 17,
+    "hotel_count": 3,
+    "highlight": "Full access to the same Membership Rewards transfer chart as the Platinum and Gold: 17 airline and 3 hotel partners.",
+    "recent_changes": "Subject to the same program-wide changes as any other Membership Rewards card."
+  },
+  "credits": [
+    {
+      "id": "clear",
+      "name": "CLEAR Plus",
+      "subtitle": "airport security",
+      "max_annual": 219,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "Covers a CLEAR+ membership at 55+ airports nationwide.",
+      "tips": [
+        "$0 to you if you don't fly through CLEAR airports."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Secondary, decline the counter CDW to activate",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "$300/trip · after 12 hrs · 2 claims/yr",
+      "level": "mid"
+    },
+    {
+      "coverage": "Baggage Insurance Plan",
+      "detail": "$1,250 carry-on / $500 checked",
+      "level": "mid"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "$1,000/claim · $50,000/yr · 90 days",
+      "level": "mid"
+    }
+  ],
+  "protection_note": "Standard-tier Amex protection across the board. Purchase protection caps at $1,000/item (not the $10,000 premium-card tier), and the 12-hour trip delay trigger is one of the weaker windows in this dashboard.",
+  "rental_note": "Secondary coverage only; put rentals on a card with primary coverage if you rent often.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "Global Assist Hotline",
+      "detail": "24/7 emergency coordination when traveling 100+ miles from home (cardholder pays for any services rendered)."
+    },
+    {
+      "name": "No Preset Spending Limit",
+      "detail": "Purchase power adjusts based on your spending patterns rather than a fixed credit line."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "Zero FX fees on international spend."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Additional Green Card",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add: no authorized user fee",
+            "included": true
+          },
+          {
+            "text": "Earns Membership Rewards on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Does not get their own CLEAR credit",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Additional cards are free with no authorized user fee, unlike the Platinum's paid add-on cards."
+  },
+  "timeline": []
+}

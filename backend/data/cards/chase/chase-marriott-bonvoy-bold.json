@@ -1,0 +1,186 @@
+{
+  "id": "chase-marriott-bonvoy-bold",
+  "name": "Marriott Bonvoy Bold® Credit Card",
+  "issuer": "Chase",
+  "network": "VISA SIGNATURE",
+  "points_program": "Marriott Bonvoy",
+  "accent_color": "#C48793",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee",
+  "verdict": {
+    "status": "keep",
+    "text": "Free Marriott points earner with genuinely broad bonus categories",
+    "short_tag": "Free Marriott Points"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🏨",
+      "multiplier": "3×",
+      "category": "Marriott Bonvoy hotels",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛍️",
+      "multiplier": "2×",
+      "category": "Groceries, rideshare, select food delivery, internet/cable/phone & select streaming",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The 2× bucket is unusually broad for a no-fee card: groceries, rideshare, delivery apps, streaming, and home internet/phone bills all qualify with no stated cap. There's no free night award on this card, unlike the Boundless; its value is built around everyday categories and Pay Yourself Back.",
+  "points": {
+    "currency": "Marriott Bonvoy",
+    "redemption_options": [
+      {
+        "method": "Cash + Points",
+        "cpp": 0.5,
+        "best": false
+      },
+      {
+        "method": "Transfer to airline miles (3:1, +5,000 bonus per 60,000 transferred)",
+        "cpp": 0.45,
+        "best": false
+      },
+      {
+        "method": "Pay Yourself Back (statement credit for airfare/Marriott stays)",
+        "cpp": 0.8,
+        "best": true
+      }
+    ],
+    "per_100k": "$800",
+    "note": "No card-granted free night award to chase here. Pay Yourself Back at $100 per 12,500 points (0.8¢/point) is the best redemption without booking an award stay directly, but it's capped at $750 in statement credits per year (about 93,750 points). A larger balance still needs a real hotel stay to cash out at full value."
+  },
+  "transfer_partners": {
+    "airline_count": 40,
+    "hotel_count": 0,
+    "highlight": "Marriott Bonvoy transfers to 40+ airline programs at 3:1, with a 5,000-mile bonus for every 60,000 points transferred in a single transaction, same chart as every other Bonvoy card.",
+    "recent_changes": "No confirmed recent changes to the airline transfer chart."
+  },
+  "credits": [
+    {
+      "id": "pay-yourself-back",
+      "name": "Pay Yourself Back",
+      "subtitle": "$100 per 12,500 pts · $750/yr cap · airfare & Marriott stays",
+      "max_annual": 750,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Redeem Marriott Bonvoy points for statement credits toward airline tickets or Marriott hotel stays at a rate of $100 per 12,500 points (0.8¢/point), up to $750 in total redemptions per year.",
+      "tips": [
+        "The best redemption rate on this card without transferring points or booking an award stay directly.",
+        "The $750/yr cap means roughly 93,750 points is the most you can cash out this way in a calendar year."
+      ]
+    },
+    {
+      "id": "dashpass",
+      "name": "DoorDash DashPass + Credit",
+      "subtitle": "1-yr complimentary + $10/qtr non-restaurant · thru 2027",
+      "max_annual": 40,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "One year of complimentary DashPass membership plus up to $10 off quarterly on non-restaurant DoorDash orders, active through December 31, 2027.",
+      "tips": [
+        "Skip this if you're not already a DoorDash user; not worth chasing on its own."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Baggage delay",
+      "detail": "$100/day · up to 5 days",
+      "level": "mid"
+    },
+    {
+      "coverage": "Lost luggage",
+      "detail": "$3,000 per covered traveler",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "$500/traveler · after 12 hrs",
+      "level": "mid"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "$500/item · 120 days",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Not offered on this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not offered on this card",
+      "level": "none"
+    }
+  ],
+  "protection_note": "Nearly identical insurance to the paid Boundless card: baggage delay, lost luggage, trip delay, and purchase protection are all present at the same limits, which is a pleasant surprise for $0. Neither Chase Marriott card offers trip cancellation or rental car coverage.",
+  "rental_note": "No rental car coverage at all; use a different card for rentals.",
+  "status_perks": [
+    {
+      "name": "Marriott Bonvoy Silver Elite Status",
+      "strength": 2,
+      "note": "Complimentary with the card: priority late checkout where available and 10% bonus points on stays. Only 5 Elite Night Credits/year (cut from 15 in a 2025 change), below the Boundless's automatic count."
+    }
+  ],
+  "services": [
+    {
+      "name": "No foreign transaction fees",
+      "detail": "Zero FX fees on international spend."
+    },
+    {
+      "name": "Visa Signature Concierge",
+      "detail": "Complimentary 24/7 concierge for reservations, tickets, and travel arrangements."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional Cards",
+    "options": [
+      {
+        "name": "Additional Bonvoy Bold Card",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns Marriott Bonvoy points on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Does not get their own Silver Elite status independently",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Additional cards are free: an easy way to pool household spend toward the 3× hotel rate and Pay Yourself Back redemptions."
+  },
+  "timeline": [
+    {
+      "date": "Jun 4, 2026",
+      "type": "neutral",
+      "badge": "Refresh",
+      "text": "Welcome offer changed to 60,000 points after $1,000 spend in 3 months (30,000 more than the prior offer), replacing a temporary 2-Free-Night promotional offer."
+    },
+    {
+      "date": "2025",
+      "type": "cut",
+      "badge": "Cut",
+      "text": "Elite Night Credit allotment cut from 15/year to 5/year."
+    }
+  ]
+}

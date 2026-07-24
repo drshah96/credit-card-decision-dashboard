@@ -1,0 +1,100 @@
+{
+  "id": "us-bank-secured",
+  "name": "Secured Visa Card",
+  "issuer": "U.S. Bank",
+  "network": "VISA",
+  "points_program": "None",
+  "accent_color": "#37474F",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee, but earns nothing and requires a refundable $300–$5,000 deposit",
+  "verdict": {
+    "status": "reconsider",
+    "text": "No rewards: Cash+ Secured earns the same for the same deposit",
+    "short_tag": "No Rewards"
+  },
+  "earn_rates": [],
+  "earn_note": "This is the bare-bones version of U.S. Bank's secured lineup: same deposit range and $0 annual fee as Cash+ Secured and Altitude Go Secured, but no cash back or points at all. There's no earn-rate reason to pick this over either of those unless you specifically want the simplest possible product.",
+  "points": {
+    "currency": "None",
+    "redemption_options": [],
+    "per_100k": "$0, no rewards program",
+    "note": "Nothing to redeem. Value is purely the credit-building mechanism, not any earning."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No rewards program, nothing to transfer.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Zero fraud liability",
+      "detail": "Not responsible for unauthorized transactions once reported",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not publicly documented for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not covered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "No purchase-protection or extended-warranty guide published for this card.",
+  "rental_note": "No auto rental coverage documented publicly for this card.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "Refundable security deposit",
+      "detail": "$300–$5,000, held in a secured savings account, sets your credit limit dollar-for-dollar."
+    },
+    {
+      "name": "Free credit score access",
+      "detail": "TransUnion VantageScore via the U.S. Bank mobile app and online banking."
+    },
+    {
+      "name": "Choose your due date",
+      "detail": "Pick a payment due date that fits your schedule."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Their activity is reported to the credit bureaus too, on the same account",
+            "included": true
+          },
+          {
+            "text": "No rewards earned: this card has no rewards program to share",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add, and since this account reports to all three bureaus, an authorized user can benefit from the payment history even though there's no rewards program to share."
+  },
+  "timeline": []
+}

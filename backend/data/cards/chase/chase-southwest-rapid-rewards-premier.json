@@ -1,0 +1,229 @@
+{
+  "id": "chase-southwest-rapid-rewards-premier",
+  "name": "Southwest® Rapid Rewards® Premier Credit Card",
+  "issuer": "Chase",
+  "network": "VISA SIGNATURE",
+  "points_program": "Rapid Rewards",
+  "accent_color": "#5B8DEF",
+  "annual_fee": 149,
+  "effective_cost": "Medium: the balanced pick if you want A-List progress without Priority's fee",
+  "verdict": {
+    "status": "situational",
+    "text": "Best-balanced tier: Preferred seating, real A-List progress",
+    "short_tag": "A-List Progress"
+  },
+  "earn_rates": [
+    {
+      "emoji": "✈️",
+      "multiplier": "3×",
+      "category": "Southwest purchases (flights, inflight, gift cards)",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "2×",
+      "category": "Grocery stores & restaurants (first $8,000/yr combined)",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "Same 1× base as Plus and Priority, but the bonus category shifts to groceries + restaurants (from Plus's gas + groceries) and the Southwest multiplier climbs to 3×. Still nothing for Chase Travel or non-Southwest travel spend.",
+  "points": {
+    "currency": "Rapid Rewards",
+    "redemption_options": [
+      {
+        "method": "Southwest gift cards / merchandise partners",
+        "cpp": 0.7,
+        "best": false
+      },
+      {
+        "method": "Wanna Get Away flights (average)",
+        "cpp": 1.3,
+        "best": true
+      },
+      {
+        "method": "High-demand / sold-out fares",
+        "cpp": 1.5,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,200–1,500",
+    "note": "Same closed-loop Rapid Rewards currency and dynamic pricing (since March 2025) as the rest of the family; this tier only changes how fast you earn it, not what it's worth."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "Rapid Rewards points only redeem for Southwest travel (or a short list of gift-card/merchandise partners at poor value); there's no way to move them to another airline or hotel program.",
+    "recent_changes": "Closed-loop currency, unchanged in structure across all three Southwest personal cards. Chase Ultimate Rewards can convert into this account, but nothing moves out of it.",
+    "partners": []
+  },
+  "credits": [
+    {
+      "id": "bags",
+      "name": "Free Checked Bag",
+      "subtitle": "1st bag · you + up to 8 on reservation",
+      "max_annual": 140,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "Southwest ended free checked bags for everyone on May 28, 2025 ($35 first bag / $45 second bag on most fares). Rapid Rewards cardmembers keep their first checked bag free, for the cardholder and up to 8 companions on the same reservation.",
+      "tips": [
+        "Only the first bag is free on this card. Southwest's own A-List Preferred members and Choice Extra fares get a free second bag too; this tier doesn't.",
+        "It covers everyone on the reservation, not just the cardholder: a family checking one bag each on a round trip can clear a big chunk of the $149 fee in a single trip."
+      ]
+    },
+    {
+      "id": "instacart",
+      "name": "Instacart+ Credit",
+      "subtitle": "$10/mo · through 2027 promo",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Up to $10/month in Instacart credit on one qualifying $10+ order, available with an active Instacart+ membership (3 months complimentary), added in the July 2025 refresh, running through the Dec 31, 2027 promo window.",
+      "tips": [
+        "Requires enrolling in Instacart+ (free for the first 3 months, a paid membership after); only worth carrying if you'd keep the subscription anyway.",
+        "The monthly credit doesn't roll over; a month skipped is a month lost."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Secondary (domestic) / primary outside the US · $60k · 31 days",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Not offered on any Southwest personal card",
+      "level": "none"
+    },
+    {
+      "coverage": "Baggage delay",
+      "detail": "$100/day · up to 3 days · after 6 hrs",
+      "level": "mid"
+    },
+    {
+      "coverage": "Lost/damaged luggage",
+      "detail": "$3,000 per passenger",
+      "level": "mid"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "$500,000 · common carrier",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "$500/claim · $50,000/account · 120 days",
+      "level": "mid"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "+1 year on eligible warranties",
+      "level": "good"
+    }
+  ],
+  "protection_note": "Identical protections to Plus and Priority: Chase doesn't scale insurance with the fee on this family. No trip cancellation/interruption coverage at any tier; the $500,000 travel accident policy and baggage delay/loss coverage are what you get regardless of which of the three you carry.",
+  "rental_note": "Secondary for domestic rentals (pays after your own auto policy), primary only outside the US, capped at $60,000 and 31 consecutive days. Decline the counter's CDW and pay with the card, but don't rely on it as your only coverage for a US rental.",
+  "status_perks": [
+    {
+      "name": "Companion Pass progress",
+      "strength": 2,
+      "note": "A 10,000-point boost toward the 135,000 Companion Pass qualifying points needed each year, identical across all three Southwest cards, so it's not a reason to pick this tier over Plus or Priority."
+    },
+    {
+      "name": "A-List tier points",
+      "strength": 3,
+      "note": "1,500 Tier Qualifying Points per $5,000 spent, a real assist toward the 35,000-TQP A-List bar if you already run a lot of spend through this card, though Priority earns them faster (2,500 per $5,000)."
+    },
+    {
+      "name": "Boarding position",
+      "strength": 2,
+      "note": "Group 5 boarding for the cardholder + up to 8 companions on the reservation, same slot as Plus and Priority. Real A-List members still board ahead of all three in the A1–A15 range."
+    }
+  ],
+  "services": [
+    {
+      "name": "Seat selection",
+      "detail": "Complimentary Preferred seat selection within 48 hours of departure, when available, for you + up to 8 companions, a step up from Plus's Standard-only seating."
+    },
+    {
+      "name": "Anniversary bonus",
+      "detail": "6,000 Rapid Rewards points automatically deposited every account anniversary, double the Plus card's 3,000."
+    },
+    {
+      "name": "Annual flight discount",
+      "detail": "One 15% off promo code each cardmember year, delivered within 15 days of your anniversary; excludes Basic fares."
+    },
+    {
+      "name": "Inflight purchase credit",
+      "detail": "25% back as a statement credit on Southwest inflight food, drinks and Wi-Fi purchases."
+    },
+    {
+      "name": "Partner perks (through 2027)",
+      "detail": "3-month complimentary Instacart+ trial (see the Instacart credit above), 12-month complimentary DashPass (activate by Dec 31, 2027), and 3× Rapid Rewards points on Lyft rides through Dec 2027, ahead of Plus's 2×, behind Priority's 5×."
+    },
+    {
+      "name": "No foreign transaction fees",
+      "detail": "Zero FX fees on international spend."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns Rapid Rewards on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "Own card number, contributes to the account's Companion Pass and A-List progress",
+            "included": true
+          },
+          {
+            "text": "Free-bag and boarding perks come from being booked on the same reservation, not from authorized-user status",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Authorized users are free on all three Southwest personal cards. The free checked bag and Group 5 boarding apply to whoever is booked on the same reservation as the cardholder (up to 8 people). You don't need to add someone as an authorized user for them to get it, just book them on your itinerary."
+  },
+  "timeline": [
+    {
+      "date": "May 28, 2025",
+      "type": "neutral",
+      "badge": "Context",
+      "text": "Southwest ended free checked bags for all passengers ($35 first bag / $45 second bag on most fares); this card's free first bag went from a redundant perk to a real one overnight."
+    },
+    {
+      "date": "Jul 24, 2025",
+      "type": "add",
+      "badge": "Refresh",
+      "text": "Fee raised $99 → $149; gained the free checked bag, Preferred seat selection, Group 5 boarding, A-List tier-point earning, and partner perks (Instacart+, DashPass, Lyft points)."
+    },
+    {
+      "date": "Dec 31, 2025",
+      "type": "cut",
+      "badge": "Cut",
+      "text": "Legacy benefits from the old card structure (2 EarlyBird Check-In credits and 2× points on internet/cable/phone) were discontinued."
+    }
+  ]
+}

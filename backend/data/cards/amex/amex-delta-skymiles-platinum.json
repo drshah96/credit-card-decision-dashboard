@@ -1,0 +1,290 @@
+{
+  "id": "amex-delta-skymiles-platinum",
+  "name": "Delta SkyMiles® Platinum American Express Card",
+  "issuer": "American Express",
+  "network": "AMERICAN EXPRESS",
+  "points_program": "Delta SkyMiles",
+  "accent_color": "#4FA3E3",
+  "annual_fee": 350,
+  "effective_cost": "Low if you fly Delta",
+  "verdict": {
+    "status": "situational",
+    "text": "Keep only if you fly Delta with a companion",
+    "short_tag": "Companion Fare"
+  },
+  "earn_rates": [
+    {
+      "emoji": "✈️",
+      "multiplier": "3×",
+      "category": "Delta purchases",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🏨",
+      "multiplier": "3×",
+      "category": "Hotels, booked direct",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "2×",
+      "category": "Restaurants, worldwide (incl. U.S. takeout/delivery)",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "2×",
+      "category": "U.S. supermarkets",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "Fine for Delta spend, but you earn SkyMiles, the weakest currency here. For everyday spend, Venture X earns more and more flexibly.",
+  "points": {
+    "currency": "Delta SkyMiles",
+    "redemption_options": [
+      {
+        "method": "Statement / low-end",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Average redemption",
+        "cpp": 1.15,
+        "best": true
+      },
+      {
+        "method": "Premium-cabin sweet spots",
+        "cpp": 2.2,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,100–1,200",
+    "note": "Airline-locked and dynamically priced. Two escapes: top up from Amex MR (1:1), or book Delta metal via Virgin Atlantic for far fewer miles than SkyMiles charges."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "SkyMiles can't be transferred out; they're stuck in Delta's program.",
+    "recent_changes": "You can transfer INTO SkyMiles from Amex MR (1:1), Chase UR and Capital One, useful for topping up an award."
+  },
+  "credits": [
+    {
+      "id": "bags",
+      "name": "Free Checked Bags",
+      "subtitle": "1st + 2nd (domestic)",
+      "max_annual": 140,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "First checked bag free on Delta flights (you + up to 8 on the reservation); second bag free domestic.",
+      "tips": [
+        "~$35 each way per bag per person, so a family checking bags on one round trip clears most of the fee.",
+        "You don't even need to pay for the flight with this card."
+      ]
+    },
+    {
+      "id": "rideshare",
+      "name": "Rideshare Credit",
+      "subtitle": "$10/mo · enroll",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "Monthly U.S. rideshare credit with Uber, Lyft, Curb, Revel, or Alto.",
+      "tips": [
+        "Enroll, then one qualifying ride a month recovers the full $120."
+      ]
+    },
+    {
+      "id": "resy",
+      "name": "Resy Dining Credit",
+      "subtitle": "$10/mo · new in 2026",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "Up to $10/month at 10,000+ U.S. Resy restaurants (via Global Dining Access by Resy), added in the 2026 refresh.",
+      "tips": [
+        "Stacks with your Amex Platinum's $400 Resy credit: two cards paying you at the same restaurants.",
+        "Monthly, no rollover; one Resy meal a month captures it."
+      ]
+    },
+    {
+      "id": "companion",
+      "name": "Companion Certificate",
+      "subtitle": "Main Cabin · annual",
+      "max_annual": 450,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Each year after renewal, one round-trip Main Cabin companion ticket to the U.S., Caribbean, or Central America; companion pays only taxes/fees ($22–$250).",
+      "tips": [
+        "One qualifying round trip erases the $350 fee. Best on expensive routes; value the slider by the fare you'd save.",
+        "Book fare classes L, U, T, X or V; the cheapest basic buckets sometimes don't qualify."
+      ]
+    },
+    {
+      "id": "stays",
+      "name": "Delta Stays Credit",
+      "subtitle": "prepaid hotels · calendar year",
+      "max_annual": 150,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Up to $150/yr (calendar year) on prepaid hotels or vacation rentals booked through Delta Stays on delta.com.",
+      "tips": [
+        "Resets on the calendar year, not renewal, so a new cardholder can use it twice on one annual fee.",
+        "Use it on a Delta Stays booking you'd make anyway."
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Secondary",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Yes (via Amex)",
+      "level": "good"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "$300 · after 12 hrs",
+      "level": "mid"
+    },
+    {
+      "coverage": "Baggage Insurance Plan",
+      "detail": "Lost/damaged/stolen (Amex)",
+      "level": "good"
+    },
+    {
+      "coverage": "Emergency evacuation",
+      "detail": "Via Premium Global Assist",
+      "level": "good"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "$800 · $50 deductible",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Yes",
+      "level": "good"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "+1 year",
+      "level": "good"
+    }
+  ],
+  "protection_note": "Thinner than the others: note the weaker $300/12-hour trip delay (vs. $500/6 hrs elsewhere) and secondary rental. It does keep Amex cell-phone protection and Premium Global Assist (incl. no-cost emergency evacuation coordination). Charge trips you want fully insured to the Sapphire Reserve.",
+  "rental_note": "Secondary only: it pays after your own auto policy. For rentals, your CSR or Venture X (free primary) is the better card to put it on.",
+  "status_perks": [
+    {
+      "name": "Medallion head start",
+      "strength": 3,
+      "note": "$2,500 MQD annually plus a spend boost: a meaningful shortcut to Silver/Gold if you're pursuing Delta status."
+    },
+    {
+      "name": "Hertz Five Star",
+      "strength": 2,
+      "note": "Mid-tier Hertz status (counter skip, free additional driver, upgrades), a step below Venture X's President's Circle."
+    },
+    {
+      "name": "Lounge access",
+      "strength": 1,
+      "note": "None on its own (Sky Club needs the $650 Reserve). Your Amex Platinum already covers 10 Sky Club visits on Delta flights."
+    }
+  ],
+  "services": [
+    {
+      "name": "Free checked bags & priority boarding",
+      "detail": "1st bag free (worldwide) for you + up to 8 companions on the reservation; 2nd bag free domestic; Zone 5 priority boarding."
+    },
+    {
+      "name": "Complimentary upgrade queue",
+      "detail": "Even without Medallion status, you're added to the upgrade list (below Medallion/Reserve members)."
+    },
+    {
+      "name": "MQD Headstart, Boost & TakeOff 15",
+      "detail": "$2,500 MQD head start, $1 MQD per $20 spent, and 15% off award flights booked with miles."
+    },
+    {
+      "name": "Global Dining Access by Resy & no FX fees",
+      "detail": "The Resy credit runs through Global Dining Access; plus zero foreign transaction fees and Premium Global Assist."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Additional Card",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add: no annual fee for additional Platinum cards",
+            "included": true
+          },
+          {
+            "text": "1st free checked bag + priority boarding when flying Delta",
+            "included": true
+          },
+          {
+            "text": "Own Global Entry / TSA PreCheck credit",
+            "included": true
+          },
+          {
+            "text": "Earns SkyMiles (into your account)",
+            "included": true
+          },
+          {
+            "text": "Shares the account's credits, no separate set",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Additional Delta Platinum cards are free, and each one extends the free-checked-bag + priority-boarding perk, so a travel companion on the account effectively gets their own free bag when you all fly Delta together."
+  },
+  "timeline": [
+    {
+      "date": "Jun 2026",
+      "type": "add",
+      "badge": "Refresh",
+      "text": "No fee increase; added a free second checked bag (domestic), a $120 rideshare credit and a $120 Resy credit, raised Delta Stays to $150, and made the companion certificate work on Delta Vacations."
+    },
+    {
+      "date": "2024",
+      "type": "cut",
+      "badge": "Cut",
+      "text": "Delta Sky Club access restricted across Amex cards (visit caps introduced)."
+    },
+    {
+      "date": "2024",
+      "type": "cut",
+      "badge": "Change",
+      "text": "Fee raised $250 → $350; SkyMiles and Medallion shifted to a spend-based (MQD) model."
+    },
+    {
+      "date": "2021",
+      "type": "neutral",
+      "badge": "Baseline",
+      "text": "Standard co-brand with companion certificate and free first bag."
+    }
+  ]
+}

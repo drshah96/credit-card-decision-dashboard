@@ -1,0 +1,146 @@
+{
+  "id": "citi-tractor-supply",
+  "name": "TSC® Visa® Card",
+  "issuer": "Citi",
+  "network": "VISA",
+  "points_program": "Neighbor's Club Rewards",
+  "accent_color": "#DA291C",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee",
+  "verdict": {
+    "status": "situational",
+    "text": "Strong 5% for regular farm/ranch shoppers, still a specialty card",
+    "short_tag": "Farm & Ranch Shoppers"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🚜",
+      "multiplier": "5%",
+      "category": "Tractor Supply & Petsense purchases",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "⛽",
+      "multiplier": "3%",
+      "category": "Gas stations, grocery stores & veterinary services",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1%",
+      "category": "All other purchases",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "This is the open-loop Visa version of Tractor Supply's card: it earns outside Tractor Supply/Petsense, unlike the closed-loop, store-only TSC Store Card, which earns the same 5% at Tractor Supply/Petsense but nothing elsewhere. Cardholders are automatically enrolled as Preferred Plus Neighbors, the highest tier of Tractor Supply's separate Neighbor's Club loyalty program. Special financing offers (e.g., a 3.99% promotional rate on purchases of $1,599+) periodically run at TractorSupply.com/TSCCard on purchases of $199 and up.",
+  "points": {
+    "currency": "Neighbor's Club Rewards",
+    "redemption_options": [
+      {
+        "method": "Redeemable at Tractor Supply stores, TractorSupply.com, or in the TSC App",
+        "cpp": 1.0,
+        "best": true
+      }
+    ],
+    "per_100k": "$1,000 in Tractor Supply / Petsense rewards, no other redemption exists",
+    "note": "A closed-loop currency despite the open-loop Visa network: rewards come back as Tractor Supply/Petsense credit, not cash or a statement credit."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners: Neighbor's Club Rewards redeem only at Tractor Supply and Petsense.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not confirmed on Citi's or Tractor Supply's public product pages for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not confirmed on Citi's or Tractor Supply's public product pages for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Baggage delay",
+      "detail": "Not included",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not included",
+      "level": "none"
+    }
+  ],
+  "protection_note": "A standard (not Signature) Visa tier with no confirmed purchase protection, extended warranty, or travel insurance. Treat this as a rewards-and-financing card with no meaningful insurance suite.",
+  "rental_note": "No rental car coverage found for this card.",
+  "status_perks": [
+    {
+      "name": "Preferred Plus Neighbor status",
+      "strength": 2,
+      "note": "Cardholders are automatically placed in Neighbor's Club's highest membership tier, unlocking extra in-store perks and offers beyond the card's own rewards."
+    }
+  ],
+  "services": [
+    {
+      "name": "Special financing offers",
+      "detail": "Limited-time and everyday promotional financing (e.g., 3.99% on purchases of $1,599+ until paid in full) on qualifying purchases of $199 or more."
+    },
+    {
+      "name": "Foreign transaction fee",
+      "detail": "3% of each purchase transaction in U.S. dollars, per Tractor Supply's cardholder terms."
+    },
+    {
+      "name": "$0 liability on unauthorized charges",
+      "detail": "Standard fraud-liability protection."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns rewards on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "No dedicated insurance to share: this card doesn't carry a confirmed protection suite",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add, useful mainly for pooling a household's farm/ranch, pet-supply, and gas/grocery spend toward the bonus categories."
+  },
+  "timeline": [
+    {
+      "date": "Ongoing",
+      "type": "neutral",
+      "badge": "Two-product lineup",
+      "text": "Tractor Supply/Citi issue two distinct card products: the closed-loop, store-only TSC Store Card (5% at Tractor Supply/Petsense, unusable elsewhere) and this open-loop TSC Visa Card (same 5%, plus 3% gas/grocery/vet and 1% elsewhere). Confirm which one you're comparing; they are not the same card."
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "id": "citi-aadvantage-mileup",
+  "name": "AAdvantage MileUp",
+  "issuer": "Citi",
+  "network": "MASTERCARD",
+  "points_program": "AAdvantage",
+  "accent_color": "#E4572E",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee, but thin earning and no free checked bag",
+  "verdict": {
+    "status": "situational",
+    "text": "Fine free AA miles earner, but the only AAdvantage card with no free bag",
+    "short_tag": "No-Fee AA Miles"
+  },
+  "earn_rates": [
+    {
+      "emoji": "✈️",
+      "multiplier": "2×",
+      "category": "Eligible American Airlines purchases",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "2×",
+      "category": "Grocery stores, incl. delivery",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1×",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The only AAdvantage card with a grocery bonus category instead of dining/gas, useful if groceries are a bigger spend category for you than restaurants. No mileage cap. Unlike Platinum Select and Executive, MileUp includes no free checked bag or preferred boarding, so the miles are essentially the entire value proposition.",
+  "points": {
+    "currency": "AAdvantage Miles",
+    "redemption_options": [
+      {
+        "method": "Statement / low-end award",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Average redemption",
+        "cpp": 1.4,
+        "best": true
+      },
+      {
+        "method": "Premium-cabin / partner sweet spots",
+        "cpp": 2.0,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,000–$1,400",
+    "note": "AAdvantage has used dynamic pricing with no published award chart since 2016, so value swings by route and date. Miles don't expire as long as there's qualifying account activity at least once every 18 months."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "AAdvantage miles aren't a transferable bank-points currency. There's no way to move them out to another loyalty program, and (unlike United MileagePlus) no bank card lets you transfer points in either.",
+    "recent_changes": "Citi became the sole issuer of AAdvantage-branded consumer credit cards as Barclays exited the co-brand partnership (announced Dec 2024, Barclays stopped issuing new AAdvantage cards Sept 30, 2025); Barclays AAdvantage cardholders began transitioning to equivalent Citi-issued cards starting April 2026, with some legacy Barclays benefits temporarily carried over."
+  },
+  "credits": [],
+  "insurance": [],
+  "protection_note": "Minimal by design: the no-fee tier of the AAdvantage lineup. Citi doesn't advertise trip delay, baggage, purchase protection, or rental car insurance for MileUp; that suite of protections starts appearing on the paid Executive card.",
+  "rental_note": "No rental car coverage advertised; use a different card for rentals.",
+  "status_perks": [
+    {
+      "name": "Loyalty Points",
+      "strength": 1,
+      "note": "1 Loyalty Point per eligible mile earned from purchases, counting toward AAdvantage status tiers, a slow crawl given this card's fairly thin earning."
+    }
+  ],
+  "services": [
+    {
+      "name": "25% back on inflight purchases",
+      "detail": "Uncapped statement credit rebate on food, beverage, and Wi-Fi purchased onboard American Airlines flights."
+    },
+    {
+      "name": "No blackout dates",
+      "detail": "Standard AAdvantage award redemption term; applies across the whole AAdvantage card family, not unique to MileUp."
+    },
+    {
+      "name": "Foreign transaction fee applies",
+      "detail": "3% of the U.S. dollar amount of each transaction; not built for international use."
+    },
+    {
+      "name": "No free checked bag",
+      "detail": "Unlike every other AAdvantage co-brand credit card, MileUp does not include a free checked bag; that benefit starts at Platinum Select."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add: no annual fee for authorized users",
+            "included": true
+          },
+          {
+            "text": "Earns AAdvantage miles on their spend (into your account)",
+            "included": true
+          },
+          {
+            "text": "No free checked bag to share: this card doesn't include one",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add and their spend earns into your account, but there's no bag benefit to extend since MileUp doesn't include one for the primary cardholder either."
+  },
+  "timeline": [
+    {
+      "date": "Apr 2026",
+      "type": "neutral",
+      "badge": "Issuer transition",
+      "text": "Citi became the sole issuer of AAdvantage-branded consumer credit cards as Barclays exited the partnership; Barclays AAdvantage cardholders began transitioning to equivalent Citi-issued cards, with some legacy Barclays benefits carried over temporarily."
+    }
+  ]
+}

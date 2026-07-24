@@ -1,0 +1,90 @@
+{
+  "id": "citi-diamond-preferred",
+  "name": "Diamond Preferred",
+  "issuer": "Citi",
+  "network": "MASTERCARD",
+  "points_program": "None, no rewards program",
+  "accent_color": "#607D8B",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee, but the entire value proposition is the 0% intro APR window",
+  "verdict": {
+    "status": "situational",
+    "text": "Not a rewards card: worth it only for a balance transfer or 0% intro window",
+    "short_tag": "Balance Transfer"
+  },
+  "earn_rates": [],
+  "earn_note": "Diamond Preferred earns no cash back, points, or miles of any kind. It's built entirely around a long 0% intro APR window, not rewards. If you want a Citi card that also earns while you carry it, look at a ThankYou Rewards card like Citi Strata instead; if you specifically need 0% APR with the longest possible runway, this and Citi Simplicity are the two Citi cards built for exactly that.",
+  "points": {
+    "currency": "None",
+    "redemption_options": [],
+    "per_100k": "$0, no rewards program",
+    "note": "No points or cash-back program of any kind. The entire value proposition is 0% intro APR: 12 months on purchases and 21 months on balance transfers from account opening (balance transfers must post within the first 4 months), then a 16.49%–27.24% variable ongoing APR based on creditworthiness. This is one of the longest 0% balance-transfer windows Citi offers on any card."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No rewards currency exists on this card, so there is nothing to transfer.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [],
+  "protection_note": "Bare-bones by design. Citi's own page for this card lists fraud liability protection and Mastercard ID Theft Protection but no purchase protection, extended warranty, or travel insurance suite; treat this as carrying none of that coverage.",
+  "rental_note": "No rental car coverage advertised; use a different card for rentals.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "0% intro APR",
+      "detail": "0% for 12 months on purchases and 21 months on balance transfers from account opening; balance transfers must be completed within the first 4 months. A 16.49%–27.24% variable APR applies after the intro periods end, based on creditworthiness."
+    },
+    {
+      "name": "Balance transfer fee",
+      "detail": "3% of each transfer ($5 minimum) if completed within the first 4 months of account opening; 5% of each transfer ($5 minimum) after that."
+    },
+    {
+      "name": "Late payment / penalty APR",
+      "detail": "Unlike Citi Simplicity, this card does carry a late fee (up to $41) and a variable penalty APR that can apply after a late payment. Citi doesn't publish the exact penalty rate on its public summary page, so check your card agreement for the precise figure."
+    },
+    {
+      "name": "Foreign transaction fee applies",
+      "detail": "3% of the U.S. dollar amount of each transaction (Citi's standard rate, matching Simplicity and the Secured Mastercard); not built for international use."
+    },
+    {
+      "name": "Citi Flex Pay",
+      "detail": "Convert eligible purchases into fixed monthly payments while continuing to use the card normally."
+    },
+    {
+      "name": "Citi Entertainment & Citi Travel",
+      "detail": "Presale ticket access to concerts and events, plus Citi's own travel-booking portal."
+    },
+    {
+      "name": "Free FICO Score access",
+      "detail": "View your FICO Score at no cost through the Citi app or site."
+    },
+    {
+      "name": "Citi Quick Lock",
+      "detail": "Instantly lock and unlock the card from the app if it's misplaced."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add: no annual fee for authorized users",
+            "included": true
+          },
+          {
+            "text": "No rewards earned: this card has no rewards program to share",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add, but since Diamond Preferred itself earns nothing, the only upside for an authorized user is shared access to spending power during the 0% intro APR window, not rewards."
+  },
+  "timeline": []
+}
