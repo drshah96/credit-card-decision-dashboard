@@ -2,6 +2,7 @@
 name = "credit-card-decision-dashboard"
 version = "0.1.0"
 description = "A web tool to help decide which credit cards to keep or downgrade"
+license = "MIT"
 requires-python = ">=3.13"
 dependencies = [
     "alembic>=1.18.5",
