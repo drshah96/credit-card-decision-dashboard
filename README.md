@@ -87,3 +87,7 @@ credit-card-decision-dashboard/
 ├── tests/backend/               # pytest — API + upsert/drafts pipeline
 └── .github/workflows/           # CI (backend + frontend checks on every PR)
 ```
+
+## License
+
+MIT, see [LICENSE](LICENSE).
