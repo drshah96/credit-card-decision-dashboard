@@ -357,6 +357,35 @@ describe("CardDetailPage", () => {
       expect(screen.getByText("Flights")).toBeInTheDocument();
     });
 
+    it("sorts earn rates by multiplier descending, ties broken alphabetically by category", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({
+          earn_rates: [
+            { emoji: "💳", multiplier: "1×", category: "Everything else", highlight: false, is_base: true },
+            { emoji: "🛒", multiplier: "3×", category: "Zebra Store", highlight: true, is_base: false },
+            { emoji: "🌐", multiplier: "5×", category: "Chase Travel portal", highlight: true, is_base: false },
+            { emoji: "⛽", multiplier: "3×", category: "Apple Store", highlight: true, is_base: false },
+            { emoji: "🎯", multiplier: "Up to 4×", category: "Capped category", highlight: true, is_base: false },
+          ],
+        }),
+      );
+
+      const { container } = renderPage();
+
+      await waitFor(() => {
+        expect(screen.getByText("Chase Travel portal")).toBeInTheDocument();
+      });
+
+      const categories = Array.from(container.querySelectorAll(".el")).map((el) => el.textContent);
+      expect(categories).toEqual([
+        "Chase Travel portal",
+        "Capped category",
+        "Apple Store",
+        "Zebra Store",
+        "Everything else",
+      ]);
+    });
+
     it("renders points section with best redemption option", async () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 

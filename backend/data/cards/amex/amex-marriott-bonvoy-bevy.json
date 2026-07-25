@@ -24,7 +24,14 @@
     {
       "emoji": "🍽️",
       "multiplier": "4×",
-      "category": "Restaurants worldwide & U.S. supermarkets (combined $15,000/yr cap, then 2×)",
+      "category": "Restaurants worldwide",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "4×",
+      "category": "U.S. supermarkets",
       "highlight": false,
       "is_base": false
     },

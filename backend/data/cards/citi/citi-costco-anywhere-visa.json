@@ -31,7 +31,14 @@
     {
       "emoji": "🍽️",
       "multiplier": "3%",
-      "category": "Restaurants & eligible travel (airfare, hotels, car rentals, Costco Travel)",
+      "category": "Restaurants",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "✈️",
+      "multiplier": "3%",
+      "category": "Eligible travel: airfare, hotels, car rentals, Costco Travel",
       "highlight": true,
       "is_base": false
     },

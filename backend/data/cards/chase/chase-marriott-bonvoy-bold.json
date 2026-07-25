@@ -22,9 +22,37 @@
       "is_base": false
     },
     {
-      "emoji": "🛍️",
+      "emoji": "🛒",
       "multiplier": "2×",
-      "category": "Groceries, rideshare, select food delivery, internet/cable/phone & select streaming",
+      "category": "Grocery stores",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🚗",
+      "multiplier": "2×",
+      "category": "Rideshare",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛵",
+      "multiplier": "2×",
+      "category": "Select food delivery",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "📺",
+      "multiplier": "2×",
+      "category": "Select streaming services",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "📡",
+      "multiplier": "2×",
+      "category": "Internet, cable & phone services",
       "highlight": true,
       "is_base": false
     },
