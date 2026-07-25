@@ -38,7 +38,21 @@
     {
       "emoji": "🍽️",
       "multiplier": "2×",
-      "category": "Dining, streaming & grocery stores",
+      "category": "Dining",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "📺",
+      "multiplier": "2×",
+      "category": "Streaming",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "2×",
+      "category": "Grocery stores",
       "highlight": false,
       "is_base": false
     },

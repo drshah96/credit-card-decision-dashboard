@@ -31,7 +31,14 @@
     {
       "emoji": "🍽️",
       "multiplier": "3%",
-      "category": "Dining and drugstores",
+      "category": "Dining: restaurants, takeout, eligible delivery",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💊",
+      "multiplier": "3%",
+      "category": "Drugstores",
       "highlight": true,
       "is_base": false
     },

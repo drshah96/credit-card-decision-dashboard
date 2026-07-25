@@ -24,7 +24,14 @@
     {
       "emoji": "🛒",
       "multiplier": "2×",
-      "category": "Grocery stores & restaurants (first $8,000/yr combined)",
+      "category": "Grocery stores",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "2×",
+      "category": "Restaurants",
       "highlight": true,
       "is_base": false
     },
@@ -36,7 +43,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Same 1× base as Plus and Priority, but the bonus category shifts to groceries + restaurants (from Plus's gas + groceries) and the Southwest multiplier climbs to 3×. Still nothing for Chase Travel or non-Southwest travel spend.",
+  "earn_note": "Same 1× base as Plus and Priority, but the bonus category shifts to groceries + restaurants (from Plus's gas + groceries) and the Southwest multiplier climbs to 3×. Still nothing for Chase Travel or non-Southwest travel spend. Groceries and restaurants combine toward a single $8,000/yr cap before dropping to 1×.",
   "points": {
     "currency": "Rapid Rewards",
     "redemption_options": [

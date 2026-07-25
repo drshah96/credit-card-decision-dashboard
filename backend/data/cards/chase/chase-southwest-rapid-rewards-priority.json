@@ -24,7 +24,14 @@
     {
       "emoji": "⛽",
       "multiplier": "2×",
-      "category": "Gas stations & restaurants, uncapped",
+      "category": "Gas stations, uncapped",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "2×",
+      "category": "Restaurants, uncapped",
       "highlight": true,
       "is_base": false
     },

@@ -24,7 +24,14 @@
     {
       "emoji": "⛽",
       "multiplier": "2×",
-      "category": "Gas stations & grocery stores (first $5,000/yr combined)",
+      "category": "Gas stations",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "2×",
+      "category": "Grocery stores",
       "highlight": true,
       "is_base": false
     },
@@ -36,7 +43,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The weakest earn structure in the Southwest lineup: same 1× base as Premier and Priority, with no dining or travel-portal bonus at all. This card earns its keep through the free bag, Companion Pass boost, and low fee, not through how it earns points.",
+  "earn_note": "The weakest earn structure in the Southwest lineup: same 1× base as Premier and Priority, with no dining or travel-portal bonus at all. This card earns its keep through the free bag, Companion Pass boost, and low fee, not through how it earns points. Gas and grocery spend combine toward a single $5,000/yr cap before dropping to 1×.",
   "points": {
     "currency": "Rapid Rewards",
     "redemption_options": [

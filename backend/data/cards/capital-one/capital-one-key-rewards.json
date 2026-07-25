@@ -24,7 +24,14 @@
     {
       "emoji": "🛒",
       "multiplier": "4%",
-      "category": "Grocery stores, dining & food delivery",
+      "category": "Grocery stores",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "4%",
+      "category": "Dining & food delivery",
       "highlight": true,
       "is_base": false
     },
