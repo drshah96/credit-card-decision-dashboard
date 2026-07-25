@@ -10,7 +10,7 @@ services:
   # Pre-Deploy Command feature — both alembic upgrade and seed_catalog are
   # idempotent, so re-running them on a restart is a no-op if nothing changed.
   - type: web
-    name: credit-card-dashboard-api
+    name: walletmath-api
     runtime: python
     plan: free
     buildCommand: pip install uv && uv sync --frozen --no-group dev
