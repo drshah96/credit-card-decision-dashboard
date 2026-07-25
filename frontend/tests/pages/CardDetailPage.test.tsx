@@ -521,14 +521,14 @@ describe("CardDetailPage", () => {
       expect(screen.getByText("Up to 3 additional cards.")).toBeInTheDocument();
     });
 
-    it("shows '— none here —' for an empty tier group", async () => {
+    it("shows 'None here' for an empty tier group", async () => {
       // Fixture: uber=easy, fhr=plan, saks is removed → niche group is empty
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
 
       await waitFor(() => {
-        expect(screen.getByText("— none here —")).toBeInTheDocument();
+        expect(screen.getByText("None here")).toBeInTheDocument();
       });
     });
 

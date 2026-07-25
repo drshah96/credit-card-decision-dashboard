@@ -224,7 +224,7 @@ export default function ComparePage() {
 
             {selectedSummaries.length === 0 ? (
               <p style={{ color: "var(--faint)", marginTop: 32, fontSize: 14.5 }}>
-                Pick up to {MAX_CARDS} cards to compare — mix and match across any bank.
+                Pick up to {MAX_CARDS} cards to compare, mix and match across any bank.
               </p>
             ) : (
               <div className="compare-table-wrap" style={{ marginTop: 36 }}>

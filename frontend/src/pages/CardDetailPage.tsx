@@ -45,7 +45,7 @@ const TIER_LABELS: Record<CreditTier, string> = {
 
 const TIER_SUBS: Record<CreditTier, string> = {
   easy: "auto or unavoidable",
-  plan: "timed — partial use likely",
+  plan: "timed, partial use likely",
   niche: "only if it fits your life",
 };
 
@@ -343,7 +343,7 @@ function CreditCalculator({
   let verdict: ReactNode;
   if (net >= 0) {
     verdict = (
-      <>With your inputs, the credits alone <b>more than cover the fee</b> — you're ahead ${net} before you count points, lounges, or insurance.</>
+      <>With your inputs, the credits alone <b>more than cover the fee</b>. You're ahead ${net} before you count points, lounges, or insurance.</>
     );
   } else if (totalUsed >= annualFee * 0.6) {
     verdict = (
@@ -351,7 +351,7 @@ function CreditCalculator({
     );
   } else {
     verdict = (
-      <>Credits only recoup <b>${totalUsed} of ${annualFee}</b>. You'd be paying ${Math.abs(net)} for the lounges, points and status — make sure those are worth it to you.</>
+      <>Credits only recoup <b>${totalUsed} of ${annualFee}</b>. You'd be paying ${Math.abs(net)} for the lounges, points and status. Make sure those are worth it to you.</>
     );
   }
 
@@ -463,7 +463,7 @@ function CreditsSection({
     <>
       <p className="credit-intro">
         Drag each slider to the amount you'll <b>actually</b> capture. Use the{" "}
-        <b>▲▼</b> arrows to move a credit between tiers for <i>your</i> life —
+        <b>▲▼</b> arrows to move a credit between tiers for <i>your</i> life.
         Resy might be effortless for you and niche for someone else. The calculator below
         tallies it against the fee.
       </p>
@@ -491,7 +491,7 @@ function CreditsSection({
                     />
                   ))
                 ) : (
-                  <div className="credit-hint" style={{ padding: "8px 2px" }}>— none here —</div>
+                  <div className="credit-hint" style={{ padding: "8px 2px" }}>None here</div>
                 )}
               </div>
             </div>
@@ -868,13 +868,13 @@ function CardDetail({ card }: { card: Card }) {
       )}
 
       {/* Credits */}
-      <Block label="Credits" title="Credits — set what you'll really use">
+      <Block label="Credits" title="Credits: set what you'll really use">
         <CreditsSection credits={card.credits} annualFee={card.annual_fee} cardId={card.id} />
       </Block>
 
       {/* Additional cards */}
       {card.additional_cards.options.length > 0 && (
-        <Block label="Cards" title="Adding a partner or family — additional cards">
+        <Block label="Cards" title="Additional cards for a partner or family">
           <div className="addcards">
             {card.additional_cards.options.map((opt) => (
               <div key={opt.name} className={`addcard ${opt.is_free ? "free" : ""}`}>
@@ -966,7 +966,7 @@ function CardDetail({ card }: { card: Card }) {
       )}
 
       {/* Timeline */}
-      <Block label="History" title="What changed — newest first">
+      <Block label="History" title="What changed, newest first">
         <ol className="timeline">
           {card.timeline.map((event) => (
             <li key={`${event.date}-${event.badge}`} className={`tnode ${event.type}`}>

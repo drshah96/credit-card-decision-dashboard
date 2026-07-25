@@ -66,7 +66,7 @@ export default function IssuersPage() {
               margin: 0,
             }}
           >
-            Pick a bank to see every card it issues — then drill into credits, earn
+            Pick a bank to see every card it issues, then drill into credits, earn
             rates, and insurance for the one you're deciding on.
           </p>
         </header>

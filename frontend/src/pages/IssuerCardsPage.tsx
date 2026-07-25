@@ -253,7 +253,7 @@ export default function IssuerCardsPage() {
               <CardGrid cards={filteredCards} selectMode={selectMode} />
             ) : (
               <p style={{ color: "var(--faint)", fontSize: 14 }}>
-                No cards match "{activeFilter}" yet — try another filter.
+                No cards match "{activeFilter}" yet. Try another filter.
               </p>
             )}
           </>
