@@ -141,7 +141,7 @@ export default function ComparePage() {
               marginBottom: 16,
             }}
           >
-            The Wallet Audit
+            Wallet Math
             <span style={{ flex: 1, height: 1, background: "var(--line)" }} />
           </div>
           <h1

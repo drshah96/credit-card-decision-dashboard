@@ -1,4 +1,4 @@
-# The Wallet Audit — Credit Card Decision Dashboard
+# Wallet Math — the real math on premium credit cards
 
 A web-based tool to help decide which premium credit cards to keep or downgrade.
 
