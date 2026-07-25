@@ -172,14 +172,15 @@
       "id": "apple",
       "name": "Apple TV+ & Apple Music",
       "subtitle": "through Jun 2027",
-      "max_annual": 250,
+      "max_annual": 288,
       "default_value": 0,
       "tier": "easy",
       "removed": false,
-      "description": "Complimentary Apple TV+ AND Apple Music, two separate services (~$250/yr combined). NOT the full Apple One bundle.",
+      "description": "Complimentary Apple TV+ AND Apple Music, two separate services (~$288/yr combined per Chase). If you already have a paid Apple One subscription in your name, each benefit applies as its own $7.50/mo discount on that subscription instead of separate complimentary access — $15/mo ($180/yr) total since Reserve includes both.",
       "tips": [
         "Activate each service individually through Chase's app; they don't turn on together.",
-        "Already paying for either? Cancel the paid plan and switch to the complimentary one.",
+        "Already have Apple One? Activating both the Apple TV+ and Apple Music benefits on Chase.com or the app (same Apple Account as your Apple One billing) gets you two separate $7.50/mo discounts, $15/mo total, no need to cancel anything.",
+        "Only paying for Apple TV+ or Apple Music separately (not the full One bundle)? Cancel that and activate the complimentary standalone version through Chase instead — full value there, not just the Apple One discount.",
         "Android/Spotify household? Set the slider toward $0."
       ]
     },
@@ -194,8 +195,22 @@
       "description": "Semi-annual credit on ~1,400 luxury hotels via The Edit by Chase Travel. Breakfast for two + $100 property credit; upgrades/late checkout are availability-only (not guaranteed like FHR).",
       "tips": [
         "Harder to spend than FHR: two-night minimum, smaller network, and prepaid-rate-only.",
-        "2026 adds a $250 promo at Select brands (IHG, Montage, Pendry, Omni, Virgin), up to $500 back on one booking.",
+        "Separate from the Chase Travel Hotels Credit below — different hotel list, different booking flow, don't double-count them.",
         "Set the slider to how many 2-night luxe stays you'll actually prepay."
+      ]
+    },
+    {
+      "id": "chase-travel-hotels",
+      "name": "Chase Travel Hotels Credit",
+      "subtitle": "$250 · 2-night min · thru 12/31/26",
+      "max_annual": 250,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Statement credit through 12/31/26 on stays of 2+ nights booked via Chase Travel at IHG, Montage, Pendry, Omni, Virgin, Minor, and Pan Pacific hotels.",
+      "tips": [
+        "Distinct from The Edit Hotel Credit above: different, more mainstream hotel brands, and it expires 12/31/26 rather than running on The Edit's ongoing schedule.",
+        "Confirm on Chase's site whether this has been extended past 12/31/26 before assuming it's gone the following year."
       ]
     },
     {
@@ -209,7 +224,8 @@
       "description": "Semi-annual credit, but ONLY at ~400 'Exclusive Tables' restaurants on OpenTable across ~26 cities.",
       "tips": [
         "~400 restaurants vs. Amex Resy's 10,000+. Hard to spend outside major metros or with dietary limits.",
-        "Vegas was gutted to one spot in mid-2026; re-check first."
+        "Vegas was gutted to one spot in mid-2026; re-check first.",
+        "The Exclusive Tables partnership also includes priority access to primetime reservations and special dining events, not just the statement credit."
       ]
     },
     {
@@ -330,6 +346,14 @@
     }
   ],
   "services": [
+    {
+      "name": "Dedicated customer service team",
+      "detail": "A dedicated Sapphire Reserve customer service line, available 7 days a week, separate from Chase's general card support."
+    },
+    {
+      "name": "Reserve Travel Designers",
+      "detail": "Personalized itinerary planning from a dedicated travel design team, valued at up to $300 per trip, a step up from the standard Visa Infinite concierge below."
+    },
     {
       "name": "Visa Infinite Concierge",
       "detail": "24/7 concierge for reservations, tickets, and travel arrangements."
