@@ -31,7 +31,14 @@
     {
       "emoji": "⛽",
       "multiplier": "3×",
-      "category": "Gas, EV charging & select transit",
+      "category": "Gas & EV charging",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🚂",
+      "multiplier": "3×",
+      "category": "Select transit",
       "highlight": true,
       "is_base": false
     },
