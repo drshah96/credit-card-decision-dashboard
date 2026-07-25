@@ -1,3 +1,4 @@
+import os
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
@@ -22,9 +23,18 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+# Comma-separated list of allowed frontend origins. Defaults to the Vite dev
+# server; production sets this to the deployed frontend's real origin (see
+# ALLOWED_ORIGINS in render.yaml).
+_allowed_origins = [
+    origin.strip()
+    for origin in os.environ.get("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
+    if origin.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=_allowed_origins,
     allow_methods=["GET"],
     allow_headers=["*"],
 )
