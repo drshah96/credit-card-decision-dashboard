@@ -58,7 +58,125 @@
     "airline_count": 18,
     "hotel_count": 4,
     "highlight": "Full access to all 18 airline and 4 hotel partners. Capital One doesn't gate transfer partners behind its priciest card. Same sweet spots as Venture X: Turkish (Star Alliance short-hauls), Flying Blue, Virgin Red, JAL Mileage Bank.",
-    "recent_changes": "JAL Mileage Bank, Qatar Airways Privilege Club, and I Prefer Hotel Rewards were added Sept 2025, growing the airline list from 15 to 18."
+    "recent_changes": "JAL Mileage Bank, Qatar Airways Privilege Club, and I Prefer Hotel Rewards were added Sept 2025, growing the airline list from 15 to 18.",
+    "partners": [
+      {
+        "name": "Aeromexico Rewards",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Air Canada Aeroplan",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Avianca LifeMiles",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "British Airways Executive Club",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Cathay Pacific Asia Miles",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Etihad Guest",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Finnair Plus",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Flying Blue",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Qantas Frequent Flyer",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Qatar Airways Privilege Club",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Singapore Airlines KrisFlyer",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "TAP Miles&Go",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Turkish Airlines Miles&Smiles",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Virgin Red",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Emirates Skywards",
+        "type": "airline",
+        "ratio": "2:1.5",
+        "notes": "Below Capital One's typical 1:1 rate."
+      },
+      {
+        "name": "EVA Air Infinity MileageLands",
+        "type": "airline",
+        "ratio": "2:1.5",
+        "notes": "Below Capital One's typical 1:1 rate."
+      },
+      {
+        "name": "Japan Airlines Mileage Bank",
+        "type": "airline",
+        "ratio": "2:1.5",
+        "notes": "Below Capital One's typical 1:1 rate."
+      },
+      {
+        "name": "JetBlue TrueBlue",
+        "type": "airline",
+        "ratio": "5:3",
+        "notes": "Below Capital One's typical 1:1 rate."
+      },
+      {
+        "name": "Choice Privileges",
+        "type": "hotel",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Wyndham Rewards",
+        "type": "hotel",
+        "ratio": "1:1"
+      },
+      {
+        "name": "I Prefer Hotel Rewards",
+        "type": "hotel",
+        "ratio": "1:2",
+        "notes": "Above Capital One's typical 1:1 rate, one of the few favorable exceptions."
+      },
+      {
+        "name": "Accor Live Limitless",
+        "type": "hotel",
+        "ratio": "2:1",
+        "notes": "Below Capital One's typical 1:1 rate."
+      }
+    ]
   },
   "credits": [
     {

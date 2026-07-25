@@ -62,10 +62,37 @@
     "note": "Same Hilton Honors currency as the Surpass and Aspire tiers; this card just earns it for free, without any of the paid tiers' credits or elite-status boost."
   },
   "transfer_partners": {
-    "airline_count": 26,
+    "airline_count": 25,
     "hotel_count": 0,
-    "highlight": "26 airline transfer partners, almost all at a poor 10:1 ratio. Hilton points are built to be spent on hotel stays, not transferred out.",
-    "recent_changes": "No confirmed recent changes to the airline transfer chart."
+    "highlight": "25 airline transfer partners, almost all at a poor 10:1 ratio. Hilton points are built to be spent on hotel stays, not transferred out.",
+    "recent_changes": "Asiana Airlines was dropped as a transfer partner in May 2025.",
+    "partners": [
+      { "name": "Aeromexico Rewards", "type": "airline", "ratio": "10:2.6" },
+      { "name": "Air Canada Aeroplan", "type": "airline", "ratio": "10:1" },
+      { "name": "Air France-KLM Flying Blue", "type": "airline", "ratio": "10:1" },
+      { "name": "AirAsia BIG", "type": "airline", "ratio": "10:2" },
+      { "name": "All Nippon Airways (ANA) Mileage Club", "type": "airline", "ratio": "10:1" },
+      { "name": "British Airways Executive Club", "type": "airline", "ratio": "10:1" },
+      { "name": "Cathay Pacific Asia Miles", "type": "airline", "ratio": "10:1" },
+      { "name": "China Eastern Eastern Miles", "type": "airline", "ratio": "10:1" },
+      { "name": "Delta SkyMiles", "type": "airline", "ratio": "10:1" },
+      { "name": "Emirates Skywards", "type": "airline", "ratio": "10:1" },
+      { "name": "Ethiopian Airlines ShebaMiles", "type": "airline", "ratio": "10:1" },
+      { "name": "Etihad Guest", "type": "airline", "ratio": "10:1" },
+      { "name": "EVA Air Infinity MileageLands", "type": "airline", "ratio": "10:1" },
+      { "name": "Hainan Airlines Fortune Wings Club", "type": "airline", "ratio": "5:2" },
+      { "name": "InterMiles", "type": "airline", "ratio": "10:1" },
+      { "name": "Japan Airlines Mileage Bank", "type": "airline", "ratio": "10:1" },
+      { "name": "Malaysia Airlines Enrich", "type": "airline", "ratio": "10:1.2" },
+      { "name": "Qantas Frequent Flyer", "type": "airline", "ratio": "10:1.5" },
+      { "name": "Qatar Airways Privilege Club", "type": "airline", "ratio": "10:1" },
+      { "name": "Saudia Alfursan", "type": "airline", "ratio": "10:1" },
+      { "name": "Singapore Airlines KrisFlyer", "type": "airline", "ratio": "8:1", "notes": "Transfers only in 4,000-point increments (4,000 Hilton = 500 KrisFlyer miles)." },
+      { "name": "Turkish Airlines Miles&Smiles", "type": "airline", "ratio": "10:1" },
+      { "name": "United MileagePlus", "type": "airline", "ratio": "10:1" },
+      { "name": "Virgin Atlantic Flying Club", "type": "airline", "ratio": "10:1.5" },
+      { "name": "Virgin Australia Velocity", "type": "airline", "ratio": "10:1.5" }
+    ]
   },
   "credits": [],
   "insurance": [

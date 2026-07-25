@@ -10,6 +10,7 @@ import type {
   Credit,
   CreditTier,
   InsuranceLevel,
+  TransferPartner,
 } from "../types/cards";
 
 // ─── Tier config ──────────────────────────────────────────────────────────────
@@ -128,6 +129,97 @@ function CreditModal({
                 })}
               </ul>
             </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Transfer partners modal ───────────────────────────────────────────────────
+
+const PARTNER_TYPE_ICON: Record<TransferPartner["type"], string> = {
+  airline: "✈️",
+  hotel: "🏨",
+};
+
+function TransferPartnersModal({
+  partners,
+  currency,
+  onClose,
+}: {
+  partners: TransferPartner[];
+  currency: string;
+  onClose: () => void;
+}) {
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+
+  useEffect(() => {
+    const prevFocus = document.activeElement as HTMLElement | null;
+    closeButtonRef.current?.focus();
+    document.body.style.overflow = "hidden";
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") onCloseRef.current();
+    }
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+      prevFocus?.focus();
+    };
+  }, []);
+
+  const airlines = partners.filter((p) => p.type === "airline");
+  const hotels = partners.filter((p) => p.type === "hotel");
+
+  return (
+    <div className="modal-backdrop" onClick={onClose}>
+      <div
+        className="modal-box"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="partners-modal-title"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="modal-head">
+          <button
+            ref={closeButtonRef}
+            type="button"
+            className="modal-x-btn"
+            onClick={onClose}
+            aria-label="Close"
+          >
+            ✕
+          </button>
+          <div className="modal-cat">Transfer partners</div>
+          <h4 className="modal-title" id="partners-modal-title">
+            Where {currency} can go
+          </h4>
+        </div>
+        <div className="modal-body">
+          {([
+            ["Airlines", airlines],
+            ["Hotels", hotels],
+          ] as const).map(([label, group]) =>
+            group.length > 0 ? (
+              <div key={label} style={{ marginBottom: 20 }}>
+                <h5>{label}</h5>
+                <ul className="partner-list">
+                  {group.map((p) => (
+                    <li key={p.name} className="partner-row">
+                      <span className="partner-icon" aria-hidden="true">
+                        {PARTNER_TYPE_ICON[p.type]}
+                      </span>
+                      <span className="partner-name">{p.name}</span>
+                      <span className="partner-ratio">{p.ratio}</span>
+                      {p.notes && <span className="partner-notes">{p.notes}</span>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null,
           )}
         </div>
       </div>
@@ -499,6 +591,8 @@ function CardDetail({ card }: { card: Card }) {
     .reduce((sum, c) => sum + c.max_annual, 0);
   const netCost = card.annual_fee - totalMaxCredits;
   const cardImage = CARD_IMAGES[card.id];
+  const [showPartnersModal, setShowPartnersModal] = useState(false);
+  const hasPartnerDetail = (card.transfer_partners.partners?.length ?? 0) > 0;
 
   return (
     <div>
@@ -683,8 +777,27 @@ function CardDetail({ card }: { card: Card }) {
           </div>
 
           {/* Transfer partners */}
-          <div className="panel-box partners">
-            <div className="pt">Transfer partners</div>
+          <div
+            className={`panel-box partners ${hasPartnerDetail ? "clickable" : ""}`}
+            role={hasPartnerDetail ? "button" : undefined}
+            tabIndex={hasPartnerDetail ? 0 : undefined}
+            onClick={hasPartnerDetail ? () => setShowPartnersModal(true) : undefined}
+            onKeyDown={
+              hasPartnerDetail
+                ? (e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setShowPartnersModal(true);
+                    }
+                  }
+                : undefined
+            }
+            aria-label={hasPartnerDetail ? "View full transfer partner list" : undefined}
+          >
+            <div className="pt">
+              Transfer partners
+              {hasPartnerDetail && <span className="pt-cta">View list →</span>}
+            </div>
             <div className="pcount">
               {card.transfer_partners.airline_count > 0 || card.transfer_partners.hotel_count > 0 ? (
                 <>
@@ -708,6 +821,14 @@ function CardDetail({ card }: { card: Card }) {
           </div>
         </div>
       </Block>
+
+      {showPartnersModal && (
+        <TransferPartnersModal
+          partners={card.transfer_partners.partners ?? []}
+          currency={card.points.currency}
+          onClose={() => setShowPartnersModal(false)}
+        />
+      )}
 
       {/* Credits */}
       <Block label="Credits" title="Credits — set what you'll really use">
