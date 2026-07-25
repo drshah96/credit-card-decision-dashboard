@@ -346,14 +346,18 @@ class TimelineEvent(Base):
 
 
 class CardTransferPartner(Base):
-    """Named transfer partners (card -> loyalty_programs). Schema is ready, but the
-    sync script leaves this empty for now: the source JSON only has aggregate
-    counts (transfer_airline_count/transfer_hotel_count on CardModel) plus prose
-    naming a few "sweet spot" partners, not an authoritative full partner list —
-    populating this table would mean inventing the rest. Fill it in once a real
-    per-partner source (issuer transfer-partner pages) is available."""
+    """Named transfer partners (card -> loyalty_programs), with the per-relationship
+    airline/hotel type stored here rather than on LoyaltyProgram.program_type:
+    a loyalty_program row is shared and deduped by name across the whole catalog,
+    so a program that's both a co-brand card's own currency (e.g. Delta SkyMiles,
+    always "bank") AND a named transfer partner elsewhere (should be "airline")
+    would have an ambiguous, order-dependent program_type if we relied on that
+    field instead."""
 
     __tablename__ = "card_transfer_partners"
+    __table_args__ = (
+        CheckConstraint("partner_type IN ('airline','hotel')", name="ck_transfer_partner_type"),
+    )
 
     card_id: Mapped[int] = mapped_column(
         ForeignKey("cards.card_id", ondelete="CASCADE"), primary_key=True
@@ -361,6 +365,7 @@ class CardTransferPartner(Base):
     loyalty_program_id: Mapped[int] = mapped_column(
         ForeignKey("loyalty_programs.loyalty_program_id"), primary_key=True
     )
+    partner_type: Mapped[str | None] = mapped_column(default=None)
     transfer_ratio: Mapped[str] = mapped_column(default="1:1")
     notes: Mapped[str | None] = mapped_column(default=None)
 

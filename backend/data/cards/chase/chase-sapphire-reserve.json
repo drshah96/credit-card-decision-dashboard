@@ -77,7 +77,81 @@
     "airline_count": 10,
     "hotel_count": 4,
     "highlight": "World of Hyatt is the crown jewel: 1:1 and exclusive to Chase & Bilt, routinely 2–3¢+. Also Aeroplan, Virgin Atlantic, Flying Blue, Singapore. Wyndham added Feb 2026.",
-    "recent_changes": "Fewer airlines than Amex, but the hotel side (esp. Hyatt) is the strongest of any bank."
+    "recent_changes": "Fewer airlines than Amex, but the hotel side (esp. Hyatt) is the strongest of any bank.",
+    "partners": [
+      {
+        "name": "Aer Lingus AerClub",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Air Canada Aeroplan",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Air France-KLM Flying Blue",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "British Airways Executive Club",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Iberia Plus",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "JetBlue TrueBlue",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Singapore Airlines KrisFlyer",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Southwest Rapid Rewards",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "United MileagePlus",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Virgin Atlantic Flying Club",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "IHG One Rewards",
+        "type": "hotel",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Marriott Bonvoy",
+        "type": "hotel",
+        "ratio": "1:1"
+      },
+      {
+        "name": "World of Hyatt",
+        "type": "hotel",
+        "ratio": "1:1",
+        "notes": "CSR keeps the legacy 1:1 rate even after CSP's ratio drops to 4:3 in 2026."
+      },
+      {
+        "name": "Wyndham Rewards",
+        "type": "hotel",
+        "ratio": "1:1",
+        "notes": "Newest partner, added Feb 2026."
+      }
+    ]
   },
   "credits": [
     {

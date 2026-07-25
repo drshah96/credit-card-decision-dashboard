@@ -357,6 +357,35 @@ describe("CardDetailPage", () => {
       expect(screen.getByText("Flights")).toBeInTheDocument();
     });
 
+    it("sorts earn rates by multiplier descending, ties broken alphabetically by category", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({
+          earn_rates: [
+            { emoji: "💳", multiplier: "1×", category: "Everything else", highlight: false, is_base: true },
+            { emoji: "🛒", multiplier: "3×", category: "Zebra Store", highlight: true, is_base: false },
+            { emoji: "🌐", multiplier: "5×", category: "Chase Travel portal", highlight: true, is_base: false },
+            { emoji: "⛽", multiplier: "3×", category: "Apple Store", highlight: true, is_base: false },
+            { emoji: "🎯", multiplier: "Up to 4×", category: "Capped category", highlight: true, is_base: false },
+          ],
+        }),
+      );
+
+      const { container } = renderPage();
+
+      await waitFor(() => {
+        expect(screen.getByText("Chase Travel portal")).toBeInTheDocument();
+      });
+
+      const categories = Array.from(container.querySelectorAll(".el")).map((el) => el.textContent);
+      expect(categories).toEqual([
+        "Chase Travel portal",
+        "Capped category",
+        "Apple Store",
+        "Zebra Store",
+        "Everything else",
+      ]);
+    });
+
     it("renders points section with best redemption option", async () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
@@ -523,6 +552,76 @@ describe("CardDetailPage", () => {
       });
       // airline/hotel counts should NOT appear
       expect(screen.queryByText(/airlines/)).not.toBeInTheDocument();
+    });
+
+    it("does not make the transfer partners panel clickable when no partner detail exists", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard());
+
+      renderPage();
+
+      await waitFor(() => {
+        expect(screen.getByText("Deepest airline list of any bank currency.")).toBeInTheDocument();
+      });
+      expect(screen.queryByRole("button", { name: /view full transfer partner list/i })).not.toBeInTheDocument();
+      expect(screen.queryByText("View list →")).not.toBeInTheDocument();
+    });
+
+    it("opens a modal listing airline and hotel partners when the transfer partners panel is clicked", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({
+          transfer_partners: {
+            airline_count: 2,
+            hotel_count: 1,
+            highlight: "Deepest airline list of any bank currency.",
+            recent_changes: "",
+            partners: [
+              { name: "Flying Blue", type: "airline", ratio: "1:1" },
+              { name: "Virgin Atlantic", type: "airline", ratio: "1:1" },
+              { name: "Marriott Bonvoy", type: "hotel", ratio: "1:1", notes: "Best redemption value." },
+            ],
+          },
+        }),
+      );
+
+      renderPage();
+
+      const panel = await screen.findByRole("button", { name: /view full transfer partner list/i });
+      expect(screen.getByText("View list →")).toBeInTheDocument();
+
+      fireEvent.click(panel);
+
+      expect(await screen.findByRole("dialog")).toBeInTheDocument();
+      expect(screen.getByText("Flying Blue")).toBeInTheDocument();
+      expect(screen.getByText("Virgin Atlantic")).toBeInTheDocument();
+      expect(screen.getByText("Marriott Bonvoy")).toBeInTheDocument();
+      expect(screen.getByText("Best redemption value.")).toBeInTheDocument();
+      expect(screen.getAllByText("1:1")).toHaveLength(3);
+    });
+
+    it("closes the transfer partners modal on Escape", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({
+          transfer_partners: {
+            airline_count: 1,
+            hotel_count: 0,
+            highlight: "Deepest airline list of any bank currency.",
+            recent_changes: "",
+            partners: [{ name: "Flying Blue", type: "airline", ratio: "1:1" }],
+          },
+        }),
+      );
+
+      renderPage();
+
+      const panel = await screen.findByRole("button", { name: /view full transfer partner list/i });
+      fireEvent.click(panel);
+      expect(await screen.findByRole("dialog")).toBeInTheDocument();
+
+      fireEvent.keyDown(document, { key: "Escape" });
+
+      await waitFor(() => {
+        expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+      });
     });
 
     it("renders protection_note when present", async () => {

@@ -55,10 +55,199 @@
     "note": "IHG points are worth less per point than Marriott or Hyatt (NerdWallet valued them around 0.6¢ in 2026), but the card issues them generously (up to 26X combined at IHG properties) and the 4th-night-free benefit plus anniversary certificate meaningfully boost real-world redemption value beyond the raw cpp. Never transfer to airlines; the ~5:1 ratio guts the value."
   },
   "transfer_partners": {
-    "airline_count": 34,
+    "airline_count": 37,
     "hotel_count": 0,
-    "highlight": "IHG One Rewards transfers to roughly 34 airline partners, mostly at a 5:1 ratio (5,000 IHG points → 1,000 miles); transfers must be initiated by phone, not online, and typically take weeks to post.",
-    "recent_changes": "No confirmed recent changes to the airline transfer chart."
+    "highlight": "IHG One Rewards transfers to 37 airline partners, mostly at a 5:1 ratio (5,000 IHG points → 1,000 miles); transfers must be initiated by phone, not online, and typically take weeks to post.",
+    "recent_changes": "Verified directly against IHG’s live partner page: El Al Matmid is no longer listed as a partner (previously reported as one by some trackers), while China Eastern, Finnair, and Lufthansa (Miles & More) are current partners not previously captured here.",
+    "partners": [
+      {
+        "name": "Aeromexico Rewards",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Air Canada Aeroplan",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Air China PhoenixMiles",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Air France-KLM Flying Blue",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Alaska Airlines Atmos Rewards",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "American Airlines AAdvantage",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "ANA Mileage Club",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Avianca LifeMiles",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "British Airways Executive Club",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Cathay Pacific Asia Miles",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "China Southern Sky Pearl Club",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Iberia Plus",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Delta SkyMiles",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Emirates Skywards",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Etihad Guest",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Gulf Air Falconflyer",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Hainan Airlines Fortune Wings Club",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "InterMiles",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Japan Airlines Mileage Bank",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "JetBlue TrueBlue",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Korean Air SKYPASS",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Malaysia Airlines Enrich",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Qantas Frequent Flyer",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Qatar Airways Privilege Club",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Saudia Alfursan",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Singapore Airlines KrisFlyer",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "South African Airways Voyager",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "TAP Air Portugal Miles&Go",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Thai Airways Royal Orchid Plus",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "United MileagePlus",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Virgin Atlantic Flying Club",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Virgin Australia Velocity",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "China Eastern Eastern Miles",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Finnair Plus",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Lufthansa Miles & More",
+        "type": "airline",
+        "ratio": "5:1"
+      },
+      {
+        "name": "Air Miles",
+        "type": "airline",
+        "ratio": "40:1",
+        "notes": "Reduced ratio, well below the 5:1 standard."
+      },
+      {
+        "name": "Air New Zealand Airpoints",
+        "type": "airline",
+        "ratio": "400:1",
+        "notes": "Reduced ratio, well below the 5:1 standard."
+      }
+    ]
   },
   "credits": [
     {

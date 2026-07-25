@@ -24,7 +24,28 @@
     {
       "emoji": "🍽️",
       "multiplier": "2×",
-      "category": "Restaurants, airline tickets (direct), local transit/commuting, fitness clubs & gyms",
+      "category": "Restaurants",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "✈️",
+      "multiplier": "2×",
+      "category": "Airline tickets, booked direct",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🚂",
+      "multiplier": "2×",
+      "category": "Local transit & commuting",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💪",
+      "multiplier": "2×",
+      "category": "Fitness clubs & gyms",
       "highlight": true,
       "is_base": false
     },
@@ -58,7 +79,140 @@
     "airline_count": 25,
     "hotel_count": 0,
     "highlight": "World of Hyatt transfers to roughly 25 airline partners at a 5:2 ratio (5,000 Hyatt points → 2,000 miles), with a few better ratios like Virgin Atlantic (5:3) and Aeromexico (5:4), but cashing out to airlines is rarely a good trade for a currency this strong at hotels.",
-    "recent_changes": "No changes to the airline transfer chart itself; the May 2026 award chart overhaul affects in-program hotel redemptions, not transfers."
+    "recent_changes": "No changes to the airline transfer chart itself; the May 2026 award chart overhaul affects in-program hotel redemptions, not transfers.",
+    "partners": [
+      {
+        "name": "Air France-KLM Flying Blue",
+        "type": "airline",
+        "ratio": "5:2"
+      },
+      {
+        "name": "ANA Mileage Club",
+        "type": "airline",
+        "ratio": "5:2"
+      },
+      {
+        "name": "American Airlines AAdvantage",
+        "type": "airline",
+        "ratio": "5:2"
+      },
+      {
+        "name": "Asiana Airlines Asiana Club",
+        "type": "airline",
+        "ratio": "5:2"
+      },
+      {
+        "name": "British Airways Executive Club",
+        "type": "airline",
+        "ratio": "5:2"
+      },
+      {
+        "name": "Cathay Pacific Asia Miles",
+        "type": "airline",
+        "ratio": "5:2"
+      },
+      {
+        "name": "China Airlines Dynasty Flyer",
+        "type": "airline",
+        "ratio": "5:2"
+      },
+      {
+        "name": "China Southern Sky Pearl Club",
+        "type": "airline",
+        "ratio": "5:2"
+      },
+      {
+        "name": "Delta SkyMiles",
+        "type": "airline",
+        "ratio": "5:2"
+      },
+      {
+        "name": "Emirates Skywards",
+        "type": "airline",
+        "ratio": "5:2"
+      },
+      {
+        "name": "Etihad Guest",
+        "type": "airline",
+        "ratio": "5:2"
+      },
+      {
+        "name": "Japan Airlines Mileage Bank",
+        "type": "airline",
+        "ratio": "5:2"
+      },
+      {
+        "name": "Korean Air SKYPASS",
+        "type": "airline",
+        "ratio": "5:2"
+      },
+      {
+        "name": "LATAM Pass",
+        "type": "airline",
+        "ratio": "5:2"
+      },
+      {
+        "name": "Qatar Airways Privilege Club",
+        "type": "airline",
+        "ratio": "5:2"
+      },
+      {
+        "name": "Royal Brunei Airlines Royal Skies",
+        "type": "airline",
+        "ratio": "5:2"
+      },
+      {
+        "name": "Singapore Airlines KrisFlyer",
+        "type": "airline",
+        "ratio": "5:2"
+      },
+      {
+        "name": "Thai Airways Royal Orchid Plus",
+        "type": "airline",
+        "ratio": "5:2"
+      },
+      {
+        "name": "United MileagePlus",
+        "type": "airline",
+        "ratio": "5:2"
+      },
+      {
+        "name": "Aeromexico Rewards",
+        "type": "airline",
+        "ratio": "5:4",
+        "notes": "Enhanced ratio, better than the 5:2 standard."
+      },
+      {
+        "name": "Air China PhoenixMiles",
+        "type": "airline",
+        "ratio": "5:3.2",
+        "notes": "Enhanced ratio, better than the 5:2 standard."
+      },
+      {
+        "name": "China Eastern Eastern Miles",
+        "type": "airline",
+        "ratio": "5:3.2",
+        "notes": "Enhanced ratio, better than the 5:2 standard."
+      },
+      {
+        "name": "Qantas Frequent Flyer",
+        "type": "airline",
+        "ratio": "5:2.4",
+        "notes": "Enhanced ratio, better than the 5:2 standard."
+      },
+      {
+        "name": "Southwest Rapid Rewards",
+        "type": "airline",
+        "ratio": "5:2.4",
+        "notes": "Enhanced ratio, better than the 5:2 standard."
+      },
+      {
+        "name": "Virgin Atlantic Flying Club",
+        "type": "airline",
+        "ratio": "5:3",
+        "notes": "Enhanced ratio, better than the 5:2 standard."
+      }
+    ]
   },
   "credits": [
     {

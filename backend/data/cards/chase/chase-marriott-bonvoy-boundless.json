@@ -24,7 +24,21 @@
     {
       "emoji": "🛒",
       "multiplier": "3×",
-      "category": "Groceries, gas stations & dining (combined $6,000/yr cap, then 2×)",
+      "category": "Grocery stores",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "⛽",
+      "multiplier": "3×",
+      "category": "Gas stations",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "3×",
+      "category": "Dining",
       "highlight": true,
       "is_base": false
     },
@@ -60,10 +74,202 @@
     "note": "Same Marriott Bonvoy currency and redemption math as Amex's Bonvoy cards. Points are worth the most redeemed for a free night you'd actually book, well above cashing out or transferring to airlines."
   },
   "transfer_partners": {
-    "airline_count": 40,
+    "airline_count": 37,
     "hotel_count": 0,
-    "highlight": "Marriott Bonvoy transfers to 40+ airline programs at 3:1, with a 5,000-mile bonus for every 60,000 points transferred in a single transaction, but no hotel transfer partners, since it already is one.",
-    "recent_changes": "No confirmed recent changes to the airline transfer chart."
+    "highlight": "Marriott Bonvoy transfers to 37 airline programs at 3:1, with a 5,000-mile bonus for every 60,000 points transferred in a single transaction, but no hotel transfer partners, since it already is one.",
+    "recent_changes": "Korean Air SKYPASS ended its Marriott transfer partnership in June 2024; some third-party trackers still list it as active, but it is not.",
+    "partners": [
+      {
+        "name": "Aegean Airlines Miles+Bonus",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Aer Lingus AerClub",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Aeromexico Rewards",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Air Canada Aeroplan",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Air China PhoenixMiles",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Air France-KLM Flying Blue",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Air New Zealand Airpoints",
+        "type": "airline",
+        "ratio": "200:1",
+        "notes": "Converts into Airpoints Dollars (NZD), not miles, so the ratio is far worse than the standard 3:1 chart."
+      },
+      {
+        "name": "American Airlines AAdvantage",
+        "type": "airline",
+        "ratio": "3:1",
+        "notes": "Does not earn the 5,000-mile transfer bonus other partners get."
+      },
+      {
+        "name": "ANA Mileage Club",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Asiana Airlines Asiana Club",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Atmos Rewards (Alaska Airlines / Hawaiian Airlines)",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Avianca LifeMiles",
+        "type": "airline",
+        "ratio": "3:1",
+        "notes": "Does not earn the 5,000-mile transfer bonus other partners get."
+      },
+      {
+        "name": "British Airways Executive Club",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Cathay Pacific Asia Miles",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "China Southern Sky Pearl Club",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Copa Airlines ConnectMiles",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Delta SkyMiles",
+        "type": "airline",
+        "ratio": "3:1",
+        "notes": "Does not earn the 5,000-mile transfer bonus other partners get."
+      },
+      {
+        "name": "Emirates Skywards",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Etihad Guest",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Frontier Miles",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Hainan Airlines Fortune Wings Club",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Iberia Plus",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "InterMiles",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Japan Airlines JAL Mileage Bank",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "LATAM Pass",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Qantas Frequent Flyer",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Qatar Airways Privilege Club",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Saudia Alfursan",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Singapore Airlines KrisFlyer",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Southwest Rapid Rewards",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "TAP Air Portugal Miles&Go",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Thai Airways Royal Orchid Plus",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Turkish Airlines Miles&Smiles",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "United MileagePlus",
+        "type": "airline",
+        "ratio": "3:1",
+        "notes": "Enhanced partnership: earns a 10,000-mile bonus per 60,000 points transferred, double the standard 5,000-mile bonus."
+      },
+      {
+        "name": "Virgin Atlantic Flying Club",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Virgin Australia Velocity Frequent Flyer",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "Vueling Club",
+        "type": "airline",
+        "ratio": "3:1"
+      }
+    ]
   },
   "credits": [
     {

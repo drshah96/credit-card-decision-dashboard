@@ -81,10 +81,118 @@
     "note": "The catch with a no-fee ThankYou card: cash-back redemption is only 0.5¢/point (half of what Strata Premier/Elite cardholders get) and transfers to airline/hotel partners go through at a reduced 1:0.7 ratio instead of 1:1. Linking this account to a Strata Premier or Strata Elite card in Citi's online banking pools the points and unlocks the full 1¢ cash rate and 1:1 transfers on everything this card earns, the main reason serious users pair it with a fee-paying Citi card rather than holding it alone."
   },
   "transfer_partners": {
-    "airline_count": 16,
+    "airline_count": 15,
     "hotel_count": 5,
-    "highlight": "Same 22-partner roster as Strata Premier and Strata Elite (American Airlines, JetBlue, Flying Blue, Virgin Atlantic, Choice, Wyndham, Preferred Hotels, and more), but every transfer from this card alone goes through at a reduced 1:0.7 ratio.",
-    "recent_changes": "American Airlines AAdvantage was reinstated as a permanent ThankYou transfer partner in July 2025 after being dropped in 2022."
+    "highlight": "Same 20-partner roster as Strata Premier and Strata Elite (American Airlines, JetBlue, Flying Blue, Virgin Atlantic, Choice, Wyndham, Preferred Hotels, and more), but every transfer from this card alone goes through at a reduced 1:0.7 ratio.",
+    "recent_changes": "American Airlines AAdvantage was reinstated as a permanent ThankYou transfer partner in July 2025 after being dropped in 2022. Aeromexico Rewards was dropped as a transfer partner in January 2026.",
+    "partners": [
+      {
+        "name": "American Airlines AAdvantage",
+        "type": "airline",
+        "ratio": "1:0.7"
+      },
+      {
+        "name": "JetBlue TrueBlue",
+        "type": "airline",
+        "ratio": "1:0.7"
+      },
+      {
+        "name": "Air France/KLM Flying Blue",
+        "type": "airline",
+        "ratio": "1:0.7"
+      },
+      {
+        "name": "Virgin Atlantic Flying Club",
+        "type": "airline",
+        "ratio": "1:0.7"
+      },
+      {
+        "name": "Virgin Red",
+        "type": "airline",
+        "ratio": "1:0.7",
+        "notes": "Virgin's multi-brand lifestyle rewards club (Virgin Atlantic, Virgin Voyages, Virgin Hotels), added as a transfer partner in 2026."
+      },
+      {
+        "name": "Turkish Airlines Miles&Smiles",
+        "type": "airline",
+        "ratio": "1:0.7"
+      },
+      {
+        "name": "Cathay Pacific Asia Miles",
+        "type": "airline",
+        "ratio": "1:0.7"
+      },
+      {
+        "name": "Singapore Airlines KrisFlyer",
+        "type": "airline",
+        "ratio": "1:0.7"
+      },
+      {
+        "name": "Avianca LifeMiles",
+        "type": "airline",
+        "ratio": "1:0.7"
+      },
+      {
+        "name": "Emirates Skywards",
+        "type": "airline",
+        "ratio": "1:0.56",
+        "notes": "Base rate for this card: 70% of Strata Premier/Elite's 1:0.8 rate, confirmed on Citi's official transfer page."
+      },
+      {
+        "name": "Etihad Guest",
+        "type": "airline",
+        "ratio": "1:0.7"
+      },
+      {
+        "name": "EVA Air Infinity MileageLands",
+        "type": "airline",
+        "ratio": "1:0.7"
+      },
+      {
+        "name": "Qantas Frequent Flyer",
+        "type": "airline",
+        "ratio": "1:0.7"
+      },
+      {
+        "name": "Qatar Airways Privilege Club",
+        "type": "airline",
+        "ratio": "1:0.7"
+      },
+      {
+        "name": "Thai Airways Royal Orchid Plus",
+        "type": "airline",
+        "ratio": "1:0.7"
+      },
+      {
+        "name": "Choice Privileges",
+        "type": "hotel",
+        "ratio": "1:1.05",
+        "notes": "Base rate for this card: 70% of Strata Premier/Elite's enhanced 1:1.5 rate, confirmed on Citi's official transfer page. Still better than 1:1 despite the reduction."
+      },
+      {
+        "name": "Wyndham Rewards",
+        "type": "hotel",
+        "ratio": "1:0.7"
+      },
+      {
+        "name": "Accor Live Limitless",
+        "type": "hotel",
+        "ratio": "1:0.35",
+        "notes": "Base rate for this card: 70% of Strata Premier/Elite's 1:0.5 rate, confirmed on Citi's official transfer page."
+      },
+      {
+        "name": "Preferred Hotels & Resorts (I Prefer)",
+        "type": "hotel",
+        "ratio": "1:1.4",
+        "notes": "Base rate for this card: 70% of Strata Premier/Elite's enhanced 1:2 rate, confirmed on Citi's official transfer page. Still better than 1:1 despite the reduction."
+      },
+      {
+        "name": "The Leading Hotels of the World (Leaders Club)",
+        "type": "hotel",
+        "ratio": "1:0.14",
+        "notes": "Base rate for this card: 70% of Strata Premier/Elite's already-low 1:0.2 rate, confirmed on Citi's official transfer page — the weakest transfer on this card by far."
+      }
+    ]
   },
   "credits": [],
   "insurance": [

@@ -98,7 +98,7 @@ def _to_card(c: CardModel) -> Card:
             partners=[
                 TransferPartner(
                     name=p.loyalty_program.name,
-                    type=p.loyalty_program.program_type,
+                    type=p.partner_type,
                     ratio=p.transfer_ratio,
                     notes=p.notes,
                 )
