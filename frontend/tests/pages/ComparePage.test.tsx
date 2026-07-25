@@ -135,6 +135,181 @@ describe("ComparePage", () => {
     expect(screen.getByText("$795")).toBeInTheDocument();
   });
 
+  it("shows points value as a small per-100-points figure derived from the best redemption rate", async () => {
+    renderPage("/compare?cards=amex-platinum,chase-sapphire-reserve");
+
+    await waitFor(() => {
+      expect(screen.getByText("Points value")).toBeInTheDocument();
+    });
+
+    const row = screen.getByText("Points value").closest("tr")!;
+    const cells = within(row).getAllByRole("cell");
+    expect(cells).toHaveLength(2);
+    for (const cell of cells) {
+      expect(cell).toHaveTextContent("$2 per 100 points");
+      expect(cell).toHaveTextContent("via Transfer partners");
+      expect(cell).not.toHaveTextContent(/per 100k/);
+    }
+  });
+
+  it("falls back to the per_100k description when a card has no best redemption option", async () => {
+    vi.mocked(fetchCard).mockImplementation((id: string) => {
+      if (id === "citi-double-cash") {
+        return Promise.resolve(
+          makeCard({
+            ...ALL_SUMMARIES[3],
+            points: {
+              currency: "Cash Back",
+              redemption_options: [],
+              per_100k: "$2,000 in statement credits",
+              note: "",
+            },
+          }),
+        );
+      }
+      return mockFetchCardImpl(id);
+    });
+    renderPage("/compare?cards=citi-double-cash");
+
+    await waitFor(() => {
+      expect(screen.getByText("$2,000 in statement credits")).toBeInTheDocument();
+    });
+  });
+
+  it("shows the credits total from usage already saved on the card's detail page, not a guess", async () => {
+    localStorage.setItem(
+      "credit-usage",
+      JSON.stringify({ "amex-platinum": { uber: 150, clear: 0, fhr: 300 } }),
+    );
+    vi.mocked(fetchCard).mockImplementation((id: string) => {
+      if (id === "amex-platinum") {
+        return Promise.resolve(
+          makeCard({
+            ...ALL_SUMMARIES[0],
+            credits: [
+              {
+                id: "uber",
+                name: "Uber Cash",
+                subtitle: "$15/mo",
+                max_annual: 200,
+                default_value: 0,
+                tier: "easy",
+                removed: false,
+                description: "",
+                tips: [],
+              },
+              {
+                id: "clear",
+                name: "CLEAR Plus",
+                subtitle: "",
+                max_annual: 200,
+                default_value: 0,
+                tier: "easy",
+                removed: false,
+                description: "",
+                tips: [],
+              },
+              {
+                id: "fhr",
+                name: "Fine Hotels + Resorts",
+                subtitle: "",
+                max_annual: 600,
+                default_value: 0,
+                tier: "plan",
+                removed: false,
+                description: "",
+                tips: [],
+              },
+            ],
+          }),
+        );
+      }
+      return mockFetchCardImpl(id);
+    });
+    renderPage("/compare?cards=amex-platinum");
+
+    await waitFor(() => {
+      expect(screen.getByText("Credits (yours / max)")).toBeInTheDocument();
+    });
+
+    const row = screen.getByText("Credits (yours / max)").closest("tr")!;
+    // Exactly the saved amounts (150 + 0 + 300), not each credit's max or default.
+    expect(within(row).getByRole("cell")).toHaveTextContent("$450 / $2984");
+    // The link to go back and amend it must stay available even once usage
+    // is saved — it should never disappear just because a value was set.
+    const adjustLink = within(row).getByRole("link", { name: /Adjust your usage/ });
+    expect(adjustLink).toHaveAttribute("href", "/cards/amex-platinum");
+  });
+
+  it("shows a hint linking to the card's detail page when no usage has been saved yet", async () => {
+    vi.mocked(fetchCard).mockImplementation((id: string) => {
+      if (id === "amex-platinum") {
+        return Promise.resolve(
+          makeCard({
+            ...ALL_SUMMARIES[0],
+            credits: [
+              {
+                id: "uber",
+                name: "Uber Cash",
+                subtitle: "",
+                max_annual: 300,
+                default_value: 0,
+                tier: "easy",
+                removed: false,
+                description: "",
+                tips: [],
+              },
+            ],
+          }),
+        );
+      }
+      return mockFetchCardImpl(id);
+    });
+    renderPage("/compare?cards=amex-platinum");
+
+    await waitFor(() => {
+      expect(screen.getByText("Credits (yours / max)")).toBeInTheDocument();
+    });
+    const row = screen.getByText("Credits (yours / max)").closest("tr")!;
+    expect(within(row).getByRole("cell")).toHaveTextContent("$0 / $2984");
+    const hint = within(row).getByRole("link", { name: /Set your usage/ });
+    expect(hint).toHaveAttribute("href", "/cards/amex-platinum");
+  });
+
+  it("excludes removed credits from the credits total even if the issuer once flagged usage on them", async () => {
+    localStorage.setItem("credit-usage", JSON.stringify({ "amex-platinum": { saks: 100 } }));
+    vi.mocked(fetchCard).mockImplementation((id: string) => {
+      if (id === "amex-platinum") {
+        return Promise.resolve(
+          makeCard({
+            ...ALL_SUMMARIES[0],
+            credits: [
+              {
+                id: "saks",
+                name: "Saks",
+                subtitle: "",
+                max_annual: 100,
+                default_value: 0,
+                tier: "easy",
+                removed: true,
+                description: "",
+                tips: [],
+              },
+            ],
+          }),
+        );
+      }
+      return mockFetchCardImpl(id);
+    });
+    renderPage("/compare?cards=amex-platinum");
+
+    await waitFor(() => {
+      expect(screen.getByText("Credits (yours / max)")).toBeInTheDocument();
+    });
+    const row = screen.getByText("Credits (yours / max)").closest("tr")!;
+    expect(within(row).getByRole("cell")).toHaveTextContent("$0 / $2984");
+  });
+
   it("picking a card via the search panel fills a slot and updates the URL", async () => {
     renderPage("/compare");
 

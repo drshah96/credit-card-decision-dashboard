@@ -5,6 +5,7 @@ import { fetchCard, fetchCards } from "../api/cards";
 import { PageTabs } from "../components/PageTabs";
 import { CompareSlot } from "../components/CompareSlot";
 import { useCompareList } from "../hooks/useCompareList";
+import { useCreditUsage } from "../hooks/useCreditUsage";
 import { CARD_IMAGES } from "../utils/cardImages";
 import type { Card, CardSummary } from "../types/cards";
 
@@ -30,6 +31,15 @@ function Row({ label, children }: { label: string; children: ReactNode }) {
       {children}
     </tr>
   );
+}
+
+// cpp is cents per point, so cpp dollars is exactly the value of 100 points —
+// e.g. 2.0¢/pt → $2 per 100 points. Formatted small ("$2 per 100 points")
+// instead of the large, harder-to-parse "$2,000 per 100k" points value.
+function formatPer100Points(cpp: number): string {
+  const rounded = cpp.toFixed(2);
+  const trimmed = rounded.endsWith(".00") ? rounded.slice(0, -3) : rounded;
+  return `$${trimmed} per 100 points`;
 }
 
 export default function ComparePage() {
@@ -96,6 +106,24 @@ export default function ComparePage() {
   const selectedSummaries = selectedIds
     .map((id) => summariesById.get(id))
     .filter((c): c is CardSummary => Boolean(c));
+
+  const { getCardUsage } = useCreditUsage();
+
+  // How much a cardholder will actually capture from a credit varies too
+  // much person-to-person to guess (someone without a car won't use a
+  // rideshare credit) — so this reuses the exact numbers the user already
+  // set on each card's own detail-page sliders (persisted via
+  // useCreditUsage) rather than assuming a percentage. `null` means the
+  // card's full credit list hasn't loaded yet; `hasSavedUsage: false` means
+  // it loaded but the user hasn't customized anything on that card yet.
+  function yourCreditsTotal(cardId: string): { value: number; hasSavedUsage: boolean } | null {
+    const detail = detailsById.get(cardId);
+    if (!detail) return null;
+    const saved = getCardUsage(cardId);
+    const active = detail.credits.filter((c) => !c.removed);
+    const value = active.reduce((sum, c) => sum + (saved?.[c.id] ?? c.default_value), 0);
+    return { value, hasSavedUsage: Boolean(saved && Object.keys(saved).length > 0) };
+  }
 
   return (
     <div style={{ minHeight: "100vh" }}>
@@ -232,12 +260,22 @@ export default function ComparePage() {
                         <td key={c.id}>{c.effective_cost}</td>
                       ))}
                     </Row>
-                    <Row label="Credits (easy / max)">
-                      {selectedSummaries.map((c) => (
-                        <td key={c.id}>
-                          ${c.total_easy_credits} / ${c.total_max_credits}
-                        </td>
-                      ))}
+                    <Row label="Credits (yours / max)">
+                      {selectedSummaries.map((c) => {
+                        const yours = yourCreditsTotal(c.id);
+                        return (
+                          <td key={c.id}>
+                            {yours ? `$${yours.value}` : "…"} / ${c.total_max_credits}
+                            {yours && (
+                              <div className="compare-credit-hint">
+                                <Link to={`/cards/${c.id}`}>
+                                  {yours.hasSavedUsage ? "Adjust your usage →" : "Set your usage →"}
+                                </Link>
+                              </div>
+                            )}
+                          </td>
+                        );
+                      })}
                     </Row>
                     <Row label="Best-case net">
                       {selectedSummaries.map((c) => {
@@ -288,15 +326,15 @@ export default function ComparePage() {
                         return (
                           <td key={c.id}>
                             {detail ? (
-                              <>
-                                {detail.points.per_100k} per 100k
-                                {best && (
-                                  <>
-                                    <br />
-                                    Best: {best.method} ({best.cpp}¢/pt)
-                                  </>
-                                )}
-                              </>
+                              best ? (
+                                <>
+                                  {formatPer100Points(best.cpp)}
+                                  <br />
+                                  via {best.method}
+                                </>
+                              ) : (
+                                detail.points.per_100k
+                              )
                             ) : (
                               <span className="compare-loading">Loading…</span>
                             )}
