@@ -127,6 +127,10 @@
     {
       "name": "Chase Pay Over Time",
       "detail": "Option to finance eligible purchases of $100+ at a fixed APR/fee instead of paying the revolving rate."
+    },
+    {
+      "name": "Travel & emergency assistance",
+      "detail": "Legal and medical referrals while traveling; cardholder pays for any goods or services obtained."
     }
   ],
   "additional_cards": {
