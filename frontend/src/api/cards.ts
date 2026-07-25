@@ -1,7 +1,9 @@
 import type { Card, CardSummary } from "../types/cards";
 
 // In dev, Vite proxies /api → localhost:8000.
-// In production, set VITE_API_URL to the deployed backend URL (e.g. https://your-app.onrender.com).
+// In production, set VITE_API_URL to the deployed backend's /api path (e.g.
+// https://your-app.onrender.com/api) — callers below pass paths like
+// "/cards" with no /api prefix of their own, so it must be included here.
 const BASE_URL = import.meta.env.VITE_API_URL ?? "/api";
 
 async function apiFetch(path: string): Promise<unknown> {
