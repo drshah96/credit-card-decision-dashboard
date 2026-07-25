@@ -6,7 +6,23 @@ from sqlalchemy import create_engine, event
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
 _DEFAULT_SQLITE_PATH = os.path.join(os.path.dirname(__file__), "data", "card_catalog.db")
-DATABASE_URL = os.environ.get("DATABASE_URL", f"sqlite:///{_DEFAULT_SQLITE_PATH}")
+
+
+def _normalize_database_url(url: str) -> str:
+    """Render (and other Heroku-style providers) hand out bare postgres:// or
+    postgresql:// URLs, which SQLAlchemy resolves to the psycopg2 dialect by
+    default — but this project installs psycopg (v3), not psycopg2. Force the
+    psycopg3 dialect explicitly so those URLs work without a psycopg2 install.
+    """
+    for prefix in ("postgres://", "postgresql://"):
+        if url.startswith(prefix):
+            return "postgresql+psycopg://" + url[len(prefix) :]
+    return url
+
+
+DATABASE_URL = _normalize_database_url(
+    os.environ.get("DATABASE_URL", f"sqlite:///{_DEFAULT_SQLITE_PATH}")
+)
 
 _connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
 engine = create_engine(DATABASE_URL, connect_args=_connect_args)
