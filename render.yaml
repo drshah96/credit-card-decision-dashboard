@@ -10,7 +10,7 @@ services:
   # Pre-Deploy Command feature — both alembic upgrade and seed_catalog are
   # idempotent, so re-running them on a restart is a no-op if nothing changed.
   - type: web
-    name: credit-card-dashboard-api
+    name: thewalletaudit-api
     runtime: python
     plan: free
     buildCommand: pip install uv && uv sync --frozen --no-group dev
@@ -23,7 +23,7 @@ services:
     # the DNS records Render provides once this Blueprint is applied; that
     # part can't be automated from here.
     domains:
-      - api.walletmath.com
+      - api.thewalletaudit.com
     envVars:
       - key: PYTHON_VERSION
         value: "3.13"
@@ -37,11 +37,11 @@ services:
       # service's name/URL ever changes (see the matching note on
       # VITE_API_URL below).
       - key: ALLOWED_ORIGINS
-        value: https://walletmath.com,https://walletmath.onrender.com
+        value: https://thewalletaudit.com,https://thewalletaudit.onrender.com
 
   # Vite/React frontend, built as a static site.
   - type: web
-    name: walletmath
+    name: thewalletaudit
     runtime: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
@@ -49,12 +49,12 @@ services:
     # the DNS records Render provides once this Blueprint is applied; that
     # part can't be automated from here.
     domains:
-      - walletmath.com
+      - thewalletaudit.com
     envVars:
       # Points at the backend service's custom domain (see the matching
       # "domains" note on the API service above).
       - key: VITE_API_URL
-        value: https://api.walletmath.com/api
+        value: https://api.thewalletaudit.com/api
     routes:
       - type: rewrite
         source: /*
