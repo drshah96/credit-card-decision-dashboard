@@ -525,6 +525,76 @@ describe("CardDetailPage", () => {
       expect(screen.queryByText(/airlines/)).not.toBeInTheDocument();
     });
 
+    it("does not make the transfer partners panel clickable when no partner detail exists", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard());
+
+      renderPage();
+
+      await waitFor(() => {
+        expect(screen.getByText("Deepest airline list of any bank currency.")).toBeInTheDocument();
+      });
+      expect(screen.queryByRole("button", { name: /view full transfer partner list/i })).not.toBeInTheDocument();
+      expect(screen.queryByText("View list →")).not.toBeInTheDocument();
+    });
+
+    it("opens a modal listing airline and hotel partners when the transfer partners panel is clicked", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({
+          transfer_partners: {
+            airline_count: 2,
+            hotel_count: 1,
+            highlight: "Deepest airline list of any bank currency.",
+            recent_changes: "",
+            partners: [
+              { name: "Flying Blue", type: "airline", ratio: "1:1" },
+              { name: "Virgin Atlantic", type: "airline", ratio: "1:1" },
+              { name: "Marriott Bonvoy", type: "hotel", ratio: "1:1", notes: "Best redemption value." },
+            ],
+          },
+        }),
+      );
+
+      renderPage();
+
+      const panel = await screen.findByRole("button", { name: /view full transfer partner list/i });
+      expect(screen.getByText("View list →")).toBeInTheDocument();
+
+      fireEvent.click(panel);
+
+      expect(await screen.findByRole("dialog")).toBeInTheDocument();
+      expect(screen.getByText("Flying Blue")).toBeInTheDocument();
+      expect(screen.getByText("Virgin Atlantic")).toBeInTheDocument();
+      expect(screen.getByText("Marriott Bonvoy")).toBeInTheDocument();
+      expect(screen.getByText("Best redemption value.")).toBeInTheDocument();
+      expect(screen.getAllByText("1:1")).toHaveLength(3);
+    });
+
+    it("closes the transfer partners modal on Escape", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({
+          transfer_partners: {
+            airline_count: 1,
+            hotel_count: 0,
+            highlight: "Deepest airline list of any bank currency.",
+            recent_changes: "",
+            partners: [{ name: "Flying Blue", type: "airline", ratio: "1:1" }],
+          },
+        }),
+      );
+
+      renderPage();
+
+      const panel = await screen.findByRole("button", { name: /view full transfer partner list/i });
+      fireEvent.click(panel);
+      expect(await screen.findByRole("dialog")).toBeInTheDocument();
+
+      fireEvent.keyDown(document, { key: "Escape" });
+
+      await waitFor(() => {
+        expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+      });
+    });
+
     it("renders protection_note when present", async () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 

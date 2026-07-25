@@ -70,7 +70,23 @@
     "airline_count": 10,
     "hotel_count": 4,
     "highlight": "Same partner list as the Reserve: World of Hyatt, Aeroplan, Virgin Atlantic, Flying Blue, Singapore, and more, mostly at 1:1.",
-    "recent_changes": "Cardholders who apply for CSP on or after Jun 15, 2026 transfer to World of Hyatt at a reduced 4:3 ratio. Existing cardholders keep 1:1 through Sep 30, 2026, then move to 4:3 too, a real value cut on the single best partner in the program."
+    "recent_changes": "Cardholders who apply for CSP on or after Jun 15, 2026 transfer to World of Hyatt at a reduced 4:3 ratio. Existing cardholders keep 1:1 through Sep 30, 2026, then move to 4:3 too, a real value cut on the single best partner in the program.",
+    "partners": [
+      { "name": "Aer Lingus AerClub", "type": "airline", "ratio": "1:1" },
+      { "name": "Air Canada Aeroplan", "type": "airline", "ratio": "1:1" },
+      { "name": "Air France-KLM Flying Blue", "type": "airline", "ratio": "1:1" },
+      { "name": "British Airways Executive Club", "type": "airline", "ratio": "1:1" },
+      { "name": "Iberia Plus", "type": "airline", "ratio": "1:1" },
+      { "name": "JetBlue TrueBlue", "type": "airline", "ratio": "1:1" },
+      { "name": "Singapore Airlines KrisFlyer", "type": "airline", "ratio": "1:1" },
+      { "name": "Southwest Rapid Rewards", "type": "airline", "ratio": "1:1" },
+      { "name": "United MileagePlus", "type": "airline", "ratio": "1:1" },
+      { "name": "Virgin Atlantic Flying Club", "type": "airline", "ratio": "1:1" },
+      { "name": "IHG One Rewards", "type": "hotel", "ratio": "1:1" },
+      { "name": "Marriott Bonvoy", "type": "hotel", "ratio": "1:1" },
+      { "name": "World of Hyatt", "type": "hotel", "ratio": "4:3", "notes": "New CSP applicants since Jun 15, 2026 get 4:3. Existing cardholders keep the legacy 1:1 rate through Sep 30, 2026, then move to 4:3 as well." },
+      { "name": "Wyndham Rewards", "type": "hotel", "ratio": "1:1", "notes": "Newest partner, added Feb 2026." }
+    ]
   },
   "credits": [
     {

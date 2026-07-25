@@ -247,8 +247,9 @@ def upsert_card(session: Session, data: dict) -> CardModel:
                 session,
                 LoyaltyProgram,
                 name=p["name"],
-                defaults={"program_type": p["type"], "is_transferable": True},
+                defaults={"is_transferable": True},
             ),
+            partner_type=p["type"],
             transfer_ratio=p["ratio"],
             notes=p.get("notes"),
         )

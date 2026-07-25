@@ -50,11 +50,21 @@ export interface Points {
   note: string;
 }
 
+export type TransferPartnerType = "airline" | "hotel";
+
+export interface TransferPartner {
+  name: string;
+  type: TransferPartnerType;
+  ratio: string;
+  notes?: string | null;
+}
+
 export interface TransferPartners {
   airline_count: number;
   hotel_count: number;
   highlight: string;
   recent_changes: string;
+  partners?: TransferPartner[];
 }
 
 export interface Credit {

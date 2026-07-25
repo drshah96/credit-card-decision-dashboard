@@ -81,10 +81,32 @@
     "note": "Citi cut the statement-credit/cash rate from 1¢ to 0.75¢/point on Aug 24, 2025, a real 25% haircut. Points still transfer 1:1 to the full partner list from this card, so the smart play is transferring to airline/hotel partners rather than cashing out. Points also never expire as long as the account is open, and pool with a linked Strata or Strata Elite account."
   },
   "transfer_partners": {
-    "airline_count": 16,
+    "airline_count": 15,
     "hotel_count": 5,
-    "highlight": "22 total partners at a full 1:1 ratio (Emirates Skywards is the exception, at roughly 1:0.8): American Airlines, JetBlue, Air France-KLM Flying Blue, Virgin Atlantic/Virgin Red, Turkish Airlines, Cathay Pacific, Singapore Airlines, Avianca LifeMiles, plus Choice Privileges, Wyndham Rewards, Accor Live Limitless, and Preferred Hotels & Resorts (I Prefer).",
-    "recent_changes": "Preferred Hotels & Resorts (I Prefer) joined as a hotel transfer partner in late October 2024, and American Airlines AAdvantage returned as a permanent partner in July 2025 after a multi-year absence."
+    "highlight": "20 total partners at a full 1:1 ratio (Emirates Skywards is the exception, at roughly 1:0.8): American Airlines, JetBlue, Air France-KLM Flying Blue, Virgin Atlantic/Virgin Red, Turkish Airlines, Cathay Pacific, Singapore Airlines, Avianca LifeMiles, plus Choice Privileges, Wyndham Rewards, Accor Live Limitless, and Preferred Hotels & Resorts (I Prefer).",
+    "recent_changes": "Preferred Hotels & Resorts (I Prefer) joined as a hotel transfer partner in late October 2024, and American Airlines AAdvantage returned as a permanent partner in July 2025 after a multi-year absence. Aeromexico Rewards was dropped as a transfer partner in January 2026.",
+    "partners": [
+      { "name": "American Airlines AAdvantage", "type": "airline", "ratio": "1:1" },
+      { "name": "JetBlue TrueBlue", "type": "airline", "ratio": "1:1" },
+      { "name": "Air France/KLM Flying Blue", "type": "airline", "ratio": "1:1" },
+      { "name": "Virgin Atlantic Flying Club", "type": "airline", "ratio": "1:1" },
+      { "name": "Virgin Red", "type": "airline", "ratio": "1:1", "notes": "Virgin's multi-brand lifestyle rewards club (Virgin Atlantic, Virgin Voyages, Virgin Hotels), added as a transfer partner in 2026." },
+      { "name": "Turkish Airlines Miles&Smiles", "type": "airline", "ratio": "1:1" },
+      { "name": "Cathay Pacific Asia Miles", "type": "airline", "ratio": "1:1" },
+      { "name": "Singapore Airlines KrisFlyer", "type": "airline", "ratio": "1:1" },
+      { "name": "Avianca LifeMiles", "type": "airline", "ratio": "1:1" },
+      { "name": "Emirates Skywards", "type": "airline", "ratio": "1:0.8", "notes": "Reduced ratio, below the rest of the list." },
+      { "name": "Etihad Guest", "type": "airline", "ratio": "1:1" },
+      { "name": "EVA Air Infinity MileageLands", "type": "airline", "ratio": "1:1" },
+      { "name": "Qantas Frequent Flyer", "type": "airline", "ratio": "1:1" },
+      { "name": "Qatar Airways Privilege Club", "type": "airline", "ratio": "1:1" },
+      { "name": "Thai Airways Royal Orchid Plus", "type": "airline", "ratio": "1:1" },
+      { "name": "Choice Privileges", "type": "hotel", "ratio": "1:1.5", "notes": "Enhanced ratio: converts to more Choice points than ThankYou Points sent." },
+      { "name": "Wyndham Rewards", "type": "hotel", "ratio": "1:1" },
+      { "name": "Accor Live Limitless", "type": "hotel", "ratio": "1:0.5", "notes": "Below 1:1, one of the weaker hotel transfers on the list." },
+      { "name": "Preferred Hotels & Resorts (I Prefer)", "type": "hotel", "ratio": "1:2", "notes": "Enhanced ratio: converts to more I Prefer points than ThankYou Points sent." },
+      { "name": "The Leading Hotels of the World (Leaders Club)", "type": "hotel", "ratio": "1:0.2", "notes": "Lowest ratio on the list; LHW points are worth comparatively little per point." }
+    ]
   },
   "credits": [
     {

@@ -84,7 +84,35 @@
     "airline_count": 19,
     "hotel_count": 7,
     "highlight": "19 airline and 7 hotel partners, almost all at 1:1 (Accor Live Limitless is 3:2): Hyatt, Marriott, Hilton, IHG, Wyndham, and I Prefer on the hotel side; United, Air France/KLM, Emirates, Cathay Pacific, and Southwest among the airlines.",
-    "recent_changes": "Wyndham Rewards and I Prefer Hotel Rewards (Preferred Hotels & Resorts, 700+ independent properties) were both added as transfer partners in 2026."
+    "recent_changes": "Wyndham Rewards and I Prefer Hotel Rewards (Preferred Hotels & Resorts, 700+ independent properties) were both added as transfer partners in 2026.",
+    "partners": [
+      { "name": "Aer Lingus AerClub", "type": "airline", "ratio": "1:1" },
+      { "name": "Air Canada Aeroplan", "type": "airline", "ratio": "1:1" },
+      { "name": "Air France-KLM Flying Blue", "type": "airline", "ratio": "1:1" },
+      { "name": "Atmos Rewards (Alaska Airlines & Hawaiian Airlines)", "type": "airline", "ratio": "1:1" },
+      { "name": "Avianca LifeMiles", "type": "airline", "ratio": "1:1" },
+      { "name": "British Airways Executive Club", "type": "airline", "ratio": "1:1" },
+      { "name": "Cathay Pacific Asia Miles", "type": "airline", "ratio": "1:1" },
+      { "name": "Emirates Skywards", "type": "airline", "ratio": "1:1" },
+      { "name": "Etihad Guest", "type": "airline", "ratio": "1:1" },
+      { "name": "Iberia Plus", "type": "airline", "ratio": "1:1" },
+      { "name": "Japan Airlines Mileage Bank", "type": "airline", "ratio": "1:1" },
+      { "name": "Qatar Airways Privilege Club", "type": "airline", "ratio": "1:1" },
+      { "name": "Southwest Rapid Rewards", "type": "airline", "ratio": "1:1" },
+      { "name": "Spirit Free Spirit", "type": "airline", "ratio": "1:1" },
+      { "name": "TAP Air Portugal Miles&Go", "type": "airline", "ratio": "1:1" },
+      { "name": "Turkish Airlines Miles&Smiles", "type": "airline", "ratio": "1:1" },
+      { "name": "United MileagePlus", "type": "airline", "ratio": "1:1" },
+      { "name": "Virgin Atlantic Flying Club", "type": "airline", "ratio": "1:1" },
+      { "name": "Virgin Red", "type": "airline", "ratio": "1:1" },
+      { "name": "Accor Live Limitless (ALL)", "type": "hotel", "ratio": "3:2", "notes": "1,000 Bilt points convert to about 667 Accor points, the one below-1:1 airline/hotel ratio in the program." },
+      { "name": "Hilton Honors", "type": "hotel", "ratio": "1:1" },
+      { "name": "IHG One Rewards", "type": "hotel", "ratio": "1:1" },
+      { "name": "Marriott Bonvoy", "type": "hotel", "ratio": "1:1", "notes": "Transferring 20,000+ points in a single transaction adds a 5,000-point bonus (25,000 Bonvoy points total)." },
+      { "name": "Preferred Hotels & Resorts I Prefer", "type": "hotel", "ratio": "1:2", "notes": "Favorable reverse ratio: 1,000 Bilt points become 2,000 I Prefer points. Added as a transfer partner in June 2026." },
+      { "name": "World of Hyatt", "type": "hotel", "ratio": "1:1" },
+      { "name": "Wyndham Rewards", "type": "hotel", "ratio": "1:1" }
+    ]
   },
   "credits": [
     {

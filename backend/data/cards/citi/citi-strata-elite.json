@@ -74,10 +74,32 @@
     "note": "Like Strata Premier, cash/statement-credit redemption sits at 0.75¢/point (cut from 1¢ in Aug 2025), well behind Double Cash's 1¢ cash rate. Linking a Double Cash account lets you redeem any pooled ThankYou Points at Double Cash's 1¢ rate instead, but the real value here is still 1:1 transfers to airline and hotel partners, including American Airlines and Admirals-Club-adjacent Star/oneworld options."
   },
   "transfer_partners": {
-    "airline_count": 16,
+    "airline_count": 15,
     "hotel_count": 5,
-    "highlight": "The same 22-partner list as Strata Premier, at the same full 1:1 ratio (Emirates ~1:0.8): American Airlines, JetBlue, Flying Blue, Virgin Atlantic/Virgin Red, Turkish, Cathay Pacific, Singapore, Avianca, plus Choice, Wyndham, Accor Live Limitless, and Preferred Hotels & Resorts. Strata Elite doesn't unlock any partners the $95 Premier lacks; the fee premium buys credits and lounge access, not better transfer value.",
-    "recent_changes": "American Airlines AAdvantage returned as a permanent transfer partner in July 2025, shortly before this card launched. Citi leaned on the AA relationship heavily in the Strata Elite launch marketing (4 free Admirals Club passes/year)."
+    "highlight": "The same 20-partner list as Strata Premier, at the same full 1:1 ratio (Emirates ~1:0.8): American Airlines, JetBlue, Flying Blue, Virgin Atlantic/Virgin Red, Turkish, Cathay Pacific, Singapore, Avianca, plus Choice, Wyndham, Accor Live Limitless, and Preferred Hotels & Resorts. Strata Elite doesn't unlock any partners the $95 Premier lacks; the fee premium buys credits and lounge access, not better transfer value.",
+    "recent_changes": "American Airlines AAdvantage returned as a permanent transfer partner in July 2025, shortly before this card launched. Citi leaned on the AA relationship heavily in the Strata Elite launch marketing (4 free Admirals Club passes/year). Aeromexico Rewards was dropped as a transfer partner in January 2026.",
+    "partners": [
+      { "name": "American Airlines AAdvantage", "type": "airline", "ratio": "1:1" },
+      { "name": "JetBlue TrueBlue", "type": "airline", "ratio": "1:1" },
+      { "name": "Air France/KLM Flying Blue", "type": "airline", "ratio": "1:1" },
+      { "name": "Virgin Atlantic Flying Club", "type": "airline", "ratio": "1:1" },
+      { "name": "Virgin Red", "type": "airline", "ratio": "1:1", "notes": "Virgin's multi-brand lifestyle rewards club (Virgin Atlantic, Virgin Voyages, Virgin Hotels), added as a transfer partner in 2026." },
+      { "name": "Turkish Airlines Miles&Smiles", "type": "airline", "ratio": "1:1" },
+      { "name": "Cathay Pacific Asia Miles", "type": "airline", "ratio": "1:1" },
+      { "name": "Singapore Airlines KrisFlyer", "type": "airline", "ratio": "1:1" },
+      { "name": "Avianca LifeMiles", "type": "airline", "ratio": "1:1" },
+      { "name": "Emirates Skywards", "type": "airline", "ratio": "1:0.8", "notes": "Reduced ratio, below the rest of the list." },
+      { "name": "Etihad Guest", "type": "airline", "ratio": "1:1" },
+      { "name": "EVA Air Infinity MileageLands", "type": "airline", "ratio": "1:1" },
+      { "name": "Qantas Frequent Flyer", "type": "airline", "ratio": "1:1" },
+      { "name": "Qatar Airways Privilege Club", "type": "airline", "ratio": "1:1" },
+      { "name": "Thai Airways Royal Orchid Plus", "type": "airline", "ratio": "1:1" },
+      { "name": "Choice Privileges", "type": "hotel", "ratio": "1:1.5", "notes": "Enhanced ratio: converts to more Choice points than ThankYou Points sent." },
+      { "name": "Wyndham Rewards", "type": "hotel", "ratio": "1:1" },
+      { "name": "Accor Live Limitless", "type": "hotel", "ratio": "1:0.5", "notes": "Below 1:1, one of the weaker hotel transfers on the list." },
+      { "name": "Preferred Hotels & Resorts (I Prefer)", "type": "hotel", "ratio": "1:2", "notes": "Enhanced ratio: converts to more I Prefer points than ThankYou Points sent." },
+      { "name": "The Leading Hotels of the World (Leaders Club)", "type": "hotel", "ratio": "1:0.2", "notes": "Lowest ratio on the list; LHW points are worth comparatively little per point." }
+    ]
   },
   "credits": [
     {
