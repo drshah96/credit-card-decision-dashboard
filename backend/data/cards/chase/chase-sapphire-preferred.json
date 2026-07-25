@@ -238,6 +238,14 @@
     {
       "name": "No foreign transaction fees",
       "detail": "Visa Signature, no added cost on purchases made outside the US."
+    },
+    {
+      "name": "24/7 customer service",
+      "detail": "Access to a customer service specialist from virtually anywhere in the world."
+    },
+    {
+      "name": "Travel & emergency assistance and roadside",
+      "detail": "Legal/medical referrals while traveling, plus roadside dispatch; fees for any goods or services obtained are the cardholder's responsibility."
     }
   ],
   "additional_cards": {
