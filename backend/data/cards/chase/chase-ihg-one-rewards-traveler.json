@@ -24,7 +24,28 @@
     {
       "emoji": "🍽️",
       "multiplier": "3×",
-      "category": "Dining, utilities, select streaming & gas stations",
+      "category": "Dining",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💡",
+      "multiplier": "3×",
+      "category": "Utilities",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "📺",
+      "multiplier": "3×",
+      "category": "Select streaming services",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "⛽",
+      "multiplier": "3×",
+      "category": "Gas stations",
       "highlight": true,
       "is_base": false
     },

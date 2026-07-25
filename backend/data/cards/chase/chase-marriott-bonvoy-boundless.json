@@ -24,7 +24,21 @@
     {
       "emoji": "🛒",
       "multiplier": "3×",
-      "category": "Groceries, gas stations & dining (combined $6,000/yr cap, then 2×)",
+      "category": "Grocery stores",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "⛽",
+      "multiplier": "3×",
+      "category": "Gas stations",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "3×",
+      "category": "Dining",
       "highlight": true,
       "is_base": false
     },

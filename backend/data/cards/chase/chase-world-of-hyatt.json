@@ -24,7 +24,28 @@
     {
       "emoji": "🍽️",
       "multiplier": "2×",
-      "category": "Restaurants, airline tickets (direct), local transit/commuting, fitness clubs & gyms",
+      "category": "Restaurants",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "✈️",
+      "multiplier": "2×",
+      "category": "Airline tickets, booked direct",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🚂",
+      "multiplier": "2×",
+      "category": "Local transit & commuting",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💪",
+      "multiplier": "2×",
+      "category": "Fitness clubs & gyms",
       "highlight": true,
       "is_base": false
     },

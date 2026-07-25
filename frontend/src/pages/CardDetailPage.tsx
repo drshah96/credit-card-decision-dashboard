@@ -9,9 +9,30 @@ import type {
   Card,
   Credit,
   CreditTier,
+  EarnRate,
   InsuranceLevel,
   TransferPartner,
 } from "../types/cards";
+
+// ─── Earn rate ordering ─────────────────────────────────────────────────────────
+
+// Highest multiplier first, ties broken alphabetically by category. Sorting at
+// render time (rather than relying on each card's JSON to be authored in order)
+// keeps every card consistent regardless of how it was written, including future
+// additions. Multiplier strings aren't uniformly formatted ("5×", "3%", "15¢/gal",
+// "Up to 4×", "Points on Star Money Days"), so we pull out the first number found
+// and treat unparseable ones as lowest-priority rather than crashing the sort.
+function parseMultiplierValue(multiplier: string): number {
+  const match = multiplier.match(/[\d.]+/);
+  return match ? parseFloat(match[0]) : -Infinity;
+}
+
+function sortEarnRates(rates: EarnRate[]): EarnRate[] {
+  return [...rates].sort((a, b) => {
+    const diff = parseMultiplierValue(b.multiplier) - parseMultiplierValue(a.multiplier);
+    return diff !== 0 ? diff : a.category.localeCompare(b.category);
+  });
+}
 
 // ─── Tier config ──────────────────────────────────────────────────────────────
 
@@ -736,7 +757,7 @@ function CardDetail({ card }: { card: Card }) {
       {/* Earning */}
       <Block label="Earning" title="How you earn points" note="per $1">
         <div className="earn-grid">
-          {card.earn_rates.map((rate) => (
+          {sortEarnRates(card.earn_rates).map((rate) => (
             <div
               key={rate.category}
               className={`earn-tile ${rate.highlight ? "hi" : ""} ${rate.is_base ? "base" : ""}`}

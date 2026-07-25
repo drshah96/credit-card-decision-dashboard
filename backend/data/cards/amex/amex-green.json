@@ -21,7 +21,7 @@
       "is_base": false
     },
     {
-      "emoji": "🚕",
+      "emoji": "🚂",
       "multiplier": "3×",
       "category": "Transit: trains, rideshare, tolls, parking, buses, subways",
       "highlight": true,
@@ -71,25 +71,107 @@
     "highlight": "Full access to the same Membership Rewards transfer chart as the Platinum and Gold: 16 airline and 3 hotel partners.",
     "recent_changes": "Subject to the same program-wide changes as any other Membership Rewards card.",
     "partners": [
-      { "name": "Aer Lingus AerClub", "type": "airline", "ratio": "1:1" },
-      { "name": "Aeromexico Rewards", "type": "airline", "ratio": "1:1.6", "notes": "Favorable ratio, better than the standard 1:1." },
-      { "name": "Air Canada Aeroplan", "type": "airline", "ratio": "1:1" },
-      { "name": "Air France-KLM Flying Blue", "type": "airline", "ratio": "1:1" },
-      { "name": "ANA Mileage Club", "type": "airline", "ratio": "1:1" },
-      { "name": "Avianca LifeMiles", "type": "airline", "ratio": "1:1" },
-      { "name": "British Airways Executive Club", "type": "airline", "ratio": "1:1" },
-      { "name": "Cathay Pacific Asia Miles", "type": "airline", "ratio": "5:4", "notes": "Devalued from 1:1 in March 2026." },
-      { "name": "Delta SkyMiles", "type": "airline", "ratio": "1:1", "notes": "Domestic-airline transfer fee applies: $0.0006/point, capped at $99." },
-      { "name": "Emirates Skywards", "type": "airline", "ratio": "5:4", "notes": "Devalued from 1:1 in 2025." },
-      { "name": "Iberia Plus", "type": "airline", "ratio": "1:1" },
-      { "name": "JetBlue TrueBlue", "type": "airline", "ratio": "1:0.8", "notes": "Minimum transfer is 250 points (vs. 1,000 for most partners); domestic-airline transfer fee also applies, capped at $99." },
-      { "name": "Qantas Frequent Flyer", "type": "airline", "ratio": "1:1", "notes": "Minimum transfer is 500 points instead of the usual 1,000." },
-      { "name": "Qatar Airways Privilege Club", "type": "airline", "ratio": "1:1" },
-      { "name": "Singapore Airlines KrisFlyer", "type": "airline", "ratio": "1:1" },
-      { "name": "Virgin Atlantic Flying Club", "type": "airline", "ratio": "1:1" },
-      { "name": "Choice Privileges", "type": "hotel", "ratio": "1:1" },
-      { "name": "Hilton Honors", "type": "hotel", "ratio": "1:2" },
-      { "name": "Marriott Bonvoy", "type": "hotel", "ratio": "1:1" }
+      {
+        "name": "Aer Lingus AerClub",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Aeromexico Rewards",
+        "type": "airline",
+        "ratio": "1:1.6",
+        "notes": "Favorable ratio, better than the standard 1:1."
+      },
+      {
+        "name": "Air Canada Aeroplan",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Air France-KLM Flying Blue",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "ANA Mileage Club",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Avianca LifeMiles",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "British Airways Executive Club",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Cathay Pacific Asia Miles",
+        "type": "airline",
+        "ratio": "5:4",
+        "notes": "Devalued from 1:1 in March 2026."
+      },
+      {
+        "name": "Delta SkyMiles",
+        "type": "airline",
+        "ratio": "1:1",
+        "notes": "Domestic-airline transfer fee applies: $0.0006/point, capped at $99."
+      },
+      {
+        "name": "Emirates Skywards",
+        "type": "airline",
+        "ratio": "5:4",
+        "notes": "Devalued from 1:1 in 2025."
+      },
+      {
+        "name": "Iberia Plus",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "JetBlue TrueBlue",
+        "type": "airline",
+        "ratio": "1:0.8",
+        "notes": "Minimum transfer is 250 points (vs. 1,000 for most partners); domestic-airline transfer fee also applies, capped at $99."
+      },
+      {
+        "name": "Qantas Frequent Flyer",
+        "type": "airline",
+        "ratio": "1:1",
+        "notes": "Minimum transfer is 500 points instead of the usual 1,000."
+      },
+      {
+        "name": "Qatar Airways Privilege Club",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Singapore Airlines KrisFlyer",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Virgin Atlantic Flying Club",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Choice Privileges",
+        "type": "hotel",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Hilton Honors",
+        "type": "hotel",
+        "ratio": "1:2"
+      },
+      {
+        "name": "Marriott Bonvoy",
+        "type": "hotel",
+        "ratio": "1:1"
+      }
     ]
   },
   "credits": [

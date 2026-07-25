@@ -24,7 +24,21 @@
     {
       "emoji": "🍽️",
       "multiplier": "6×",
-      "category": "U.S. restaurants, supermarkets, gas stations",
+      "category": "U.S. restaurants",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "6×",
+      "category": "U.S. supermarkets",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "⛽",
+      "multiplier": "6×",
+      "category": "U.S. gas stations",
       "highlight": true,
       "is_base": false
     },

@@ -24,7 +24,14 @@
     {
       "emoji": "✈️",
       "multiplier": "7×",
-      "category": "Flights (direct or Amex Travel), select car rentals, U.S. restaurants",
+      "category": "Select travel: flights (direct or Amex Travel), select car rentals",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "7×",
+      "category": "U.S. restaurants",
       "highlight": true,
       "is_base": false
     },

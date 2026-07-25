@@ -24,7 +24,35 @@
     {
       "emoji": "🍽️",
       "multiplier": "3×",
-      "category": "Dining, select streaming, online groceries, gas & EV charging, vacation rentals",
+      "category": "Dining",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "⛽",
+      "multiplier": "3×",
+      "category": "Gas & EV charging",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🏡",
+      "multiplier": "3×",
+      "category": "Vacation homes at top brands",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "📺",
+      "multiplier": "3×",
+      "category": "Select streaming services",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "3×",
+      "category": "Online groceries",
       "highlight": true,
       "is_base": false
     },
@@ -125,10 +153,11 @@
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "A complimentary 12-month Apple TV subscription (not the full Apple One bundle, and not Apple Music) if activated by December 31, 2026.",
+      "description": "A complimentary 12-month Apple TV subscription (not Apple Music, unlike the Reserve's version) if activated by December 31, 2026. If you already have a paid Apple One subscription in your name, activating this benefit gets you a $7.50/mo discount on it instead, for 12 months.",
       "tips": [
         "One-time, limited-time offer, not an ongoing annual credit like the Reserve's Apple TV+/Music benefit.",
-        "Already pay for Apple TV? Cancel the paid plan for the free year, but remember to resume payment after it ends."
+        "Already pay for standalone Apple TV (not Apple One)? Cancel the paid plan for the free year, but remember to resume payment after it ends.",
+        "Already have Apple One? You get the $7.50/mo discount automatically once you activate on Chase.com or the app with the same Apple Account, not the free standalone subscription."
       ]
     },
     {
