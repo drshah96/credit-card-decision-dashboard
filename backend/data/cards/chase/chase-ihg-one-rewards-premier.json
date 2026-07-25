@@ -362,23 +362,18 @@
       "level": "mid"
     },
     {
-      "coverage": "Rental car CDW",
-      "detail": "Theft & collision, secondary in the US, rentals of 31 days or less",
-      "level": "mid"
-    },
-    {
       "coverage": "Purchase protection",
       "detail": "$500/item · $50,000/cardholder · 120 days",
       "level": "mid"
     }
   ],
-  "protection_note": "Solid mid-tier protections bundled with Mastercard World Elite: trip cancellation and rental car coverage are both present, though rental coverage caps out at 31-day rental terms and is secondary in the US. Nothing here beats a premium travel card's limits.",
-  "rental_note": "Secondary coverage for theft and collision on rentals of 31 days or less, in the US and abroad. Decline the counter's CDW and pay with this card, but use a card with primary coverage if you rent for longer stretches.",
+  "protection_note": "Solid mid-tier protections bundled with Mastercard World Elite: trip cancellation coverage is present, but Chase's own itemized benefits list for this card doesn't include rental car coverage, unlike some of its other Mastercard World Elite cards. Nothing here beats a premium travel card's limits.",
+  "rental_note": "No rental car coverage on this card; Chase's own itemized benefits list for it doesn't include auto rental coverage. Use a different card for rentals.",
   "status_perks": [
     {
       "name": "IHG One Rewards Platinum Elite Status",
       "strength": 3,
-      "note": "Complimentary with the card for as long as you hold it: includes room upgrades when available, a welcome amenity, and bonus points on stays. Diamond Elite (IHG's top tier) unlocks after $40,000 in card spend per calendar year."
+      "note": "Complimentary with the card for as long as you hold it: includes room upgrades when available, a welcome amenity, and bonus points on stays. Diamond Elite (IHG's top tier) unlocks after $40,000 in card spend in a calendar year, lasting through December 31 of the following year."
     }
   ],
   "services": [
@@ -389,6 +384,14 @@
     {
       "name": "Mastercard World Elite Benefits",
       "detail": "Lyft ride credits, Booking.com prepaid-stay discounts (up to 7% off), and other World Elite Mastercard perks bundled with the card."
+    },
+    {
+      "name": "20% off reward points purchases",
+      "detail": "Save 20% when you buy IHG One Rewards points directly with this card."
+    },
+    {
+      "name": "Early access to IHG Reward Night sales",
+      "detail": "Cardmembers get early access to IHG's Reward Night sales each year."
     }
   ],
   "additional_cards": {
