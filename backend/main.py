@@ -44,7 +44,7 @@ app.add_middleware(
 def root() -> dict:
     """Points humans hitting the bare API domain at something useful; the
     actual frontend lives on a separate service and calls /api/* directly."""
-    return {"name": "Wallet Math API", "docs": "/docs", "health": "/health"}
+    return {"name": "The Wallet Audit API", "docs": "/docs", "health": "/health"}
 
 
 @app.get("/health")
