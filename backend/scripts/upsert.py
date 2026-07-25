@@ -115,158 +115,175 @@ def upsert_card(session: Session, data: dict) -> CardModel:
         },
     )
 
-    card = session.query(CardModel).filter_by(slug=data["id"]).one_or_none()
-    if card is None:
-        card = CardModel(slug=data["id"])
-        session.add(card)
-    else:
-        # Clear and flush child collections before reassigning them below.
-        # Reassigning `card.credits = [...]` directly relies on the delete-orphan
-        # cascade to remove the old rows, but SQLAlchemy's unit of work doesn't
-        # guarantee those DELETEs are flushed before the new rows' INSERTs in the
-        # same flush — so re-promoting an existing card hits the UNIQUE(card_id,
-        # slug) constraint against its own not-yet-deleted old rows. Flushing an
-        # empty collection first forces the deletes to actually happen first.
-        card.earn_rates = []
-        card.redemption_options = []
-        card.credits = []
-        card.insurance_benefits = []
-        card.status_perks = []
-        card.services = []
-        card.additional_card_options = []
-        card.timeline_events = []
-        card.transfer_partners = []
-        session.flush()
+    try:
+        # A SAVEPOINT, not the outer transaction: seed_catalog.py reseeds on
+        # every boot, and Render keeps the outgoing instance alive while the
+        # new one starts up, so both can end up upserting the same card
+        # concurrently during a deploy transition. If the other process
+        # commits this exact card's rows between our delete-and-reflush and
+        # our own insert, only this card's work rolls back — everything
+        # upsert_card has already flushed for other cards in this
+        # transaction survives — and we adopt what the other process wrote
+        # instead of failing the whole reseed.
+        with session.begin_nested():
+            card = session.query(CardModel).filter_by(slug=data["id"]).one_or_none()
+            if card is None:
+                card = CardModel(slug=data["id"])
+                session.add(card)
+            else:
+                # Clear and flush child collections before reassigning them below.
+                # Reassigning `card.credits = [...]` directly relies on the delete-orphan
+                # cascade to remove the old rows, but SQLAlchemy's unit of work doesn't
+                # guarantee those DELETEs are flushed before the new rows' INSERTs in the
+                # same flush — so re-promoting an existing card hits the UNIQUE(card_id,
+                # slug) constraint against its own not-yet-deleted old rows. Flushing an
+                # empty collection first forces the deletes to actually happen first.
+                card.earn_rates = []
+                card.redemption_options = []
+                card.credits = []
+                card.insurance_benefits = []
+                card.status_perks = []
+                card.services = []
+                card.additional_card_options = []
+                card.timeline_events = []
+                card.transfer_partners = []
+                session.flush()
 
-    card.name = data["name"]
-    card.issuer = issuer
-    card.network = network
-    card.points_program = points_program
-    card.accent_color = data["accent_color"]
-    card.annual_fee_cents = round(data["annual_fee"] * 100)
-    card.effective_cost_label = data["effective_cost"]
-    card.official_url = data.get("official_url")
-    card.verdict_status = data["verdict"]["status"]
-    card.verdict_text = data["verdict"]["text"]
-    card.verdict_short_tag = data["verdict"].get("short_tag")
-    card.earn_note = data.get("earn_note")
-    card.points_per_100k_label = data["points"]["per_100k"]
-    card.points_note = data["points"].get("note")
-    card.transfer_airline_count = data["transfer_partners"]["airline_count"]
-    card.transfer_hotel_count = data["transfer_partners"]["hotel_count"]
-    card.transfer_highlight = data["transfer_partners"].get("highlight")
-    card.transfer_recent_changes = data["transfer_partners"].get("recent_changes")
-    card.protection_note = data.get("protection_note")
-    card.rental_note = data.get("rental_note")
-    card.additional_cards_title = data.get("additional_cards", {}).get("title")
-    card.additional_cards_note = data.get("additional_cards", {}).get("note")
-    card.is_active = True
+            card.name = data["name"]
+            card.issuer = issuer
+            card.network = network
+            card.points_program = points_program
+            card.accent_color = data["accent_color"]
+            card.annual_fee_cents = round(data["annual_fee"] * 100)
+            card.effective_cost_label = data["effective_cost"]
+            card.official_url = data.get("official_url")
+            card.verdict_status = data["verdict"]["status"]
+            card.verdict_text = data["verdict"]["text"]
+            card.verdict_short_tag = data["verdict"].get("short_tag")
+            card.earn_note = data.get("earn_note")
+            card.points_per_100k_label = data["points"]["per_100k"]
+            card.points_note = data["points"].get("note")
+            card.transfer_airline_count = data["transfer_partners"]["airline_count"]
+            card.transfer_hotel_count = data["transfer_partners"]["hotel_count"]
+            card.transfer_highlight = data["transfer_partners"].get("highlight")
+            card.transfer_recent_changes = data["transfer_partners"].get("recent_changes")
+            card.protection_note = data.get("protection_note")
+            card.rental_note = data.get("rental_note")
+            card.additional_cards_title = data.get("additional_cards", {}).get("title")
+            card.additional_cards_note = data.get("additional_cards", {}).get("note")
+            card.is_active = True
 
-    card.earn_rates = [
-        EarnRate(
-            emoji=r.get("emoji"),
-            multiplier_x=_parse_multiplier(r["multiplier"]),
-            multiplier_label=r["multiplier"],
-            category=r["category"],
-            is_highlight=r.get("highlight", False),
-            is_base=r.get("is_base", False),
-            sort_order=i,
-        )
-        for i, r in enumerate(data["earn_rates"])
-    ]
-
-    card.redemption_options = [
-        RedemptionOption(
-            method=r["method"], cents_per_point=r["cpp"], is_best=r.get("best", False), sort_order=i
-        )
-        for i, r in enumerate(data["points"]["redemption_options"])
-    ]
-
-    card.credits = [
-        CreditModel(
-            slug=c["id"],
-            name=c["name"],
-            subtitle=c.get("subtitle", ""),
-            max_annual_cents=round(c["max_annual"] * 100),
-            default_value_cents=round(c.get("default_value", 0) * 100),
-            tier=tiers[c["tier"]],
-            is_removed=c.get("removed", False),
-            description=c.get("description", ""),
-            sort_order=i,
-            tips=[
-                CreditTip(
-                    tip_text=t[6:] if t.startswith("warn::") else t,
-                    is_warning=t.startswith("warn::"),
-                    sort_order=j,
+            card.earn_rates = [
+                EarnRate(
+                    emoji=r.get("emoji"),
+                    multiplier_x=_parse_multiplier(r["multiplier"]),
+                    multiplier_label=r["multiplier"],
+                    category=r["category"],
+                    is_highlight=r.get("highlight", False),
+                    is_base=r.get("is_base", False),
+                    sort_order=i,
                 )
-                for j, t in enumerate(c.get("tips", []))
-            ],
-        )
-        for i, c in enumerate(data["credits"])
-    ]
+                for i, r in enumerate(data["earn_rates"])
+            ]
 
-    card.insurance_benefits = [
-        InsuranceBenefit(
-            coverage_type=_get_or_create(session, CoverageType, name=item["coverage"]),
-            detail=item["detail"],
-            level=item["level"],
-            sort_order=i,
-        )
-        for i, item in enumerate(data["insurance"])
-    ]
-
-    card.status_perks = [
-        StatusPerk(name=p["name"], strength=p["strength"], note=p["note"], sort_order=i)
-        for i, p in enumerate(data.get("status_perks", []))
-    ]
-
-    card.services = [
-        ServiceModel(name=s["name"], detail=s["detail"], sort_order=i)
-        for i, s in enumerate(data.get("services", []))
-    ]
-
-    card.additional_card_options = [
-        AdditionalCardOption(
-            name=opt["name"],
-            fee_label=opt["fee"],
-            is_free=opt.get("is_free", False),
-            sort_order=i,
-            benefits=[
-                AdditionalCardBenefit(
-                    benefit_text=b["text"], is_included=b.get("included", True), sort_order=j
+            card.redemption_options = [
+                RedemptionOption(
+                    method=r["method"],
+                    cents_per_point=r["cpp"],
+                    is_best=r.get("best", False),
+                    sort_order=i,
                 )
-                for j, b in enumerate(opt.get("benefits", []))
-            ],
-        )
-        for i, opt in enumerate(data.get("additional_cards", {}).get("options", []))
-    ]
+                for i, r in enumerate(data["points"]["redemption_options"])
+            ]
 
-    card.transfer_partners = [
-        CardTransferPartner(
-            loyalty_program=_get_or_create(
-                session,
-                LoyaltyProgram,
-                name=p["name"],
-                defaults={"is_transferable": True},
-            ),
-            partner_type=p["type"],
-            transfer_ratio=p["ratio"],
-            notes=p.get("notes"),
-        )
-        for p in data["transfer_partners"].get("partners", [])
-    ]
+            card.credits = [
+                CreditModel(
+                    slug=c["id"],
+                    name=c["name"],
+                    subtitle=c.get("subtitle", ""),
+                    max_annual_cents=round(c["max_annual"] * 100),
+                    default_value_cents=round(c.get("default_value", 0) * 100),
+                    tier=tiers[c["tier"]],
+                    is_removed=c.get("removed", False),
+                    description=c.get("description", ""),
+                    sort_order=i,
+                    tips=[
+                        CreditTip(
+                            tip_text=t[6:] if t.startswith("warn::") else t,
+                            is_warning=t.startswith("warn::"),
+                            sort_order=j,
+                        )
+                        for j, t in enumerate(c.get("tips", []))
+                    ],
+                )
+                for i, c in enumerate(data["credits"])
+            ]
 
-    card.timeline_events = [
-        TimelineEvent(
-            event_date=_parse_event_date(e["date"]),
-            date_label=e["date"],
-            event_type=e["type"],
-            badge=e["badge"],
-            description=e["text"],
-            sort_order=i,
-        )
-        for i, e in enumerate(data.get("timeline", []))
-    ]
+            card.insurance_benefits = [
+                InsuranceBenefit(
+                    coverage_type=_get_or_create(session, CoverageType, name=item["coverage"]),
+                    detail=item["detail"],
+                    level=item["level"],
+                    sort_order=i,
+                )
+                for i, item in enumerate(data["insurance"])
+            ]
 
-    session.flush()
+            card.status_perks = [
+                StatusPerk(name=p["name"], strength=p["strength"], note=p["note"], sort_order=i)
+                for i, p in enumerate(data.get("status_perks", []))
+            ]
+
+            card.services = [
+                ServiceModel(name=s["name"], detail=s["detail"], sort_order=i)
+                for i, s in enumerate(data.get("services", []))
+            ]
+
+            card.additional_card_options = [
+                AdditionalCardOption(
+                    name=opt["name"],
+                    fee_label=opt["fee"],
+                    is_free=opt.get("is_free", False),
+                    sort_order=i,
+                    benefits=[
+                        AdditionalCardBenefit(
+                            benefit_text=b["text"], is_included=b.get("included", True), sort_order=j
+                        )
+                        for j, b in enumerate(opt.get("benefits", []))
+                    ],
+                )
+                for i, opt in enumerate(data.get("additional_cards", {}).get("options", []))
+            ]
+
+            card.transfer_partners = [
+                CardTransferPartner(
+                    loyalty_program=_get_or_create(
+                        session,
+                        LoyaltyProgram,
+                        name=p["name"],
+                        defaults={"is_transferable": True},
+                    ),
+                    partner_type=p["type"],
+                    transfer_ratio=p["ratio"],
+                    notes=p.get("notes"),
+                )
+                for p in data["transfer_partners"].get("partners", [])
+            ]
+
+            card.timeline_events = [
+                TimelineEvent(
+                    event_date=_parse_event_date(e["date"]),
+                    date_label=e["date"],
+                    event_type=e["type"],
+                    badge=e["badge"],
+                    description=e["text"],
+                    sort_order=i,
+                )
+                for i, e in enumerate(data.get("timeline", []))
+            ]
+
+            session.flush()
+    except IntegrityError:
+        card = session.query(CardModel).filter_by(slug=data["id"]).one()
+
     return card
