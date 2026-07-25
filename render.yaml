@@ -11,7 +11,7 @@ services:
   # idempotent, so re-running them on a restart is a no-op if nothing changed.
   - type: web
     name: credit-card-dashboard-api
-    env: python
+    runtime: python
     plan: free
     buildCommand: pip install uv && uv sync --frozen --no-group dev
     startCommand: >-
@@ -19,6 +19,11 @@ services:
       uv run python -m backend.scripts.seed_catalog &&
       uv run uvicorn backend.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
+    # Custom domain — still requires manually verifying ownership and adding
+    # the DNS records Render provides once this Blueprint is applied; that
+    # part can't be automated from here.
+    domains:
+      - api.walletmath.com
     envVars:
       - key: PYTHON_VERSION
         value: "3.13"
@@ -37,7 +42,7 @@ services:
   # Vite/React frontend, built as a static site.
   - type: web
     name: walletmath
-    env: static
+    runtime: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
     # Custom domain — still requires manually verifying ownership and adding
@@ -46,11 +51,10 @@ services:
     domains:
       - walletmath.com
     envVars:
-      # Points at the backend service above. Render assigns that service's
-      # .onrender.com URL once it's first created — update this if the
-      # backend's name/URL ever changes.
+      # Points at the backend service's custom domain (see the matching
+      # "domains" note on the API service above).
       - key: VITE_API_URL
-        value: https://credit-card-dashboard-api.onrender.com/api
+        value: https://api.walletmath.com/api
     routes:
       - type: rewrite
         source: /*
