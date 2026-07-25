@@ -247,7 +247,9 @@ def upsert_card(session: Session, data: dict) -> CardModel:
                     sort_order=i,
                     benefits=[
                         AdditionalCardBenefit(
-                            benefit_text=b["text"], is_included=b.get("included", True), sort_order=j
+                            benefit_text=b["text"],
+                            is_included=b.get("included", True),
+                            sort_order=j,
                         )
                         for j, b in enumerate(opt.get("benefits", []))
                     ],
