@@ -586,6 +586,11 @@ body {
 .card-picker-result .cpr-name { font-weight: 500; }
 .card-picker-result .cpr-fee { color: var(--faint); font-size: 12px; flex-shrink: 0; }
 
+/* ─── Compare page: credits-usage hint ──────────────────────────────────────── */
+.compare-credit-hint { margin-top: 4px; font-size: 11.5px; }
+.compare-credit-hint a { color: var(--accent); text-decoration: none; }
+.compare-credit-hint a:hover { text-decoration: underline; }
+
 /* ─── Compare page: comparison table ───────────────────────────────────────── */
 .compare-table-wrap {
   overflow-x: auto;

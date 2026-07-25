@@ -3,6 +3,7 @@ import { skipToken, useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 import { fetchCard } from "../api/cards";
 import { useCompareList } from "../hooks/useCompareList";
+import { useCreditUsage } from "../hooks/useCreditUsage";
 import { ISSUERS } from "../utils/cardTaxonomy";
 import { CARD_IMAGES } from "../utils/cardImages";
 import type {
@@ -400,15 +401,28 @@ function CreditCalculator({
 
 // ─── Credits section ──────────────────────────────────────────────────────────
 
-function CreditsSection({ credits, annualFee }: { credits: Credit[]; annualFee: number }) {
+function CreditsSection({
+  credits,
+  annualFee,
+  cardId,
+}: {
+  credits: Credit[];
+  annualFee: number;
+  cardId: string;
+}) {
   // Credits an issuer has discontinued are tracked in the History timeline
   // below (as a "Cut" entry) instead — showing them here too, in a section
   // that's otherwise exclusively "credits you can use," was confusing.
   const active = credits.filter((c) => !c.removed);
+  const { getCardUsage, setCreditValue } = useCreditUsage();
 
-  const [values, setValues] = useState<Record<string, number>>(
-    () => Object.fromEntries(active.map((c) => [c.id, c.default_value])),
-  );
+  // Seeded from whatever this cardholder already saved for this card (so a
+  // return visit — or the Compare page — sees the same numbers), falling
+  // back to each credit's own default only for ones never touched yet.
+  const [values, setValues] = useState<Record<string, number>>(() => {
+    const saved = getCardUsage(cardId);
+    return Object.fromEntries(active.map((c) => [c.id, saved?.[c.id] ?? c.default_value]));
+  });
   const [tiers, setTiers] = useState<Record<string, CreditTier>>(
     () => Object.fromEntries(active.map((c) => [c.id, c.tier])),
   );
@@ -416,6 +430,7 @@ function CreditsSection({ credits, annualFee }: { credits: Credit[]; annualFee: 
 
   function handleSlider(id: string, v: number) {
     setValues((prev) => ({ ...prev, [id]: v }));
+    setCreditValue(cardId, id, v);
   }
 
   function handleTierMove(id: string, dir: "up" | "down") {
@@ -429,6 +444,7 @@ function CreditsSection({ credits, annualFee }: { credits: Credit[]; annualFee: 
   function handleReset() {
     setValues(Object.fromEntries(active.map((c) => [c.id, c.default_value])));
     setTiers(Object.fromEntries(active.map((c) => [c.id, c.tier])));
+    for (const c of active) setCreditValue(cardId, c.id, c.default_value);
   }
 
   function handleOpenModal(credit: Credit, tier: CreditTier) {
@@ -853,7 +869,7 @@ function CardDetail({ card }: { card: Card }) {
 
       {/* Credits */}
       <Block label="Credits" title="Credits — set what you'll really use">
-        <CreditsSection credits={card.credits} annualFee={card.annual_fee} />
+        <CreditsSection credits={card.credits} annualFee={card.annual_fee} cardId={card.id} />
       </Block>
 
       {/* Additional cards */}
