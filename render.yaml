@@ -51,10 +51,14 @@ services:
     domains:
       - thewalletaudit.com
     envVars:
-      # Points at the backend service's custom domain (see the matching
-      # "domains" note on the API service above).
+      # Points at the backend's default onrender.com URL, not its custom
+      # domain (api.thewalletaudit.com) — that domain hasn't been purchased
+      # yet, so it doesn't resolve, and pointing the frontend at it broke
+      # every API call in production. Switch this to
+      # https://api.thewalletaudit.com/api once the domain is registered and
+      # verified in Render.
       - key: VITE_API_URL
-        value: https://api.thewalletaudit.com/api
+        value: https://thewalletaudit-api.onrender.com/api
     routes:
       - type: rewrite
         source: /*
