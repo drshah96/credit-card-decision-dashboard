@@ -26,18 +26,25 @@ services:
         fromDatabase:
           name: credit-card-dashboard-db
           property: connectionString
-      # Locks CORS down to just the deployed frontend. Update if the web
+      # Locks CORS down to just the deployed frontend. Includes both the
+      # custom domain and the default onrender.com URL so requests still work
+      # during DNS setup/propagation for the custom domain. Update if the web
       # service's name/URL ever changes (see the matching note on
       # VITE_API_URL below).
       - key: ALLOWED_ORIGINS
-        value: https://credit-card-dashboard-web.onrender.com
+        value: https://walletmath.com,https://walletmath.onrender.com
 
   # Vite/React frontend, built as a static site.
   - type: web
-    name: credit-card-dashboard-web
+    name: walletmath
     env: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
+    # Custom domain — still requires manually verifying ownership and adding
+    # the DNS records Render provides once this Blueprint is applied; that
+    # part can't be automated from here.
+    domains:
+      - walletmath.com
     envVars:
       # Points at the backend service above. Render assigns that service's
       # .onrender.com URL once it's first created — update this if the
