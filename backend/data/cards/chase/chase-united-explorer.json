@@ -197,7 +197,7 @@
     },
     {
       "coverage": "Baggage delay",
-      "detail": "$100/day · up to 3 days",
+      "detail": "$100/day · up to 3 days · after 6 hrs",
       "level": "good"
     },
     {
@@ -206,8 +206,13 @@
       "level": "good"
     },
     {
+      "coverage": "Travel accident insurance",
+      "detail": "$500,000 · common carrier / $100,000 · 24-hour",
+      "level": "good"
+    },
+    {
       "coverage": "Purchase protection",
-      "detail": "$10,000/item · 120 days",
+      "detail": "$10,000/item · $50,000/yr · 120 days",
       "level": "strong"
     },
     {
@@ -221,7 +226,7 @@
       "level": "none"
     }
   ],
-  "protection_note": "Solid on baggage and purchase protection, and the primary rental CDW is free and real ($60k, matches CSR's structure). The weak spot is trip cancellation/interruption: $1,500/person and $6,000/trip is thin next to CSR's $10,000/person, and the 12-hour trip-delay trigger is double CSR's 6-hour window.",
+  "protection_note": "Solid on baggage and purchase protection, and the primary rental CDW is free and real ($60k, matches CSR's structure), plus a standard $500,000 travel accident policy. The weak spot is trip cancellation/interruption: $1,500/person and $6,000/trip is thin next to CSR's $10,000/person, and the 12-hour trip-delay trigger is double CSR's 6-hour window.",
   "rental_note": "Primary coverage up to $60,000 (secondary only for New York residents). Decline the counter's CDW and pay with the card. Slightly lower cap than CSR's $75k but still free, real primary coverage.",
   "status_perks": [
     {
@@ -255,6 +260,10 @@
     {
       "name": "Visa Signature Concierge",
       "detail": "24/7 concierge for reservations, tickets, and travel arrangements."
+    },
+    {
+      "name": "Roadside assistance",
+      "detail": "4 free dispatch events per year, up to $50 each, covering towing, tire change, battery/jump start, lockout, and fuel delivery, available 24/7 in the US and Canada."
     }
   ],
   "additional_cards": {
