@@ -169,6 +169,14 @@
     {
       "name": "No foreign transaction fees",
       "detail": "Zero FX fees on international spend."
+    },
+    {
+      "name": "Roadside assistance",
+      "detail": "Pay-per-use dispatch service (towing, tire change, jump start, lockout, fuel delivery) available 24/7 in the US and Canada; you pay a pre-negotiated per-service fee."
+    },
+    {
+      "name": "Travel & emergency assistance",
+      "detail": "Legal and medical referrals while traveling; cardholder pays for any goods or services obtained."
     }
   ],
   "additional_cards": {

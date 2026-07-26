@@ -343,23 +343,18 @@
       "level": "mid"
     },
     {
-      "coverage": "Rental car CDW",
-      "detail": "Theft & collision, secondary to personal insurance in the US",
-      "level": "mid"
-    },
-    {
       "coverage": "Purchase protection",
       "detail": "$500/item · 120 days (90 days for NY residents)",
       "level": "mid"
     }
   ],
-  "protection_note": "Unusually complete protections for a $0 card: trip cancellation and rental car coverage are both present, a direct result of the 2025 upgrade to Mastercard World Elite. Limits still trail the paid Premier and any premium travel card.",
-  "rental_note": "Secondary coverage for theft and collision: decline the counter's CDW and pay with this card, but use a card with primary coverage if you rent often.",
+  "protection_note": "Unusually complete protections for a $0 card, a direct result of the 2025 upgrade to Mastercard World Elite: trip cancellation is here, but Chase's own itemized benefits list for this card doesn't include rental car coverage. Limits still trail the paid Premier and any premium travel card.",
+  "rental_note": "No rental car coverage on this card; Chase's own itemized benefits list for it doesn't include auto rental coverage. Use a different card for rentals.",
   "status_perks": [
     {
       "name": "IHG One Rewards Silver Elite Status",
       "strength": 1,
-      "note": "Complimentary with the card for as long as you hold it: a light welcome amenity and modest bonus points. Gold Elite unlocks after $20,000 in card spend per calendar year."
+      "note": "Complimentary with the card for as long as you hold it: a light welcome amenity and modest bonus points. Gold Elite unlocks after $20,000 in card spend in a calendar year, lasting through December 31 of the following year."
     }
   ],
   "services": [
@@ -374,6 +369,10 @@
     {
       "name": "Points purchase discount",
       "detail": "20% off when buying IHG One Rewards points directly with this card."
+    },
+    {
+      "name": "Early access to IHG Reward Night sales",
+      "detail": "Cardmembers get early access to IHG's Reward Night sales each year."
     }
   ],
   "additional_cards": {

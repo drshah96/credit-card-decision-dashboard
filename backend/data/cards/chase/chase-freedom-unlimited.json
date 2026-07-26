@@ -116,6 +116,10 @@
     {
       "name": "Lyft bonus",
       "detail": "2% total cash back on Lyft rides through Sep 30, 2027 (an extra 0.5% on top of the 1.5% base)."
+    },
+    {
+      "name": "Travel & emergency assistance",
+      "detail": "Legal and medical referrals while traveling; cardholder pays for any goods or services obtained."
     }
   ],
   "additional_cards": {

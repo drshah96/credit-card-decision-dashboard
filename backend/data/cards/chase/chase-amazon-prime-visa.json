@@ -102,6 +102,11 @@
       "coverage": "Travel accident insurance",
       "detail": "Up to $500,000",
       "level": "good"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Secondary only",
+      "level": "mid"
     }
   ],
   "protection_note": "A stronger-than-expected protection suite for a no-fee retail card, courtesy of its Visa Signature status: purchase protection, extended warranty, baggage delay, lost luggage, and travel accident insurance are all included. There's no trip cancellation/interruption coverage and no cell phone protection, so it's still not a substitute for a dedicated travel card.",
@@ -119,6 +124,18 @@
     {
       "name": "Next-day Amazon redemption",
       "detail": "Cash back can be applied directly at Amazon.com checkout as soon as the next day, with no minimum balance required."
+    },
+    {
+      "name": "Prime Card Bonus",
+      "detail": "Eligible Prime cardmembers earn 10% back or more on a rotating selection of items and categories at Amazon.com. Limited-time offers, on top of the standing 5%."
+    },
+    {
+      "name": "Roadside assistance",
+      "detail": "Dispatch service for roadside emergencies; fees billed to your card at time of dispatch."
+    },
+    {
+      "name": "Travel & emergency assistance",
+      "detail": "Legal and medical referrals while traveling; cardholder pays for any goods or services obtained."
     }
   ],
   "additional_cards": {

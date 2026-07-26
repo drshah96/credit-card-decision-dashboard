@@ -46,7 +46,7 @@ export function CardSummaryCard({ card, selectMode = false }: Props) {
             isCompared
               ? `Remove ${card.name} from compare`
               : compareFull
-                ? `${card.name} — compare is full`
+                ? `${card.name}: compare is full`
                 : `Add ${card.name} to compare`
           }
           disabled={compareFull}

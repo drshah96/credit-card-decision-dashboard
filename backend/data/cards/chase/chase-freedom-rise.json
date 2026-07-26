@@ -119,6 +119,14 @@
     {
       "name": "Foreign transaction fee likely applies",
       "detail": "Chase doesn't list Freedom Rise among its no-foreign-transaction-fee cards; treat it as carrying the standard ~3% fee abroad and confirm before international use."
+    },
+    {
+      "name": "Automatic upgrade path to Freedom Unlimited",
+      "detail": "Evaluated automatically each year for an upgrade to Chase Freedom Unlimited once the account is open with a purchase in the past 12 months, on-time payments to all lenders in the past 12 months, and no suspended Chase accounts."
+    },
+    {
+      "name": "Lock/unlock card",
+      "detail": "Instantly lock or unlock the card from the Chase Mobile app or Chase.com to block new purchases, cash advances, and balance transfers; doesn't affect scheduled automatic payments."
     }
   ],
   "additional_cards": {

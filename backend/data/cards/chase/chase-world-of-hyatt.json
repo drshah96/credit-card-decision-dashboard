@@ -265,7 +265,7 @@
     },
     {
       "coverage": "Baggage delay",
-      "detail": "$100/day · up to 5 days",
+      "detail": "$100/day · up to 5 days · after 6 hrs",
       "level": "mid"
     },
     {

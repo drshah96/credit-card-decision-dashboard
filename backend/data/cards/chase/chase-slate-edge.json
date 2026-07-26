@@ -6,20 +6,20 @@
   "points_program": "None, no rewards program",
   "accent_color": "#37474F",
   "annual_fee": 0,
-  "effective_cost": "Free, with no annual fee, but no longer available to new applicants",
+  "effective_cost": "Free, with no annual fee, but no rewards program and a high ongoing APR",
   "official_url": "https://creditcards.chase.com/credit-building-credit-cards/slate/edge",
   "verdict": {
     "status": "reconsider",
-    "text": "Discontinued for new applicants; existing holders can keep it",
-    "short_tag": "Discontinued"
+    "text": "No rewards and a high APR; Freedom Rise is the better no-fee starter card",
+    "short_tag": "No Rewards"
   },
   "earn_rates": [],
-  "earn_note": "Slate Edge never earned cash back or points. It's built entirely around a 0% intro APR and an ongoing APR-reduction mechanic, not rewards. If you want cash back on a starter/credit-building Chase card, use Freedom Rise instead.",
+  "earn_note": "Slate Edge has no cash back or points program of any kind. Chase's official page now shows a flat ~29% variable APR with no 0% intro period, a change from the intro-APR/rate-reduction mechanic this card originally launched with. If you want cash back on a no-fee, no-credit-history-required Chase starter card, use Freedom Rise instead.",
   "points": {
     "currency": "None",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
-    "note": "This card has no points or cash-back program of any kind. Its entire value proposition is interest-rate management: a 0% intro APR window plus an ongoing 2% APR reduction each account anniversary (down to a floor rate) for cardholders who spend $1,000/year and pay on time."
+    "note": "This card has no points or cash-back program of any kind. Chase's official page shows a flat ~29% variable APR and no longer mentions any 0% intro period or the ongoing APR-reduction mechanic this card launched with in 2021."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -27,29 +27,50 @@
     "highlight": "No rewards currency exists on this card, so there is nothing to transfer.",
     "recent_changes": "Not applicable."
   },
-  "credits": [],
+  "credits": [
+    {
+      "id": "dashpass",
+      "name": "DoorDash DashPass",
+      "subtitle": "6 mo free, then $10/quarter promo",
+      "max_annual": 40,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "6 months of complimentary DashPass membership ($0 delivery fees on DoorDash/Caviar). Separately, up to $10/quarter in statement credits on non-restaurant (grocery/retail) DoorDash orders through Dec 2027.",
+      "tips": [
+        "Cancel DashPass before the 6-month free trial ends if you don't want to start paying for it.",
+        "The $10/quarter non-restaurant credit is the only ongoing recurring value here."
+      ]
+    }
+  ],
   "insurance": [
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Secondary only",
+      "level": "mid"
+    },
     {
       "coverage": "Purchase protection",
       "detail": "$500/item · 120 days (90 days for NY residents)",
       "level": "mid"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "+1 year (on warranties ≤3 years, up to 4 years total)",
+      "level": "good"
     }
   ],
-  "protection_note": "Minimal by design: this is a credit-building/APR-management card, not a travel or rewards card. No trip cancellation, baggage, rental car, or cell phone coverage.",
-  "rental_note": "No rental car coverage at all; use a different card for rentals.",
+  "protection_note": "Modest, as expected for a starter card: purchase protection, extended warranty, and secondary rental car coverage exist, but no trip cancellation, baggage, or cell phone coverage.",
+  "rental_note": "Secondary coverage only: it pays after your personal auto insurance, covering what's left. Use a primary-coverage card, like the Sapphire Preferred, for rentals when possible.",
   "status_perks": [],
   "services": [
     {
-      "name": "0% intro APR",
-      "detail": "0% for 18 months on purchases and balance transfers, then a variable ~22–30% ongoing rate."
-    },
-    {
-      "name": "Automatic APR reduction",
-      "detail": "Cardholders who spend at least $1,000 and pay on time in an account year get an automatic 2-percentage-point APR cut at each account anniversary, potentially down to a floor around 18–19%."
-    },
-    {
       "name": "Automatic credit line reviews",
-      "detail": "Chase automatically checks the account for a credit line increase roughly every 6 months."
+      "detail": "Chase automatically checks the account for a credit line increase every 6 months or sooner."
+    },
+    {
+      "name": "Roadside assistance",
+      "detail": "Dispatch service for roadside emergencies; fees billed to your card at time of dispatch."
     },
     {
       "name": "Foreign transaction fee likely applies",
@@ -59,14 +80,14 @@
   "additional_cards": {
     "title": "Additional cards",
     "options": [],
-    "note": "No distinct authorized-user program is marketed for this card, and it's no longer accepting new applicants of any kind as of February 2026."
+    "note": "No distinct authorized-user program is marketed for this card."
   },
   "timeline": [
     {
-      "date": "Jan 2026",
+      "date": "Jul 2026",
       "type": "cut",
-      "badge": "Discontinued",
-      "text": "Chase stops accepting new Slate Edge applications and reintroduces a plain Chase Slate card (0% intro APR for 21 months on balance transfers, but without the ongoing APR-reduction feature) as its replacement for new applicants."
+      "badge": "Benefit cut",
+      "text": "As of this check, Chase's official page shows a flat ~29% variable APR with no 0% intro period and no mention of the automatic APR-reduction mechanic the card launched with. The card remains open to new applicants, contrary to this dataset's earlier discontinued status."
     },
     {
       "date": "Jul 19, 2021",
