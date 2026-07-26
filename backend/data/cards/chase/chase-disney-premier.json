@@ -93,10 +93,20 @@
       "coverage": "Baggage delay",
       "detail": "$100/day · up to 3 days · after 6 hrs",
       "level": "mid"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Theft & collision, secondary domestic / primary outside the US, up to $60,000, 31 days",
+      "level": "mid"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "$500,000 · common carrier",
+      "level": "good"
     }
   ],
-  "protection_note": "A retail card's protection suite, not a travel card's: purchase protection, extended warranty, and baggage delay are here, but there's no trip cancellation/interruption, no rental car coverage, no emergency medical, and no cell phone protection. Chase's own benefits list for this card doesn't include auto rental coverage, unlike most of its other Visa Signature cards.",
-  "rental_note": "No rental car coverage on this card, despite the Visa Signature network; Chase's own protection list for Disney Premier doesn't include it, unlike most of its other Visa Signature cards. Use a different card for rentals.",
+  "protection_note": "A standard Visa Signature protection suite: purchase protection, extended warranty, baggage delay, rental car coverage, and travel accident insurance are all included, per Chase's Visa Signature/Visa Platinum Guide to Benefits. There's still no trip cancellation/interruption or cell phone protection.",
+  "rental_note": "Secondary coverage for theft and collision domestically (primary outside the US), up to $60,000, on rentals of 31 days or less. Decline the counter's CDW and pay with this card.",
   "status_perks": [],
   "services": [
     {
@@ -114,6 +124,14 @@
     {
       "name": "Foreign transaction fee applies",
       "detail": "3% on purchases made outside the US, not built for international use, including at Disneyland Paris."
+    },
+    {
+      "name": "Roadside assistance",
+      "detail": "Pay-per-use dispatch service (towing, tire change, jump start, lockout, fuel delivery) available 24/7 in the US and Canada; you pay a pre-negotiated per-service fee."
+    },
+    {
+      "name": "Travel & emergency assistance",
+      "detail": "Legal and medical referrals while traveling; cardholder pays for any goods or services obtained."
     }
   ],
   "additional_cards": {
