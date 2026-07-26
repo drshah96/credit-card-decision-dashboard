@@ -6,6 +6,7 @@ import { PageTabs } from "../components/PageTabs";
 import { CompareSlot } from "../components/CompareSlot";
 import { useCompareList } from "../hooks/useCompareList";
 import { useCreditUsage } from "../hooks/useCreditUsage";
+import { trackEvent } from "../utils/analytics";
 import { CARD_IMAGES } from "../utils/cardImages";
 import type { Card, CardSummary } from "../types/cards";
 
@@ -106,6 +107,25 @@ export default function ComparePage() {
   const selectedSummaries = selectedIds
     .map((id) => summariesById.get(id))
     .filter((c): c is CardSummary => Boolean(c));
+
+  // Comma-joined ids of only the selections that resolved to a real card —
+  // a stable primitive key so the tracking effect below only re-triggers
+  // when the actual validated comparison set changes.
+  const validCardIdsKey = selectedSummaries.map((c) => c.id).join(",");
+
+  // Debounced so building a comparison one card at a time (pick 1, pick 2,
+  // pick 3...) fires a single compare_cards event for the settled set
+  // rather than one event per incremental edit. Gated on selectedSummaries
+  // (validated against the fetched catalog) rather than raw selectedIds, so
+  // a stale/typo'd share link never counts an unresolved id as compared.
+  useEffect(() => {
+    const ids = validCardIdsKey ? validCardIdsKey.split(",") : [];
+    if (ids.length < 2) return;
+    const timeoutId = window.setTimeout(() => {
+      trackEvent("compare_cards", { card_ids: validCardIdsKey, card_count: ids.length });
+    }, 1000);
+    return () => window.clearTimeout(timeoutId);
+  }, [validCardIdsKey]);
 
   const { getCardUsage } = useCreditUsage();
 

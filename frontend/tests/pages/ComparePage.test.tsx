@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, waitFor, fireEvent, within } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -496,6 +496,48 @@ describe("ComparePage", () => {
         "amex-platinum",
         "chase-sapphire-reserve",
       ]);
+    });
+  });
+
+  describe("analytics", () => {
+    afterEach(() => {
+      delete window.gtag;
+    });
+
+    it("fires a single debounced compare_cards event once the selection settles", async () => {
+      const calls: unknown[][] = [];
+      window.gtag = (...args: unknown[]) => calls.push(args);
+
+      renderPage("/compare?cards=amex-platinum,chase-sapphire-reserve");
+
+      await waitFor(() => {
+        expect(screen.getByRole("columnheader", { name: /the platinum card/i })).toBeInTheDocument();
+      });
+
+      await waitFor(
+        () => {
+          expect(calls).toEqual([
+            ["event", "compare_cards", { card_ids: "amex-platinum,chase-sapphire-reserve", card_count: 2 }],
+          ]);
+        },
+        { timeout: 2000 },
+      );
+    });
+
+    it("excludes ids that don't resolve to a real card from the tracked comparison", async () => {
+      const calls: unknown[][] = [];
+      window.gtag = (...args: unknown[]) => calls.push(args);
+
+      renderPage("/compare?cards=amex-platinum,typo-nonexistent-id");
+
+      await waitFor(() => {
+        expect(screen.getByRole("columnheader", { name: /the platinum card/i })).toBeInTheDocument();
+      });
+
+      // Wait past the debounce window; only one id resolved to a real card,
+      // so the comparison never reached the 2-card minimum — no event fires.
+      await new Promise((resolve) => setTimeout(resolve, 1200));
+      expect(calls).toEqual([]);
     });
   });
 });
