@@ -190,7 +190,7 @@
     },
     {
       "coverage": "Baggage delay",
-      "detail": "$100/day · up to 3 days",
+      "detail": "$100/day · up to 3 days · after 6 hrs",
       "level": "good"
     },
     {
@@ -199,13 +199,23 @@
       "level": "good"
     },
     {
+      "coverage": "Travel accident insurance",
+      "detail": "$500,000 · common carrier / $100,000 · 24-hour",
+      "level": "good"
+    },
+    {
+      "coverage": "Emergency evacuation & transportation",
+      "detail": "$1,000,000 medical evacuation · $1,000 repatriation of remains",
+      "level": "strong"
+    },
+    {
       "coverage": "Purchase protection",
-      "detail": "$10,000/item · 120 days",
+      "detail": "$10,000/item · $50,000/yr · 120 days",
       "level": "strong"
     },
     {
       "coverage": "Return protection",
-      "detail": "Up to $500/item",
+      "detail": "$500/item · $1,000/yr · 90 days",
       "level": "good"
     },
     {
@@ -219,7 +229,7 @@
       "level": "none"
     }
   ],
-  "protection_note": "A real step up from Explorer/Quest on trip cancellation: $10,000/person matches CSR outright, plus a return-protection benefit neither cheaper United card gets. The 12-hour trip-delay trigger is still dated (CSR triggers at 6 hrs), and there's still no cell-phone protection.",
+  "protection_note": "A real step up from Explorer/Quest on trip cancellation: $10,000/person matches CSR outright, plus a return-protection benefit and Visa Infinite exclusives (travel accident insurance, $1M emergency evacuation coverage) neither cheaper United card gets. The 12-hour trip-delay trigger is still dated (CSR triggers at 6 hrs), and there's still no cell-phone protection.",
   "rental_note": "Primary coverage up to $60,000: decline the counter's CDW and pay with the card. Same cap as Explorer/Quest; CSR and Venture X go higher at $75k.",
   "status_perks": [
     {
@@ -264,6 +274,10 @@
     {
       "name": "Visa Infinite Concierge",
       "detail": "24/7 concierge for reservations, tickets, and travel arrangements, plus Visa Infinite travel and emergency assistance services."
+    },
+    {
+      "name": "Roadside assistance",
+      "detail": "4 free dispatch events per year, up to $50 each, covering towing, tire change, battery/jump start, lockout, and fuel delivery, available 24/7 in the US and Canada."
     },
     {
       "name": "United Club All Access path",
