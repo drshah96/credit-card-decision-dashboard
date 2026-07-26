@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { fetchCard } from "../api/cards";
 import { useCompareList } from "../hooks/useCompareList";
 import { useCreditUsage } from "../hooks/useCreditUsage";
+import { trackEvent } from "../utils/analytics";
 import { ISSUERS } from "../utils/cardTaxonomy";
 import { CARD_IMAGES } from "../utils/cardImages";
 import type {
@@ -992,6 +993,10 @@ export default function CardDetailPage() {
     queryKey: ["card", id],
     queryFn: id ? () => fetchCard(id) : skipToken,
   });
+
+  useEffect(() => {
+    if (card) trackEvent("view_card", { card_id: card.id, issuer: card.issuer });
+  }, [card]);
 
   const is404 = error instanceof Error && error.message.includes("404");
   const issuer = card ? ISSUERS.find((i) => i.issuerField === card.issuer) : undefined;

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -1272,6 +1272,41 @@ describe("CardDetailPage", () => {
         "href",
         "/compare?cards=chase-a,chase-b,chase-c,chase-d",
       );
+    });
+  });
+
+  describe("analytics", () => {
+    afterEach(() => {
+      delete window.gtag;
+    });
+
+    it("fires a view_card event with the card's id and issuer once it loads", async () => {
+      const calls: unknown[][] = [];
+      window.gtag = (...args: unknown[]) => calls.push(args);
+      vi.mocked(fetchCard).mockResolvedValue(makeCard({ id: "amex-platinum", issuer: "American Express" }));
+
+      renderPage("amex-platinum");
+
+      await waitFor(() => {
+        expect(calls).toContainEqual([
+          "event",
+          "view_card",
+          { card_id: "amex-platinum", issuer: "American Express" },
+        ]);
+      });
+    });
+
+    it("does not fire view_card while the card is still loading or failed to load", async () => {
+      const calls: unknown[][] = [];
+      window.gtag = (...args: unknown[]) => calls.push(args);
+      vi.mocked(fetchCard).mockRejectedValue(new Error("Server error 500: Internal Server Error"));
+
+      renderPage();
+
+      await waitFor(() => {
+        expect(screen.getByText("Failed to load card")).toBeInTheDocument();
+      });
+      expect(calls).toEqual([]);
     });
   });
 });

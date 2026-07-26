@@ -8,6 +8,9 @@ import "@fontsource-variable/fraunces/standard.css";
 import "@fontsource-variable/space-grotesk/wght.css";
 import "./index.css";
 import App from "./App.tsx";
+import { initAnalytics } from "./utils/analytics";
+
+initAnalytics();
 
 const queryClient = new QueryClient();
 
