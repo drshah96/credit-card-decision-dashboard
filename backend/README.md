@@ -1,6 +1,6 @@
 # Backend — card catalog database
 
-The card catalog is a normalized relational schema (17 tables), not a single JSON
+The card catalog is a normalized relational schema (18 tables), not a single JSON
 blob. This doc covers the schema shape, how data actually gets in, and how to add
 or update a card.
 
@@ -24,10 +24,11 @@ letting the catalog grow without a PR per edit.
   `timeline_events`. Each has a `sort_order` column standing in for array position,
   and cascades on delete with its card.
 - **`card_transfer_partners`** — junction table (card ↔ named transfer partner).
-  Schema is ready but currently unpopulated for most cards — the source data only
-  has aggregate counts (`transfer_airline_count`/`transfer_hotel_count` on `cards`),
-  not an authoritative per-partner list with ratios. Populate this once a reliable
-  per-partner source exists, rather than inventing entries.
+  Populated for 27 of 95 cards so far, where a reliable, verified per-partner
+  source exists (name, type, ratio); the rest still only have the aggregate
+  counts (`transfer_airline_count`/`transfer_hotel_count` on `cards`). Extend
+  this as verified per-partner sources become available for other cards,
+  rather than inventing entries.
 - **`card_drafts`** — the review queue. Not part of the normalized schema itself;
   holds fetched-and-extracted card data pending human approval before it's promoted
   into the tables above.
@@ -297,9 +298,8 @@ one to backfill existing rows) — check the generated file before applying.
 
 ## Known gaps
 
-- `card_transfer_partners` is unpopulated for most cards (see Schema above).
-- No bulk "seed everything" script yet — a fresh database needs each card added
-  and promoted individually (see Getting Started in the top-level README).
-- User accounts / persisted calculator state (which credits a specific person
-  actually uses) isn't built — the frontend calculator is currently client-side
-  state only, reset on page refresh.
+- `card_transfer_partners` still only has real per-partner data for 27 of 95
+  cards (see Schema above) — extend as verified sources become available.
+- User accounts aren't built. `useCreditUsage`'s per-card credit-usage values
+  persist in the browser's `localStorage` (survives a refresh), but aren't
+  tied to an account, so they don't follow a user across devices/browsers.
