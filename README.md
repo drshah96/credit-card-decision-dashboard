@@ -14,12 +14,19 @@ A web-based tool to help decide which premium credit cards to keep or downgrade.
 
 ## Cards covered
 
-| Card | Annual Fee |
-|------|-----------|
-| Amex Platinum | $895 |
-| Chase Sapphire Reserve | $795 |
-| Capital One Venture X | $395 |
-| Delta SkyMiles Platinum | $350 |
+95 cards across 7 issuers, each hand-authored as its own JSON file under
+`backend/data/cards/{issuer}/*.json` — see [`backend/README.md`](backend/README.md)
+for the schema and the add → review → promote flow for contributing a new one.
+
+| Issuer | Cards |
+|--------|-------|
+| Citi | 23 |
+| Chase | 19 |
+| Capital One | 17 |
+| American Express | 14 |
+| Bank of America | 10 |
+| U.S. Bank | 9 |
+| Bilt | 3 |
 
 ## Getting started
 
@@ -79,7 +86,8 @@ credit-card-decision-dashboard/
 │   │   └── cards.py            # Query layer used by the API routes
 │   └── scripts/
 │       ├── upsert.py           # Card-shape dict → normalized rows (shared by drafts + any re-sync)
-│       └── drafts.py           # Review-queue CLI: add / list / show / promote / reject
+│       ├── drafts.py           # Review-queue CLI: add / list / show / promote / reject
+│       └── seed_catalog.py     # Bulk-seed/resync every committed card JSON, skipping the review queue
 ├── alembic/                     # Schema migrations
 ├── frontend/
 │   ├── src/                    # React app (pages, components, api client)
