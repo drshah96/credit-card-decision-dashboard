@@ -19,9 +19,8 @@ services:
       uv run python -m backend.scripts.seed_catalog &&
       uv run uvicorn backend.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
-    # Custom domain — still requires manually verifying ownership and adding
-    # the DNS records Render provides once this Blueprint is applied; that
-    # part can't be automated from here.
+    # Custom domain — verified, DNS (Cloudflare, DNS-only/unproxied CNAME to
+    # thewalletaudit-api.onrender.com) is live and the cert is issued.
     domains:
       - api.thewalletaudit.com
     envVars:
@@ -45,20 +44,16 @@ services:
     runtime: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
-    # Custom domain — still requires manually verifying ownership and adding
-    # the DNS records Render provides once this Blueprint is applied; that
-    # part can't be automated from here.
+    # Custom domain — verified, DNS (Cloudflare, DNS-only/unproxied CNAME to
+    # thewalletaudit.onrender.com) is live and the cert is issued. www is
+    # also registered on this service and redirects to the bare domain.
     domains:
       - thewalletaudit.com
     envVars:
-      # Points at the backend's default onrender.com URL, not its custom
-      # domain (api.thewalletaudit.com) — that domain hasn't been purchased
-      # yet, so it doesn't resolve, and pointing the frontend at it broke
-      # every API call in production. Switch this to
-      # https://api.thewalletaudit.com/api once the domain is registered and
-      # verified in Render.
+      # api.thewalletaudit.com is registered, verified, and has a live cert —
+      # point the frontend at it directly instead of the onrender.com URL.
       - key: VITE_API_URL
-        value: https://thewalletaudit-api.onrender.com/api
+        value: https://api.thewalletaudit.com/api
     routes:
       - type: rewrite
         source: /*
