@@ -17,7 +17,7 @@ function renderPage() {
 describe("IssuersPage", () => {
   it("renders the header copy", () => {
     renderPage();
-    expect(screen.getByText(/premium cards aren't about credits/i)).toBeInTheDocument();
+    expect(screen.getByText(/build a smarter card portfolio/i)).toBeInTheDocument();
   });
 
   it("renders one tile per issuer", () => {

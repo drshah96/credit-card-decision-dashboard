@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, waitFor, fireEvent, cleanup } from "@testing-library/react";
-import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { MemoryRouter, Route, Routes, useLocation } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import IssuerCardsPage from "@/pages/IssuerCardsPage";
 import type { Card, CardSummary } from "@/types/cards";
@@ -64,15 +64,24 @@ function mockFetchCardImpl(id: string): Promise<Card> {
   return Promise.resolve(makeCard(summary));
 }
 
-function renderPage(slug = "amex") {
+// Displays whatever router `state` it was navigated with, so a test can
+// assert on the `state.from` a card tile's Link passes along — a plain
+// static stub route can't observe that (state isn't part of the URL).
+function CardDetailStateProbe() {
+  const location = useLocation();
+  const from = (location.state as { from?: string } | null)?.from;
+  return <div>Card detail (from: {from ?? "none"})</div>;
+}
+
+function renderPage(slug = "amex", search = "") {
   const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
   return render(
     <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={[`/issuer/${slug}`]}>
+      <MemoryRouter initialEntries={[`/issuer/${slug}${search}`]}>
         <Routes>
           <Route path="/issuer/:issuerSlug" element={<IssuerCardsPage />} />
           <Route path="/" element={<div>Issuers home</div>} />
-          <Route path="/cards/:id" element={<div>Card detail</div>} />
+          <Route path="/cards/:id" element={<CardDetailStateProbe />} />
         </Routes>
       </MemoryRouter>
     </QueryClientProvider>,
@@ -150,16 +159,36 @@ describe("IssuerCardsPage", () => {
     expect(screen.queryByText("The Platinum Card")).not.toBeInTheDocument();
   });
 
-  it("links each card tile to its detail page", async () => {
+  it("restores the active filter from the URL on mount, instead of defaulting to All Cards", async () => {
+    // Simulates arriving back at this page (e.g. via the card detail page's
+    // back link, or the browser's back button) after a filter was already
+    // selected — the filter must come from the URL, not a fresh useState.
     vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
-    renderPage("amex");
+    renderPage("amex", "?filter=Airline");
 
     await waitFor(() => {
-      expect(screen.getByRole("link", { name: /view the platinum card details/i })).toHaveAttribute(
+      expect(screen.getByRole("button", { name: "Airline" })).toHaveAttribute("aria-pressed", "true");
+    });
+    expect(screen.getByText("Delta SkyMiles Gold")).toBeInTheDocument();
+    expect(screen.queryByText("The Platinum Card")).not.toBeInTheDocument();
+  });
+
+  it("links each card tile to its detail page, passing the current filtered URL as router state", async () => {
+    // So the detail page's back link can return here with the same filter
+    // still active, instead of resetting to All Cards.
+    vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
+    renderPage("amex", "?filter=Airline");
+
+    await waitFor(() => {
+      expect(screen.getByRole("link", { name: /view delta skymiles gold details/i })).toHaveAttribute(
         "href",
-        "/cards/amex-platinum",
+        "/cards/amex-delta-skymiles-gold",
       );
     });
+
+    fireEvent.click(screen.getByRole("link", { name: /view delta skymiles gold details/i }));
+
+    expect(screen.getByText("Card detail (from: /issuer/amex?filter=Airline)")).toBeInTheDocument();
   });
 
   describe("select cards mode", () => {

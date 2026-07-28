@@ -124,16 +124,17 @@ function makeCard(overrides: Partial<Card> = {}): Card {
 
 // ─── Render helper ────────────────────────────────────────────────────────────
 
-function renderPage(cardId = "amex") {
+function renderPage(cardId = "amex", state?: { from?: string }) {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false } },
   });
   return render(
     <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={[`/cards/${cardId}`]}>
+      <MemoryRouter initialEntries={[{ pathname: `/cards/${cardId}`, state }]}>
         <Routes>
           <Route path="/cards/:id" element={<CardDetailPage />} />
           <Route path="/" element={<div>Dashboard</div>} />
+          <Route path="/issuer/:issuerSlug" element={<div>Issuer page</div>} />
         </Routes>
       </MemoryRouter>
     </QueryClientProvider>,
@@ -1214,6 +1215,56 @@ describe("CardDetailPage", () => {
       );
 
       expect(vi.mocked(fetchCard)).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("back link", () => {
+    it("returns to the exact filtered issuer URL it was linked from", async () => {
+      // An issuer page's card tile passes its current URL (filter included)
+      // as router state — the back link should use that verbatim, not the
+      // plain /issuer/{slug} it'd otherwise construct, so an active filter
+      // like "Dining" survives going back.
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({ issuer: "Chase", network: "VISA INFINITE" }),
+      );
+      renderPage("amex", { from: "/issuer/chase?filter=Dining" });
+
+      await waitFor(() => {
+        expect(screen.getByRole("link", { name: /chase cards/i })).toHaveAttribute(
+          "href",
+          "/issuer/chase?filter=Dining",
+        );
+      });
+    });
+
+    it("labels the back link using the state URL's issuer even before the card finishes loading", () => {
+      // Regression: backTo used to prefer state.from unconditionally, but
+      // backLabel only read the issuer resolved from `card` data — so while
+      // the card was still loading (or if the fetch failed), the link
+      // pointed at the right filtered issuer URL but showed "All issuers"
+      // instead of "Chase cards".
+      vi.mocked(fetchCard).mockReturnValue(new Promise(() => {}));
+      renderPage("amex", { from: "/issuer/chase?filter=Dining" });
+
+      expect(screen.getByRole("link", { name: /chase cards/i })).toHaveAttribute(
+        "href",
+        "/issuer/chase?filter=Dining",
+      );
+    });
+
+    it("falls back to the plain issuer URL when arriving with no router state", async () => {
+      // E.g. a shared link straight to a card, or navigating from the
+      // Compare page — there's no "from" to honor, so it should construct
+      // the issuer's default URL rather than crash or link nowhere.
+      vi.mocked(fetchCard).mockResolvedValue(makeCard({ issuer: "Chase" }));
+      renderPage("amex");
+
+      await waitFor(() => {
+        expect(screen.getByRole("link", { name: /chase cards/i })).toHaveAttribute(
+          "href",
+          "/issuer/chase",
+        );
+      });
     });
   });
 

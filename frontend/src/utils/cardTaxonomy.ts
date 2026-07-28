@@ -1,5 +1,13 @@
 import type { Card, CardSummary } from "../types/cards";
 
+// Multiplier strings aren't uniformly formatted ("5×", "3%", "15¢/gal", "Up to
+// 4×", "Points on Star Money Days"), so this pulls out the first number found
+// and treats unparseable ones as lowest-priority rather than crashing a sort.
+export function parseMultiplierValue(multiplier: string): number {
+  const match = multiplier.match(/[\d.]+/);
+  return match ? parseFloat(match[0]) : -Infinity;
+}
+
 // ─── Issuers ──────────────────────────────────────────────────────────────────
 // `issuer` as returned by the API -> a URL-safe slug + display label.
 
@@ -222,6 +230,77 @@ export function groupCardsForAllView(cards: CardSummary[]): CardSection[] {
   return sections;
 }
 
+// ─── Sorting a single category-filtered view ───────────────────────────────────
+// Unlike the "All Cards" view (grouped into one section per brand), a
+// category filter (Dining, Gas, a brand, ...) shows one flat grid — but it
+// should still surface the issuer's own flagship cards before airline/hotel
+// co-brands before other co-brands, and within each of those, the card that
+// actually earns the most in the selected category first.
+
+/** Regexes shared with `detailTags` so a card's earn-rate categories are
+ * matched identically whether deriving its tags or ranking it within a filter. */
+const CATEGORY_TAG_MATCHERS: Record<string, RegExp> = {
+  Dining: /dining|restaurant/,
+  Gas: /\bgas\b|fuel station|ev charging/,
+};
+
+/** 0 = the issuer's own flagship product, 1 = an airline/hotel co-brand
+ * (shown together, unlike the per-brand sectioning in the "All Cards" view),
+ * 2 = any other co-branded partner card. */
+function groupRank(cardId: string): number {
+  const group = classify(cardId).group;
+  if (group === "personal") return 0;
+  if (group === "airline" || group === "hotel") return 1;
+  return 2;
+}
+
+/** The card's best multiplier in the filter's earn-rate category, or null if
+ * the filter isn't a category with a meaningful multiplier to rank by (a
+ * brand name, "Airline", "No Annual Fee", ...) or the card detail hasn't
+ * loaded yet. */
+function categoryRelevance(detail: Card | undefined, filter: string): number | null {
+  const matcher = CATEGORY_TAG_MATCHERS[filter];
+  if (!matcher || !detail) return null;
+  let best: number | null = null;
+  for (const rate of detail.earn_rates) {
+    if (matcher.test(rate.category.toLowerCase())) {
+      const value = parseMultiplierValue(rate.multiplier);
+      if (best === null || value > best) best = value;
+    }
+  }
+  return best;
+}
+
+/** Orders a category/brand-filtered list of cards: flagship, then
+ * airline/hotel co-brands, then other co-brands; within each, the card most
+ * relevant to `filter` first (by earn-rate multiplier where that means
+ * something, otherwise highest annual fee, then name). */
+export function sortFilteredCards(
+  cards: CardSummary[],
+  filter: string,
+  detailsById: Map<string, Card>,
+): CardSummary[] {
+  // Computed once per card up front (like tagMap/detailsById in the caller)
+  // rather than inside the comparator, where a sort re-evaluates it O(n log n)
+  // times instead of O(n).
+  const ranks = new Map(cards.map((c) => [c.id, groupRank(c.id)]));
+
+  return [...cards].sort((a, b) => {
+    const rankDiff = ranks.get(a.id)! - ranks.get(b.id)!;
+    if (rankDiff !== 0) return rankDiff;
+
+    const relA = categoryRelevance(detailsById.get(a.id), filter);
+    const relB = categoryRelevance(detailsById.get(b.id), filter);
+    if (relA !== null || relB !== null) {
+      if (relA === null) return 1;
+      if (relB === null) return -1;
+      if (relA !== relB) return relB - relA;
+    }
+
+    return byFeeDescThenName(a, b);
+  });
+}
+
 // ─── Filter chips ─────────────────────────────────────────────────────────────
 // Chips that need only summary-level data (annual fee, group/brand) are
 // derivable immediately. The richer behavioral chips (Dining, Gas, Lounge
@@ -272,8 +351,8 @@ export function detailTags(card: Card): string[] {
   }
 
   const categories = card.earn_rates.map((r) => r.category.toLowerCase()).join(" | ");
-  if (/dining|restaurant/.test(categories)) tags.add("Dining");
-  if (/\bgas\b|fuel station|ev charging/.test(categories)) tags.add("Gas");
+  if (CATEGORY_TAG_MATCHERS.Dining.test(categories)) tags.add("Dining");
+  if (CATEGORY_TAG_MATCHERS.Gas.test(categories)) tags.add("Gas");
 
   if (card.status_perks.some((p) => /lounge/i.test(p.name) || /lounge/i.test(p.note))) {
     tags.add("Lounge Access");

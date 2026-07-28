@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { CompareTray } from "./components/CompareTray";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { Footer } from "./components/Footer";
+import { SiteMark } from "./components/SiteMark";
 import CardDetailPage from "./pages/CardDetailPage";
 import ComparePage from "./pages/ComparePage";
 import IssuerCardsPage from "./pages/IssuerCardsPage";
@@ -23,6 +24,7 @@ export default function App() {
 
   return (
     <>
+      <SiteMark />
       <ErrorBoundary>
         <Routes>
           <Route path="/" element={<IssuersPage />} />
