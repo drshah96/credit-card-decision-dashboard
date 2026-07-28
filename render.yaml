@@ -19,8 +19,10 @@ services:
       uv run python -m backend.scripts.seed_catalog &&
       uv run uvicorn backend.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
-    # Custom domain — verified, DNS (Cloudflare, DNS-only/unproxied CNAME to
-    # thewalletaudit-api.onrender.com) is live and the cert is issued.
+    # Custom domain — verified, DNS (Cloudflare, proxied CNAME to
+    # thewalletaudit-api.onrender.com) is live and the cert is issued. SSL/TLS
+    # mode on Cloudflare is "Full" — needed for the proxy to trust Render's
+    # own cert instead of erroring or downgrading to plaintext.
     domains:
       - api.thewalletaudit.com
     envVars:
@@ -44,9 +46,12 @@ services:
     runtime: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
-    # Custom domain — verified, DNS (Cloudflare, DNS-only/unproxied CNAME to
+    # Custom domain — verified, DNS (Cloudflare, proxied CNAME to
     # thewalletaudit.onrender.com) is live and the cert is issued. www is
     # also registered on this service and redirects to the bare domain.
+    # All three records (root, www, api) are proxied through Cloudflare
+    # (orange cloud) as of 2026-07-28, for DDoS protection/caching/traffic
+    # analytics — SSL/TLS mode on Cloudflare is "Full".
     domains:
       - thewalletaudit.com
     envVars:
