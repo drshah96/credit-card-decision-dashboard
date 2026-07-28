@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PageTabs } from "../components/PageTabs";
 import { ISSUERS } from "../utils/cardTaxonomy";
@@ -19,43 +20,57 @@ const ISSUER_LOGOS: Record<string, string> = {
   bilt: biltLogo,
 };
 
+const HEADLINES = [
+  { lead: "Build a smarter card portfolio.", accent: "Maximize every swipe." },
+  { lead: "Don't just carry premium cards.", accent: "Unlock their full potential." },
+  { lead: "Curate a better wallet.", accent: "Elevate your rewards." },
+];
+const HEADLINE_ROTATE_MS = 5000;
+
 export default function IssuersPage() {
+  const [headlineIndex, setHeadlineIndex] = useState(0);
+
+  useEffect(() => {
+    // Auto-updating content that runs longer than 5s needs a way to stop
+    // (WCAG 2.2.2) — the simplest honest option for a decorative headline
+    // like this is to not start it at all for users who've asked their OS
+    // for reduced motion, rather than adding a bespoke pause control.
+    const prefersReducedMotion =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    const id = setInterval(() => {
+      setHeadlineIndex((i) => (i + 1) % HEADLINES.length);
+    }, HEADLINE_ROTATE_MS);
+    return () => clearInterval(id);
+  }, []);
+
+  const headline = HEADLINES[headlineIndex];
+
   return (
     <div style={{ minHeight: "100vh" }}>
-      <div className="wrap" style={{ paddingTop: 48, paddingBottom: 80 }}>
-        {/* Header */}
+      <div className="wrap" style={{ paddingTop: 24, paddingBottom: 80 }}>
+        {/* Header — the site's own name/mark lives in the persistent
+            SiteMark bar above every page (see App.tsx), not here, so this
+            headline doesn't have to also carry brand identity. */}
         <header style={{ marginBottom: 40 }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 12,
-              fontSize: 11.5,
-              letterSpacing: "0.32em",
-              textTransform: "uppercase",
-              color: "var(--faint)",
-              marginBottom: 16,
-            }}
-          >
-            The Wallet Audit
-            <span style={{ flex: 1, height: 1, background: "var(--line)" }} />
-          </div>
           <h1
+            key={headlineIndex}
+            className="headline-rotator"
             style={{
               fontFamily: '"Fraunces Variable", serif',
               fontWeight: 600,
-              fontSize: "clamp(34px, 5.6vw, 56px)",
-              lineHeight: 1.05,
-              margin: "0 0 10px",
+              fontSize: "clamp(22px, 3.2vw, 32px)",
+              lineHeight: 1.15,
+              margin: "0 0 14px",
               letterSpacing: "-0.01em",
               color: "var(--ink)",
             }}
           >
-            Premium cards aren't about credits.
-            <br />
-            They're about{" "}
+            {headline.lead}{" "}
             <em style={{ fontStyle: "italic", color: "var(--gold)" }}>
-              what you'll actually use.
+              {headline.accent}
             </em>
           </h1>
           <p
@@ -66,8 +81,10 @@ export default function IssuersPage() {
               margin: 0,
             }}
           >
-            Pick a bank to see every card it issues, then drill into credits, earn
-            rates, and insurance for the one you're deciding on.
+            The Wallet Audit drills into every credit, earn rate, travel benefit,
+            and insurance policy on each card, turning honest points valuation
+            into real card optimization, so you can maximize rewards on the card
+            you'll actually use.
           </p>
         </header>
 
