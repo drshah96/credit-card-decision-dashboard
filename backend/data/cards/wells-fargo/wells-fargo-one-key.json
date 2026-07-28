@@ -1,0 +1,148 @@
+{
+  "id": "wells-fargo-one-key",
+  "name": "One Key Card",
+  "issuer": "Wells Fargo",
+  "network": "VISA SIGNATURE",
+  "points_program": "OneKeyCash",
+  "accent_color": "#6C2EB5",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee",
+  "official_url": "https://creditcards.wellsfargo.com/one-key-credit-card/",
+  "verdict": {
+    "status": "situational",
+    "text": "Keep if you book through Expedia, Hotels.com, or Vrbo often",
+    "short_tag": "Expedia Group Booking Card"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🧳",
+      "multiplier": "3%",
+      "category": "Expedia, Hotels.com, and Vrbo bookings",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "3%",
+      "category": "Gas stations, grocery stores, and dining",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1.5%",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The 3% rate applies both to Expedia Group bookings and to a separate everyday bucket (gas, groceries, dining), so it earns well even for people who don't book much travel through Expedia. The 1.5% base rate on everything else is above average for a no-fee co-branded card.",
+  "points": {
+    "currency": "OneKeyCash",
+    "redemption_options": [
+      {
+        "method": "Book travel on Expedia, Hotels.com, or Vrbo",
+        "cpp": 1.0,
+        "best": true
+      }
+    ],
+    "per_100k": "$1,000, Expedia Group bookings only",
+    "note": "OneKeyCash is not redeemable for cash, statement credit, or gift cards; it only spends on Expedia, Hotels.com, and Vrbo. That's the tradeoff for the 3% everyday rate: the reward is locked to one travel ecosystem."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners. OneKeyCash isn't a transferable currency, it's a closed-loop credit for Expedia, Hotels.com, and Vrbo.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Reimbursement for covered cancellations or interruptions on common carrier fares; exact per-trip limit not published on the card's marketing page",
+      "level": "mid"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "Up to $1,000,000 when the full fare for a common carrier ticket is charged to the card",
+      "level": "strong"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Up to $50,000, secondary coverage that applies after your personal auto insurance",
+      "level": "good"
+    },
+    {
+      "coverage": "Cell phone protection",
+      "detail": "Up to $1,000 per claim against damage or theft when you pay your monthly cell phone bill with this card, minus a $25 deductible, max 2 claims per 12 months",
+      "level": "strong"
+    },
+    {
+      "coverage": "Zero liability",
+      "detail": "Not responsible for unauthorized transactions once reported",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not published for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not published for this card",
+      "level": "none"
+    }
+  ],
+  "protection_note": "A surprisingly strong travel insurance suite for a no-fee card: trip cancellation, travel accident coverage up to $1,000,000, and cell phone protection all show up. Purchase protection and extended warranty aren't advertised.",
+  "rental_note": "Secondary coverage up to $50,000, meaning it pays after your personal auto policy for whatever's left, up to that limit. Charge the full rental cost to the card and decline the counter's optional CDW to activate it.",
+  "status_perks": [
+    {
+      "name": "Silver tier, One Key membership",
+      "strength": 2,
+      "note": "Automatic Silver status gives 15% or more in savings on 10,000+ VIP Access hotels booked through Expedia, Hotels.com, or Vrbo. Gold tier unlocks after $15,000 in annual card spending."
+    }
+  ],
+  "services": [
+    {
+      "name": "$250 welcome bonus",
+      "detail": "$250 in OneKeyCash after spending $1,000 in purchases within the first 3 months."
+    },
+    {
+      "name": "No foreign transaction fee",
+      "detail": "$0 on purchases made outside the US."
+    },
+    {
+      "name": "Eligibility restriction",
+      "detail": "Not eligible for the welcome bonus if you've opened a One Key card within the last 48 months."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Earns OneKeyCash on their spend (into your account)",
+            "included": true
+          }
+        ]
+      }
+    ],
+    "note": "No cost to add, and their spending earns the same category rates into your account."
+  },
+  "timeline": [
+    {
+      "date": "2024 or later",
+      "type": "add",
+      "badge": "Launch",
+      "text": "Wells Fargo issues One Key and One Key+ as a two-tier lineup tied to Expedia Group's unified One Key loyalty program across Expedia, Hotels.com, and Vrbo. The exact launch date isn't confirmed here; treat it as approximate."
+    }
+  ]
+}
