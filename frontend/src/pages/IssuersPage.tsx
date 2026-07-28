@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PageTabs } from "../components/PageTabs";
+import { trackEvent } from "../utils/analytics";
 import { ISSUERS } from "../utils/cardTaxonomy";
 import amexLogo from "../assets/logos/amex.svg";
 import chaseLogo from "../assets/logos/chase.svg";
@@ -45,6 +46,13 @@ export default function IssuersPage() {
     }, HEADLINE_ROTATE_MS);
     return () => clearInterval(id);
   }, []);
+
+  // Fires once on mount and again on every rotation, so GA4 can report which
+  // headline variant a session actually saw (e.g. to correlate with clicks
+  // through to an issuer) instead of the rotation being invisible to analytics.
+  useEffect(() => {
+    trackEvent("headline_view", { headline_variant: HEADLINES[headlineIndex].lead });
+  }, [headlineIndex]);
 
   const headline = HEADLINES[headlineIndex];
 
