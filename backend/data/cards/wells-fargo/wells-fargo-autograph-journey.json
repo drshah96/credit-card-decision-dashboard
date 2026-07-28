@@ -31,7 +31,14 @@
     {
       "emoji": "🍽️",
       "multiplier": "3×",
-      "category": "Restaurants and other travel: car rentals, cruises, transit",
+      "category": "Restaurants",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🚗",
+      "multiplier": "3×",
+      "category": "Other travel: car rentals, cruises, transit",
       "highlight": true,
       "is_base": false
     },
