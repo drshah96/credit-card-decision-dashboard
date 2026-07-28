@@ -1,0 +1,19 @@
+name: Enforce main source branch
+
+# main only accepts merges from development (see feedback_pr_target_branch
+# memory / project convention adopted 2026-07-28) — this is the piece
+# branch protection itself can't express, since it only restricts the
+# target branch, not which branch a PR is allowed to come from.
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-source-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require development as PR source
+        if: github.head_ref != 'development'
+        run: |
+          echo "PRs into main must come from the 'development' branch (got '${{ github.head_ref }}')." >&2
+          exit 1
