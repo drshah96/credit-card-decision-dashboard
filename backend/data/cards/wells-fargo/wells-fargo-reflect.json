@@ -1,0 +1,101 @@
+{
+  "id": "wells-fargo-reflect",
+  "name": "Reflect Card",
+  "issuer": "Wells Fargo",
+  "network": "VISA",
+  "points_program": "None, no rewards program",
+  "accent_color": "#4A4A4A",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee, but no rewards program; the entire point is a long 0% intro APR",
+  "official_url": "https://creditcards.wellsfargo.com/reflect-visa-credit-card/",
+  "verdict": {
+    "status": "situational",
+    "text": "Keep only for the long 0% intro period; skip it otherwise",
+    "short_tag": "Long 0% Intro APR"
+  },
+  "earn_rates": [],
+  "earn_note": "No cash back or points program of any kind. This card exists for one reason: one of the longest 0% intro APR periods available, for people who want to finance a purchase or pay down a balance transfer interest-free.",
+  "points": {
+    "currency": "None",
+    "redemption_options": [],
+    "per_100k": "$0, no rewards program",
+    "note": "There is nothing to redeem. Choose this card for the intro APR, not for ongoing value."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No rewards currency exists on this card, so there is nothing to transfer.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Cell phone protection",
+      "detail": "Up to $600 per claim against damage or theft when you pay your monthly cell phone bill with this card, minus a $25 deductible, max 2 claims per 12 months",
+      "level": "good"
+    },
+    {
+      "coverage": "Zero liability",
+      "detail": "Not responsible for unauthorized transactions once reported",
+      "level": "good"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not published for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not published for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not published for this card",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip cancel/interrupt",
+      "detail": "Not published for this card",
+      "level": "none"
+    }
+  ],
+  "protection_note": "Cell phone protection is the one real benefit here, and it matches the Active Cash Card's terms. Nothing else is advertised: no purchase protection, extended warranty, rental car coverage, or trip insurance.",
+  "rental_note": "No auto rental coverage is publicly documented for this card.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "0% intro APR, 21 months",
+      "detail": "0% for 21 months on purchases and qualifying balance transfers (transfers must be made within 120 days of account opening), then a variable 17.49%, 23.99%, or 28.24% APR. One of the longest intro periods available on any card."
+    },
+    {
+      "name": "Foreign transaction fee",
+      "detail": "3% of each transaction, converted to US dollars."
+    },
+    {
+      "name": "My Wells Fargo Deals",
+      "detail": "Personalized merchant offers that earn a statement credit when you shop through the app."
+    },
+    {
+      "name": "Roadside Dispatch",
+      "detail": "24/7 towing and roadside assistance, billed to the card at time of dispatch, no membership fee."
+    },
+    {
+      "name": "Credit Close-Up",
+      "detail": "Free monthly FICO score updates and credit report insights through the Wells Fargo app."
+    }
+  ],
+  "additional_cards": {
+    "title": "Authorized users",
+    "options": [],
+    "note": "No distinct authorized-user program is marketed for this card."
+  },
+  "timeline": [
+    {
+      "date": "Jun 2021",
+      "type": "add",
+      "badge": "Launch",
+      "text": "Wells Fargo launches Reflect as a no-annual-fee card built around a long 0% intro APR, positioned for people who want breathing room on a purchase or balance transfer rather than rewards."
+    }
+  ]
+}
