@@ -25,6 +25,7 @@ export const ISSUERS: IssuerInfo[] = [
   { slug: "us-bank", label: "U.S. Bank", issuerField: "U.S. Bank" },
   { slug: "bofa", label: "Bank of America", issuerField: "Bank of America" },
   { slug: "bilt", label: "Bilt", issuerField: "Bilt" },
+  { slug: "wells-fargo", label: "Wells Fargo", issuerField: "Wells Fargo" },
 ];
 
 export function getIssuerBySlug(slug: string | undefined): IssuerInfo | undefined {
@@ -165,6 +166,16 @@ export const CLASSIFICATION: Record<string, Classification> = {
   "bilt-blue": { group: "personal" },
   "bilt-obsidian": { group: "personal" },
   "bilt-palladium": { group: "personal" },
+
+  // ── Wells Fargo ──
+  "wells-fargo-active-cash": { group: "personal" },
+  "wells-fargo-reflect": { group: "personal" },
+  "wells-fargo-autograph": { group: "personal" },
+  "wells-fargo-autograph-journey": { group: "personal" },
+  "wells-fargo-one-key": { group: "cobrand", brand: "Expedia One Key" },
+  "wells-fargo-one-key-plus": { group: "cobrand", brand: "Expedia One Key" },
+  "wells-fargo-choice-privileges": { group: "hotel", brand: "Choice Privileges" },
+  "wells-fargo-choice-privileges-select": { group: "hotel", brand: "Choice Privileges" },
 };
 
 export function classify(cardId: string): Classification {

@@ -101,6 +101,14 @@ CARD_IDS = [
     "bilt-blue",
     "bilt-obsidian",
     "bilt-palladium",
+    "wells-fargo-active-cash",
+    "wells-fargo-reflect",
+    "wells-fargo-autograph",
+    "wells-fargo-autograph-journey",
+    "wells-fargo-one-key",
+    "wells-fargo-one-key-plus",
+    "wells-fargo-choice-privileges",
+    "wells-fargo-choice-privileges-select",
 ]
 
 
@@ -152,6 +160,7 @@ def test_get_card_detail(card_id: str) -> None:
         "us-bank-secured",
         "bofa-bankamericard",
         "bofa-bankamericard-secured",
+        "wells-fargo-reflect",
     )
     if card_id not in NO_REWARDS_CARDS:
         assert len(data["earn_rates"]) > 0
