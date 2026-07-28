@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef, type ReactNode } from "react";
 import { skipToken, useQuery } from "@tanstack/react-query";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { fetchCard } from "../api/cards";
 import { useCompareList } from "../hooks/useCompareList";
 import { useCreditUsage } from "../hooks/useCreditUsage";
 import { trackEvent } from "../utils/analytics";
-import { ISSUERS } from "../utils/cardTaxonomy";
+import { ISSUERS, getIssuerBySlug, parseMultiplierValue } from "../utils/cardTaxonomy";
 import { CARD_IMAGES } from "../utils/cardImages";
 import type {
   Card,
@@ -21,14 +21,7 @@ import type {
 // Highest multiplier first, ties broken alphabetically by category. Sorting at
 // render time (rather than relying on each card's JSON to be authored in order)
 // keeps every card consistent regardless of how it was written, including future
-// additions. Multiplier strings aren't uniformly formatted ("5×", "3%", "15¢/gal",
-// "Up to 4×", "Points on Star Money Days"), so we pull out the first number found
-// and treat unparseable ones as lowest-priority rather than crashing the sort.
-function parseMultiplierValue(multiplier: string): number {
-  const match = multiplier.match(/[\d.]+/);
-  return match ? parseFloat(match[0]) : -Infinity;
-}
-
+// additions.
 function sortEarnRates(rates: EarnRate[]): EarnRate[] {
   return [...rates].sort((a, b) => {
     const diff = parseMultiplierValue(b.multiplier) - parseMultiplierValue(a.multiplier);
@@ -988,6 +981,7 @@ function CardDetail({ card }: { card: Card }) {
 
 export default function CardDetailPage() {
   const { id } = useParams<{ id: string }>();
+  const location = useLocation();
 
   const { data: card, isLoading, isError, error } = useQuery({
     queryKey: ["card", id],
@@ -1000,8 +994,19 @@ export default function CardDetailPage() {
 
   const is404 = error instanceof Error && error.message.includes("404");
   const issuer = card ? ISSUERS.find((i) => i.issuerField === card.issuer) : undefined;
-  const backTo = issuer ? `/issuer/${issuer.slug}` : "/";
-  const backLabel = issuer ? `${issuer.label} cards` : "All issuers";
+  // Prefer the exact page we were linked from (an issuer page's card tile
+  // passes this via router state) so an active filter there — e.g. "Dining"
+  // — survives going back, instead of resetting to "All Cards". Resolving
+  // the issuer from that URL (rather than only from the card data) keeps
+  // the label in sync with the destination while the card is still
+  // loading — otherwise backTo would already point at e.g. "/issuer/chase"
+  // while backLabel still read "All issuers" because `card`/`issuer` hadn't
+  // resolved yet.
+  const stateFrom = (location.state as { from?: string } | null)?.from;
+  const stateIssuer = getIssuerBySlug(stateFrom?.match(/^\/issuer\/([^/?]+)/)?.[1]);
+  const resolvedIssuer = stateIssuer ?? issuer;
+  const backTo = stateFrom ?? (resolvedIssuer ? `/issuer/${resolvedIssuer.slug}` : "/");
+  const backLabel = resolvedIssuer ? `${resolvedIssuer.label} cards` : "All issuers";
 
   return (
     <div style={{ minHeight: "100vh" }}>

@@ -10,6 +10,8 @@ import {
   detailTags,
   groupCardsForAllView,
   orderChips,
+  parseMultiplierValue,
+  sortFilteredCards,
   summaryTags,
 } from "@/utils/cardTaxonomy";
 import type { Card, CardSummary } from "@/types/cards";
@@ -321,5 +323,102 @@ describe("brandTagsForCards", () => {
       makeSummary({ id: "amex-platinum" }),
     ]);
     expect(brands).toEqual(new Set(["Hilton Honors", "Marriott Bonvoy"]));
+  });
+});
+
+// ─── parseMultiplierValue ───────────────────────────────────────────────────────
+
+describe("parseMultiplierValue", () => {
+  it("extracts the leading number regardless of suffix", () => {
+    expect(parseMultiplierValue("5×")).toBe(5);
+    expect(parseMultiplierValue("3%")).toBe(3);
+    expect(parseMultiplierValue("15¢/gal")).toBe(15);
+    expect(parseMultiplierValue("Up to 4×")).toBe(4);
+    expect(parseMultiplierValue("2.5×")).toBe(2.5);
+  });
+
+  it("treats an unparseable multiplier as lowest-priority rather than throwing", () => {
+    expect(parseMultiplierValue("Points on Star Money Days")).toBe(-Infinity);
+  });
+});
+
+// ─── sortFilteredCards ──────────────────────────────────────────────────────────
+
+describe("sortFilteredCards", () => {
+  it("puts flagship cards before airline/hotel co-brands before other co-brands", () => {
+    const cards = [
+      makeSummary({ id: "chase-amazon-prime-visa", name: "Amazon Prime Visa", annual_fee: 0 }),
+      makeSummary({ id: "chase-united-explorer", name: "United Explorer", annual_fee: 150 }),
+      makeSummary({ id: "chase-sapphire-reserve", name: "Sapphire Reserve", annual_fee: 795 }),
+    ];
+
+    const sorted = sortFilteredCards(cards, "Travel", new Map());
+
+    expect(sorted.map((c) => c.id)).toEqual([
+      "chase-sapphire-reserve", // personal (flagship)
+      "chase-united-explorer", // airline
+      "chase-amazon-prime-visa", // cobrand
+    ]);
+  });
+
+  it("within a group, ranks by the filter category's highest multiplier first", () => {
+    const low = makeSummary({ id: "amex-gold", name: "Gold Card", annual_fee: 325 });
+    const high = makeSummary({ id: "amex-platinum", name: "The Platinum Card", annual_fee: 895 });
+    const detailsById = new Map([
+      [
+        low.id,
+        makeCard({
+          id: low.id,
+          earn_rates: [{ emoji: "🍽️", multiplier: "1×", category: "Restaurants", highlight: false, is_base: false }],
+        }),
+      ],
+      [
+        high.id,
+        makeCard({
+          id: high.id,
+          earn_rates: [{ emoji: "🍽️", multiplier: "4×", category: "Dining", highlight: true, is_base: false }],
+        }),
+      ],
+    ]);
+
+    // Lower annual fee listed first in the input — a plain fee-descending
+    // sort would keep `high` first anyway, so this specifically proves the
+    // ordering comes from the Dining multiplier, not from the fee tiebreak.
+    const sorted = sortFilteredCards([low, high], "Dining", detailsById);
+
+    expect(sorted.map((c) => c.id)).toEqual(["amex-platinum", "amex-gold"]);
+  });
+
+  it("falls back to fee descending, then name, when the filter has no multiplier to rank by", () => {
+    const cards = [
+      makeSummary({ id: "amex-gold", name: "Gold Card", annual_fee: 325 }),
+      makeSummary({ id: "amex-platinum", name: "The Platinum Card", annual_fee: 895 }),
+    ];
+
+    // "Travel" is a structural tag, not an earn-rate category — there's no
+    // multiplier to compare, so cards should fall back to fee-descending.
+    const sorted = sortFilteredCards(cards, "Travel", new Map());
+
+    expect(sorted.map((c) => c.id)).toEqual(["amex-platinum", "amex-gold"]);
+  });
+
+  it("puts a card with no loaded detail after one with a known multiplier in the same group", () => {
+    const noDetail = makeSummary({ id: "amex-gold", name: "Gold Card", annual_fee: 895 });
+    const withDetail = makeSummary({ id: "amex-platinum", name: "The Platinum Card", annual_fee: 325 });
+    const detailsById = new Map([
+      [
+        withDetail.id,
+        makeCard({
+          id: withDetail.id,
+          earn_rates: [{ emoji: "🍽️", multiplier: "1×", category: "Dining", highlight: false, is_base: false }],
+        }),
+      ],
+      // noDetail intentionally has no entry in detailsById — simulates its
+      // per-card fetch not having resolved yet.
+    ]);
+
+    const sorted = sortFilteredCards([noDetail, withDetail], "Dining", detailsById);
+
+    expect(sorted.map((c) => c.id)).toEqual(["amex-platinum", "amex-gold"]);
   });
 });

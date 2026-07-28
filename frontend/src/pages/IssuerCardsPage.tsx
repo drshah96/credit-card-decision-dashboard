@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams, useSearchParams } from "react-router-dom";
 import { fetchCard, fetchCards } from "../api/cards";
 import { CardSummaryCard } from "../components/CardSummaryCard";
 import { useCompareList } from "../hooks/useCompareList";
@@ -12,13 +12,19 @@ import {
   getIssuerBySlug,
   groupCardsForAllView,
   orderChips,
+  sortFilteredCards,
   summaryTags,
 } from "../utils/cardTaxonomy";
 
 function CardTile({ card, selectMode }: { card: CardSummary; selectMode: boolean }) {
+  // Carries the current filter (it lives in this page's URL, see below) so
+  // the card detail page's back link can return here with the same filter
+  // still selected, rather than resetting to "All Cards".
+  const location = useLocation();
   return (
     <Link
       to={`/cards/${card.id}`}
+      state={{ from: location.pathname + location.search }}
       aria-label={`View ${card.name} details`}
       style={{ display: "block", height: "100%", textDecoration: "none" }}
     >
@@ -46,7 +52,17 @@ function CardGrid({ cards, selectMode }: { cards: CardSummary[]; selectMode: boo
 export default function IssuerCardsPage() {
   const { issuerSlug } = useParams<{ issuerSlug: string }>();
   const issuer = getIssuerBySlug(issuerSlug);
-  const [activeFilter, setActiveFilter] = useState<string>(ALL_CARDS_FILTER);
+  // Lives in the URL (rather than useState) so it survives navigating to a
+  // card's detail page and back — a plain useState resets to "All Cards" on
+  // remount, since React Router unmounts this page while a card is open.
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeFilter = searchParams.get("filter") ?? ALL_CARDS_FILTER;
+  const setActiveFilter = (filter: string) => {
+    const next = new URLSearchParams(searchParams);
+    if (filter === ALL_CARDS_FILTER) next.delete("filter");
+    else next.set("filter", filter);
+    setSearchParams(next, { replace: true });
+  };
   const { compareIds } = useCompareList();
   // Defaults to "on" whenever picks already exist (e.g. returning from a
   // card's detail page) — otherwise the toggle would misleadingly read
@@ -117,7 +133,11 @@ export default function IssuerCardsPage() {
   const filteredCards =
     activeFilter === ALL_CARDS_FILTER
       ? issuerCards
-      : issuerCards.filter((c) => tagMap.get(activeFilter)?.has(c.id));
+      : sortFilteredCards(
+          issuerCards.filter((c) => tagMap.get(activeFilter)?.has(c.id)),
+          activeFilter,
+          detailsById,
+        );
 
   const sections = activeFilter === ALL_CARDS_FILTER ? groupCardsForAllView(issuerCards) : null;
 
