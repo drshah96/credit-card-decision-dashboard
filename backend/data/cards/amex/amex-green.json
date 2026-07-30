@@ -253,5 +253,12 @@
     ],
     "note": "Additional cards are free with no authorized user fee, unlike the Platinum's paid add-on cards."
   },
-  "timeline": []
+  "timeline": [
+    {
+      "date": "Aug 20, 2026",
+      "type": "future",
+      "badge": "Upcoming",
+      "text": "As of late July 2026, Amex pulled the Green Card's application page ahead of a planned rename to the \"American Express Classic Green Card\" on Aug 20, 2026. Amex says benefits, fee, and rewards are unchanged. It's not discontinued: existing cardholders keep the card as-is, and it remains available to eligible Amex cardholders as a product change from Platinum or Gold — just not open to brand-new applicants at the moment."
+    }
+  ]
 }
