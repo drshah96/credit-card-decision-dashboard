@@ -1,15 +1,40 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { CardSummary } from "../types/cards";
-import { ISSUERS } from "../utils/cardTaxonomy";
+import { groupCardsForPicker } from "../utils/cardTaxonomy";
 
 interface Props {
+  /** Already filtered by issuer/category/brand — see ComparePage's shared
+   * CompareFilterBar. This component adds free-text search on top and does
+   * the final ordering (grouped by issuer, ranked by category relevance
+   * within each group — see `groupCardsForPicker`). */
   cards: CardSummary[];
   excludeIds: string[];
+  /** The active Category filter(s), if any — needed here (not just upstream)
+   * because it decides the sort order *within* each issuer group, not just
+   * which cards are included. */
+  categories: Set<string>;
+  filterLabel: string;
   onSelect: (id: string) => void;
   onClose: () => void;
 }
 
-export function CardPicker({ cards, excludeIds, onSelect, onClose }: Props) {
+function CardRow({ card, onSelect }: { card: CardSummary; onSelect: (id: string) => void }) {
+  return (
+    <button type="button" className="card-picker-result" onClick={() => onSelect(card.id)}>
+      <span className="cpr-name">{card.name}</span>
+      <span className="cpr-fee">{card.annual_fee === 0 ? "$0" : `$${card.annual_fee}/yr`}</span>
+    </button>
+  );
+}
+
+export function CardPicker({
+  cards,
+  excludeIds,
+  categories,
+  filterLabel,
+  onSelect,
+  onClose,
+}: Props) {
   const [query, setQuery] = useState("");
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -23,22 +48,23 @@ export function CardPicker({ cards, excludeIds, onSelect, onClose }: Props) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
-  const groups = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    const available = cards.filter((c) => !excludeIds.includes(c.id));
-    const matching = q
-      ? available.filter(
-          (c) => c.name.toLowerCase().includes(q) || c.issuer.toLowerCase().includes(q),
-        )
-      : available;
+  const available = useMemo(
+    () => cards.filter((c) => !excludeIds.includes(c.id)),
+    [cards, excludeIds],
+  );
 
-    return ISSUERS.map((issuer) => ({
-      issuer,
-      cards: matching
-        .filter((c) => c.issuer === issuer.issuerField)
-        .sort((a, b) => a.name.localeCompare(b.name)),
-    })).filter((g) => g.cards.length > 0);
-  }, [cards, excludeIds, query]);
+  const matches = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return available;
+    return available.filter(
+      (c) => c.name.toLowerCase().includes(q) || c.issuer.toLowerCase().includes(q),
+    );
+  }, [available, query]);
+
+  const groups = useMemo(
+    () => groupCardsForPicker(matches, categories),
+    [matches, categories],
+  );
 
   return (
     <div
@@ -62,20 +88,18 @@ export function CardPicker({ cards, excludeIds, onSelect, onClose }: Props) {
         </button>
       </div>
       <div className="card-picker-results">
-        {groups.length === 0 && <p className="card-picker-empty">No cards match "{query}".</p>}
-        {groups.map(({ issuer, cards: groupCards }) => (
-          <div key={issuer.slug} className="card-picker-group">
-            <div className="card-picker-group-label">{issuer.label}</div>
+        {groups.length === 0 && (
+          <p className="card-picker-empty">
+            {query
+              ? `No cards match "${query}"${filterLabel ? ` in ${filterLabel}` : ""}.`
+              : `No cards match "${filterLabel}".`}
+          </p>
+        )}
+        {groups.map(({ label, cards: groupCards }) => (
+          <div key={label} className="card-picker-group">
+            <div className="card-picker-group-label">{label}</div>
             {groupCards.map((c) => (
-              <button
-                key={c.id}
-                type="button"
-                className="card-picker-result"
-                onClick={() => onSelect(c.id)}
-              >
-                <span className="cpr-name">{c.name}</span>
-                <span className="cpr-fee">{c.annual_fee === 0 ? "$0" : `$${c.annual_fee}/yr`}</span>
-              </button>
+              <CardRow key={c.id} card={c} onSelect={onSelect} />
             ))}
           </div>
         ))}

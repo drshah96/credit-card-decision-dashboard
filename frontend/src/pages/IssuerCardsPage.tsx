@@ -3,6 +3,7 @@ import { useQueries, useQuery } from "@tanstack/react-query";
 import { Link, useLocation, useParams, useSearchParams } from "react-router-dom";
 import { fetchCard, fetchCards } from "../api/cards";
 import { CardSummaryCard } from "../components/CardSummaryCard";
+import { FilterChips } from "../components/FilterChips";
 import { useCompareList } from "../hooks/useCompareList";
 import type { Card, CardSummary } from "../types/cards";
 import {
@@ -219,27 +220,12 @@ export default function IssuerCardsPage() {
         {!isLoading && !isError && (
           <>
             {/* Filter chips */}
-            <div
-              role="group"
-              aria-label="Filter by"
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 8,
-                marginBottom: 32,
-              }}
-            >
-              {chips.map((chip) => (
-                <button
-                  key={chip}
-                  type="button"
-                  onClick={() => setActiveFilter(chip)}
-                  aria-pressed={activeFilter === chip}
-                  className={`filter-chip ${activeFilter === chip ? "active" : ""}`}
-                >
-                  {chip}
-                </button>
-              ))}
+            <div style={{ marginBottom: 32 }}>
+              <FilterChips
+                chips={chips}
+                isActive={(chip) => chip === activeFilter}
+                onToggle={setActiveFilter}
+              />
             </div>
 
             {/* Select-mode toggle only — "Remove Selection" and the Compare

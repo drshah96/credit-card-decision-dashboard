@@ -130,10 +130,28 @@ def test_list_cards_summary_shape() -> None:
     assert "verdict" in card
     assert "total_easy_credits" in card
     assert "total_max_credits" in card
+    assert "categories" in card
     # Full card fields must NOT be in summary
     assert "credits" not in card
     assert "insurance" not in card
     assert "timeline" not in card
+    assert "earn_rates" not in card
+
+
+def test_summary_categories_match_full_detail_earn_rates() -> None:
+    """CardSummary.categories is a lightweight {category, multiplier}
+    projection of the full Card's earn_rates — not the full EarnRate objects
+    (no emoji/highlight/is_base) — so a catalog-wide filter/rank feature can
+    read it without fetching full detail for every card."""
+    card_id = "amex-gold"
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == card_id)
+    detail = client.get(f"/api/cards/{card_id}").json()
+
+    assert summary["categories"] == [
+        {"category": r["category"], "multiplier": r["multiplier"]} for r in detail["earn_rates"]
+    ]
+    for cat in summary["categories"]:
+        assert set(cat.keys()) == {"category", "multiplier"}
 
 
 @pytest.mark.parametrize("card_id", CARD_IDS)

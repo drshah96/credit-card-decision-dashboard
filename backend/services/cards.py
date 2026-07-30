@@ -10,6 +10,7 @@ from backend.models import (
     Card,
     CardSummary,
     Credit,
+    EarnCategorySummary,
     EarnRate,
     Insurance,
     Points,
@@ -45,14 +46,16 @@ _DETAIL_OPTIONS = (
 )
 
 # Summary load — only what CardSummary actually needs: the scalar card fields,
-# the three lookup names, and credits (to total up easy/max credit values).
-# Deliberately skips earn_rates/insurance/timeline/etc. so GET /api/cards
-# doesn't drag in nine relationships it never reads.
+# the three lookup names, credits (to total up easy/max credit values), and
+# earn_rates (category labels only, for spend-category filter chips).
+# Deliberately skips insurance/timeline/etc. so GET /api/cards doesn't drag in
+# relationships it never reads.
 _SUMMARY_OPTIONS = (
     joinedload(CardModel.issuer),
     joinedload(CardModel.network),
     joinedload(CardModel.points_program),
     selectinload(CardModel.credits).selectinload(CreditModel.tier),
+    selectinload(CardModel.earn_rates),
 )
 
 
@@ -172,6 +175,10 @@ def _to_card_summary(c: CardModel) -> CardSummary:
         ),
         total_easy_credits=easy_total,
         total_max_credits=max_total,
+        categories=[
+            EarnCategorySummary(category=r.category, multiplier=r.multiplier_label)
+            for r in c.earn_rates
+        ],
     )
 
 

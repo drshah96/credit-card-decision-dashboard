@@ -6,13 +6,25 @@ import { CardPicker } from "./CardPicker";
 
 interface Props {
   cardSummary: CardSummary | undefined;
-  allCards: CardSummary[];
+  /** Already filtered by the shared CompareFilterBar above all slots — see
+   * ComparePage. Final ordering happens inside CardPicker itself. */
+  pickerCards: CardSummary[];
+  pickerCategories: Set<string>;
+  pickerFilterLabel: string;
   excludeIds: string[];
   onPick: (id: string) => void;
   onRemove: () => void;
 }
 
-export function CompareSlot({ cardSummary, allCards, excludeIds, onPick, onRemove }: Props) {
+export function CompareSlot({
+  cardSummary,
+  pickerCards,
+  pickerCategories,
+  pickerFilterLabel,
+  excludeIds,
+  onPick,
+  onRemove,
+}: Props) {
   const [pickerOpen, setPickerOpen] = useState(false);
 
   if (!cardSummary) {
@@ -23,7 +35,9 @@ export function CompareSlot({ cardSummary, allCards, excludeIds, onPick, onRemov
         </button>
         {pickerOpen && (
           <CardPicker
-            cards={allCards}
+            cards={pickerCards}
+            categories={pickerCategories}
+            filterLabel={pickerFilterLabel}
             excludeIds={excludeIds}
             onSelect={(id) => {
               onPick(id);

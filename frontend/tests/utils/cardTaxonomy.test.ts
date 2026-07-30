@@ -9,6 +9,7 @@ import {
   classify,
   detailTags,
   groupCardsForAllView,
+  groupCardsForPicker,
   orderChips,
   parseMultiplierValue,
   sortFilteredCards,
@@ -85,6 +86,7 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     verdict: { status: "situational", text: "Keep if you use the credits" },
     total_easy_credits: 0,
     total_max_credits: 2984,
+    categories: [],
     ...overrides,
   };
 }
@@ -207,53 +209,48 @@ describe("summaryTags", () => {
     expect(tags).not.toContain("Airline");
     expect(tags).not.toContain("Hotel");
   });
-});
 
-describe("detailTags", () => {
   it("tags the issuer's own currency as Travel for a personal rewards card", () => {
-    const tags = detailTags(makeCard());
+    const tags = summaryTags(makeSummary());
     expect(tags).toEqual(expect.arrayContaining(["Travel", "Membership Rewards"]));
   });
 
   it("tags Cash Back cards without a Travel/currency tag", () => {
-    const tags = detailTags(
-      makeCard({
-        id: "amex-blue-cash-everyday",
-        points: { currency: "Cash Back", redemption_options: [], per_100k: "", note: "" },
-      }),
-    );
+    const tags = summaryTags(makeSummary({ id: "amex-blue-cash-everyday", points_program: "Cash Back" }));
     expect(tags).toContain("Cash Back");
     expect(tags).not.toContain("Travel");
   });
 
   it("does not fabricate a currency tag for a genuinely no-rewards card", () => {
-    // Regression test: the full Card detail's points.currency is the bare
-    // string "None" for no-rewards cards — a naive check against the
-    // friendlier "None — no rewards program" summary label (a different
-    // field entirely) would miss this and leak "None" out as a fake tag.
-    const tags = detailTags(
-      makeCard({
-        id: "chase-slate-edge",
-        points: { currency: "None", redemption_options: [], per_100k: "", note: "" },
-      }),
-    );
+    // Regression test: a no-rewards card's points_program is the bare string
+    // "None" — a naive check against the friendlier "None — no rewards
+    // program" detail-page label (a different field entirely) would miss
+    // this and leak "None" out as a fake tag.
+    const tags = summaryTags(makeSummary({ id: "chase-slate-edge", points_program: "None" }));
     expect(tags).not.toContain("None");
     expect(tags).not.toContain("Travel");
     expect(tags).not.toContain("Cash Back");
   });
 
   it("tags Dining and Gas from earn rate categories", () => {
-    const tags = detailTags(
-      makeCard({
-        earn_rates: [
-          { emoji: "🍽️", multiplier: "3x", category: "Restaurants worldwide", highlight: true, is_base: false },
-          { emoji: "⛽", multiplier: "3x", category: "U.S. gas stations", highlight: true, is_base: false },
+    const tags = summaryTags(
+      makeSummary({
+        categories: [
+          { category: "Restaurants worldwide", multiplier: "4x" },
+          { category: "U.S. gas stations", multiplier: "3x" },
         ],
       }),
     );
     expect(tags).toEqual(expect.arrayContaining(["Dining", "Gas"]));
   });
 
+  it("doesn't tag Dining/Gas when nothing in the categories supports them", () => {
+    const tags = summaryTags(makeSummary({ categories: [] }));
+    expect(tags).not.toEqual(expect.arrayContaining(["Dining", "Gas"]));
+  });
+});
+
+describe("detailTags", () => {
   it("tags Lounge Access from status perks", () => {
     const tags = detailTags(
       makeCard({
@@ -275,11 +272,109 @@ describe("detailTags", () => {
     );
   });
 
-  it("doesn't tag Dining/Gas/Lounge/APR/FTF/BT when nothing in the data supports them", () => {
+  it("doesn't tag Lounge/APR/FTF/BT when nothing in the data supports them", () => {
     const tags = detailTags(makeCard());
     expect(tags).not.toEqual(
-      expect.arrayContaining(["Dining", "Gas", "Lounge Access", "0% Intro APR", "No Foreign Transaction Fee", "Balance Transfer"]),
+      expect.arrayContaining(["Lounge Access", "0% Intro APR", "No Foreign Transaction Fee", "Balance Transfer"]),
     );
+  });
+});
+
+// ─── groupCardsForPicker ────────────────────────────────────────────────────────
+
+// All fixtures below default to issuer "American Express" (see makeSummary),
+// so unless a test overrides `issuer`, everything lands in one group and
+// `onlyGroup` pulls out just its cards for a flat, easy-to-assert list.
+function onlyGroup(sections: ReturnType<typeof groupCardsForPicker>) {
+  expect(sections).toHaveLength(1);
+  return sections[0].cards;
+}
+
+describe("groupCardsForPicker", () => {
+  it("ranks a single selected category by multiplier, descending", () => {
+    const cards = [
+      makeSummary({ id: "a", name: "A", categories: [{ category: "Dining", multiplier: "3x" }] }),
+      makeSummary({ id: "b", name: "B", categories: [{ category: "Dining", multiplier: "5x" }] }),
+      makeSummary({ id: "c", name: "C", categories: [{ category: "Dining", multiplier: "4x" }] }),
+    ];
+    const sorted = onlyGroup(groupCardsForPicker(cards, new Set(["Dining"])));
+    expect(sorted.map((c) => c.id)).toEqual(["b", "c", "a"]);
+  });
+
+  it("with multiple categories selected, ranks by the best multiplier across any of them", () => {
+    const cards = [
+      // Best rate is in Gas (2x) — lower than B's best (Dining, 4x).
+      makeSummary({
+        id: "a",
+        name: "A",
+        categories: [
+          { category: "Dining", multiplier: "1x" },
+          { category: "Gas", multiplier: "2x" },
+        ],
+      }),
+      makeSummary({ id: "b", name: "B", categories: [{ category: "Dining", multiplier: "4x" }] }),
+    ];
+    const sorted = onlyGroup(groupCardsForPicker(cards, new Set(["Dining", "Gas"])));
+    expect(sorted.map((c) => c.id)).toEqual(["b", "a"]);
+  });
+
+  it("breaks ties alphabetically by name", () => {
+    const cards = [
+      makeSummary({ id: "z", name: "Zebra", categories: [{ category: "Gas", multiplier: "3x" }] }),
+      makeSummary({ id: "a", name: "Alpha", categories: [{ category: "Gas", multiplier: "3x" }] }),
+    ];
+    const sorted = onlyGroup(groupCardsForPicker(cards, new Set(["Gas"])));
+    expect(sorted.map((c) => c.id)).toEqual(["a", "z"]);
+  });
+
+  it("puts cards with no computable multiplier for the selected filters last, alphabetically", () => {
+    const cards = [
+      makeSummary({ id: "b", name: "Bravo", categories: [] }), // "Travel" has no per-category rate
+      makeSummary({ id: "g", name: "Golf", categories: [{ category: "Gas", multiplier: "3x" }] }),
+      makeSummary({ id: "a", name: "Alpha", categories: [] }),
+    ];
+    const sorted = onlyGroup(groupCardsForPicker(cards, new Set(["Gas", "Travel"])));
+    expect(sorted.map((c) => c.id)).toEqual(["g", "a", "b"]);
+  });
+
+  it("sorts alphabetically by name when no category filter is selected", () => {
+    const cards = [
+      makeSummary({ id: "z", name: "Zebra", categories: [{ category: "Gas", multiplier: "5x" }] }),
+      makeSummary({ id: "a", name: "Alpha", categories: [{ category: "Gas", multiplier: "1x" }] }),
+    ];
+    const sorted = onlyGroup(groupCardsForPicker(cards, new Set()));
+    expect(sorted.map((c) => c.id)).toEqual(["a", "z"]);
+  });
+
+  it("groups by issuer before ranking within each group", () => {
+    const cards = [
+      makeSummary({
+        id: "chase-card",
+        name: "Chase Card",
+        issuer: "Chase",
+        categories: [{ category: "Dining", multiplier: "2x" }],
+      }),
+      makeSummary({
+        id: "amex-card",
+        name: "Amex Card",
+        issuer: "American Express",
+        categories: [{ category: "Dining", multiplier: "5x" }],
+      }),
+    ];
+    const sections = groupCardsForPicker(cards, new Set(["Dining"]));
+    // Two separate issuer groups, not one flat cross-issuer ranking — the
+    // higher Dining multiplier (Chase, 2x < Amex, 5x) does NOT pull the Amex
+    // card into a different position relative to Chase's own group.
+    expect(sections.map((s) => s.label)).toEqual(["American Express", "Chase"]);
+    expect(sections[0].cards.map((c) => c.id)).toEqual(["amex-card"]);
+    expect(sections[1].cards.map((c) => c.id)).toEqual(["chase-card"]);
+  });
+
+  it("omits empty issuer groups", () => {
+    const cards = [makeSummary({ id: "a", name: "A", issuer: "American Express" })];
+    const sections = groupCardsForPicker(cards, new Set());
+    expect(sections).toHaveLength(1);
+    expect(sections[0].label).toBe("American Express");
   });
 });
 

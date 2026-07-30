@@ -124,6 +124,14 @@ class Card(BaseModel):
     timeline: list[TimelineEvent]
 
 
+class EarnCategorySummary(BaseModel):
+    """Just enough of an EarnRate to derive and rank spend-category filter
+    chips (Dining, Gas, ...) without the full object's emoji/highlight/is_base."""
+
+    category: str
+    multiplier: str
+
+
 class CardSummary(BaseModel):
     """Lightweight card info returned by GET /api/cards."""
 
@@ -138,3 +146,8 @@ class CardSummary(BaseModel):
     verdict: Verdict
     total_easy_credits: int
     total_max_credits: int
+    # Category + multiplier pairs (not the full EarnRate objects) — enough for
+    # the frontend to derive spend-category filter chips AND rank matches by
+    # multiplier across the whole catalog, without an N+1 fetch of every
+    # card's full detail.
+    categories: list[EarnCategorySummary] = []
