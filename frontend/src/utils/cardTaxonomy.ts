@@ -321,7 +321,76 @@ export function sortFilteredCards(
 
 export const ALL_CARDS_FILTER = "All Cards";
 
-/** Tags derivable from summary data alone (fast, no per-card fetch needed). */
+/** Dining/Gas chips derived from a set of earn-rate category labels — shared
+ * between `summaryTags` (CardSummary.categories, label strings only) and
+ * `detailTags` (full Card.earn_rates) so the same card matches identically
+ * regardless of which one supplied the labels. */
+function categoryTags(categories: string[]): string[] {
+  const tags: string[] = [];
+  const joined = categories.map((c) => c.toLowerCase()).join(" | ");
+  if (CATEGORY_TAG_MATCHERS.Dining.test(joined)) tags.push("Dining");
+  if (CATEGORY_TAG_MATCHERS.Gas.test(joined)) tags.push("Gas");
+  return tags;
+}
+
+/** The card's best multiplier across any of the selected filters that map to
+ * an earn-rate category (Dining, Gas — not "Travel"/"Airline"/"No Annual
+ * Fee"/..., which have no per-category rate to rank by), read from
+ * CardSummary.categories alone so ranking the whole catalog never needs a
+ * full Card fetch. Null if none of the selected filters are category-based,
+ * or none of the card's categories match any of them. */
+function summaryCategoryRelevance(
+  categories: CardSummary["categories"],
+  filters: Iterable<string>,
+): number | null {
+  let best: number | null = null;
+  for (const filter of filters) {
+    const matcher = CATEGORY_TAG_MATCHERS[filter];
+    if (!matcher) continue;
+    for (const { category, multiplier } of categories) {
+      if (matcher.test(category.toLowerCase())) {
+        const value = parseMultiplierValue(multiplier);
+        if (best === null || value > best) best = value;
+      }
+    }
+  }
+  return best;
+}
+
+/** Orders cards for the compare-tab card picker: grouped by issuer (canonical
+ * ISSUERS order, same as the rest of the app), and within each issuer group,
+ * by best earn-rate multiplier across the selected category filters,
+ * descending (5x before 4x before 3x, ...) when any are selected — ties, and
+ * cards with no computable multiplier for the selected filters (e.g. only
+ * "Travel" or "No Annual Fee" is selected), fall back to alphabetical order
+ * by name. Empty issuer groups are omitted. */
+export function groupCardsForPicker(
+  cards: CardSummary[],
+  categories: Iterable<string>,
+): CardSection[] {
+  const categorySet = new Set(categories);
+  return ISSUERS.map((issuer) => ({
+    label: issuer.label,
+    cards: cards
+      .filter((c) => c.issuer === issuer.issuerField)
+      .sort((a, b) => {
+        if (categorySet.size > 0) {
+          const relA = summaryCategoryRelevance(a.categories, categorySet);
+          const relB = summaryCategoryRelevance(b.categories, categorySet);
+          if (relA !== null || relB !== null) {
+            if (relA === null) return 1;
+            if (relB === null) return -1;
+            if (relA !== relB) return relB - relA;
+          }
+        }
+        return a.name.localeCompare(b.name);
+      }),
+  })).filter((g) => g.cards.length > 0);
+}
+
+/** Tags derivable from summary data alone (fast, no per-card fetch needed) —
+ * annual fee, brand/group, currency (Cash Back vs. a transferable travel
+ * program), and earn-rate categories (Dining, Gas). */
 export function summaryTags(card: CardSummary): string[] {
   const tags = new Set<string>();
   const c = classify(card.id);
@@ -338,18 +407,8 @@ export function summaryTags(card: CardSummary): string[] {
     tags.add(c.brand);
   }
 
-  return [...tags];
-}
-
-/** Additional tags that require the full card detail (earn categories, status
- * perks, and free-text fields for benefits with no dedicated schema field). */
-export function detailTags(card: Card): string[] {
-  const tags = new Set<string>();
-  const c = classify(card.id);
-
-  const currency = card.points.currency;
+  const currency = card.points_program;
   const hasNoRewards = currency === "None";
-
   if (!hasNoRewards) {
     if (currency === "Cash Back") {
       tags.add("Cash Back");
@@ -361,9 +420,18 @@ export function detailTags(card: Card): string[] {
     }
   }
 
-  const categories = card.earn_rates.map((r) => r.category.toLowerCase()).join(" | ");
-  if (CATEGORY_TAG_MATCHERS.Dining.test(categories)) tags.add("Dining");
-  if (CATEGORY_TAG_MATCHERS.Gas.test(categories)) tags.add("Gas");
+  for (const tag of categoryTags(card.categories.map((c) => c.category))) tags.add(tag);
+
+  return [...tags];
+}
+
+/** Additional tags that require the full card detail: status perks and
+ * free-text fields for benefits with no dedicated schema field. Everything
+ * derivable from summary data (fee, brand, currency, earn categories) lives
+ * in `summaryTags` instead — this only adds what genuinely needs the full
+ * `/api/cards/:id` payload. */
+export function detailTags(card: Card): string[] {
+  const tags = new Set<string>();
 
   if (card.status_perks.some((p) => /lounge/i.test(p.name) || /lounge/i.test(p.note))) {
     tags.add("Lounge Access");
@@ -398,11 +466,42 @@ export function brandTagsForCards(cards: CardSummary[]): Set<string> {
   return brands;
 }
 
+// ─── Compare-tab shared filter bar ─────────────────────────────────────────────
+// Single source of truth for the three filter predicates, shared by
+// CompareFilterBar (to compute each dropdown's own mutually-scoped options)
+// and ComparePage (to compute the actual filtered card list) — kept here
+// rather than duplicated in both so a future change to what "matches this
+// issuer/brand/category" means can't drift between the two call sites.
+
+export function filterByIssuers(cards: CardSummary[], issuers: Set<string>): CardSummary[] {
+  return issuers.size === 0 ? cards : cards.filter((c) => issuers.has(c.issuer));
+}
+
+export function filterByBrands(cards: CardSummary[], brands: Set<string>): CardSummary[] {
+  if (brands.size === 0) return cards;
+  return cards.filter((c) => {
+    const b = classify(c.id).brand;
+    return b !== undefined && brands.has(b);
+  });
+}
+
+export function filterByCategories(cards: CardSummary[], categories: Set<string>): CardSummary[] {
+  if (categories.size === 0) return cards;
+  const tagMap = new Map<string, Set<string>>();
+  for (const card of cards) {
+    for (const tag of summaryTags(card)) {
+      if (!tagMap.has(tag)) tagMap.set(tag, new Set());
+      tagMap.get(tag)!.add(card.id);
+    }
+  }
+  return cards.filter((c) => [...categories].some((cat) => tagMap.get(cat)?.has(c.id)));
+}
+
 // Mirrors the order Amex (and most issuers) use on their own card-picker
 // pages. "Featured" is deliberately omitted — it's editorial curation with
 // no equivalent field in this catalog's data, so it isn't something we can
 // honestly derive rather than guess.
-const STRUCTURAL_CHIP_ORDER = [
+export const STRUCTURAL_CHIP_ORDER = [
   "Travel",
   "Cash Back",
   "Lounge Access",

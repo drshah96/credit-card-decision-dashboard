@@ -27,6 +27,7 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     verdict: { status: "keep", text: "Keep if you use the credits" },
     total_easy_credits: 0,
     total_max_credits: 2984,
+    categories: [],
     ...overrides,
   };
 }
@@ -387,9 +388,10 @@ describe("ComparePage", () => {
 
     const addButtons = await screen.findAllByRole("button", { name: "+ Add a card" });
     fireEvent.click(addButtons[0]);
-    const group = (await screen.findByText("American Express")).closest(
-      ".card-picker-group",
-    ) as HTMLElement;
+    const groupLabel = (await screen.findAllByText("American Express")).find((el) =>
+      el.classList.contains("card-picker-group-label"),
+    )!;
+    const group = groupLabel.closest(".card-picker-group") as HTMLElement;
     const names = within(group)
       .getAllByRole("button")
       .map((b) => b.textContent);

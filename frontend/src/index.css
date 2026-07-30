@@ -456,6 +456,85 @@ body {
   border-bottom-color: var(--accent);
 }
 
+/* ─── Compare page: shared filter bar ───────────────────────────────────────── */
+.compare-filter-bar { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
+.compare-filter-trigger {
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--panel-s);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 160px;
+  justify-content: space-between;
+}
+.compare-filter-trigger:hover { border-color: var(--line-2); }
+.compare-filter-trigger.active { border-color: var(--accent); color: var(--accent); }
+.compare-filter-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--panel-2);
+  border-radius: 100px;
+  padding: 1px 6px;
+}
+.compare-filter-caret {
+  width: 0;
+  height: 0;
+  flex-shrink: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--faint);
+}
+.compare-filter-dropdown { position: relative; }
+.compare-filter-panel {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 220px;
+  max-height: 280px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--base);
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  box-shadow: 0 20px 44px -16px rgba(15, 23, 42, 0.28);
+  padding: 8px;
+}
+.compare-filter-panel-empty { font-size: 12.5px; color: var(--faint); padding: 8px; margin: 0; }
+.compare-filter-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink);
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.compare-filter-option:hover { background: var(--panel-2); }
+.compare-filter-clear {
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--accent);
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--line);
+  margin-top: 4px;
+  padding: 8px;
+  text-align: left;
+  cursor: pointer;
+}
+
 /* ─── Compare page: slots ──────────────────────────────────────────────────── */
 .compare-grid {
   display: grid;

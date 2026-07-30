@@ -25,6 +25,7 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     verdict: { status: "keep", text: "Keep if you use the credits" },
     total_easy_credits: 0,
     total_max_credits: 2984,
+    categories: [],
     ...overrides,
   };
 }
