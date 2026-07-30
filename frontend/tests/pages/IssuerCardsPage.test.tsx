@@ -114,6 +114,18 @@ describe("IssuerCardsPage", () => {
     });
   });
 
+  it("shows a loading placeholder instead of \"0 cards\" while the catalog is still loading", () => {
+    // A never-resolving fetch pins the page in its loading state — regression
+    // guard for issuerCards.length rendering as "0 cards" before isLoading
+    // was checked, instead of some kind of loading indicator.
+    vi.mocked(fetchCards).mockReturnValue(new Promise(() => {}));
+    renderPage("amex");
+
+    expect(screen.getByRole("heading", { name: "American Express Cards" })).toBeInTheDocument();
+    expect(screen.getByText("Loading…")).toBeInTheDocument();
+    expect(screen.queryByText("0 cards")).not.toBeInTheDocument();
+  });
+
   it("defaults to the All Cards filter, grouped into sections", async () => {
     vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
     renderPage("amex");
