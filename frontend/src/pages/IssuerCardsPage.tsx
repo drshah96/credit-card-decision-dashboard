@@ -172,7 +172,9 @@ export default function IssuerCardsPage() {
             {issuer.label} Cards
           </h1>
           <p style={{ color: "var(--muted)", fontSize: 14.5, margin: 0 }}>
-            {issuerCards.length} {issuerCards.length === 1 ? "card" : "cards"}
+            {isLoading
+              ? "Loading…"
+              : `${issuerCards.length} ${issuerCards.length === 1 ? "card" : "cards"}`}
           </p>
         </header>
 
