@@ -1,13 +1,15 @@
-import { useEffect, useMemo, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { Link, useSearchParams } from "react-router-dom";
 import { fetchCard, fetchCards } from "../api/cards";
 import { PageTabs } from "../components/PageTabs";
 import { CompareSlot } from "../components/CompareSlot";
+import { CompareFilterBar } from "../components/CompareFilterBar";
 import { useCompareList } from "../hooks/useCompareList";
 import { useCreditUsage } from "../hooks/useCreditUsage";
 import { trackEvent } from "../utils/analytics";
 import { CARD_IMAGES } from "../utils/cardImages";
+import { filterByBrands, filterByCategories, filterByIssuers } from "../utils/cardTaxonomy";
 import type { Card, CardSummary } from "../types/cards";
 
 const MAX_CARDS = 4;
@@ -96,6 +98,29 @@ export default function ComparePage() {
     return map;
   }, [allCards]);
 
+  // Shared across every slot's "+ Add a card" picker (see CompareFilterBar)
+  // instead of each slot re-filtering independently — set once, e.g. "Dining",
+  // and every empty slot's picker already shows just dining cards. Each is a
+  // Set (multi-select, OR'd within itself); the three filter types AND
+  // together.
+  const [filterIssuers, setFilterIssuers] = useState<Set<string>>(new Set());
+  const [filterBrands, setFilterBrands] = useState<Set<string>>(new Set());
+  const [filterCategories, setFilterCategories] = useState<Set<string>>(new Set());
+
+  // Filtered here (shared across every slot) using the same predicates
+  // CompareFilterBar uses to compute its own dropdown options, so the two
+  // can never drift apart. Final ordering — grouped by issuer, ranked by
+  // category relevance within each group — happens inside CardPicker itself,
+  // since it also needs to re-rank after its own free-text search narrows
+  // the list further.
+  const pickerCards = useMemo(() => {
+    const byIssuer = filterByIssuers(allCards ?? [], filterIssuers);
+    const byBrand = filterByBrands(byIssuer, filterBrands);
+    return filterByCategories(byBrand, filterCategories);
+  }, [allCards, filterIssuers, filterBrands, filterCategories]);
+
+  const pickerFilterLabel = [...filterIssuers, ...filterCategories, ...filterBrands].join(", ");
+
   const detailsById = useMemo(() => {
     const map = new Map<string, Card>();
     for (const q of detailQueries) {
@@ -147,29 +172,15 @@ export default function ComparePage() {
 
   return (
     <div style={{ minHeight: "100vh" }}>
-      <div className="wrap" style={{ paddingTop: 48, paddingBottom: 80 }}>
+      <div className="wrap" style={{ paddingTop: 24, paddingBottom: 80 }}>
         <header style={{ marginBottom: 40 }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 12,
-              fontSize: 11.5,
-              letterSpacing: "0.32em",
-              textTransform: "uppercase",
-              color: "var(--faint)",
-              marginBottom: 16,
-            }}
-          >
-            The Wallet Audit
-            <span style={{ flex: 1, height: 1, background: "var(--line)" }} />
-          </div>
           <h1
             style={{
               fontFamily: '"Fraunces Variable", serif',
               fontWeight: 600,
-              fontSize: "clamp(28px, 4.2vw, 42px)",
-              margin: "0 0 8px",
+              fontSize: "clamp(22px, 3.2vw, 32px)",
+              lineHeight: 1.15,
+              margin: "0 0 14px",
               letterSpacing: "-0.01em",
               color: "var(--ink)",
             }}
@@ -227,12 +238,23 @@ export default function ComparePage() {
 
         {!summariesLoading && !summariesError && (
           <>
+            <CompareFilterBar
+              cards={allCards ?? []}
+              issuers={filterIssuers}
+              onIssuersChange={setFilterIssuers}
+              brands={filterBrands}
+              onBrandsChange={setFilterBrands}
+              categories={filterCategories}
+              onCategoriesChange={setFilterCategories}
+            />
             <div className="compare-grid" style={{ marginTop: 8 }}>
               {Array.from({ length: MAX_CARDS }, (_, i) => (
                 <CompareSlot
                   key={i}
                   cardSummary={selectedSummaries[i]}
-                  allCards={allCards ?? []}
+                  pickerCards={pickerCards}
+                  pickerCategories={filterCategories}
+                  pickerFilterLabel={pickerFilterLabel}
                   excludeIds={selectedIds}
                   onPick={(id) => updateSelection([...selectedIds, id])}
                   onRemove={() =>

@@ -23,10 +23,19 @@ interface CardBase {
   verdict: Verdict;
 }
 
+export interface EarnCategorySummary {
+  category: string;
+  multiplier: string;
+}
+
 /** Returned by GET /api/cards */
 export interface CardSummary extends CardBase {
   total_easy_credits: number;
   total_max_credits: number;
+  /** Category + multiplier pairs only (not full EarnRate objects) — enough to
+   * derive spend-category filter chips (Dining, Gas, ...) AND rank matches by
+   * multiplier catalog-wide, without fetching every card's full detail. */
+  categories: EarnCategorySummary[];
 }
 
 export interface EarnRate {
