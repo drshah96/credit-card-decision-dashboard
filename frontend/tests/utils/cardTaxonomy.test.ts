@@ -8,8 +8,10 @@ import {
   brandTagsForCards,
   classify,
   detailTags,
+  excludeHiddenSecuredCards,
   groupCardsForAllView,
   groupCardsForPicker,
+  hiddenSecuredIds,
   orderChips,
   parseMultiplierValue,
   sortFilteredCards,
@@ -88,6 +90,8 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     total_max_credits: 2984,
     categories: [],
     best_cpp: 1,
+    secured_variant_id: null,
+    is_secured_variant_of: null,
     ...overrides,
   };
 }
@@ -103,6 +107,8 @@ function makeCard(overrides: Partial<Card> = {}): Card {
     annual_fee: 895,
     effective_cost: "Depends on usage",
     verdict: { status: "situational", text: "Keep if you use the credits" },
+    secured_variant_id: null,
+    is_secured_variant_of: null,
     earn_rates: [],
     earn_note: "",
     points: { currency: "Membership Rewards", redemption_options: [], per_100k: "", note: "" },
@@ -516,5 +522,50 @@ describe("sortFilteredCards", () => {
     const sorted = sortFilteredCards([noDetail, withDetail], "Dining", detailsById);
 
     expect(sorted.map((c) => c.id)).toEqual(["amex-platinum", "amex-gold"]);
+  });
+});
+
+describe("hiddenSecuredIds / excludeHiddenSecuredCards", () => {
+  it("collects every secured_variant_id present in the catalog", () => {
+    const cards = [
+      makeSummary({ id: "us-bank-cash-plus", secured_variant_id: "us-bank-cash-plus-secured" }),
+      makeSummary({ id: "us-bank-cash-plus-secured" }),
+      makeSummary({ id: "amex-gold" }),
+    ];
+
+    expect(hiddenSecuredIds(cards)).toEqual(new Set(["us-bank-cash-plus-secured"]));
+  });
+
+  it("drops a secured card from the list when its unsecured sibling is present", () => {
+    const primary = makeSummary({
+      id: "us-bank-cash-plus",
+      secured_variant_id: "us-bank-cash-plus-secured",
+    });
+    const secured = makeSummary({ id: "us-bank-cash-plus-secured" });
+    const other = makeSummary({ id: "amex-gold" });
+
+    expect(excludeHiddenSecuredCards([primary, secured, other]).map((c) => c.id)).toEqual([
+      "us-bank-cash-plus",
+      "amex-gold",
+    ]);
+  });
+
+  it("keeps a secured card whose unsecured sibling isn't in the current list", () => {
+    // e.g. a "My Cards" selection that includes only the secured variant —
+    // it must not vanish just because the pairing exists in the full catalog.
+    const secured = makeSummary({ id: "us-bank-cash-plus-secured" });
+    const other = makeSummary({ id: "amex-gold" });
+
+    expect(excludeHiddenSecuredCards([secured, other]).map((c) => c.id)).toEqual([
+      "us-bank-cash-plus-secured",
+      "amex-gold",
+    ]);
+  });
+
+  it("leaves a card with no pairing at all untouched", () => {
+    const cards = [makeSummary({ id: "amex-gold" }), makeSummary({ id: "chase-freedom-flex" })];
+
+    expect(hiddenSecuredIds(cards)).toEqual(new Set());
+    expect(excludeHiddenSecuredCards(cards)).toHaveLength(2);
   });
 });

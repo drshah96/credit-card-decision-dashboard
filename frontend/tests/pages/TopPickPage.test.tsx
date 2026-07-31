@@ -29,6 +29,8 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     total_max_credits: 0,
     categories: [],
     best_cpp: 1,
+    secured_variant_id: null,
+    is_secured_variant_of: null,
     ...overrides,
   };
 }
@@ -339,6 +341,27 @@ describe("My Cards filter", () => {
     expect(screen.queryByRole("checkbox", { name: "American Express Gold" })).not.toBeInTheDocument();
     expect(
       screen.queryByRole("checkbox", { name: "Blue Cash Preferred" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("hides a secured card from the picker when its unsecured twin is also present", async () => {
+    vi.mocked(fetchCards).mockResolvedValue([
+      ...SUMMARIES,
+      makeSummary({
+        id: "amex-gold-secured",
+        name: "American Express Gold Secured",
+        issuer: "American Express",
+      }),
+    ].map((c) =>
+      c.id === "amex-gold" ? { ...c, secured_variant_id: "amex-gold-secured" } : c,
+    ));
+    renderPage();
+
+    fireEvent.click(await screen.findByRole("button", { name: /^My Cards/ }));
+
+    expect(screen.getByRole("checkbox", { name: "American Express Gold" })).toBeInTheDocument();
+    expect(
+      screen.queryByRole("checkbox", { name: "American Express Gold Secured" }),
     ).not.toBeInTheDocument();
   });
 

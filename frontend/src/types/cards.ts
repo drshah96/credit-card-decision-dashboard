@@ -21,6 +21,15 @@ interface CardBase {
   annual_fee: number;
   effective_cost: string;
   verdict: Verdict;
+  /** Set on an unsecured card whose secured counterpart has identical earn
+   * rates — the secured card is hidden from catalog listings in favor of
+   * this one, and this id is used to link to it as "also available". */
+  secured_variant_id: string | null;
+  /** The inverse, set on the secured card itself (computed server-side,
+   * never stored in that card's own data) — lets its own detail page link
+   * back to the unsecured primary it's hidden in favor of, since it's no
+   * longer reachable by browsing catalog listings. */
+  is_secured_variant_of: string | null;
 }
 
 export interface EarnCategorySummary {

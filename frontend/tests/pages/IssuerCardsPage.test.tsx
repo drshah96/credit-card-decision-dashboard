@@ -29,6 +29,8 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     total_max_credits: 2984,
     categories: [],
     best_cpp: 1,
+    secured_variant_id: null,
+    is_secured_variant_of: null,
     ...overrides,
   };
 }
@@ -113,6 +115,27 @@ describe("IssuerCardsPage", () => {
     await waitFor(() => {
       expect(screen.getByText("4 cards")).toBeInTheDocument();
     });
+  });
+
+  it("hides a secured card whose unsecured twin is also in this issuer's lineup", async () => {
+    const summaries = [
+      ...AMEX_SUMMARIES,
+      makeSummary({
+        id: "amex-platinum-secured",
+        name: "The Platinum Secured Card",
+        issuer: "American Express",
+        secured_variant_id: null,
+      }),
+    ];
+    // The unsecured primary carries the pairing, not the secured card itself.
+    summaries[0] = { ...summaries[0], secured_variant_id: "amex-platinum-secured" };
+    vi.mocked(fetchCards).mockResolvedValue(summaries);
+    renderPage("amex");
+
+    await waitFor(() => {
+      expect(screen.getByText("4 cards")).toBeInTheDocument();
+    });
+    expect(screen.queryByText("The Platinum Secured Card")).not.toBeInTheDocument();
   });
 
   it("shows a loading placeholder instead of \"0 cards\" while the catalog is still loading", () => {

@@ -1,5 +1,5 @@
 import type { CardSummary } from "../types/cards";
-import { parseMultiplierValue } from "./cardTaxonomy";
+import { excludeHiddenSecuredCards, parseMultiplierValue } from "./cardTaxonomy";
 
 /** Display order for the Top Pick page's section groupings. */
 export const TOP_PICK_GROUPS = [
@@ -355,35 +355,6 @@ function byValueDescThenFeeAscThenName(
   return a.card.name.localeCompare(b.card.name);
 }
 
-// A secured card whose earn rates are byte-for-byte identical to its
-// unsecured counterpart shouldn't also compete for the same ranking slots
-// — it's the same card in every way that matters for "what do I earn here,"
-// and showing both just crowds out a genuinely different card. Hand-
-// verified against the catalog (NOT inferred from the "-secured" id suffix
-// alone): Capital One Quicksilver Secured actually earns less than
-// unsecured Quicksilver (no Entertainment bonus), so that pair is
-// deliberately left off this map and both still compete normally; Citi
-// Secured and U.S. Bank Secured are standalone products with no unsecured
-// counterpart in the catalog at all. Maps secured id -> unsecured id (kept
-// in each pair, since it needs no security deposit) rather than a flat
-// exclude-list — the secured card should only be dropped when its
-// unsecured twin is ALSO among the cards being ranked (e.g. the Top Pick
-// page's "my cards" filter, scoped to cards someone actually holds, might
-// contain only the secured one — dropping it unconditionally there would
-// wrongly zero it out of every category). (Separately tracked: merging each
-// pair into one listing with a "secured version also available" note,
-// rather than just hiding the secured one here — a bigger change than this
-// page's ranking logic alone should make.)
-const SECURED_DUPLICATE_OF: Record<string, string> = {
-  "bofa-bankamericard-secured": "bofa-bankamericard",
-  "bofa-cash-rewards-secured": "bofa-customized-cash-rewards",
-  "bofa-travel-rewards-secured": "bofa-travel-rewards",
-  "bofa-unlimited-cash-rewards-secured": "bofa-unlimited-cash-rewards",
-  "capital-one-platinum-secured": "capital-one-platinum",
-  "us-bank-altitude-go-secured": "us-bank-altitude-go",
-  "us-bank-cash-plus-secured": "us-bank-cash-plus",
-};
-
 /** Ranks the whole catalog into the top 3 cards per category by *effective*
  * earn rate — raw multiplier weighted by the card's best cents-per-point
  * value (best_cpp; 1.0 for flat cash back), so a 6x points card isn't
@@ -399,11 +370,15 @@ const SECURED_DUPLICATE_OF: Record<string, string> = {
  * Chase Freedom card's points are worth more once transferred into a
  * Sapphire Reserve account than they are alone). */
 export function computeTopPicks(cards: CardSummary[]): TopPickRow[] {
-  const presentIds = new Set(cards.map((c) => c.id));
-  const deduped = cards.filter((c) => {
-    const unsecuredCounterpart = SECURED_DUPLICATE_OF[c.id];
-    return !unsecuredCounterpart || !presentIds.has(unsecuredCounterpart);
-  });
+  // A secured card with byte-identical earn rates to its unsecured twin
+  // (CardSummary.secured_variant_id, set only on the unsecured card) is the
+  // same card in every way that matters here, and showing both just crowds
+  // out a genuinely different card's ranking slot. excludeHiddenSecuredCards
+  // only drops it when the unsecured twin is ALSO among `cards` — e.g. the
+  // "my cards" filter, scoped to what someone actually holds, might contain
+  // only the secured one, and dropping it unconditionally there would
+  // wrongly zero it out of every category.
+  const deduped = excludeHiddenSecuredCards(cards);
   return TOP_PICK_CATEGORIES.map((category) => {
     const entries: TopPickEntry[] = [];
     for (const card of deduped) {

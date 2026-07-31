@@ -19,6 +19,8 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     total_max_credits: 0,
     categories: [],
     best_cpp: 1,
+    secured_variant_id: null,
+    is_secured_variant_of: null,
     ...overrides,
   };
 }
@@ -418,6 +420,7 @@ describe("secured/unsecured duplicate handling", () => {
         id: "us-bank-cash-plus",
         name: "Cash+ Visa Signature Card",
         categories: [rate("Streaming", "5%")],
+        secured_variant_id: "us-bank-cash-plus-secured",
       }),
       makeSummary({
         id: "us-bank-cash-plus-secured",

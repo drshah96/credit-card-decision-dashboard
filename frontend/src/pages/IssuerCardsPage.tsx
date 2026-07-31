@@ -10,6 +10,7 @@ import {
   ALL_CARDS_FILTER,
   brandTagsForCards,
   detailTags,
+  excludeHiddenSecuredCards,
   getIssuerBySlug,
   groupCardsForAllView,
   orderChips,
@@ -76,7 +77,8 @@ export default function IssuerCardsPage() {
   });
 
   const issuerCards = useMemo(
-    () => (allCards ?? []).filter((c) => c.issuer === issuer?.issuerField),
+    () =>
+      excludeHiddenSecuredCards((allCards ?? []).filter((c) => c.issuer === issuer?.issuerField)),
     [allCards, issuer],
   );
 
