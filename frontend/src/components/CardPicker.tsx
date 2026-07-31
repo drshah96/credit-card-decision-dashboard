@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { CardSummary } from "../types/cards";
-import { groupCardsForPicker } from "../utils/cardTaxonomy";
+import { excludeHiddenSecuredCards, groupCardsForPicker } from "../utils/cardTaxonomy";
 
 interface Props {
   /** Already filtered by issuer/category/brand — see ComparePage's shared
@@ -49,7 +49,7 @@ export function CardPicker({
   }, [onClose]);
 
   const available = useMemo(
-    () => cards.filter((c) => !excludeIds.includes(c.id)),
+    () => excludeHiddenSecuredCards(cards.filter((c) => !excludeIds.includes(c.id))),
     [cards, excludeIds],
   );
 

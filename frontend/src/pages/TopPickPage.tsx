@@ -5,7 +5,7 @@ import { fetchCards } from "../api/cards";
 import { PageTabs } from "../components/PageTabs";
 import { CARD_IMAGES } from "../utils/cardImages";
 import { FilterChips } from "../components/FilterChips";
-import { groupCardsForPicker, ISSUERS } from "../utils/cardTaxonomy";
+import { groupCardsForPicker, hiddenSecuredIds, ISSUERS } from "../utils/cardTaxonomy";
 import {
   computeTopPicks,
   TOP_PICK_GROUPS,
@@ -81,15 +81,24 @@ function MyCardsFilter({
     [allCards, selectedIds],
   );
 
+  // Computed from the full catalog (not the already-filtered `matches` list
+  // below) so a pair is reliably caught regardless of search/issuer filter —
+  // see excludeHiddenSecuredCards's own doc comment for why.
+  const hiddenSecured = useMemo(() => hiddenSecuredIds(allCards), [allCards]);
+
   const matches = useMemo(() => {
     const q = query.trim().toLowerCase();
     return allCards.filter((c) => {
       if (selectedIds.has(c.id)) return false; // already shown in "Selected"
+      // Not excludeHiddenSecuredCards here: an already-selected secured card
+      // must stay pickable-off in "Selected" above even though it's hidden
+      // from this browsable list.
+      if (hiddenSecured.has(c.id)) return false;
       if (issuerFilter.size > 0 && !issuerFilter.has(c.issuer)) return false;
       if (!q) return true;
       return c.name.toLowerCase().includes(q) || c.issuer.toLowerCase().includes(q);
     });
-  }, [allCards, query, issuerFilter, selectedIds]);
+  }, [allCards, query, issuerFilter, selectedIds, hiddenSecured]);
 
   const groups = useMemo(
     () => groupCardsForPicker(matches, NO_CATEGORY_FILTER),

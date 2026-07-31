@@ -3,16 +3,17 @@ import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CardDetailPage from "@/pages/CardDetailPage";
-import type { Card, Credit } from "@/types/cards";
+import type { Card, CardSummary, Credit } from "@/types/cards";
 
 // ─── Mock API module ──────────────────────────────────────────────────────────
 
 vi.mock("@/api/cards", () => ({
   fetchCard: vi.fn(),
+  fetchCards: vi.fn(),
 }));
 
 // Import after mock so we get the mocked version
-import { fetchCard } from "@/api/cards";
+import { fetchCard, fetchCards } from "@/api/cards";
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 
@@ -42,6 +43,8 @@ function makeCard(overrides: Partial<Card> = {}): Card {
     annual_fee: 895,
     effective_cost: "Depends on usage",
     verdict: { status: "situational", text: "Keep if you use the credits" },
+    secured_variant_id: null,
+    is_secured_variant_of: null,
     earn_rates: [
       { emoji: "✈️", multiplier: "5×", category: "Flights", highlight: true, is_base: false },
       { emoji: "💳", multiplier: "1×", category: "Everything else", highlight: false, is_base: true },
@@ -1289,6 +1292,70 @@ describe("CardDetailPage", () => {
           "/compare?cards=amex,chase-sapphire-reserve",
         );
       });
+    });
+
+    it("labels the back link plainly when linked from another card's detail page", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard({ issuer: "Chase" }));
+      renderPage("amex", { from: "/cards/amex-secured" });
+
+      await waitFor(() => {
+        expect(screen.getByRole("link", { name: "← Back" })).toHaveAttribute(
+          "href",
+          "/cards/amex-secured",
+        );
+      });
+    });
+  });
+
+  describe("secured/unsecured pairing note", () => {
+    it("shows a link to the secured version, with its name, when this is the unsecured primary", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({ id: "amex", secured_variant_id: "amex-secured" }),
+      );
+      vi.mocked(fetchCards).mockResolvedValue([
+        { id: "amex-secured", name: "The Platinum Secured Card" } as CardSummary,
+      ]);
+      renderPage("amex");
+
+      await waitFor(() => {
+        expect(screen.getByText(/also available/)).toHaveTextContent("The Platinum Secured Card");
+      });
+      expect(screen.getByRole("link", { name: /view the secured version/i })).toHaveAttribute(
+        "href",
+        "/cards/amex-secured",
+      );
+    });
+
+    it("shows a link back to the unsecured primary, with its name, when this is the secured card", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({ id: "amex-secured", is_secured_variant_of: "amex" }),
+      );
+      vi.mocked(fetchCards).mockResolvedValue([
+        { id: "amex", name: "The Platinum Card" } as CardSummary,
+      ]);
+      renderPage("amex-secured");
+
+      await waitFor(() => {
+        expect(screen.getByText(/this is the secured version of/i)).toHaveTextContent(
+          "The Platinum Card",
+        );
+      });
+      expect(screen.getByRole("link", { name: /view the unsecured version/i })).toHaveAttribute(
+        "href",
+        "/cards/amex",
+      );
+    });
+
+    it("renders no pairing note for a card with neither field set", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard());
+      renderPage("amex");
+
+      await waitFor(() => {
+        expect(screen.getByRole("heading", { name: "The Platinum Card" })).toBeInTheDocument();
+      });
+      expect(screen.queryByText(/also available/)).not.toBeInTheDocument();
+      expect(screen.queryByText(/this is the secured version of/i)).not.toBeInTheDocument();
+      expect(fetchCards).not.toHaveBeenCalled();
     });
   });
 

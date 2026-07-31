@@ -24,6 +24,8 @@ function makeCard(overrides: Partial<CardSummary> = {}): CardSummary {
     total_max_credits: 2984,
     categories: [],
     best_cpp: 1,
+    secured_variant_id: null,
+    is_secured_variant_of: null,
     ...overrides,
   };
 }

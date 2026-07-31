@@ -8,6 +8,30 @@ export function parseMultiplierValue(multiplier: string): number {
   return match ? parseFloat(match[0]) : -Infinity;
 }
 
+// ─── Secured/unsecured card pairs ──────────────────────────────────────────────
+// A handful of cards (BofA, Capital One Platinum, US Bank) have a secured
+// variant with byte-identical earn rates to an unsecured sibling — the two
+// are functionally the same product. Every catalog-listing surface (issuer
+// pages, Compare's card picker, Top Pick) hides the secured twin in favor of
+// the unsecured one, using CardSummary.secured_variant_id as the single
+// source of truth (set only on the unsecured card) rather than a
+// hand-maintained id list, so a catalog change can't drift out of sync.
+
+/** Every secured card id that should be hidden from a catalog-wide listing
+ * because an unsecured sibling with identical earn rates is also present. */
+export function hiddenSecuredIds(cards: CardSummary[]): Set<string> {
+  return new Set(
+    cards.map((c) => c.secured_variant_id).filter((id): id is string => id !== null),
+  );
+}
+
+/** `cards` with any secured card dropped in favor of its unsecured sibling —
+ * the common case every listing surface actually wants. */
+export function excludeHiddenSecuredCards<T extends CardSummary>(cards: T[]): T[] {
+  const hidden = hiddenSecuredIds(cards);
+  return cards.filter((c) => !hidden.has(c.id));
+}
+
 // ─── Issuers ──────────────────────────────────────────────────────────────────
 // `issuer` as returned by the API -> a URL-safe slug + display label.
 

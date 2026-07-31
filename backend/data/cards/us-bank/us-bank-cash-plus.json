@@ -1,5 +1,6 @@
 {
   "id": "us-bank-cash-plus",
+  "secured_variant_id": "us-bank-cash-plus-secured",
   "name": "Cash+ Visa Signature Card",
   "issuer": "U.S. Bank",
   "network": "VISA SIGNATURE",

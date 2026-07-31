@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, type ReactNode } from "react";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { Link, useLocation, useParams } from "react-router-dom";
-import { fetchCard } from "../api/cards";
+import { fetchCard, fetchCards } from "../api/cards";
 import { useCompareList } from "../hooks/useCompareList";
 import { useCreditUsage } from "../hooks/useCreditUsage";
 import { trackEvent } from "../utils/analytics";
@@ -612,6 +612,46 @@ function DetailSkeleton() {
   );
 }
 
+// ─── Secured/unsecured pairing note ────────────────────────────────────────────
+
+// A handful of cards (BofA, Capital One Platinum, US Bank) have a secured
+// counterpart with byte-identical earn rates, hidden from catalog listings in
+// favor of the unsecured one (see cardTaxonomy.ts's hiddenSecuredIds). Both
+// sides of the pair still need a way to reach the other — the unsecured
+// primary as an easier-approval-odds alternative, the secured card (no
+// longer reachable by browsing) to orient someone who lands there directly.
+// Looks the sibling's name up via the same `["cards"]` summary query every
+// other listing page already uses, so it's usually already warm in cache.
+function SecuredPairingNote({ card }: { card: Card }) {
+  const location = useLocation();
+  const pairId = card.secured_variant_id ?? card.is_secured_variant_of;
+  const { data: allCards } = useQuery({
+    queryKey: ["cards"],
+    queryFn: fetchCards,
+    enabled: pairId !== null,
+  });
+  if (!pairId) return null;
+
+  const pairName = allCards?.find((c) => c.id === pairId)?.name;
+  const text = card.secured_variant_id
+    ? `A secured version of this card${pairName ? `, ${pairName},` : ""} is also available — same benefits, easier approval odds.`
+    : `This is the secured version of${pairName ? ` ${pairName}` : " another card"} — same benefits, no easier-approval trade-off besides the refundable deposit.`;
+  const linkLabel = card.secured_variant_id ? "View the secured version" : "View the unsecured version";
+
+  return (
+    <div className="panel-box" style={{ marginTop: 16, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
+      <p style={{ margin: 0, fontSize: 13, color: "var(--muted)", lineHeight: 1.5 }}>{text}</p>
+      <Link
+        to={`/cards/${pairId}`}
+        state={{ from: location.pathname + location.search }}
+        style={{ fontSize: 13, fontWeight: 600, color: "var(--accent)", whiteSpace: "nowrap", textDecoration: "none" }}
+      >
+        {linkLabel} →
+      </Link>
+    </div>
+  );
+}
+
 // ─── Card detail ──────────────────────────────────────────────────────────────
 
 function CardDetail({ card }: { card: Card }) {
@@ -763,6 +803,8 @@ function CardDetail({ card }: { card: Card }) {
           </div>
         </div>
       </header>
+
+      <SecuredPairingNote card={card} />
 
       {/* Earning */}
       <Block label="Earning" title="How you earn points" note="per $1">
@@ -1011,9 +1053,11 @@ export default function CardDetailPage() {
     ? "Top Pick"
     : stateFrom?.startsWith("/compare")
       ? "Compare Cards"
-      : resolvedIssuer
-        ? `${resolvedIssuer.label} cards`
-        : "All issuers";
+      : stateFrom?.startsWith("/cards/")
+        ? "Back"
+        : resolvedIssuer
+          ? `${resolvedIssuer.label} cards`
+          : "All issuers";
 
   return (
     <div style={{ minHeight: "100vh" }}>

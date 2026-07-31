@@ -1,5 +1,6 @@
 {
   "id": "capital-one-platinum",
+  "secured_variant_id": "capital-one-platinum-secured",
   "name": "Platinum",
   "issuer": "Capital One",
   "network": "MASTERCARD",

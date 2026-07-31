@@ -1,5 +1,6 @@
 {
   "id": "us-bank-altitude-go",
+  "secured_variant_id": "us-bank-altitude-go-secured",
   "name": "Altitude Go Visa Signature Card",
   "issuer": "U.S. Bank",
   "network": "VISA SIGNATURE",
