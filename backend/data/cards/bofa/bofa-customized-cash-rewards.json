@@ -10,14 +10,14 @@
   "official_url": "https://www.bankofamerica.com/credit-cards/products/cash-back-credit-card/",
   "verdict": {
     "status": "keep",
-    "text": "Keep if you'll rotate your 6% category: $2,500 cap still earns well",
+    "text": "Keep if you'll use your 3% category: $2,500 cap still earns well",
     "short_tag": "Choose-Your-Own Categories"
   },
   "earn_rates": [
     {
       "emoji": "🛍️",
-      "multiplier": "6%",
-      "category": "Choice category (1st year): gas/EV, online shopping, dining, travel, drug stores, or home improvement",
+      "multiplier": "3%",
+      "category": "Choice category: gas/EV, online shopping, dining, travel, drug stores, or home improvement",
       "highlight": true,
       "is_base": false
     },

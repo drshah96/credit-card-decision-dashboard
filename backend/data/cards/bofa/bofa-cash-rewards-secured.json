@@ -10,14 +10,14 @@
   "official_url": "https://www.bankofamerica.com/credit-cards/products/cash-back-secured-credit-card/",
   "verdict": {
     "status": "situational",
-    "text": "Same 6%/2% structure as Customized Cash Rewards, good for rebuilding",
+    "text": "Same 3%/2% structure as Customized Cash Rewards, good for rebuilding",
     "short_tag": "Credit Building"
   },
   "earn_rates": [
     {
       "emoji": "🛍️",
-      "multiplier": "6%",
-      "category": "Choice category (1st year): gas/EV, online shopping, dining, travel, drug stores, or home improvement",
+      "multiplier": "3%",
+      "category": "Choice category: gas/EV, online shopping, dining, travel, drug stores, or home improvement",
       "highlight": true,
       "is_base": false
     },
