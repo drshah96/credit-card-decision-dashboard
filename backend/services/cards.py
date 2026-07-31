@@ -61,7 +61,7 @@ _SUMMARY_OPTIONS = (
 )
 
 
-def _to_card(c: CardModel) -> Card:
+def _to_card(c: CardModel, is_secured_variant_of: str | None = None) -> Card:
     return Card(
         id=c.slug,
         name=c.name,
@@ -154,10 +154,12 @@ def _to_card(c: CardModel) -> Card:
             TimelineEvent(date=e.date_label, type=e.event_type, badge=e.badge, text=e.description)
             for e in c.timeline_events
         ],
+        secured_variant_id=c.secured_variant_id,
+        is_secured_variant_of=is_secured_variant_of,
     )
 
 
-def _to_card_summary(c: CardModel) -> CardSummary:
+def _to_card_summary(c: CardModel, is_secured_variant_of: str | None = None) -> CardSummary:
     active_credits = [cr for cr in c.credits if not cr.is_removed]
     easy_total = sum(
         cr.default_value_cents // 100 for cr in active_credits if cr.tier.code == "easy"
@@ -184,6 +186,8 @@ def _to_card_summary(c: CardModel) -> CardSummary:
             for r in c.earn_rates
         ],
         best_cpp=max((o.cents_per_point for o in c.redemption_options), default=0.0),
+        secured_variant_id=c.secured_variant_id,
+        is_secured_variant_of=is_secured_variant_of,
     )
 
 
@@ -204,10 +208,24 @@ def get_card(card_id: str) -> Card | None:
             .options(*_DETAIL_OPTIONS)
             .one_or_none()
         )
-        return _to_card(card) if card else None
+        if not card:
+            return None
+        # Reverse lookup: is this card itself hidden in favor of it, i.e. is
+        # some other card's secured_variant_id pointing at this one? Only
+        # ever matches for a secured card, never stored on its own row.
+        primary = (
+            session.query(CardModel.slug)
+            .filter(CardModel.secured_variant_id == card_id, CardModel.is_active.is_(True))
+            .scalar()
+        )
+        return _to_card(card, is_secured_variant_of=primary)
 
 
 def get_card_summaries() -> list[CardSummary]:
     with session_scope() as session:
         cards = _query(session, *_SUMMARY_OPTIONS).all()
-        return [_to_card_summary(c) for c in cards]
+        # Same reverse lookup as get_card, but computed once for the whole
+        # catalog instead of a per-card query, since this path already loads
+        # every card in one pass.
+        reverse = {c.secured_variant_id: c.slug for c in cards if c.secured_variant_id}
+        return [_to_card_summary(c, is_secured_variant_of=reverse.get(c.slug)) for c in cards]

@@ -1,5 +1,6 @@
 {
   "id": "bofa-customized-cash-rewards",
+  "secured_variant_id": "bofa-cash-rewards-secured",
   "name": "Customized Cash Rewards Credit Card",
   "issuer": "Bank of America",
   "network": "VISA SIGNATURE",

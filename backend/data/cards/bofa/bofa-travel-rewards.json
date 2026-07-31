@@ -1,5 +1,6 @@
 {
   "id": "bofa-travel-rewards",
+  "secured_variant_id": "bofa-travel-rewards-secured",
   "name": "Travel Rewards Credit Card",
   "issuer": "Bank of America",
   "network": "VISA SIGNATURE",

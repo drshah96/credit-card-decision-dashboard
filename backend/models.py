@@ -122,6 +122,15 @@ class Card(BaseModel):
     services: list[Service]
     additional_cards: AdditionalCards
     timeline: list[TimelineEvent]
+    # Set on an unsecured card whose secured counterpart has identical earn
+    # rates (e.g. bofa-customized-cash-rewards -> bofa-cash-rewards-secured) —
+    # the secured card is hidden from catalog listings in favor of this one,
+    # surfaced instead as a "secured version also available" link.
+    secured_variant_id: str | None = None
+    # The inverse: set on the secured card itself, computed server-side by
+    # reverse-lookup (never stored in that card's own JSON) so its detail
+    # page can point back to the primary listing it's hidden in favor of.
+    is_secured_variant_of: str | None = None
 
 
 class EarnCategorySummary(BaseModel):
@@ -164,3 +173,9 @@ class CardSummary(BaseModel):
     # more than 3x Chase points at 2¢ each) — without fetching every card's
     # full detail just to read its redemption_options.
     best_cpp: float = 0.0
+    # See Card.secured_variant_id / Card.is_secured_variant_of — same meaning,
+    # duplicated here so catalog-listing surfaces (issuer pages, Compare's
+    # card picker, Top Pick) can hide a secured card in favor of its unsecured
+    # twin from the summary list alone, without fetching full Card detail.
+    secured_variant_id: str | None = None
+    is_secured_variant_of: str | None = None

@@ -455,6 +455,20 @@ def test_upsert_updates_changed_scalar_fields(session):
     assert card.verdict_text == "Now worth keeping"
 
 
+def test_upsert_secured_variant_id_round_trips(session):
+    card = upsert_card(session, make_card_data({"secured_variant_id": "test-card-secured"}))
+    session.commit()
+
+    assert card.secured_variant_id == "test-card-secured"
+
+
+def test_upsert_secured_variant_id_defaults_to_none(session):
+    card = upsert_card(session, make_card_data())
+    session.commit()
+
+    assert card.secured_variant_id is None
+
+
 def test_upsert_drops_credit_removed_from_source(session):
     data = make_card_data(
         {

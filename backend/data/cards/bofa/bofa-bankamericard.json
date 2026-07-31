@@ -1,5 +1,6 @@
 {
   "id": "bofa-bankamericard",
+  "secured_variant_id": "bofa-bankamericard-secured",
   "name": "BankAmericard Credit Card",
   "issuer": "Bank of America",
   "network": "MASTERCARD",
