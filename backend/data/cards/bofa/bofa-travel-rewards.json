@@ -1,5 +1,6 @@
 {
   "id": "bofa-travel-rewards",
+  "secured_variant_id": "bofa-travel-rewards-secured",
   "name": "Travel Rewards Credit Card",
   "issuer": "Bank of America",
   "network": "VISA SIGNATURE",
@@ -37,7 +38,7 @@
         "best": false
       }
     ],
-    "per_100k": "$1,500–$1,700",
+    "per_100k": "$1,000",
     "note": "Value tops out around 1¢/point regardless of redemption method. There's no transfer-partner ecosystem behind this program, just a flat, no-fuss statement-credit redemption."
   },
   "transfer_partners": {

@@ -28,6 +28,9 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     total_easy_credits: 0,
     total_max_credits: 2984,
     categories: [],
+    best_cpp: 1,
+    secured_variant_id: null,
+    is_secured_variant_of: null,
     ...overrides,
   };
 }
@@ -377,6 +380,29 @@ describe("ComparePage", () => {
 
     const picker = search.closest(".card-picker") as HTMLElement;
     expect(within(picker).queryByText("The Platinum Card")).not.toBeInTheDocument();
+  });
+
+  it("the card picker hides a secured card whose unsecured twin has identical earn rates", async () => {
+    vi.mocked(fetchCards).mockResolvedValue([
+      ...ALL_SUMMARIES,
+      makeSummary({
+        id: "amex-platinum-secured",
+        name: "The Platinum Secured Card",
+        issuer: "American Express",
+      }),
+    ].map((c) =>
+      c.id === "amex-platinum" ? { ...c, secured_variant_id: "amex-platinum-secured" } : c,
+    ));
+    renderPage("/compare");
+
+    const addButtons = await screen.findAllByRole("button", { name: "+ Add a card" });
+    fireEvent.click(addButtons[0]);
+    const search = screen.getByLabelText("Search cards");
+    fireEvent.change(search, { target: { value: "platinum" } });
+
+    const picker = search.closest(".card-picker") as HTMLElement;
+    expect(within(picker).getByText("The Platinum Card")).toBeInTheDocument();
+    expect(within(picker).queryByText("The Platinum Secured Card")).not.toBeInTheDocument();
   });
 
   it("sorts multiple results within the same issuer group alphabetically", async () => {

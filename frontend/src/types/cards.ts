@@ -21,11 +21,24 @@ interface CardBase {
   annual_fee: number;
   effective_cost: string;
   verdict: Verdict;
+  /** Set on an unsecured card whose secured counterpart has identical earn
+   * rates — the secured card is hidden from catalog listings in favor of
+   * this one, and this id is used to link to it as "also available". */
+  secured_variant_id: string | null;
+  /** The inverse, set on the secured card itself (computed server-side,
+   * never stored in that card's own data) — lets its own detail page link
+   * back to the unsecured primary it's hidden in favor of, since it's no
+   * longer reachable by browsing catalog listings. */
+  is_secured_variant_of: string | null;
 }
 
 export interface EarnCategorySummary {
   category: string;
   multiplier: string;
+  /** Whether this is the card's flat "everything else" rate — the only
+   * reliable Catch-All signal, since that rate is phrased dozens of
+   * different ways in category free text. */
+  is_base: boolean;
 }
 
 /** Returned by GET /api/cards */
@@ -36,6 +49,11 @@ export interface CardSummary extends CardBase {
    * derive spend-category filter chips (Dining, Gas, ...) AND rank matches by
    * multiplier catalog-wide, without fetching every card's full detail. */
   categories: EarnCategorySummary[];
+  /** Best cents-per-point across this card's redemption options (1.0 for a
+   * flat cash-back card). Lets the Top Pick page rank by effective earn
+   * rate (multiplier × best_cpp) instead of comparing raw multipliers
+   * across incompatible currencies. */
+  best_cpp: number;
 }
 
 export interface EarnRate {

@@ -119,6 +119,17 @@ class CardModel(Base):
     rental_note: Mapped[str | None] = mapped_column(default=None)
     additional_cards_title: Mapped[str | None] = mapped_column(default=None)
     additional_cards_note: Mapped[str | None] = mapped_column(default=None)
+    # Slug of this card's secured counterpart when the two have identical
+    # earn rates (set on the unsecured card only — see backend/models.py
+    # Card.secured_variant_id for the full explanation). Deliberately a plain
+    # string, not a self-referential FK: every other cross-card reference in
+    # this schema is likewise unenforced (e.g. nothing FKs into `slug`), and
+    # a handful of hand-authored pairs doesn't need referential-integrity
+    # machinery. unique=True (nulls excepted, per standard SQL/SQLite/Postgres
+    # behavior) guarantees at most one card claims a given secured sibling, so
+    # the reverse lookup in services/cards.py can safely use .scalar() instead
+    # of handling a hypothetical multi-row match.
+    secured_variant_id: Mapped[str | None] = mapped_column(unique=True, default=None)
     is_active: Mapped[bool] = mapped_column(default=True)
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(server_default=func.now(), onupdate=func.now())

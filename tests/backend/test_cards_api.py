@@ -139,19 +139,98 @@ def test_list_cards_summary_shape() -> None:
 
 
 def test_summary_categories_match_full_detail_earn_rates() -> None:
-    """CardSummary.categories is a lightweight {category, multiplier}
+    """CardSummary.categories is a lightweight {category, multiplier, is_base}
     projection of the full Card's earn_rates — not the full EarnRate objects
-    (no emoji/highlight/is_base) — so a catalog-wide filter/rank feature can
-    read it without fetching full detail for every card."""
+    (no emoji/highlight) — so a catalog-wide filter/rank feature can read it
+    without fetching full detail for every card. is_base is kept (unlike
+    emoji/highlight) since it's the only reliable way to identify a card's
+    flat "everything else" rate from summary data alone."""
     card_id = "amex-gold"
     summary = next(c for c in client.get("/api/cards").json() if c["id"] == card_id)
     detail = client.get(f"/api/cards/{card_id}").json()
 
     assert summary["categories"] == [
-        {"category": r["category"], "multiplier": r["multiplier"]} for r in detail["earn_rates"]
+        {"category": r["category"], "multiplier": r["multiplier"], "is_base": r["is_base"]}
+        for r in detail["earn_rates"]
     ]
     for cat in summary["categories"]:
-        assert set(cat.keys()) == {"category", "multiplier"}
+        assert set(cat.keys()) == {"category", "multiplier", "is_base"}
+
+
+def test_summary_best_cpp_matches_max_of_full_detail_redemption_options() -> None:
+    """CardSummary.best_cpp is the highest cents-per-point across the full
+    Card's redemption_options — lets a catalog-wide ranking feature compare
+    cards' effective earn rate (multiplier x best_cpp) without fetching full
+    detail for every card just to read redemption options."""
+    card_id = "chase-sapphire-reserve"
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == card_id)
+    detail = client.get(f"/api/cards/{card_id}").json()
+
+    assert summary["best_cpp"] == max(o["cpp"] for o in detail["points"]["redemption_options"])
+
+
+def test_summary_best_cpp_is_zero_when_no_redemption_options() -> None:
+    """A card with no redemption_options at all (e.g. a no-rewards product)
+    shouldn't error — best_cpp falls back to 0.0 rather than crashing on an
+    empty max()."""
+    for card in client.get("/api/cards").json():
+        detail = client.get(f"/api/cards/{card['id']}").json()
+        if not detail["points"]["redemption_options"]:
+            assert card["best_cpp"] == 0.0
+            return
+    pytest.skip("no card in the current catalog has zero redemption options")
+
+
+def test_secured_variant_id_on_primary_card() -> None:
+    """An unsecured card with an identical-benefits secured counterpart (e.g.
+    us-bank-cash-plus / us-bank-cash-plus-secured) carries secured_variant_id
+    pointing at it, on both the summary and full-detail payload — this is
+    what listing surfaces use to hide the secured twin in its favor."""
+    card_id, secured_id = "us-bank-cash-plus", "us-bank-cash-plus-secured"
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == card_id)
+    detail = client.get(f"/api/cards/{card_id}").json()
+
+    assert summary["secured_variant_id"] == secured_id
+    assert detail["secured_variant_id"] == secured_id
+    # The primary card is never itself "the secured one" of something else.
+    assert summary["is_secured_variant_of"] is None
+    assert detail["is_secured_variant_of"] is None
+
+
+def test_is_secured_variant_of_on_secured_card() -> None:
+    """The reverse of the above: the secured card's own summary/detail carry
+    is_secured_variant_of pointing back at the unsecured primary it's hidden
+    in favor of — this field is never stored in that card's own JSON, it's
+    computed server-side by reverse lookup."""
+    card_id, primary_id = "us-bank-cash-plus-secured", "us-bank-cash-plus"
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == card_id)
+    detail = client.get(f"/api/cards/{card_id}").json()
+
+    assert summary["is_secured_variant_of"] == primary_id
+    assert detail["is_secured_variant_of"] == primary_id
+    # The secured card doesn't itself have a secured variant.
+    assert summary["secured_variant_id"] is None
+    assert detail["secured_variant_id"] is None
+
+
+def test_standalone_secured_cards_have_no_pairing() -> None:
+    """citi-secured and us-bank-secured have no unsecured counterpart in the
+    catalog at all — both pairing fields should stay null for them, same as
+    any ordinary card with no secured/unsecured relationship."""
+    for card_id in ("citi-secured", "us-bank-secured"):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["secured_variant_id"] is None
+        assert detail["is_secured_variant_of"] is None
+
+
+def test_capital_one_quicksilver_secured_not_paired() -> None:
+    """capital-one-quicksilver-secured earns less than the unsecured
+    Quicksilver (missing the 5% Entertainment bonus) — confirmed NOT a
+    duplicate, so it must not be wired up as a pair despite the name."""
+    detail = client.get("/api/cards/capital-one-quicksilver-secured").json()
+    assert detail["is_secured_variant_of"] is None
+    unsecured = client.get("/api/cards/capital-one-quicksilver").json()
+    assert unsecured["secured_variant_id"] is None
 
 
 @pytest.mark.parametrize("card_id", CARD_IDS)

@@ -1,5 +1,6 @@
 {
   "id": "bofa-unlimited-cash-rewards",
+  "secured_variant_id": "bofa-unlimited-cash-rewards-secured",
   "name": "Unlimited Cash Rewards Credit Card",
   "issuer": "Bank of America",
   "network": "VISA SIGNATURE",
@@ -16,8 +17,8 @@
   "earn_rates": [
     {
       "emoji": "💳",
-      "multiplier": "2%",
-      "category": "Everything, first year only, then 1.5%",
+      "multiplier": "1.5%",
+      "category": "Everything",
       "highlight": true,
       "is_base": true
     }
@@ -37,7 +38,7 @@
         "best": false
       }
     ],
-    "per_100k": "$1,500–$2,000",
+    "per_100k": "$1,000",
     "note": "Straightforward flat-rate cash back with no minimum redemption and no expiration while the account stays open."
   },
   "transfer_partners": {

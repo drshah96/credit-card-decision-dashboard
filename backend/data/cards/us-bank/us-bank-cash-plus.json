@@ -1,5 +1,6 @@
 {
   "id": "us-bank-cash-plus",
+  "secured_variant_id": "us-bank-cash-plus-secured",
   "name": "Cash+ Visa Signature Card",
   "issuer": "U.S. Bank",
   "network": "VISA SIGNATURE",
@@ -17,7 +18,7 @@
     {
       "emoji": "🛍️",
       "multiplier": "5%",
-      "category": "Two categories you choose each quarter, first $2,000 combined, then 1%",
+      "category": "Two categories you choose each quarter: fast food, home utilities, streaming, department stores, cell phone, electronics, sporting goods, furniture, movie theaters, ground transportation, gyms, or select clothing (first $2,000 combined, then 1%)",
       "highlight": true,
       "is_base": false
     },
@@ -58,8 +59,8 @@
         "best": false
       }
     ],
-    "per_100k": "$2,000–$2,800",
-    "note": "Actual value depends heavily on hitting the $2,000/quarter cap in your two 5% categories: max out both every quarter and the blended rate on $8,000/year of category spend plus 1% elsewhere lands well above a flat 2% card. Redemption value is highest when deposited to a U.S. Bank account; other redemption paths may pay less."
+    "per_100k": "$1,000",
+    "note": "Flat 1¢ per dollar no matter how you redeem, so this figure never moves. The real value lever isn't redemption, it's the earn rate: max out both $2,000/quarter 5% category caps and the blended rate on $8,000/year of category spend plus 1% elsewhere lands well above a flat 2% card."
   },
   "transfer_partners": {
     "airline_count": 0,

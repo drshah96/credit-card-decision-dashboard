@@ -10,14 +10,14 @@
   "official_url": "https://www.bankofamerica.com/credit-cards/products/cash-back-secured-credit-card/",
   "verdict": {
     "status": "situational",
-    "text": "Same 6%/2% structure as Customized Cash Rewards, good for rebuilding",
+    "text": "Same 3%/2% structure as Customized Cash Rewards, good for rebuilding",
     "short_tag": "Credit Building"
   },
   "earn_rates": [
     {
       "emoji": "🛍️",
-      "multiplier": "6%",
-      "category": "Choice category (1st year): gas/EV, online shopping, dining, travel, drug stores, or home improvement",
+      "multiplier": "3%",
+      "category": "Choice category: gas/EV, online shopping, dining, travel, drug stores, or home improvement",
       "highlight": true,
       "is_base": false
     },
@@ -51,8 +51,8 @@
         "best": false
       }
     ],
-    "per_100k": "$2,300–$3,300",
-    "note": "Same redemption menu and category math as the unsecured card: max out the $2,500/quarter choice-category cap for the best blended rate."
+    "per_100k": "$1,000",
+    "note": "Same redemption menu as the unsecured card: flat 1¢ per dollar however you redeem it, so the real value lever is maxing out the $2,500/quarter choice-category cap for the best blended earn rate."
   },
   "transfer_partners": {
     "airline_count": 0,

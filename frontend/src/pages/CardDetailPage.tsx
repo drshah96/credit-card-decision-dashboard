@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, type ReactNode } from "react";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { Link, useLocation, useParams } from "react-router-dom";
-import { fetchCard } from "../api/cards";
+import { fetchCard, fetchCards } from "../api/cards";
 import { useCompareList } from "../hooks/useCompareList";
 import { useCreditUsage } from "../hooks/useCreditUsage";
 import { trackEvent } from "../utils/analytics";
@@ -612,6 +612,46 @@ function DetailSkeleton() {
   );
 }
 
+// ─── Secured/unsecured pairing note ────────────────────────────────────────────
+
+// A handful of cards (BofA, Capital One Platinum, US Bank) have a secured
+// counterpart with byte-identical earn rates, hidden from catalog listings in
+// favor of the unsecured one (see cardTaxonomy.ts's hiddenSecuredIds). Both
+// sides of the pair still need a way to reach the other — the unsecured
+// primary as an easier-approval-odds alternative, the secured card (no
+// longer reachable by browsing) to orient someone who lands there directly.
+// Looks the sibling's name up via the same `["cards"]` summary query every
+// other listing page already uses, so it's usually already warm in cache.
+function SecuredPairingNote({ card }: { card: Card }) {
+  const location = useLocation();
+  const pairId = card.secured_variant_id ?? card.is_secured_variant_of;
+  const { data: allCards } = useQuery({
+    queryKey: ["cards"],
+    queryFn: fetchCards,
+    enabled: pairId !== null,
+  });
+  if (!pairId) return null;
+
+  const pairName = allCards?.find((c) => c.id === pairId)?.name;
+  const text = card.secured_variant_id
+    ? `A secured version of this card${pairName ? `, ${pairName},` : ""} is also available — same benefits, easier approval odds.`
+    : `This is the secured version of${pairName ? ` ${pairName}` : " another card"} — same benefits, no easier-approval trade-off besides the refundable deposit.`;
+  const linkLabel = card.secured_variant_id ? "View the secured version" : "View the unsecured version";
+
+  return (
+    <div className="panel-box" style={{ marginTop: 16, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
+      <p style={{ margin: 0, fontSize: 13, color: "var(--muted)", lineHeight: 1.5 }}>{text}</p>
+      <Link
+        to={`/cards/${pairId}`}
+        state={{ from: location.pathname + location.search }}
+        style={{ fontSize: 13, fontWeight: 600, color: "var(--accent)", whiteSpace: "nowrap", textDecoration: "none" }}
+      >
+        {linkLabel} →
+      </Link>
+    </div>
+  );
+}
+
 // ─── Card detail ──────────────────────────────────────────────────────────────
 
 function CardDetail({ card }: { card: Card }) {
@@ -763,6 +803,8 @@ function CardDetail({ card }: { card: Card }) {
           </div>
         </div>
       </header>
+
+      <SecuredPairingNote card={card} />
 
       {/* Earning */}
       <Block label="Earning" title="How you earn points" note="per $1">
@@ -994,19 +1036,28 @@ export default function CardDetailPage() {
 
   const is404 = error instanceof Error && error.message.includes("404");
   const issuer = card ? ISSUERS.find((i) => i.issuerField === card.issuer) : undefined;
-  // Prefer the exact page we were linked from (an issuer page's card tile
-  // passes this via router state) so an active filter there — e.g. "Dining"
-  // — survives going back, instead of resetting to "All Cards". Resolving
-  // the issuer from that URL (rather than only from the card data) keeps
-  // the label in sync with the destination while the card is still
-  // loading — otherwise backTo would already point at e.g. "/issuer/chase"
-  // while backLabel still read "All issuers" because `card`/`issuer` hadn't
-  // resolved yet.
+  // Prefer the exact page we were linked from (an issuer page's card tile,
+  // a Top Pick ranking cell, or a Compare Cards row all pass this via
+  // router state) so state there — e.g. an active "Dining" filter, or the
+  // current ?cards selection — survives going back, instead of resetting
+  // to a generic default. Resolving the issuer from that URL (rather than
+  // only from the card data) keeps the label in sync with the destination
+  // while the card is still loading — otherwise backTo would already point
+  // at e.g. "/issuer/chase" while backLabel still read "All issuers"
+  // because `card`/`issuer` hadn't resolved yet.
   const stateFrom = (location.state as { from?: string } | null)?.from;
   const stateIssuer = getIssuerBySlug(stateFrom?.match(/^\/issuer\/([^/?]+)/)?.[1]);
   const resolvedIssuer = stateIssuer ?? issuer;
   const backTo = stateFrom ?? (resolvedIssuer ? `/issuer/${resolvedIssuer.slug}` : "/");
-  const backLabel = resolvedIssuer ? `${resolvedIssuer.label} cards` : "All issuers";
+  const backLabel = stateFrom?.startsWith("/top-picks")
+    ? "Top Pick"
+    : stateFrom?.startsWith("/compare")
+      ? "Compare Cards"
+      : stateFrom?.startsWith("/cards/")
+        ? "Back"
+        : resolvedIssuer
+          ? `${resolvedIssuer.label} cards`
+          : "All issuers";
 
   return (
     <div style={{ minHeight: "100vh" }}>

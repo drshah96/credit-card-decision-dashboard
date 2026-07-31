@@ -1,5 +1,6 @@
 {
   "id": "bofa-customized-cash-rewards",
+  "secured_variant_id": "bofa-cash-rewards-secured",
   "name": "Customized Cash Rewards Credit Card",
   "issuer": "Bank of America",
   "network": "VISA SIGNATURE",
@@ -10,14 +11,14 @@
   "official_url": "https://www.bankofamerica.com/credit-cards/products/cash-back-credit-card/",
   "verdict": {
     "status": "keep",
-    "text": "Keep if you'll rotate your 6% category: $2,500 cap still earns well",
+    "text": "Keep if you'll use your 3% category: $2,500 cap still earns well",
     "short_tag": "Choose-Your-Own Categories"
   },
   "earn_rates": [
     {
       "emoji": "🛍️",
-      "multiplier": "6%",
-      "category": "Choice category (1st year): gas/EV, online shopping, dining, travel, drug stores, or home improvement",
+      "multiplier": "3%",
+      "category": "Choice category: gas/EV, online shopping, dining, travel, drug stores, or home improvement",
       "highlight": true,
       "is_base": false
     },
@@ -51,8 +52,8 @@
         "best": false
       }
     ],
-    "per_100k": "$2,300–$3,300",
-    "note": "Value depends on hitting the $2,500/quarter cap in your choice category: maxing it out every quarter during the first-year 6% bonus period pushes the blended rate well above a flat 2% card."
+    "per_100k": "$1,000",
+    "note": "Flat 1¢ per dollar however you redeem it, so the real value lever isn't redemption, it's the earn rate: maxing out the $2,500/quarter choice-category cap pushes the blended rate well above a flat 2% card."
   },
   "transfer_partners": {
     "airline_count": 0,

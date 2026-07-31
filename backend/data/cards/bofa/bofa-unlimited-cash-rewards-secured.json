@@ -16,8 +16,8 @@
   "earn_rates": [
     {
       "emoji": "💳",
-      "multiplier": "2%",
-      "category": "Everything, first year only, then 1.5%",
+      "multiplier": "1.5%",
+      "category": "Everything",
       "highlight": true,
       "is_base": true
     }
@@ -37,7 +37,7 @@
         "best": false
       }
     ],
-    "per_100k": "$1,500–$2,000",
+    "per_100k": "$1,000",
     "note": "Same flat-rate redemption menu as the unsecured card: no minimum redemption, no expiration while the account stays open."
   },
   "transfer_partners": {
