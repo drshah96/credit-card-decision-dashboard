@@ -8,6 +8,7 @@ import CardDetailPage from "./pages/CardDetailPage";
 import ComparePage from "./pages/ComparePage";
 import IssuerCardsPage from "./pages/IssuerCardsPage";
 import IssuersPage from "./pages/IssuersPage";
+import TopPickPage from "./pages/TopPickPage";
 import { trackPageView } from "./utils/analytics";
 
 // Centralized here (rather than per-page) so every route — present and
@@ -28,6 +29,7 @@ export default function App() {
       <ErrorBoundary>
         <Routes>
           <Route path="/" element={<IssuersPage />} />
+          <Route path="/top-picks" element={<TopPickPage />} />
           <Route path="/compare" element={<ComparePage />} />
           <Route path="/issuer/:issuerSlug" element={<IssuerCardsPage />} />
           <Route path="/cards/:id" element={<CardDetailPage />} />

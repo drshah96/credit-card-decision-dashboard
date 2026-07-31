@@ -26,6 +26,7 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     total_easy_credits: 0,
     total_max_credits: 2984,
     categories: [],
+    best_cpp: 1,
     ...overrides,
   };
 }

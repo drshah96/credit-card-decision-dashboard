@@ -456,6 +456,146 @@ body {
   border-bottom-color: var(--accent);
 }
 
+/* ─── Top Pick page ──────────────────────────────────────────────────────────── */
+.top-pick-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 4px 0 28px;
+}
+.top-pick-toolbar-label { font-size: 13px; color: var(--faint); }
+.top-pick-my-cards { position: relative; display: inline-block; }
+.top-pick-my-cards-panel {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 420px;
+  max-height: 520px;
+  display: flex;
+  flex-direction: column;
+  background: var(--base);
+  border: 1px solid var(--line-2);
+  border-radius: 14px;
+  box-shadow: 0 20px 44px -16px rgba(15, 23, 42, 0.28);
+  overflow: hidden;
+}
+.top-pick-my-cards-issuers {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+}
+.top-pick-my-cards-issuers .filter-chip { font-size: 12px; padding: 5px 12px; }
+.top-pick-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel-s);
+}
+/* table-layout: fixed makes column widths follow the header row alone,
+   instead of the browser's default auto-layout stretching each column to
+   fit its widest cell across every row — without this, Top Choice (always
+   populated) ends up wider than Runner-Up/Honorable Mention (often just a
+   short "—"). */
+.top-pick-table { width: 100%; border-collapse: collapse; min-width: 720px; table-layout: fixed; }
+.top-pick-table th:first-child { width: 19%; }
+.top-pick-table th:not(:first-child) { width: 27%; }
+.top-pick-table th,
+.top-pick-table td {
+  padding: 14px 16px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+.top-pick-table thead th {
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--faint);
+  background: var(--panel-2);
+  font-weight: 600;
+}
+.top-pick-table tbody th {
+  position: relative;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.top-pick-table tbody tr:last-child th,
+.top-pick-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.top-pick-category-label { display: inline-flex; align-items: center; gap: 6px; }
+.top-pick-cell-empty { color: var(--faint); font-size: 13px; }
+.top-pick-card-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  text-decoration: none;
+}
+.top-pick-card-art { width: 40px; height: auto; border-radius: 4px; flex-shrink: 0; margin-top: 1px; }
+.top-pick-card-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.top-pick-issuer {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.top-pick-name { font-size: 13.5px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+.top-pick-value { font-size: 12.5px; color: var(--accent); font-weight: 600; font-variant-numeric: tabular-nums; }
+.top-pick-effective-value { color: var(--faint); font-weight: 400; }
+/* A fallback entry (no real bonus for this category — just the card's flat
+   everyday rate) is deliberately muted relative to a real bonus match, so
+   it reads as "here's an option" rather than "here's the winner". */
+.top-pick-card-link.fallback .top-pick-value { color: var(--faint); }
+.top-pick-fallback-note {
+  display: block;
+  font-size: 11px;
+  font-style: italic;
+  color: var(--faint);
+  margin-top: 2px;
+}
+
+.top-pick-category-info { position: relative; display: inline-block; margin-left: 2px; }
+.top-pick-info-trigger {
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--faint);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 100px;
+}
+.top-pick-info-trigger:hover { color: var(--accent); }
+.top-pick-info-panel {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 240px;
+  white-space: normal;
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--muted);
+  background: var(--base);
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  box-shadow: 0 20px 44px -16px rgba(15, 23, 42, 0.28);
+  padding: 12px 14px;
+}
+/* Opens above the trigger instead of below — for the last row in a
+   section, which otherwise has nowhere within the table's own height for
+   a below-opening panel to fit (see the CategoryInfo comment in
+   TopPickPage.tsx for why this can't just be solved with CSS overflow). */
+.top-pick-info-panel.up {
+  top: auto;
+  bottom: calc(100% + 6px);
+}
+
 /* ─── Compare page: shared filter bar ───────────────────────────────────────── */
 .compare-filter-bar { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
 .compare-filter-trigger {

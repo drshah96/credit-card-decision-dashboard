@@ -126,10 +126,14 @@ class Card(BaseModel):
 
 class EarnCategorySummary(BaseModel):
     """Just enough of an EarnRate to derive and rank spend-category filter
-    chips (Dining, Gas, ...) without the full object's emoji/highlight/is_base."""
+    chips (Dining, Gas, ...) without the full object's emoji/highlight.
+    Keeps is_base — unlike free-text category matching, it's the only
+    reliable way to identify a card's flat "everything else" rate (see the
+    Top Pick page's Catch-All category)."""
 
     category: str
     multiplier: str
+    is_base: bool = False
 
 
 class CardSummary(BaseModel):
@@ -151,3 +155,12 @@ class CardSummary(BaseModel):
     # multiplier across the whole catalog, without an N+1 fetch of every
     # card's full detail.
     categories: list[EarnCategorySummary] = []
+    # The best (highest) cents-per-point value across this card's redemption
+    # options — e.g. 2.0 for a transferable-points card whose best transfer
+    # partner redemption is worth 2¢/point, or 1.0 for a flat cash-back card.
+    # Lets the Top Pick page rank cards by *effective* earn rate
+    # (multiplier × best_cpp) instead of comparing raw multipliers across
+    # incompatible currencies (6x Hilton points at 0.5¢ each isn't worth
+    # more than 3x Chase points at 2¢ each) — without fetching every card's
+    # full detail just to read its redemption_options.
+    best_cpp: float = 0.0

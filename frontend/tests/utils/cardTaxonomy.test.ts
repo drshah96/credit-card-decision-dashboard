@@ -87,6 +87,7 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     total_easy_credits: 0,
     total_max_credits: 2984,
     categories: [],
+    best_cpp: 1,
     ...overrides,
   };
 }
@@ -236,8 +237,8 @@ describe("summaryTags", () => {
     const tags = summaryTags(
       makeSummary({
         categories: [
-          { category: "Restaurants worldwide", multiplier: "4x" },
-          { category: "U.S. gas stations", multiplier: "3x" },
+          { category: "Restaurants worldwide", multiplier: "4x", is_base: false },
+          { category: "U.S. gas stations", multiplier: "3x", is_base: false },
         ],
       }),
     );
@@ -293,9 +294,9 @@ function onlyGroup(sections: ReturnType<typeof groupCardsForPicker>) {
 describe("groupCardsForPicker", () => {
   it("ranks a single selected category by multiplier, descending", () => {
     const cards = [
-      makeSummary({ id: "a", name: "A", categories: [{ category: "Dining", multiplier: "3x" }] }),
-      makeSummary({ id: "b", name: "B", categories: [{ category: "Dining", multiplier: "5x" }] }),
-      makeSummary({ id: "c", name: "C", categories: [{ category: "Dining", multiplier: "4x" }] }),
+      makeSummary({ id: "a", name: "A", categories: [{ category: "Dining", multiplier: "3x", is_base: false }] }),
+      makeSummary({ id: "b", name: "B", categories: [{ category: "Dining", multiplier: "5x", is_base: false }] }),
+      makeSummary({ id: "c", name: "C", categories: [{ category: "Dining", multiplier: "4x", is_base: false }] }),
     ];
     const sorted = onlyGroup(groupCardsForPicker(cards, new Set(["Dining"])));
     expect(sorted.map((c) => c.id)).toEqual(["b", "c", "a"]);
@@ -308,11 +309,11 @@ describe("groupCardsForPicker", () => {
         id: "a",
         name: "A",
         categories: [
-          { category: "Dining", multiplier: "1x" },
-          { category: "Gas", multiplier: "2x" },
+          { category: "Dining", multiplier: "1x", is_base: false },
+          { category: "Gas", multiplier: "2x", is_base: false },
         ],
       }),
-      makeSummary({ id: "b", name: "B", categories: [{ category: "Dining", multiplier: "4x" }] }),
+      makeSummary({ id: "b", name: "B", categories: [{ category: "Dining", multiplier: "4x", is_base: false }] }),
     ];
     const sorted = onlyGroup(groupCardsForPicker(cards, new Set(["Dining", "Gas"])));
     expect(sorted.map((c) => c.id)).toEqual(["b", "a"]);
@@ -320,8 +321,8 @@ describe("groupCardsForPicker", () => {
 
   it("breaks ties alphabetically by name", () => {
     const cards = [
-      makeSummary({ id: "z", name: "Zebra", categories: [{ category: "Gas", multiplier: "3x" }] }),
-      makeSummary({ id: "a", name: "Alpha", categories: [{ category: "Gas", multiplier: "3x" }] }),
+      makeSummary({ id: "z", name: "Zebra", categories: [{ category: "Gas", multiplier: "3x", is_base: false }] }),
+      makeSummary({ id: "a", name: "Alpha", categories: [{ category: "Gas", multiplier: "3x", is_base: false }] }),
     ];
     const sorted = onlyGroup(groupCardsForPicker(cards, new Set(["Gas"])));
     expect(sorted.map((c) => c.id)).toEqual(["a", "z"]);
@@ -330,7 +331,7 @@ describe("groupCardsForPicker", () => {
   it("puts cards with no computable multiplier for the selected filters last, alphabetically", () => {
     const cards = [
       makeSummary({ id: "b", name: "Bravo", categories: [] }), // "Travel" has no per-category rate
-      makeSummary({ id: "g", name: "Golf", categories: [{ category: "Gas", multiplier: "3x" }] }),
+      makeSummary({ id: "g", name: "Golf", categories: [{ category: "Gas", multiplier: "3x", is_base: false }] }),
       makeSummary({ id: "a", name: "Alpha", categories: [] }),
     ];
     const sorted = onlyGroup(groupCardsForPicker(cards, new Set(["Gas", "Travel"])));
@@ -339,8 +340,8 @@ describe("groupCardsForPicker", () => {
 
   it("sorts alphabetically by name when no category filter is selected", () => {
     const cards = [
-      makeSummary({ id: "z", name: "Zebra", categories: [{ category: "Gas", multiplier: "5x" }] }),
-      makeSummary({ id: "a", name: "Alpha", categories: [{ category: "Gas", multiplier: "1x" }] }),
+      makeSummary({ id: "z", name: "Zebra", categories: [{ category: "Gas", multiplier: "5x", is_base: false }] }),
+      makeSummary({ id: "a", name: "Alpha", categories: [{ category: "Gas", multiplier: "1x", is_base: false }] }),
     ];
     const sorted = onlyGroup(groupCardsForPicker(cards, new Set()));
     expect(sorted.map((c) => c.id)).toEqual(["a", "z"]);
@@ -352,13 +353,13 @@ describe("groupCardsForPicker", () => {
         id: "chase-card",
         name: "Chase Card",
         issuer: "Chase",
-        categories: [{ category: "Dining", multiplier: "2x" }],
+        categories: [{ category: "Dining", multiplier: "2x", is_base: false }],
       }),
       makeSummary({
         id: "amex-card",
         name: "Amex Card",
         issuer: "American Express",
-        categories: [{ category: "Dining", multiplier: "5x" }],
+        categories: [{ category: "Dining", multiplier: "5x", is_base: false }],
       }),
     ];
     const sections = groupCardsForPicker(cards, new Set(["Dining"]));

@@ -46,16 +46,18 @@ _DETAIL_OPTIONS = (
 )
 
 # Summary load — only what CardSummary actually needs: the scalar card fields,
-# the three lookup names, credits (to total up easy/max credit values), and
-# earn_rates (category labels only, for spend-category filter chips).
-# Deliberately skips insurance/timeline/etc. so GET /api/cards doesn't drag in
-# relationships it never reads.
+# the three lookup names, credits (to total up easy/max credit values),
+# earn_rates (category labels only, for spend-category filter chips), and
+# redemption_options (cents-per-point only, for best_cpp). Deliberately skips
+# insurance/timeline/etc. so GET /api/cards doesn't drag in relationships it
+# never reads.
 _SUMMARY_OPTIONS = (
     joinedload(CardModel.issuer),
     joinedload(CardModel.network),
     joinedload(CardModel.points_program),
     selectinload(CardModel.credits).selectinload(CreditModel.tier),
     selectinload(CardModel.earn_rates),
+    selectinload(CardModel.redemption_options),
 )
 
 
@@ -176,9 +178,12 @@ def _to_card_summary(c: CardModel) -> CardSummary:
         total_easy_credits=easy_total,
         total_max_credits=max_total,
         categories=[
-            EarnCategorySummary(category=r.category, multiplier=r.multiplier_label)
+            EarnCategorySummary(
+                category=r.category, multiplier=r.multiplier_label, is_base=r.is_base
+            )
             for r in c.earn_rates
         ],
+        best_cpp=max((o.cents_per_point for o in c.redemption_options), default=0.0),
     )
 
 

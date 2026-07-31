@@ -26,6 +26,10 @@ interface CardBase {
 export interface EarnCategorySummary {
   category: string;
   multiplier: string;
+  /** Whether this is the card's flat "everything else" rate — the only
+   * reliable Catch-All signal, since that rate is phrased dozens of
+   * different ways in category free text. */
+  is_base: boolean;
 }
 
 /** Returned by GET /api/cards */
@@ -36,6 +40,11 @@ export interface CardSummary extends CardBase {
    * derive spend-category filter chips (Dining, Gas, ...) AND rank matches by
    * multiplier catalog-wide, without fetching every card's full detail. */
   categories: EarnCategorySummary[];
+  /** Best cents-per-point across this card's redemption options (1.0 for a
+   * flat cash-back card). Lets the Top Pick page rank by effective earn
+   * rate (multiplier × best_cpp) instead of comparing raw multipliers
+   * across incompatible currencies. */
+  best_cpp: number;
 }
 
 export interface EarnRate {

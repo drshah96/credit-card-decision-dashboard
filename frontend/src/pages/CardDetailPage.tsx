@@ -994,19 +994,26 @@ export default function CardDetailPage() {
 
   const is404 = error instanceof Error && error.message.includes("404");
   const issuer = card ? ISSUERS.find((i) => i.issuerField === card.issuer) : undefined;
-  // Prefer the exact page we were linked from (an issuer page's card tile
-  // passes this via router state) so an active filter there — e.g. "Dining"
-  // — survives going back, instead of resetting to "All Cards". Resolving
-  // the issuer from that URL (rather than only from the card data) keeps
-  // the label in sync with the destination while the card is still
-  // loading — otherwise backTo would already point at e.g. "/issuer/chase"
-  // while backLabel still read "All issuers" because `card`/`issuer` hadn't
-  // resolved yet.
+  // Prefer the exact page we were linked from (an issuer page's card tile,
+  // a Top Pick ranking cell, or a Compare Cards row all pass this via
+  // router state) so state there — e.g. an active "Dining" filter, or the
+  // current ?cards selection — survives going back, instead of resetting
+  // to a generic default. Resolving the issuer from that URL (rather than
+  // only from the card data) keeps the label in sync with the destination
+  // while the card is still loading — otherwise backTo would already point
+  // at e.g. "/issuer/chase" while backLabel still read "All issuers"
+  // because `card`/`issuer` hadn't resolved yet.
   const stateFrom = (location.state as { from?: string } | null)?.from;
   const stateIssuer = getIssuerBySlug(stateFrom?.match(/^\/issuer\/([^/?]+)/)?.[1]);
   const resolvedIssuer = stateIssuer ?? issuer;
   const backTo = stateFrom ?? (resolvedIssuer ? `/issuer/${resolvedIssuer.slug}` : "/");
-  const backLabel = resolvedIssuer ? `${resolvedIssuer.label} cards` : "All issuers";
+  const backLabel = stateFrom?.startsWith("/top-picks")
+    ? "Top Pick"
+    : stateFrom?.startsWith("/compare")
+      ? "Compare Cards"
+      : resolvedIssuer
+        ? `${resolvedIssuer.label} cards`
+        : "All issuers";
 
   return (
     <div style={{ minHeight: "100vh" }}>
