@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { fetchCard, fetchCards } from "../api/cards";
 import { PageTabs } from "../components/PageTabs";
 import { CompareSlot } from "../components/CompareSlot";
@@ -46,6 +46,11 @@ function formatPer100Points(cpp: number): string {
 }
 
 export default function ComparePage() {
+  // Carried onto every card-detail link below (via router state) so the
+  // card detail page's back link returns here — with the current ?cards
+  // selection intact — instead of falling back to the card's issuer page.
+  // Same pattern IssuerCardsPage uses for its own card tiles.
+  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const { compareIds, setCompareIds } = useCompareList();
   const selectedIds = useMemo(() => parseSelectedIds(searchParams.get("cards")), [searchParams]);
@@ -310,7 +315,10 @@ export default function ComparePage() {
                             {yours ? `$${yours.value}` : "…"} / ${c.total_max_credits}
                             {yours && (
                               <div className="compare-credit-hint">
-                                <Link to={`/cards/${c.id}`}>
+                                <Link
+                                  to={`/cards/${c.id}`}
+                                  state={{ from: location.pathname + location.search }}
+                                >
                                   {yours.hasSavedUsage ? "Adjust your usage →" : "Set your usage →"}
                                 </Link>
                               </div>
@@ -444,7 +452,11 @@ export default function ComparePage() {
                     <Row label="">
                       {selectedSummaries.map((c) => (
                         <td key={c.id}>
-                          <Link to={`/cards/${c.id}`} className="compare-detail-link">
+                          <Link
+                            to={`/cards/${c.id}`}
+                            state={{ from: location.pathname + location.search }}
+                            className="compare-detail-link"
+                          >
                             View full details →
                           </Link>
                         </td>

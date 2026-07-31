@@ -139,19 +139,46 @@ def test_list_cards_summary_shape() -> None:
 
 
 def test_summary_categories_match_full_detail_earn_rates() -> None:
-    """CardSummary.categories is a lightweight {category, multiplier}
+    """CardSummary.categories is a lightweight {category, multiplier, is_base}
     projection of the full Card's earn_rates — not the full EarnRate objects
-    (no emoji/highlight/is_base) — so a catalog-wide filter/rank feature can
-    read it without fetching full detail for every card."""
+    (no emoji/highlight) — so a catalog-wide filter/rank feature can read it
+    without fetching full detail for every card. is_base is kept (unlike
+    emoji/highlight) since it's the only reliable way to identify a card's
+    flat "everything else" rate from summary data alone."""
     card_id = "amex-gold"
     summary = next(c for c in client.get("/api/cards").json() if c["id"] == card_id)
     detail = client.get(f"/api/cards/{card_id}").json()
 
     assert summary["categories"] == [
-        {"category": r["category"], "multiplier": r["multiplier"]} for r in detail["earn_rates"]
+        {"category": r["category"], "multiplier": r["multiplier"], "is_base": r["is_base"]}
+        for r in detail["earn_rates"]
     ]
     for cat in summary["categories"]:
-        assert set(cat.keys()) == {"category", "multiplier"}
+        assert set(cat.keys()) == {"category", "multiplier", "is_base"}
+
+
+def test_summary_best_cpp_matches_max_of_full_detail_redemption_options() -> None:
+    """CardSummary.best_cpp is the highest cents-per-point across the full
+    Card's redemption_options — lets a catalog-wide ranking feature compare
+    cards' effective earn rate (multiplier x best_cpp) without fetching full
+    detail for every card just to read redemption options."""
+    card_id = "chase-sapphire-reserve"
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == card_id)
+    detail = client.get(f"/api/cards/{card_id}").json()
+
+    assert summary["best_cpp"] == max(o["cpp"] for o in detail["points"]["redemption_options"])
+
+
+def test_summary_best_cpp_is_zero_when_no_redemption_options() -> None:
+    """A card with no redemption_options at all (e.g. a no-rewards product)
+    shouldn't error — best_cpp falls back to 0.0 rather than crashing on an
+    empty max()."""
+    for card in client.get("/api/cards").json():
+        detail = client.get(f"/api/cards/{card['id']}").json()
+        if not detail["points"]["redemption_options"]:
+            assert card["best_cpp"] == 0.0
+            return
+    pytest.skip("no card in the current catalog has zero redemption options")
 
 
 @pytest.mark.parametrize("card_id", CARD_IDS)

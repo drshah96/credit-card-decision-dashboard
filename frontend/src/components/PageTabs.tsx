@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useCompareList } from "../hooks/useCompareList";
 
 interface Props {
-  active: "issuers" | "compare";
+  active: "issuers" | "topPicks" | "compare";
 }
 
 export function PageTabs({ active }: Props) {
@@ -16,7 +16,14 @@ export function PageTabs({ active }: Props) {
         className={`page-tab ${active === "issuers" ? "active" : ""}`}
         aria-current={active === "issuers" ? "page" : undefined}
       >
-        By Issuer
+        Card Issuers
+      </Link>
+      <Link
+        to="/top-picks"
+        className={`page-tab ${active === "topPicks" ? "active" : ""}`}
+        aria-current={active === "topPicks" ? "page" : undefined}
+      >
+        Top Pick
       </Link>
       <Link
         to={compareTo}

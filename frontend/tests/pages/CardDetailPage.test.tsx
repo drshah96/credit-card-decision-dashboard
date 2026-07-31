@@ -1253,9 +1253,9 @@ describe("CardDetailPage", () => {
     });
 
     it("falls back to the plain issuer URL when arriving with no router state", async () => {
-      // E.g. a shared link straight to a card, or navigating from the
-      // Compare page — there's no "from" to honor, so it should construct
-      // the issuer's default URL rather than crash or link nowhere.
+      // E.g. a shared link straight to a card — there's no "from" to honor,
+      // so it should construct the issuer's default URL rather than crash
+      // or link nowhere.
       vi.mocked(fetchCard).mockResolvedValue(makeCard({ issuer: "Chase" }));
       renderPage("amex");
 
@@ -1263,6 +1263,30 @@ describe("CardDetailPage", () => {
         expect(screen.getByRole("link", { name: /chase cards/i })).toHaveAttribute(
           "href",
           "/issuer/chase",
+        );
+      });
+    });
+
+    it("returns to Top Pick, labeled accordingly, when linked from there", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard({ issuer: "Chase" }));
+      renderPage("amex", { from: "/top-picks" });
+
+      await waitFor(() => {
+        expect(screen.getByRole("link", { name: /top pick/i })).toHaveAttribute(
+          "href",
+          "/top-picks",
+        );
+      });
+    });
+
+    it("returns to Compare Cards, with its ?cards selection intact, when linked from there", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard({ issuer: "Chase" }));
+      renderPage("amex", { from: "/compare?cards=amex,chase-sapphire-reserve" });
+
+      await waitFor(() => {
+        expect(screen.getByRole("link", { name: /compare cards/i })).toHaveAttribute(
+          "href",
+          "/compare?cards=amex,chase-sapphire-reserve",
         );
       });
     });
