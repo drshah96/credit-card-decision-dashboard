@@ -1,10 +1,12 @@
-import { useMemo, useState } from "react";
-import { useQueries, useQuery } from "@tanstack/react-query";
+import { useEffect, useMemo, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link, useLocation, useParams, useSearchParams } from "react-router-dom";
-import { fetchCard, fetchCards } from "../api/cards";
+import { fetchCardDetails, fetchCards } from "../api/cards";
 import { CardSummaryCard } from "../components/CardSummaryCard";
 import { FilterChips } from "../components/FilterChips";
+import { SlowLoadNotice } from "../components/SlowLoadNotice";
 import { useCompareList } from "../hooks/useCompareList";
+import { useSlowLoadWarning } from "../hooks/useSlowLoadWarning";
 import type { Card, CardSummary } from "../types/cards";
 import {
   ALL_CARDS_FILTER,
@@ -75,32 +77,43 @@ export default function IssuerCardsPage() {
     queryKey: ["cards"],
     queryFn: fetchCards,
   });
+  const slowLoad = useSlowLoadWarning(isLoading);
 
   const issuerCards = useMemo(
     () =>
       excludeHiddenSecuredCards((allCards ?? []).filter((c) => c.issuer === issuer?.issuerField)),
     [allCards, issuer],
   );
+  const issuerCardIds = useMemo(() => issuerCards.map((c) => c.id), [issuerCards]);
 
   // Fetching full detail for every card in this issuer's lineup (at most 23
   // today) is what lets the behavioral filter chips (Dining, Gas, Lounge
   // Access, Balance Transfer, 0% Intro APR, No Foreign Transaction Fee) read
-  // real data instead of being guessed — and it's all local API traffic, plus
-  // react-query caches each result so opening a card afterward is instant.
-  const detailQueries = useQueries({
-    queries: issuerCards.map((c) => ({
-      queryKey: ["card", c.id],
-      queryFn: () => fetchCard(c.id),
-    })),
+  // real data instead of being guessed. One bulk request for the whole lineup
+  // rather than a fetchCard-per-card fan-out — the latter meant visiting an
+  // issuer with a large lineup (e.g. Citi's 23 cards) fired 23 separate
+  // requests on every page load.
+  const queryClient = useQueryClient();
+  const { data: cardDetails } = useQuery({
+    queryKey: ["cardDetails", issuerCardIds],
+    queryFn: () => fetchCardDetails(issuerCardIds),
+    enabled: issuerCardIds.length > 0,
   });
+
+  // Seed the single-card cache (["card", id], read by CardDetailPage) from
+  // this bulk response so clicking into a card afterward is still instant
+  // instead of re-fetching detail this page already has.
+  useEffect(() => {
+    for (const card of cardDetails ?? []) {
+      queryClient.setQueryData(["card", card.id], card);
+    }
+  }, [cardDetails, queryClient]);
 
   const detailsById = useMemo(() => {
     const map = new Map<string, Card>();
-    for (const q of detailQueries) {
-      if (q.data) map.set(q.data.id, q.data);
-    }
+    for (const c of cardDetails ?? []) map.set(c.id, c);
     return map;
-  }, [detailQueries]);
+  }, [cardDetails]);
 
   const tagMap = useMemo(() => {
     const map = new Map<string, Set<string>>();
@@ -203,6 +216,7 @@ export default function IssuerCardsPage() {
             ))}
           </div>
         )}
+        {isLoading && slowLoad && <SlowLoadNotice />}
 
         {isError && (
           <div

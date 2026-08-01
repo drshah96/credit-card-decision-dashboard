@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor, fireEvent, cleanup } from "@testing-library/react";
+import { render, screen, waitFor, fireEvent, cleanup, act } from "@testing-library/react";
 import { MemoryRouter, Route, Routes, useLocation } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import IssuerCardsPage from "@/pages/IssuerCardsPage";
@@ -7,10 +7,10 @@ import type { Card, CardSummary } from "@/types/cards";
 
 vi.mock("@/api/cards", () => ({
   fetchCards: vi.fn(),
-  fetchCard: vi.fn(),
+  fetchCardDetails: vi.fn(),
 }));
 
-import { fetchCard, fetchCards } from "@/api/cards";
+import { fetchCardDetails, fetchCards } from "@/api/cards";
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 
@@ -66,10 +66,13 @@ const AMEX_SUMMARIES: CardSummary[] = [
   makeSummary({ id: "amex-marriott-bonvoy-bevy", name: "Marriott Bonvoy Bevy", points_program: "Marriott Bonvoy" }),
 ];
 
-function mockFetchCardImpl(id: string): Promise<Card> {
-  const summary = AMEX_SUMMARIES.find((c) => c.id === id);
-  if (!summary) return Promise.reject(new Error(`unknown fixture id: ${id}`));
-  return Promise.resolve(makeCard(summary));
+function mockFetchCardDetailsImpl(ids: string[]): Promise<Card[]> {
+  return Promise.resolve(
+    ids
+      .map((id) => AMEX_SUMMARIES.find((c) => c.id === id))
+      .filter((s): s is CardSummary => s !== undefined)
+      .map((s) => makeCard(s)),
+  );
 }
 
 // Displays whatever router `state` it was navigated with, so a test can
@@ -99,7 +102,7 @@ function renderPage(slug = "amex", search = "") {
 beforeEach(() => {
   vi.clearAllMocks();
   localStorage.clear();
-  vi.mocked(fetchCard).mockImplementation(mockFetchCardImpl);
+  vi.mocked(fetchCardDetails).mockImplementation(mockFetchCardDetailsImpl);
 });
 
 describe("IssuerCardsPage", () => {
@@ -119,6 +122,21 @@ describe("IssuerCardsPage", () => {
     await waitFor(() => {
       expect(screen.getByText("4 cards")).toBeInTheDocument();
     });
+  });
+
+  it("fetches full card detail for the whole lineup in one bulk request, not one per card", async () => {
+    // Regression guard: this page used to fan out into a separate fetchCard
+    // request per card in the lineup (up to 23 for Citi), which was slow —
+    // it must now go through the bulk endpoint exactly once.
+    vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
+    renderPage("amex");
+
+    await waitFor(() => {
+      expect(fetchCardDetails).toHaveBeenCalledTimes(1);
+    });
+    expect(fetchCardDetails).toHaveBeenCalledWith(
+      expect.arrayContaining(AMEX_SUMMARIES.map((c) => c.id)),
+    );
   });
 
   it("hides a secured card whose unsecured twin is also in this issuer's lineup", async () => {
@@ -230,6 +248,27 @@ describe("IssuerCardsPage", () => {
     fireEvent.click(screen.getByRole("link", { name: /view delta skymiles gold details/i }));
 
     expect(screen.getByText("Card detail (from: /issuer/amex?filter=Airline)")).toBeInTheDocument();
+  });
+
+  describe("slow-load notice", () => {
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it("shows a reassuring message once loading has taken a while, not immediately", () => {
+      // Regression guard for the reported "friends thought it was broken and
+      // closed the tab" cold-start UX — a plain skeleton with no explanation
+      // reads as broken once a load drags on for a while.
+      vi.useFakeTimers();
+      vi.mocked(fetchCards).mockReturnValue(new Promise(() => {}));
+      renderPage("amex");
+
+      expect(screen.queryByText(/still waking up/i)).not.toBeInTheDocument();
+      act(() => {
+        vi.advanceTimersByTime(4000);
+      });
+      expect(screen.getByText(/still waking up/i)).toBeInTheDocument();
+    });
   });
 
   describe("select cards mode", () => {
