@@ -141,6 +141,13 @@ class Card(BaseModel):
     # program name alone — e.g. Freedom Rise and Amazon Prime Visa are also
     # technically Ultimate Rewards but explicitly can't pool).
     points_pool_id: str | None = None
+    # True only for the card whose own account a pooled balance actually
+    # redeems through (Sapphire Preferred/Reserve, Strata Premier/Elite) —
+    # false for a feeder card that only reaches full value once pooled with
+    # one of these. A feeder should never be valued off another feeder in
+    # the same pool with no receiver present, since real-world transfer-
+    # partner access requires an active premium account in the mix.
+    points_pool_receiver: bool = False
 
 
 class EarnCategorySummary(BaseModel):
@@ -194,3 +201,6 @@ class CardSummary(BaseModel):
     # value from the summary list alone, without fetching full Card detail
     # for every selected card.
     points_pool_id: str | None = None
+    # See Card.points_pool_receiver — same meaning, duplicated here for the
+    # same reason as points_pool_id above.
+    points_pool_receiver: bool = False

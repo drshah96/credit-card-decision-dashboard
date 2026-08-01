@@ -1,6 +1,7 @@
 {
   "id": "chase-sapphire-reserve",
   "points_pool_id": "chase-ultimate-rewards-transferable",
+  "points_pool_receiver": true,
   "name": "Sapphire Reserve",
   "issuer": "Chase",
   "network": "VISA INFINITE",
