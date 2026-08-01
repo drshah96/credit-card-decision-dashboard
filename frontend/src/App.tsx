@@ -8,6 +8,7 @@ import CardDetailPage from "./pages/CardDetailPage";
 import ComparePage from "./pages/ComparePage";
 import IssuerCardsPage from "./pages/IssuerCardsPage";
 import IssuersPage from "./pages/IssuersPage";
+import MethodologyPage from "./pages/MethodologyPage";
 import TopPickPage from "./pages/TopPickPage";
 import { trackPageView } from "./utils/analytics";
 
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/compare" element={<ComparePage />} />
           <Route path="/issuer/:issuerSlug" element={<IssuerCardsPage />} />
           <Route path="/cards/:id" element={<CardDetailPage />} />
+          <Route path="/methodology" element={<MethodologyPage />} />
         </Routes>
       </ErrorBoundary>
       <CompareTray />
