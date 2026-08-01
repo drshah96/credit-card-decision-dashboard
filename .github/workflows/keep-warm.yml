@@ -1,0 +1,25 @@
+name: Keep backend warm during waking hours
+
+# Pings the backend's /health endpoint every 10 minutes during roughly
+# 7am-11pm ET to prevent Render's free-tier spin-down (15 min idle) during
+# that window — this project's URL goes out on job applications, and a
+# recruiter hitting a ~60s cold start looks like a broken site. Deliberately
+# NOT 24/7: that would consume nearly the entire monthly free instance-hour
+# allowance for this one service. Outside this window the backend still
+# sleeps normally, so a visit then pays the full cold-start cost.
+#
+# Cron is always UTC. The hour range below (11-23,0-3) is 7am-11pm EDT
+# (UTC-4) and will drift by an hour once DST ends (~November) until it
+# resumes (~March) — acceptable drift for a "wide window" goal, not worth
+# the complexity of a DST-aware schedule.
+on:
+  schedule:
+    - cron: "4,14,24,34,44,54 11-23,0-3 * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping /health
+        run: curl -sf --max-time 30 https://api.thewalletaudit.com/health
