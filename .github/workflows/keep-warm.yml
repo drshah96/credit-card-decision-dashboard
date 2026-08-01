@@ -8,6 +8,16 @@ name: Keep backend warm during waking hours
 # allowance for this one service. Outside this window the backend still
 # sleeps normally, so a visit then pays the full cold-start cost.
 #
+# Pings the raw onrender.com origin URL, NOT api.thewalletaudit.com. The
+# custom domain sits behind our own Cloudflare zone, which has Bot Fight
+# Mode enabled (zone-wide, no per-path exceptions on the free plan) — it
+# challenges GitHub Actions' runner traffic with a JS challenge a bare curl
+# can never pass. The onrender.com URL sits behind Render's own platform
+# infrastructure instead, unaffected by our zone's bot settings, and wakes
+# the exact same backend instance. Real visitors (recruiters etc.) always
+# use api.thewalletaudit.com and get full Bot Fight Mode protection as
+# normal — only this internal keep-alive ping uses the direct origin URL.
+#
 # Cron is always UTC. The hour range below (11-23,0-3) is 7am-11pm EDT
 # (UTC-4) and will drift by an hour once DST ends (~November) until it
 # resumes (~March) — acceptable drift for a "wide window" goal, not worth
@@ -22,12 +32,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping /health
-        run: |
-          curl -sS --max-time 30 -D - -o body.txt -w "\nHTTP %{http_code}\n" https://api.thewalletaudit.com/health
-          echo "--- body ---"
-          cat body.txt
-          status=$(curl -sS --max-time 30 -o /dev/null -w "%{http_code}" https://api.thewalletaudit.com/health)
-          if [ "$status" -lt 200 ] || [ "$status" -ge 300 ]; then
-            echo "::error::/health returned HTTP $status"
-            exit 1
-          fi
+        run: curl -sf --max-time 30 https://thewalletaudit-api.onrender.com/health
