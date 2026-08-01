@@ -261,10 +261,14 @@ function isRankableMultiplier(multiplier: string): boolean {
 // — "6%" means 6 cents per dollar, full stop. It should NOT also be
 // multiplied by the card's best_cpp: best_cpp reflects the card's best
 // points *transfer* value, which has nothing to do with a specific rate
-// that's already denominated as a flat percentage. (In today's catalog
-// every %-earning card's redemption options happen to be cpp 1.0 anyway,
-// so this doesn't change any current ranking — it's a correctness
-// guarantee for the calculation, not dependent on that data coincidence.)
+// that's already denominated as a flat percentage. (Every %-earning card's
+// OWN redemption options are cpp 1.0, so multiplying would be a no-op for
+// them anyway — this guard only actually matters for a points_pool_id card,
+// see toEntry: Chase Freedom Flex/Unlimited display their Ultimate Rewards
+// earn rate as "%" purely because their own best_cpp is 1.0 in isolation,
+// but that's not a hard cash guarantee the way real cash-back currency is —
+// once pooled into a Sapphire account, the same "5%" is really 5x points
+// worth more than 1¢ each.)
 function isPercentMultiplier(multiplier: string): boolean {
   return multiplier.includes("%");
 }
@@ -288,6 +292,11 @@ export interface TopPickEntry {
    * (e.g. 5% cash back everywhere) — the point of this row is "what's
    * actually good for this category," not just "what's your best card." */
   isFallback: boolean;
+  /** True when this card's effective value was boosted above its own
+   * best_cpp by pooling into another held card's account (Chase Ultimate
+   * Rewards: Freedom Flex/Unlimited into Sapphire Preferred/Reserve) — only
+   * ever true when computeTopPicks was called with applyPointsPooling. */
+  isPooled: boolean;
 }
 
 export interface TopPickRow extends TopPickCategory {
@@ -324,16 +333,43 @@ function catchAllRateFor(card: CardSummary): { value: number; multiplier: string
   return { value: parseMultiplierValue(rate.multiplier), multiplier: rate.multiplier };
 }
 
+/** The cents-per-point value to use for `card` in this ranking pass — its
+ * own best_cpp, unless points-pooling is being applied and another card in
+ * `pool` (the exact set of cards being ranked: the whole catalog, or a "My
+ * Cards" selection) shares its points_pool_id with a higher best_cpp. A
+ * real Ultimate Rewards account blends into one balance once combined, so
+ * every pool member inherits the best redemption path any of them unlocks.
+ * Never boosts catalog-wide — see computeTopPicks's applyPointsPooling
+ * param — pooling requires actually holding both cards, which the default
+ * whole-catalog ranking has no way to know. */
+function effectiveCppFor(card: CardSummary, pool: CardSummary[], applyPointsPooling: boolean): number {
+  if (!applyPointsPooling || !card.points_pool_id) return card.best_cpp;
+  return Math.max(
+    card.best_cpp,
+    ...pool
+      .filter((c) => c.id !== card.id && c.points_pool_id === card.points_pool_id)
+      .map((c) => c.best_cpp),
+  );
+}
+
 function toEntry(
   card: CardSummary,
   rate: { value: number; multiplier: string },
   isFallback: boolean,
+  effectiveCpp: number,
 ): TopPickEntry {
+  const isPooled = effectiveCpp > card.best_cpp;
+  // See isPercentMultiplier's doc comment: a points_pool_id card's "%" rate
+  // isn't a hard cash guarantee the way real cash-back currency is, so once
+  // pooling has actually boosted it above its own best_cpp, treat it as the
+  // point multiplier it really is instead of a literal percent.
+  const treatAsLiteralPercent = isPercentMultiplier(rate.multiplier) && !isPooled;
   return {
     card,
-    effectiveValue: isPercentMultiplier(rate.multiplier) ? rate.value : rate.value * card.best_cpp,
+    effectiveValue: treatAsLiteralPercent ? rate.value : rate.value * effectiveCpp,
     multiplier: rate.multiplier,
     isFallback,
+    isPooled,
   };
 }
 
@@ -355,6 +391,15 @@ function byValueDescThenFeeAscThenName(
   return a.card.name.localeCompare(b.card.name);
 }
 
+export interface ComputeTopPicksOptions {
+  /** Apply cross-card points-pooling (see effectiveCppFor) — only makes
+   * sense when `cards` is a "My Cards" selection of what someone actually
+   * holds, never the whole-catalog default ranking, since pooling requires
+   * actually holding both the feeder and receiver card. Defaults to false
+   * so every existing catalog-wide call site is unaffected. */
+  applyPointsPooling?: boolean;
+}
+
 /** Ranks the whole catalog into the top 3 cards per category by *effective*
  * earn rate — raw multiplier weighted by the card's best cents-per-point
  * value (best_cpp; 1.0 for flat cash back), so a 6x points card isn't
@@ -366,10 +411,12 @@ function byValueDescThenFeeAscThenName(
  * value. Known limitation: still doesn't account for spending caps or
  * activation requirements on a given rate, and best_cpp is one number per
  * card (the best realistic redemption across the board), not category-
- * specific — nor does it account for cross-card points pooling (e.g. a
- * Chase Freedom card's points are worth more once transferred into a
- * Sapphire Reserve account than they are alone). */
-export function computeTopPicks(cards: CardSummary[]): TopPickRow[] {
+ * specific. */
+export function computeTopPicks(
+  cards: CardSummary[],
+  options: ComputeTopPicksOptions = {},
+): TopPickRow[] {
+  const { applyPointsPooling = false } = options;
   // A secured card with byte-identical earn rates to its unsecured twin
   // (CardSummary.secured_variant_id, set only on the unsecured card) is the
   // same card in every way that matters here, and showing both just crowds
@@ -379,11 +426,16 @@ export function computeTopPicks(cards: CardSummary[]): TopPickRow[] {
   // only the secured one, and dropping it unconditionally there would
   // wrongly zero it out of every category.
   const deduped = excludeHiddenSecuredCards(cards);
+  // Computed once per card, not per category — every category's ranking for
+  // a given card uses the exact same pool-boosted (or not) cpp.
+  const effectiveCppById = new Map<string, number>(
+    deduped.map((card) => [card.id, effectiveCppFor(card, deduped, applyPointsPooling)]),
+  );
   return TOP_PICK_CATEGORIES.map((category) => {
     const entries: TopPickEntry[] = [];
     for (const card of deduped) {
       const best = bestRateForCategory(card, category.key);
-      if (best) entries.push(toEntry(card, best, false));
+      if (best) entries.push(toEntry(card, best, false, effectiveCppById.get(card.id)!));
     }
     entries.sort(byValueDescThenFeeAscThenName);
 
@@ -400,7 +452,7 @@ export function computeTopPicks(cards: CardSummary[]): TopPickRow[] {
       for (const card of deduped) {
         if (alreadyUsed.has(card.id)) continue;
         const catchAll = catchAllRateFor(card);
-        if (catchAll) fallbacks.push(toEntry(card, catchAll, true));
+        if (catchAll) fallbacks.push(toEntry(card, catchAll, true, effectiveCppById.get(card.id)!));
       }
       fallbacks.sort(byValueDescThenFeeAscThenName);
       entries.push(...fallbacks.slice(0, 3 - entries.length));

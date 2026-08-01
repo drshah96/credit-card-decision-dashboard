@@ -192,11 +192,14 @@ function MyCardsFilter({
 function RankCell({ entry }: { entry: TopPickEntry | undefined }) {
   if (!entry) return <td className="top-pick-cell-empty">—</td>;
   const cardImage = CARD_IMAGES[entry.card.id];
-  // A "%" rate already directly states cents earned per dollar, so its
-  // effectiveValue always equals the displayed number — showing it again
-  // would just be noise. Only surfaced for "x" points multipliers, where
-  // it's the reason a lower "x" can still outrank a higher one.
-  const showEffectiveValue = !entry.multiplier.includes("%");
+  // A "%" rate normally already directly states cents earned per dollar, so
+  // its effectiveValue always equals the displayed number — showing it
+  // again would just be noise. Except when pooling has boosted it above
+  // that raw label (e.g. Freedom Flex's displayed "5%" really means ~10.3¢
+  // once pooled into a Sapphire Reserve account) — then the boosted number
+  // is exactly the point, and hiding it would make the isPooled note below
+  // meaningless.
+  const showEffectiveValue = !entry.multiplier.includes("%") || entry.isPooled;
   return (
     <td>
       <Link
@@ -219,6 +222,9 @@ function RankCell({ entry }: { entry: TopPickEntry | undefined }) {
           </span>
           {entry.isFallback && (
             <span className="top-pick-fallback-note">No category bonus</span>
+          )}
+          {entry.isPooled && (
+            <span className="top-pick-pooled-note">Boosted by points pooling</span>
           )}
         </span>
       </Link>
@@ -344,7 +350,12 @@ export default function TopPickPage() {
     return allCards.filter((c) => selectedIds.has(c.id));
   }, [allCards, selectedIds]);
 
-  const rows = allCards ? computeTopPicks(scopedCards) : [];
+  // Points pooling (Chase Freedom Flex/Unlimited inheriting a Sapphire
+  // account's redemption value) only makes sense once we know which cards
+  // someone actually holds — never applied to the whole-catalog default.
+  const rows = allCards
+    ? computeTopPicks(scopedCards, { applyPointsPooling: selectedIds.size > 0 })
+    : [];
 
   return (
     <div style={{ minHeight: "100vh" }}>
