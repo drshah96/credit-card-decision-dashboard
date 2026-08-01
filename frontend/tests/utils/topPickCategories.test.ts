@@ -21,6 +21,8 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     best_cpp: 1,
     secured_variant_id: null,
     is_secured_variant_of: null,
+    points_pool_id: null,
+    points_pool_receiver: false,
     ...overrides,
   };
 }
@@ -315,6 +317,175 @@ describe("computeTopPicks ranking weighted by point value", () => {
     const row = computeTopPicks([card]).find((r) => r.key === "dining")!;
     // Without the fix this would be 5 * 2.05 = 10.25.
     expect(row.topChoice?.effectiveValue).toBe(5);
+  });
+});
+
+describe("points pooling", () => {
+  // A Freedom Flex/Unlimited-shaped fixture: %-labeled rate, best_cpp 1 on
+  // its own, but carries a points_pool_id.
+  function feeder(overrides: Partial<CardSummary> = {}): CardSummary {
+    return makeSummary({
+      id: "freedom",
+      name: "Freedom Flex",
+      best_cpp: 1,
+      points_pool_id: "chase-ultimate-rewards-transferable",
+      categories: [rate("Dining", "3%")],
+      ...overrides,
+    });
+  }
+
+  // A Sapphire Reserve-shaped fixture: the higher-cpp receiver account.
+  function receiver(overrides: Partial<CardSummary> = {}): CardSummary {
+    return makeSummary({
+      id: "sapphire",
+      name: "Sapphire Reserve",
+      best_cpp: 2.05,
+      points_pool_id: "chase-ultimate-rewards-transferable",
+      points_pool_receiver: true,
+      categories: [rate("Dining", "3×")],
+      ...overrides,
+    });
+  }
+
+  it("boosts a feeder card's effective value to the receiver's best_cpp when pooling is applied", () => {
+    const row = computeTopPicks([feeder(), receiver({ categories: [] })], {
+      applyPointsPooling: true,
+    }).find((r) => r.key === "dining")!;
+    // 3% raw -> reinterpreted as 3 points, boosted to 2.05cpp = 6.15.
+    expect(row.topChoice?.effectiveValue).toBeCloseTo(6.15);
+    expect(row.topChoice?.card.id).toBe("freedom");
+    expect(row.topChoice?.isPooled).toBe(true);
+  });
+
+  it("leaves the feeder card at its own raw rate when applyPointsPooling isn't passed at all", () => {
+    // Regression guard: the whole-catalog default ranking must never boost
+    // a card just because a pool partner happens to exist somewhere in the
+    // catalog — pooling requires actually holding both.
+    const row = computeTopPicks([feeder(), receiver({ categories: [] })]).find(
+      (r) => r.key === "dining",
+    )!;
+    expect(row.topChoice?.effectiveValue).toBe(3);
+    expect(row.topChoice?.isPooled).toBe(false);
+  });
+
+  it("doesn't boost a feeder card when its pool partner isn't in the given set, even with pooling enabled", () => {
+    // e.g. someone's My Cards selection includes Freedom Flex but not any
+    // Sapphire card — nothing to pool with.
+    const row = computeTopPicks([feeder()], { applyPointsPooling: true }).find(
+      (r) => r.key === "dining",
+    )!;
+    expect(row.topChoice?.effectiveValue).toBe(3);
+    expect(row.topChoice?.isPooled).toBe(false);
+  });
+
+  it("doesn't mark the receiver card itself as pooled — its own best_cpp is already the max", () => {
+    const row = computeTopPicks([feeder({ categories: [] }), receiver()], {
+      applyPointsPooling: true,
+    }).find((r) => r.key === "dining")!;
+    expect(row.topChoice?.card.id).toBe("sapphire");
+    expect(row.topChoice?.isPooled).toBe(false);
+  });
+
+  it("takes the max across multiple pool partners, not just any one of them", () => {
+    const weakerReceiver = makeSummary({
+      id: "preferred",
+      name: "Sapphire Preferred",
+      best_cpp: 1.5,
+      points_pool_id: "chase-ultimate-rewards-transferable",
+      points_pool_receiver: true,
+      categories: [],
+    });
+    const row = computeTopPicks([feeder(), weakerReceiver, receiver({ categories: [] })], {
+      applyPointsPooling: true,
+    }).find((r) => r.key === "dining")!;
+    // Boosted to the Reserve's 2.05, not the weaker Preferred's 1.5.
+    expect(row.topChoice?.effectiveValue).toBeCloseTo(6.15);
+  });
+
+  it("doesn't pool cards with different pool ids", () => {
+    const otherPool = receiver({
+      id: "other-issuer-card",
+      points_pool_id: "some-other-pool",
+      categories: [],
+    });
+    const row = computeTopPicks([feeder(), otherPool], { applyPointsPooling: true }).find(
+      (r) => r.key === "dining",
+    )!;
+    expect(row.topChoice?.effectiveValue).toBe(3);
+    expect(row.topChoice?.isPooled).toBe(false);
+  });
+
+  it("doesn't let one feeder boost another feeder with no receiver present, even when their best_cpp values differ", () => {
+    // The exact bug this field was added to fix: Citi Double Cash (1.0cpp
+    // alone) and plain Strata (1.2cpp alone) share a pool id but neither is
+    // a receiver — Chase's two feeders happened to tie at the same best_cpp
+    // (1.0 each), which masked this exact gap, since max(1, 1) looks
+    // correct by coincidence. Citi's feeders don't tie, so a naive
+    // "max across anyone sharing the pool id" would incorrectly boost
+    // Double Cash to 1.2 with no premium account actually held.
+    const doubleCash = makeSummary({
+      id: "citi-double-cash",
+      name: "Double Cash",
+      best_cpp: 1.0,
+      points_pool_id: "citi-thankyou-points-transferable",
+      categories: [rate("Dining", "2%")],
+    });
+    const strata = makeSummary({
+      id: "citi-strata",
+      name: "Strata",
+      best_cpp: 1.2,
+      points_pool_id: "citi-thankyou-points-transferable",
+      categories: [],
+    });
+    const row = computeTopPicks([doubleCash, strata], { applyPointsPooling: true }).find(
+      (r) => r.key === "dining",
+    )!;
+    expect(row.topChoice?.effectiveValue).toBe(2);
+    expect(row.topChoice?.isPooled).toBe(false);
+  });
+
+  it("boosts a Citi feeder to a Citi receiver's best_cpp, same as the Chase case", () => {
+    const doubleCash = makeSummary({
+      id: "citi-double-cash",
+      name: "Double Cash",
+      best_cpp: 1.0,
+      points_pool_id: "citi-thankyou-points-transferable",
+      categories: [rate("Dining", "2%")],
+    });
+    const strataElite = makeSummary({
+      id: "citi-strata-elite",
+      name: "Strata Elite",
+      best_cpp: 1.7,
+      points_pool_id: "citi-thankyou-points-transferable",
+      points_pool_receiver: true,
+      categories: [],
+    });
+    const row = computeTopPicks([doubleCash, strataElite], { applyPointsPooling: true }).find(
+      (r) => r.key === "dining",
+    )!;
+    expect(row.topChoice?.card.id).toBe("citi-double-cash");
+    expect(row.topChoice?.effectiveValue).toBeCloseTo(3.4);
+    expect(row.topChoice?.isPooled).toBe(true);
+  });
+
+  it("two receivers in the same pool can still boost each other (a real pooled balance blends to the best account)", () => {
+    // Not a bug: if someone holds both Sapphire Preferred and Reserve and
+    // combines everything into the Reserve account, all of it — including
+    // points Preferred itself earned — redeems at Reserve's better rate.
+    const preferred = makeSummary({
+      id: "sapphire-preferred",
+      name: "Sapphire Preferred",
+      best_cpp: 2.0,
+      points_pool_id: "chase-ultimate-rewards-transferable",
+      points_pool_receiver: true,
+      categories: [rate("Dining", "3×")],
+    });
+    const row = computeTopPicks([preferred, receiver({ categories: [] })], {
+      applyPointsPooling: true,
+    }).find((r) => r.key === "dining")!;
+    expect(row.topChoice?.card.id).toBe("sapphire-preferred");
+    expect(row.topChoice?.effectiveValue).toBeCloseTo(6.15);
+    expect(row.topChoice?.isPooled).toBe(true);
   });
 });
 

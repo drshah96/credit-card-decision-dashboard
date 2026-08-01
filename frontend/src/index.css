@@ -549,13 +549,17 @@ body {
    everyday rate) is deliberately muted relative to a real bonus match, so
    it reads as "here's an option" rather than "here's the winner". */
 .top-pick-card-link.fallback .top-pick-value { color: var(--faint); }
-.top-pick-fallback-note {
+.top-pick-fallback-note, .top-pick-pooled-note {
   display: block;
   font-size: 11px;
   font-style: italic;
-  color: var(--faint);
   margin-top: 2px;
 }
+.top-pick-fallback-note { color: var(--faint); }
+/* Pooling raises a card's value above its own baseline — the opposite of a
+   fallback's "settle for this" framing — so it reads as a positive callout
+   rather than muted caveat text. */
+.top-pick-pooled-note { color: var(--accent); }
 
 .top-pick-category-info { position: relative; display: inline-block; margin-left: 2px; }
 .top-pick-info-trigger {

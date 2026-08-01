@@ -130,6 +130,20 @@ class CardModel(Base):
     # the reverse lookup in services/cards.py can safely use .scalar() instead
     # of handling a hypothetical multi-row match.
     secured_variant_id: Mapped[str | None] = mapped_column(unique=True, default=None)
+    # Shared, non-unique identifier for a real-world transferable points pool
+    # (see backend/models.py Card.points_pool_id) — deliberately NOT unique,
+    # unlike secured_variant_id: every card sharing a pool id is a peer, so
+    # multiple rows carrying the same value is the whole point, not a bug.
+    points_pool_id: Mapped[str | None] = mapped_column(default=None)
+    # True only for the card whose OWN account is what a pooled balance gets
+    # redeemed through (e.g. Sapphire Preferred/Reserve, Strata Premier/
+    # Elite) — false for a "feeder" card that only reaches full value once
+    # pooled with one of these (Freedom Flex/Unlimited, Double Cash, plain
+    # Strata). Without this distinction, two feeders sharing a pool id could
+    # incorrectly appear to boost each other even with no receiver actually
+    # held — real-world transfer-partner access requires an active premium
+    # account in the mix, not just any two linked cards.
+    points_pool_receiver: Mapped[bool] = mapped_column(default=False)
     is_active: Mapped[bool] = mapped_column(default=True)
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(server_default=func.now(), onupdate=func.now())

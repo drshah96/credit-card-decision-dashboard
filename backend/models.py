@@ -131,6 +131,23 @@ class Card(BaseModel):
     # reverse-lookup (never stored in that card's own JSON) so its detail
     # page can point back to the primary listing it's hidden in favor of.
     is_secured_variant_of: str | None = None
+    # Set on every card that shares a real-world transferable points balance
+    # with other cards on the same id (e.g. Chase Freedom Flex/Unlimited pool
+    # into a Sapphire Preferred/Reserve account and inherit its redemption
+    # value) — unlike secured_variant_id this is symmetric, not primary/
+    # secondary: every card sharing an id is a peer, not a hidden duplicate.
+    # Only set where a card's own data explicitly documents the pooling
+    # relationship (verified against the catalog, not inferred from points
+    # program name alone — e.g. Freedom Rise and Amazon Prime Visa are also
+    # technically Ultimate Rewards but explicitly can't pool).
+    points_pool_id: str | None = None
+    # True only for the card whose own account a pooled balance actually
+    # redeems through (Sapphire Preferred/Reserve, Strata Premier/Elite) —
+    # false for a feeder card that only reaches full value once pooled with
+    # one of these. A feeder should never be valued off another feeder in
+    # the same pool with no receiver present, since real-world transfer-
+    # partner access requires an active premium account in the mix.
+    points_pool_receiver: bool = False
 
 
 class EarnCategorySummary(BaseModel):
@@ -179,3 +196,11 @@ class CardSummary(BaseModel):
     # twin from the summary list alone, without fetching full Card detail.
     secured_variant_id: str | None = None
     is_secured_variant_of: str | None = None
+    # See Card.points_pool_id — same meaning, duplicated here so the Top
+    # Pick page's "My Cards" ranking can compute pool-boosted effective
+    # value from the summary list alone, without fetching full Card detail
+    # for every selected card.
+    points_pool_id: str | None = None
+    # See Card.points_pool_receiver — same meaning, duplicated here for the
+    # same reason as points_pool_id above.
+    points_pool_receiver: bool = False

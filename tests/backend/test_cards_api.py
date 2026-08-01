@@ -233,6 +233,113 @@ def test_capital_one_quicksilver_secured_not_paired() -> None:
     assert unsecured["secured_variant_id"] is None
 
 
+def test_points_pool_id_shared_by_chase_ultimate_rewards_transfer_cards() -> None:
+    """Freedom Flex/Unlimited (flat 1cpp alone) share a pool id with Sapphire
+    Preferred/Reserve (the accounts that unlock transfer-partner value) —
+    both on the summary list and full detail, since the Top Pick page's My
+    Cards ranking reads this off the summary alone."""
+    poolable = (
+        "chase-freedom-flex",
+        "chase-freedom-unlimited",
+        "chase-sapphire-preferred",
+        "chase-sapphire-reserve",
+    )
+    summaries = {c["id"]: c for c in client.get("/api/cards").json()}
+    pool_ids = set()
+    for card_id in poolable:
+        assert summaries[card_id]["points_pool_id"] is not None
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["points_pool_id"] == summaries[card_id]["points_pool_id"]
+        pool_ids.add(summaries[card_id]["points_pool_id"])
+    assert len(pool_ids) == 1, "all four cards must share the exact same pool id"
+
+
+def test_points_pool_id_null_for_documented_non_poolable_ultimate_rewards_cards() -> None:
+    """chase-freedom-rise and chase-amazon-prime-visa are also technically
+    Ultimate Rewards under the hood, but each card's own points.note
+    explicitly says it can't be moved into a premium account — regression
+    guard against ever including them by loosely matching on currency name
+    instead of the hand-verified pair list."""
+    for card_id in ("chase-freedom-rise", "chase-amazon-prime-visa"):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["points_pool_id"] is None
+
+
+def test_points_pool_id_null_for_amex_membership_rewards_cards() -> None:
+    """Amex MR cards (Gold/Green/Platinum) already list transfer-partner cpp
+    as their own best redemption option independently — no pooling gap to
+    model, so none of them should carry a points_pool_id."""
+    for card_id in ("amex-gold", "amex-green", "amex-platinum"):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["points_pool_id"] is None
+
+
+def test_points_pool_receiver_only_true_for_the_premium_accounts() -> None:
+    """Only the card whose own account a pooled balance actually redeems
+    through is a receiver — Sapphire Preferred/Reserve and Strata Premier/
+    Elite. The feeder cards (which only reach full value once pooled with
+    one of these) must stay false, not just non-null pool ids, so a ranking
+    can't mistake a feeder for a valid boost source."""
+    receivers = (
+        "chase-sapphire-preferred",
+        "chase-sapphire-reserve",
+        "citi-strata-premier",
+        "citi-strata-elite",
+    )
+    feeders = (
+        "chase-freedom-flex",
+        "chase-freedom-unlimited",
+        "citi-double-cash",
+        "citi-strata",
+    )
+    summaries = {c["id"]: c for c in client.get("/api/cards").json()}
+    for card_id in receivers:
+        assert summaries[card_id]["points_pool_receiver"] is True
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["points_pool_receiver"] is True
+    for card_id in feeders:
+        assert summaries[card_id]["points_pool_receiver"] is False
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["points_pool_receiver"] is False
+
+
+def test_points_pool_id_shared_by_citi_thankyou_points_transfer_cards() -> None:
+    """Double Cash (flat 1cpp alone) and plain Strata (1.2cpp, reduced
+    transfer ratio) share a pool id with Strata Premier/Elite (the accounts
+    that unlock full 1:1 transfer-partner value) — confirmed via each
+    card's own points.note, not inferred from the shared 'ThankYou Points'
+    currency name alone (citi-att-points-plus also earns ThankYou Points but
+    its own note says explicitly it has no transfer-partner access and never
+    mentions pooling, so it's correctly excluded — see the next test)."""
+    poolable = (
+        "citi-double-cash",
+        "citi-strata",
+        "citi-strata-premier",
+        "citi-strata-elite",
+    )
+    summaries = {c["id"]: c for c in client.get("/api/cards").json()}
+    pool_ids = set()
+    for card_id in poolable:
+        assert summaries[card_id]["points_pool_id"] is not None
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["points_pool_id"] == summaries[card_id]["points_pool_id"]
+        pool_ids.add(summaries[card_id]["points_pool_id"])
+    assert len(pool_ids) == 1, "all four cards must share the exact same pool id"
+    # And it must be a genuinely different pool than Chase's — pooling only
+    # happens within the same issuer's rewards program in real life.
+    chase_pool = client.get("/api/cards/chase-sapphire-reserve").json()["points_pool_id"]
+    assert pool_ids != {chase_pool}
+
+
+def test_points_pool_id_null_for_citi_att_points_plus() -> None:
+    """citi-att-points-plus also earns 'ThankYou® Points' currency, but its
+    own points.note explicitly says base-tier ThankYou Points have no
+    transfer-partner access and never mentions pooling/linking — regression
+    guard against ever including it by matching on currency name alone."""
+    detail = client.get("/api/cards/citi-att-points-plus").json()
+    assert detail["points_pool_id"] is None
+
+
 @pytest.mark.parametrize("card_id", CARD_IDS)
 def test_get_card_detail(card_id: str) -> None:
     response = client.get(f"/api/cards/{card_id}")

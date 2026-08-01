@@ -1,5 +1,7 @@
 {
   "id": "chase-sapphire-preferred",
+  "points_pool_id": "chase-ultimate-rewards-transferable",
+  "points_pool_receiver": true,
   "name": "Sapphire Preferred",
   "issuer": "Chase",
   "network": "VISA SIGNATURE",

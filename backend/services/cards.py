@@ -156,6 +156,8 @@ def _to_card(c: CardModel, is_secured_variant_of: str | None = None) -> Card:
         ],
         secured_variant_id=c.secured_variant_id,
         is_secured_variant_of=is_secured_variant_of,
+        points_pool_id=c.points_pool_id,
+        points_pool_receiver=c.points_pool_receiver,
     )
 
 
@@ -188,6 +190,8 @@ def _to_card_summary(c: CardModel, is_secured_variant_of: str | None = None) -> 
         best_cpp=max((o.cents_per_point for o in c.redemption_options), default=0.0),
         secured_variant_id=c.secured_variant_id,
         is_secured_variant_of=is_secured_variant_of,
+        points_pool_id=c.points_pool_id,
+        points_pool_receiver=c.points_pool_receiver,
     )
 
 

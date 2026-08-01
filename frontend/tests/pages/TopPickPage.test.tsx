@@ -31,6 +31,8 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     best_cpp: 1,
     secured_variant_id: null,
     is_secured_variant_of: null,
+    points_pool_id: null,
+    points_pool_receiver: false,
     ...overrides,
   };
 }
@@ -395,5 +397,132 @@ describe("My Cards filter", () => {
     ).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Clear selection" }));
     expect(screen.queryByText(/None of your selected cards were found/)).not.toBeInTheDocument();
+  });
+
+  it("boosts a pooled card's value and shows the pooling note when both cards in the pair are selected", async () => {
+    const POOL_SUMMARIES: CardSummary[] = [
+      makeSummary({
+        id: "chase-freedom-flex",
+        name: "Freedom Flex",
+        issuer: "Chase",
+        best_cpp: 1,
+        points_pool_id: "chase-ultimate-rewards-transferable",
+        categories: [{ category: "Dining", multiplier: "3%", is_base: false }],
+      }),
+      makeSummary({
+        id: "chase-sapphire-reserve",
+        name: "Sapphire Reserve",
+        issuer: "Chase",
+        best_cpp: 2.05,
+        points_pool_id: "chase-ultimate-rewards-transferable",
+        points_pool_receiver: true,
+        categories: [],
+      }),
+    ];
+    vi.mocked(fetchCards).mockResolvedValue(POOL_SUMMARIES);
+    renderPage("?cards=chase-freedom-flex,chase-sapphire-reserve");
+
+    const diningRow = (await screen.findByRole("rowheader", { name: "Dining" })).closest("tr")!;
+    expect(within(diningRow).getByText("Freedom Flex")).toBeInTheDocument();
+    // 3% raw -> reinterpreted as 3 points, boosted to 2.05cpp = 6.15,
+    // displayed to one decimal (floating point rounds this to 6.1).
+    expect(within(diningRow).getByText(/6\.1¢\/\$1/)).toBeInTheDocument();
+    expect(within(diningRow).getByText("Boosted by points pooling")).toBeInTheDocument();
+  });
+
+  it("doesn't boost a pooled card's value when only it, not its pool partner, is selected", async () => {
+    const POOL_SUMMARIES: CardSummary[] = [
+      makeSummary({
+        id: "chase-freedom-flex",
+        name: "Freedom Flex",
+        issuer: "Chase",
+        best_cpp: 1,
+        points_pool_id: "chase-ultimate-rewards-transferable",
+        categories: [{ category: "Dining", multiplier: "3%", is_base: false }],
+      }),
+    ];
+    vi.mocked(fetchCards).mockResolvedValue(POOL_SUMMARIES);
+    renderPage("?cards=chase-freedom-flex");
+
+    const diningRow = (await screen.findByRole("rowheader", { name: "Dining" })).closest("tr")!;
+    expect(within(diningRow).getByText("Freedom Flex")).toBeInTheDocument();
+    expect(within(diningRow).queryByText("Boosted by points pooling")).not.toBeInTheDocument();
+  });
+
+  it("never boosts a pooled card's value in the whole-catalog default ranking", async () => {
+    const POOL_SUMMARIES: CardSummary[] = [
+      makeSummary({
+        id: "chase-freedom-flex",
+        name: "Freedom Flex",
+        issuer: "Chase",
+        best_cpp: 1,
+        points_pool_id: "chase-ultimate-rewards-transferable",
+        categories: [{ category: "Dining", multiplier: "3%", is_base: false }],
+      }),
+      makeSummary({
+        id: "chase-sapphire-reserve",
+        name: "Sapphire Reserve",
+        issuer: "Chase",
+        best_cpp: 2.05,
+        points_pool_id: "chase-ultimate-rewards-transferable",
+        points_pool_receiver: true,
+        categories: [],
+      }),
+    ];
+    vi.mocked(fetchCards).mockResolvedValue(POOL_SUMMARIES);
+    renderPage();
+
+    const diningRow = (await screen.findByRole("rowheader", { name: "Dining" })).closest("tr")!;
+    expect(within(diningRow).queryByText("Boosted by points pooling")).not.toBeInTheDocument();
+  });
+
+  const CITI_POOL_SUMMARIES: CardSummary[] = [
+    makeSummary({
+      id: "citi-double-cash",
+      name: "Double Cash",
+      issuer: "Citi",
+      best_cpp: 1,
+      points_pool_id: "citi-thankyou-points-transferable",
+      categories: [{ category: "Everything", multiplier: "2%", is_base: true }],
+    }),
+    makeSummary({
+      id: "citi-strata",
+      name: "Strata",
+      issuer: "Citi",
+      best_cpp: 1.2,
+      points_pool_id: "citi-thankyou-points-transferable",
+      categories: [],
+    }),
+    makeSummary({
+      id: "citi-strata-elite",
+      name: "Strata Elite",
+      issuer: "Citi",
+      best_cpp: 1.7,
+      points_pool_id: "citi-thankyou-points-transferable",
+      points_pool_receiver: true,
+      categories: [],
+    }),
+  ];
+
+  it("doesn't boost one Citi feeder off another feeder with no receiver selected", async () => {
+    vi.mocked(fetchCards).mockResolvedValue(CITI_POOL_SUMMARIES);
+    renderPage("?cards=citi-double-cash,citi-strata");
+
+    const catchAllRow = (await screen.findByRole("rowheader", { name: /catch-all/i })).closest(
+      "tr",
+    )!;
+    expect(within(catchAllRow).getByText("Double Cash")).toBeInTheDocument();
+    expect(within(catchAllRow).queryByText("Boosted by points pooling")).not.toBeInTheDocument();
+  });
+
+  it("boosts a Citi feeder to the receiver's value once the receiver is selected", async () => {
+    vi.mocked(fetchCards).mockResolvedValue(CITI_POOL_SUMMARIES);
+    renderPage("?cards=citi-double-cash,citi-strata-elite");
+
+    const catchAllRow = (await screen.findByRole("rowheader", { name: /catch-all/i })).closest(
+      "tr",
+    )!;
+    expect(within(catchAllRow).getByText("Double Cash")).toBeInTheDocument();
+    expect(within(catchAllRow).getByText("Boosted by points pooling")).toBeInTheDocument();
   });
 });
