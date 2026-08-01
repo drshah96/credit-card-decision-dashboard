@@ -233,6 +233,47 @@ def test_capital_one_quicksilver_secured_not_paired() -> None:
     assert unsecured["secured_variant_id"] is None
 
 
+def test_points_pool_id_shared_by_chase_ultimate_rewards_transfer_cards() -> None:
+    """Freedom Flex/Unlimited (flat 1cpp alone) share a pool id with Sapphire
+    Preferred/Reserve (the accounts that unlock transfer-partner value) —
+    both on the summary list and full detail, since the Top Pick page's My
+    Cards ranking reads this off the summary alone."""
+    poolable = (
+        "chase-freedom-flex",
+        "chase-freedom-unlimited",
+        "chase-sapphire-preferred",
+        "chase-sapphire-reserve",
+    )
+    summaries = {c["id"]: c for c in client.get("/api/cards").json()}
+    pool_ids = set()
+    for card_id in poolable:
+        assert summaries[card_id]["points_pool_id"] is not None
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["points_pool_id"] == summaries[card_id]["points_pool_id"]
+        pool_ids.add(summaries[card_id]["points_pool_id"])
+    assert len(pool_ids) == 1, "all four cards must share the exact same pool id"
+
+
+def test_points_pool_id_null_for_documented_non_poolable_ultimate_rewards_cards() -> None:
+    """chase-freedom-rise and chase-amazon-prime-visa are also technically
+    Ultimate Rewards under the hood, but each card's own points.note
+    explicitly says it can't be moved into a premium account — regression
+    guard against ever including them by loosely matching on currency name
+    instead of the hand-verified pair list."""
+    for card_id in ("chase-freedom-rise", "chase-amazon-prime-visa"):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["points_pool_id"] is None
+
+
+def test_points_pool_id_null_for_amex_membership_rewards_cards() -> None:
+    """Amex MR cards (Gold/Green/Platinum) already list transfer-partner cpp
+    as their own best redemption option independently — no pooling gap to
+    model, so none of them should carry a points_pool_id."""
+    for card_id in ("amex-gold", "amex-green", "amex-platinum"):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["points_pool_id"] is None
+
+
 @pytest.mark.parametrize("card_id", CARD_IDS)
 def test_get_card_detail(card_id: str) -> None:
     response = client.get(f"/api/cards/{card_id}")

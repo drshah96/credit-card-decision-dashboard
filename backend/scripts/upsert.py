@@ -172,6 +172,7 @@ def upsert_card(session: Session, data: dict) -> CardModel:
             card.additional_cards_title = data.get("additional_cards", {}).get("title")
             card.additional_cards_note = data.get("additional_cards", {}).get("note")
             card.secured_variant_id = data.get("secured_variant_id")
+            card.points_pool_id = data.get("points_pool_id")
             card.is_active = True
 
             card.earn_rates = [
