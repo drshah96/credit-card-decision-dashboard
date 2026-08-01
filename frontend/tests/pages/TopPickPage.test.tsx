@@ -32,6 +32,7 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     secured_variant_id: null,
     is_secured_variant_of: null,
     points_pool_id: null,
+    points_pool_receiver: false,
     ...overrides,
   };
 }
@@ -414,6 +415,7 @@ describe("My Cards filter", () => {
         issuer: "Chase",
         best_cpp: 2.05,
         points_pool_id: "chase-ultimate-rewards-transferable",
+        points_pool_receiver: true,
         categories: [],
       }),
     ];
@@ -463,6 +465,7 @@ describe("My Cards filter", () => {
         issuer: "Chase",
         best_cpp: 2.05,
         points_pool_id: "chase-ultimate-rewards-transferable",
+        points_pool_receiver: true,
         categories: [],
       }),
     ];
@@ -471,5 +474,55 @@ describe("My Cards filter", () => {
 
     const diningRow = (await screen.findByRole("rowheader", { name: "Dining" })).closest("tr")!;
     expect(within(diningRow).queryByText("Boosted by points pooling")).not.toBeInTheDocument();
+  });
+
+  const CITI_POOL_SUMMARIES: CardSummary[] = [
+    makeSummary({
+      id: "citi-double-cash",
+      name: "Double Cash",
+      issuer: "Citi",
+      best_cpp: 1,
+      points_pool_id: "citi-thankyou-points-transferable",
+      categories: [{ category: "Everything", multiplier: "2%", is_base: true }],
+    }),
+    makeSummary({
+      id: "citi-strata",
+      name: "Strata",
+      issuer: "Citi",
+      best_cpp: 1.2,
+      points_pool_id: "citi-thankyou-points-transferable",
+      categories: [],
+    }),
+    makeSummary({
+      id: "citi-strata-elite",
+      name: "Strata Elite",
+      issuer: "Citi",
+      best_cpp: 1.7,
+      points_pool_id: "citi-thankyou-points-transferable",
+      points_pool_receiver: true,
+      categories: [],
+    }),
+  ];
+
+  it("doesn't boost one Citi feeder off another feeder with no receiver selected", async () => {
+    vi.mocked(fetchCards).mockResolvedValue(CITI_POOL_SUMMARIES);
+    renderPage("?cards=citi-double-cash,citi-strata");
+
+    const catchAllRow = (await screen.findByRole("rowheader", { name: /catch-all/i })).closest(
+      "tr",
+    )!;
+    expect(within(catchAllRow).getByText("Double Cash")).toBeInTheDocument();
+    expect(within(catchAllRow).queryByText("Boosted by points pooling")).not.toBeInTheDocument();
+  });
+
+  it("boosts a Citi feeder to the receiver's value once the receiver is selected", async () => {
+    vi.mocked(fetchCards).mockResolvedValue(CITI_POOL_SUMMARIES);
+    renderPage("?cards=citi-double-cash,citi-strata-elite");
+
+    const catchAllRow = (await screen.findByRole("rowheader", { name: /catch-all/i })).closest(
+      "tr",
+    )!;
+    expect(within(catchAllRow).getByText("Double Cash")).toBeInTheDocument();
+    expect(within(catchAllRow).getByText("Boosted by points pooling")).toBeInTheDocument();
   });
 });

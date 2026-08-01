@@ -334,20 +334,29 @@ function catchAllRateFor(card: CardSummary): { value: number; multiplier: string
 }
 
 /** The cents-per-point value to use for `card` in this ranking pass — its
- * own best_cpp, unless points-pooling is being applied and another card in
- * `pool` (the exact set of cards being ranked: the whole catalog, or a "My
- * Cards" selection) shares its points_pool_id with a higher best_cpp. A
- * real Ultimate Rewards account blends into one balance once combined, so
- * every pool member inherits the best redemption path any of them unlocks.
- * Never boosts catalog-wide — see computeTopPicks's applyPointsPooling
- * param — pooling requires actually holding both cards, which the default
- * whole-catalog ranking has no way to know. */
+ * own best_cpp, unless points-pooling is being applied and a *receiver*
+ * card in `pool` (the exact set of cards being ranked: the whole catalog,
+ * or a "My Cards" selection) shares its points_pool_id with a higher
+ * best_cpp. A real Ultimate Rewards/ThankYou Points account blends into
+ * one balance once combined, so every pool member inherits the best
+ * redemption path any receiver in the pool unlocks. Only a receiver
+ * (points_pool_receiver — Sapphire Preferred/Reserve, Strata Premier/
+ * Elite) can be the source of a boost: two feeder cards sharing a pool id
+ * (e.g. Citi Double Cash + plain Strata, whose own best_cpp values differ)
+ * must NOT boost each other with no receiver actually held, since real-
+ * world transfer-partner access requires an active premium account in the
+ * mix, not just any two linked cards. Never boosts catalog-wide — see
+ * computeTopPicks's applyPointsPooling param — pooling requires actually
+ * holding the cards, which the default whole-catalog ranking has no way
+ * to know. */
 function effectiveCppFor(card: CardSummary, pool: CardSummary[], applyPointsPooling: boolean): number {
   if (!applyPointsPooling || !card.points_pool_id) return card.best_cpp;
   return Math.max(
     card.best_cpp,
     ...pool
-      .filter((c) => c.id !== card.id && c.points_pool_id === card.points_pool_id)
+      .filter(
+        (c) => c.id !== card.id && c.points_pool_id === card.points_pool_id && c.points_pool_receiver,
+      )
       .map((c) => c.best_cpp),
   );
 }

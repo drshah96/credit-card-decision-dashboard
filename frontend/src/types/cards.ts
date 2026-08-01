@@ -37,6 +37,14 @@ interface CardBase {
    * by Top Pick's "My Cards" ranking to value a held flat-rate card at the
    * best cpp among every other held card in the same pool. */
   points_pool_id: string | null;
+  /** True only for the card whose own account a pooled balance actually
+   * redeems through (e.g. Sapphire Preferred/Reserve, Strata Premier/
+   * Elite) — false for a feeder card that only reaches full value once
+   * pooled with one of these. A feeder must never be valued off another
+   * feeder sharing its pool id with no receiver present — real-world
+   * transfer-partner access requires an active premium account in the
+   * mix, not just any two linked cards. */
+  points_pool_receiver: boolean;
 }
 
 export interface EarnCategorySummary {

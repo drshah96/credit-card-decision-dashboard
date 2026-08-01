@@ -46,6 +46,7 @@ function makeCard(overrides: Partial<Card> = {}): Card {
     secured_variant_id: null,
     is_secured_variant_of: null,
     points_pool_id: null,
+    points_pool_receiver: false,
     earn_rates: [
       { emoji: "✈️", multiplier: "5×", category: "Flights", highlight: true, is_base: false },
       { emoji: "💳", multiplier: "1×", category: "Everything else", highlight: false, is_base: true },

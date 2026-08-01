@@ -93,6 +93,7 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     secured_variant_id: null,
     is_secured_variant_of: null,
     points_pool_id: null,
+    points_pool_receiver: false,
     ...overrides,
   };
 }
@@ -111,6 +112,7 @@ function makeCard(overrides: Partial<Card> = {}): Card {
     secured_variant_id: null,
     is_secured_variant_of: null,
     points_pool_id: null,
+    points_pool_receiver: false,
     earn_rates: [],
     earn_note: "",
     points: { currency: "Membership Rewards", redemption_options: [], per_100k: "", note: "" },
