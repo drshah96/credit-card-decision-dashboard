@@ -109,6 +109,14 @@ class Card(BaseModel):
     annual_fee: int
     effective_cost: str
     official_url: str | None = None
+    # Whether official_url carries affiliate tracking (commission-earning).
+    # False for every card today — the catalog has no affiliate program yet.
+    # Drives frontend/src/pages/CardDetailPage.tsx's AffiliateDisclosure,
+    # which only renders when this is true, so the disclosure is never shown
+    # for a link that isn't actually monetized (and can't go stale/misleading
+    # if a card is flagged without the UI catching up, since the two are
+    # the same read).
+    is_affiliate_link: bool = False
     verdict: Verdict
     earn_rates: list[EarnRate]
     earn_note: str

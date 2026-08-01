@@ -393,6 +393,16 @@ def test_official_url_is_string_or_none(card_id: str) -> None:
     )
 
 
+@pytest.mark.parametrize("card_id", CARD_IDS)
+def test_is_affiliate_link_false_for_every_card_today(card_id: str) -> None:
+    """No card in the catalog has an affiliate relationship yet — the field
+    exists so the disclosure UI is ready to go the moment one is added, not
+    because anything is live now. Regression guard against a card ever
+    getting silently flagged true without a deliberate, reviewed change."""
+    response = client.get(f"/api/cards/{card_id}")
+    assert response.json()["is_affiliate_link"] is False
+
+
 def test_annual_fees_are_correct() -> None:
     response = client.get("/api/cards")
     fees = {c["id"]: c["annual_fee"] for c in response.json()}
