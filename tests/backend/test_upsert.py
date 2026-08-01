@@ -493,6 +493,22 @@ def test_upsert_points_pool_id_shared_by_two_cards_not_unique(session):
     assert a.points_pool_id == b.points_pool_id == "shared-pool"
 
 
+def test_upsert_points_pool_receiver_round_trips(session):
+    card = upsert_card(
+        session, make_card_data({"points_pool_id": "test-pool", "points_pool_receiver": True})
+    )
+    session.commit()
+
+    assert card.points_pool_receiver is True
+
+
+def test_upsert_points_pool_receiver_defaults_to_false(session):
+    card = upsert_card(session, make_card_data())
+    session.commit()
+
+    assert card.points_pool_receiver is False
+
+
 def test_upsert_drops_credit_removed_from_source(session):
     data = make_card_data(
         {

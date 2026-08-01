@@ -1,5 +1,6 @@
 {
   "id": "citi-double-cash",
+  "points_pool_id": "citi-thankyou-points-transferable",
   "name": "Double Cash",
   "issuer": "Citi",
   "network": "MASTERCARD",

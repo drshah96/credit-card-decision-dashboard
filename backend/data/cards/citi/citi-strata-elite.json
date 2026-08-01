@@ -1,5 +1,7 @@
 {
   "id": "citi-strata-elite",
+  "points_pool_id": "citi-thankyou-points-transferable",
+  "points_pool_receiver": true,
   "name": "Strata Elite",
   "issuer": "Citi",
   "network": "WORLD LEGEND MASTERCARD",

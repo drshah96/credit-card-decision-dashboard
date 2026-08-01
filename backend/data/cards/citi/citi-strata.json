@@ -1,5 +1,6 @@
 {
   "id": "citi-strata",
+  "points_pool_id": "citi-thankyou-points-transferable",
   "name": "Strata",
   "issuer": "Citi",
   "network": "MASTERCARD",
