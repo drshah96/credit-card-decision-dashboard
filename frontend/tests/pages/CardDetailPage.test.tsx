@@ -47,6 +47,7 @@ function makeCard(overrides: Partial<Card> = {}): Card {
     is_secured_variant_of: null,
     points_pool_id: null,
     points_pool_receiver: false,
+    is_affiliate_link: false,
     earn_rates: [
       { emoji: "✈️", multiplier: "5×", category: "Flights", highlight: true, is_base: false },
       { emoji: "💳", multiplier: "1×", category: "Everything else", highlight: false, is_base: true },
@@ -1358,6 +1359,50 @@ describe("CardDetailPage", () => {
       expect(screen.queryByText(/also available/)).not.toBeInTheDocument();
       expect(screen.queryByText(/this is the secured version of/i)).not.toBeInTheDocument();
       expect(fetchCards).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("affiliate disclosure", () => {
+    it("shows nothing for a card with no affiliate relationship (every card today)", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard({ is_affiliate_link: false }));
+      renderPage();
+
+      await waitFor(() => {
+        expect(screen.getByRole("heading", { name: "The Platinum Card" })).toBeInTheDocument();
+      });
+      expect(screen.queryByText(/advertising disclosure/i)).not.toBeInTheDocument();
+    });
+
+    it("shows a plain-language commission disclosure naming the card when its link is flagged as affiliate", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({ name: "The Platinum Card", is_affiliate_link: true }),
+      );
+      renderPage();
+
+      const disclosureLabel = await screen.findByText(/advertising disclosure/i);
+      const disclosure = disclosureLabel.parentElement!;
+      expect(disclosure).toHaveTextContent(
+        "we may earn a commission if you apply for The Platinum Card",
+      );
+      expect(disclosure).toHaveTextContent("never changes which cards we recommend");
+    });
+
+    it("renders before both existing outbound links (the card name and the card image), not after", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({ id: "amex-platinum", is_affiliate_link: true, official_url: "https://amex.com" }),
+      );
+      renderPage("amex-platinum");
+
+      const disclosureLabel = await screen.findByText(/advertising disclosure/i);
+      const disclosure = disclosureLabel.parentElement!;
+      // Exact name, not a substring match — the card image link's accessible
+      // name is "The Platinum Card card art" (from its alt text), which
+      // would also match a loose regex here and make this ambiguous.
+      const outboundLink = await screen.findByRole("link", { name: "The Platinum Card" });
+      // DOCUMENT_POSITION_FOLLOWING means `outboundLink` comes AFTER
+      // `disclosure` in the DOM — i.e. the disclosure is first.
+      const position = disclosure.compareDocumentPosition(outboundLink);
+      expect(position & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     });
   });
 

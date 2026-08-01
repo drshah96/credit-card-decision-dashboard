@@ -41,6 +41,7 @@ function makeCard(overrides: Partial<Card> = {}): Card {
   const summary = makeSummary(overrides);
   return {
     ...summary,
+    is_affiliate_link: false,
     earn_rates: [],
     earn_note: "",
     points: { currency: summary.points_program, redemption_options: [], per_100k: "", note: "" },

@@ -113,6 +113,7 @@ function makeCard(overrides: Partial<Card> = {}): Card {
     is_secured_variant_of: null,
     points_pool_id: null,
     points_pool_receiver: false,
+    is_affiliate_link: false,
     earn_rates: [],
     earn_note: "",
     points: { currency: "Membership Rewards", redemption_options: [], per_100k: "", note: "" },

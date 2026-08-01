@@ -41,6 +41,7 @@ function makeCard(overrides: Partial<Card> = {}): Card {
   const summary = makeSummary(overrides);
   return {
     ...summary,
+    is_affiliate_link: false,
     earn_rates: [
       { emoji: "✈️", multiplier: "5×", category: "Flights", highlight: true, is_base: false },
     ],

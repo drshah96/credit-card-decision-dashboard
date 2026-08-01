@@ -166,6 +166,11 @@ export interface TimelineEvent {
 /** Returned by GET /api/cards/:id */
 export interface Card extends CardBase {
   official_url?: string | null;
+  /** Whether official_url carries affiliate tracking (commission-earning).
+   * False for every card today — drives whether CardDetailPage's
+   * AffiliateDisclosure renders, so the disclosure can never show for a
+   * link that isn't actually monetized. */
+  is_affiliate_link: boolean;
   earn_rates: EarnRate[];
   earn_note: string;
   points: Points;
