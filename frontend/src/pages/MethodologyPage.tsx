@@ -101,6 +101,20 @@ export default function MethodologyPage() {
           </p>
         </header>
 
+        <div
+          className="panel-box"
+          style={{ marginTop: 24, maxWidth: 720, fontSize: 14, lineHeight: 1.6 }}
+        >
+          <p style={{ margin: "0 0 8px", fontWeight: 600, color: "var(--ink)" }}>
+            The short version
+          </p>
+          <List>
+            <ListItem>Every ranking comes from one fixed formula. It never knows or cares whether a card pays us anything.</ListItem>
+            <ListItem>We don't have any affiliate partnerships today. Every link goes straight to the issuer.</ListItem>
+            <ListItem>Calculator and "Best-case net" numbers are estimates, not guarantees. Double-check the issuer's terms before applying.</ListItem>
+          </List>
+        </div>
+
         <Section label="Stance" title="We rank by math, not by who pays us">
           <P>
             Every ranking on this site (Top Pick, Compare, the "Best-case net" figure on a card's
@@ -111,12 +125,14 @@ export default function MethodologyPage() {
           <P>
             Right now, we don't have any affiliate partnerships. Every link on this site goes
             straight to the issuer's own page. If that ever changes, we'll disclose it clearly on
-            the specific card it applies to, not bury it in a footer. But the promise on this
-            page isn't really about today. It's a standing rule: a card's ranking, point
-            valuation, or "Best-case net" figure will never change because of a business
-            relationship, now or later. We don't just say that. It's backed by an automated test
-            in our own codebase that fails the build if a card's monetization status ever moves
-            its rank.
+            the specific card it applies to, not bury it in a footer.
+          </P>
+          <P>
+            But the promise on this page isn't really about today. It's a standing rule: a card's
+            ranking, point valuation, or "Best-case net" figure will never change because of a
+            business relationship, now or later. We don't just say that. It's backed by an
+            automated test in our own codebase that fails the build if a card's monetization
+            status ever moves its rank.
           </P>
         </Section>
 
@@ -218,12 +234,6 @@ export default function MethodologyPage() {
             click through to a card's own page and check its issuer's terms before applying.
           </P>
         </Section>
-
-        <p style={{ marginTop: 56, fontSize: 13, color: "var(--faint)" }}>
-          <Link to="/" style={{ color: "inherit" }}>
-            ← Back to Card Issuers
-          </Link>
-        </p>
       </div>
     </div>
   );

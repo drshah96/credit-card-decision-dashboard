@@ -99,12 +99,18 @@ describe("MethodologyPage", () => {
     ).toBeInTheDocument();
   });
 
-  it("links back to the Card Issuers page from both the top and bottom of the page", () => {
+  it("links back to the Card Issuers page once, at the top", () => {
     renderPage();
     const backLinks = screen.getAllByRole("link", { name: /back to card issuers/i });
-    expect(backLinks).toHaveLength(2);
-    for (const link of backLinks) {
-      expect(link).toHaveAttribute("href", "/");
-    }
+    expect(backLinks).toHaveLength(1);
+    expect(backLinks[0]).toHaveAttribute("href", "/");
+  });
+
+  it("gives a short-version summary near the top of the page", () => {
+    renderPage();
+    expect(screen.getByText(/the short version/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/we don't have any affiliate partnerships today/i),
+    ).toBeInTheDocument();
   });
 });
