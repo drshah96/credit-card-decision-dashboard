@@ -6,7 +6,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 from backend.models import Card, CardSummary
-from backend.services.cards import get_card, get_card_summaries
+from backend.services.cards import get_card, get_card_summaries, get_cards
 
 
 @asynccontextmanager
@@ -57,6 +57,18 @@ def health() -> dict:
 def list_cards() -> list[CardSummary]:
     """Return a summary of all cards."""
     return get_card_summaries()
+
+
+@app.get("/api/cards/detail", response_model=list[Card])
+def list_card_details(ids: str = "") -> list[Card]:
+    """Full detail for multiple cards in one request, given a comma-separated
+    `ids` query param. Registered above /api/cards/{card_id} — as a literal
+    path, it has to be matched before that param route, or "detail" would be
+    parsed as a card_id instead. Lets a page that needs every card in a
+    lineup (e.g. an issuer's full set) fetch them all in one round trip
+    instead of fanning out into a separate request per card."""
+    card_ids = [i for i in ids.split(",") if i]
+    return get_cards(card_ids)
 
 
 @app.get("/api/cards/{card_id}", response_model=Card)

@@ -375,6 +375,56 @@ def test_get_card_not_found() -> None:
     assert response.status_code == 404
 
 
+def test_bulk_card_detail_matches_individual_fetches() -> None:
+    """The bulk endpoint (used by IssuerCardsPage to fetch a whole lineup in
+    one request instead of fanning out into one request per card) must return
+    byte-for-byte the same payload per card as the single-card endpoint."""
+    ids = ["amex-platinum", "chase-sapphire-preferred", "citi-double-cash"]
+    response = client.get("/api/cards/detail", params={"ids": ",".join(ids)})
+    assert response.status_code == 200
+    bulk_by_id = {c["id"]: c for c in response.json()}
+    assert set(bulk_by_id) == set(ids)
+    for card_id in ids:
+        assert bulk_by_id[card_id] == client.get(f"/api/cards/{card_id}").json()
+
+
+def test_bulk_card_detail_missing_ids_param_returns_empty_list() -> None:
+    response = client.get("/api/cards/detail")
+    assert response.status_code == 200
+    assert response.json() == []
+
+
+def test_bulk_card_detail_empty_ids_returns_empty_list() -> None:
+    response = client.get("/api/cards/detail", params={"ids": ""})
+    assert response.status_code == 200
+    assert response.json() == []
+
+
+def test_bulk_card_detail_unknown_id_silently_omitted() -> None:
+    # A bulk fetch has "give me what you have" semantics, not the single-card
+    # endpoint's 404 — one bad id shouldn't fail the whole batch.
+    response = client.get(
+        "/api/cards/detail", params={"ids": "amex-platinum,nonexistent"}
+    )
+    assert response.status_code == 200
+    ids = [c["id"] for c in response.json()]
+    assert ids == ["amex-platinum"]
+
+
+def test_bulk_card_detail_preserves_secured_variant_pairing_even_without_primary_in_batch() -> None:
+    # Regression guard: the reverse secured/unsecured lookup must be resolved
+    # against the whole catalog, not just the requested batch — otherwise
+    # requesting only the secured card (without its unsecured primary also in
+    # the batch) would wrongly lose its is_secured_variant_of pairing.
+    response = client.get(
+        "/api/cards/detail", params={"ids": "us-bank-cash-plus-secured"}
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) == 1
+    assert data[0]["is_secured_variant_of"] == "us-bank-cash-plus"
+
+
 def test_amex_platinum_official_url() -> None:
     response = client.get("/api/cards/amex-platinum")
     assert response.status_code == 200
