@@ -469,6 +469,30 @@ def test_upsert_secured_variant_id_defaults_to_none(session):
     assert card.secured_variant_id is None
 
 
+def test_upsert_points_pool_id_round_trips(session):
+    card = upsert_card(session, make_card_data({"points_pool_id": "test-pool"}))
+    session.commit()
+
+    assert card.points_pool_id == "test-pool"
+
+
+def test_upsert_points_pool_id_defaults_to_none(session):
+    card = upsert_card(session, make_card_data())
+    session.commit()
+
+    assert card.points_pool_id is None
+
+
+def test_upsert_points_pool_id_shared_by_two_cards_not_unique(session):
+    # Unlike secured_variant_id, points_pool_id has no unique constraint —
+    # multiple cards intentionally sharing one value is the whole point.
+    a = upsert_card(session, make_card_data({"id": "card-a", "points_pool_id": "shared-pool"}))
+    b = upsert_card(session, make_card_data({"id": "card-b", "points_pool_id": "shared-pool"}))
+    session.commit()
+
+    assert a.points_pool_id == b.points_pool_id == "shared-pool"
+
+
 def test_upsert_drops_credit_removed_from_source(session):
     data = make_card_data(
         {

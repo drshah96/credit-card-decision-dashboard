@@ -30,6 +30,13 @@ interface CardBase {
    * back to the unsecured primary it's hidden in favor of, since it's no
    * longer reachable by browsing catalog listings. */
   is_secured_variant_of: string | null;
+  /** Shared, non-unique id for a real-world transferable points pool (e.g.
+   * Chase Freedom Flex/Unlimited pool into a Sapphire Preferred/Reserve
+   * account and inherit its redemption value). Every card sharing this id
+   * is a peer, not a primary/duplicate pair like secured_variant_id — used
+   * by Top Pick's "My Cards" ranking to value a held flat-rate card at the
+   * best cpp among every other held card in the same pool. */
+  points_pool_id: string | null;
 }
 
 export interface EarnCategorySummary {

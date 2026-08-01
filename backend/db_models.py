@@ -130,6 +130,11 @@ class CardModel(Base):
     # the reverse lookup in services/cards.py can safely use .scalar() instead
     # of handling a hypothetical multi-row match.
     secured_variant_id: Mapped[str | None] = mapped_column(unique=True, default=None)
+    # Shared, non-unique identifier for a real-world transferable points pool
+    # (see backend/models.py Card.points_pool_id) — deliberately NOT unique,
+    # unlike secured_variant_id: every card sharing a pool id is a peer, so
+    # multiple rows carrying the same value is the whole point, not a bug.
+    points_pool_id: Mapped[str | None] = mapped_column(default=None)
     is_active: Mapped[bool] = mapped_column(default=True)
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(server_default=func.now(), onupdate=func.now())
