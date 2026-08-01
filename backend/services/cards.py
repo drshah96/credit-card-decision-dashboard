@@ -193,6 +193,7 @@ def _to_card_summary(c: CardModel, is_secured_variant_of: str | None = None) -> 
         is_secured_variant_of=is_secured_variant_of,
         points_pool_id=c.points_pool_id,
         points_pool_receiver=c.points_pool_receiver,
+        is_affiliate_link=c.is_affiliate_link,
     )
 
 

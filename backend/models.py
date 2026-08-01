@@ -115,7 +115,11 @@ class Card(BaseModel):
     # which only renders when this is true, so the disclosure is never shown
     # for a link that isn't actually monetized (and can't go stale/misleading
     # if a card is flagged without the UI catching up, since the two are
-    # the same read).
+    # the same read). Also duplicated on CardSummary below — that's what
+    # makes the ranking-integrity regression test in
+    # frontend/tests/utils/topPickCategories.test.ts possible: it proves
+    # computeTopPicks ignores this field entirely, not just that nothing
+    # currently reads it.
     is_affiliate_link: bool = False
     verdict: Verdict
     earn_rates: list[EarnRate]
@@ -212,3 +216,9 @@ class CardSummary(BaseModel):
     # See Card.points_pool_receiver — same meaning, duplicated here for the
     # same reason as points_pool_id above.
     points_pool_receiver: bool = False
+    # See Card.is_affiliate_link — same meaning, duplicated here so
+    # computeTopPicks (which only ever sees CardSummary, never full Card
+    # detail) can be proven to ignore monetization status entirely, rather
+    # than that guarantee only holding for surfaces that happen to fetch
+    # full detail.
+    is_affiliate_link: bool = False

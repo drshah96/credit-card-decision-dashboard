@@ -398,9 +398,25 @@ def test_is_affiliate_link_false_for_every_card_today(card_id: str) -> None:
     """No card in the catalog has an affiliate relationship yet — the field
     exists so the disclosure UI is ready to go the moment one is added, not
     because anything is live now. Regression guard against a card ever
-    getting silently flagged true without a deliberate, reviewed change."""
-    response = client.get(f"/api/cards/{card_id}")
-    assert response.json()["is_affiliate_link"] is False
+    getting silently flagged true without a deliberate, reviewed change.
+    Checked on both the summary and full-detail payload, since the summary
+    is what the ranking-integrity test in
+    frontend/tests/utils/topPickCategories.test.ts actually depends on."""
+    detail = client.get(f"/api/cards/{card_id}").json()
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == card_id)
+    assert detail["is_affiliate_link"] is False
+    assert summary["is_affiliate_link"] is False
+
+
+def test_summary_is_affiliate_link_matches_full_detail() -> None:
+    """CardSummary.is_affiliate_link mirrors Card.is_affiliate_link exactly
+    — the Top Pick ranking path (which only ever sees CardSummary) reads
+    the same value a detail page would, not a separately-tracked copy that
+    could drift out of sync."""
+    card_id = "amex-platinum"
+    detail = client.get(f"/api/cards/{card_id}").json()
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == card_id)
+    assert summary["is_affiliate_link"] == detail["is_affiliate_link"]
 
 
 def test_annual_fees_are_correct() -> None:
