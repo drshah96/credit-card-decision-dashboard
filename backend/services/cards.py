@@ -72,6 +72,7 @@ def _to_card(c: CardModel, is_secured_variant_of: str | None = None) -> Card:
         annual_fee=c.annual_fee_cents // 100,
         effective_cost=c.effective_cost_label,
         official_url=c.official_url,
+        is_affiliate_link=c.is_affiliate_link,
         verdict=Verdict(
             status=c.verdict_status, text=c.verdict_text, short_tag=c.verdict_short_tag
         ),
@@ -192,6 +193,7 @@ def _to_card_summary(c: CardModel, is_secured_variant_of: str | None = None) -> 
         is_secured_variant_of=is_secured_variant_of,
         points_pool_id=c.points_pool_id,
         points_pool_receiver=c.points_pool_receiver,
+        is_affiliate_link=c.is_affiliate_link,
     )
 
 
@@ -223,6 +225,34 @@ def get_card(card_id: str) -> Card | None:
             .scalar()
         )
         return _to_card(card, is_secured_variant_of=primary)
+
+
+def get_cards(card_ids: list[str]) -> list[Card]:
+    """Full detail for multiple cards in one request — the same relationship
+    loaders as get_card, issued once for the whole batch (one IN query per
+    relationship, via selectinload) instead of once per card. Lets a page
+    that needs every card in a lineup (e.g. an issuer's full set, for the
+    behavioral filter chips) fetch them all in one round trip instead of
+    fanning out into a separate request per card. Unknown ids are silently
+    omitted rather than erroring, matching a bulk "give me what you have"
+    contract instead of get_card's single-resource 404 semantics."""
+    if not card_ids:
+        return []
+    with session_scope() as session:
+        cards = (
+            session.query(CardModel)
+            .filter(CardModel.slug.in_(card_ids), CardModel.is_active.is_(True))
+            .options(*_DETAIL_OPTIONS)
+            .all()
+        )
+        # Same reverse lookup as get_card, batched as one IN query across the
+        # whole catalog rather than a query per card in the batch.
+        primaries = dict(
+            session.query(CardModel.secured_variant_id, CardModel.slug)
+            .filter(CardModel.secured_variant_id.in_(card_ids), CardModel.is_active.is_(True))
+            .all()
+        )
+        return [_to_card(c, is_secured_variant_of=primaries.get(c.slug)) for c in cards]
 
 
 def get_card_summaries() -> list[CardSummary]:

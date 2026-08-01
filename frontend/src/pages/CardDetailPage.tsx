@@ -612,6 +612,45 @@ function DetailSkeleton() {
   );
 }
 
+// ─── Affiliate disclosure ───────────────────────────────────────────────────────
+
+// Renders only when this specific card's own link is actually monetized —
+// never a blanket site-wide banner. That's deliberate: it means the
+// disclosure can never drift out of sync with reality (there's nothing to
+// forget to update elsewhere) and never claims a commission that isn't
+// real. As of this writing no card in the catalog has is_affiliate_link
+// set — this exists so the UI is ready the moment one does, per FTC
+// Endorsement Guide principles: clear, conspicuous, plain language, and
+// placed before the link it discloses rather than buried in a footer or
+// hidden behind a hover/click. Rendered as the very first element inside
+// the hero <header>, above both existing outbound links (the card name and
+// the card image), so it's unavoidable before either.
+function AffiliateDisclosure({ card }: { card: Card }) {
+  if (!card.is_affiliate_link) return null;
+  return (
+    <div
+      className="panel-box"
+      style={{
+        marginBottom: 20,
+        display: "flex",
+        alignItems: "flex-start",
+        gap: 12,
+        background: "color-mix(in srgb, var(--gold) 12%, var(--panel-s))",
+        borderColor: "color-mix(in srgb, var(--gold) 35%, var(--line))",
+      }}
+    >
+      <span aria-hidden="true" style={{ fontSize: 18, lineHeight: 1 }}>
+        📢
+      </span>
+      <p style={{ margin: 0, fontSize: 13.5, color: "var(--ink)", lineHeight: 1.55 }}>
+        <strong>Advertising disclosure:</strong> we may earn a commission if you apply for{" "}
+        {card.name} through the link on this page, at no extra cost to you. This never changes
+        which cards we recommend or how we calculate their point values.
+      </p>
+    </div>
+  );
+}
+
 // ─── Secured/unsecured pairing note ────────────────────────────────────────────
 
 // A handful of cards (BofA, Capital One Platinum, US Bank) have a secured
@@ -669,6 +708,7 @@ function CardDetail({ card }: { card: Card }) {
     <div>
       {/* Hero */}
       <header style={{ paddingTop: 12 }}>
+        <AffiliateDisclosure card={card} />
         <div
           style={{
             display: "flex",

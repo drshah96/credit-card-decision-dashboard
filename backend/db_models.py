@@ -105,6 +105,8 @@ class CardModel(Base):
     annual_fee_cents: Mapped[int]
     effective_cost_label: Mapped[str]
     official_url: Mapped[str | None] = mapped_column(default=None)
+    # See backend/models.py Card.is_affiliate_link for the full explanation.
+    is_affiliate_link: Mapped[bool] = mapped_column(default=False)
     verdict_status: Mapped[str]
     verdict_text: Mapped[str]
     verdict_short_tag: Mapped[str | None] = mapped_column(default=None)

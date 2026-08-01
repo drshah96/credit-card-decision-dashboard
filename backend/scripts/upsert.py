@@ -157,6 +157,7 @@ def upsert_card(session: Session, data: dict) -> CardModel:
             card.annual_fee_cents = round(data["annual_fee"] * 100)
             card.effective_cost_label = data["effective_cost"]
             card.official_url = data.get("official_url")
+            card.is_affiliate_link = data.get("is_affiliate_link", False)
             card.verdict_status = data["verdict"]["status"]
             card.verdict_text = data["verdict"]["text"]
             card.verdict_short_tag = data["verdict"].get("short_tag")

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export function Footer() {
   return (
     <footer style={{ borderTop: "1px solid var(--line)", marginTop: 40 }}>
@@ -15,6 +17,11 @@ export function Footer() {
         banks change pricing, credits, and benefits without notice. Always confirm current
         terms on the issuer's official site before applying. This dashboard is for
         informational purposes only and isn't financial advice.
+        <div style={{ marginTop: 10 }}>
+          <Link to="/methodology" style={{ color: "var(--muted)" }}>
+            How we rank cards →
+          </Link>
+        </div>
       </div>
     </footer>
   );

@@ -5,6 +5,8 @@ import { fetchCards } from "../api/cards";
 import { PageTabs } from "../components/PageTabs";
 import { CARD_IMAGES } from "../utils/cardImages";
 import { FilterChips } from "../components/FilterChips";
+import { SlowLoadNotice } from "../components/SlowLoadNotice";
+import { useSlowLoadWarning } from "../hooks/useSlowLoadWarning";
 import { groupCardsForPicker, hiddenSecuredIds, ISSUERS } from "../utils/cardTaxonomy";
 import {
   computeTopPicks,
@@ -330,6 +332,7 @@ export default function TopPickPage() {
     queryKey: ["cards"],
     queryFn: fetchCards,
   });
+  const slowLoad = useSlowLoadWarning(isLoading);
 
   // Lives in the URL (like Compare's ?cards=) rather than localStorage —
   // the whole interaction (open picker, select, see the table update)
@@ -408,6 +411,7 @@ export default function TopPickPage() {
             }}
           />
         )}
+        {isLoading && slowLoad && <SlowLoadNotice />}
 
         {isError && (
           <div

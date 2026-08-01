@@ -33,6 +33,7 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     is_secured_variant_of: null,
     points_pool_id: null,
     points_pool_receiver: false,
+    is_affiliate_link: false,
     ...overrides,
   };
 }
@@ -41,6 +42,7 @@ function makeCard(overrides: Partial<Card> = {}): Card {
   const summary = makeSummary(overrides);
   return {
     ...summary,
+    is_affiliate_link: false,
     earn_rates: [
       { emoji: "✈️", multiplier: "5×", category: "Flights", highlight: true, is_base: false },
     ],
