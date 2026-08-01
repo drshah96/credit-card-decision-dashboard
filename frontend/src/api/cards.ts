@@ -36,3 +36,16 @@ export async function fetchCard(id: string): Promise<Card> {
   }
   return data as Card;
 }
+
+// One request for full detail on many cards at once, instead of a separate
+// fetchCard per card — see IssuerCardsPage, which needs every card in a
+// lineup for the behavioral filter chips and would otherwise fan out into
+// dozens of individual requests.
+export async function fetchCardDetails(ids: string[]): Promise<Card[]> {
+  if (ids.length === 0) return [];
+  const data = await apiFetch(`/cards/detail?ids=${ids.map(encodeURIComponent).join(",")}`);
+  if (!Array.isArray(data)) {
+    throw new Error("Unexpected response format: expected an array of cards.");
+  }
+  return data as Card[];
+}
