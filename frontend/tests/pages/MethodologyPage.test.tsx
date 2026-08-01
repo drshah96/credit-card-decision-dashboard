@@ -62,6 +62,29 @@ describe("MethodologyPage", () => {
     ).toBeInTheDocument();
   });
 
+  it("lists the three credit tiers as bullets, not run into a single sentence", () => {
+    renderPage();
+    const items = screen.getAllByRole("listitem").map((li) => li.textContent);
+    expect(items).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining("Effortless."),
+        expect.stringContaining("Plan a little."),
+        expect.stringContaining("Niche."),
+      ]),
+    );
+  });
+
+  it("lists what the ranking doesn't model as bullets", () => {
+    renderPage();
+    const items = screen.getAllByRole("listitem").map((li) => li.textContent);
+    expect(items).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining("Spending caps on bonus categories."),
+        expect.stringContaining("Sign-up bonuses."),
+      ]),
+    );
+  });
+
   it("explains Best-case net is the optimistic ceiling, distinct from the calculator", () => {
     renderPage();
     expect(

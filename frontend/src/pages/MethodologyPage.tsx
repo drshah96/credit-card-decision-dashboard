@@ -39,6 +39,16 @@ function P({ children }: { children: React.ReactNode }) {
   return <p style={{ margin: "0 0 14px" }}>{children}</p>;
 }
 
+function List({ children }: { children: React.ReactNode }) {
+  return (
+    <ul style={{ margin: "0 0 14px", paddingLeft: 20, listStyle: "disc" }}>{children}</ul>
+  );
+}
+
+function ListItem({ children }: { children: React.ReactNode }) {
+  return <li style={{ marginBottom: 6 }}>{children}</li>;
+}
+
 function BackLink() {
   const [hover, setHover] = useState(false);
   return (
@@ -152,11 +162,21 @@ export default function MethodologyPage() {
             A card's advertised credits (airline credit, dining credit, and so on) are rarely
             worth their full face value to any one person. Most people don't use every credit
             every year. So each credit on this site starts with a realistic, hand-estimated
-            default, not the maximum, grouped into three tiers: <strong>Effortless</strong>
-            (automatic or unavoidable, you'll capture it without trying), <strong>Plan a
-            little</strong> (timed or takes a bit of effort, partial use is likely), and{" "}
-            <strong>Niche</strong> (only worth it if it genuinely fits your life).
+            default, not the maximum, grouped into three tiers:
           </P>
+          <List>
+            <ListItem>
+              <strong>Effortless.</strong> Automatic or unavoidable. You'll capture it without
+              trying.
+            </ListItem>
+            <ListItem>
+              <strong>Plan a little.</strong> Timed or takes a bit of effort. Partial use is
+              likely.
+            </ListItem>
+            <ListItem>
+              <strong>Niche.</strong> Only worth it if it genuinely fits your life.
+            </ListItem>
+          </List>
           <P>
             You can drag any credit's slider to match your own real usage instead of the default.
             The calculator recomputes "credits you'll use," compares it against the annual fee,
@@ -182,15 +202,20 @@ export default function MethodologyPage() {
         </Section>
 
         <Section label="Limits" title="What this site doesn't account for">
+          <P>Let's be upfront about where the math stops. Rankings don't model:</P>
+          <List>
+            <ListItem>Spending caps on bonus categories.</ListItem>
+            <ListItem>
+              Activation requirements. Some rates need to be manually enrolled each quarter.
+            </ListItem>
+            <ListItem>Sign-up bonuses.</ListItem>
+          </List>
           <P>
-            Let's be upfront about where the math stops. Rankings don't model spending caps on
-            bonus categories, activation requirements (some rates need to be manually enrolled
-            each quarter), or sign-up bonuses. A card's "best redemption rate" is one number
-            representing its best realistic outcome, not a guarantee that every dollar you spend
-            redeems at that rate. Category matching is based on the free-text category
-            descriptions issuers publish, which can occasionally be broader or narrower than
-            real-world merchant coding. When in doubt, click through to a card's own page and
-            check its issuer's terms before applying.
+            A card's "best redemption rate" is one number representing its best realistic
+            outcome, not a guarantee that every dollar you spend redeems at that rate. Category
+            matching is based on the free-text category descriptions issuers publish, which can
+            occasionally be broader or narrower than real-world merchant coding. When in doubt,
+            click through to a card's own page and check its issuer's terms before applying.
           </P>
         </Section>
 
