@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor, fireEvent, cleanup } from "@testing-library/react";
+import { render, screen, waitFor, fireEvent, cleanup, act } from "@testing-library/react";
 import { MemoryRouter, Route, Routes, useLocation } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import IssuerCardsPage from "@/pages/IssuerCardsPage";
@@ -248,6 +248,27 @@ describe("IssuerCardsPage", () => {
     fireEvent.click(screen.getByRole("link", { name: /view delta skymiles gold details/i }));
 
     expect(screen.getByText("Card detail (from: /issuer/amex?filter=Airline)")).toBeInTheDocument();
+  });
+
+  describe("slow-load notice", () => {
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it("shows a reassuring message once loading has taken a while, not immediately", () => {
+      // Regression guard for the reported "friends thought it was broken and
+      // closed the tab" cold-start UX — a plain skeleton with no explanation
+      // reads as broken once a load drags on for a while.
+      vi.useFakeTimers();
+      vi.mocked(fetchCards).mockReturnValue(new Promise(() => {}));
+      renderPage("amex");
+
+      expect(screen.queryByText(/still waking up/i)).not.toBeInTheDocument();
+      act(() => {
+        vi.advanceTimersByTime(4000);
+      });
+      expect(screen.getByText(/still waking up/i)).toBeInTheDocument();
+    });
   });
 
   describe("select cards mode", () => {

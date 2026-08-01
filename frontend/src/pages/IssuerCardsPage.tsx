@@ -4,7 +4,9 @@ import { Link, useLocation, useParams, useSearchParams } from "react-router-dom"
 import { fetchCardDetails, fetchCards } from "../api/cards";
 import { CardSummaryCard } from "../components/CardSummaryCard";
 import { FilterChips } from "../components/FilterChips";
+import { SlowLoadNotice } from "../components/SlowLoadNotice";
 import { useCompareList } from "../hooks/useCompareList";
+import { useSlowLoadWarning } from "../hooks/useSlowLoadWarning";
 import type { Card, CardSummary } from "../types/cards";
 import {
   ALL_CARDS_FILTER,
@@ -75,6 +77,7 @@ export default function IssuerCardsPage() {
     queryKey: ["cards"],
     queryFn: fetchCards,
   });
+  const slowLoad = useSlowLoadWarning(isLoading);
 
   const issuerCards = useMemo(
     () =>
@@ -213,6 +216,7 @@ export default function IssuerCardsPage() {
             ))}
           </div>
         )}
+        {isLoading && slowLoad && <SlowLoadNotice />}
 
         {isError && (
           <div
