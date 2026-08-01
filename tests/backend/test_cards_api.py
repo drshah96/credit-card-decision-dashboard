@@ -403,9 +403,7 @@ def test_bulk_card_detail_empty_ids_returns_empty_list() -> None:
 def test_bulk_card_detail_unknown_id_silently_omitted() -> None:
     # A bulk fetch has "give me what you have" semantics, not the single-card
     # endpoint's 404 — one bad id shouldn't fail the whole batch.
-    response = client.get(
-        "/api/cards/detail", params={"ids": "amex-platinum,nonexistent"}
-    )
+    response = client.get("/api/cards/detail", params={"ids": "amex-platinum,nonexistent"})
     assert response.status_code == 200
     ids = [c["id"] for c in response.json()]
     assert ids == ["amex-platinum"]
@@ -416,9 +414,7 @@ def test_bulk_card_detail_preserves_secured_variant_pairing_even_without_primary
     # against the whole catalog, not just the requested batch — otherwise
     # requesting only the secured card (without its unsecured primary also in
     # the batch) would wrongly lose its is_secured_variant_of pairing.
-    response = client.get(
-        "/api/cards/detail", params={"ids": "us-bank-cash-plus-secured"}
-    )
+    response = client.get("/api/cards/detail", params={"ids": "us-bank-cash-plus-secured"})
     assert response.status_code == 200
     data = response.json()
     assert len(data) == 1
