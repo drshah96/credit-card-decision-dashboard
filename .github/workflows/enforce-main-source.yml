@@ -1,9 +1,14 @@
 name: Enforce main source branch
 
-# main only accepts merges from development (see feedback_pr_target_branch
-# memory / project convention adopted 2026-07-28) — this is the piece
-# branch protection itself can't express, since it only restricts the
-# target branch, not which branch a PR is allowed to come from.
+# main only accepts merges from development (the normal, scheduled path) or
+# fixes (the urgent path for shipping a fix batch without waiting on
+# development — see feedback_pr_target_branch memory / project convention
+# adopted 2026-07-28, extended 2026-08-01) — this is the piece branch
+# protection itself can't express, since it only restricts the target
+# branch, not which branch a PR is allowed to come from. An urgent
+# fixes -> main merge must always be followed by also merging fixes into
+# development, so development can't drift and regress the fix on its next
+# promotion to main.
 on:
   pull_request:
     branches: [main]
@@ -12,8 +17,8 @@ jobs:
   check-source-branch:
     runs-on: ubuntu-latest
     steps:
-      - name: Require development as PR source
-        if: github.head_ref != 'development'
+      - name: Require development or fixes as PR source
+        if: github.head_ref != 'development' && github.head_ref != 'fixes'
         run: |
-          echo "PRs into main must come from the 'development' branch (got '${{ github.head_ref }}')." >&2
+          echo "PRs into main must come from 'development' or 'fixes' (got '${{ github.head_ref }}')." >&2
           exit 1
