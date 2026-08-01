@@ -5,8 +5,10 @@ import { fetchCard, fetchCards } from "../api/cards";
 import { PageTabs } from "../components/PageTabs";
 import { CompareSlot } from "../components/CompareSlot";
 import { CompareFilterBar } from "../components/CompareFilterBar";
+import { SlowLoadNotice } from "../components/SlowLoadNotice";
 import { useCompareList } from "../hooks/useCompareList";
 import { useCreditUsage } from "../hooks/useCreditUsage";
+import { useSlowLoadWarning } from "../hooks/useSlowLoadWarning";
 import { trackEvent } from "../utils/analytics";
 import { CARD_IMAGES } from "../utils/cardImages";
 import { filterByBrands, filterByCategories, filterByIssuers } from "../utils/cardTaxonomy";
@@ -89,6 +91,7 @@ export default function ComparePage() {
     queryKey: ["cards"],
     queryFn: fetchCards,
   });
+  const slowLoad = useSlowLoadWarning(summariesLoading);
 
   const detailQueries = useQueries({
     queries: selectedIds.map((id) => ({
@@ -223,6 +226,7 @@ export default function ComparePage() {
             ))}
           </div>
         )}
+        {summariesLoading && slowLoad && <SlowLoadNotice />}
 
         {summariesError && (
           <div

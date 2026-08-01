@@ -8,6 +8,7 @@ import "@fontsource-variable/fraunces/standard.css";
 import "@fontsource-variable/space-grotesk/wght.css";
 import "./index.css";
 import App from "./App.tsx";
+import { fetchCards } from "./api/cards";
 import { initAnalytics } from "./utils/analytics";
 
 // Render's redirect rules only match on path, not hostname, so the raw
@@ -23,6 +24,16 @@ if (window.location.hostname === "thewalletaudit.onrender.com") {
   initAnalytics();
 
   const queryClient = new QueryClient();
+
+  // Fired the instant the app boots, on every route (not just the homepage)
+  // — the backend runs on a free Render plan that spins down after 15 min
+  // idle, so the first request after a quiet period pays a real wake-up
+  // delay. Kicking this off immediately, before the user has even picked an
+  // issuer or clicked into a card, overlaps that wake-up with the time
+  // they'd naturally spend browsing anyway, and doubles as a prefetch: by
+  // the time IssuerCardsPage/TopPickPage/ComparePage mount and run their own
+  // ["cards"] query, this is very likely already resolved in cache.
+  void queryClient.prefetchQuery({ queryKey: ["cards"], queryFn: fetchCards });
 
   const rootElement = document.getElementById("root");
   if (!rootElement) throw new Error("Root element #root not found in index.html");
