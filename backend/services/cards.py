@@ -72,6 +72,7 @@ def _to_card(c: CardModel, is_secured_variant_of: str | None = None) -> Card:
         annual_fee=c.annual_fee_cents // 100,
         effective_cost=c.effective_cost_label,
         official_url=c.official_url,
+        is_affiliate_link=c.is_affiliate_link,
         verdict=Verdict(
             status=c.verdict_status, text=c.verdict_text, short_tag=c.verdict_short_tag
         ),
@@ -192,6 +193,7 @@ def _to_card_summary(c: CardModel, is_secured_variant_of: str | None = None) -> 
         is_secured_variant_of=is_secured_variant_of,
         points_pool_id=c.points_pool_id,
         points_pool_receiver=c.points_pool_receiver,
+        is_affiliate_link=c.is_affiliate_link,
     )
 
 

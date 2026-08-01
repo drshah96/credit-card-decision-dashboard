@@ -509,6 +509,20 @@ def test_upsert_points_pool_receiver_defaults_to_false(session):
     assert card.points_pool_receiver is False
 
 
+def test_upsert_is_affiliate_link_round_trips(session):
+    card = upsert_card(session, make_card_data({"is_affiliate_link": True}))
+    session.commit()
+
+    assert card.is_affiliate_link is True
+
+
+def test_upsert_is_affiliate_link_defaults_to_false(session):
+    card = upsert_card(session, make_card_data())
+    session.commit()
+
+    assert card.is_affiliate_link is False
+
+
 def test_upsert_drops_credit_removed_from_source(session):
     data = make_card_data(
         {

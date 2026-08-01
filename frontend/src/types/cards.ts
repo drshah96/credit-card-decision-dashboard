@@ -45,6 +45,14 @@ interface CardBase {
    * transfer-partner access requires an active premium account in the
    * mix, not just any two linked cards. */
   points_pool_receiver: boolean;
+  /** Whether this card's official_url carries affiliate tracking
+   * (commission-earning). False for every card today — the catalog has no
+   * affiliate program yet. Drives CardDetailPage's AffiliateDisclosure,
+   * and — just as importantly — is carried on CardSummary specifically so
+   * Top Pick's ranking (computeTopPicks, which only ever sees CardSummary)
+   * can be proven to ignore monetization status entirely: see the
+   * ranking-integrity regression test in topPickCategories.test.ts. */
+  is_affiliate_link: boolean;
 }
 
 export interface EarnCategorySummary {
