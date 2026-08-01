@@ -1,12 +1,20 @@
 name: Keep backend warm during waking hours
 
-# Pings the backend's /health endpoint every 10 minutes during roughly
+# Pings the backend's /health endpoint every 5 minutes during roughly
 # 7am-11pm ET to prevent Render's free-tier spin-down (15 min idle) during
 # that window — this project's URL goes out on job applications, and a
 # recruiter hitting a ~60s cold start looks like a broken site. Deliberately
 # NOT 24/7: that would consume nearly the entire monthly free instance-hour
 # allowance for this one service. Outside this window the backend still
 # sleeps normally, so a visit then pays the full cold-start cost.
+#
+# 5 minutes, not 10: verified live that GitHub Actions' schedule trigger can
+# skip multiple consecutive ticks under platform load (observed a ~26-minute
+# gap between two "successful" runs against a configured 10-minute cadence,
+# which let the backend actually cold-start once mid-window). 5 minutes is
+# GitHub's minimum supported interval — this doesn't eliminate that
+# unreliability, it just makes a single missed tick much less likely to
+# compound into a gap that exceeds the 15-minute spin-down threshold.
 #
 # Pings the raw onrender.com origin URL, NOT api.thewalletaudit.com. The
 # custom domain sits behind our own Cloudflare zone, which has Bot Fight
@@ -24,7 +32,7 @@ name: Keep backend warm during waking hours
 # the complexity of a DST-aware schedule.
 on:
   schedule:
-    - cron: "4,14,24,34,44,54 11-23,0-3 * * *"
+    - cron: "4-59/5 11-23,0-3 * * *"
   workflow_dispatch:
 
 jobs:
