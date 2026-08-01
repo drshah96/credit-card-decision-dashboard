@@ -23,6 +23,7 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     is_secured_variant_of: null,
     points_pool_id: null,
     points_pool_receiver: false,
+    is_affiliate_link: false,
     ...overrides,
   };
 }
@@ -317,6 +318,76 @@ describe("computeTopPicks ranking weighted by point value", () => {
     const row = computeTopPicks([card]).find((r) => r.key === "dining")!;
     // Without the fix this would be 5 * 2.05 = 10.25.
     expect(row.topChoice?.effectiveValue).toBe(5);
+  });
+});
+
+describe("ranking integrity: is_affiliate_link never affects computeTopPicks", () => {
+  // Answers the actual pay-to-play concern directly, not just "nothing
+  // currently reads this field": does flagging a card as monetized let it
+  // outrank a better card it wouldn't otherwise beat on the math alone?
+  const strong = makeSummary({
+    id: "strong",
+    name: "Strong Card",
+    best_cpp: 2.0,
+    annual_fee: 0,
+    categories: [rate("Dining", "6×")],
+  });
+  const medium = makeSummary({
+    id: "medium",
+    name: "Medium Card",
+    best_cpp: 1.0,
+    annual_fee: 0,
+    categories: [rate("Dining", "4×")],
+  });
+  const weak = makeSummary({
+    id: "weak",
+    name: "Weak Card",
+    best_cpp: 1.0,
+    annual_fee: 0,
+    categories: [rate("Dining", "2×")],
+  });
+
+  // Every field of a TopPickEntry that could plausibly be influenced by
+  // monetization — deliberately excludes `card` itself, since comparing
+  // the full CardSummary would trivially "fail" on is_affiliate_link
+  // differing between scenarios even though ranking is unaffected.
+  function rankingFingerprint(row: ReturnType<typeof computeTopPicks>[number]) {
+    return ["topChoice", "runnerUp", "honorableMention"].map((slot) => {
+      const entry = row[slot as "topChoice" | "runnerUp" | "honorableMention"];
+      if (!entry) return undefined;
+      return {
+        id: entry.card.id,
+        effectiveValue: entry.effectiveValue,
+        multiplier: entry.multiplier,
+        isFallback: entry.isFallback,
+        isPooled: entry.isPooled,
+      };
+    });
+  }
+
+  it("doesn't promote the weakest card in a category just because it's flagged as affiliate", () => {
+    const baseline = computeTopPicks([strong, medium, weak]).find((r) => r.key === "dining")!;
+    const withWeakFlagged = computeTopPicks([
+      strong,
+      medium,
+      { ...weak, is_affiliate_link: true },
+    ]).find((r) => r.key === "dining")!;
+
+    expect(rankingFingerprint(withWeakFlagged)).toEqual(rankingFingerprint(baseline));
+    // Spelled out, not just the fingerprint diff: still last place.
+    expect(withWeakFlagged.honorableMention?.card.id).toBe("weak");
+    expect(withWeakFlagged.topChoice?.card.id).toBe("strong");
+  });
+
+  it("produces identical rankings whether every card is flagged as affiliate or none are", () => {
+    const baseline = computeTopPicks([strong, medium, weak]).find((r) => r.key === "dining")!;
+    const allFlagged = computeTopPicks([
+      { ...strong, is_affiliate_link: true },
+      { ...medium, is_affiliate_link: true },
+      { ...weak, is_affiliate_link: true },
+    ]).find((r) => r.key === "dining")!;
+
+    expect(rankingFingerprint(allFlagged)).toEqual(rankingFingerprint(baseline));
   });
 });
 

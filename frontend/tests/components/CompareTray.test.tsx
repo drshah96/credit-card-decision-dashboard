@@ -31,6 +31,7 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     is_secured_variant_of: null,
     points_pool_id: null,
     points_pool_receiver: false,
+    is_affiliate_link: false,
     ...overrides,
   };
 }
