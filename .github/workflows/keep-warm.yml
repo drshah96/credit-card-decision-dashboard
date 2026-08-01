@@ -22,4 +22,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping /health
-        run: curl -sf --max-time 30 https://api.thewalletaudit.com/health
+        run: |
+          curl -sS --max-time 30 -D - -o body.txt -w "\nHTTP %{http_code}\n" https://api.thewalletaudit.com/health
+          echo "--- body ---"
+          cat body.txt
+          status=$(curl -sS --max-time 30 -o /dev/null -w "%{http_code}" https://api.thewalletaudit.com/health)
+          if [ "$status" -lt 200 ] || [ "$status" -ge 300 ]; then
+            echo "::error::/health returned HTTP $status"
+            exit 1
+          fi
