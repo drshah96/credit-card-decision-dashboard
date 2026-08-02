@@ -1158,7 +1158,7 @@ export default function CardDetailPage() {
 
   return (
     <div style={{ minHeight: "100vh" }}>
-      <div className="wrap" style={{ paddingTop: 48, paddingBottom: 80 }}>
+      <div className="wrap" style={{ paddingTop: 24, paddingBottom: 80 }}>
         <Link
           to={backTo}
           style={{
