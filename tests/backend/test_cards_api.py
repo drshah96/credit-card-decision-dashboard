@@ -1155,3 +1155,51 @@ def test_bilt_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> No
         "foreign_transaction_fee_rate",
     ):
         assert field not in summary
+
+
+# Wells Fargo batch (2026-08-02): all 8 cards researched — the final issuer,
+# closing out backlog #11 across all 103 cards. Wells Fargo quotes ongoing
+# APR as three discrete creditworthiness tiers (e.g. "18.49%, 24.49%, or
+# 28.49%"), not a min-max range — stored verbatim like Citi's BJ's/REI tiers
+# and Capital One's tiered cards, not force-converted to a range. See
+# [[project_apr_balance_transfer_fx_fee_audit]].
+def test_wells_fargo_autograph_has_asymmetric_intro_periods_and_distinct_bt_apr() -> None:
+    # 12mo purchases / 18mo balance transfers, AND a balance-transfer APR
+    # range genuinely different from the tiered purchase APR — two
+    # independent axes of divergence on the same card.
+    detail = client.get("/api/cards/wells-fargo-autograph").json()
+    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": 12}
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": 18}
+    assert detail["variable_apr"] == "18.49%, 24.49%, or 28.49% (based on creditworthiness)"
+    assert detail["balance_transfer_apr"] == "17.49%-27.49%"
+
+
+@pytest.mark.parametrize(
+    "card_id,intro_months",
+    [
+        ("wells-fargo-active-cash", 12),
+        ("wells-fargo-reflect", 21),
+    ],
+)
+def test_wells_fargo_cards_with_symmetric_intro_apr_offer(card_id: str, intro_months: int) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": intro_months}
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": intro_months}
+
+
+def test_wells_fargo_autograph_journey_has_no_intro_offer_and_a_flat_bt_fee() -> None:
+    detail = client.get("/api/cards/wells-fargo-autograph-journey").json()
+    assert detail["intro_apr_purchases"] is None
+    assert detail["intro_apr_balance_transfers"] is None
+    assert detail["balance_transfer_fee"] == "$5 or 5% of each transfer, whichever is greater"
+
+
+def test_wells_fargo_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == "wells-fargo-reflect")
+    for field in (
+        "variable_apr",
+        "balance_transfer_apr",
+        "balance_transfer_fee",
+        "foreign_transaction_fee_rate",
+    ):
+        assert field not in summary
