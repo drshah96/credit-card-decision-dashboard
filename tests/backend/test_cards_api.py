@@ -726,7 +726,9 @@ def test_chase_cards_with_confirmed_foreign_transaction_fee() -> None:
         assert detail["intro_apr_balance_transfers"] is None
     assert client.get("/api/cards/chase-freedom-rise").json()["foreign_transaction_fee"] is True
     assert client.get("/api/cards/chase-disney-premier").json()["foreign_transaction_fee"] is True
-    assert client.get("/api/cards/chase-amazon-prime-visa").json()["foreign_transaction_fee"] is False
+    assert (
+        client.get("/api/cards/chase-amazon-prime-visa").json()["foreign_transaction_fee"] is False
+    )
 
 
 # Round 2 of the Chase pilot (2026-08-02): variable_apr/balance_transfer_apr/
@@ -734,7 +736,9 @@ def test_chase_cards_with_confirmed_foreign_transaction_fee() -> None:
 # Pricing & Terms pages/PDFs. Detail-only (not on CardSummary) — see
 # [[project_apr_balance_transfer_fx_fee_audit]].
 def test_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
-    summary = next(c for c in client.get("/api/cards").json() if c["id"] == "chase-sapphire-reserve")
+    summary = next(
+        c for c in client.get("/api/cards").json() if c["id"] == "chase-sapphire-reserve"
+    )
     for field in (
         "variable_apr",
         "balance_transfer_apr",
@@ -769,7 +773,9 @@ def test_chase_variable_and_balance_transfer_apr(
 
 def test_chase_balance_transfer_fee_standard_vs_prime_visa_exception() -> None:
     standard = "Either $5 or 5% of the amount of each transfer, whichever is greater"
-    assert client.get("/api/cards/chase-sapphire-reserve").json()["balance_transfer_fee"] == standard
+    assert (
+        client.get("/api/cards/chase-sapphire-reserve").json()["balance_transfer_fee"] == standard
+    )
     assert (
         client.get("/api/cards/chase-amazon-prime-visa").json()["balance_transfer_fee"]
         == "Either $5 or 4% of the amount of each transfer, whichever is greater"
@@ -827,13 +833,18 @@ def test_amex_cards_confirmed_no_balance_transfer_support(card_id: str) -> None:
         ("amex-blue-cash-preferred", 12),
     ],
 )
-def test_amex_blue_cash_cards_carry_the_only_fx_fee_in_the_amex_lineup(card_id: str, intro_months: int) -> None:
+def test_amex_blue_cash_cards_carry_the_only_fx_fee_in_the_amex_lineup(
+    card_id: str, intro_months: int
+) -> None:
     detail = client.get(f"/api/cards/{card_id}").json()
     assert detail["intro_apr_purchases"] == {"rate": "0%", "months": intro_months}
     assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": intro_months}
     assert detail["foreign_transaction_fee"] is True
     assert detail["foreign_transaction_fee_rate"] == "2.7%"
-    assert detail["balance_transfer_fee"] == "Either $5 or 3% of the amount of each transfer, whichever is greater"
+    assert (
+        detail["balance_transfer_fee"]
+        == "Either $5 or 3% of the amount of each transfer, whichever is greater"
+    )
 
 
 def test_amex_hilton_surpass_is_the_only_amex_card_with_a_two_tier_bt_fee() -> None:
@@ -967,7 +978,9 @@ def test_capital_one_variable_apr_and_fee_fields_are_detail_only_not_on_summary(
         ("citi-diamond-preferred", 12, 21),
     ],
 )
-def test_citi_cards_with_asymmetric_intro_apr_durations(card_id: str, purchases_months: int, bt_months: int) -> None:
+def test_citi_cards_with_asymmetric_intro_apr_durations(
+    card_id: str, purchases_months: int, bt_months: int
+) -> None:
     detail = client.get(f"/api/cards/{card_id}").json()
     assert detail["intro_apr_purchases"] == {"rate": "0%", "months": purchases_months}
     assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": bt_months}

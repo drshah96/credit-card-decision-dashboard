@@ -68,9 +68,7 @@ def _has_lounge_access(status_perks) -> bool:
     """Same condition frontend/src/utils/cardTaxonomy.ts's now-removed
     detailTags() used to check client-side — moved server-side so it's a
     summary-level field instead of requiring a full Card detail fetch."""
-    return any(
-        "lounge" in p.name.lower() or "lounge" in p.note.lower() for p in status_perks
-    )
+    return any("lounge" in p.name.lower() or "lounge" in p.note.lower() for p in status_perks)
 
 
 def _intro_apr(rate: str | None, months: int | None) -> IntroApr | None:
