@@ -60,10 +60,14 @@ export default function IssuerCardsPage() {
   // remount, since React Router unmounts this page while a card is open.
   const [searchParams, setSearchParams] = useSearchParams();
   const activeFilter = searchParams.get("filter") ?? ALL_CARDS_FILTER;
+  // Clicking the already-active chip toggles it back off to "All Cards"
+  // rather than re-selecting itself, matching how filter chips read
+  // elsewhere in the app.
   const setActiveFilter = (filter: string) => {
+    const nextFilter = filter === activeFilter ? ALL_CARDS_FILTER : filter;
     const next = new URLSearchParams(searchParams);
-    if (filter === ALL_CARDS_FILTER) next.delete("filter");
-    else next.set("filter", filter);
+    if (nextFilter === ALL_CARDS_FILTER) next.delete("filter");
+    else next.set("filter", nextFilter);
     setSearchParams(next, { replace: true });
   };
   const { compareIds } = useCompareList();
