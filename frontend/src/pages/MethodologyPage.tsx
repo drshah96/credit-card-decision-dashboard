@@ -156,8 +156,8 @@ export default function MethodologyPage() {
             up a much higher redemption rate once combined with a premium account in the same
             family, like a Chase Sapphire card or Citi Strata Premier/Elite. That's a real
             feature of those points programs, not something we made up. We only apply that boost
-            once you've told us which cards you actually hold (the "My Cards" filter on Top
-            Pick). It never applies to the default, whole-catalog ranking, since it only holds
+            once you've told us which cards you actually hold (the "Choose Your Cards" filter on
+            Top Pick). It never applies to the default, whole-catalog ranking, since it only holds
             true if you actually own both cards.
           </P>
           <P>
