@@ -191,7 +191,7 @@ describe("IssuerCardsPage", () => {
     await waitFor(() => {
       expect(screen.getByRole("button", { name: "All Cards" })).toHaveAttribute("aria-pressed", "true");
     });
-    expect(screen.getByText("Flagship Cards")).toBeInTheDocument();
+    expect(screen.getByText("Proprietary Cards")).toBeInTheDocument();
     // Named after its brand even though it's the only airline program in this fixture.
     expect(screen.getByText("Delta SkyMiles Cards")).toBeInTheDocument();
     // Two hotel brands (Hilton, Marriott) -> each gets its own section.
@@ -225,7 +225,7 @@ describe("IssuerCardsPage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Airline" }));
 
     expect(screen.getByRole("button", { name: "Airline" })).toHaveAttribute("aria-pressed", "true");
-    expect(screen.queryByText("Flagship Cards")).not.toBeInTheDocument();
+    expect(screen.queryByText("Proprietary Cards")).not.toBeInTheDocument();
     expect(screen.getByText("Delta SkyMiles Gold")).toBeInTheDocument();
     expect(screen.queryByText("The Platinum Card")).not.toBeInTheDocument();
   });
