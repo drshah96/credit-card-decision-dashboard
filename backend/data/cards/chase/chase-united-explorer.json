@@ -8,6 +8,9 @@
   "annual_fee": 150,
   "effective_cost": "Low if you check bags and fly United",
   "official_url": "https://creditcards.chase.com/travel-credit-cards/united/united-explorer",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
   "verdict": {
     "status": "situational",
     "text": "Keep only if the free bag + 2 lounge passes clear the fee for you",
@@ -15,29 +18,29 @@
   },
   "earn_rates": [
     {
-      "emoji": "✈️",
-      "multiplier": "3×",
+      "emoji": "\u2708\ufe0f",
+      "multiplier": "3\u00d7",
       "category": "United purchases",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "🏨",
-      "multiplier": "2×",
+      "emoji": "\ud83c\udfe8",
+      "multiplier": "2\u00d7",
       "category": "Hotels, booked direct",
       "highlight": false,
       "is_base": false
     },
     {
-      "emoji": "🍽️",
-      "multiplier": "2×",
+      "emoji": "\ud83c\udf7d\ufe0f",
+      "multiplier": "2\u00d7",
       "category": "Dining, incl. eligible delivery",
       "highlight": false,
       "is_base": false
     },
     {
-      "emoji": "💳",
-      "multiplier": "1×",
+      "emoji": "\ud83d\udcb3",
+      "multiplier": "1\u00d7",
       "category": "Everything else",
       "highlight": false,
       "is_base": true
@@ -63,7 +66,7 @@
         "best": false
       }
     ],
-    "per_100k": "$1,200–1,400",
+    "per_100k": "$1,200\u20131,400",
     "note": "United uses dynamic pricing with no published award chart, so value swings by route and date. No blackout dates and miles never expire. Cardholders get a baseline 10%+ discount on award tickets (15%+ once you hold Premier status)."
   },
   "transfer_partners": {
@@ -76,7 +79,7 @@
     {
       "id": "bags",
       "name": "Free Checked Bag",
-      "subtitle": "1st bag · you + 1 companion",
+      "subtitle": "1st bag \u00b7 you + 1 companion",
       "max_annual": 70,
       "default_value": 0,
       "tier": "easy",
@@ -90,7 +93,7 @@
     {
       "id": "united-travel",
       "name": "United Travel Credit",
-      "subtitle": "$100 · after $10k spend",
+      "subtitle": "$100 \u00b7 after $10k spend",
       "max_annual": 100,
       "default_value": 0,
       "tier": "plan",
@@ -103,7 +106,7 @@
     {
       "id": "hotels",
       "name": "United Hotels Credit",
-      "subtitle": "$50 × 2 · prepaid stays",
+      "subtitle": "$50 \u00d7 2 \u00b7 prepaid stays",
       "max_annual": 100,
       "default_value": 0,
       "tier": "plan",
@@ -116,7 +119,7 @@
     {
       "id": "rideshare",
       "name": "Rideshare Credit",
-      "subtitle": "$5/mo · enroll",
+      "subtitle": "$5/mo \u00b7 enroll",
       "max_annual": 60,
       "default_value": 0,
       "tier": "easy",
@@ -129,7 +132,7 @@
     {
       "id": "avis-budget",
       "name": "Avis/Budget Credit",
-      "subtitle": "$25 × 2 rentals",
+      "subtitle": "$25 \u00d7 2 rentals",
       "max_annual": 50,
       "default_value": 0,
       "tier": "niche",
@@ -168,7 +171,7 @@
     {
       "id": "global-entry",
       "name": "Global Entry / TSA PreCheck / NEXUS Credit",
-      "subtitle": "$120 · every 4 years",
+      "subtitle": "$120 \u00b7 every 4 years",
       "max_annual": 30,
       "default_value": 0,
       "tier": "plan",
@@ -182,22 +185,22 @@
   "insurance": [
     {
       "coverage": "Rental car CDW",
-      "detail": "Primary · up to $60,000 (secondary for NY residents)",
+      "detail": "Primary \u00b7 up to $60,000 (secondary for NY residents)",
       "level": "strong"
     },
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "$1,500/person · $6,000/trip",
+      "detail": "$1,500/person \u00b7 $6,000/trip",
       "level": "mid"
     },
     {
       "coverage": "Trip delay",
-      "detail": "$500/person · after 12 hrs",
+      "detail": "$500/person \u00b7 after 12 hrs",
       "level": "mid"
     },
     {
       "coverage": "Baggage delay",
-      "detail": "$100/day · up to 3 days · after 6 hrs",
+      "detail": "$100/day \u00b7 up to 3 days \u00b7 after 6 hrs",
       "level": "good"
     },
     {
@@ -207,12 +210,12 @@
     },
     {
       "coverage": "Travel accident insurance",
-      "detail": "$500,000 · common carrier / $100,000 · 24-hour",
+      "detail": "$500,000 \u00b7 common carrier / $100,000 \u00b7 24-hour",
       "level": "good"
     },
     {
       "coverage": "Purchase protection",
-      "detail": "$10,000/item · $50,000/yr · 120 days",
+      "detail": "$10,000/item \u00b7 $50,000/yr \u00b7 120 days",
       "level": "strong"
     },
     {
@@ -304,7 +307,7 @@
       "date": "Jan 1, 2026",
       "type": "add",
       "badge": "Refresh",
-      "text": "Fee $99 → $150 for existing cardholders; added United Hotels, rideshare, Avis/Budget, JSX, and Instacart credits alongside the existing free bag and Global Entry credit."
+      "text": "Fee $99 \u2192 $150 for existing cardholders; added United Hotels, rideshare, Avis/Budget, JSX, and Instacart credits alongside the existing free bag and Global Entry credit."
     },
     {
       "date": "2025",
