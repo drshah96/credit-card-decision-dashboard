@@ -8,6 +8,16 @@
   "annual_fee": 95,
   "effective_cost": "Low: the $100 annual hotel credit alone covers most of the $95 fee if you book 2+ night stays through Bilt Travel",
   "official_url": "https://www.bilt.com/card/obsidian",
+  "intro_apr_purchases": {
+    "rate": "10%",
+    "months": 12
+  },
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "26.74%-34.74%",
+  "balance_transfer_apr": "26.74%-34.74%",
+  "balance_transfer_fee": "The greater of 5% or $5",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Worth it if you'll book 2+ Bilt Travel stays a year for the $100 credit",

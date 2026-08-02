@@ -1119,3 +1119,39 @@ def test_bofa_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> No
         "foreign_transaction_fee_rate",
     ):
         assert field not in summary
+
+
+# Bilt batch (2026-08-02): all 3 Bilt 2.0 cards researched. Bilt is the
+# first issuer whose intro-APR promo isn't 0% — a real 10% teaser rate,
+# exactly the edge case `IntroApr.rate` was documented (in
+# frontend/src/types/cards.ts) to be kept as a string rather than a
+# hardcoded boolean for. Balance transfers are explicitly NOT eligible for
+# that intro rate on any Bilt 2.0 card. See
+# [[project_apr_balance_transfer_fx_fee_audit]].
+@pytest.mark.parametrize("card_id", ["bilt-blue", "bilt-obsidian", "bilt-palladium"])
+def test_bilt_cards_have_a_nonzero_ten_percent_intro_apr(card_id: str) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["intro_apr_purchases"] == {"rate": "10%", "months": 12}
+    assert detail["intro_apr_balance_transfers"] is None
+    assert detail["variable_apr"] == "26.74%-34.74%"
+    assert detail["foreign_transaction_fee"] is False
+
+
+def test_bilt_palladium_has_a_distinct_tiered_bt_fee_from_blue_and_obsidian() -> None:
+    palladium = client.get("/api/cards/bilt-palladium").json()
+    assert "60 days" not in palladium["balance_transfer_fee"]
+    assert "4 months" in palladium["balance_transfer_fee"]
+    for card_id in ("bilt-blue", "bilt-obsidian"):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["balance_transfer_fee"] == "The greater of 5% or $5"
+
+
+def test_bilt_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == "bilt-blue")
+    for field in (
+        "variable_apr",
+        "balance_transfer_apr",
+        "balance_transfer_fee",
+        "foreign_transaction_fee_rate",
+    ):
+        assert field not in summary
