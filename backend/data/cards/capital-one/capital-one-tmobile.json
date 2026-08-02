@@ -8,6 +8,13 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee",
   "official_url": "https://www.capitalone.com/credit-cards/t-mobile/",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "18.99% or 28.99% (based on creditworthiness)",
+  "balance_transfer_apr": "18.99% or 28.99% (based on creditworthiness)",
+  "balance_transfer_fee": "Greater of 3% of the amount transferred or $3",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Only makes sense for active T-Mobile customers: rewards aren't cashable",

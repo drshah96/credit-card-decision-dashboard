@@ -866,3 +866,89 @@ def test_amex_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> No
         "foreign_transaction_fee_rate",
     ):
         assert field not in summary
+
+
+# Capital One batch (2026-08-02): all 17 cards researched. Capital One's
+# balance-transfer fee follows a consistent issuer-wide pattern across
+# nearly every card — $0 if transferred at the card's own standard APR,
+# 3-4% only if transferred at a promotional (often 0%) rate Capital One
+# separately offers — quoted verbatim rather than force-fit into a single
+# number. See [[project_apr_balance_transfer_fx_fee_audit]].
+def test_capital_one_no_card_charges_a_foreign_transaction_fee() -> None:
+    # Distinct from Chase/Amex: Capital One's own stated policy is that none
+    # of its US-issued cards charge one, confirmed per-card during research.
+    ids = [
+        "capital-one-venture-x",
+        "capital-one-venture",
+        "capital-one-venture-one",
+        "capital-one-savor",
+        "capital-one-savor-one",
+        "capital-one-quicksilver",
+        "capital-one-quicksilver-one",
+        "capital-one-quicksilver-secured",
+        "capital-one-platinum",
+        "capital-one-platinum-secured",
+        "capital-one-key-rewards",
+        "capital-one-bjs-one",
+        "capital-one-bjs-one-plus",
+        "capital-one-kohls-rewards",
+        "capital-one-bass-pro-cabelas-club",
+        "capital-one-rei-co-op",
+        "capital-one-tmobile",
+    ]
+    for card_id in ids:
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["foreign_transaction_fee"] is False
+        assert detail["foreign_transaction_fee_rate"] is None
+
+
+@pytest.mark.parametrize(
+    "card_id,intro_months",
+    [
+        ("capital-one-venture-one", 15),
+        ("capital-one-savor", 12),
+        ("capital-one-savor-one", 12),
+        ("capital-one-quicksilver", 15),
+        ("capital-one-kohls-rewards", 12),
+    ],
+)
+def test_capital_one_cards_with_a_real_intro_apr_offer(card_id: str, intro_months: int) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": intro_months}
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": intro_months}
+    assert "3%" in detail["balance_transfer_fee"] or "4%" in detail["balance_transfer_fee"]
+
+
+def test_capital_one_premium_travel_cards_have_no_intro_offer() -> None:
+    for card_id in ("capital-one-venture-x", "capital-one-venture"):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["intro_apr_purchases"] is None
+        assert detail["intro_apr_balance_transfers"] is None
+        assert detail["variable_apr"] == "19.49%-28.49%"
+
+
+def test_capital_one_bass_pro_cabelas_has_a_bifurcated_purchase_apr() -> None:
+    # A genuinely two-tier rate (special in-store rate vs. everything else)
+    # rather than a single range — stored verbatim, not force-averaged.
+    detail = client.get("/api/cards/capital-one-bass-pro-cabelas-club").json()
+    assert "9.99%" in detail["variable_apr"]
+    assert detail["balance_transfer_apr"] == "20.49%-32.24%"
+
+
+def test_capital_one_bjs_cards_share_the_same_tiered_apr() -> None:
+    tiered = "19.24%, 25.24%, or 29.24% (based on creditworthiness)"
+    for card_id in ("capital-one-bjs-one", "capital-one-bjs-one-plus"):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["variable_apr"] == tiered
+        assert detail["intro_apr_purchases"] is None
+
+
+def test_capital_one_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == "capital-one-venture-x")
+    for field in (
+        "variable_apr",
+        "balance_transfer_apr",
+        "balance_transfer_fee",
+        "foreign_transaction_fee_rate",
+    ):
+        assert field not in summary

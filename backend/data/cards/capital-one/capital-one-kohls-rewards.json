@@ -8,6 +8,19 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee",
   "official_url": "https://www.capitalone.com/credit-cards/kohls/",
+  "intro_apr_purchases": {
+    "rate": "0%",
+    "months": 12
+  },
+  "intro_apr_balance_transfers": {
+    "rate": "0%",
+    "months": 12
+  },
+  "foreign_transaction_fee": false,
+  "variable_apr": "19.49%-28.49%",
+  "balance_transfer_apr": "19.49%-28.49%",
+  "balance_transfer_fee": "$0 at the standard Transfer APR, or 4% at any promotional APR Capital One may offer",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Strong only for regular Kohl's shoppers who'll spend the Kohl's Cash",
