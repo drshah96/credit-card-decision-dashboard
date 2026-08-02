@@ -275,8 +275,8 @@ export function groupCardsForAllView(cards: CardSummary[]): CardSection[] {
 /** Regexes shared with `detailTags` so a card's earn-rate categories are
  * matched identically whether deriving its tags or ranking it within a filter. */
 const CATEGORY_TAG_MATCHERS: Record<string, RegExp> = {
-  Dining: /dining|restaurant/,
-  Gas: /\bgas\b|fuel station|ev charging/,
+  Dining: /restaurant|dining|caf[eé]|\bbars?\b|food delivery|doordash|grubhub|takeout|fast food/,
+  Gas: /\bgas\b|gasoline|\bfuel\b|ev charging/,
 };
 
 /** 0 = the issuer's own flagship product, 1 = an airline/hotel co-brand
