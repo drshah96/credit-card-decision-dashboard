@@ -29,9 +29,16 @@
       "is_base": false
     },
     {
+      "emoji": "🛒",
+      "multiplier": "2 pts/$1",
+      "category": "U.S. supermarkets & grocery stores",
+      "highlight": false,
+      "is_base": false
+    },
+    {
       "emoji": "⛽",
       "multiplier": "2 pts/$1",
-      "category": "Supermarkets & gas stations",
+      "category": "U.S. gas stations",
       "highlight": false,
       "is_base": false
     },

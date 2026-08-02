@@ -31,7 +31,21 @@
     {
       "emoji": "⛽",
       "multiplier": "3%",
-      "category": "Gas stations, grocery stores & veterinary services",
+      "category": "Gas stations",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "3%",
+      "category": "Grocery stores",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🐾",
+      "multiplier": "3%",
+      "category": "Veterinary services",
       "highlight": true,
       "is_base": false
     },

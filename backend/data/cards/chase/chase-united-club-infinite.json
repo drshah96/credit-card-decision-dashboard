@@ -45,7 +45,14 @@
     {
       "emoji": "\ud83e\uddf3",
       "multiplier": "2\u00d7",
-      "category": "Travel & dining",
+      "category": "Other travel",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "\ud83c\udf7d\ufe0f",
+      "multiplier": "2\u00d7",
+      "category": "Dining, incl. eligible delivery",
       "highlight": false,
       "is_base": false
     },
