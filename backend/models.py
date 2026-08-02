@@ -9,6 +9,15 @@ class Verdict(BaseModel):
     short_tag: str | None = None
 
 
+class IntroApr(BaseModel):
+    """A promotional intro-APR period, on purchases or balance transfers.
+    `rate` is almost always "0%" but kept as a string rather than hardcoded,
+    since a small number of real-world promos use a non-zero teaser rate."""
+
+    rate: str
+    months: int
+
+
 class EarnRate(BaseModel):
     emoji: str
     multiplier: str
@@ -160,6 +169,38 @@ class Card(BaseModel):
     # the same pool with no receiver present, since real-world transfer-
     # partner access requires an active premium account in the mix.
     points_pool_receiver: bool = False
+    # Sourced from the issuer's own current terms, not guessed from
+    # incidental mentions elsewhere in a card's data — None means this card
+    # hasn't been audited yet (distinct from confirmed-absent), during the
+    # incremental per-issuer rollout of this data. See the frontend's "0%
+    # Intro APR" / "Balance Transfer" Category chips, which read these
+    # directly: a promotional balance-transfer offer IS an intro-APR period
+    # applied to balance transfers, so there's no separate "has balance
+    # transfer" flag that could drift out of sync with this.
+    intro_apr_purchases: IntroApr | None = None
+    intro_apr_balance_transfers: IntroApr | None = None
+    # True = card charges a foreign transaction fee. None = not yet audited.
+    foreign_transaction_fee: bool | None = None
+    # Derived from status_perks (any perk whose name/note mentions "lounge")
+    # rather than stored directly — unlike the three fields above, this one
+    # doesn't need per-card research, so there's no "not yet audited" state.
+    # Also duplicated on CardSummary below for the same reason as those three.
+    has_lounge_access: bool = False
+    # The ongoing (post-intro, or from day one if there's no intro offer)
+    # rate ranges and fees, quoted verbatim from the issuer's own Pricing &
+    # Terms table rather than decomposed into numbers — real ranges are tied
+    # to creditworthiness ("19.24%-29.99% Variable") and nothing in this app
+    # computes with them, it only displays them, same treatment as
+    # effective_cost/multiplier elsewhere in this schema. Detail-only (not on
+    # CardSummary) — purely informational, not a Compare-tab filter driver
+    # like the intro-offer fields above. None = not yet audited.
+    variable_apr: str | None = None
+    balance_transfer_apr: str | None = None
+    balance_transfer_fee: str | None = None
+    # The actual rate when foreign_transaction_fee is True (e.g. "3%") — the
+    # boolean above still drives the "No Foreign Transaction Fee" chip
+    # unchanged, this is just the detail-page-level specific number.
+    foreign_transaction_fee_rate: str | None = None
 
 
 class EarnCategorySummary(BaseModel):
@@ -222,3 +263,12 @@ class CardSummary(BaseModel):
     # than that guarantee only holding for surfaces that happen to fetch
     # full detail.
     is_affiliate_link: bool = False
+    # See Card.intro_apr_purchases/intro_apr_balance_transfers/
+    # foreign_transaction_fee — same meaning, duplicated here so the
+    # Compare tab's Category chips (0% Intro APR, Balance Transfer, No
+    # Foreign Transaction Fee) can filter the whole catalog from the
+    # summary list alone, without fetching full Card detail per card.
+    intro_apr_purchases: IntroApr | None = None
+    intro_apr_balance_transfers: IntroApr | None = None
+    foreign_transaction_fee: bool | None = None
+    has_lounge_access: bool = False

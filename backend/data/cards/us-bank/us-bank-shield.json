@@ -8,6 +8,19 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee, and a genuinely long 21-cycle 0% intro APR window",
   "official_url": "https://www.usbank.com/credit-cards/shield-visa-credit-card.html",
+  "intro_apr_purchases": {
+    "rate": "0%",
+    "months": 21
+  },
+  "intro_apr_balance_transfers": {
+    "rate": "0%",
+    "months": 21
+  },
+  "foreign_transaction_fee": true,
+  "variable_apr": "16.99%-27.99%",
+  "balance_transfer_apr": "16.99%-27.99%",
+  "balance_transfer_fee": "5% of each transfer amount, $5 minimum",
+  "foreign_transaction_fee_rate": "3%",
   "verdict": {
     "status": "situational",
     "text": "Keep for the 21-cycle 0% APR: cell phone protection is the real perk",

@@ -8,6 +8,19 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee",
   "official_url": "https://www.americanexpress.com/us/credit-cards/card/blue-cash-everyday/",
+  "intro_apr_purchases": {
+    "rate": "0%",
+    "months": 15
+  },
+  "intro_apr_balance_transfers": {
+    "rate": "0%",
+    "months": 15
+  },
+  "foreign_transaction_fee": true,
+  "variable_apr": "19.49%-28.49%",
+  "balance_transfer_apr": "19.49%-28.49%",
+  "balance_transfer_fee": "Either $5 or 3% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": "2.7%",
   "verdict": {
     "status": "keep",
     "text": "No annual fee: an easy keep if you shop groceries, gas, or online",

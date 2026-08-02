@@ -8,6 +8,13 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee, but usable only at Exxon and Mobil branded stations",
   "official_url": "https://www.citi.com/credit-cards/exxon-mobil-credit-card",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "28.74%",
+  "balance_transfer_apr": null,
+  "balance_transfer_fee": null,
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Only makes sense if you fuel up almost exclusively at Exxon/Mobil",

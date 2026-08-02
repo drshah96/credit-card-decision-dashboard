@@ -8,6 +8,13 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee, but requiring an active REI Co-op membership ($30 one-time fee)",
   "official_url": "https://www.rei.com/membership/mastercard",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "17.49%, 24.49%, or 28.49% (based on creditworthiness)",
+  "balance_transfer_apr": "17.49%, 24.49%, or 28.49% (based on creditworthiness)",
+  "balance_transfer_fee": "$0 at the standard Transfer APR, or 3% at any promotional APR Capital One may offer",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Solid for REI regulars: 5% at REI, but base rate is unremarkable",

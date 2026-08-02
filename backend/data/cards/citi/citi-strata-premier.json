@@ -10,6 +10,13 @@
   "annual_fee": 95,
   "effective_cost": "Low: the $100 hotel credit alone covers most of the fee",
   "official_url": "https://www.citi.com/credit-cards/citi-strata-premier-credit-card",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "20.24%-28.24%",
+  "balance_transfer_apr": "20.24%-28.24%",
+  "balance_transfer_fee": "5% of each transfer, $5 minimum",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "keep",
     "text": "Strong $95 travel card, but cash redemption is capped at 0.75¢/point",

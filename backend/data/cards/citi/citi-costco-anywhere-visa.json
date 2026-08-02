@@ -8,6 +8,13 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee, but requiring a paid Costco membership ($65/yr or more) to hold the card at all",
   "official_url": "https://www.citi.com/credit-cards/citi-costco-anywhere-visa-credit-card",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "18.74%-26.74%",
+  "balance_transfer_apr": "18.74%-26.74%",
+  "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Excellent if you're already a paying Costco member who drives regularly",

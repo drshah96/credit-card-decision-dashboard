@@ -8,6 +8,13 @@
   "annual_fee": 99,
   "effective_cost": "Moderate: the $100 anniversary bonus alone covers the $99 fee if you'll use it",
   "official_url": "https://creditcards.wellsfargo.com/one-key-plus-credit-card/",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "18.49%, 23.49%, or 28.49% (based on creditworthiness)",
+  "balance_transfer_apr": "18.49%, 23.49%, or 28.49% (based on creditworthiness)",
+  "balance_transfer_fee": "$5 or 5% of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Keep if Gold status and the $100 anniversary bonus beat the $99 fee",

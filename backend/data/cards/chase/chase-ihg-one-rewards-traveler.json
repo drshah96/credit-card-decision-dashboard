@@ -8,6 +8,13 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee",
   "official_url": "https://creditcards.chase.com/travel-credit-cards/ihg-rewards-club/traveler",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "19.24%-27.74%",
+  "balance_transfer_apr": "19.24%-27.74%",
+  "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "keep",
     "text": "Free IHG points earner, upgraded with World Elite perks in 2025",
@@ -15,49 +22,49 @@
   },
   "earn_rates": [
     {
-      "emoji": "🏨",
-      "multiplier": "5×",
+      "emoji": "\ud83c\udfe8",
+      "multiplier": "5\u00d7",
       "category": "IHG Hotels & Resorts",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "🍽️",
-      "multiplier": "3×",
+      "emoji": "\ud83c\udf7d\ufe0f",
+      "multiplier": "3\u00d7",
       "category": "Dining",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "💡",
-      "multiplier": "3×",
+      "emoji": "\ud83d\udca1",
+      "multiplier": "3\u00d7",
       "category": "Utilities",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "📺",
-      "multiplier": "3×",
+      "emoji": "\ud83d\udcfa",
+      "multiplier": "3\u00d7",
       "category": "Select streaming services",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "⛽",
-      "multiplier": "3×",
+      "emoji": "\u26fd",
+      "multiplier": "3\u00d7",
       "category": "Gas stations",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "💳",
-      "multiplier": "2×",
+      "emoji": "\ud83d\udcb3",
+      "multiplier": "2\u00d7",
       "category": "Everything else",
       "highlight": false,
       "is_base": true
     }
   ],
-  "earn_note": "2× on general spend is unusually strong for a no-fee card, and the 3× bucket (dining, utilities, streaming, gas) is broad enough to hit most months. The Premier card earns faster at IHG hotels (10× vs 5×) and on travel broadly (5× vs 3×), but this card asks nothing back for it.",
+  "earn_note": "2\u00d7 on general spend is unusually strong for a no-fee card, and the 3\u00d7 bucket (dining, utilities, streaming, gas) is broad enough to hit most months. The Premier card earns faster at IHG hotels (10\u00d7 vs 5\u00d7) and on travel broadly (5\u00d7 vs 3\u00d7), but this card asks nothing back for it.",
   "points": {
     "currency": "IHG One Rewards",
     "redemption_options": [
@@ -73,13 +80,13 @@
       }
     ],
     "per_100k": "$600",
-    "note": "Same IHG One Rewards currency as the Premier card (NerdWallet valued points around 0.6¢ in 2026). This card just earns it for free, without the Premier's anniversary free night certificate or Platinum status. Never transfer to airlines; the ~5:1 ratio guts the value."
+    "note": "Same IHG One Rewards currency as the Premier card (NerdWallet valued points around 0.6\u00a2 in 2026). This card just earns it for free, without the Premier's anniversary free night certificate or Platinum status. Never transfer to airlines; the ~5:1 ratio guts the value."
   },
   "transfer_partners": {
     "airline_count": 37,
     "hotel_count": 0,
-    "highlight": "IHG One Rewards transfers to 37 airline partners, mostly at a 5:1 ratio (5,000 IHG points → 1,000 miles); transfers must be initiated by phone, not online.",
-    "recent_changes": "Verified directly against IHG’s live partner page: El Al Matmid is no longer listed as a partner (previously reported as one by some trackers), while China Eastern, Finnair, and Lufthansa (Miles & More) are current partners not previously captured here.",
+    "highlight": "IHG One Rewards transfers to 37 airline partners, mostly at a 5:1 ratio (5,000 IHG points \u2192 1,000 miles); transfers must be initiated by phone, not online.",
+    "recent_changes": "Verified directly against IHG\u2019s live partner page: El Al Matmid is no longer listed as a partner (previously reported as one by some trackers), while China Eastern, Finnair, and Lufthansa (Miles & More) are current partners not previously captured here.",
     "partners": [
       {
         "name": "Aeromexico Rewards",
@@ -274,7 +281,7 @@
     {
       "id": "spend-bonus",
       "name": "Annual Spend Bonus",
-      "subtitle": "10,000 pts · after $10,000/yr spend",
+      "subtitle": "10,000 pts \u00b7 after $10,000/yr spend",
       "max_annual": 60,
       "default_value": 0,
       "tier": "niche",
@@ -287,7 +294,7 @@
     {
       "id": "instacart",
       "name": "Instacart Credit",
-      "subtitle": "$10/mo · up to $120/yr · + 3-mo Instacart+",
+      "subtitle": "$10/mo \u00b7 up to $120/yr \u00b7 + 3-mo Instacart+",
       "max_annual": 120,
       "default_value": 0,
       "tier": "niche",
@@ -301,7 +308,7 @@
     {
       "id": "dashpass",
       "name": "DoorDash DashPass + Credit",
-      "subtitle": "12-mo complimentary + $10/qtr non-restaurant · thru 2027",
+      "subtitle": "12-mo complimentary + $10/qtr non-restaurant \u00b7 thru 2027",
       "max_annual": 160,
       "default_value": 0,
       "tier": "niche",
@@ -329,12 +336,12 @@
   "insurance": [
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "$5,000/traveler · $10,000/trip",
+      "detail": "$5,000/traveler \u00b7 $10,000/trip",
       "level": "good"
     },
     {
       "coverage": "Baggage delay",
-      "detail": "$100/day · up to 3 days · after 6 hrs",
+      "detail": "$100/day \u00b7 up to 3 days \u00b7 after 6 hrs",
       "level": "mid"
     },
     {
@@ -344,7 +351,7 @@
     },
     {
       "coverage": "Purchase protection",
-      "detail": "$500/item · 120 days (90 days for NY residents)",
+      "detail": "$500/item \u00b7 120 days (90 days for NY residents)",
       "level": "mid"
     }
   ],

@@ -8,6 +8,13 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee, but earns nothing and requires a refundable $300–$5,000 deposit",
   "official_url": "https://www.usbank.com/credit-cards/secured-visa-credit-card.html",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": true,
+  "variable_apr": "27.49%",
+  "balance_transfer_apr": "27.49%",
+  "balance_transfer_fee": "5% of each transfer amount, $5 minimum",
+  "foreign_transaction_fee_rate": "3%",
   "verdict": {
     "status": "reconsider",
     "text": "No rewards: Cash+ Secured earns the same for the same deposit",

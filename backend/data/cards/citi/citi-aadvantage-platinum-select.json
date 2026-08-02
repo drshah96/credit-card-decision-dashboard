@@ -8,6 +8,13 @@
   "annual_fee": 99,
   "effective_cost": "Free the first year (fee waived), $99/yr after; the free checked bag alone can clear that for a couple flying American once a year",
   "official_url": "https://www.citi.com/credit-cards/citi-aadvantage-platinum-select-world-elite-mastercard",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "19.49%-29.49%",
+  "balance_transfer_apr": "19.49%-29.49%",
+  "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Keep if you check bags on American at least once or twice a year",

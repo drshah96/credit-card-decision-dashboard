@@ -8,6 +8,13 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee; refundable deposit sets your credit line",
   "official_url": "https://www.capitalone.com/credit-cards/quicksilver-secured/",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "28.99%",
+  "balance_transfer_apr": "28.99%",
+  "balance_transfer_fee": "$0 at the standard Transfer APR, or 4% at any promotional APR Capital One may offer",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Rare secured card that earns 1.5% cash back like its unsecured sibling",

@@ -8,6 +8,13 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee",
   "official_url": "https://www.citi.com/credit-cards/dillards-credit-cards",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": null,
+  "variable_apr": "32.49%",
+  "balance_transfer_apr": "32.49%",
+  "balance_transfer_fee": "The greater of $10 or 5% of the amount of each transfer",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Thin rewards and high APR: only for Dillard's regulars who pay in full",

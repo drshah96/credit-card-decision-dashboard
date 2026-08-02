@@ -8,6 +8,13 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee",
   "official_url": "https://www.capitalone.com/credit-cards/bass-pro-shops/",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "9.99% (Bass Pro Shops/Cabela's purchases); 20.49%-32.24% (all other purchases)",
+  "balance_transfer_apr": "20.49%-32.24%",
+  "balance_transfer_fee": "$0 at the standard Transfer APR, or 3% at any promotional APR Capital One may offer",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Only worth it for frequent Bass Pro / Cabela's shoppers",

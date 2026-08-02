@@ -8,6 +8,13 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee on the standard tier (a $59/yr Gold tier exists for thinner-credit applicants, with a richer 6% Best Buy rate)",
   "official_url": "https://www.citi.com/credit-cards/citi-best-buy-credit-cards",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "Variable 14.24%-30.74%, or non-variable 9.00%-20.24%, based on creditworthiness",
+  "balance_transfer_apr": "Variable 14.24%-30.74%, or non-variable 9.00%-20.24%, based on creditworthiness",
+  "balance_transfer_fee": "The greater of $15 or 5% of the amount of each transfer",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Only worth it for regular Best Buy shoppers: rewards are store-locked",

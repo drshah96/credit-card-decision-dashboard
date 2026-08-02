@@ -9,6 +9,19 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee",
   "official_url": "https://www.citi.com/credit-cards/citi-strata-credit-card",
+  "intro_apr_purchases": {
+    "rate": "0%",
+    "months": 15
+  },
+  "intro_apr_balance_transfers": {
+    "rate": "0%",
+    "months": 15
+  },
+  "foreign_transaction_fee": true,
+  "variable_apr": "19.24%-29.24%",
+  "balance_transfer_apr": "19.24%-29.24%",
+  "balance_transfer_fee": "3% of each transfer (minimum $5) within the first 4 months of account opening; 5% (minimum $5) after",
+  "foreign_transaction_fee_rate": "3%",
   "verdict": {
     "status": "keep",
     "text": "Broad no-fee earner, though cash-back is capped at half a cent/point",

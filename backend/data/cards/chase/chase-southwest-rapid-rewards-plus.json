@@ -1,6 +1,6 @@
 {
   "id": "chase-southwest-rapid-rewards-plus",
-  "name": "Southwest® Rapid Rewards® Plus Credit Card",
+  "name": "Southwest\u00ae Rapid Rewards\u00ae Plus Credit Card",
   "issuer": "Chase",
   "network": "VISA SIGNATURE",
   "points_program": "Rapid Rewards",
@@ -8,6 +8,13 @@
   "annual_fee": 99,
   "effective_cost": "Low if you check a bag or are chasing the Companion Pass",
   "official_url": "https://creditcards.chase.com/travel-credit-cards/southwest/plus",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "19.24%-27.74%",
+  "balance_transfer_apr": "19.24%-27.74%",
+  "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Cheapest way onto the free-bag list and Companion Pass stacking",
@@ -15,35 +22,35 @@
   },
   "earn_rates": [
     {
-      "emoji": "✈️",
-      "multiplier": "2×",
+      "emoji": "\u2708\ufe0f",
+      "multiplier": "2\u00d7",
       "category": "Southwest purchases (flights, inflight, gift cards)",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "⛽",
-      "multiplier": "2×",
+      "emoji": "\u26fd",
+      "multiplier": "2\u00d7",
       "category": "Gas stations",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "🛒",
-      "multiplier": "2×",
+      "emoji": "\ud83d\uded2",
+      "multiplier": "2\u00d7",
       "category": "Grocery stores",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "💳",
-      "multiplier": "1×",
+      "emoji": "\ud83d\udcb3",
+      "multiplier": "1\u00d7",
       "category": "Everything else",
       "highlight": false,
       "is_base": true
     }
   ],
-  "earn_note": "The weakest earn structure in the Southwest lineup: same 1× base as Premier and Priority, with no dining or travel-portal bonus at all. This card earns its keep through the free bag, Companion Pass boost, and low fee, not through how it earns points. Gas and grocery spend combine toward a single $5,000/yr cap before dropping to 1×.",
+  "earn_note": "The weakest earn structure in the Southwest lineup: same 1\u00d7 base as Premier and Priority, with no dining or travel-portal bonus at all. This card earns its keep through the free bag, Companion Pass boost, and low fee, not through how it earns points. Gas and grocery spend combine toward a single $5,000/yr cap before dropping to 1\u00d7.",
   "points": {
     "currency": "Rapid Rewards",
     "redemption_options": [
@@ -63,7 +70,7 @@
         "best": false
       }
     ],
-    "per_100k": "$1,200–1,500",
+    "per_100k": "$1,200\u20131,500",
     "note": "No blackout dates or seat caps: every seat Southwest sells is bookable with points. Southwest moved to dynamic pricing in March 2025, so the exact cent value now floats with fare demand instead of sitting on a fixed award chart."
   },
   "transfer_partners": {
@@ -77,7 +84,7 @@
     {
       "id": "bags",
       "name": "Free Checked Bag",
-      "subtitle": "1st bag · you + up to 8 on reservation",
+      "subtitle": "1st bag \u00b7 you + up to 8 on reservation",
       "max_annual": 140,
       "default_value": 0,
       "tier": "easy",
@@ -92,7 +99,7 @@
   "insurance": [
     {
       "coverage": "Rental car CDW",
-      "detail": "Secondary (domestic) / primary outside the US · $60k · 31 days",
+      "detail": "Secondary (domestic) / primary outside the US \u00b7 $60k \u00b7 31 days",
       "level": "mid"
     },
     {
@@ -102,7 +109,7 @@
     },
     {
       "coverage": "Baggage delay",
-      "detail": "$100/day · up to 3 days · after 6 hrs",
+      "detail": "$100/day \u00b7 up to 3 days \u00b7 after 6 hrs",
       "level": "mid"
     },
     {
@@ -112,12 +119,12 @@
     },
     {
       "coverage": "Travel accident insurance",
-      "detail": "$500,000 · common carrier",
+      "detail": "$500,000 \u00b7 common carrier",
       "level": "good"
     },
     {
       "coverage": "Purchase protection",
-      "detail": "$500/claim · $50,000/account · 120 days",
+      "detail": "$500/claim \u00b7 $50,000/account \u00b7 120 days",
       "level": "mid"
     },
     {
@@ -142,7 +149,7 @@
     {
       "name": "Boarding position",
       "strength": 2,
-      "note": "Group 5 boarding for the cardholder + up to 8 companions on the reservation, same slot as Premier and Priority. Real A-List members still board ahead of all three in the A1–A15 range."
+      "note": "Group 5 boarding for the cardholder + up to 8 companions on the reservation, same slot as Premier and Priority. Real A-List members still board ahead of all three in the A1\u2013A15 range."
     }
   ],
   "services": [
@@ -164,7 +171,7 @@
     },
     {
       "name": "Partner perks (through 2027)",
-      "detail": "3-month complimentary Instacart+ trial and 12-month complimentary DashPass (activate by Dec 31, 2027); 2× Rapid Rewards points on Lyft rides through Dec 2027."
+      "detail": "3-month complimentary Instacart+ trial and 12-month complimentary DashPass (activate by Dec 31, 2027); 2\u00d7 Rapid Rewards points on Lyft rides through Dec 2027."
     },
     {
       "name": "No foreign transaction fees",
@@ -219,13 +226,13 @@
       "date": "Jul 24, 2025",
       "type": "add",
       "badge": "Refresh",
-      "text": "Fee raised $69 → $99; gained the free checked bag, Standard seat selection, Group 5 boarding, and partner perks (Instacart+, DashPass, Lyft points)."
+      "text": "Fee raised $69 \u2192 $99; gained the free checked bag, Standard seat selection, Group 5 boarding, and partner perks (Instacart+, DashPass, Lyft points)."
     },
     {
       "date": "Dec 31, 2025",
       "type": "cut",
       "badge": "Cut",
-      "text": "Legacy benefits from the old card structure (2 EarlyBird Check-In credits and 2× points on internet/cable/phone) were discontinued."
+      "text": "Legacy benefits from the old card structure (2 EarlyBird Check-In credits and 2\u00d7 points on internet/cable/phone) were discontinued."
     }
   ]
 }

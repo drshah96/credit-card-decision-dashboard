@@ -34,6 +34,10 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     points_pool_id: null,
     points_pool_receiver: false,
     is_affiliate_link: false,
+    intro_apr_purchases: null,
+    intro_apr_balance_transfers: null,
+    foreign_transaction_fee: null,
+    has_lounge_access: false,
     ...overrides,
   };
 }
@@ -43,6 +47,14 @@ function makeCard(overrides: Partial<Card> = {}): Card {
   return {
     ...summary,
     is_affiliate_link: false,
+    intro_apr_purchases: null,
+    intro_apr_balance_transfers: null,
+    foreign_transaction_fee: null,
+    has_lounge_access: false,
+    variable_apr: null,
+    balance_transfer_apr: null,
+    balance_transfer_fee: null,
+    foreign_transaction_fee_rate: null,
     earn_rates: [],
     earn_note: "",
     points: { currency: summary.points_program, redemption_options: [], per_100k: "", note: "" },

@@ -8,6 +8,19 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee, but the entire value proposition is the 0% intro APR window",
   "official_url": "https://www.citi.com/credit-cards/citi-diamond-preferred-credit-card",
+  "intro_apr_purchases": {
+    "rate": "0%",
+    "months": 12
+  },
+  "intro_apr_balance_transfers": {
+    "rate": "0%",
+    "months": 21
+  },
+  "foreign_transaction_fee": true,
+  "variable_apr": "16.49%-27.24%",
+  "balance_transfer_apr": "16.49%-27.24%",
+  "balance_transfer_fee": "3% of each transfer (minimum $5) within the first 4 months of account opening; 5% (minimum $5) after",
+  "foreign_transaction_fee_rate": "3%",
   "verdict": {
     "status": "situational",
     "text": "Not a rewards card: worth it only for a balance transfer or 0% intro window",
