@@ -273,6 +273,51 @@ describe("summaryTags", () => {
     expect(tags).not.toEqual(expect.arrayContaining(["Dining", "Gas"]));
   });
 
+  it("tags Gas from 'gasoline'/'fuel' wording, not just the literal word 'gas'", () => {
+    // Real citi-exxonmobil-smart-card-plus categories — neither contains the
+    // literal word "gas", so a narrower matcher silently drops this card from
+    // the Gas chip and Compare-tab category filter.
+    const tags = summaryTags(
+      makeSummary({
+        categories: [
+          {
+            category: "Synergy Supreme+™ premium gasoline at Exxon & Mobil stations",
+            multiplier: "12¢/gal",
+            is_base: false,
+          },
+          {
+            category: "Regular, mid-grade & diesel fuel at Exxon & Mobil stations",
+            multiplier: "10¢/gal",
+            is_base: false,
+          },
+        ],
+      }),
+    );
+    expect(tags).toContain("Gas");
+  });
+
+  it("tags Dining from 'food delivery'/'fast food' wording, not just 'dining'/'restaurant'", () => {
+    // Real categories from chase-marriott-bonvoy-bold ("Select food delivery")
+    // and us-bank-cash-plus ("... fast food, home utilities, ...").
+    expect(
+      summaryTags(makeSummary({ categories: [{ category: "Select food delivery", multiplier: "3x", is_base: false }] })),
+    ).toContain("Dining");
+    expect(
+      summaryTags(
+        makeSummary({
+          categories: [
+            {
+              category:
+                "Two categories you choose each quarter: fast food, home utilities, streaming, department stores",
+              multiplier: "5x",
+              is_base: false,
+            },
+          ],
+        }),
+      ),
+    ).toContain("Dining");
+  });
+
   // Lounge Access, 0% Intro APR, Balance Transfer, and No Foreign
   // Transaction Fee are all sourced from real issuer terms server-side (see
   // backend/models.py Card.intro_apr_purchases), not guessed from free
