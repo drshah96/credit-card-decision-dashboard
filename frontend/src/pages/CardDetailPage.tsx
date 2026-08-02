@@ -13,6 +13,7 @@ import type {
   CreditTier,
   EarnRate,
   InsuranceLevel,
+  IntroApr,
   TransferPartner,
 } from "../types/cards";
 
@@ -57,6 +58,32 @@ const INS_DOT_CLASS: Record<InsuranceLevel, string> = {
 // ─── Pip labels ───────────────────────────────────────────────────────────────
 
 const PIP_LABELS = ["", "minimal", "minor", "useful", "strong", "elite"];
+
+// ─── Rates & fees helpers ───────────────────────────────────────────────────────
+
+// Folds the intro offer into the same row as the ongoing rate it rolls into
+// (e.g. "0% intro APR for 15 months, after that 18.24%-27.74%") rather than
+// two separate rows — an intro rate is just the first phase of the same
+// APR, not a distinct fact. "intro APR" (not just the bare rate) makes the
+// first clause a complete phrase on its own — some ongoing-rate strings are
+// already full sentences in their own right (e.g. US Bank Split's "no
+// standard revolving APR..."), so the trailing clause can't be relied on to
+// carry the noun for both halves. "—" (not "Not offered" or similar)
+// matches the same "no data" convention TopPickPage's empty ranking cells
+// use — deliberately doesn't distinguish "this card has no such offer" from
+// "not yet audited" for the couple of fields still genuinely unresolved
+// (see intro_apr_purchases's own doc comment in types/cards.ts).
+function formatAprRow(intro: IntroApr | null, ongoing: string | null): string {
+  if (intro && ongoing) return `${intro.rate} intro APR for ${intro.months} months, after that ${ongoing}`;
+  if (intro) return `${intro.rate} intro APR for ${intro.months} months`;
+  return ongoing ?? "—";
+}
+
+function formatForeignTransactionFee(hasFee: boolean | null, rate: string | null): string {
+  if (hasFee === false) return "None";
+  if (hasFee === true) return rate ?? "Charged (exact rate not confirmed)";
+  return "—";
+}
 
 // ─── Credit Modal ─────────────────────────────────────────────────────────────
 
@@ -1040,6 +1067,36 @@ function CardDetail({ card }: { card: Card }) {
           </div>
         </Block>
       )}
+
+      {/* Interest rates & fees */}
+      <Block
+        label="Miscellaneous Charges"
+        title="Interest rates & fees"
+        note="from each issuer's own terms"
+      >
+        <div className="rates-list">
+          <div className="rates-row">
+            <span className="rk">Purchase APR</span>
+            <span className="rv">{formatAprRow(card.intro_apr_purchases, card.variable_apr)}</span>
+          </div>
+          <div className="rates-row">
+            <span className="rk">Balance transfer APR</span>
+            <span className="rv">
+              {formatAprRow(card.intro_apr_balance_transfers, card.balance_transfer_apr)}
+            </span>
+          </div>
+          <div className="rates-row">
+            <span className="rk">Balance transfer fee</span>
+            <span className="rv">{card.balance_transfer_fee ?? "—"}</span>
+          </div>
+          <div className="rates-row">
+            <span className="rk">Foreign transaction fee</span>
+            <span className="rv">
+              {formatForeignTransactionFee(card.foreign_transaction_fee, card.foreign_transaction_fee_rate)}
+            </span>
+          </div>
+        </div>
+      </Block>
 
       {/* Timeline */}
       <Block label="History" title="What changed, newest first">
