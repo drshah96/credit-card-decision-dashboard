@@ -2,7 +2,7 @@ import { useState } from "react";
 import { describe, it, expect } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { CompareFilterBar } from "@/components/CompareFilterBar";
-import type { CardSummary } from "@/types/cards";
+import type { Card, CardSummary } from "@/types/cards";
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 // Real card ids so `classify()` resolves real brand/group data: Delta SkyMiles
@@ -42,16 +42,44 @@ const CHASE_HYATT = makeSummary({
 
 const ALL_CARDS = [AMEX_DELTA, CHASE_HYATT];
 
+function makeCard(overrides: Partial<Card> = {}): Card {
+  const summary = makeSummary(overrides);
+  return {
+    ...summary,
+    is_affiliate_link: false,
+    earn_rates: [],
+    earn_note: "",
+    points: { currency: summary.points_program, redemption_options: [], per_100k: "", note: "" },
+    transfer_partners: { airline_count: 0, hotel_count: 0, highlight: "", recent_changes: "" },
+    credits: [],
+    insurance: [],
+    protection_note: "",
+    rental_note: "",
+    status_perks: [],
+    services: [],
+    additional_cards: { title: "", options: [], note: "" },
+    timeline: [],
+    ...overrides,
+  };
+}
+
 // A stateful wrapper — CompareFilterBar is fully controlled, so exercising
 // real interactions (a click narrowing what a later click can pick) needs an
 // actual state update between them, not just a fresh render with new props.
-function Harness({ cards }: { cards: CardSummary[] }) {
+function Harness({
+  cards,
+  detailsById,
+}: {
+  cards: CardSummary[];
+  detailsById?: Map<string, Card>;
+}) {
   const [issuers, setIssuers] = useState<Set<string>>(new Set());
   const [brands, setBrands] = useState<Set<string>>(new Set());
   const [categories, setCategories] = useState<Set<string>>(new Set());
   return (
     <CompareFilterBar
       cards={cards}
+      detailsById={detailsById}
       issuers={issuers}
       onIssuersChange={setIssuers}
       brands={brands}
@@ -111,5 +139,41 @@ describe("CompareFilterBar", () => {
     fireEvent.click(screen.getByText("World of Hyatt"));
 
     expect(screen.getByRole("button", { name: /^Brand/ })).toHaveTextContent("2");
+  });
+
+  describe("detail-only behavioral chips", () => {
+    // Lounge Access, 0% Intro APR, No Foreign Transaction Fee, and Balance
+    // Transfer all live in Card.status_perks/free-text fields, not
+    // CardSummary — only offered/matchable once that card's full detail has
+    // been fetched and passed in via detailsById.
+
+    it("doesn't offer a behavioral chip until detail has loaded for a card that has it", () => {
+      render(<Harness cards={ALL_CARDS} />);
+
+      fireEvent.click(screen.getByRole("button", { name: /^Category/ }));
+      expect(screen.queryByText("Lounge Access")).not.toBeInTheDocument();
+    });
+
+    it("offers and filters by Lounge Access once a card's detail confirms it", () => {
+      const detailsById = new Map([
+        [
+          AMEX_DELTA.id,
+          makeCard({
+            ...AMEX_DELTA,
+            status_perks: [{ name: "Centurion Lounge Access", strength: 3, note: "" }],
+          }),
+        ],
+        [CHASE_HYATT.id, makeCard({ ...CHASE_HYATT })],
+      ]);
+      render(<Harness cards={ALL_CARDS} detailsById={detailsById} />);
+
+      fireEvent.click(screen.getByRole("button", { name: /^Category/ }));
+      expect(screen.getByText("Lounge Access")).toBeInTheDocument();
+
+      fireEvent.click(screen.getByText("Lounge Access"));
+      fireEvent.click(screen.getByRole("button", { name: /^Issuer/ }));
+      expect(screen.getByText("American Express")).toBeInTheDocument();
+      expect(screen.queryByText("Chase")).not.toBeInTheDocument();
+    });
   });
 });

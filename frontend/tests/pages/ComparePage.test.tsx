@@ -8,9 +8,10 @@ import type { Card, CardSummary } from "@/types/cards";
 vi.mock("@/api/cards", () => ({
   fetchCards: vi.fn(),
   fetchCard: vi.fn(),
+  fetchCardDetails: vi.fn(),
 }));
 
-import { fetchCard, fetchCards } from "@/api/cards";
+import { fetchCard, fetchCardDetails, fetchCards } from "@/api/cards";
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 
@@ -100,6 +101,15 @@ function mockFetchCardImpl(id: string): Promise<Card> {
   return Promise.resolve(makeCard(summary));
 }
 
+function mockFetchCardDetailsImpl(ids: string[]): Promise<Card[]> {
+  return Promise.resolve(
+    ids
+      .map((id) => ALL_SUMMARIES.find((c) => c.id === id))
+      .filter((s): s is CardSummary => s !== undefined)
+      .map((s) => makeCard(s)),
+  );
+}
+
 function renderPage(initialPath = "/compare") {
   const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
   return render(
@@ -120,6 +130,7 @@ beforeEach(() => {
   localStorage.clear();
   vi.mocked(fetchCards).mockResolvedValue(ALL_SUMMARIES);
   vi.mocked(fetchCard).mockImplementation(mockFetchCardImpl);
+  vi.mocked(fetchCardDetails).mockImplementation(mockFetchCardDetailsImpl);
 });
 
 describe("ComparePage", () => {
@@ -384,6 +395,43 @@ describe("ComparePage", () => {
 
     const picker = search.closest(".card-picker") as HTMLElement;
     expect(within(picker).queryByText("The Platinum Card")).not.toBeInTheDocument();
+  });
+
+  it("the Category filter offers and narrows by a detail-only behavioral chip once catalog-wide detail loads", async () => {
+    // Lounge Access lives in Card.status_perks, not CardSummary — only
+    // available once the bulk catalog-wide detail fetch (added for the
+    // Category dropdown, reusing the same bulk endpoint IssuerCardsPage
+    // uses) resolves.
+    vi.mocked(fetchCardDetails).mockImplementation((ids: string[]) =>
+      Promise.resolve(
+        ids
+          .map((id) => ALL_SUMMARIES.find((c) => c.id === id))
+          .filter((s): s is CardSummary => s !== undefined)
+          .map((s) =>
+            makeCard(
+              s.id === "amex-platinum"
+                ? { ...s, status_perks: [{ name: "Centurion Lounge Access", strength: 3, note: "" }] }
+                : s,
+            ),
+          ),
+      ),
+    );
+    renderPage("/compare");
+
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: /^Category/ })).toBeInTheDocument();
+    });
+    await waitFor(() => {
+      fireEvent.click(screen.getByRole("button", { name: /^Category/ }));
+      expect(screen.getByText("Lounge Access")).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByText("Lounge Access"));
+    fireEvent.click(screen.getAllByRole("button", { name: "+ Add a card" })[0]);
+
+    const picker = screen.getByLabelText("Search cards").closest(".card-picker") as HTMLElement;
+    expect(within(picker).getByText("The Platinum Card")).toBeInTheDocument();
+    expect(within(picker).queryByText("Sapphire Reserve")).not.toBeInTheDocument();
   });
 
   it("the card picker hides a secured card whose unsecured twin has identical earn rates", async () => {

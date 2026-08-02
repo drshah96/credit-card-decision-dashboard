@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { useQueries, useQuery } from "@tanstack/react-query";
+import { useQueries, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
-import { fetchCard, fetchCards } from "../api/cards";
+import { fetchCard, fetchCardDetails, fetchCards } from "../api/cards";
 import { PageTabs } from "../components/PageTabs";
 import { CompareSlot } from "../components/CompareSlot";
 import { CompareFilterBar } from "../components/CompareFilterBar";
@@ -93,6 +93,35 @@ export default function ComparePage() {
   });
   const slowLoad = useSlowLoadWarning(summariesLoading);
 
+  // Full detail for the whole catalog (not just the selected comparison
+  // slots below) — lets the filter bar's Category dropdown offer and match
+  // on the detail-only behavioral chips (Lounge Access, 0% Intro APR, No
+  // Foreign Transaction Fee, Balance Transfer), same as IssuerCardsPage does
+  // for one issuer's lineup, just scoped to every card instead. One bulk
+  // request rather than fanning out per card.
+  const allCardIds = useMemo(() => (allCards ?? []).map((c) => c.id), [allCards]);
+  const queryClient = useQueryClient();
+  const { data: allCardDetails } = useQuery({
+    queryKey: ["cardDetails", allCardIds],
+    queryFn: () => fetchCardDetails(allCardIds),
+    enabled: allCardIds.length > 0,
+  });
+
+  // Seeds the single-card cache (["card", id]) from the bulk response, so
+  // the detailQueries below (for whichever cards are actually selected into
+  // a compare slot) resolve instantly from cache instead of re-fetching.
+  useEffect(() => {
+    for (const card of allCardDetails ?? []) {
+      queryClient.setQueryData(["card", card.id], card);
+    }
+  }, [allCardDetails, queryClient]);
+
+  const allDetailsById = useMemo(() => {
+    const map = new Map<string, Card>();
+    for (const c of allCardDetails ?? []) map.set(c.id, c);
+    return map;
+  }, [allCardDetails]);
+
   const detailQueries = useQueries({
     queries: selectedIds.map((id) => ({
       queryKey: ["card", id],
@@ -124,8 +153,8 @@ export default function ComparePage() {
   const pickerCards = useMemo(() => {
     const byIssuer = filterByIssuers(allCards ?? [], filterIssuers);
     const byBrand = filterByBrands(byIssuer, filterBrands);
-    return filterByCategories(byBrand, filterCategories);
-  }, [allCards, filterIssuers, filterBrands, filterCategories]);
+    return filterByCategories(byBrand, filterCategories, allDetailsById);
+  }, [allCards, filterIssuers, filterBrands, filterCategories, allDetailsById]);
 
   const pickerFilterLabel = [...filterIssuers, ...filterCategories, ...filterBrands].join(", ");
 
@@ -249,6 +278,7 @@ export default function ComparePage() {
           <>
             <CompareFilterBar
               cards={allCards ?? []}
+              detailsById={allDetailsById}
               issuers={filterIssuers}
               onIssuersChange={setFilterIssuers}
               brands={filterBrands}

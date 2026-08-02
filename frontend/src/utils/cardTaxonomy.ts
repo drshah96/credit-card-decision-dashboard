@@ -509,11 +509,26 @@ export function filterByBrands(cards: CardSummary[], brands: Set<string>): CardS
   });
 }
 
-export function filterByCategories(cards: CardSummary[], categories: Set<string>): CardSummary[] {
+/** Every tag that applies to a card: summary-level ones always, plus the
+ * detail-only behavioral tags (Lounge Access, 0% Intro APR, No Foreign
+ * Transaction Fee, Balance Transfer) whenever that card's full detail has
+ * already been fetched. `detailsById` is optional and additive — a card
+ * missing from it (detail not loaded yet) still gets its full summary tags,
+ * it just can't match on a behavioral one until its detail arrives. */
+export function allTags(card: CardSummary, detailsById?: Map<string, Card>): string[] {
+  const detail = detailsById?.get(card.id);
+  return detail ? [...summaryTags(card), ...detailTags(detail)] : summaryTags(card);
+}
+
+export function filterByCategories(
+  cards: CardSummary[],
+  categories: Set<string>,
+  detailsById?: Map<string, Card>,
+): CardSummary[] {
   if (categories.size === 0) return cards;
   const tagMap = new Map<string, Set<string>>();
   for (const card of cards) {
-    for (const tag of summaryTags(card)) {
+    for (const tag of allTags(card, detailsById)) {
       if (!tagMap.has(tag)) tagMap.set(tag, new Set());
       tagMap.get(tag)!.add(card.id);
     }

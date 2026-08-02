@@ -1,17 +1,23 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { CardSummary } from "../types/cards";
+import type { Card, CardSummary } from "../types/cards";
 import {
+  allTags,
   brandTagsForCards,
   filterByBrands,
   filterByCategories,
   filterByIssuers,
   ISSUERS,
   STRUCTURAL_CHIP_ORDER,
-  summaryTags,
 } from "../utils/cardTaxonomy";
 
 interface Props {
   cards: CardSummary[];
+  // Full detail for as much of `cards` as has loaded so far — lets the
+  // Category dropdown offer the detail-only behavioral chips (Lounge
+  // Access, 0% Intro APR, No Foreign Transaction Fee, Balance Transfer)
+  // alongside the summary-level ones. Optional/additive: cards missing from
+  // it just can't offer/match those specific chips yet.
+  detailsById?: Map<string, Card>;
   issuers: Set<string>;
   onIssuersChange: (issuers: Set<string>) => void;
   brands: Set<string>;
@@ -127,6 +133,7 @@ function MultiSelectDropdown({
  * Issuer+Brand). */
 export function CompareFilterBar({
   cards,
+  detailsById,
   issuers,
   onIssuersChange,
   brands,
@@ -135,22 +142,22 @@ export function CompareFilterBar({
   onCategoriesChange,
 }: Props) {
   const issuerOptions = useMemo(() => {
-    const scoped = filterByCategories(filterByBrands(cards, brands), categories);
+    const scoped = filterByCategories(filterByBrands(cards, brands), categories, detailsById);
     const present = new Set(scoped.map((c) => c.issuer));
     return ISSUERS.map((i) => i.issuerField).filter((f) => present.has(f));
-  }, [cards, brands, categories]);
+  }, [cards, brands, categories, detailsById]);
 
   const brandOptions = useMemo(() => {
-    const scoped = filterByCategories(filterByIssuers(cards, issuers), categories);
+    const scoped = filterByCategories(filterByIssuers(cards, issuers), categories, detailsById);
     return [...brandTagsForCards(scoped)].sort((a, b) => a.localeCompare(b));
-  }, [cards, issuers, categories]);
+  }, [cards, issuers, categories, detailsById]);
 
   const categoryOptions = useMemo(() => {
     const scoped = filterByBrands(filterByIssuers(cards, issuers), brands);
     const present = new Set<string>();
-    for (const card of scoped) for (const tag of summaryTags(card)) present.add(tag);
+    for (const card of scoped) for (const tag of allTags(card, detailsById)) present.add(tag);
     return STRUCTURAL_CHIP_ORDER.filter((t) => present.has(t)).sort((a, b) => a.localeCompare(b));
-  }, [cards, issuers, brands]);
+  }, [cards, issuers, brands, detailsById]);
 
   useDropStale(issuerOptions, issuers, onIssuersChange);
   useDropStale(brandOptions, brands, onBrandsChange);
