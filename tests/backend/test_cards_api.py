@@ -614,3 +614,116 @@ def test_health_endpoint() -> None:
     response = client.get("/health")
     assert response.status_code == 200
     assert response.json() == {"status": "ok"}
+
+
+# ─── intro APR / balance transfer / foreign transaction fee ───────────────────
+# Sourced from real issuer terms per-card (see backend/models.py
+# Card.intro_apr_purchases), rolled out incrementally by issuer. None means
+# "not yet audited" for that card, not "confirmed absent" — distinct states.
+
+
+@pytest.mark.parametrize("card_id", CARD_IDS)
+def test_summary_apr_and_fx_fields_match_full_detail(card_id: str) -> None:
+    """CardSummary's three fields mirror Card's exactly, whatever their
+    current value — the Compare tab's Category chips (which only ever see
+    CardSummary) must never read a value that could drift from the detail
+    page's own. Same pattern as the is_affiliate_link parity test."""
+    detail = client.get(f"/api/cards/{card_id}").json()
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == card_id)
+    for field in ("intro_apr_purchases", "intro_apr_balance_transfers", "foreign_transaction_fee"):
+        assert summary[field] == detail[field], field
+
+
+def test_has_lounge_access_true_for_a_known_lounge_card() -> None:
+    """amex-platinum has real Centurion Lounge access in its status_perks —
+    confirms has_lounge_access is actually derived from that data, not
+    hardcoded false."""
+    detail = client.get("/api/cards/amex-platinum").json()
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == "amex-platinum")
+    assert detail["has_lounge_access"] is True
+    assert summary["has_lounge_access"] is True
+
+
+def test_has_lounge_access_false_for_a_card_with_no_such_perk() -> None:
+    detail = client.get("/api/cards/chase-freedom-unlimited").json()
+    assert detail["has_lounge_access"] is False
+
+
+def test_intro_apr_shape_when_present() -> None:
+    """Whichever card ends up with an audited intro-APR offer, the field is
+    a {rate, months} object, not a bare number or string."""
+    cards = client.get("/api/cards").json()
+    audited = [c for c in cards if c["intro_apr_purchases"] is not None]
+    if not audited:
+        pytest.skip("no card has an audited intro_apr_purchases offer yet")
+    sample = audited[0]["intro_apr_purchases"]
+    assert set(sample.keys()) == {"rate", "months"}
+    assert isinstance(sample["rate"], str)
+    assert isinstance(sample["months"], int)
+
+
+# Chase pilot batch (2026-08-01/02): all 19 Chase cards researched against
+# Chase's own official pages. Only the three cards Chase actually markets on
+# 0% APR carry the offer — every premium/travel/co-brand Chase card was
+# confirmed (not just left unaudited) to have none. See
+# [[project_apr_balance_transfer_fx_fee_audit]] memory for the full source
+# list and the remaining-issuers backlog.
+@pytest.mark.parametrize(
+    "card_id,purchases_months,bt_months,fx_fee",
+    [
+        ("chase-freedom-unlimited", 15, 15, True),
+        ("chase-freedom-flex", 15, 15, True),
+        ("chase-slate-edge", 18, 18, True),
+    ],
+)
+def test_chase_cards_with_a_real_intro_apr_offer(
+    card_id: str, purchases_months: int, bt_months: int, fx_fee: bool
+) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": purchases_months}
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": bt_months}
+    assert detail["foreign_transaction_fee"] is fx_fee
+
+
+@pytest.mark.parametrize(
+    "card_id",
+    [
+        "chase-sapphire-preferred",
+        "chase-sapphire-reserve",
+        "chase-united-explorer",
+        "chase-united-quest",
+        "chase-united-club-infinite",
+        "chase-world-of-hyatt",
+        "chase-marriott-bonvoy-boundless",
+        "chase-marriott-bonvoy-bold",
+        "chase-ihg-one-rewards-premier",
+        "chase-ihg-one-rewards-traveler",
+        "chase-southwest-rapid-rewards-plus",
+        "chase-southwest-rapid-rewards-premier",
+        "chase-southwest-rapid-rewards-priority",
+    ],
+)
+def test_chase_travel_and_cobrand_cards_confirmed_no_foreign_transaction_fee(card_id: str) -> None:
+    """These were actively researched and confirmed fee-free, not just left
+    unaudited — distinct from a card this pilot batch didn't cover yet."""
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["foreign_transaction_fee"] is False
+    assert detail["intro_apr_purchases"] is None
+    assert detail["intro_apr_balance_transfers"] is None
+
+
+def test_chase_cards_with_confirmed_foreign_transaction_fee() -> None:
+    # Freedom Flex/Unlimited/Rise/Slate Edge/Disney Premier all confirmed to
+    # currently charge 3% (Freedom Flex is scheduled to drop it 2026-09-20,
+    # still in the future as of this audit).
+    for card_id in (
+        "chase-freedom-rise",
+        "chase-disney-premier",
+        "chase-amazon-prime-visa",
+    ):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["intro_apr_purchases"] is None
+        assert detail["intro_apr_balance_transfers"] is None
+    assert client.get("/api/cards/chase-freedom-rise").json()["foreign_transaction_fee"] is True
+    assert client.get("/api/cards/chase-disney-premier").json()["foreign_transaction_fee"] is True
+    assert client.get("/api/cards/chase-amazon-prime-visa").json()["foreign_transaction_fee"] is False
