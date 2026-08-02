@@ -55,6 +55,38 @@ body {
 /* ─── Page wrapper ─────────────────────────────────────────────────────────── */
 .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
 
+/* ─── Site mark (logo + wordmark header) ──────────────────────────────────────
+   Sticky so it stays reachable as a way back to "/" on long pages, and
+   shrinks once scrolled (.is-compact) rather than permanently eating
+   vertical space. Both images share --sitemark-logo-h; wordmark-tagline.png
+   bakes its text into a fixed ~6.3:1-aspect-ratio image, so clamp()'d height
+   (not a fixed px value) is what keeps the lockup from overflowing off the
+   right edge on phone widths — there's no way to reflow text baked into an
+   image, only to scale the whole thing down with the viewport. */
+.sitemark {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  --sitemark-logo-h: clamp(24px, 7vw, 44px);
+  --sitemark-pad: clamp(12px, 3vw, 20px);
+}
+.sitemark.is-compact {
+  --sitemark-logo-h: clamp(16px, 5vw, 28px);
+  --sitemark-pad: clamp(8px, 1.5vw, 10px);
+}
+.sitemark-inner { padding: var(--sitemark-pad) 20px; text-align: center; transition: padding .2s ease; }
+.sitemark-link { display: inline-flex; align-items: center; gap: clamp(4px, 1vw, 6px); }
+.sitemark-logo, .sitemark-wordmark {
+  height: var(--sitemark-logo-h);
+  width: auto;
+  display: block;
+  transition: height .2s ease;
+}
+
 /* ─── Block heading ────────────────────────────────────────────────────────── */
 .block-head {
   display: flex;
@@ -464,7 +496,9 @@ body {
   gap: 12px;
   margin: 4px 0 28px;
 }
+.top-pick-toolbar-text { display: flex; flex-direction: column; gap: 2px; }
 .top-pick-toolbar-label { font-size: 13px; color: var(--faint); }
+.top-pick-toolbar-hint { font-size: 12.5px; color: var(--accent); }
 .top-pick-my-cards { position: relative; display: inline-block; }
 .top-pick-my-cards-panel {
   position: absolute;

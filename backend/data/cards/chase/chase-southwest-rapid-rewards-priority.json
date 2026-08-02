@@ -1,6 +1,6 @@
 {
   "id": "chase-southwest-rapid-rewards-priority",
-  "name": "Southwest® Rapid Rewards® Priority Credit Card",
+  "name": "Southwest\u00ae Rapid Rewards\u00ae Priority Credit Card",
   "issuer": "Chase",
   "network": "VISA SIGNATURE",
   "points_program": "Rapid Rewards",
@@ -8,6 +8,13 @@
   "annual_fee": 229,
   "effective_cost": "Highest fee in the family: needs frequent flying or A-List pursuit to clear",
   "official_url": "https://creditcards.chase.com/southwest/priority-credit-card",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "19.24%-27.74%",
+  "balance_transfer_apr": "19.24%-27.74%",
+  "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Only earns back its fee for frequent flyers chasing A-List",
@@ -15,35 +22,35 @@
   },
   "earn_rates": [
     {
-      "emoji": "✈️",
-      "multiplier": "4×",
+      "emoji": "\u2708\ufe0f",
+      "multiplier": "4\u00d7",
       "category": "Southwest purchases (flights, inflight, gift cards)",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "⛽",
-      "multiplier": "2×",
+      "emoji": "\u26fd",
+      "multiplier": "2\u00d7",
       "category": "Gas stations, uncapped",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "🍽️",
-      "multiplier": "2×",
+      "emoji": "\ud83c\udf7d\ufe0f",
+      "multiplier": "2\u00d7",
       "category": "Restaurants, uncapped",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "💳",
-      "multiplier": "1×",
+      "emoji": "\ud83d\udcb3",
+      "multiplier": "1\u00d7",
       "category": "Everything else",
       "highlight": false,
       "is_base": true
     }
   ],
-  "earn_note": "The only uncapped bonus category in the family (Plus and Premier both cap their second category at $5k–$8k/yr), plus the fastest Southwest multiplier at 4×. Still a 1× base, though; a flat-rate card like Venture X beats it on uncategorized spend.",
+  "earn_note": "The only uncapped bonus category in the family (Plus and Premier both cap their second category at $5k\u2013$8k/yr), plus the fastest Southwest multiplier at 4\u00d7. Still a 1\u00d7 base, though; a flat-rate card like Venture X beats it on uncategorized spend.",
   "points": {
     "currency": "Rapid Rewards",
     "redemption_options": [
@@ -63,7 +70,7 @@
         "best": false
       }
     ],
-    "per_100k": "$1,200–1,500",
+    "per_100k": "$1,200\u20131,500",
     "note": "Same closed-loop Rapid Rewards currency and dynamic pricing (since March 2025) as the rest of the family; Priority just earns it fastest, especially on Southwest-direct spend."
   },
   "transfer_partners": {
@@ -77,7 +84,7 @@
     {
       "id": "bags",
       "name": "Free Checked Bag",
-      "subtitle": "1st bag · you + up to 8 on reservation",
+      "subtitle": "1st bag \u00b7 you + up to 8 on reservation",
       "max_annual": 140,
       "default_value": 0,
       "tier": "easy",
@@ -91,7 +98,7 @@
     {
       "id": "instacart",
       "name": "Instacart+ Credit",
-      "subtitle": "$10/mo · through 2027 promo",
+      "subtitle": "$10/mo \u00b7 through 2027 promo",
       "max_annual": 120,
       "default_value": 0,
       "tier": "niche",
@@ -106,7 +113,7 @@
   "insurance": [
     {
       "coverage": "Rental car CDW",
-      "detail": "Secondary (domestic) / primary outside the US · $60k · 31 days",
+      "detail": "Secondary (domestic) / primary outside the US \u00b7 $60k \u00b7 31 days",
       "level": "mid"
     },
     {
@@ -116,7 +123,7 @@
     },
     {
       "coverage": "Baggage delay",
-      "detail": "$100/day · up to 3 days · after 6 hrs",
+      "detail": "$100/day \u00b7 up to 3 days \u00b7 after 6 hrs",
       "level": "mid"
     },
     {
@@ -126,12 +133,12 @@
     },
     {
       "coverage": "Travel accident insurance",
-      "detail": "$500,000 · common carrier",
+      "detail": "$500,000 \u00b7 common carrier",
       "level": "good"
     },
     {
       "coverage": "Purchase protection",
-      "detail": "$500/claim · $50,000/account · 120 days",
+      "detail": "$500/claim \u00b7 $50,000/account \u00b7 120 days",
       "level": "mid"
     },
     {
@@ -174,7 +181,7 @@
     },
     {
       "name": "Partner perks (through 2027)",
-      "detail": "3-month complimentary Instacart+ trial (see the Instacart credit above), 12-month complimentary DashPass (activate by Dec 31, 2027), and 5× Rapid Rewards points on Lyft rides through Dec 2027, the richest multiplier in the family."
+      "detail": "3-month complimentary Instacart+ trial (see the Instacart credit above), 12-month complimentary DashPass (activate by Dec 31, 2027), and 5\u00d7 Rapid Rewards points on Lyft rides through Dec 2027, the richest multiplier in the family."
     },
     {
       "name": "No foreign transaction fees",
@@ -229,13 +236,13 @@
       "date": "Jul 24, 2025",
       "type": "add",
       "badge": "Refresh",
-      "text": "Fee raised $149 → $229; Southwest earn rate rose 3× → 4×, A-List tier points doubled to 2,500 per $5,000, and Extra Legroom upgrades plus earlier Preferred seat selection were added."
+      "text": "Fee raised $149 \u2192 $229; Southwest earn rate rose 3\u00d7 \u2192 4\u00d7, A-List tier points doubled to 2,500 per $5,000, and Extra Legroom upgrades plus earlier Preferred seat selection were added."
     },
     {
       "date": "Dec 31, 2025",
       "type": "cut",
       "badge": "Cut",
-      "text": "The $75 annual Southwest travel credit and the 4 annual Upgraded Boarding certificates from the old card structure were discontinued, along with 2× points on internet/cable/phone."
+      "text": "The $75 annual Southwest travel credit and the 4 annual Upgraded Boarding certificates from the old card structure were discontinued, along with 2\u00d7 points on internet/cable/phone."
     }
   ]
 }

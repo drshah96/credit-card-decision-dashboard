@@ -8,6 +8,13 @@
   "annual_fee": 95,
   "effective_cost": "Low if you actually book the free night awards",
   "official_url": "https://creditcards.chase.com/travel-credit-cards/world-of-hyatt",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "20.24%-27.24%",
+  "balance_transfer_apr": "20.24%-27.24%",
+  "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Keep if you stay at Hyatt hotels: the free nights are the whole card",
@@ -15,49 +22,49 @@
   },
   "earn_rates": [
     {
-      "emoji": "🏨",
-      "multiplier": "4×",
+      "emoji": "\ud83c\udfe8",
+      "multiplier": "4\u00d7",
       "category": "Hyatt hotels, direct",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "🍽️",
-      "multiplier": "2×",
+      "emoji": "\ud83c\udf7d\ufe0f",
+      "multiplier": "2\u00d7",
       "category": "Restaurants",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "✈️",
-      "multiplier": "2×",
+      "emoji": "\u2708\ufe0f",
+      "multiplier": "2\u00d7",
       "category": "Airline tickets, booked direct",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "🚂",
-      "multiplier": "2×",
+      "emoji": "\ud83d\ude82",
+      "multiplier": "2\u00d7",
       "category": "Local transit & commuting",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "💪",
-      "multiplier": "2×",
+      "emoji": "\ud83d\udcaa",
+      "multiplier": "2\u00d7",
       "category": "Fitness clubs & gyms",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "💳",
-      "multiplier": "1×",
+      "emoji": "\ud83d\udcb3",
+      "multiplier": "1\u00d7",
       "category": "Everything else",
       "highlight": false,
       "is_base": true
     }
   ],
-  "earn_note": "The 4× hotel rate is Hyatt-direct only; book through an OTA and you earn nothing extra. The 2× bucket (dining, direct airfare, transit, gyms) is broader than most hotel cards' second tier, but 1× on general spend is well below a flat-rate card.",
+  "earn_note": "The 4\u00d7 hotel rate is Hyatt-direct only; book through an OTA and you earn nothing extra. The 2\u00d7 bucket (dining, direct airfare, transit, gyms) is broader than most hotel cards' second tier, but 1\u00d7 on general spend is well below a flat-rate card.",
   "points": {
     "currency": "World of Hyatt",
     "redemption_options": [
@@ -73,12 +80,12 @@
       }
     ],
     "per_100k": "$1,800",
-    "note": "World of Hyatt is routinely the highest-valued major hotel currency per point (NerdWallet pegged it around 1.8¢ in 2026). A new five-tier award chart (up from three tiers) rolled out in May 2026 and pushed most redemptions to cost more points than before, so treat 1.8¢ as a median, not a floor. Transferring out to airlines at 5:2 is a rounding error by comparison."
+    "note": "World of Hyatt is routinely the highest-valued major hotel currency per point (NerdWallet pegged it around 1.8\u00a2 in 2026). A new five-tier award chart (up from three tiers) rolled out in May 2026 and pushed most redemptions to cost more points than before, so treat 1.8\u00a2 as a median, not a floor. Transferring out to airlines at 5:2 is a rounding error by comparison."
   },
   "transfer_partners": {
     "airline_count": 25,
     "hotel_count": 0,
-    "highlight": "World of Hyatt transfers to roughly 25 airline partners at a 5:2 ratio (5,000 Hyatt points → 2,000 miles), with a few better ratios like Virgin Atlantic (5:3) and Aeromexico (5:4), but cashing out to airlines is rarely a good trade for a currency this strong at hotels.",
+    "highlight": "World of Hyatt transfers to roughly 25 airline partners at a 5:2 ratio (5,000 Hyatt points \u2192 2,000 miles), with a few better ratios like Virgin Atlantic (5:3) and Aeromexico (5:4), but cashing out to airlines is rarely a good trade for a currency this strong at hotels.",
     "recent_changes": "No changes to the airline transfer chart itself; the May 2026 award chart overhaul affects in-program hotel redemptions, not transfers.",
     "partners": [
       {
@@ -218,26 +225,26 @@
     {
       "id": "free-night",
       "name": "Annual Free Night Award",
-      "subtitle": "Category 1–4 · after cardmember anniversary",
+      "subtitle": "Category 1\u20134 \u00b7 after cardmember anniversary",
       "max_annual": 200,
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "One free night award each year after your cardmember anniversary month, redeemable at Category 1–4 Hyatt hotels and resorts (room charge only; resort/facility fees are waived). Excludes Miraval, Hyatt Zilara, and Hyatt Ziva.",
+      "description": "One free night award each year after your cardmember anniversary month, redeemable at Category 1\u20134 Hyatt hotels and resorts (room charge only; resort/facility fees are waived). Excludes Miraval, Hyatt Zilara, and Hyatt Ziva.",
       "tips": [
         "Valid for 12 months from issuance and subject to availability; book ahead, especially at popular Category 4 properties.",
-        "$200 here is a conservative mid-range estimate for a Category 1–4 redemption, not a guarantee for any specific hotel."
+        "$200 here is a conservative mid-range estimate for a Category 1\u20134 redemption, not a guarantee for any specific hotel."
       ]
     },
     {
       "id": "second-free-night",
       "name": "Second Free Night Award",
-      "subtitle": "Category 1–4 · after $15,000/yr spend",
+      "subtitle": "Category 1\u20134 \u00b7 after $15,000/yr spend",
       "max_annual": 200,
       "default_value": 0,
       "tier": "niche",
       "removed": false,
-      "description": "An additional free night award at Category 1–4 Hyatt properties after spending $15,000 on the card within a calendar year.",
+      "description": "An additional free night award at Category 1\u20134 Hyatt properties after spending $15,000 on the card within a calendar year.",
       "tips": [
         "Only worth counting if you're already going to hit $15,000/yr in spend; don't chase the threshold just for this."
       ]
@@ -245,7 +252,7 @@
     {
       "id": "dashpass",
       "name": "DoorDash DashPass + Credit",
-      "subtitle": "12-mo complimentary + $10/mo non-restaurant · thru 2027",
+      "subtitle": "12-mo complimentary + $10/mo non-restaurant \u00b7 thru 2027",
       "max_annual": 160,
       "default_value": 0,
       "tier": "niche",
@@ -260,12 +267,12 @@
   "insurance": [
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "$5,000/person · $10,000/trip",
+      "detail": "$5,000/person \u00b7 $10,000/trip",
       "level": "good"
     },
     {
       "coverage": "Baggage delay",
-      "detail": "$100/day · up to 5 days · after 6 hrs",
+      "detail": "$100/day \u00b7 up to 5 days \u00b7 after 6 hrs",
       "level": "mid"
     },
     {
@@ -280,7 +287,7 @@
     },
     {
       "coverage": "Purchase protection",
-      "detail": "$500/item · 120 days",
+      "detail": "$500/item \u00b7 120 days",
       "level": "mid"
     },
     {
@@ -338,7 +345,7 @@
       "date": "May 20, 2026",
       "type": "neutral",
       "badge": "Refresh",
-      "text": "World of Hyatt program moved from a 3-tier to a 5-tier award chart, pushing most in-program point redemptions higher. The card's free night awards (capped at Category 1–4) are affected the same way; expect less headroom than before at popular properties."
+      "text": "World of Hyatt program moved from a 3-tier to a 5-tier award chart, pushing most in-program point redemptions higher. The card's free night awards (capped at Category 1\u20134) are affected the same way; expect less headroom than before at popular properties."
     }
   ]
 }

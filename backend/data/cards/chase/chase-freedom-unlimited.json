@@ -9,6 +9,19 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee",
   "official_url": "https://creditcards.chase.com/cash-back-credit-cards/freedom/unlimited",
+  "intro_apr_purchases": {
+    "rate": "0%",
+    "months": 15
+  },
+  "intro_apr_balance_transfers": {
+    "rate": "0%",
+    "months": 15
+  },
+  "foreign_transaction_fee": true,
+  "variable_apr": "18.24%-27.74%",
+  "balance_transfer_apr": "18.24%-27.74%",
+  "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": "3%",
   "verdict": {
     "status": "keep",
     "text": "No annual fee with a genuinely flat 1.5% floor: an easy long-term keep",
@@ -16,28 +29,28 @@
   },
   "earn_rates": [
     {
-      "emoji": "🌐",
+      "emoji": "\ud83c\udf10",
       "multiplier": "5%",
       "category": "Chase Travel portal",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "🍽️",
+      "emoji": "\ud83c\udf7d\ufe0f",
       "multiplier": "3%",
       "category": "Dining: restaurants, takeout, eligible delivery",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "💊",
+      "emoji": "\ud83d\udc8a",
       "multiplier": "3%",
       "category": "Drugstores",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "💳",
+      "emoji": "\ud83d\udcb3",
       "multiplier": "1.5%",
       "category": "Everything else",
       "highlight": false,
@@ -55,7 +68,7 @@
       }
     ],
     "per_100k": "$1,000",
-    "note": "Technically Ultimate Rewards points, not a distinct cash-back currency; on their own they're worth a flat 1¢ each. If this account is paired with a Chase Sapphire or Ink Business card, the combined points inherit that card's full redemption value, including airline/hotel transfers, instead of being capped at 1¢."
+    "note": "Technically Ultimate Rewards points, not a distinct cash-back currency; on their own they're worth a flat 1\u00a2 each. If this account is paired with a Chase Sapphire or Ink Business card, the combined points inherit that card's full redemption value, including airline/hotel transfers, instead of being capped at 1\u00a2."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -87,7 +100,7 @@
     },
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "$1,500/person · $6,000/trip",
+      "detail": "$1,500/person \u00b7 $6,000/trip",
       "level": "mid"
     },
     {
@@ -97,12 +110,12 @@
     },
     {
       "coverage": "Purchase protection",
-      "detail": "$500/item · 120 days",
+      "detail": "$500/item \u00b7 120 days",
       "level": "mid"
     },
     {
       "coverage": "Extended warranty",
-      "detail": "+1 year (on warranties ≤3 years, up to 4 years total)",
+      "detail": "+1 year (on warranties \u22643 years, up to 4 years total)",
       "level": "good"
     }
   ],

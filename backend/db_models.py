@@ -146,6 +146,23 @@ class CardModel(Base):
     # held — real-world transfer-partner access requires an active premium
     # account in the mix, not just any two linked cards.
     points_pool_receiver: Mapped[bool] = mapped_column(default=False)
+    # See backend/models.py Card.intro_apr_purchases/intro_apr_balance_transfers/
+    # foreign_transaction_fee — flattened here the same way Verdict is
+    # (verdict_status/verdict_text/verdict_short_tag above), not a separate
+    # table, since each is just a couple of scalar fields. NULL means not
+    # yet audited for this card.
+    intro_apr_purchases_rate: Mapped[str | None] = mapped_column(default=None)
+    intro_apr_purchases_months: Mapped[int | None] = mapped_column(default=None)
+    intro_apr_balance_transfers_rate: Mapped[str | None] = mapped_column(default=None)
+    intro_apr_balance_transfers_months: Mapped[int | None] = mapped_column(default=None)
+    foreign_transaction_fee: Mapped[bool | None] = mapped_column(default=None)
+    # Ongoing rates/fees, quoted verbatim from the issuer's own Pricing &
+    # Terms table — see backend/models.py Card.variable_apr for why these
+    # stay strings rather than decomposed numbers.
+    variable_apr: Mapped[str | None] = mapped_column(default=None)
+    balance_transfer_apr: Mapped[str | None] = mapped_column(default=None)
+    balance_transfer_fee: Mapped[str | None] = mapped_column(default=None)
+    foreign_transaction_fee_rate: Mapped[str | None] = mapped_column(default=None)
     is_active: Mapped[bool] = mapped_column(default=True)
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(server_default=func.now(), onupdate=func.now())

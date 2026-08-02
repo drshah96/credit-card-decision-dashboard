@@ -8,6 +8,13 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee",
   "official_url": "https://creditcards.chase.com/cash-back-credit-cards/amazon-prime-rewards",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "18.74%-27.49%",
+  "balance_transfer_apr": "18.74%-27.49%",
+  "balance_transfer_fee": "Either $5 or 4% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Only earns its keep with an active Prime membership",
@@ -15,42 +22,42 @@
   },
   "earn_rates": [
     {
-      "emoji": "📦",
+      "emoji": "\ud83d\udce6",
       "multiplier": "5%",
       "category": "Amazon.com, Audible.com & Whole Foods Market, with Prime membership",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "✈️",
+      "emoji": "\u2708\ufe0f",
       "multiplier": "5%",
       "category": "Chase Travel purchases",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "⛽",
+      "emoji": "\u26fd",
       "multiplier": "2%",
       "category": "Gas stations",
       "highlight": false,
       "is_base": false
     },
     {
-      "emoji": "🍽️",
+      "emoji": "\ud83c\udf7d\ufe0f",
       "multiplier": "2%",
       "category": "Restaurants",
       "highlight": false,
       "is_base": false
     },
     {
-      "emoji": "🚂",
+      "emoji": "\ud83d\ude82",
       "multiplier": "2%",
       "category": "Local transit & commuting, incl. rideshare",
       "highlight": false,
       "is_base": false
     },
     {
-      "emoji": "💳",
+      "emoji": "\ud83d\udcb3",
       "multiplier": "1%",
       "category": "Everything else",
       "highlight": false,
@@ -68,7 +75,7 @@
       }
     ],
     "per_100k": "$1,000",
-    "note": "Technically Chase Ultimate Rewards points under the hood, but on this card alone they're worth a flat 1¢ each with no travel-portal bonus. They can't be moved into a separate premium Ultimate Rewards account (Sapphire Preferred/Reserve) to unlock transfer partners. For all practical purposes, treat this as straight cash back."
+    "note": "Technically Chase Ultimate Rewards points under the hood, but on this card alone they're worth a flat 1\u00a2 each with no travel-portal bonus. They can't be moved into a separate premium Ultimate Rewards account (Sapphire Preferred/Reserve) to unlock transfer partners. For all practical purposes, treat this as straight cash back."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -85,12 +92,12 @@
     },
     {
       "coverage": "Purchase protection",
-      "detail": "$500/item · 120 days (90 days for NY residents)",
+      "detail": "$500/item \u00b7 120 days (90 days for NY residents)",
       "level": "mid"
     },
     {
       "coverage": "Baggage delay",
-      "detail": "$100/day · up to 3 days · after 6 hrs",
+      "detail": "$100/day \u00b7 up to 3 days \u00b7 after 6 hrs",
       "level": "mid"
     },
     {

@@ -8,6 +8,13 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee",
   "official_url": "https://creditcards.chase.com/cash-back-credit-cards/freedom/rise",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": true,
+  "variable_apr": "18.24%-27.74%",
+  "balance_transfer_apr": "18.24%-27.74%",
+  "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": "3%",
   "verdict": {
     "status": "keep",
     "text": "Best starter card: no credit history needed, real Chase relationship",
@@ -15,14 +22,14 @@
   },
   "earn_rates": [
     {
-      "emoji": "🍽️",
+      "emoji": "\ud83c\udf7d\ufe0f",
       "multiplier": "3%",
       "category": "Dining, first 6 months, up to $6,000 spent (then 1.5%)",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "💳",
+      "emoji": "\ud83d\udcb3",
       "multiplier": "1.5%",
       "category": "Everything else",
       "highlight": false,
@@ -40,7 +47,7 @@
       }
     ],
     "per_100k": "$1,000",
-    "note": "Technically Ultimate Rewards points, worth a flat 1¢ each with no minimum redemption threshold. Cash back doesn't expire as long as the account stays open. No transfer value; this card is designed purely as a credit-building tool, not a points play."
+    "note": "Technically Ultimate Rewards points, worth a flat 1\u00a2 each with no minimum redemption threshold. Cash back doesn't expire as long as the account stays open. No transfer value; this card is designed purely as a credit-building tool, not a points play."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -52,7 +59,7 @@
     {
       "id": "autopay-bonus",
       "name": "Autopay Enrollment Bonus",
-      "subtitle": "$25 one-time · first 3 months",
+      "subtitle": "$25 one-time \u00b7 first 3 months",
       "max_annual": 25,
       "default_value": 0,
       "tier": "easy",
@@ -81,7 +88,7 @@
   "insurance": [
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "$1,500/person · $6,000/trip",
+      "detail": "$1,500/person \u00b7 $6,000/trip",
       "level": "mid"
     },
     {
@@ -91,12 +98,12 @@
     },
     {
       "coverage": "Purchase protection",
-      "detail": "$500/item · 120 days",
+      "detail": "$500/item \u00b7 120 days",
       "level": "mid"
     },
     {
       "coverage": "Extended warranty",
-      "detail": "+1 year (on warranties ≤3 years, up to 4 years total)",
+      "detail": "+1 year (on warranties \u22643 years, up to 4 years total)",
       "level": "good"
     }
   ],

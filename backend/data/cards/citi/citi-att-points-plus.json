@@ -8,6 +8,13 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee, and can net a recurring statement credit if you already spend $1,000+/cycle",
   "official_url": "https://www.citi.com/credit-cards/citi-att-pointsplus-credit-card",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "19.49%-27.49%",
+  "balance_transfer_apr": "19.49%-27.49%",
+  "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Only useful if you already pay AT&T bills: the bill discount is the value",

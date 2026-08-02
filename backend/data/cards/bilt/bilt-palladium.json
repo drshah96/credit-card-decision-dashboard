@@ -8,6 +8,16 @@
   "annual_fee": 495,
   "effective_cost": "Moderate: $200 Bilt Cash + $400 in hotel credits ($600 total) can more than cover the fee if you use both, plus Priority Pass lounge access",
   "official_url": "https://www.bilt.com/card/palladium",
+  "intro_apr_purchases": {
+    "rate": "10%",
+    "months": 12
+  },
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "26.74%-34.74%",
+  "balance_transfer_apr": "26.74%-34.74%",
+  "balance_transfer_fee": "3% of each transfer (minimum $5) within the first 4 months of account opening; 5% (minimum $5) after",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Keep if you'll use Priority Pass and capture the $400 hotel credit",

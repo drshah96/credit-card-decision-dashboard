@@ -10,6 +10,13 @@
   "annual_fee": 795,
   "effective_cost": "Medium",
   "official_url": "https://creditcards.chase.com/rewards-credit-cards/sapphire/reserve",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "20.24%-28.74%",
+  "balance_transfer_apr": "19.49%-27.99%",
+  "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Best all-rounder if you use the credits",
@@ -17,42 +24,42 @@
   },
   "earn_rates": [
     {
-      "emoji": "🌐",
-      "multiplier": "8×",
+      "emoji": "\ud83c\udf10",
+      "multiplier": "8\u00d7",
       "category": "Chase Travel portal",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "✈️",
-      "multiplier": "4×",
+      "emoji": "\u2708\ufe0f",
+      "multiplier": "4\u00d7",
       "category": "Flights & hotels, booked direct",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "🍽️",
-      "multiplier": "3×",
+      "emoji": "\ud83c\udf7d\ufe0f",
+      "multiplier": "3\u00d7",
       "category": "Dining, worldwide",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "🚗",
-      "multiplier": "5×",
+      "emoji": "\ud83d\ude97",
+      "multiplier": "5\u00d7",
       "category": "Lyft (through Mar 2027)",
       "highlight": false,
       "is_base": false
     },
     {
-      "emoji": "💳",
-      "multiplier": "1×",
+      "emoji": "\ud83d\udcb3",
+      "multiplier": "1\u00d7",
       "category": "Everything else",
       "highlight": false,
       "is_base": true
     }
   ],
-  "earn_note": "Strong bonus categories (dining and direct travel), but the 1× base still lags Venture X for uncategorized spend.",
+  "earn_note": "Strong bonus categories (dining and direct travel), but the 1\u00d7 base still lags Venture X for uncategorized spend.",
   "points": {
     "currency": "Ultimate Rewards",
     "redemption_options": [
@@ -73,12 +80,12 @@
       }
     ],
     "per_100k": "$2,050+",
-    "note": "Legacy points earned before Oct 26, 2025 keep a 1.5¢ floor until Oct 26, 2027; burn those first. Otherwise, transfer for the most value."
+    "note": "Legacy points earned before Oct 26, 2025 keep a 1.5\u00a2 floor until Oct 26, 2027; burn those first. Otherwise, transfer for the most value."
   },
   "transfer_partners": {
     "airline_count": 10,
     "hotel_count": 4,
-    "highlight": "World of Hyatt is the crown jewel: 1:1 and exclusive to Chase & Bilt, routinely 2–3¢+. Also Aeroplan, Virgin Atlantic, Flying Blue, Singapore. Wyndham added Feb 2026.",
+    "highlight": "World of Hyatt is the crown jewel: 1:1 and exclusive to Chase & Bilt, routinely 2\u20133\u00a2+. Also Aeroplan, Virgin Atlantic, Flying Blue, Singapore. Wyndham added Feb 2026.",
     "recent_changes": "Fewer airlines than Amex, but the hotel side (esp. Hyatt) is the strongest of any bank.",
     "partners": [
       {
@@ -178,18 +185,18 @@
       "default_value": 0,
       "tier": "easy",
       "removed": false,
-      "description": "Complimentary Apple TV+ AND Apple Music, two separate services (~$288/yr combined per Chase). If you already have a paid Apple One subscription in your name, each benefit applies as its own $7.50/mo discount on that subscription instead of separate complimentary access — $15/mo ($180/yr) total since Reserve includes both.",
+      "description": "Complimentary Apple TV+ AND Apple Music, two separate services (~$288/yr combined per Chase). If you already have a paid Apple One subscription in your name, each benefit applies as its own $7.50/mo discount on that subscription instead of separate complimentary access \u2014 $15/mo ($180/yr) total since Reserve includes both.",
       "tips": [
         "Activate each service individually through Chase's app; they don't turn on together.",
         "Already have Apple One? Activating both the Apple TV+ and Apple Music benefits on Chase.com or the app (same Apple Account as your Apple One billing) gets you two separate $7.50/mo discounts, $15/mo total, no need to cancel anything.",
-        "Only paying for Apple TV+ or Apple Music separately (not the full One bundle)? Cancel that and activate the complimentary standalone version through Chase instead — full value there, not just the Apple One discount.",
+        "Only paying for Apple TV+ or Apple Music separately (not the full One bundle)? Cancel that and activate the complimentary standalone version through Chase instead \u2014 full value there, not just the Apple One discount.",
         "Android/Spotify household? Set the slider toward $0."
       ]
     },
     {
       "id": "edit",
       "name": "The Edit Hotel Credit",
-      "subtitle": "$250 × 2 · 2-night min",
+      "subtitle": "$250 \u00d7 2 \u00b7 2-night min",
       "max_annual": 500,
       "default_value": 0,
       "tier": "plan",
@@ -197,14 +204,14 @@
       "description": "Semi-annual credit on ~1,400 luxury hotels via The Edit by Chase Travel. Breakfast for two + $100 property credit; upgrades/late checkout are availability-only (not guaranteed like FHR).",
       "tips": [
         "Harder to spend than FHR: two-night minimum, smaller network, and prepaid-rate-only.",
-        "Separate from the Chase Travel Hotels Credit below — different hotel list, different booking flow, don't double-count them.",
+        "Separate from the Chase Travel Hotels Credit below \u2014 different hotel list, different booking flow, don't double-count them.",
         "Set the slider to how many 2-night luxe stays you'll actually prepay."
       ]
     },
     {
       "id": "chase-travel-hotels",
       "name": "Chase Travel Hotels Credit",
-      "subtitle": "$250 · 2-night min · thru 12/31/26",
+      "subtitle": "$250 \u00b7 2-night min \u00b7 thru 12/31/26",
       "max_annual": 250,
       "default_value": 0,
       "tier": "plan",
@@ -218,7 +225,7 @@
     {
       "id": "dining",
       "name": "Dining Credit",
-      "subtitle": "$150 × 2 · Exclusive Tables",
+      "subtitle": "$150 \u00d7 2 \u00b7 Exclusive Tables",
       "max_annual": 300,
       "default_value": 0,
       "tier": "plan",
@@ -233,7 +240,7 @@
     {
       "id": "stubhub",
       "name": "StubHub / viagogo",
-      "subtitle": "$150 × 2 · enroll",
+      "subtitle": "$150 \u00d7 2 \u00b7 enroll",
       "max_annual": 300,
       "default_value": 0,
       "tier": "plan",
@@ -261,7 +268,7 @@
     {
       "id": "global-entry",
       "name": "Global Entry / TSA PreCheck / NEXUS Credit",
-      "subtitle": "$120 · every 4 years",
+      "subtitle": "$120 \u00b7 every 4 years",
       "max_annual": 30,
       "default_value": 0,
       "tier": "plan",
@@ -275,12 +282,12 @@
     {
       "id": "peloton",
       "name": "Peloton",
-      "subtitle": "$10/mo + 10× gear",
+      "subtitle": "$10/mo + 10\u00d7 gear",
       "max_annual": 120,
       "default_value": 0,
       "tier": "niche",
       "removed": false,
-      "description": "Monthly credit toward a Peloton membership, plus 10× on equipment (up to 50k pts).",
+      "description": "Monthly credit toward a Peloton membership, plus 10\u00d7 on equipment (up to 50k pts).",
       "tips": [
         "Only meaningful if you're a subscriber."
       ]
@@ -289,7 +296,7 @@
   "insurance": [
     {
       "coverage": "Rental car CDW",
-      "detail": "Primary · $75k (free)",
+      "detail": "Primary \u00b7 $75k (free)",
       "level": "strong"
     },
     {
@@ -299,12 +306,12 @@
     },
     {
       "coverage": "Trip delay",
-      "detail": "$500 · after 6 hrs",
+      "detail": "$500 \u00b7 after 6 hrs",
       "level": "good"
     },
     {
       "coverage": "Baggage delay",
-      "detail": "$100/day · up to 5 days",
+      "detail": "$100/day \u00b7 up to 5 days",
       "level": "good"
     },
     {
@@ -319,7 +326,7 @@
     },
     {
       "coverage": "Purchase protection",
-      "detail": "$10k/claim · 120 days",
+      "detail": "$10k/claim \u00b7 120 days",
       "level": "strong"
     },
     {
@@ -366,11 +373,11 @@
     },
     {
       "name": "DoorDash DashPass + Lyft",
-      "detail": "Complimentary DashPass ($0 delivery fees) and 5× on Lyft rides through Mar 2027."
+      "detail": "Complimentary DashPass ($0 delivery fees) and 5\u00d7 on Lyft rides through Mar 2027."
     },
     {
       "name": "Points Boost",
-      "detail": "Up to 2¢/point on select Chase Travel bookings, CSR's redemption edge."
+      "detail": "Up to 2\u00a2/point on select Chase Travel bookings, CSR's redemption edge."
     },
     {
       "name": "Visa Infinite travel & roadside",
@@ -415,7 +422,7 @@
       "date": "Oct 26, 2027",
       "type": "future",
       "badge": "Upcoming",
-      "text": "Legacy 1.5¢ redemption on pre-Oct-2025 points expires; after this, only Points Boost or 1¢ remain."
+      "text": "Legacy 1.5\u00a2 redemption on pre-Oct-2025 points expires; after this, only Points Boost or 1\u00a2 remain."
     },
     {
       "date": "Jul 2026",
@@ -439,7 +446,7 @@
       "date": "Jun 23, 2025",
       "type": "add",
       "badge": "Overhaul",
-      "text": "Fee $550 → $795; new credits (Edit $500, dining $300, StubHub $300, Apple, DashPass). Flat 50% travel bonus replaced by Points Boost."
+      "text": "Fee $550 \u2192 $795; new credits (Edit $500, dining $300, StubHub $300, Apple, DashPass). Flat 50% travel bonus replaced by Points Boost."
     },
     {
       "date": "2016",
