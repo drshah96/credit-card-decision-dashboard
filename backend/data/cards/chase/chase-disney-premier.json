@@ -31,14 +31,28 @@
     {
       "emoji": "\u26fd",
       "multiplier": "2%",
-      "category": "Gas stations & most Disney U.S. locations",
+      "category": "Gas stations",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "\ud83c\udff0",
+      "multiplier": "2%",
+      "category": "Most Disney U.S. locations",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "\ud83d\uded2",
       "multiplier": "2%",
-      "category": "Grocery stores & restaurants",
+      "category": "Grocery stores",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "\ud83c\udf7d\ufe0f",
+      "multiplier": "2%",
+      "category": "Restaurants",
       "highlight": true,
       "is_base": false
     },

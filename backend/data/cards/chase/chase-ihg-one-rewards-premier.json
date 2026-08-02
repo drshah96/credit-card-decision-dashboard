@@ -29,9 +29,23 @@
       "is_base": false
     },
     {
-      "emoji": "\u2708\ufe0f",
+      "emoji": "\ud83e\uddf3",
       "multiplier": "5\u00d7",
-      "category": "Travel, dining & gas stations",
+      "category": "Travel",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "\ud83c\udf7d\ufe0f",
+      "multiplier": "5\u00d7",
+      "category": "Dining, incl. eligible delivery",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "\u26fd",
+      "multiplier": "5\u00d7",
+      "category": "Gas stations",
       "highlight": true,
       "is_base": false
     },

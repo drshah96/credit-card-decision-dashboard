@@ -29,9 +29,23 @@
       "is_base": false
     },
     {
+      "emoji": "⛽",
+      "multiplier": "3%",
+      "category": "Gas stations",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "3%",
+      "category": "Grocery stores",
+      "highlight": true,
+      "is_base": false
+    },
+    {
       "emoji": "🍽️",
       "multiplier": "3%",
-      "category": "Gas stations, grocery stores, and dining",
+      "category": "Dining",
       "highlight": true,
       "is_base": false
     },

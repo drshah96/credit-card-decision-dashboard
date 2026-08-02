@@ -246,7 +246,7 @@ export function groupCardsForAllView(cards: CardSummary[]): CardSection[] {
 
   const sections: CardSection[] = [];
   if (flagship.length > 0) {
-    sections.push({ label: "Flagship Cards", cards: [...flagship].sort(byFeeDescThenName) });
+    sections.push({ label: "Proprietary Cards", cards: [...flagship].sort(byFeeDescThenName) });
   }
   // One section per airline/hotel program, always named after its brand
   // (e.g. "Delta SkyMiles Cards", "Southwest Rapid Rewards Cards") — even

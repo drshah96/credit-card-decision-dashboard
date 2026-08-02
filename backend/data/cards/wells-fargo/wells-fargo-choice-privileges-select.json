@@ -31,7 +31,28 @@
     {
       "emoji": "⛽",
       "multiplier": "5×",
-      "category": "Gas stations, grocery stores, home improvement stores, and phone plans",
+      "category": "Gas stations",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "5×",
+      "category": "Grocery stores",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🔨",
+      "multiplier": "5×",
+      "category": "Home improvement stores",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "📱",
+      "multiplier": "5×",
+      "category": "Phone plans",
       "highlight": true,
       "is_base": false
     },
