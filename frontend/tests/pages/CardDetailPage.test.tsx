@@ -423,6 +423,60 @@ describe("CardDetailPage", () => {
       });
     });
 
+    it("renders interest rates & fees with real audited data", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({
+          variable_apr: "20.24%-28.74%",
+          intro_apr_purchases: { rate: "0%", months: 15 },
+          balance_transfer_apr: "19.49%-27.99%",
+          intro_apr_balance_transfers: { rate: "0%", months: 15 },
+          balance_transfer_fee: "Either $5 or 5% of the amount of each transfer, whichever is greater",
+          foreign_transaction_fee: true,
+          foreign_transaction_fee_rate: "3%",
+        }),
+      );
+
+      renderPage();
+
+      await waitFor(() => {
+        expect(screen.getByText("Interest rates & fees")).toBeInTheDocument();
+      });
+      // Intro offer and ongoing rate fold into one row, not two separate ones.
+      expect(
+        screen.getByText("0% intro APR for 15 months, after that 20.24%-28.74%"),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText("0% intro APR for 15 months, after that 19.49%-27.99%"),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText("Either $5 or 5% of the amount of each transfer, whichever is greater"),
+      ).toBeInTheDocument();
+      expect(screen.getByText("3%")).toBeInTheDocument();
+    });
+
+    it("falls back to an em dash for interest/fee fields that aren't yet audited", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard()); // all null by default
+
+      renderPage();
+
+      await waitFor(() => {
+        expect(screen.getByText("Interest rates & fees")).toBeInTheDocument();
+      });
+      // Purchase APR, balance transfer APR, balance_transfer_fee, and
+      // foreign_transaction_fee (null, not confirmed false) all fall back.
+      expect(screen.getAllByText("—")).toHaveLength(4);
+    });
+
+    it('shows "None" for a card confirmed to have no foreign transaction fee', async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard({ foreign_transaction_fee: false }));
+
+      renderPage();
+
+      await waitFor(() => {
+        expect(screen.getByText("None")).toBeInTheDocument();
+      });
+    });
+
     it("renders timeline events", async () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 

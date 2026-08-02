@@ -94,6 +94,14 @@ body {
   gap: 14px;
   margin-bottom: 16px;
 }
+/* label + title + note (all nowrap by default) can together exceed the
+   viewport on narrow phones — pre-existing on any Block with a longer
+   note (e.g. Insurance's "the value that isn't a credit"), not new to this
+   rule; wrapping only below this breakpoint leaves desktop untouched. */
+@media (max-width: 480px) {
+  .block-head { flex-wrap: wrap; }
+  .block-head .note { white-space: normal; }
+}
 .block-head::after {
   content: "";
   flex: 1;
@@ -312,6 +320,21 @@ body {
 .ins-row .iv { font-size: 12.5px; color: var(--ink); }
 .protect-note { margin-top: 14px; color: var(--muted); font-size: 12.5px; line-height: 1.65; }
 .rental-call { margin-top: 12px; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; background: var(--panel-s); font-size: 12.5px; color: var(--muted); line-height: 1.65; }
+
+/* ─── Rates & fees ─────────────────────────────────────────────────────────── */
+/* Single column, not the two-column .ins-grid — some fee values here are full
+   sentences (e.g. Wells Fargo's two-tier balance transfer fee text), which
+   need the full row width to read comfortably rather than fighting for space
+   in a half-width column. */
+.rates-list { display: flex; flex-direction: column; }
+.rates-row { display: flex; align-items: flex-start; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.rates-row:last-child { border-bottom: none; }
+.rates-row .rk { font-size: 12px; color: var(--muted); width: 200px; flex: 0 0 auto; }
+.rates-row .rv { font-size: 12.5px; color: var(--ink); line-height: 1.55; }
+@media (max-width: 640px) {
+  .rates-row { flex-direction: column; gap: 4px; }
+  .rates-row .rk { width: auto; }
+}
 
 /* ─── Status perks & services ──────────────────────────────────────────────── */
 .perkwrap { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
