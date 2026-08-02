@@ -230,6 +230,24 @@ describe("IssuerCardsPage", () => {
     expect(screen.queryByText("The Platinum Card")).not.toBeInTheDocument();
   });
 
+  it("clicking the active chip again deselects it back to All Cards", async () => {
+    vi.mocked(fetchCards).mockResolvedValue(AMEX_SUMMARIES);
+    renderPage("amex");
+
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "Airline" })).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Airline" }));
+    expect(screen.getByRole("button", { name: "Airline" })).toHaveAttribute("aria-pressed", "true");
+
+    fireEvent.click(screen.getByRole("button", { name: "Airline" }));
+
+    expect(screen.getByRole("button", { name: "Airline" })).toHaveAttribute("aria-pressed", "false");
+    expect(screen.getByRole("button", { name: "All Cards" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByText("The Platinum Card")).toBeInTheDocument();
+  });
+
   it("restores the active filter from the URL on mount, instead of defaulting to All Cards", async () => {
     // Simulates arriving back at this page (e.g. via the card detail page's
     // back link, or the browser's back button) after a filter was already
