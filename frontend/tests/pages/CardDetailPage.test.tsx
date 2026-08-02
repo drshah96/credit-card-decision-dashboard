@@ -52,6 +52,10 @@ function makeCard(overrides: Partial<Card> = {}): Card {
     intro_apr_balance_transfers: null,
     foreign_transaction_fee: null,
     has_lounge_access: false,
+    variable_apr: null,
+    balance_transfer_apr: null,
+    balance_transfer_fee: null,
+    foreign_transaction_fee_rate: null,
     earn_rates: [
       { emoji: "✈️", multiplier: "5×", category: "Flights", highlight: true, is_base: false },
       { emoji: "💳", multiplier: "1×", category: "Everything else", highlight: false, is_base: true },

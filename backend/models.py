@@ -186,6 +186,21 @@ class Card(BaseModel):
     # doesn't need per-card research, so there's no "not yet audited" state.
     # Also duplicated on CardSummary below for the same reason as those three.
     has_lounge_access: bool = False
+    # The ongoing (post-intro, or from day one if there's no intro offer)
+    # rate ranges and fees, quoted verbatim from the issuer's own Pricing &
+    # Terms table rather than decomposed into numbers — real ranges are tied
+    # to creditworthiness ("19.24%-29.99% Variable") and nothing in this app
+    # computes with them, it only displays them, same treatment as
+    # effective_cost/multiplier elsewhere in this schema. Detail-only (not on
+    # CardSummary) — purely informational, not a Compare-tab filter driver
+    # like the intro-offer fields above. None = not yet audited.
+    variable_apr: str | None = None
+    balance_transfer_apr: str | None = None
+    balance_transfer_fee: str | None = None
+    # The actual rate when foreign_transaction_fee is True (e.g. "3%") — the
+    # boolean above still drives the "No Foreign Transaction Fee" chip
+    # unchanged, this is just the detail-page-level specific number.
+    foreign_transaction_fee_rate: str | None = None
 
 
 class EarnCategorySummary(BaseModel):

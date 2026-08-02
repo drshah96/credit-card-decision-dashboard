@@ -11,6 +11,10 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
+  "variable_apr": "18.74%-27.49%",
+  "balance_transfer_apr": "18.74%-27.49%",
+  "balance_transfer_fee": "Either $5 or 4% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Only earns its keep with an active Prime membership",

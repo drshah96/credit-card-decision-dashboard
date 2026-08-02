@@ -193,6 +193,10 @@ def upsert_card(session: Session, data: dict) -> CardModel:
                 intro_apr_balance_transfers["months"] if intro_apr_balance_transfers else None
             )
             card.foreign_transaction_fee = data.get("foreign_transaction_fee")
+            card.variable_apr = data.get("variable_apr")
+            card.balance_transfer_apr = data.get("balance_transfer_apr")
+            card.balance_transfer_fee = data.get("balance_transfer_fee")
+            card.foreign_transaction_fee_rate = data.get("foreign_transaction_fee_rate")
             card.is_active = True
 
             card.earn_rates = [

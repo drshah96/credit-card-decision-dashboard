@@ -11,6 +11,10 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
+  "variable_apr": "19.74%-28.24%",
+  "balance_transfer_apr": "21.49%-28.49%",
+  "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Keep only if you fly United enough to live in the Club",

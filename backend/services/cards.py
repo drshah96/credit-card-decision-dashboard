@@ -186,6 +186,10 @@ def _to_card(c: CardModel, is_secured_variant_of: str | None = None) -> Card:
         ),
         foreign_transaction_fee=c.foreign_transaction_fee,
         has_lounge_access=_has_lounge_access(c.status_perks),
+        variable_apr=c.variable_apr,
+        balance_transfer_apr=c.balance_transfer_apr,
+        balance_transfer_fee=c.balance_transfer_fee,
+        foreign_transaction_fee_rate=c.foreign_transaction_fee_rate,
     )
 
 

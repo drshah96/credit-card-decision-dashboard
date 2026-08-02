@@ -13,6 +13,10 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
+  "variable_apr": "19.24%-27.49%",
+  "balance_transfer_apr": "19.24%-27.49%",
+  "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "keep",
     "text": "The best $95 travel card: broad 3x categories, ~2\u00a2/point via transfers",

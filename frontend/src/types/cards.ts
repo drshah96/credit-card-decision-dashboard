@@ -211,4 +211,19 @@ export interface Card extends CardBase {
   services: Service[];
   additional_cards: AdditionalCards;
   timeline: TimelineEvent[];
+  /** Ongoing (post-intro, or from day one if there's no intro offer) rate
+   * ranges and fees, quoted verbatim from the issuer's own Pricing & Terms
+   * table rather than decomposed into numbers — real ranges are tied to
+   * creditworthiness ("19.24%-29.99% Variable") and nothing here computes
+   * with them, only displays them. Detail-only (not on CardSummary) —
+   * purely informational, not a Compare-tab filter driver like
+   * intro_apr_purchases/intro_apr_balance_transfers. Null = not yet
+   * audited. */
+  variable_apr: string | null;
+  balance_transfer_apr: string | null;
+  balance_transfer_fee: string | null;
+  /** The actual rate when foreign_transaction_fee is true (e.g. "3%") — the
+   * boolean still drives the "No Foreign Transaction Fee" chip unchanged,
+   * this is just the detail-page-level specific number. */
+  foreign_transaction_fee_rate: string | null;
 }

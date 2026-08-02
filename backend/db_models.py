@@ -156,6 +156,13 @@ class CardModel(Base):
     intro_apr_balance_transfers_rate: Mapped[str | None] = mapped_column(default=None)
     intro_apr_balance_transfers_months: Mapped[int | None] = mapped_column(default=None)
     foreign_transaction_fee: Mapped[bool | None] = mapped_column(default=None)
+    # Ongoing rates/fees, quoted verbatim from the issuer's own Pricing &
+    # Terms table — see backend/models.py Card.variable_apr for why these
+    # stay strings rather than decomposed numbers.
+    variable_apr: Mapped[str | None] = mapped_column(default=None)
+    balance_transfer_apr: Mapped[str | None] = mapped_column(default=None)
+    balance_transfer_fee: Mapped[str | None] = mapped_column(default=None)
+    foreign_transaction_fee_rate: Mapped[str | None] = mapped_column(default=None)
     is_active: Mapped[bool] = mapped_column(default=True)
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(server_default=func.now(), onupdate=func.now())

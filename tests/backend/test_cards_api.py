@@ -727,3 +727,64 @@ def test_chase_cards_with_confirmed_foreign_transaction_fee() -> None:
     assert client.get("/api/cards/chase-freedom-rise").json()["foreign_transaction_fee"] is True
     assert client.get("/api/cards/chase-disney-premier").json()["foreign_transaction_fee"] is True
     assert client.get("/api/cards/chase-amazon-prime-visa").json()["foreign_transaction_fee"] is False
+
+
+# Round 2 of the Chase pilot (2026-08-02): variable_apr/balance_transfer_apr/
+# balance_transfer_fee/foreign_transaction_fee_rate, sourced from Chase's own
+# Pricing & Terms pages/PDFs. Detail-only (not on CardSummary) — see
+# [[project_apr_balance_transfer_fx_fee_audit]].
+def test_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == "chase-sapphire-reserve")
+    for field in (
+        "variable_apr",
+        "balance_transfer_apr",
+        "balance_transfer_fee",
+        "foreign_transaction_fee_rate",
+    ):
+        assert field not in summary
+
+
+@pytest.mark.parametrize(
+    "card_id,variable_apr,balance_transfer_apr",
+    [
+        # Confirmed identical purchase/BT ranges.
+        ("chase-freedom-unlimited", "18.24%-27.74%", "18.24%-27.74%"),
+        ("chase-freedom-flex", "18.24%-27.74%", "18.24%-27.74%"),
+        ("chase-amazon-prime-visa", "18.74%-27.49%", "18.74%-27.49%"),
+        # Confirmed genuinely distinct BT APR ranges — the whole reason this
+        # field isn't just derived from variable_apr.
+        ("chase-sapphire-reserve", "20.24%-28.74%", "19.49%-27.99%"),
+        ("chase-united-club-infinite", "19.74%-28.24%", "21.49%-28.49%"),
+        ("chase-ihg-one-rewards-premier", "19.24%-27.74%", "19.99%-28.49%"),
+        ("chase-marriott-bonvoy-boundless", "20.24%-27.24%", "19.24%-27.74%"),
+    ],
+)
+def test_chase_variable_and_balance_transfer_apr(
+    card_id: str, variable_apr: str, balance_transfer_apr: str
+) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["variable_apr"] == variable_apr
+    assert detail["balance_transfer_apr"] == balance_transfer_apr
+
+
+def test_chase_balance_transfer_fee_standard_vs_prime_visa_exception() -> None:
+    standard = "Either $5 or 5% of the amount of each transfer, whichever is greater"
+    assert client.get("/api/cards/chase-sapphire-reserve").json()["balance_transfer_fee"] == standard
+    assert (
+        client.get("/api/cards/chase-amazon-prime-visa").json()["balance_transfer_fee"]
+        == "Either $5 or 4% of the amount of each transfer, whichever is greater"
+    )
+
+
+def test_chase_foreign_transaction_fee_rate_matches_the_boolean() -> None:
+    # Cards confirmed to charge 3% match `foreign_transaction_fee: true`;
+    # cards confirmed fee-free have a null rate, not "0%" — there's nothing
+    # to quote from a Pricing & Terms table that doesn't list the fee.
+    for card_id in ("chase-freedom-flex", "chase-freedom-unlimited", "chase-disney-premier"):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["foreign_transaction_fee"] is True
+        assert detail["foreign_transaction_fee_rate"] == "3%"
+    for card_id in ("chase-sapphire-reserve", "chase-amazon-prime-visa"):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["foreign_transaction_fee"] is False
+        assert detail["foreign_transaction_fee_rate"] is None

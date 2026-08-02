@@ -13,6 +13,10 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
+  "variable_apr": "20.24%-28.74%",
+  "balance_transfer_apr": "19.49%-27.99%",
+  "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Best all-rounder if you use the credits",
