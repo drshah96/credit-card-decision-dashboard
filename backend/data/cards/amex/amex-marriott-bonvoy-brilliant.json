@@ -8,6 +8,13 @@
   "annual_fee": 650,
   "effective_cost": "Depends on hotel loyalty and free-night use",
   "official_url": "https://www.americanexpress.com/us/credit-cards/card/marriott-bonvoy-brilliant/",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "19.49%-28.49%",
+  "balance_transfer_apr": null,
+  "balance_transfer_fee": null,
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Keep if you're loyal to Marriott and actually book the free night",

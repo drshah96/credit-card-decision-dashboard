@@ -788,3 +788,81 @@ def test_chase_foreign_transaction_fee_rate_matches_the_boolean() -> None:
         detail = client.get(f"/api/cards/{card_id}").json()
         assert detail["foreign_transaction_fee"] is False
         assert detail["foreign_transaction_fee_rate"] is None
+
+
+# Amex batch (2026-08-02): all 14 Amex cards researched against Amex's own
+# official Terms/Cardmember Agreement pages. Charge cards (Platinum, Gold,
+# Green) don't support balance transfers at all — confirmed via their own
+# terms disclosures, not assumed from the product type — so those three
+# fields resolve to null rather than being forced into a shape that doesn't
+# apply. See [[project_apr_balance_transfer_fx_fee_audit]].
+@pytest.mark.parametrize(
+    "card_id",
+    [
+        "amex-platinum",
+        "amex-gold",
+        "amex-green",
+        "amex-delta-skymiles-gold",
+        "amex-delta-skymiles-platinum",
+        "amex-delta-skymiles-reserve",
+        "amex-hilton-honors",
+        "amex-hilton-honors-aspire",
+        "amex-marriott-bonvoy-bevy",
+        "amex-marriott-bonvoy-brilliant",
+    ],
+)
+def test_amex_cards_confirmed_no_balance_transfer_support(card_id: str) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["intro_apr_purchases"] is None
+    assert detail["intro_apr_balance_transfers"] is None
+    assert detail["balance_transfer_apr"] is None
+    assert detail["balance_transfer_fee"] is None
+    assert detail["foreign_transaction_fee"] is False
+
+
+@pytest.mark.parametrize(
+    "card_id,intro_months",
+    [
+        ("amex-blue-cash-everyday", 15),
+        ("amex-blue-cash-preferred", 12),
+    ],
+)
+def test_amex_blue_cash_cards_carry_the_only_fx_fee_in_the_amex_lineup(card_id: str, intro_months: int) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": intro_months}
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": intro_months}
+    assert detail["foreign_transaction_fee"] is True
+    assert detail["foreign_transaction_fee_rate"] == "2.7%"
+    assert detail["balance_transfer_fee"] == "Either $5 or 3% of the amount of each transfer, whichever is greater"
+
+
+def test_amex_hilton_surpass_is_the_only_amex_card_with_a_two_tier_bt_fee() -> None:
+    detail = client.get("/api/cards/amex-hilton-honors-surpass").json()
+    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": 15}
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": 15}
+    assert detail["variable_apr"] == "17.49%-27.49%"
+    assert detail["balance_transfer_apr"] == "17.49%-27.49%"
+    assert "60 days" in detail["balance_transfer_fee"]
+
+
+def test_amex_delta_blue_has_no_intro_offer_despite_bt_being_available() -> None:
+    # Delta Blue supports balance transfers at its standard rate (no 0%
+    # promotional period) — distinct from the charge cards above, which
+    # don't support balance transfers at all.
+    detail = client.get("/api/cards/amex-delta-skymiles-blue").json()
+    assert detail["intro_apr_purchases"] is None
+    assert detail["intro_apr_balance_transfers"] is None
+    assert detail["variable_apr"] == "16.74%-25.74%"
+    assert detail["balance_transfer_apr"] == "16.74%-25.74%"
+    assert detail["balance_transfer_fee"] is not None
+
+
+def test_amex_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == "amex-platinum")
+    for field in (
+        "variable_apr",
+        "balance_transfer_apr",
+        "balance_transfer_fee",
+        "foreign_transaction_fee_rate",
+    ):
+        assert field not in summary
