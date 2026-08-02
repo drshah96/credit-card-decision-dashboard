@@ -73,18 +73,60 @@ body {
   -webkit-backdrop-filter: blur(10px);
   --sitemark-logo-h: clamp(24px, 7vw, 44px);
   --sitemark-pad: clamp(12px, 3vw, 20px);
+  transition: background .2s ease;
 }
 .sitemark.is-compact {
-  --sitemark-logo-h: clamp(16px, 5vw, 28px);
-  --sitemark-pad: clamp(8px, 1.5vw, 10px);
+  /* Bigger than the plain shrink-both size used to be — once the wordmark
+     drops out, the logo is the only brand element left in the sticky bar,
+     so it can carry more visual weight than a purely proportional shrink
+     would give it. Padding shrinks further than before too, so the bar
+     doesn't just trade "shrink both" width for an oversized logo — it
+     actually reads as noticeably more compact once scrolled. Grey
+     (var(--panel-s), the same panel background used elsewhere in the
+     dashboard) instead of white/frosted, so the compact bar reads as a
+     distinct "scrolled" state rather than looking identical to the top. */
+  --sitemark-logo-h: clamp(30px, 6.5vw, 40px);
+  --sitemark-pad: clamp(4px, 1vw, 6px);
+  background: rgba(244, 245, 247, 0.94);
 }
 .sitemark-inner { padding: var(--sitemark-pad) 20px; text-align: center; transition: padding .2s ease; }
-.sitemark-link { display: inline-flex; align-items: center; gap: clamp(4px, 1vw, 6px); }
+.sitemark-link {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(4px, 1vw, 6px);
+  /* Without this, the inline-flex box (sitting inside a text-align: center
+     block) gets baseline-aligned like a line of text — reserving invisible
+     descender space below it the way "g"/"y" would need, even though there's
+     no actual text. That's what made the logo look vertically off-center:
+     real, measured ~6.5px of dead space under it and none above, not an
+     optical illusion. middle-aligning it against the line box removes that
+     reserved space entirely. */
+  vertical-align: middle;
+  transition: gap .2s ease;
+}
 .sitemark-logo, .sitemark-wordmark {
   height: var(--sitemark-logo-h);
   width: auto;
   display: block;
   transition: height .2s ease;
+}
+/* EXPERIMENT: on scroll, drop the wordmark entirely and keep just the logo
+   mark, instead of shrinking both together. Kept in the DOM (not
+   conditionally unmounted) so it can fade/collapse smoothly rather than
+   snapping away. Link's aria-label already carries the accessible name, so
+   dropping the wordmark's own alt text from the a11y tree here is fine.
+   The base rule needs an explicit (generously large) max-width, not the
+   default `none` — a transition can't interpolate from the keyword `none`
+   to a pixel value, so without this the collapse snapped instantly instead
+   of animating, which is what made the centered row jerk sideways as
+   .sitemark-inner's text-align: center suddenly had less content to center. */
+.sitemark-wordmark { max-width: 400px; }
+.sitemark.is-compact .sitemark-link { gap: 0; }
+.sitemark.is-compact .sitemark-wordmark {
+  opacity: 0;
+  max-width: 0;
+  margin: 0;
+  transition: height .2s ease, opacity .15s ease, max-width .2s ease;
 }
 
 /* ─── Block heading ────────────────────────────────────────────────────────── */
@@ -93,6 +135,14 @@ body {
   align-items: baseline;
   gap: 14px;
   margin-bottom: 16px;
+}
+/* label + title + note (all nowrap by default) can together exceed the
+   viewport on narrow phones — pre-existing on any Block with a longer
+   note (e.g. Insurance's "the value that isn't a credit"), not new to this
+   rule; wrapping only below this breakpoint leaves desktop untouched. */
+@media (max-width: 480px) {
+  .block-head { flex-wrap: wrap; }
+  .block-head .note { white-space: normal; }
 }
 .block-head::after {
   content: "";
@@ -312,6 +362,21 @@ body {
 .ins-row .iv { font-size: 12.5px; color: var(--ink); }
 .protect-note { margin-top: 14px; color: var(--muted); font-size: 12.5px; line-height: 1.65; }
 .rental-call { margin-top: 12px; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; background: var(--panel-s); font-size: 12.5px; color: var(--muted); line-height: 1.65; }
+
+/* ─── Rates & fees ─────────────────────────────────────────────────────────── */
+/* Single column, not the two-column .ins-grid — some fee values here are full
+   sentences (e.g. Wells Fargo's two-tier balance transfer fee text), which
+   need the full row width to read comfortably rather than fighting for space
+   in a half-width column. */
+.rates-list { display: flex; flex-direction: column; }
+.rates-row { display: flex; align-items: flex-start; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.rates-row:last-child { border-bottom: none; }
+.rates-row .rk { font-size: 12px; color: var(--muted); width: 200px; flex: 0 0 auto; }
+.rates-row .rv { font-size: 12.5px; color: var(--ink); line-height: 1.55; }
+@media (max-width: 640px) {
+  .rates-row { flex-direction: column; gap: 4px; }
+  .rates-row .rk { width: auto; }
+}
 
 /* ─── Status perks & services ──────────────────────────────────────────────── */
 .perkwrap { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }

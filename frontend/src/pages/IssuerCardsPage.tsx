@@ -136,7 +136,7 @@ export default function IssuerCardsPage() {
 
   if (!issuer) {
     return (
-      <div className="wrap" style={{ paddingTop: 48, paddingBottom: 80 }}>
+      <div className="wrap" style={{ paddingTop: 24, paddingBottom: 80 }}>
         <p style={{ color: "var(--muted)" }}>Unknown issuer.</p>
         <Link to="/" style={{ color: "var(--accent)" }}>
           ← All issuers
@@ -158,7 +158,7 @@ export default function IssuerCardsPage() {
 
   return (
     <div style={{ minHeight: "100vh" }}>
-      <div className="wrap" style={{ paddingTop: 48, paddingBottom: 80 }}>
+      <div className="wrap" style={{ paddingTop: 24, paddingBottom: 80 }}>
         <Link
           to="/"
           style={{

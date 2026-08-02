@@ -156,7 +156,7 @@ describe("groupCardsForAllView", () => {
     const sections = groupCardsForAllView(cards);
 
     expect(sections.map((s) => s.label)).toEqual([
-      "Flagship Cards",
+      "Proprietary Cards",
       "Delta SkyMiles Cards", // named after its brand even though it's the only airline program
       "Hilton Honors Cards",
       "Marriott Bonvoy Cards",
@@ -181,7 +181,7 @@ describe("groupCardsForAllView", () => {
 
   it("omits sections with no matching cards", () => {
     const sections = groupCardsForAllView([makeSummary({ id: "amex-platinum" })]);
-    expect(sections).toEqual([{ label: "Flagship Cards", cards: [makeSummary()] }]);
+    expect(sections).toEqual([{ label: "Proprietary Cards", cards: [makeSummary()] }]);
   });
 
   it("puts retail/carrier co-brands in Other Co-Branded Cards", () => {
