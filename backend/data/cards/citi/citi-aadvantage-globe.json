@@ -8,6 +8,13 @@
   "annual_fee": 350,
   "effective_cost": "~$100–150 net for a traveler who uses the Turo and inflight credits, before the year-two companion certificate",
   "official_url": "https://www.citi.com/credit-cards/citi-aadvantage-globe-mastercard",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "19.49%-29.49%",
+  "balance_transfer_apr": "19.49%-29.49%",
+  "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Only earns back its fee if you fly American and use the travel credits",

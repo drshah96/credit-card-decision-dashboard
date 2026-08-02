@@ -8,6 +8,13 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee, but purely a store-financing tool with no rewards and no use outside Goodyear and its fuel-station partners",
   "official_url": "https://www.citi.com/credit-cards/goodyear-credit-cards",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": null,
+  "variable_apr": "Variable 16.99%-33.49%, or non-variable 22.36%-26.99%, based on offer",
+  "balance_transfer_apr": "Variable 16.99%-33.49%, or non-variable 22.36%-26.99%, based on offer",
+  "balance_transfer_fee": "The greater of $10 or 5% of the amount of each transfer",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "A tire financing card, not rewards: only for a specific 0% purchase",

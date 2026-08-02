@@ -952,3 +952,62 @@ def test_capital_one_variable_apr_and_fee_fields_are_detail_only_not_on_summary(
         "foreign_transaction_fee_rate",
     ):
         assert field not in summary
+
+
+# Citi batch (2026-08-02): all 23 cards researched. Citi is the first issuer
+# where the purchase and balance-transfer intro periods genuinely differ in
+# length on the same card (not just presence/absence like Chase's AAdvantage
+# MileUp-style asymmetry) — Simplicity (18mo purchases / 21mo BT) and Diamond
+# Preferred (12mo purchases / 21mo BT) both confirmed via multiple sources.
+# See [[project_apr_balance_transfer_fx_fee_audit]].
+@pytest.mark.parametrize(
+    "card_id,purchases_months,bt_months",
+    [
+        ("citi-simplicity", 18, 21),
+        ("citi-diamond-preferred", 12, 21),
+    ],
+)
+def test_citi_cards_with_asymmetric_intro_apr_durations(card_id: str, purchases_months: int, bt_months: int) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": purchases_months}
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": bt_months}
+
+
+def test_citi_aadvantage_mileup_has_bt_intro_but_no_purchase_intro() -> None:
+    # The inverse asymmetry: an intro offer on balance transfers only.
+    detail = client.get("/api/cards/citi-aadvantage-mileup").json()
+    assert detail["intro_apr_purchases"] is None
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": 15}
+
+
+def test_citi_two_cards_left_genuinely_unconfirmed_foreign_transaction_fee() -> None:
+    # Unlike the rest of the Citi batch, Goodyear and Dillard's Mastercard
+    # (our catalog's variant) couldn't be confirmed either way during
+    # research — null here means "not yet audited", not "confirmed fee-free".
+    for card_id in ("citi-goodyear", "citi-dillards"):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["foreign_transaction_fee"] is None
+        assert detail["foreign_transaction_fee_rate"] is None
+
+
+def test_citi_store_financing_cards_have_no_blanket_intro_offer() -> None:
+    # Home Depot and ExxonMobil offer deferred-interest financing scoped to
+    # specific purchase amounts, not a blanket account-wide intro APR — same
+    # non-fit as Amazon Prime Visa in the Chase batch, left null rather than
+    # force-fit into {rate, months}.
+    for card_id in ("citi-home-depot-consumer", "citi-exxonmobil-smart-card-plus"):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["intro_apr_purchases"] is None
+        assert detail["balance_transfer_apr"] is None
+        assert detail["balance_transfer_fee"] is None
+
+
+def test_citi_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == "citi-strata-premier")
+    for field in (
+        "variable_apr",
+        "balance_transfer_apr",
+        "balance_transfer_fee",
+        "foreign_transaction_fee_rate",
+    ):
+        assert field not in summary
