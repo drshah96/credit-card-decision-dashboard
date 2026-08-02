@@ -8,6 +8,19 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee",
   "official_url": "https://www.usbank.com/credit-cards/bank-smartly-visa-signature-credit-card.html",
+  "intro_apr_purchases": {
+    "rate": "0%",
+    "months": 12
+  },
+  "intro_apr_balance_transfers": {
+    "rate": "0%",
+    "months": 12
+  },
+  "foreign_transaction_fee": true,
+  "variable_apr": "18.24%-28.24%",
+  "balance_transfer_apr": "18.24%-28.24%",
+  "balance_transfer_fee": "5% of each transfer amount, $5 minimum",
+  "foreign_transaction_fee_rate": "3%",
   "verdict": {
     "status": "situational",
     "text": "Keep if you bank with U.S. Bank Smartly for a real deposit balance",

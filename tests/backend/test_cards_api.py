@@ -1011,3 +1011,56 @@ def test_citi_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> No
         "foreign_transaction_fee_rate",
     ):
         assert field not in summary
+
+
+# US Bank batch (2026-08-02): all 9 cards researched. US Bank uses a single
+# consistent balance-transfer fee across its whole lineup ("5% of each
+# transfer amount, $5 minimum"), unlike Citi/Capital One's tiered structures.
+# See [[project_apr_balance_transfer_fx_fee_audit]].
+def test_us_bank_split_has_no_revolving_apr_by_design() -> None:
+    # Every purchase auto-splits into an interest-free installment plan —
+    # there's no revolving balance/APR concept to audit, unlike a card that's
+    # simply "not yet audited". Confirmed and described, not left blank.
+    detail = client.get("/api/cards/us-bank-split").json()
+    assert detail["intro_apr_purchases"] is None
+    assert detail["balance_transfer_apr"] is None
+    assert detail["balance_transfer_fee"] is None
+    assert "split into" in detail["variable_apr"]
+    assert detail["foreign_transaction_fee"] is True
+    assert detail["foreign_transaction_fee_rate"] == "3%"
+
+
+@pytest.mark.parametrize(
+    "card_id,intro_months",
+    [
+        ("us-bank-altitude-connect", 15),
+        ("us-bank-altitude-go", 15),
+        ("us-bank-cash-plus", 15),
+        ("us-bank-shield", 21),
+        ("us-bank-smartly", 12),
+    ],
+)
+def test_us_bank_cards_with_a_real_intro_apr_offer(card_id: str, intro_months: int) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": intro_months}
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": intro_months}
+    assert detail["balance_transfer_fee"] == "5% of each transfer amount, $5 minimum"
+
+
+def test_us_bank_altitude_connect_is_the_only_fee_free_us_bank_card() -> None:
+    # Every other US Bank card charges 3%; Altitude Connect is the one
+    # exception, confirmed rather than assumed from the "Altitude" naming.
+    detail = client.get("/api/cards/us-bank-altitude-connect").json()
+    assert detail["foreign_transaction_fee"] is False
+    assert detail["foreign_transaction_fee_rate"] is None
+
+
+def test_us_bank_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == "us-bank-shield")
+    for field in (
+        "variable_apr",
+        "balance_transfer_apr",
+        "balance_transfer_fee",
+        "foreign_transaction_fee_rate",
+    ):
+        assert field not in summary
