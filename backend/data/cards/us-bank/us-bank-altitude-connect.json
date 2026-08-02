@@ -8,6 +8,19 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee, and genuinely premium travel perks for a $0 card",
   "official_url": "https://www.usbank.com/credit-cards/altitude-connect-visa-signature-credit-card.html",
+  "intro_apr_purchases": {
+    "rate": "0%",
+    "months": 15
+  },
+  "intro_apr_balance_transfers": {
+    "rate": "0%",
+    "months": 15
+  },
+  "foreign_transaction_fee": false,
+  "variable_apr": "17.49%-27.49%",
+  "balance_transfer_apr": "17.49%-27.49%",
+  "balance_transfer_fee": "5% of each transfer amount, $5 minimum",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "keep",
     "text": "Strongest no-fee travel card: Priority Pass and Global Entry credit",

@@ -1,6 +1,6 @@
 {
   "id": "chase-marriott-bonvoy-boundless",
-  "name": "Marriott Bonvoy Boundless® Credit Card",
+  "name": "Marriott Bonvoy Boundless\u00ae Credit Card",
   "issuer": "Chase",
   "network": "VISA SIGNATURE",
   "points_program": "Marriott Bonvoy",
@@ -8,6 +8,13 @@
   "annual_fee": 95,
   "effective_cost": "Low if you redeem the annual free night award",
   "official_url": "https://creditcards.chase.com/travel-credit-cards/marriott-bonvoy/boundless",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "20.24%-27.24%",
+  "balance_transfer_apr": "19.24%-27.74%",
+  "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Keep if you'll actually book the annual free night; otherwise a mid-pack earner",
@@ -15,42 +22,42 @@
   },
   "earn_rates": [
     {
-      "emoji": "🏨",
-      "multiplier": "6×",
+      "emoji": "\ud83c\udfe8",
+      "multiplier": "6\u00d7",
       "category": "Marriott Bonvoy hotels",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "🛒",
-      "multiplier": "3×",
+      "emoji": "\ud83d\uded2",
+      "multiplier": "3\u00d7",
       "category": "Grocery stores",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "⛽",
-      "multiplier": "3×",
+      "emoji": "\u26fd",
+      "multiplier": "3\u00d7",
       "category": "Gas stations",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "🍽️",
-      "multiplier": "3×",
+      "emoji": "\ud83c\udf7d\ufe0f",
+      "multiplier": "3\u00d7",
       "category": "Dining",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "💳",
-      "multiplier": "2×",
+      "emoji": "\ud83d\udcb3",
+      "multiplier": "2\u00d7",
       "category": "Everything else",
       "highlight": false,
       "is_base": true
     }
   ],
-  "earn_note": "The 3× categories share one combined $6,000/yr cap across groceries, gas, and dining, easy to blow through if you lean on any single bucket. After that cap (and everywhere else), this card earns a flat 2×, which beats Amex's Bonvoy cards' catch-all rate.",
+  "earn_note": "The 3\u00d7 categories share one combined $6,000/yr cap across groceries, gas, and dining, easy to blow through if you lean on any single bucket. After that cap (and everywhere else), this card earns a flat 2\u00d7, which beats Amex's Bonvoy cards' catch-all rate.",
   "points": {
     "currency": "Marriott Bonvoy",
     "redemption_options": [
@@ -275,12 +282,12 @@
     {
       "id": "airline-credit",
       "name": "Airline Incidental Credit",
-      "subtitle": "$50 × 2 · $250 min spend per half · thru 6/30/2027",
+      "subtitle": "$50 \u00d7 2 \u00b7 $250 min spend per half \u00b7 thru 6/30/2027",
       "max_annual": 100,
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "Up to $50 in statement credits twice a year (Jan–Jun and Jul–Dec) after spending $250 or more on eligible airline purchases within that half, active through June 30, 2027.",
+      "description": "Up to $50 in statement credits twice a year (Jan\u2013Jun and Jul\u2013Dec) after spending $250 or more on eligible airline purchases within that half, active through June 30, 2027.",
       "tips": [
         "Requires $250 of actual airline charges in each 6-month window; general travel spend doesn't count.",
         "This is a limited-time promotional benefit, not a confirmed permanent feature; re-check before assuming it renews past mid-2027."
@@ -289,7 +296,7 @@
     {
       "id": "free-night",
       "name": "Annual Free Night Award",
-      "subtitle": "up to 35,000-point category · after account anniversary",
+      "subtitle": "up to 35,000-point category \u00b7 after account anniversary",
       "max_annual": 250,
       "default_value": 0,
       "tier": "plan",
@@ -303,7 +310,7 @@
     {
       "id": "dashpass",
       "name": "DoorDash DashPass + Credit",
-      "subtitle": "complimentary + $10/qtr non-restaurant · thru 2027",
+      "subtitle": "complimentary + $10/qtr non-restaurant \u00b7 thru 2027",
       "max_annual": 40,
       "default_value": 0,
       "tier": "niche",
@@ -317,7 +324,7 @@
   "insurance": [
     {
       "coverage": "Baggage delay",
-      "detail": "$100/day · up to 5 days",
+      "detail": "$100/day \u00b7 up to 5 days",
       "level": "mid"
     },
     {
@@ -327,12 +334,12 @@
     },
     {
       "coverage": "Trip delay",
-      "detail": "$500/traveler · after 12 hrs",
+      "detail": "$500/traveler \u00b7 after 12 hrs",
       "level": "mid"
     },
     {
       "coverage": "Purchase protection",
-      "detail": "$500/item · 120 days",
+      "detail": "$500/item \u00b7 120 days",
       "level": "mid"
     },
     {
@@ -388,7 +395,7 @@
         ]
       }
     ],
-    "note": "Additional cards are free: a way to pool household spend toward the 6× hotel rate and the $35,000 Gold Elite threshold."
+    "note": "Additional cards are free: a way to pool household spend toward the 6\u00d7 hotel rate and the $35,000 Gold Elite threshold."
   },
   "timeline": [
     {

@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { CompareTray } from "./components/CompareTray";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { Footer } from "./components/Footer";
+import { ScrollToTop } from "./components/ScrollToTop";
 import { SiteMark } from "./components/SiteMark";
 import CardDetailPage from "./pages/CardDetailPage";
 import ComparePage from "./pages/ComparePage";
@@ -26,6 +27,7 @@ export default function App() {
 
   return (
     <>
+      <ScrollToTop />
       <SiteMark />
       <ErrorBoundary>
         <Routes>

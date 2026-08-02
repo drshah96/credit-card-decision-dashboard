@@ -175,6 +175,28 @@ def upsert_card(session: Session, data: dict) -> CardModel:
             card.secured_variant_id = data.get("secured_variant_id")
             card.points_pool_id = data.get("points_pool_id")
             card.points_pool_receiver = data.get("points_pool_receiver", False)
+            # Each is {"rate": "0%", "months": 15} or absent (not yet
+            # audited) in the source JSON — flattened into the two scalar
+            # columns each, same as every other nested object here.
+            intro_apr_purchases = data.get("intro_apr_purchases")
+            card.intro_apr_purchases_rate = (
+                intro_apr_purchases["rate"] if intro_apr_purchases else None
+            )
+            card.intro_apr_purchases_months = (
+                intro_apr_purchases["months"] if intro_apr_purchases else None
+            )
+            intro_apr_balance_transfers = data.get("intro_apr_balance_transfers")
+            card.intro_apr_balance_transfers_rate = (
+                intro_apr_balance_transfers["rate"] if intro_apr_balance_transfers else None
+            )
+            card.intro_apr_balance_transfers_months = (
+                intro_apr_balance_transfers["months"] if intro_apr_balance_transfers else None
+            )
+            card.foreign_transaction_fee = data.get("foreign_transaction_fee")
+            card.variable_apr = data.get("variable_apr")
+            card.balance_transfer_apr = data.get("balance_transfer_apr")
+            card.balance_transfer_fee = data.get("balance_transfer_fee")
+            card.foreign_transaction_fee_rate = data.get("foreign_transaction_fee_rate")
             card.is_active = True
 
             card.earn_rates = [

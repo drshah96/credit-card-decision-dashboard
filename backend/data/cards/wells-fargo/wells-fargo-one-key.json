@@ -8,6 +8,13 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee",
   "official_url": "https://creditcards.wellsfargo.com/one-key-credit-card/",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "18.49%, 23.49%, or 28.49% (based on creditworthiness)",
+  "balance_transfer_apr": "18.49%, 23.49%, or 28.49% (based on creditworthiness)",
+  "balance_transfer_fee": "$5 or 5% of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Keep if you book through Expedia, Hotels.com, or Vrbo often",
@@ -22,9 +29,23 @@
       "is_base": false
     },
     {
+      "emoji": "⛽",
+      "multiplier": "3%",
+      "category": "Gas stations",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "3%",
+      "category": "Grocery stores",
+      "highlight": true,
+      "is_base": false
+    },
+    {
       "emoji": "🍽️",
       "multiplier": "3%",
-      "category": "Gas stations, grocery stores, and dining",
+      "category": "Dining",
       "highlight": true,
       "is_base": false
     },

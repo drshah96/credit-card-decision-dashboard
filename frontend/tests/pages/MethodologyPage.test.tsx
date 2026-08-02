@@ -48,7 +48,7 @@ describe("MethodologyPage", () => {
     ).toBeInTheDocument();
   });
 
-  it("explains points pooling is scoped to My Cards, never the default ranking", () => {
+  it("explains points pooling is scoped to Choose Your Cards, never the default ranking", () => {
     renderPage();
     expect(
       screen.getByText(/never applies to the default, whole-catalog ranking/i),

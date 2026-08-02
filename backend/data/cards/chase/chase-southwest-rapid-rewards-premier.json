@@ -1,6 +1,6 @@
 {
   "id": "chase-southwest-rapid-rewards-premier",
-  "name": "Southwest® Rapid Rewards® Premier Credit Card",
+  "name": "Southwest\u00ae Rapid Rewards\u00ae Premier Credit Card",
   "issuer": "Chase",
   "network": "VISA SIGNATURE",
   "points_program": "Rapid Rewards",
@@ -8,6 +8,13 @@
   "annual_fee": 149,
   "effective_cost": "Medium: the balanced pick if you want A-List progress without Priority's fee",
   "official_url": "https://creditcards.chase.com/southwest/premier-credit-card",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "20.24%-27.24%",
+  "balance_transfer_apr": "20.24%-27.24%",
+  "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Best-balanced tier: Preferred seating, real A-List progress",
@@ -15,35 +22,35 @@
   },
   "earn_rates": [
     {
-      "emoji": "✈️",
-      "multiplier": "3×",
+      "emoji": "\u2708\ufe0f",
+      "multiplier": "3\u00d7",
       "category": "Southwest purchases (flights, inflight, gift cards)",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "🛒",
-      "multiplier": "2×",
+      "emoji": "\ud83d\uded2",
+      "multiplier": "2\u00d7",
       "category": "Grocery stores",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "🍽️",
-      "multiplier": "2×",
+      "emoji": "\ud83c\udf7d\ufe0f",
+      "multiplier": "2\u00d7",
       "category": "Restaurants",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "💳",
-      "multiplier": "1×",
+      "emoji": "\ud83d\udcb3",
+      "multiplier": "1\u00d7",
       "category": "Everything else",
       "highlight": false,
       "is_base": true
     }
   ],
-  "earn_note": "Same 1× base as Plus and Priority, but the bonus category shifts to groceries + restaurants (from Plus's gas + groceries) and the Southwest multiplier climbs to 3×. Still nothing for Chase Travel or non-Southwest travel spend. Groceries and restaurants combine toward a single $8,000/yr cap before dropping to 1×.",
+  "earn_note": "Same 1\u00d7 base as Plus and Priority, but the bonus category shifts to groceries + restaurants (from Plus's gas + groceries) and the Southwest multiplier climbs to 3\u00d7. Still nothing for Chase Travel or non-Southwest travel spend. Groceries and restaurants combine toward a single $8,000/yr cap before dropping to 1\u00d7.",
   "points": {
     "currency": "Rapid Rewards",
     "redemption_options": [
@@ -63,7 +70,7 @@
         "best": false
       }
     ],
-    "per_100k": "$1,200–1,500",
+    "per_100k": "$1,200\u20131,500",
     "note": "Same closed-loop Rapid Rewards currency and dynamic pricing (since March 2025) as the rest of the family; this tier only changes how fast you earn it, not what it's worth."
   },
   "transfer_partners": {
@@ -77,7 +84,7 @@
     {
       "id": "bags",
       "name": "Free Checked Bag",
-      "subtitle": "1st bag · you + up to 8 on reservation",
+      "subtitle": "1st bag \u00b7 you + up to 8 on reservation",
       "max_annual": 140,
       "default_value": 0,
       "tier": "easy",
@@ -91,7 +98,7 @@
     {
       "id": "instacart",
       "name": "Instacart+ Credit",
-      "subtitle": "$10/mo · through 2027 promo",
+      "subtitle": "$10/mo \u00b7 through 2027 promo",
       "max_annual": 120,
       "default_value": 0,
       "tier": "niche",
@@ -106,7 +113,7 @@
   "insurance": [
     {
       "coverage": "Rental car CDW",
-      "detail": "Secondary (domestic) / primary outside the US · $60k · 31 days",
+      "detail": "Secondary (domestic) / primary outside the US \u00b7 $60k \u00b7 31 days",
       "level": "mid"
     },
     {
@@ -116,7 +123,7 @@
     },
     {
       "coverage": "Baggage delay",
-      "detail": "$100/day · up to 3 days · after 6 hrs",
+      "detail": "$100/day \u00b7 up to 3 days \u00b7 after 6 hrs",
       "level": "mid"
     },
     {
@@ -126,12 +133,12 @@
     },
     {
       "coverage": "Travel accident insurance",
-      "detail": "$500,000 · common carrier",
+      "detail": "$500,000 \u00b7 common carrier",
       "level": "good"
     },
     {
       "coverage": "Purchase protection",
-      "detail": "$500/claim · $50,000/account · 120 days",
+      "detail": "$500/claim \u00b7 $50,000/account \u00b7 120 days",
       "level": "mid"
     },
     {
@@ -156,7 +163,7 @@
     {
       "name": "Boarding position",
       "strength": 2,
-      "note": "Group 5 boarding for the cardholder + up to 8 companions on the reservation, same slot as Plus and Priority. Real A-List members still board ahead of all three in the A1–A15 range."
+      "note": "Group 5 boarding for the cardholder + up to 8 companions on the reservation, same slot as Plus and Priority. Real A-List members still board ahead of all three in the A1\u2013A15 range."
     }
   ],
   "services": [
@@ -178,7 +185,7 @@
     },
     {
       "name": "Partner perks (through 2027)",
-      "detail": "3-month complimentary Instacart+ trial (see the Instacart credit above), 12-month complimentary DashPass (activate by Dec 31, 2027), and 3× Rapid Rewards points on Lyft rides through Dec 2027, ahead of Plus's 2×, behind Priority's 5×."
+      "detail": "3-month complimentary Instacart+ trial (see the Instacart credit above), 12-month complimentary DashPass (activate by Dec 31, 2027), and 3\u00d7 Rapid Rewards points on Lyft rides through Dec 2027, ahead of Plus's 2\u00d7, behind Priority's 5\u00d7."
     },
     {
       "name": "No foreign transaction fees",
@@ -233,13 +240,13 @@
       "date": "Jul 24, 2025",
       "type": "add",
       "badge": "Refresh",
-      "text": "Fee raised $99 → $149; gained the free checked bag, Preferred seat selection, Group 5 boarding, A-List tier-point earning, and partner perks (Instacart+, DashPass, Lyft points)."
+      "text": "Fee raised $99 \u2192 $149; gained the free checked bag, Preferred seat selection, Group 5 boarding, A-List tier-point earning, and partner perks (Instacart+, DashPass, Lyft points)."
     },
     {
       "date": "Dec 31, 2025",
       "type": "cut",
       "badge": "Cut",
-      "text": "Legacy benefits from the old card structure (2 EarlyBird Check-In credits and 2× points on internet/cable/phone) were discontinued."
+      "text": "Legacy benefits from the old card structure (2 EarlyBird Check-In credits and 2\u00d7 points on internet/cable/phone) were discontinued."
     }
   ]
 }

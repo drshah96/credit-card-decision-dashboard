@@ -8,6 +8,16 @@
   "annual_fee": 0,
   "effective_cost": "Free, with $0 annual fee every year and no spending requirement to waive it",
   "official_url": "https://www.bilt.com/card/blue",
+  "intro_apr_purchases": {
+    "rate": "10%",
+    "months": 12
+  },
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "26.74%-34.74%",
+  "balance_transfer_apr": "26.74%-34.74%",
+  "balance_transfer_fee": "The greater of 5% or $5",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "keep",
     "text": "The only $0-fee card earning points on rent, with no transaction fee",

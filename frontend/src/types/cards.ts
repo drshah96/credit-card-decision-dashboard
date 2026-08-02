@@ -11,6 +11,14 @@ export interface Verdict {
   short_tag?: string | null;
 }
 
+/** A promotional intro-APR period, on purchases or balance transfers. `rate`
+ * is almost always "0%" but kept as a string, not a boolean, since a small
+ * number of real-world promos use a non-zero teaser rate. */
+export interface IntroApr {
+  rate: string;
+  months: number;
+}
+
 interface CardBase {
   id: string;
   name: string;
@@ -53,6 +61,23 @@ interface CardBase {
    * can be proven to ignore monetization status entirely: see the
    * ranking-integrity regression test in topPickCategories.test.ts. */
   is_affiliate_link: boolean;
+  /** Sourced from the issuer's own current terms, not guessed — null means
+   * this card hasn't been audited yet (distinct from confirmed-absent),
+   * during the incremental per-issuer rollout of this data. Drives the
+   * Compare tab's "0% Intro APR" / "Balance Transfer" Category chips: a
+   * promotional balance-transfer offer IS an intro-APR period applied to
+   * balance transfers, so there's no separate "has balance transfer" flag
+   * that could drift out of sync with this. */
+  intro_apr_purchases: IntroApr | null;
+  intro_apr_balance_transfers: IntroApr | null;
+  /** True = card charges a foreign transaction fee. Null = not yet audited.
+   * Drives the "No Foreign Transaction Fee" Category chip (only matches
+   * when this is explicitly `false`, not merely falsy/null). */
+  foreign_transaction_fee: boolean | null;
+  /** Derived server-side from status_perks (any perk mentioning "lounge") —
+   * unlike the three fields above, this doesn't need per-card research, so
+   * there's no "not yet audited" state, just true/false. */
+  has_lounge_access: boolean;
 }
 
 export interface EarnCategorySummary {
@@ -186,4 +211,19 @@ export interface Card extends CardBase {
   services: Service[];
   additional_cards: AdditionalCards;
   timeline: TimelineEvent[];
+  /** Ongoing (post-intro, or from day one if there's no intro offer) rate
+   * ranges and fees, quoted verbatim from the issuer's own Pricing & Terms
+   * table rather than decomposed into numbers — real ranges are tied to
+   * creditworthiness ("19.24%-29.99% Variable") and nothing here computes
+   * with them, only displays them. Detail-only (not on CardSummary) —
+   * purely informational, not a Compare-tab filter driver like
+   * intro_apr_purchases/intro_apr_balance_transfers. Null = not yet
+   * audited. */
+  variable_apr: string | null;
+  balance_transfer_apr: string | null;
+  balance_transfer_fee: string | null;
+  /** The actual rate when foreign_transaction_fee is true (e.g. "3%") — the
+   * boolean still drives the "No Foreign Transaction Fee" chip unchanged,
+   * this is just the detail-page-level specific number. */
+  foreign_transaction_fee_rate: string | null;
 }

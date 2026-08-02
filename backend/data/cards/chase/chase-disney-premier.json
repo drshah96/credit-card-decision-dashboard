@@ -1,6 +1,6 @@
 {
   "id": "chase-disney-premier",
-  "name": "Disney® Premier Visa® Card",
+  "name": "Disney\u00ae Premier Visa\u00ae Card",
   "issuer": "Chase",
   "network": "VISA SIGNATURE",
   "points_program": "Disney Rewards Dollars",
@@ -8,6 +8,13 @@
   "annual_fee": 49,
   "effective_cost": "Low, but only if you're already spending at Disney",
   "official_url": "https://creditcards.chase.com/rewards-credit-cards/disney/premier",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": true,
+  "variable_apr": "18.24%-27.74%",
+  "balance_transfer_apr": "18.24%-27.74%",
+  "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": "3%",
   "verdict": {
     "status": "situational",
     "text": "Keep only if you regularly book Disney trips or stream Disney+/Hulu/ESPN+",
@@ -15,28 +22,42 @@
   },
   "earn_rates": [
     {
-      "emoji": "📺",
+      "emoji": "\ud83d\udcfa",
       "multiplier": "5%",
       "category": "DisneyPlus.com, Hulu.com & Stream.ESPN.com",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "⛽",
+      "emoji": "\u26fd",
       "multiplier": "2%",
-      "category": "Gas stations & most Disney U.S. locations",
+      "category": "Gas stations",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "🛒",
+      "emoji": "\ud83c\udff0",
       "multiplier": "2%",
-      "category": "Grocery stores & restaurants",
+      "category": "Most Disney U.S. locations",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "💳",
+      "emoji": "\ud83d\uded2",
+      "multiplier": "2%",
+      "category": "Grocery stores",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "\ud83c\udf7d\ufe0f",
+      "multiplier": "2%",
+      "category": "Restaurants",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "\ud83d\udcb3",
       "multiplier": "1%",
       "category": "Everything else",
       "highlight": false,
@@ -54,7 +75,7 @@
       }
     ],
     "per_100k": "$1,000",
-    "note": "Disney Rewards Dollars are dollar-denominated and always worth 1¢; there's no bonus redemption to chase. The catch is where you can spend them: Disney parks, resorts, cruises, shopping, dining, and (via Pay Yourself Back) airline statement credits. No cash-out option and no transfer partners."
+    "note": "Disney Rewards Dollars are dollar-denominated and always worth 1\u00a2; there's no bonus redemption to chase. The catch is where you can spend them: Disney parks, resorts, cruises, shopping, dining, and (via Pay Yourself Back) airline statement credits. No cash-out option and no transfer partners."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -66,7 +87,7 @@
     {
       "id": "dashpass",
       "name": "DoorDash DashPass",
-      "subtitle": "1 year free · then auto-renews paid",
+      "subtitle": "1 year free \u00b7 then auto-renews paid",
       "max_annual": 120,
       "default_value": 0,
       "tier": "niche",
@@ -81,7 +102,7 @@
   "insurance": [
     {
       "coverage": "Purchase protection",
-      "detail": "$500/item · 120 days",
+      "detail": "$500/item \u00b7 120 days",
       "level": "mid"
     },
     {
@@ -91,7 +112,7 @@
     },
     {
       "coverage": "Baggage delay",
-      "detail": "$100/day · up to 3 days · after 6 hrs",
+      "detail": "$100/day \u00b7 up to 3 days \u00b7 after 6 hrs",
       "level": "mid"
     },
     {
@@ -101,7 +122,7 @@
     },
     {
       "coverage": "Travel accident insurance",
-      "detail": "$500,000 · common carrier",
+      "detail": "$500,000 \u00b7 common carrier",
       "level": "good"
     }
   ],
@@ -119,7 +140,7 @@
     },
     {
       "name": "0% APR on Disney vacation packages",
-      "detail": "6-month 0% promotional APR on qualifying Disney vacation package purchases, reverting to the standard variable APR (18.24%–29.99%) after the promo period."
+      "detail": "6-month 0% promotional APR on qualifying Disney vacation package purchases, reverting to the standard variable APR (18.24%\u201329.99%) after the promo period."
     },
     {
       "name": "Foreign transaction fee applies",
@@ -164,7 +185,7 @@
       "date": "Feb 3, 2026",
       "type": "neutral",
       "badge": "Lineup change",
-      "text": "Chase & Disney launched the Disney® Inspire Visa® Card ($149 AF) above Premier, aimed at frequent park/cruise visitors. Premier now sits as the mid-tier option between the no-fee Disney Visa and Inspire."
+      "text": "Chase & Disney launched the Disney\u00ae Inspire Visa\u00ae Card ($149 AF) above Premier, aimed at frequent park/cruise visitors. Premier now sits as the mid-tier option between the no-fee Disney Visa and Inspire."
     },
     {
       "date": "2026",

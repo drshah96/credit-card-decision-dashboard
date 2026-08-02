@@ -8,6 +8,13 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee",
   "official_url": "https://www.americanexpress.com/us/credit-cards/card/hilton-honors/",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "19.49%-28.49%",
+  "balance_transfer_apr": null,
+  "balance_transfer_fee": null,
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "keep",
     "text": "Free Hilton points earner with no downside",
@@ -31,7 +38,14 @@
     {
       "emoji": "🛒",
       "multiplier": "5×",
-      "category": "U.S. supermarkets and gas stations",
+      "category": "U.S. supermarkets",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "⛽",
+      "multiplier": "5×",
+      "category": "U.S. gas stations",
       "highlight": true,
       "is_base": false
     },

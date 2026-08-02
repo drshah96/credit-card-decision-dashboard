@@ -13,6 +13,7 @@ from backend.models import (
     EarnCategorySummary,
     EarnRate,
     Insurance,
+    IntroApr,
     Points,
     RedemptionOption,
     Service,
@@ -47,10 +48,11 @@ _DETAIL_OPTIONS = (
 
 # Summary load — only what CardSummary actually needs: the scalar card fields,
 # the three lookup names, credits (to total up easy/max credit values),
-# earn_rates (category labels only, for spend-category filter chips), and
-# redemption_options (cents-per-point only, for best_cpp). Deliberately skips
-# insurance/timeline/etc. so GET /api/cards doesn't drag in relationships it
-# never reads.
+# earn_rates (category labels only, for spend-category filter chips),
+# redemption_options (cents-per-point only, for best_cpp), and status_perks
+# (just to derive has_lounge_access — cheap, a handful of short rows per
+# card, unlike insurance/timeline/services/etc. which GET /api/cards still
+# deliberately skips since nothing summary-level reads them).
 _SUMMARY_OPTIONS = (
     joinedload(CardModel.issuer),
     joinedload(CardModel.network),
@@ -58,7 +60,24 @@ _SUMMARY_OPTIONS = (
     selectinload(CardModel.credits).selectinload(CreditModel.tier),
     selectinload(CardModel.earn_rates),
     selectinload(CardModel.redemption_options),
+    selectinload(CardModel.status_perks),
 )
+
+
+def _has_lounge_access(status_perks) -> bool:
+    """Same condition frontend/src/utils/cardTaxonomy.ts's now-removed
+    detailTags() used to check client-side — moved server-side so it's a
+    summary-level field instead of requiring a full Card detail fetch."""
+    return any("lounge" in p.name.lower() or "lounge" in p.note.lower() for p in status_perks)
+
+
+def _intro_apr(rate: str | None, months: int | None) -> IntroApr | None:
+    """CardModel stores intro-APR terms as a flat rate/months pair (see
+    Verdict's own flattening) — None if the card hasn't been audited for
+    this yet, or was audited and confirmed to have no such offer."""
+    if rate is None or months is None:
+        return None
+    return IntroApr(rate=rate, months=months)
 
 
 def _to_card(c: CardModel, is_secured_variant_of: str | None = None) -> Card:
@@ -159,6 +178,16 @@ def _to_card(c: CardModel, is_secured_variant_of: str | None = None) -> Card:
         is_secured_variant_of=is_secured_variant_of,
         points_pool_id=c.points_pool_id,
         points_pool_receiver=c.points_pool_receiver,
+        intro_apr_purchases=_intro_apr(c.intro_apr_purchases_rate, c.intro_apr_purchases_months),
+        intro_apr_balance_transfers=_intro_apr(
+            c.intro_apr_balance_transfers_rate, c.intro_apr_balance_transfers_months
+        ),
+        foreign_transaction_fee=c.foreign_transaction_fee,
+        has_lounge_access=_has_lounge_access(c.status_perks),
+        variable_apr=c.variable_apr,
+        balance_transfer_apr=c.balance_transfer_apr,
+        balance_transfer_fee=c.balance_transfer_fee,
+        foreign_transaction_fee_rate=c.foreign_transaction_fee_rate,
     )
 
 
@@ -194,6 +223,12 @@ def _to_card_summary(c: CardModel, is_secured_variant_of: str | None = None) -> 
         points_pool_id=c.points_pool_id,
         points_pool_receiver=c.points_pool_receiver,
         is_affiliate_link=c.is_affiliate_link,
+        intro_apr_purchases=_intro_apr(c.intro_apr_purchases_rate, c.intro_apr_purchases_months),
+        intro_apr_balance_transfers=_intro_apr(
+            c.intro_apr_balance_transfers_rate, c.intro_apr_balance_transfers_months
+        ),
+        foreign_transaction_fee=c.foreign_transaction_fee,
+        has_lounge_access=_has_lounge_access(c.status_perks),
     )
 
 

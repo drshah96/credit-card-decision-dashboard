@@ -246,7 +246,7 @@ export function groupCardsForAllView(cards: CardSummary[]): CardSection[] {
 
   const sections: CardSection[] = [];
   if (flagship.length > 0) {
-    sections.push({ label: "Flagship Cards", cards: [...flagship].sort(byFeeDescThenName) });
+    sections.push({ label: "Proprietary Cards", cards: [...flagship].sort(byFeeDescThenName) });
   }
   // One section per airline/hotel program, always named after its brand
   // (e.g. "Delta SkyMiles Cards", "Southwest Rapid Rewards Cards") — even
@@ -414,7 +414,13 @@ export function groupCardsForPicker(
 
 /** Tags derivable from summary data alone (fast, no per-card fetch needed) —
  * annual fee, brand/group, currency (Cash Back vs. a transferable travel
- * program), and earn-rate categories (Dining, Gas). */
+ * program), earn-rate categories (Dining, Gas), and the behavioral flags
+ * (Lounge Access, 0% Intro APR, Balance Transfer, No Foreign Transaction
+ * Fee) that used to require a full Card detail fetch before they were
+ * promoted to CardSummary fields, sourced from real issuer terms rather
+ * than guessed from incidental free text (see backend/models.py
+ * Card.intro_apr_purchases for the full explanation). A card not yet
+ * audited for these just doesn't get the tag — it isn't asserted absent. */
 export function summaryTags(card: CardSummary): string[] {
   const tags = new Set<string>();
   const c = classify(card.id);
@@ -446,35 +452,10 @@ export function summaryTags(card: CardSummary): string[] {
 
   for (const tag of categoryTags(card.categories.map((c) => c.category))) tags.add(tag);
 
-  return [...tags];
-}
-
-/** Additional tags that require the full card detail: status perks and
- * free-text fields for benefits with no dedicated schema field. Everything
- * derivable from summary data (fee, brand, currency, earn categories) lives
- * in `summaryTags` instead — this only adds what genuinely needs the full
- * `/api/cards/:id` payload. */
-export function detailTags(card: Card): string[] {
-  const tags = new Set<string>();
-
-  if (card.status_perks.some((p) => /lounge/i.test(p.name) || /lounge/i.test(p.note))) {
-    tags.add("Lounge Access");
-  }
-
-  const freeText = [
-    card.earn_note,
-    card.points.note,
-    card.protection_note,
-    card.rental_note,
-    ...card.credits.map((cr) => cr.description),
-    ...card.services.map((s) => s.detail),
-  ]
-    .join(" ")
-    .toLowerCase();
-
-  if (/\bintro(ductory)?\s*apr\b/.test(freeText)) tags.add("0% Intro APR");
-  if (/no foreign transaction fee/.test(freeText)) tags.add("No Foreign Transaction Fee");
-  if (/balance transfer/.test(freeText)) tags.add("Balance Transfer");
+  if (card.has_lounge_access) tags.add("Lounge Access");
+  if (card.intro_apr_purchases) tags.add("0% Intro APR");
+  if (card.intro_apr_balance_transfers) tags.add("Balance Transfer");
+  if (card.foreign_transaction_fee === false) tags.add("No Foreign Transaction Fee");
 
   return [...tags];
 }

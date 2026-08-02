@@ -11,10 +11,13 @@ name: Keep backend warm during waking hours
 # 5 minutes, not 10: verified live that GitHub Actions' schedule trigger can
 # skip multiple consecutive ticks under platform load (observed a ~26-minute
 # gap between two "successful" runs against a configured 10-minute cadence,
-# which let the backend actually cold-start once mid-window). 5 minutes is
-# GitHub's minimum supported interval — this doesn't eliminate that
-# unreliability, it just makes a single missed tick much less likely to
-# compound into a gap that exceeds the 15-minute spin-down threshold.
+# which let the backend actually cold-start once mid-window). Tightening to
+# 5 minutes (GitHub's minimum interval) didn't meaningfully help either —
+# a second live check found only one tick fired in the next ~50 minutes.
+# This points to platform-level throttling of scheduled workflows, not
+# something fixable by tuning the interval further. An external uptime-ping
+# service (not GitHub Actions) is now the primary mechanism; this workflow
+# stays on as a free secondary/backup layer, not the main line of defense.
 #
 # Pings the raw onrender.com origin URL, NOT api.thewalletaudit.com. The
 # custom domain sits behind our own Cloudflare zone, which has Bot Fight
@@ -40,4 +43,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping /health
-        run: curl -sf --max-time 30 https://thewalletaudit-api.onrender.com/health
+        # 90s, not 30s: if this ping is itself the one that catches the
+        # backend cold, it needs to survive Render's ~60s wake-up, not
+        # time out and fail before the backend even finishes booting
+        # (observed live: curl exit 28, timeout, on a run that landed
+        # during a cold window).
+        run: curl -sf --max-time 90 https://thewalletaudit-api.onrender.com/health

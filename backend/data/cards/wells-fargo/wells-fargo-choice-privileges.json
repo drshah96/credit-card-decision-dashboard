@@ -8,6 +8,13 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee",
   "official_url": "https://creditcards.wellsfargo.com/choice-hotel-privileges-mastercard/",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "19.99%, 25.74%, or 28.74% (based on creditworthiness)",
+  "balance_transfer_apr": "19.99%, 25.74%, or 28.74% (based on creditworthiness)",
+  "balance_transfer_fee": "$5 or 5% of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Keep for frequent Choice Hotels stays; points don't transfer",
@@ -24,7 +31,28 @@
     {
       "emoji": "⛽",
       "multiplier": "3×",
-      "category": "Gas stations, grocery stores, home improvement stores, and phone plans",
+      "category": "Gas stations",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "3×",
+      "category": "Grocery stores",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🔨",
+      "multiplier": "3×",
+      "category": "Home improvement stores",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "📱",
+      "multiplier": "3×",
+      "category": "Phone plans",
       "highlight": true,
       "is_base": false
     },

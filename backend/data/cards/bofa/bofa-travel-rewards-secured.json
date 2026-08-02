@@ -8,6 +8,19 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee, but requiring a refundable $200–$5,000 security deposit to set your limit",
   "official_url": "https://www.bankofamerica.com/credit-cards/products/travel-rewards-secured-credit-card/",
+  "intro_apr_purchases": {
+    "rate": "0%",
+    "months": 15
+  },
+  "intro_apr_balance_transfers": {
+    "rate": "0%",
+    "months": 15
+  },
+  "foreign_transaction_fee": false,
+  "variable_apr": "17.49%-27.49%",
+  "balance_transfer_apr": "17.49%-27.49%",
+  "balance_transfer_fee": "3% for the first 60 days of account opening; 5% after",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Same flat 1.5x as Travel Rewards, no foreign fees while rebuilding",

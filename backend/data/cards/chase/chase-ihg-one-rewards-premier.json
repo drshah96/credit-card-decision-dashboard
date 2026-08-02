@@ -8,6 +8,13 @@
   "annual_fee": 99,
   "effective_cost": "Low if you use the free nights and spend-based credits",
   "official_url": "https://creditcards.chase.com/travel-credit-cards/ihg-rewards-club/premier",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "19.24%-27.74%",
+  "balance_transfer_apr": "19.99%-28.49%",
+  "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Keep if you stay at IHG properties a few times a year; thin otherwise",
@@ -15,28 +22,42 @@
   },
   "earn_rates": [
     {
-      "emoji": "🏨",
-      "multiplier": "10×",
+      "emoji": "\ud83c\udfe8",
+      "multiplier": "10\u00d7",
       "category": "IHG Hotels & Resorts",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "✈️",
-      "multiplier": "5×",
-      "category": "Travel, dining & gas stations",
+      "emoji": "\ud83e\uddf3",
+      "multiplier": "5\u00d7",
+      "category": "Travel",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "💳",
-      "multiplier": "3×",
+      "emoji": "\ud83c\udf7d\ufe0f",
+      "multiplier": "5\u00d7",
+      "category": "Dining, incl. eligible delivery",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "\u26fd",
+      "multiplier": "5\u00d7",
+      "category": "Gas stations",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "\ud83d\udcb3",
+      "multiplier": "3\u00d7",
       "category": "Everything else",
       "highlight": false,
       "is_base": true
     }
   ],
-  "earn_note": "3× on general spend is a strong base rate for a $99 card, well above most co-brand hotel cards' catch-all tier. The 5× bucket (travel, dining, gas) is broad enough to matter for everyday spend, on top of the 10× IHG-direct rate.",
+  "earn_note": "3\u00d7 on general spend is a strong base rate for a $99 card, well above most co-brand hotel cards' catch-all tier. The 5\u00d7 bucket (travel, dining, gas) is broad enough to matter for everyday spend, on top of the 10\u00d7 IHG-direct rate.",
   "points": {
     "currency": "IHG One Rewards",
     "redemption_options": [
@@ -52,13 +73,13 @@
       }
     ],
     "per_100k": "$600",
-    "note": "IHG points are worth less per point than Marriott or Hyatt (NerdWallet valued them around 0.6¢ in 2026), but the card issues them generously (up to 26X combined at IHG properties) and the 4th-night-free benefit plus anniversary certificate meaningfully boost real-world redemption value beyond the raw cpp. Never transfer to airlines; the ~5:1 ratio guts the value."
+    "note": "IHG points are worth less per point than Marriott or Hyatt (NerdWallet valued them around 0.6\u00a2 in 2026), but the card issues them generously (up to 26X combined at IHG properties) and the 4th-night-free benefit plus anniversary certificate meaningfully boost real-world redemption value beyond the raw cpp. Never transfer to airlines; the ~5:1 ratio guts the value."
   },
   "transfer_partners": {
     "airline_count": 37,
     "hotel_count": 0,
-    "highlight": "IHG One Rewards transfers to 37 airline partners, mostly at a 5:1 ratio (5,000 IHG points → 1,000 miles); transfers must be initiated by phone, not online, and typically take weeks to post.",
-    "recent_changes": "Verified directly against IHG’s live partner page: El Al Matmid is no longer listed as a partner (previously reported as one by some trackers), while China Eastern, Finnair, and Lufthansa (Miles & More) are current partners not previously captured here.",
+    "highlight": "IHG One Rewards transfers to 37 airline partners, mostly at a 5:1 ratio (5,000 IHG points \u2192 1,000 miles); transfers must be initiated by phone, not online, and typically take weeks to post.",
+    "recent_changes": "Verified directly against IHG\u2019s live partner page: El Al Matmid is no longer listed as a partner (previously reported as one by some trackers), while China Eastern, Finnair, and Lufthansa (Miles & More) are current partners not previously captured here.",
     "partners": [
       {
         "name": "Aeromexico Rewards",
@@ -253,7 +274,7 @@
     {
       "id": "spend-bonus",
       "name": "Annual Spend Bonus",
-      "subtitle": "$100 credit + 10,000 pts · after $20,000/yr spend",
+      "subtitle": "$100 credit + 10,000 pts \u00b7 after $20,000/yr spend",
       "max_annual": 100,
       "default_value": 0,
       "tier": "niche",
@@ -266,7 +287,7 @@
     {
       "id": "instacart",
       "name": "Instacart Credit",
-      "subtitle": "$10/mo · up to $120/yr · + 3-mo Instacart+",
+      "subtitle": "$10/mo \u00b7 up to $120/yr \u00b7 + 3-mo Instacart+",
       "max_annual": 120,
       "default_value": 0,
       "tier": "niche",
@@ -280,7 +301,7 @@
     {
       "id": "dashpass",
       "name": "DoorDash DashPass + Credit",
-      "subtitle": "12-mo complimentary + $10/qtr non-restaurant · thru 2027",
+      "subtitle": "12-mo complimentary + $10/qtr non-restaurant \u00b7 thru 2027",
       "max_annual": 160,
       "default_value": 0,
       "tier": "niche",
@@ -293,7 +314,7 @@
     {
       "id": "global-entry",
       "name": "Global Entry / TSA PreCheck / NEXUS Credit",
-      "subtitle": "$120 · every 4 years",
+      "subtitle": "$120 \u00b7 every 4 years",
       "max_annual": 30,
       "default_value": 0,
       "tier": "plan",
@@ -306,7 +327,7 @@
     {
       "id": "united-travelbank",
       "name": "United TravelBank Cash",
-      "subtitle": "$25 × 2 · after registering MileagePlus",
+      "subtitle": "$25 \u00d7 2 \u00b7 after registering MileagePlus",
       "max_annual": 50,
       "default_value": 0,
       "tier": "niche",
@@ -319,7 +340,7 @@
     {
       "id": "free-night",
       "name": "Anniversary Free Night Certificate",
-      "subtitle": "up to 40,000-point category · every card anniversary",
+      "subtitle": "up to 40,000-point category \u00b7 every card anniversary",
       "max_annual": 150,
       "default_value": 0,
       "tier": "plan",
@@ -348,12 +369,12 @@
   "insurance": [
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "$5,000/person · $10,000/trip",
+      "detail": "$5,000/person \u00b7 $10,000/trip",
       "level": "good"
     },
     {
       "coverage": "Baggage delay",
-      "detail": "$100/day · up to 3 days",
+      "detail": "$100/day \u00b7 up to 3 days",
       "level": "mid"
     },
     {
@@ -363,7 +384,7 @@
     },
     {
       "coverage": "Purchase protection",
-      "detail": "$500/item · $50,000/cardholder · 120 days",
+      "detail": "$500/item \u00b7 $50,000/cardholder \u00b7 120 days",
       "level": "mid"
     }
   ],

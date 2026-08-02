@@ -8,6 +8,13 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee on the card itself (requires paid BJ's membership)",
   "official_url": "https://www.capitalone.com/credit-cards/bjs-wholesale-club/",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "19.24%, 25.24%, or 29.24% (based on creditworthiness)",
+  "balance_transfer_apr": "19.24%, 25.24%, or 29.24% (based on creditworthiness)",
+  "balance_transfer_fee": "$0 at the standard Transfer APR, or 4% at any promotional APR Capital One may offer",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Only useful layered onto a BJ's membership you already pay for",

@@ -614,3 +614,605 @@ def test_health_endpoint() -> None:
     response = client.get("/health")
     assert response.status_code == 200
     assert response.json() == {"status": "ok"}
+
+
+# ─── intro APR / balance transfer / foreign transaction fee ───────────────────
+# Sourced from real issuer terms per-card (see backend/models.py
+# Card.intro_apr_purchases), rolled out incrementally by issuer. None means
+# "not yet audited" for that card, not "confirmed absent" — distinct states.
+
+
+@pytest.mark.parametrize("card_id", CARD_IDS)
+def test_summary_apr_and_fx_fields_match_full_detail(card_id: str) -> None:
+    """CardSummary's three fields mirror Card's exactly, whatever their
+    current value — the Compare tab's Category chips (which only ever see
+    CardSummary) must never read a value that could drift from the detail
+    page's own. Same pattern as the is_affiliate_link parity test."""
+    detail = client.get(f"/api/cards/{card_id}").json()
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == card_id)
+    for field in ("intro_apr_purchases", "intro_apr_balance_transfers", "foreign_transaction_fee"):
+        assert summary[field] == detail[field], field
+
+
+def test_has_lounge_access_true_for_a_known_lounge_card() -> None:
+    """amex-platinum has real Centurion Lounge access in its status_perks —
+    confirms has_lounge_access is actually derived from that data, not
+    hardcoded false."""
+    detail = client.get("/api/cards/amex-platinum").json()
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == "amex-platinum")
+    assert detail["has_lounge_access"] is True
+    assert summary["has_lounge_access"] is True
+
+
+def test_has_lounge_access_false_for_a_card_with_no_such_perk() -> None:
+    detail = client.get("/api/cards/chase-freedom-unlimited").json()
+    assert detail["has_lounge_access"] is False
+
+
+def test_intro_apr_shape_when_present() -> None:
+    """Whichever card ends up with an audited intro-APR offer, the field is
+    a {rate, months} object, not a bare number or string."""
+    cards = client.get("/api/cards").json()
+    audited = [c for c in cards if c["intro_apr_purchases"] is not None]
+    if not audited:
+        pytest.skip("no card has an audited intro_apr_purchases offer yet")
+    sample = audited[0]["intro_apr_purchases"]
+    assert set(sample.keys()) == {"rate", "months"}
+    assert isinstance(sample["rate"], str)
+    assert isinstance(sample["months"], int)
+
+
+# Chase pilot batch (2026-08-01/02): all 19 Chase cards researched against
+# Chase's own official pages. Only the three cards Chase actually markets on
+# 0% APR carry the offer — every premium/travel/co-brand Chase card was
+# confirmed (not just left unaudited) to have none. See
+# [[project_apr_balance_transfer_fx_fee_audit]] memory for the full source
+# list and the remaining-issuers backlog.
+@pytest.mark.parametrize(
+    "card_id,purchases_months,bt_months,fx_fee",
+    [
+        ("chase-freedom-unlimited", 15, 15, True),
+        ("chase-freedom-flex", 15, 15, True),
+        ("chase-slate-edge", 18, 18, True),
+    ],
+)
+def test_chase_cards_with_a_real_intro_apr_offer(
+    card_id: str, purchases_months: int, bt_months: int, fx_fee: bool
+) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": purchases_months}
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": bt_months}
+    assert detail["foreign_transaction_fee"] is fx_fee
+
+
+@pytest.mark.parametrize(
+    "card_id",
+    [
+        "chase-sapphire-preferred",
+        "chase-sapphire-reserve",
+        "chase-united-explorer",
+        "chase-united-quest",
+        "chase-united-club-infinite",
+        "chase-world-of-hyatt",
+        "chase-marriott-bonvoy-boundless",
+        "chase-marriott-bonvoy-bold",
+        "chase-ihg-one-rewards-premier",
+        "chase-ihg-one-rewards-traveler",
+        "chase-southwest-rapid-rewards-plus",
+        "chase-southwest-rapid-rewards-premier",
+        "chase-southwest-rapid-rewards-priority",
+    ],
+)
+def test_chase_travel_and_cobrand_cards_confirmed_no_foreign_transaction_fee(card_id: str) -> None:
+    """These were actively researched and confirmed fee-free, not just left
+    unaudited — distinct from a card this pilot batch didn't cover yet."""
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["foreign_transaction_fee"] is False
+    assert detail["intro_apr_purchases"] is None
+    assert detail["intro_apr_balance_transfers"] is None
+
+
+def test_chase_cards_with_confirmed_foreign_transaction_fee() -> None:
+    # Freedom Flex/Unlimited/Rise/Slate Edge/Disney Premier all confirmed to
+    # currently charge 3% (Freedom Flex is scheduled to drop it 2026-09-20,
+    # still in the future as of this audit).
+    for card_id in (
+        "chase-freedom-rise",
+        "chase-disney-premier",
+        "chase-amazon-prime-visa",
+    ):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["intro_apr_purchases"] is None
+        assert detail["intro_apr_balance_transfers"] is None
+    assert client.get("/api/cards/chase-freedom-rise").json()["foreign_transaction_fee"] is True
+    assert client.get("/api/cards/chase-disney-premier").json()["foreign_transaction_fee"] is True
+    assert (
+        client.get("/api/cards/chase-amazon-prime-visa").json()["foreign_transaction_fee"] is False
+    )
+
+
+# Round 2 of the Chase pilot (2026-08-02): variable_apr/balance_transfer_apr/
+# balance_transfer_fee/foreign_transaction_fee_rate, sourced from Chase's own
+# Pricing & Terms pages/PDFs. Detail-only (not on CardSummary) — see
+# [[project_apr_balance_transfer_fx_fee_audit]].
+def test_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
+    summary = next(
+        c for c in client.get("/api/cards").json() if c["id"] == "chase-sapphire-reserve"
+    )
+    for field in (
+        "variable_apr",
+        "balance_transfer_apr",
+        "balance_transfer_fee",
+        "foreign_transaction_fee_rate",
+    ):
+        assert field not in summary
+
+
+@pytest.mark.parametrize(
+    "card_id,variable_apr,balance_transfer_apr",
+    [
+        # Confirmed identical purchase/BT ranges.
+        ("chase-freedom-unlimited", "18.24%-27.74%", "18.24%-27.74%"),
+        ("chase-freedom-flex", "18.24%-27.74%", "18.24%-27.74%"),
+        ("chase-amazon-prime-visa", "18.74%-27.49%", "18.74%-27.49%"),
+        # Confirmed genuinely distinct BT APR ranges — the whole reason this
+        # field isn't just derived from variable_apr.
+        ("chase-sapphire-reserve", "20.24%-28.74%", "19.49%-27.99%"),
+        ("chase-united-club-infinite", "19.74%-28.24%", "21.49%-28.49%"),
+        ("chase-ihg-one-rewards-premier", "19.24%-27.74%", "19.99%-28.49%"),
+        ("chase-marriott-bonvoy-boundless", "20.24%-27.24%", "19.24%-27.74%"),
+    ],
+)
+def test_chase_variable_and_balance_transfer_apr(
+    card_id: str, variable_apr: str, balance_transfer_apr: str
+) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["variable_apr"] == variable_apr
+    assert detail["balance_transfer_apr"] == balance_transfer_apr
+
+
+def test_chase_balance_transfer_fee_standard_vs_prime_visa_exception() -> None:
+    standard = "Either $5 or 5% of the amount of each transfer, whichever is greater"
+    assert (
+        client.get("/api/cards/chase-sapphire-reserve").json()["balance_transfer_fee"] == standard
+    )
+    assert (
+        client.get("/api/cards/chase-amazon-prime-visa").json()["balance_transfer_fee"]
+        == "Either $5 or 4% of the amount of each transfer, whichever is greater"
+    )
+
+
+def test_chase_foreign_transaction_fee_rate_matches_the_boolean() -> None:
+    # Cards confirmed to charge 3% match `foreign_transaction_fee: true`;
+    # cards confirmed fee-free have a null rate, not "0%" — there's nothing
+    # to quote from a Pricing & Terms table that doesn't list the fee.
+    for card_id in ("chase-freedom-flex", "chase-freedom-unlimited", "chase-disney-premier"):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["foreign_transaction_fee"] is True
+        assert detail["foreign_transaction_fee_rate"] == "3%"
+    for card_id in ("chase-sapphire-reserve", "chase-amazon-prime-visa"):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["foreign_transaction_fee"] is False
+        assert detail["foreign_transaction_fee_rate"] is None
+
+
+# Amex batch (2026-08-02): all 14 Amex cards researched against Amex's own
+# official Terms/Cardmember Agreement pages. Charge cards (Platinum, Gold,
+# Green) don't support balance transfers at all — confirmed via their own
+# terms disclosures, not assumed from the product type — so those three
+# fields resolve to null rather than being forced into a shape that doesn't
+# apply. See [[project_apr_balance_transfer_fx_fee_audit]].
+@pytest.mark.parametrize(
+    "card_id",
+    [
+        "amex-platinum",
+        "amex-gold",
+        "amex-green",
+        "amex-delta-skymiles-gold",
+        "amex-delta-skymiles-platinum",
+        "amex-delta-skymiles-reserve",
+        "amex-hilton-honors",
+        "amex-hilton-honors-aspire",
+        "amex-marriott-bonvoy-bevy",
+        "amex-marriott-bonvoy-brilliant",
+    ],
+)
+def test_amex_cards_confirmed_no_balance_transfer_support(card_id: str) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["intro_apr_purchases"] is None
+    assert detail["intro_apr_balance_transfers"] is None
+    assert detail["balance_transfer_apr"] is None
+    assert detail["balance_transfer_fee"] is None
+    assert detail["foreign_transaction_fee"] is False
+
+
+@pytest.mark.parametrize(
+    "card_id,intro_months",
+    [
+        ("amex-blue-cash-everyday", 15),
+        ("amex-blue-cash-preferred", 12),
+    ],
+)
+def test_amex_blue_cash_cards_carry_the_only_fx_fee_in_the_amex_lineup(
+    card_id: str, intro_months: int
+) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": intro_months}
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": intro_months}
+    assert detail["foreign_transaction_fee"] is True
+    assert detail["foreign_transaction_fee_rate"] == "2.7%"
+    assert (
+        detail["balance_transfer_fee"]
+        == "Either $5 or 3% of the amount of each transfer, whichever is greater"
+    )
+
+
+def test_amex_hilton_surpass_is_the_only_amex_card_with_a_two_tier_bt_fee() -> None:
+    detail = client.get("/api/cards/amex-hilton-honors-surpass").json()
+    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": 15}
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": 15}
+    assert detail["variable_apr"] == "17.49%-27.49%"
+    assert detail["balance_transfer_apr"] == "17.49%-27.49%"
+    assert "60 days" in detail["balance_transfer_fee"]
+
+
+def test_amex_delta_blue_has_no_intro_offer_despite_bt_being_available() -> None:
+    # Delta Blue supports balance transfers at its standard rate (no 0%
+    # promotional period) — distinct from the charge cards above, which
+    # don't support balance transfers at all.
+    detail = client.get("/api/cards/amex-delta-skymiles-blue").json()
+    assert detail["intro_apr_purchases"] is None
+    assert detail["intro_apr_balance_transfers"] is None
+    assert detail["variable_apr"] == "16.74%-25.74%"
+    assert detail["balance_transfer_apr"] == "16.74%-25.74%"
+    assert detail["balance_transfer_fee"] is not None
+
+
+def test_amex_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == "amex-platinum")
+    for field in (
+        "variable_apr",
+        "balance_transfer_apr",
+        "balance_transfer_fee",
+        "foreign_transaction_fee_rate",
+    ):
+        assert field not in summary
+
+
+# Capital One batch (2026-08-02): all 17 cards researched. Capital One's
+# balance-transfer fee follows a consistent issuer-wide pattern across
+# nearly every card — $0 if transferred at the card's own standard APR,
+# 3-4% only if transferred at a promotional (often 0%) rate Capital One
+# separately offers — quoted verbatim rather than force-fit into a single
+# number. See [[project_apr_balance_transfer_fx_fee_audit]].
+def test_capital_one_no_card_charges_a_foreign_transaction_fee() -> None:
+    # Distinct from Chase/Amex: Capital One's own stated policy is that none
+    # of its US-issued cards charge one, confirmed per-card during research.
+    ids = [
+        "capital-one-venture-x",
+        "capital-one-venture",
+        "capital-one-venture-one",
+        "capital-one-savor",
+        "capital-one-savor-one",
+        "capital-one-quicksilver",
+        "capital-one-quicksilver-one",
+        "capital-one-quicksilver-secured",
+        "capital-one-platinum",
+        "capital-one-platinum-secured",
+        "capital-one-key-rewards",
+        "capital-one-bjs-one",
+        "capital-one-bjs-one-plus",
+        "capital-one-kohls-rewards",
+        "capital-one-bass-pro-cabelas-club",
+        "capital-one-rei-co-op",
+        "capital-one-tmobile",
+    ]
+    for card_id in ids:
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["foreign_transaction_fee"] is False
+        assert detail["foreign_transaction_fee_rate"] is None
+
+
+@pytest.mark.parametrize(
+    "card_id,intro_months",
+    [
+        ("capital-one-venture-one", 15),
+        ("capital-one-savor", 12),
+        ("capital-one-savor-one", 12),
+        ("capital-one-quicksilver", 15),
+        ("capital-one-kohls-rewards", 12),
+    ],
+)
+def test_capital_one_cards_with_a_real_intro_apr_offer(card_id: str, intro_months: int) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": intro_months}
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": intro_months}
+    assert "3%" in detail["balance_transfer_fee"] or "4%" in detail["balance_transfer_fee"]
+
+
+def test_capital_one_premium_travel_cards_have_no_intro_offer() -> None:
+    for card_id in ("capital-one-venture-x", "capital-one-venture"):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["intro_apr_purchases"] is None
+        assert detail["intro_apr_balance_transfers"] is None
+        assert detail["variable_apr"] == "19.49%-28.49%"
+
+
+def test_capital_one_bass_pro_cabelas_has_a_bifurcated_purchase_apr() -> None:
+    # A genuinely two-tier rate (special in-store rate vs. everything else)
+    # rather than a single range — stored verbatim, not force-averaged.
+    detail = client.get("/api/cards/capital-one-bass-pro-cabelas-club").json()
+    assert "9.99%" in detail["variable_apr"]
+    assert detail["balance_transfer_apr"] == "20.49%-32.24%"
+
+
+def test_capital_one_bjs_cards_share_the_same_tiered_apr() -> None:
+    tiered = "19.24%, 25.24%, or 29.24% (based on creditworthiness)"
+    for card_id in ("capital-one-bjs-one", "capital-one-bjs-one-plus"):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["variable_apr"] == tiered
+        assert detail["intro_apr_purchases"] is None
+
+
+def test_capital_one_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == "capital-one-venture-x")
+    for field in (
+        "variable_apr",
+        "balance_transfer_apr",
+        "balance_transfer_fee",
+        "foreign_transaction_fee_rate",
+    ):
+        assert field not in summary
+
+
+# Citi batch (2026-08-02): all 23 cards researched. Citi is the first issuer
+# where the purchase and balance-transfer intro periods genuinely differ in
+# length on the same card (not just presence/absence like Chase's AAdvantage
+# MileUp-style asymmetry) — Simplicity (18mo purchases / 21mo BT) and Diamond
+# Preferred (12mo purchases / 21mo BT) both confirmed via multiple sources.
+# See [[project_apr_balance_transfer_fx_fee_audit]].
+@pytest.mark.parametrize(
+    "card_id,purchases_months,bt_months",
+    [
+        ("citi-simplicity", 18, 21),
+        ("citi-diamond-preferred", 12, 21),
+    ],
+)
+def test_citi_cards_with_asymmetric_intro_apr_durations(
+    card_id: str, purchases_months: int, bt_months: int
+) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": purchases_months}
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": bt_months}
+
+
+def test_citi_aadvantage_mileup_has_bt_intro_but_no_purchase_intro() -> None:
+    # The inverse asymmetry: an intro offer on balance transfers only.
+    detail = client.get("/api/cards/citi-aadvantage-mileup").json()
+    assert detail["intro_apr_purchases"] is None
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": 15}
+
+
+def test_citi_two_cards_left_genuinely_unconfirmed_foreign_transaction_fee() -> None:
+    # Unlike the rest of the Citi batch, Goodyear and Dillard's Mastercard
+    # (our catalog's variant) couldn't be confirmed either way during
+    # research — null here means "not yet audited", not "confirmed fee-free".
+    for card_id in ("citi-goodyear", "citi-dillards"):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["foreign_transaction_fee"] is None
+        assert detail["foreign_transaction_fee_rate"] is None
+
+
+def test_citi_store_financing_cards_have_no_blanket_intro_offer() -> None:
+    # Home Depot and ExxonMobil offer deferred-interest financing scoped to
+    # specific purchase amounts, not a blanket account-wide intro APR — same
+    # non-fit as Amazon Prime Visa in the Chase batch, left null rather than
+    # force-fit into {rate, months}.
+    for card_id in ("citi-home-depot-consumer", "citi-exxonmobil-smart-card-plus"):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["intro_apr_purchases"] is None
+        assert detail["balance_transfer_apr"] is None
+        assert detail["balance_transfer_fee"] is None
+
+
+def test_citi_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == "citi-strata-premier")
+    for field in (
+        "variable_apr",
+        "balance_transfer_apr",
+        "balance_transfer_fee",
+        "foreign_transaction_fee_rate",
+    ):
+        assert field not in summary
+
+
+# US Bank batch (2026-08-02): all 9 cards researched. US Bank uses a single
+# consistent balance-transfer fee across its whole lineup ("5% of each
+# transfer amount, $5 minimum"), unlike Citi/Capital One's tiered structures.
+# See [[project_apr_balance_transfer_fx_fee_audit]].
+def test_us_bank_split_has_no_revolving_apr_by_design() -> None:
+    # Every purchase auto-splits into an interest-free installment plan —
+    # there's no revolving balance/APR concept to audit, unlike a card that's
+    # simply "not yet audited". Confirmed and described, not left blank.
+    detail = client.get("/api/cards/us-bank-split").json()
+    assert detail["intro_apr_purchases"] is None
+    assert detail["balance_transfer_apr"] is None
+    assert detail["balance_transfer_fee"] is None
+    assert "split into" in detail["variable_apr"]
+    assert detail["foreign_transaction_fee"] is True
+    assert detail["foreign_transaction_fee_rate"] == "3%"
+
+
+@pytest.mark.parametrize(
+    "card_id,intro_months",
+    [
+        ("us-bank-altitude-connect", 15),
+        ("us-bank-altitude-go", 15),
+        ("us-bank-cash-plus", 15),
+        ("us-bank-shield", 21),
+        ("us-bank-smartly", 12),
+    ],
+)
+def test_us_bank_cards_with_a_real_intro_apr_offer(card_id: str, intro_months: int) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": intro_months}
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": intro_months}
+    assert detail["balance_transfer_fee"] == "5% of each transfer amount, $5 minimum"
+
+
+def test_us_bank_altitude_connect_is_the_only_fee_free_us_bank_card() -> None:
+    # Every other US Bank card charges 3%; Altitude Connect is the one
+    # exception, confirmed rather than assumed from the "Altitude" naming.
+    detail = client.get("/api/cards/us-bank-altitude-connect").json()
+    assert detail["foreign_transaction_fee"] is False
+    assert detail["foreign_transaction_fee_rate"] is None
+
+
+def test_us_bank_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == "us-bank-shield")
+    for field in (
+        "variable_apr",
+        "balance_transfer_apr",
+        "balance_transfer_fee",
+        "foreign_transaction_fee_rate",
+    ):
+        assert field not in summary
+
+
+# BofA batch (2026-08-02): all 10 cards researched. BofA's balance-transfer
+# fee uses the same intro/standard two-tier shape as Chase's Freedom Flex/
+# Unlimited (3% within the first 60 days, 5% after), confirmed across every
+# card in the lineup with an intro offer. See
+# [[project_apr_balance_transfer_fx_fee_audit]].
+@pytest.mark.parametrize(
+    "card_id,intro_months",
+    [
+        ("bofa-unlimited-cash-rewards", 15),
+        ("bofa-customized-cash-rewards", 15),
+        ("bofa-travel-rewards", 15),
+        ("bofa-bankamericard", 21),
+    ],
+)
+def test_bofa_cards_with_a_real_intro_apr_offer(card_id: str, intro_months: int) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": intro_months}
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": intro_months}
+    assert detail["balance_transfer_fee"] == "3% for the first 60 days of account opening; 5% after"
+
+
+def test_bofa_travel_rewards_has_no_foreign_transaction_fee_unlike_cash_cards() -> None:
+    # Distinct from Unlimited/Customized Cash Rewards, which both charge 3%.
+    detail = client.get("/api/cards/bofa-travel-rewards").json()
+    assert detail["foreign_transaction_fee"] is False
+    assert detail["foreign_transaction_fee_rate"] is None
+    for card_id in ("bofa-unlimited-cash-rewards", "bofa-customized-cash-rewards"):
+        cash_detail = client.get(f"/api/cards/{card_id}").json()
+        assert cash_detail["foreign_transaction_fee"] is True
+        assert cash_detail["foreign_transaction_fee_rate"] == "3%"
+
+
+def test_bofa_premium_rewards_cards_have_no_intro_offer_and_flat_bt_fees() -> None:
+    # Premium/Elite skip the intro-APR structure entirely and use flat
+    # percentage BT fees (5% / 4%) instead of the two-tier intro/standard
+    # shape the no-annual-fee cards use.
+    detail = client.get("/api/cards/bofa-premium-rewards").json()
+    assert detail["intro_apr_purchases"] is None
+    assert detail["balance_transfer_fee"] == "5% of the amount of each transaction"
+    elite_detail = client.get("/api/cards/bofa-premium-rewards-elite").json()
+    assert elite_detail["intro_apr_purchases"] is None
+    assert elite_detail["balance_transfer_fee"] == "4% of the amount of each transaction"
+
+
+def test_bofa_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == "bofa-bankamericard")
+    for field in (
+        "variable_apr",
+        "balance_transfer_apr",
+        "balance_transfer_fee",
+        "foreign_transaction_fee_rate",
+    ):
+        assert field not in summary
+
+
+# Bilt batch (2026-08-02): all 3 Bilt 2.0 cards researched. Bilt is the
+# first issuer whose intro-APR promo isn't 0% — a real 10% teaser rate,
+# exactly the edge case `IntroApr.rate` was documented (in
+# frontend/src/types/cards.ts) to be kept as a string rather than a
+# hardcoded boolean for. Balance transfers are explicitly NOT eligible for
+# that intro rate on any Bilt 2.0 card. See
+# [[project_apr_balance_transfer_fx_fee_audit]].
+@pytest.mark.parametrize("card_id", ["bilt-blue", "bilt-obsidian", "bilt-palladium"])
+def test_bilt_cards_have_a_nonzero_ten_percent_intro_apr(card_id: str) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["intro_apr_purchases"] == {"rate": "10%", "months": 12}
+    assert detail["intro_apr_balance_transfers"] is None
+    assert detail["variable_apr"] == "26.74%-34.74%"
+    assert detail["foreign_transaction_fee"] is False
+
+
+def test_bilt_palladium_has_a_distinct_tiered_bt_fee_from_blue_and_obsidian() -> None:
+    palladium = client.get("/api/cards/bilt-palladium").json()
+    assert "60 days" not in palladium["balance_transfer_fee"]
+    assert "4 months" in palladium["balance_transfer_fee"]
+    for card_id in ("bilt-blue", "bilt-obsidian"):
+        detail = client.get(f"/api/cards/{card_id}").json()
+        assert detail["balance_transfer_fee"] == "The greater of 5% or $5"
+
+
+def test_bilt_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == "bilt-blue")
+    for field in (
+        "variable_apr",
+        "balance_transfer_apr",
+        "balance_transfer_fee",
+        "foreign_transaction_fee_rate",
+    ):
+        assert field not in summary
+
+
+# Wells Fargo batch (2026-08-02): all 8 cards researched — the final issuer,
+# closing out backlog #11 across all 103 cards. Wells Fargo quotes ongoing
+# APR as three discrete creditworthiness tiers (e.g. "18.49%, 24.49%, or
+# 28.49%"), not a min-max range — stored verbatim like Citi's BJ's/REI tiers
+# and Capital One's tiered cards, not force-converted to a range. See
+# [[project_apr_balance_transfer_fx_fee_audit]].
+def test_wells_fargo_autograph_has_asymmetric_intro_periods_and_distinct_bt_apr() -> None:
+    # 12mo purchases / 18mo balance transfers, AND a balance-transfer APR
+    # range genuinely different from the tiered purchase APR — two
+    # independent axes of divergence on the same card.
+    detail = client.get("/api/cards/wells-fargo-autograph").json()
+    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": 12}
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": 18}
+    assert detail["variable_apr"] == "18.49%, 24.49%, or 28.49% (based on creditworthiness)"
+    assert detail["balance_transfer_apr"] == "17.49%-27.49%"
+
+
+@pytest.mark.parametrize(
+    "card_id,intro_months",
+    [
+        ("wells-fargo-active-cash", 12),
+        ("wells-fargo-reflect", 21),
+    ],
+)
+def test_wells_fargo_cards_with_symmetric_intro_apr_offer(card_id: str, intro_months: int) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": intro_months}
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": intro_months}
+
+
+def test_wells_fargo_autograph_journey_has_no_intro_offer_and_a_flat_bt_fee() -> None:
+    detail = client.get("/api/cards/wells-fargo-autograph-journey").json()
+    assert detail["intro_apr_purchases"] is None
+    assert detail["intro_apr_balance_transfers"] is None
+    assert detail["balance_transfer_fee"] == "$5 or 5% of each transfer, whichever is greater"
+
+
+def test_wells_fargo_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == "wells-fargo-reflect")
+    for field in (
+        "variable_apr",
+        "balance_transfer_apr",
+        "balance_transfer_fee",
+        "foreign_transaction_fee_rate",
+    ):
+        assert field not in summary

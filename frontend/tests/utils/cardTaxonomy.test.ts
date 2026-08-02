@@ -7,7 +7,6 @@ import {
   CLASSIFICATION,
   brandTagsForCards,
   classify,
-  detailTags,
   excludeHiddenSecuredCards,
   groupCardsForAllView,
   groupCardsForPicker,
@@ -95,6 +94,10 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     points_pool_id: null,
     points_pool_receiver: false,
     is_affiliate_link: false,
+    intro_apr_purchases: null,
+    intro_apr_balance_transfers: null,
+    foreign_transaction_fee: null,
+    has_lounge_access: false,
     ...overrides,
   };
 }
@@ -115,6 +118,14 @@ function makeCard(overrides: Partial<Card> = {}): Card {
     points_pool_id: null,
     points_pool_receiver: false,
     is_affiliate_link: false,
+    intro_apr_purchases: null,
+    intro_apr_balance_transfers: null,
+    foreign_transaction_fee: null,
+    has_lounge_access: false,
+    variable_apr: null,
+    balance_transfer_apr: null,
+    balance_transfer_fee: null,
+    foreign_transaction_fee_rate: null,
     earn_rates: [],
     earn_note: "",
     points: { currency: "Membership Rewards", redemption_options: [], per_100k: "", note: "" },
@@ -145,7 +156,7 @@ describe("groupCardsForAllView", () => {
     const sections = groupCardsForAllView(cards);
 
     expect(sections.map((s) => s.label)).toEqual([
-      "Flagship Cards",
+      "Proprietary Cards",
       "Delta SkyMiles Cards", // named after its brand even though it's the only airline program
       "Hilton Honors Cards",
       "Marriott Bonvoy Cards",
@@ -170,7 +181,7 @@ describe("groupCardsForAllView", () => {
 
   it("omits sections with no matching cards", () => {
     const sections = groupCardsForAllView([makeSummary({ id: "amex-platinum" })]);
-    expect(sections).toEqual([{ label: "Flagship Cards", cards: [makeSummary()] }]);
+    expect(sections).toEqual([{ label: "Proprietary Cards", cards: [makeSummary()] }]);
   });
 
   it("puts retail/carrier co-brands in Other Co-Branded Cards", () => {
@@ -261,32 +272,44 @@ describe("summaryTags", () => {
     const tags = summaryTags(makeSummary({ categories: [] }));
     expect(tags).not.toEqual(expect.arrayContaining(["Dining", "Gas"]));
   });
-});
 
-describe("detailTags", () => {
-  it("tags Lounge Access from status perks", () => {
-    const tags = detailTags(
-      makeCard({
-        status_perks: [{ name: "Centurion Lounge Access", strength: 5, note: "Unlimited visits." }],
-      }),
-    );
-    expect(tags).toContain("Lounge Access");
+  // Lounge Access, 0% Intro APR, Balance Transfer, and No Foreign
+  // Transaction Fee are all sourced from real issuer terms server-side (see
+  // backend/models.py Card.intro_apr_purchases), not guessed from free
+  // text — summaryTags just reads the resulting CardSummary fields.
+
+  it("tags Lounge Access when has_lounge_access is true", () => {
+    expect(summaryTags(makeSummary({ has_lounge_access: true }))).toContain("Lounge Access");
   });
 
-  it("tags 0% Intro APR, No Foreign Transaction Fee, and Balance Transfer from free text", () => {
-    const tags = detailTags(
-      makeCard({
-        protection_note: "This card has no foreign transaction fee on any purchase.",
-        earn_note: "0% intro APR for 21 months on balance transfers.",
-      }),
+  it("tags 0% Intro APR when intro_apr_purchases is set", () => {
+    const tags = summaryTags(
+      makeSummary({ intro_apr_purchases: { rate: "0%", months: 15 } }),
     );
-    expect(tags).toEqual(
-      expect.arrayContaining(["0% Intro APR", "No Foreign Transaction Fee", "Balance Transfer"]),
+    expect(tags).toContain("0% Intro APR");
+  });
+
+  it("tags Balance Transfer when intro_apr_balance_transfers is set", () => {
+    const tags = summaryTags(
+      makeSummary({ intro_apr_balance_transfers: { rate: "0%", months: 18 } }),
+    );
+    expect(tags).toContain("Balance Transfer");
+  });
+
+  it("tags No Foreign Transaction Fee only when explicitly false, not merely unaudited (null)", () => {
+    expect(summaryTags(makeSummary({ foreign_transaction_fee: false }))).toContain(
+      "No Foreign Transaction Fee",
+    );
+    expect(summaryTags(makeSummary({ foreign_transaction_fee: null }))).not.toContain(
+      "No Foreign Transaction Fee",
+    );
+    expect(summaryTags(makeSummary({ foreign_transaction_fee: true }))).not.toContain(
+      "No Foreign Transaction Fee",
     );
   });
 
-  it("doesn't tag Lounge/APR/FTF/BT when nothing in the data supports them", () => {
-    const tags = detailTags(makeCard());
+  it("doesn't tag Lounge/APR/FTF/BT when the card hasn't been audited for them", () => {
+    const tags = summaryTags(makeSummary());
     expect(tags).not.toEqual(
       expect.arrayContaining(["Lounge Access", "0% Intro APR", "No Foreign Transaction Fee", "Balance Transfer"]),
     );

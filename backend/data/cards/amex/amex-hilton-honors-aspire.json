@@ -8,6 +8,13 @@
   "annual_fee": 550,
   "effective_cost": "Low if you use the resort + flight credits",
   "official_url": "https://www.americanexpress.com/us/credit-cards/card/hilton-honors-aspire/",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "19.49%-28.49%",
+  "balance_transfer_apr": null,
+  "balance_transfer_fee": null,
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Keep if you actually book Hilton resort stays; the credits are narrow",
@@ -24,7 +31,14 @@
     {
       "emoji": "✈️",
       "multiplier": "7×",
-      "category": "Select travel: flights (direct or Amex Travel), select car rentals",
+      "category": "Flights, direct or via Amex Travel",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🚗",
+      "multiplier": "7×",
+      "category": "Select car rentals",
       "highlight": true,
       "is_base": false
     },

@@ -8,6 +8,13 @@
   "annual_fee": 95,
   "effective_cost": "Moderate: the anniversary bonus points and Trusted Traveler credit can offset a large share of the $95 fee for frequent Choice Hotels guests",
   "official_url": "https://creditcards.wellsfargo.com/choice-hotels-privileges-select-mastercard/",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "19.99%, 25.74%, or 28.74% (based on creditworthiness)",
+  "balance_transfer_apr": "19.99%, 25.74%, or 28.74% (based on creditworthiness)",
+  "balance_transfer_fee": "$5 or 5% of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
   "verdict": {
     "status": "situational",
     "text": "Keep for frequent Choice Hotels stays if Platinum status is worth it",
@@ -24,7 +31,28 @@
     {
       "emoji": "⛽",
       "multiplier": "5×",
-      "category": "Gas stations, grocery stores, home improvement stores, and phone plans",
+      "category": "Gas stations",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "5×",
+      "category": "Grocery stores",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🔨",
+      "multiplier": "5×",
+      "category": "Home improvement stores",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "📱",
+      "multiplier": "5×",
+      "category": "Phone plans",
       "highlight": true,
       "is_base": false
     },

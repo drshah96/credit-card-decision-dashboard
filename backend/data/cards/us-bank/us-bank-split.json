@@ -8,6 +8,13 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee, but this is a BNPL card with no rewards program at all",
   "official_url": "https://www.usbank.com/credit-cards/split-card-world-mastercard-credit-card.html",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": true,
+  "variable_apr": "No standard revolving APR \u2014 purchases are automatically split into an interest-free 3-month payment plan (optional 6- or 12-month plans available for a fee)",
+  "balance_transfer_apr": null,
+  "balance_transfer_fee": null,
+  "foreign_transaction_fee_rate": "3%",
   "verdict": {
     "status": "reconsider",
     "text": "Not a rewards card: forces every purchase into an installment plan",

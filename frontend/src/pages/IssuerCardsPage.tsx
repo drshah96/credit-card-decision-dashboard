@@ -11,7 +11,6 @@ import type { Card, CardSummary } from "../types/cards";
 import {
   ALL_CARDS_FILTER,
   brandTagsForCards,
-  detailTags,
   excludeHiddenSecuredCards,
   getIssuerBySlug,
   groupCardsForAllView,
@@ -87,12 +86,14 @@ export default function IssuerCardsPage() {
   const issuerCardIds = useMemo(() => issuerCards.map((c) => c.id), [issuerCards]);
 
   // Fetching full detail for every card in this issuer's lineup (at most 23
-  // today) is what lets the behavioral filter chips (Dining, Gas, Lounge
-  // Access, Balance Transfer, 0% Intro APR, No Foreign Transaction Fee) read
-  // real data instead of being guessed. One bulk request for the whole lineup
-  // rather than a fetchCard-per-card fan-out — the latter meant visiting an
-  // issuer with a large lineup (e.g. Citi's 23 cards) fired 23 separate
-  // requests on every page load.
+  // today) is what lets sortFilteredCards rank cards within a filtered view
+  // by real earn-rate relevance (e.g. within "Dining", the card that
+  // actually earns the most dining multiplier first) — every filter chip
+  // itself now comes from CardSummary alone (see summaryTags), this is only
+  // for in-filter ordering. One bulk request for the whole lineup rather
+  // than a fetchCard-per-card fan-out — the latter meant visiting an issuer
+  // with a large lineup (e.g. Citi's 23 cards) fired 23 separate requests on
+  // every page load.
   const queryClient = useQueryClient();
   const { data: cardDetails } = useQuery({
     queryKey: ["cardDetails", issuerCardIds],
@@ -123,11 +124,9 @@ export default function IssuerCardsPage() {
     };
     for (const card of issuerCards) {
       for (const tag of summaryTags(card)) addTag(tag, card.id);
-      const detail = detailsById.get(card.id);
-      if (detail) for (const tag of detailTags(detail)) addTag(tag, card.id);
     }
     return map;
-  }, [issuerCards, detailsById]);
+  }, [issuerCards]);
 
   const brandTags = useMemo(() => brandTagsForCards(issuerCards), [issuerCards]);
   const chips = useMemo(
@@ -137,7 +136,7 @@ export default function IssuerCardsPage() {
 
   if (!issuer) {
     return (
-      <div className="wrap" style={{ paddingTop: 48, paddingBottom: 80 }}>
+      <div className="wrap" style={{ paddingTop: 24, paddingBottom: 80 }}>
         <p style={{ color: "var(--muted)" }}>Unknown issuer.</p>
         <Link to="/" style={{ color: "var(--accent)" }}>
           ← All issuers
@@ -159,7 +158,7 @@ export default function IssuerCardsPage() {
 
   return (
     <div style={{ minHeight: "100vh" }}>
-      <div className="wrap" style={{ paddingTop: 48, paddingBottom: 80 }}>
+      <div className="wrap" style={{ paddingTop: 24, paddingBottom: 80 }}>
         <Link
           to="/"
           style={{

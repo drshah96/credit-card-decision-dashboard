@@ -34,6 +34,10 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     points_pool_id: null,
     points_pool_receiver: false,
     is_affiliate_link: false,
+    intro_apr_purchases: null,
+    intro_apr_balance_transfers: null,
+    foreign_transaction_fee: null,
+    has_lounge_access: false,
     ...overrides,
   };
 }
@@ -43,6 +47,14 @@ function makeCard(overrides: Partial<Card> = {}): Card {
   return {
     ...summary,
     is_affiliate_link: false,
+    intro_apr_purchases: null,
+    intro_apr_balance_transfers: null,
+    foreign_transaction_fee: null,
+    has_lounge_access: false,
+    variable_apr: null,
+    balance_transfer_apr: null,
+    balance_transfer_fee: null,
+    foreign_transaction_fee_rate: null,
     earn_rates: [],
     earn_note: "",
     points: { currency: summary.points_program, redemption_options: [], per_100k: "", note: "" },
@@ -179,7 +191,7 @@ describe("IssuerCardsPage", () => {
     await waitFor(() => {
       expect(screen.getByRole("button", { name: "All Cards" })).toHaveAttribute("aria-pressed", "true");
     });
-    expect(screen.getByText("Flagship Cards")).toBeInTheDocument();
+    expect(screen.getByText("Proprietary Cards")).toBeInTheDocument();
     // Named after its brand even though it's the only airline program in this fixture.
     expect(screen.getByText("Delta SkyMiles Cards")).toBeInTheDocument();
     // Two hotel brands (Hilton, Marriott) -> each gets its own section.
@@ -213,7 +225,7 @@ describe("IssuerCardsPage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Airline" }));
 
     expect(screen.getByRole("button", { name: "Airline" })).toHaveAttribute("aria-pressed", "true");
-    expect(screen.queryByText("Flagship Cards")).not.toBeInTheDocument();
+    expect(screen.queryByText("Proprietary Cards")).not.toBeInTheDocument();
     expect(screen.getByText("Delta SkyMiles Gold")).toBeInTheDocument();
     expect(screen.queryByText("The Platinum Card")).not.toBeInTheDocument();
   });

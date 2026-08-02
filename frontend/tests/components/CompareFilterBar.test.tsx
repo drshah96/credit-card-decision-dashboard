@@ -28,6 +28,10 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     points_pool_id: null,
     points_pool_receiver: false,
     is_affiliate_link: false,
+    intro_apr_purchases: null,
+    intro_apr_balance_transfers: null,
+    foreign_transaction_fee: null,
+    has_lounge_access: false,
     ...overrides,
   };
 }
@@ -111,5 +115,63 @@ describe("CompareFilterBar", () => {
     fireEvent.click(screen.getByText("World of Hyatt"));
 
     expect(screen.getByRole("button", { name: /^Brand/ })).toHaveTextContent("2");
+  });
+
+  describe("behavioral chips (Lounge Access, 0% Intro APR, Balance Transfer, No Foreign Transaction Fee)", () => {
+    // All four are summary-level fields (see backend/models.py
+    // Card.intro_apr_purchases for why) — no full Card detail needed, so a
+    // plain CardSummary override is enough to exercise them.
+
+    it("doesn't offer a behavioral chip for a card that doesn't have it", () => {
+      render(<Harness cards={ALL_CARDS} />);
+
+      fireEvent.click(screen.getByRole("button", { name: /^Category/ }));
+      expect(screen.queryByText("Lounge Access")).not.toBeInTheDocument();
+      expect(screen.queryByText("0% Intro APR")).not.toBeInTheDocument();
+      expect(screen.queryByText("Balance Transfer")).not.toBeInTheDocument();
+      expect(screen.queryByText("No Foreign Transaction Fee")).not.toBeInTheDocument();
+    });
+
+    it("offers and filters by Lounge Access", () => {
+      const amexWithLounge = makeSummary({ ...AMEX_DELTA, has_lounge_access: true });
+      render(<Harness cards={[amexWithLounge, CHASE_HYATT]} />);
+
+      fireEvent.click(screen.getByRole("button", { name: /^Category/ }));
+      expect(screen.getByText("Lounge Access")).toBeInTheDocument();
+
+      fireEvent.click(screen.getByText("Lounge Access"));
+      fireEvent.click(screen.getByRole("button", { name: /^Issuer/ }));
+      expect(screen.getByText("American Express")).toBeInTheDocument();
+      expect(screen.queryByText("Chase")).not.toBeInTheDocument();
+    });
+
+    it("offers and filters by 0% Intro APR", () => {
+      const chaseWithIntroApr = makeSummary({
+        ...CHASE_HYATT,
+        intro_apr_purchases: { rate: "0%", months: 15 },
+      });
+      render(<Harness cards={[AMEX_DELTA, chaseWithIntroApr]} />);
+
+      fireEvent.click(screen.getByRole("button", { name: /^Category/ }));
+      fireEvent.click(screen.getByText("0% Intro APR"));
+
+      fireEvent.click(screen.getByRole("button", { name: /^Issuer/ }));
+      expect(screen.getByText("Chase")).toBeInTheDocument();
+      expect(screen.queryByText("American Express")).not.toBeInTheDocument();
+    });
+
+    it("offers and filters by No Foreign Transaction Fee (only when explicitly false, not just unaudited)", () => {
+      const amexNoFxFee = makeSummary({ ...AMEX_DELTA, foreign_transaction_fee: false });
+      // CHASE_HYATT's foreign_transaction_fee stays null (not yet audited) —
+      // must not be treated as if it were confirmed fee-free.
+      render(<Harness cards={[amexNoFxFee, CHASE_HYATT]} />);
+
+      fireEvent.click(screen.getByRole("button", { name: /^Category/ }));
+      fireEvent.click(screen.getByText("No Foreign Transaction Fee"));
+
+      fireEvent.click(screen.getByRole("button", { name: /^Issuer/ }));
+      expect(screen.getByText("American Express")).toBeInTheDocument();
+      expect(screen.queryByText("Chase")).not.toBeInTheDocument();
+    });
   });
 });

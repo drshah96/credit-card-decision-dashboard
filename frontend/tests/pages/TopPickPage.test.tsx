@@ -34,6 +34,10 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     points_pool_id: null,
     points_pool_receiver: false,
     is_affiliate_link: false,
+    intro_apr_purchases: null,
+    intro_apr_balance_transfers: null,
+    foreign_transaction_fee: null,
+    has_lounge_access: false,
     ...overrides,
   };
 }
@@ -262,12 +266,12 @@ describe("TopPickPage", () => {
   });
 });
 
-describe("My Cards filter", () => {
+describe("Choose Your Cards filter", () => {
   it("ranks the whole catalog by default, with no filter applied", async () => {
     vi.mocked(fetchCards).mockResolvedValue(SUMMARIES);
     renderPage();
 
-    expect(await screen.findByRole("button", { name: /^My Cards/ })).not.toHaveClass("active");
+    expect(await screen.findByRole("button", { name: /^Choose Your Cards/ })).not.toHaveClass("active");
     const diningRow = (await screen.findByRole("rowheader", { name: "Dining" })).closest("tr")!;
     expect(within(diningRow).getByText("American Express Gold")).toBeInTheDocument();
   });
@@ -276,7 +280,7 @@ describe("My Cards filter", () => {
     vi.mocked(fetchCards).mockResolvedValue(SUMMARIES);
     renderPage();
 
-    fireEvent.click(await screen.findByRole("button", { name: /^My Cards/ }));
+    fireEvent.click(await screen.findByRole("button", { name: /^Choose Your Cards/ }));
     fireEvent.click(screen.getByRole("checkbox", { name: "Sapphire Reserve" }));
 
     const diningRow = (await screen.findByRole("rowheader", { name: "Dining" })).closest("tr")!;
@@ -292,11 +296,11 @@ describe("My Cards filter", () => {
     vi.mocked(fetchCards).mockResolvedValue(SUMMARIES);
     renderPage();
 
-    fireEvent.click(await screen.findByRole("button", { name: /^My Cards/ }));
+    fireEvent.click(await screen.findByRole("button", { name: /^Choose Your Cards/ }));
     fireEvent.click(screen.getByRole("checkbox", { name: "Sapphire Reserve" }));
 
     expect(screen.getByText(/among your 1 selected cards/)).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /^My Cards/ })).toHaveTextContent("1");
+    expect(screen.getByRole("button", { name: /^Choose Your Cards/ })).toHaveTextContent("1");
   });
 
   it("restores a selection from the URL on load", async () => {
@@ -312,7 +316,7 @@ describe("My Cards filter", () => {
     vi.mocked(fetchCards).mockResolvedValue(SUMMARIES);
     renderPage("?cards=chase-sapphire-reserve");
 
-    fireEvent.click(await screen.findByRole("button", { name: /^My Cards/ }));
+    fireEvent.click(await screen.findByRole("button", { name: /^Choose Your Cards/ }));
     fireEvent.click(screen.getByRole("button", { name: "Clear selection" }));
 
     const diningRow = (await screen.findByRole("rowheader", { name: "Dining" })).closest("tr")!;
@@ -324,7 +328,7 @@ describe("My Cards filter", () => {
     vi.mocked(fetchCards).mockResolvedValue(SUMMARIES);
     renderPage();
 
-    fireEvent.click(await screen.findByRole("button", { name: /^My Cards/ }));
+    fireEvent.click(await screen.findByRole("button", { name: /^Choose Your Cards/ }));
     fireEvent.change(screen.getByRole("textbox", { name: "Search cards" }), {
       target: { value: "sapphire" },
     });
@@ -337,7 +341,7 @@ describe("My Cards filter", () => {
     vi.mocked(fetchCards).mockResolvedValue(SUMMARIES);
     renderPage();
 
-    fireEvent.click(await screen.findByRole("button", { name: /^My Cards/ }));
+    fireEvent.click(await screen.findByRole("button", { name: /^Choose Your Cards/ }));
     fireEvent.click(screen.getByRole("button", { name: "Chase" }));
 
     expect(screen.getByRole("checkbox", { name: "Sapphire Reserve" })).toBeInTheDocument();
@@ -360,7 +364,7 @@ describe("My Cards filter", () => {
     ));
     renderPage();
 
-    fireEvent.click(await screen.findByRole("button", { name: /^My Cards/ }));
+    fireEvent.click(await screen.findByRole("button", { name: /^Choose Your Cards/ }));
 
     expect(screen.getByRole("checkbox", { name: "American Express Gold" })).toBeInTheDocument();
     expect(
@@ -372,7 +376,7 @@ describe("My Cards filter", () => {
     vi.mocked(fetchCards).mockResolvedValue(SUMMARIES);
     renderPage("?cards=amex-gold");
 
-    fireEvent.click(await screen.findByRole("button", { name: /^My Cards/ }));
+    fireEvent.click(await screen.findByRole("button", { name: /^Choose Your Cards/ }));
     expect(screen.getByText("Selected (1)")).toBeInTheDocument();
     const selectedCheckbox = screen.getByRole("checkbox", { name: "American Express Gold" });
     expect(selectedCheckbox).toBeChecked();

@@ -122,12 +122,12 @@ function MyCardsFilter({
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
       >
-        My Cards
+        Choose Your Cards
         {selectedIds.size > 0 && <span className="compare-filter-count">{selectedIds.size}</span>}
         <span className="compare-filter-caret" aria-hidden="true" />
       </button>
       {open && (
-        <div className="top-pick-my-cards-panel" role="group" aria-label="Filter to your cards">
+        <div className="top-pick-my-cards-panel" role="group" aria-label="Choose your cards">
           <div className="card-picker-search">
             <input
               type="text"
@@ -389,10 +389,18 @@ export default function TopPickPage() {
 
         {!isLoading && !isError && allCards && (
           <div className="top-pick-toolbar">
-            <span className="top-pick-toolbar-label">
-              {selectedIds.size > 0
-                ? `Scoped to ${selectedIds.size} of your cards`
-                : `Ranking all ${allCards.length} cards in the catalog`}
+            <span className="top-pick-toolbar-text">
+              <span className="top-pick-toolbar-label">
+                {selectedIds.size > 0
+                  ? `Scoped to ${selectedIds.size} of your cards`
+                  : `Ranking all ${allCards.length} cards in the catalog`}
+              </span>
+              {selectedIds.size === 0 && (
+                <span className="top-pick-toolbar-hint">
+                  Add the credit cards you have, or ones you're considering, to compare their
+                  real value.
+                </span>
+              )}
             </span>
             <MyCardsFilter allCards={allCards} selectedIds={selectedIds} onChange={setSelectedIds} />
           </div>
