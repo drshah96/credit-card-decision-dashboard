@@ -1064,3 +1064,58 @@ def test_us_bank_variable_apr_and_fee_fields_are_detail_only_not_on_summary() ->
         "foreign_transaction_fee_rate",
     ):
         assert field not in summary
+
+
+# BofA batch (2026-08-02): all 10 cards researched. BofA's balance-transfer
+# fee uses the same intro/standard two-tier shape as Chase's Freedom Flex/
+# Unlimited (3% within the first 60 days, 5% after), confirmed across every
+# card in the lineup with an intro offer. See
+# [[project_apr_balance_transfer_fx_fee_audit]].
+@pytest.mark.parametrize(
+    "card_id,intro_months",
+    [
+        ("bofa-unlimited-cash-rewards", 15),
+        ("bofa-customized-cash-rewards", 15),
+        ("bofa-travel-rewards", 15),
+        ("bofa-bankamericard", 21),
+    ],
+)
+def test_bofa_cards_with_a_real_intro_apr_offer(card_id: str, intro_months: int) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": intro_months}
+    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": intro_months}
+    assert detail["balance_transfer_fee"] == "3% for the first 60 days of account opening; 5% after"
+
+
+def test_bofa_travel_rewards_has_no_foreign_transaction_fee_unlike_cash_cards() -> None:
+    # Distinct from Unlimited/Customized Cash Rewards, which both charge 3%.
+    detail = client.get("/api/cards/bofa-travel-rewards").json()
+    assert detail["foreign_transaction_fee"] is False
+    assert detail["foreign_transaction_fee_rate"] is None
+    for card_id in ("bofa-unlimited-cash-rewards", "bofa-customized-cash-rewards"):
+        cash_detail = client.get(f"/api/cards/{card_id}").json()
+        assert cash_detail["foreign_transaction_fee"] is True
+        assert cash_detail["foreign_transaction_fee_rate"] == "3%"
+
+
+def test_bofa_premium_rewards_cards_have_no_intro_offer_and_flat_bt_fees() -> None:
+    # Premium/Elite skip the intro-APR structure entirely and use flat
+    # percentage BT fees (5% / 4%) instead of the two-tier intro/standard
+    # shape the no-annual-fee cards use.
+    detail = client.get("/api/cards/bofa-premium-rewards").json()
+    assert detail["intro_apr_purchases"] is None
+    assert detail["balance_transfer_fee"] == "5% of the amount of each transaction"
+    elite_detail = client.get("/api/cards/bofa-premium-rewards-elite").json()
+    assert elite_detail["intro_apr_purchases"] is None
+    assert elite_detail["balance_transfer_fee"] == "4% of the amount of each transaction"
+
+
+def test_bofa_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
+    summary = next(c for c in client.get("/api/cards").json() if c["id"] == "bofa-bankamericard")
+    for field in (
+        "variable_apr",
+        "balance_transfer_apr",
+        "balance_transfer_fee",
+        "foreign_transaction_fee_rate",
+    ):
+        assert field not in summary
