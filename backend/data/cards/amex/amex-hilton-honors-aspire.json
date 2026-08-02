@@ -31,7 +31,14 @@
     {
       "emoji": "✈️",
       "multiplier": "7×",
-      "category": "Select travel: flights (direct or Amex Travel), select car rentals",
+      "category": "Flights, direct or via Amex Travel",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🚗",
+      "multiplier": "7×",
+      "category": "Select car rentals",
       "highlight": true,
       "is_base": false
     },
