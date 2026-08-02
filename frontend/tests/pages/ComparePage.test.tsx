@@ -8,10 +8,9 @@ import type { Card, CardSummary } from "@/types/cards";
 vi.mock("@/api/cards", () => ({
   fetchCards: vi.fn(),
   fetchCard: vi.fn(),
-  fetchCardDetails: vi.fn(),
 }));
 
-import { fetchCard, fetchCardDetails, fetchCards } from "@/api/cards";
+import { fetchCard, fetchCards } from "@/api/cards";
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 
@@ -35,6 +34,10 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     points_pool_id: null,
     points_pool_receiver: false,
     is_affiliate_link: false,
+    intro_apr_purchases: null,
+    intro_apr_balance_transfers: null,
+    foreign_transaction_fee: null,
+    has_lounge_access: false,
     ...overrides,
   };
 }
@@ -44,6 +47,10 @@ function makeCard(overrides: Partial<Card> = {}): Card {
   return {
     ...summary,
     is_affiliate_link: false,
+    intro_apr_purchases: null,
+    intro_apr_balance_transfers: null,
+    foreign_transaction_fee: null,
+    has_lounge_access: false,
     earn_rates: [
       { emoji: "✈️", multiplier: "5×", category: "Flights", highlight: true, is_base: false },
     ],
@@ -101,15 +108,6 @@ function mockFetchCardImpl(id: string): Promise<Card> {
   return Promise.resolve(makeCard(summary));
 }
 
-function mockFetchCardDetailsImpl(ids: string[]): Promise<Card[]> {
-  return Promise.resolve(
-    ids
-      .map((id) => ALL_SUMMARIES.find((c) => c.id === id))
-      .filter((s): s is CardSummary => s !== undefined)
-      .map((s) => makeCard(s)),
-  );
-}
-
 function renderPage(initialPath = "/compare") {
   const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
   return render(
@@ -130,7 +128,6 @@ beforeEach(() => {
   localStorage.clear();
   vi.mocked(fetchCards).mockResolvedValue(ALL_SUMMARIES);
   vi.mocked(fetchCard).mockImplementation(mockFetchCardImpl);
-  vi.mocked(fetchCardDetails).mockImplementation(mockFetchCardDetailsImpl);
 });
 
 describe("ComparePage", () => {
@@ -397,30 +394,17 @@ describe("ComparePage", () => {
     expect(within(picker).queryByText("The Platinum Card")).not.toBeInTheDocument();
   });
 
-  it("the Category filter offers and narrows by a detail-only behavioral chip once catalog-wide detail loads", async () => {
-    // Lounge Access lives in Card.status_perks, not CardSummary — only
-    // available once the bulk catalog-wide detail fetch (added for the
-    // Category dropdown, reusing the same bulk endpoint IssuerCardsPage
-    // uses) resolves.
-    vi.mocked(fetchCardDetails).mockImplementation((ids: string[]) =>
-      Promise.resolve(
-        ids
-          .map((id) => ALL_SUMMARIES.find((c) => c.id === id))
-          .filter((s): s is CardSummary => s !== undefined)
-          .map((s) =>
-            makeCard(
-              s.id === "amex-platinum"
-                ? { ...s, status_perks: [{ name: "Centurion Lounge Access", strength: 3, note: "" }] }
-                : s,
-            ),
-          ),
-      ),
-    );
+  it("the Category filter offers and narrows by a behavioral chip sourced from CardSummary alone", async () => {
+    // Lounge Access/0% Intro APR/Balance Transfer/No Foreign Transaction Fee
+    // are all CardSummary fields (see backend/models.py
+    // Card.intro_apr_purchases) — no full Card detail fetch needed, unlike
+    // when this was first built.
+    vi.mocked(fetchCards).mockResolvedValue([
+      { ...ALL_SUMMARIES[0], has_lounge_access: true },
+      ...ALL_SUMMARIES.slice(1),
+    ]);
     renderPage("/compare");
 
-    await waitFor(() => {
-      expect(screen.getByRole("button", { name: /^Category/ })).toBeInTheDocument();
-    });
     await waitFor(() => {
       fireEvent.click(screen.getByRole("button", { name: /^Category/ }));
       expect(screen.getByText("Lounge Access")).toBeInTheDocument();

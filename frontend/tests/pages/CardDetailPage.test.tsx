@@ -48,6 +48,10 @@ function makeCard(overrides: Partial<Card> = {}): Card {
     points_pool_id: null,
     points_pool_receiver: false,
     is_affiliate_link: false,
+    intro_apr_purchases: null,
+    intro_apr_balance_transfers: null,
+    foreign_transaction_fee: null,
+    has_lounge_access: false,
     earn_rates: [
       { emoji: "✈️", multiplier: "5×", category: "Flights", highlight: true, is_base: false },
       { emoji: "💳", multiplier: "1×", category: "Everything else", highlight: false, is_base: true },

@@ -34,6 +34,10 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     points_pool_id: null,
     points_pool_receiver: false,
     is_affiliate_link: false,
+    intro_apr_purchases: null,
+    intro_apr_balance_transfers: null,
+    foreign_transaction_fee: null,
+    has_lounge_access: false,
     ...overrides,
   };
 }
