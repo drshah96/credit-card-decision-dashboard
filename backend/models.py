@@ -218,10 +218,11 @@ class Card(BaseModel):
     foreign_transaction_fee_rate: str | None = None
     # Round-3 rates/fees (see backlog #12) — same treatment as variable_apr
     # above: verbatim strings from the issuer's own Pricing & Terms table,
-    # detail-only, None = not yet audited. pay_over_time_fee is an
-    # Amex-charge-card-specific concept (a fee for using Pay Over Time on an
-    # otherwise-charge card) and stays None for every other issuer's cards,
-    # not just unaudited ones.
+    # detail-only, None = not yet audited. pay_over_time_fee only applies to
+    # issuers that offer a "pay a purchase off over time for a fixed fee
+    # instead of interest" feature (Amex's Pay Over Time on charge cards,
+    # Chase Pay Over Time on revolving cards) — None for cards with no such
+    # feature at all, not just unaudited ones.
     cash_advance_apr: str | None = None
     penalty_apr: str | None = None
     # When the penalty APR kicks in (e.g. "after a payment more than 60 days

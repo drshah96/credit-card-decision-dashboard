@@ -673,7 +673,6 @@ def test_intro_apr_shape_when_present() -> None:
     [
         ("chase-freedom-unlimited", 15, 15, True),
         ("chase-freedom-flex", 15, 15, True),
-        ("chase-slate-edge", 18, 18, True),
     ],
 )
 def test_chase_cards_with_a_real_intro_apr_offer(
@@ -720,12 +719,14 @@ def test_chase_cards_with_confirmed_foreign_transaction_fee() -> None:
         "chase-freedom-rise",
         "chase-disney-premier",
         "chase-amazon-prime-visa",
+        "chase-slate-edge",
     ):
         detail = client.get(f"/api/cards/{card_id}").json()
         assert detail["intro_apr_purchases"] is None
         assert detail["intro_apr_balance_transfers"] is None
     assert client.get("/api/cards/chase-freedom-rise").json()["foreign_transaction_fee"] is True
     assert client.get("/api/cards/chase-disney-premier").json()["foreign_transaction_fee"] is True
+    assert client.get("/api/cards/chase-slate-edge").json()["foreign_transaction_fee"] is True
     assert (
         client.get("/api/cards/chase-amazon-prime-visa").json()["foreign_transaction_fee"] is False
     )
@@ -755,12 +756,17 @@ def test_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
         ("chase-freedom-unlimited", "18.24%-27.74%", "18.24%-27.74%"),
         ("chase-freedom-flex", "18.24%-27.74%", "18.24%-27.74%"),
         ("chase-amazon-prime-visa", "18.74%-27.49%", "18.74%-27.49%"),
-        # Confirmed genuinely distinct BT APR ranges — the whole reason this
-        # field isn't just derived from variable_apr.
-        ("chase-sapphire-reserve", "20.24%-28.74%", "19.49%-27.99%"),
-        ("chase-united-club-infinite", "19.74%-28.24%", "21.49%-28.49%"),
-        ("chase-ihg-one-rewards-premier", "19.24%-27.74%", "19.99%-28.49%"),
-        ("chase-marriott-bonvoy-boundless", "20.24%-27.24%", "19.24%-27.74%"),
+        # Re-verified 2026-08-03 against Chase's current Pricing & Terms pages:
+        # every one of these previously had a genuinely distinct BT APR range
+        # (the whole reason this field isn't just derived from variable_apr) —
+        # Prime Rate has since dropped to 6.75% and Chase re-grouped Purchase/
+        # My Chase Loan/Balance Transfer APR under one range for all of them.
+        # Kept as their own group since a future audit could easily find this
+        # has reverted, unlike the cards above which were never distinct.
+        ("chase-sapphire-reserve", "19.49%-27.99%", "19.49%-27.99%"),
+        ("chase-ihg-one-rewards-premier", "19.24%-27.74%", "19.24%-27.74%"),
+        ("chase-marriott-bonvoy-boundless", "19.24%-27.74%", "19.24%-27.74%"),
+        ("chase-united-club-infinite", "19.74%-28.24%", "19.74%-28.24%"),
     ],
 )
 def test_chase_variable_and_balance_transfer_apr(

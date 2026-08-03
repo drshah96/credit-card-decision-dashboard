@@ -241,8 +241,10 @@ export interface Card extends CardBase {
   foreign_transaction_fee_rate: string | null;
   /** Round-3 rates/fees (#12) — same verbatim-string, detail-only,
    * null-means-not-yet-audited treatment as variable_apr above.
-   * pay_over_time_fee is an Amex-charge-card-specific concept and stays
-   * null for every other issuer's cards, not just unaudited ones. */
+   * pay_over_time_fee only applies to issuers offering a "pay a purchase
+   * off over time for a fixed fee instead of interest" feature (Amex's Pay
+   * Over Time, Chase Pay Over Time) — null for cards with no such feature
+   * at all, not just unaudited ones. */
   cash_advance_apr: string | null;
   penalty_apr: string | null;
   /** When the penalty APR kicks in (e.g. "after a payment more than 60 days

@@ -13,10 +13,22 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "20.24%-28.74%",
+  "variable_apr": "19.49%-27.99%",
   "balance_transfer_apr": "19.49%-27.99%",
   "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.49%",
+  "penalty_apr": "Up to 29.99%",
+  "penalty_apr_trigger": "Failing to make a Minimum Payment when due, or making a payment that's returned unpaid; can remain in effect indefinitely",
+  "pay_over_time_fee": "Up to 1.72% per month of the amount selected to pay over time, via Chase Pay Over Time",
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": "Up to $40",
+  "returned_check_fee": "None",
+  "welcome_bonus": {
+    "bonus": "100,000 points",
+    "requirement": "after you spend $6,000 in purchases in the first 3 months from account opening",
+    "estimated_value": "$2,000"
+  },
   "verdict": {
     "status": "situational",
     "text": "Best all-rounder if you use the credits",
@@ -33,7 +45,14 @@
     {
       "emoji": "\u2708\ufe0f",
       "multiplier": "4\u00d7",
-      "category": "Flights & hotels, booked direct",
+      "category": "Flights, booked direct",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "\ud83c\udfe8",
+      "multiplier": "4\u00d7",
+      "category": "Hotels, booked direct",
       "highlight": true,
       "is_base": false
     },
@@ -47,7 +66,7 @@
     {
       "emoji": "\ud83d\ude97",
       "multiplier": "5\u00d7",
-      "category": "Lyft (through Mar 2027)",
+      "category": "Lyft (through Sep 2027)",
       "highlight": false,
       "is_base": false
     },
@@ -254,15 +273,40 @@
     {
       "id": "dashpass",
       "name": "DoorDash DashPass",
-      "subtitle": "+ $10/mo non-restaurant",
+      "subtitle": "$0 delivery fees · 12 mo",
       "max_annual": 120,
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "Complimentary DashPass ($0 delivery fees) plus a $10/mo promo on non-restaurant (grocery/retail) orders.",
+      "description": "Complimentary 12-month DashPass membership ($0 delivery fees, reduced service fees), a $120 value per Chase, if activated by Dec 31, 2027.",
       "tips": [
-        "Activate DashPass by the deadline; it auto-covers delivery fees.",
-        "The $10/mo non-restaurant promo is use-it-or-lose-it; a monthly grocery DoorDash order captures it."
+        "Activate DashPass by the deadline; it auto-covers delivery fees for the membership period."
+      ]
+    },
+    {
+      "id": "doordash-promos",
+      "name": "DoorDash Promos",
+      "subtitle": "$25/mo · thru 12/31/27",
+      "max_annual": 300,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "DashPass members get up to $25/mo in DoorDash promos: a $5/mo credit on restaurant orders plus two $10/mo promos on groceries, retail, and more, through Dec 31, 2027.",
+      "tips": [
+        "Use-it-or-lose-it monthly; a grocery or restaurant DoorDash order each month captures it."
+      ]
+    },
+    {
+      "id": "lyft",
+      "name": "Lyft Ride Credits",
+      "subtitle": "$10/mo · thru 9/30/27",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Up to $10 in monthly in-app Lyft ride credits through Sep 30, 2027, on top of 5× total points on Lyft rides through the same date.",
+      "tips": [
+        "Stacks with the 5× Lyft earn rate; a monthly Lyft ride captures both."
       ]
     },
     {
@@ -370,10 +414,6 @@
     {
       "name": "Visa Infinite Luxury Hotel Collection",
       "detail": "Elite-like perks (breakfast, upgrades, late checkout, property credit) at 900+ hotels, on top of The Edit."
-    },
-    {
-      "name": "DoorDash DashPass + Lyft",
-      "detail": "Complimentary DashPass ($0 delivery fees) and 5\u00d7 on Lyft rides through Mar 2027."
     },
     {
       "name": "Points Boost",
