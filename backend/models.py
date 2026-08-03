@@ -18,6 +18,21 @@ class IntroApr(BaseModel):
     months: int
 
 
+class WelcomeBonus(BaseModel):
+    """The current sign-up offer, quoted verbatim from the issuer's own
+    current terms rather than decomposed into numbers — offers change
+    frequently and are structured differently across issuers (points vs.
+    cash, single vs. tiered spend thresholds), so `bonus`/`requirement` stay
+    free text like `effective_cost`/`variable_apr` elsewhere in this schema.
+    `estimated_value` is this card's own best redemption cpp applied to the
+    bonus, when the bonus is a points/miles amount — omitted for cash offers,
+    where the bonus amount already is the value."""
+
+    bonus: str
+    requirement: str
+    estimated_value: str | None = None
+
+
 class EarnRate(BaseModel):
     emoji: str
     multiplier: str
@@ -201,6 +216,26 @@ class Card(BaseModel):
     # boolean above still drives the "No Foreign Transaction Fee" chip
     # unchanged, this is just the detail-page-level specific number.
     foreign_transaction_fee_rate: str | None = None
+    # Round-3 rates/fees (see backlog #12) — same treatment as variable_apr
+    # above: verbatim strings from the issuer's own Pricing & Terms table,
+    # detail-only, None = not yet audited. pay_over_time_fee is an
+    # Amex-charge-card-specific concept (a fee for using Pay Over Time on an
+    # otherwise-charge card) and stays None for every other issuer's cards,
+    # not just unaudited ones.
+    cash_advance_apr: str | None = None
+    penalty_apr: str | None = None
+    # When the penalty APR kicks in (e.g. "after a payment more than 60 days
+    # late") — kept separate from the rate itself since issuers phrase the
+    # trigger very differently and it isn't always present even when the
+    # rate is.
+    penalty_apr_trigger: str | None = None
+    pay_over_time_fee: str | None = None
+    late_payment_fee: str | None = None
+    returned_payment_fee: str | None = None
+    returned_check_fee: str | None = None
+    # The current sign-up offer — see WelcomeBonus. Detail-only, same as the
+    # round-3 fields above; None = not yet audited.
+    welcome_bonus: WelcomeBonus | None = None
 
 
 class EarnCategorySummary(BaseModel):

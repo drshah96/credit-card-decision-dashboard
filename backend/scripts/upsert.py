@@ -197,6 +197,23 @@ def upsert_card(session: Session, data: dict) -> CardModel:
             card.balance_transfer_apr = data.get("balance_transfer_apr")
             card.balance_transfer_fee = data.get("balance_transfer_fee")
             card.foreign_transaction_fee_rate = data.get("foreign_transaction_fee_rate")
+            card.cash_advance_apr = data.get("cash_advance_apr")
+            card.penalty_apr = data.get("penalty_apr")
+            card.penalty_apr_trigger = data.get("penalty_apr_trigger")
+            card.pay_over_time_fee = data.get("pay_over_time_fee")
+            card.late_payment_fee = data.get("late_payment_fee")
+            card.returned_payment_fee = data.get("returned_payment_fee")
+            card.returned_check_fee = data.get("returned_check_fee")
+            # {"bonus": "...", "requirement": "...", "estimated_value": "..."}
+            # or absent (not yet audited), same shape as intro_apr_* above.
+            welcome_bonus = data.get("welcome_bonus")
+            card.welcome_bonus_bonus = welcome_bonus["bonus"] if welcome_bonus else None
+            card.welcome_bonus_requirement = (
+                welcome_bonus["requirement"] if welcome_bonus else None
+            )
+            card.welcome_bonus_estimated_value = (
+                welcome_bonus.get("estimated_value") if welcome_bonus else None
+            )
             card.is_active = True
 
             card.earn_rates = [

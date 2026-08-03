@@ -56,6 +56,14 @@ function makeCard(overrides: Partial<Card> = {}): Card {
     balance_transfer_apr: null,
     balance_transfer_fee: null,
     foreign_transaction_fee_rate: null,
+    cash_advance_apr: null,
+    penalty_apr: null,
+    penalty_apr_trigger: null,
+    pay_over_time_fee: null,
+    late_payment_fee: null,
+    returned_payment_fee: null,
+    returned_check_fee: null,
+    welcome_bonus: null,
     earn_rates: [
       { emoji: "✈️", multiplier: "5×", category: "Flights", highlight: true, is_base: false },
       { emoji: "💳", multiplier: "1×", category: "Everything else", highlight: false, is_base: true },
@@ -462,9 +470,46 @@ describe("CardDetailPage", () => {
       await waitFor(() => {
         expect(screen.getByText("Interest rates & fees")).toBeInTheDocument();
       });
-      // Purchase APR, balance transfer APR, balance_transfer_fee, and
-      // foreign_transaction_fee (null, not confirmed false) all fall back.
-      expect(screen.getAllByText("—")).toHaveLength(4);
+      // Purchase APR, balance transfer APR, balance_transfer_fee, foreign
+      // transaction fee, cash advance APR, penalty APR, late payment fee,
+      // returned payment fee, and returned check fee all fall back — Pay
+      // Over Time fee's row is omitted entirely when null (issuer-specific,
+      // not "unaudited"), so it isn't counted here.
+      expect(screen.getAllByText("—")).toHaveLength(9);
+    });
+
+    it("renders round-3 rates/fees with real audited data", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({
+          cash_advance_apr: "29.99%",
+          penalty_apr: "29.99%",
+          penalty_apr_trigger: "after a payment more than 60 days late",
+          pay_over_time_fee: "1.33% of the Pay Over Time balance",
+          late_payment_fee: "Up to $41",
+          returned_payment_fee: "Up to $41",
+          returned_check_fee: "Up to $41",
+        }),
+      );
+
+      renderPage();
+
+      await waitFor(() => {
+        expect(screen.getByText("Interest rates & fees")).toBeInTheDocument();
+      });
+      expect(screen.getByText("29.99%, after a payment more than 60 days late")).toBeInTheDocument();
+      expect(screen.getByText("1.33% of the Pay Over Time balance")).toBeInTheDocument();
+      expect(screen.getAllByText("Up to $41")).toHaveLength(3);
+    });
+
+    it("omits the Pay Over Time fee row entirely when null, unlike the other round-3 fields", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard());
+
+      renderPage();
+
+      await waitFor(() => {
+        expect(screen.getByText("Interest rates & fees")).toBeInTheDocument();
+      });
+      expect(screen.queryByText("Pay Over Time fee")).not.toBeInTheDocument();
     });
 
     it('shows "None" for a card confirmed to have no foreign transaction fee', async () => {
@@ -475,6 +520,40 @@ describe("CardDetailPage", () => {
       await waitFor(() => {
         expect(screen.getByText("None")).toBeInTheDocument();
       });
+    });
+
+    it("renders the welcome bonus block with real audited data", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({
+          welcome_bonus: {
+            bonus: "80,000 Membership Rewards points",
+            requirement: "after spending $8,000 in the first 6 months",
+            estimated_value: "$1,600",
+          },
+        }),
+      );
+
+      renderPage();
+
+      await waitFor(() => {
+        expect(screen.getByText("Welcome bonus")).toBeInTheDocument();
+      });
+      expect(screen.getByText("80,000 Membership Rewards points")).toBeInTheDocument();
+      expect(
+        screen.getByText("after spending $8,000 in the first 6 months"),
+      ).toBeInTheDocument();
+      expect(screen.getByText("Worth an estimated $1,600")).toBeInTheDocument();
+    });
+
+    it("omits the welcome bonus block entirely when not yet audited", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard()); // welcome_bonus: null
+
+      renderPage();
+
+      await waitFor(() => {
+        expect(screen.getByText("Interest rates & fees")).toBeInTheDocument();
+      });
+      expect(screen.queryByText("Welcome bonus")).not.toBeInTheDocument();
     });
 
     it("renders timeline events", async () => {

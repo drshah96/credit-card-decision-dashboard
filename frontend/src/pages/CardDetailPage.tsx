@@ -85,6 +85,11 @@ function formatForeignTransactionFee(hasFee: boolean | null, rate: string | null
   return "—";
 }
 
+function formatPenaltyApr(rate: string | null, trigger: string | null): string {
+  if (rate && trigger) return `${rate}, ${trigger}`;
+  return rate ?? "—";
+}
+
 // ─── Credit Modal ─────────────────────────────────────────────────────────────
 
 function CreditModal({
@@ -873,6 +878,21 @@ function CardDetail({ card }: { card: Card }) {
 
       <SecuredPairingNote card={card} />
 
+      {/* Welcome bonus */}
+      {card.welcome_bonus && (
+        <Block label="Sign-up offer" title="Welcome bonus" note="from the issuer's current terms">
+          <div className="welcome-bonus">
+            <div className="wb-amount">{card.welcome_bonus.bonus}</div>
+            <div className="wb-req">{card.welcome_bonus.requirement}</div>
+            {card.welcome_bonus.estimated_value && (
+              <div className="wb-value">
+                Worth an estimated {card.welcome_bonus.estimated_value}
+              </div>
+            )}
+          </div>
+        </Block>
+      )}
+
       {/* Earning */}
       <Block label="Earning" title="How you earn points" note="per $1">
         <div className="earn-grid">
@@ -1094,6 +1114,32 @@ function CardDetail({ card }: { card: Card }) {
             <span className="rv">
               {formatForeignTransactionFee(card.foreign_transaction_fee, card.foreign_transaction_fee_rate)}
             </span>
+          </div>
+          <div className="rates-row">
+            <span className="rk">Cash advance APR</span>
+            <span className="rv">{card.cash_advance_apr ?? "—"}</span>
+          </div>
+          <div className="rates-row">
+            <span className="rk">Penalty APR</span>
+            <span className="rv">{formatPenaltyApr(card.penalty_apr, card.penalty_apr_trigger)}</span>
+          </div>
+          {card.pay_over_time_fee && (
+            <div className="rates-row">
+              <span className="rk">Pay Over Time fee</span>
+              <span className="rv">{card.pay_over_time_fee}</span>
+            </div>
+          )}
+          <div className="rates-row">
+            <span className="rk">Late payment fee</span>
+            <span className="rv">{card.late_payment_fee ?? "—"}</span>
+          </div>
+          <div className="rates-row">
+            <span className="rk">Returned payment fee</span>
+            <span className="rv">{card.returned_payment_fee ?? "—"}</span>
+          </div>
+          <div className="rates-row">
+            <span className="rk">Returned check fee</span>
+            <span className="rv">{card.returned_check_fee ?? "—"}</span>
           </div>
         </div>
       </Block>

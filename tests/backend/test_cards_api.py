@@ -1216,3 +1216,41 @@ def test_wells_fargo_variable_apr_and_fee_fields_are_detail_only_not_on_summary(
         "foreign_transaction_fee_rate",
     ):
         assert field not in summary
+
+
+# ─── Round 3 (#12): cash advance/penalty APR, pay-over-time fee, penalty
+# fees, and Welcome Bonus — same detail-only, verbatim-string, incremental
+# per-issuer rollout as the round 1/2 fields above. None = not yet audited.
+
+
+def test_round_3_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
+    summary = next(
+        c for c in client.get("/api/cards").json() if c["id"] == "chase-sapphire-reserve"
+    )
+    for field in (
+        "cash_advance_apr",
+        "penalty_apr",
+        "penalty_apr_trigger",
+        "pay_over_time_fee",
+        "late_payment_fee",
+        "returned_payment_fee",
+        "returned_check_fee",
+        "welcome_bonus",
+    ):
+        assert field not in summary
+
+
+def test_welcome_bonus_shape_when_present() -> None:
+    """Whichever card ends up with an audited welcome bonus, the field is a
+    {bonus, requirement, estimated_value} object with the right value types,
+    not a bare string."""
+    all_ids = [c["id"] for c in client.get("/api/cards").json()]
+    cards = client.get("/api/cards/detail", params={"ids": ",".join(all_ids)}).json()
+    audited = [c for c in cards if c["welcome_bonus"] is not None]
+    if not audited:
+        pytest.skip("no card has an audited welcome_bonus yet")
+    sample = audited[0]["welcome_bonus"]
+    assert set(sample.keys()) == {"bonus", "requirement", "estimated_value"}
+    assert isinstance(sample["bonus"], str)
+    assert isinstance(sample["requirement"], str)
+    assert sample["estimated_value"] is None or isinstance(sample["estimated_value"], str)
