@@ -1,4 +1,12 @@
 databases:
+  # Render's free Postgres plan expires 30 days after creation (14-day grace
+  # period, then hard deletion) — this database is being replaced by Neon
+  # (see DATABASE_URL below) for exactly that reason. Left declared here
+  # rather than removed outright: deleting a `databases:` entry from a
+  # synced Render Blueprint can delete the underlying resource on the next
+  # sync, and this shouldn't be torn down until the Neon migration is
+  # confirmed working in production. Decommission manually from the Render
+  # dashboard once that's verified, then remove this block in a follow-up.
   - name: credit-card-dashboard-db
     plan: free
     databaseName: card_catalog
@@ -28,10 +36,17 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: "3.13"
+      # Was fromDatabase: credit-card-dashboard-db (Render's own free
+      # Postgres, which expires 30 days after creation — see the comment on
+      # that database above). Now points at a Neon Postgres project
+      # instead: a real, non-expiring free tier, and a drop-in replacement
+      # requiring no code changes (backend/db.py's _normalize_database_url
+      # already handles the generic postgres:// URL shape Neon hands out).
+      # sync: false means this must be set manually in the Render
+      # dashboard — a real connection string is a secret and shouldn't be
+      # committed here.
       - key: DATABASE_URL
-        fromDatabase:
-          name: credit-card-dashboard-db
-          property: connectionString
+        sync: false
       # Locks CORS down to just the deployed frontend. Includes both the
       # custom domain and the default onrender.com URL so requests still work
       # during DNS setup/propagation for the custom domain. Update if the web
