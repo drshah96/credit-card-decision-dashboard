@@ -15,6 +15,18 @@
   "balance_transfer_apr": "19.49%-30.49%",
   "balance_transfer_fee": "5% of each transaction, minimum $10",
   "foreign_transaction_fee_rate": "3%",
+  "cash_advance_apr": null,
+  "penalty_apr": "Up to 29.99%",
+  "penalty_apr_trigger": "Making a late payment or a payment that's returned",
+  "pay_over_time_fee": null,
+  "late_payment_fee": "$30, or $41 if another late payment occurs within 6 billing cycles",
+  "returned_payment_fee": "$30, or $41 if another returned payment occurs within 6 billing cycles",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "20% off first purchase",
+    "requirement": "on your first L.L.Bean purchase upon approval",
+    "estimated_value": null
+  },
   "verdict": {
     "status": "situational",
     "text": "Decent 4% at L.L.Bean, but weak elsewhere and store-locked redemption",

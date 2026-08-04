@@ -18,6 +18,18 @@
   "balance_transfer_apr": "26.74%-34.74%",
   "balance_transfer_fee": "The greater of 5% or $5",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": null,
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": null,
+  "late_payment_fee": "$30, or $41 if another late payment occurs within 6 billing cycles",
+  "returned_payment_fee": "$30, or $41 if another returned payment occurs within 6 billing cycles",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "$200 Bilt Cash",
+    "requirement": "on account opening, no spending required",
+    "estimated_value": null
+  },
   "verdict": {
     "status": "situational",
     "text": "Worth it if you'll book 2+ Bilt Travel stays a year for the $100 credit",

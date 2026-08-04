@@ -15,6 +15,18 @@
   "balance_transfer_apr": "18.74%-27.49%",
   "balance_transfer_fee": "Either $5 or 4% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.49%",
+  "penalty_apr": "Up to 29.99%",
+  "penalty_apr_trigger": "Failing to make a Minimum Payment when due, or making a payment that's returned unpaid; can remain in effect indefinitely",
+  "pay_over_time_fee": "Up to 1.72% per month of the amount selected to pay over time, via Chase Pay Over Time",
+  "late_payment_fee": "Up to $39",
+  "returned_payment_fee": "Up to $39",
+  "returned_check_fee": "None",
+  "welcome_bonus": {
+    "bonus": "$150 Amazon Gift Card",
+    "requirement": "instantly loaded into your Amazon account on approval, for Prime members (non-Prime: $50 gift card and a 3% base Amazon/Whole Foods/Audible rate instead of 5%)",
+    "estimated_value": null
+  },
   "verdict": {
     "status": "situational",
     "text": "Only earns its keep with an active Prime membership",

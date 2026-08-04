@@ -15,6 +15,18 @@
   "balance_transfer_apr": null,
   "balance_transfer_fee": null,
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.74%",
+  "penalty_apr": "29.99%",
+  "penalty_apr_trigger": "Missing at least the Minimum Payment Due, or a returned payment; applies for at least 6 months and is reviewed every 6 months after that",
+  "pay_over_time_fee": "Up to 1.33% per month of each purchase placed in a Plan It plan",
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": "Up to $40",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "Up to 150,000 points",
+    "requirement": "100,000 points after $6,000 in purchases in the first 6 months, plus another 50,000 after an additional $2,000 in purchases in the same 6 months",
+    "estimated_value": "$1,200"
+  },
   "verdict": {
     "status": "situational",
     "text": "Keep if you're loyal to Marriott and actually book the free night",
