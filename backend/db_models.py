@@ -79,7 +79,6 @@ class CoverageType(Base):
 
     coverage_type_id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(unique=True)
-    category: Mapped[str | None] = mapped_column(default=None)
 
 
 # ─── Core entity ────────────────────────────────────────────────────────────
