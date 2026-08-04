@@ -208,9 +208,7 @@ def upsert_card(session: Session, data: dict) -> CardModel:
             # or absent (not yet audited), same shape as intro_apr_* above.
             welcome_bonus = data.get("welcome_bonus")
             card.welcome_bonus_bonus = welcome_bonus["bonus"] if welcome_bonus else None
-            card.welcome_bonus_requirement = (
-                welcome_bonus["requirement"] if welcome_bonus else None
-            )
+            card.welcome_bonus_requirement = welcome_bonus["requirement"] if welcome_bonus else None
             card.welcome_bonus_estimated_value = (
                 welcome_bonus.get("estimated_value") if welcome_bonus else None
             )
