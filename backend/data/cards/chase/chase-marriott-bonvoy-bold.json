@@ -21,7 +21,7 @@
   "pay_over_time_fee": "0% on qualifying $100-$5,000 travel purchases (Marriott stays or booked directly with an airline); up to 1.72% per month on other amounts selected to pay over time",
   "late_payment_fee": "Up to $40",
   "returned_payment_fee": "Up to $40",
-  "returned_check_fee": "None",
+  "returned_check_fee": null,
   "welcome_bonus": {
     "bonus": "60,000 points",
     "requirement": "after you spend $1,000 in purchases in the first 3 months from account opening",
