@@ -15,6 +15,18 @@
   "balance_transfer_apr": "Variable 16.99%-33.49%, or non-variable 22.36%-26.99%, based on offer",
   "balance_transfer_fee": "The greater of $10 or 5% of the amount of each transfer",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": null,
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": null,
+  "late_payment_fee": null,
+  "returned_payment_fee": null,
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "$50 back",
+    "requirement": "on a first purchase of $250 or more",
+    "estimated_value": null
+  },
   "verdict": {
     "status": "situational",
     "text": "A tire financing card, not rewards: only for a specific 0% purchase",

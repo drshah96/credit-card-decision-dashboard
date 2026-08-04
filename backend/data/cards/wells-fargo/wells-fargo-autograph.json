@@ -21,6 +21,18 @@
   "balance_transfer_apr": "17.49%-27.49%",
   "balance_transfer_fee": "3% of each transfer (minimum $5) within the first 120 days of account opening; up to 5% (minimum $5) after",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "29.49%",
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": null,
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": null,
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "20,000 points",
+    "requirement": "after you spend $1,000 in purchases within the first 3 months of account opening",
+    "estimated_value": "$200"
+  },
   "verdict": {
     "status": "keep",
     "text": "Keep for a genuinely wide 3x list, all with no annual fee",

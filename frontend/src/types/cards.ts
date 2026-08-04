@@ -19,6 +19,19 @@ export interface IntroApr {
   months: number;
 }
 
+/** The current sign-up offer, quoted verbatim from the issuer's own current
+ * terms — offers change frequently and are structured differently across
+ * issuers (points vs. cash, single vs. tiered spend thresholds), so `bonus`/
+ * `requirement` stay free text like `effective_cost`/`variable_apr`
+ * elsewhere. `estimated_value` is this card's own best redemption cpp
+ * applied to the bonus, when it's a points/miles amount — null for cash
+ * offers, where the bonus amount already is the value. */
+export interface WelcomeBonus {
+  bonus: string;
+  requirement: string;
+  estimated_value: string | null;
+}
+
 interface CardBase {
   id: string;
   name: string;
@@ -226,4 +239,23 @@ export interface Card extends CardBase {
    * boolean still drives the "No Foreign Transaction Fee" chip unchanged,
    * this is just the detail-page-level specific number. */
   foreign_transaction_fee_rate: string | null;
+  /** Round-3 rates/fees (#12) — same verbatim-string, detail-only,
+   * null-means-not-yet-audited treatment as variable_apr above.
+   * pay_over_time_fee only applies to issuers offering a "pay a purchase
+   * off over time for a fixed fee instead of interest" feature (Amex's Pay
+   * Over Time, Chase Pay Over Time) — null for cards with no such feature
+   * at all, not just unaudited ones. */
+  cash_advance_apr: string | null;
+  penalty_apr: string | null;
+  /** When the penalty APR kicks in (e.g. "after a payment more than 60 days
+   * late") — kept separate from the rate since issuers phrase the trigger
+   * very differently and it isn't always present even when the rate is. */
+  penalty_apr_trigger: string | null;
+  pay_over_time_fee: string | null;
+  late_payment_fee: string | null;
+  returned_payment_fee: string | null;
+  returned_check_fee: string | null;
+  /** The current sign-up offer — see WelcomeBonus. Detail-only, same
+   * not-yet-audited treatment as the round-3 fields above. */
+  welcome_bonus: WelcomeBonus | null;
 }

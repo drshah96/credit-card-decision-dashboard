@@ -15,6 +15,18 @@
   "balance_transfer_apr": null,
   "balance_transfer_fee": null,
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.74%",
+  "penalty_apr": "29.99%",
+  "penalty_apr_trigger": "Missing at least the Minimum Payment Due, or a returned payment; applies for at least 6 months and is reviewed every 6 months after that",
+  "pay_over_time_fee": "Up to 1.33% per month of each purchase placed in a Plan It plan",
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": "Up to $40",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "As high as 80,000 miles",
+    "requirement": "after you spend $2,000 in purchases in the first 6 months of Card Membership; welcome offers vary and you may not be eligible for an offer",
+    "estimated_value": "$920"
+  },
   "verdict": {
     "status": "situational",
     "text": "Worth it if you check bags on Delta more than once a year",
@@ -31,7 +43,7 @@
     {
       "emoji": "🍽️",
       "multiplier": "2×",
-      "category": "Restaurants",
+      "category": "U.S. restaurants, incl. takeout & delivery",
       "highlight": false,
       "is_base": false
     },

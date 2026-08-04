@@ -17,10 +17,22 @@
     "months": 12
   },
   "foreign_transaction_fee": false,
-  "variable_apr": "18.49%-28.49%",
-  "balance_transfer_apr": "18.49%-28.49%",
+  "variable_apr": "18.49%, 24.49%, or 28.49%, based on creditworthiness",
+  "balance_transfer_apr": "18.49%, 24.49%, or 28.49%, based on creditworthiness",
   "balance_transfer_fee": "$0 at the standard Transfer APR; 3% during the 0% intro period, or 4% at any other promotional APR Capital One may offer",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.49%",
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": null,
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": null,
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "$250 cash bonus",
+    "requirement": "after you spend $500 in purchases in the first 3 months from account opening",
+    "estimated_value": null
+  },
   "verdict": {
     "status": "keep",
     "text": "Keep: unlimited 3% on dining, streaming, entertainment, groceries",

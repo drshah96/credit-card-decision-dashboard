@@ -163,6 +163,20 @@ class CardModel(Base):
     balance_transfer_apr: Mapped[str | None] = mapped_column(default=None)
     balance_transfer_fee: Mapped[str | None] = mapped_column(default=None)
     foreign_transaction_fee_rate: Mapped[str | None] = mapped_column(default=None)
+    # Round-3 rates/fees — see backend/models.py Card.cash_advance_apr and
+    # friends for why these stay verbatim strings, and Card.welcome_bonus
+    # for why that one's flattened into three columns the same way
+    # intro_apr_purchases/Verdict are above.
+    cash_advance_apr: Mapped[str | None] = mapped_column(default=None)
+    penalty_apr: Mapped[str | None] = mapped_column(default=None)
+    penalty_apr_trigger: Mapped[str | None] = mapped_column(default=None)
+    pay_over_time_fee: Mapped[str | None] = mapped_column(default=None)
+    late_payment_fee: Mapped[str | None] = mapped_column(default=None)
+    returned_payment_fee: Mapped[str | None] = mapped_column(default=None)
+    returned_check_fee: Mapped[str | None] = mapped_column(default=None)
+    welcome_bonus_bonus: Mapped[str | None] = mapped_column(default=None)
+    welcome_bonus_requirement: Mapped[str | None] = mapped_column(default=None)
+    welcome_bonus_estimated_value: Mapped[str | None] = mapped_column(default=None)
     is_active: Mapped[bool] = mapped_column(default=True)
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(server_default=func.now(), onupdate=func.now())

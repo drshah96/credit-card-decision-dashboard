@@ -15,6 +15,18 @@
   "balance_transfer_apr": "18.49%, 23.49%, or 28.49% (based on creditworthiness)",
   "balance_transfer_fee": "$5 or 5% of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.49%",
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": "$0 for eligible Expedia Purchase Plans",
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": null,
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "$250 OneKeyCash",
+    "requirement": "after you spend $1,000 in purchases within the first 3 months of account opening",
+    "estimated_value": null
+  },
   "verdict": {
     "status": "situational",
     "text": "Keep if you book through Expedia, Hotels.com, or Vrbo often",

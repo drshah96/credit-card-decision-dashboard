@@ -15,6 +15,18 @@
   "balance_transfer_apr": "19.24%-27.74%",
   "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.49%",
+  "penalty_apr": "Up to 29.99%",
+  "penalty_apr_trigger": "Failing to make a Minimum Payment when due, or making a payment that's returned unpaid; can remain in effect indefinitely",
+  "pay_over_time_fee": "0% on qualifying $100-$5,000 travel purchases (Marriott stays or booked directly with an airline); up to 1.72% per month on other amounts selected to pay over time",
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": "Up to $40",
+  "returned_check_fee": "None",
+  "welcome_bonus": {
+    "bonus": "60,000 points",
+    "requirement": "after you spend $1,000 in purchases in the first 3 months from account opening",
+    "estimated_value": "$480"
+  },
   "verdict": {
     "status": "keep",
     "text": "Free Marriott points earner with genuinely broad bonus categories",

@@ -22,6 +22,7 @@ from backend.models import (
     TransferPartner,
     TransferPartners,
     Verdict,
+    WelcomeBonus,
 )
 
 # Full detail load — every relationship the Card response needs, in as few
@@ -78,6 +79,19 @@ def _intro_apr(rate: str | None, months: int | None) -> IntroApr | None:
     if rate is None or months is None:
         return None
     return IntroApr(rate=rate, months=months)
+
+
+def _welcome_bonus(
+    bonus: str | None, requirement: str | None, estimated_value: str | None
+) -> WelcomeBonus | None:
+    """CardModel stores the welcome bonus as a flat bonus/requirement/
+    estimated_value triple, same flattening as _intro_apr above. bonus and
+    requirement are both required on the model, so either being absent means
+    not-yet-audited — estimated_value alone can be legitimately absent (a
+    cash-back offer's bonus amount already is its value)."""
+    if bonus is None or requirement is None:
+        return None
+    return WelcomeBonus(bonus=bonus, requirement=requirement, estimated_value=estimated_value)
 
 
 def _to_card(c: CardModel, is_secured_variant_of: str | None = None) -> Card:
@@ -188,6 +202,16 @@ def _to_card(c: CardModel, is_secured_variant_of: str | None = None) -> Card:
         balance_transfer_apr=c.balance_transfer_apr,
         balance_transfer_fee=c.balance_transfer_fee,
         foreign_transaction_fee_rate=c.foreign_transaction_fee_rate,
+        cash_advance_apr=c.cash_advance_apr,
+        penalty_apr=c.penalty_apr,
+        penalty_apr_trigger=c.penalty_apr_trigger,
+        pay_over_time_fee=c.pay_over_time_fee,
+        late_payment_fee=c.late_payment_fee,
+        returned_payment_fee=c.returned_payment_fee,
+        returned_check_fee=c.returned_check_fee,
+        welcome_bonus=_welcome_bonus(
+            c.welcome_bonus_bonus, c.welcome_bonus_requirement, c.welcome_bonus_estimated_value
+        ),
     )
 
 

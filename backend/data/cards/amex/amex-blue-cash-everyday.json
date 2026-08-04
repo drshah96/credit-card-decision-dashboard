@@ -21,6 +21,18 @@
   "balance_transfer_apr": "19.49%-28.49%",
   "balance_transfer_fee": "Either $5 or 3% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": "2.7%",
+  "cash_advance_apr": "28.74%",
+  "penalty_apr": "29.99%",
+  "penalty_apr_trigger": "Missing at least the Minimum Payment Due, or a returned payment; applies for at least 6 months and is reviewed every 6 months after that",
+  "pay_over_time_fee": "0% during the first 15 months from account opening, then up to 1.33% per month of each purchase or amount moved into a Plan It plan",
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": "Up to $40",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "As high as $200 cash back",
+    "requirement": "after you spend $2,000 in purchases in the first 6 months of Card Membership; welcome offers vary and you may not be eligible for an offer",
+    "estimated_value": null
+  },
   "verdict": {
     "status": "keep",
     "text": "No annual fee: an easy keep if you shop groceries, gas, or online",
