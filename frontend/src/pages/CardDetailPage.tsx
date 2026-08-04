@@ -6,6 +6,7 @@ import { useCompareList } from "../hooks/useCompareList";
 import { useCreditUsage } from "../hooks/useCreditUsage";
 import { trackEvent } from "../utils/analytics";
 import { ISSUERS, getIssuerBySlug, parseMultiplierValue } from "../utils/cardTaxonomy";
+import { recordPageView } from "../utils/sessionTracking";
 import { CARD_IMAGES } from "../utils/cardImages";
 import type {
   Card,
@@ -1181,7 +1182,10 @@ export default function CardDetailPage() {
   });
 
   useEffect(() => {
-    if (card) trackEvent("view_card", { card_id: card.id, issuer: card.issuer });
+    if (card) {
+      trackEvent("view_card", { card_id: card.id, issuer: card.issuer });
+      recordPageView("card_view", card.issuer, card.id);
+    }
   }, [card]);
 
   const is404 = error instanceof Error && error.message.includes("404");

@@ -7,6 +7,7 @@ import { FilterChips } from "../components/FilterChips";
 import { SlowLoadNotice } from "../components/SlowLoadNotice";
 import { useCompareList } from "../hooks/useCompareList";
 import { useSlowLoadWarning } from "../hooks/useSlowLoadWarning";
+import { recordPageView } from "../utils/sessionTracking";
 import type { Card, CardSummary } from "../types/cards";
 import {
   ALL_CARDS_FILTER,
@@ -70,6 +71,10 @@ export default function IssuerCardsPage() {
     else next.set("filter", nextFilter);
     setSearchParams(next, { replace: true });
   };
+  useEffect(() => {
+    if (issuer) recordPageView("issuer_view", issuer.issuerField);
+  }, [issuer]);
+
   const { compareIds } = useCompareList();
   // Defaults to "on" whenever picks already exist (e.g. returning from a
   // card's detail page) — otherwise the toggle would misleadingly read
