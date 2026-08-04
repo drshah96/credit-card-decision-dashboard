@@ -91,6 +91,51 @@ def test_track_event_issuer_view_has_no_card_id() -> None:
         assert view.card_slug is None
 
 
+def test_track_event_reads_country_from_the_cf_ipcountry_header() -> None:
+    session_id = _unique_session_id()
+
+    response = client.post(
+        "/api/events",
+        json={"session_id": session_id, "event_type": "issuer_view", "issuer": "Amex"},
+        headers={"CF-IPCountry": "CA"},
+    )
+
+    assert response.status_code == 200
+    with session_scope() as db:
+        session_row = db.get(SessionModel, session_id)
+        assert session_row is not None
+        assert session_row.country == "CA"
+
+
+def test_track_event_treats_unknown_country_placeholder_as_none() -> None:
+    session_id = _unique_session_id()
+
+    client.post(
+        "/api/events",
+        json={"session_id": session_id, "event_type": "issuer_view", "issuer": "Amex"},
+        headers={"CF-IPCountry": "XX"},
+    )
+
+    with session_scope() as db:
+        session_row = db.get(SessionModel, session_id)
+        assert session_row is not None
+        assert session_row.country is None
+
+
+def test_track_event_without_the_header_leaves_country_none() -> None:
+    session_id = _unique_session_id()
+
+    client.post(
+        "/api/events",
+        json={"session_id": session_id, "event_type": "issuer_view", "issuer": "Amex"},
+    )
+
+    with session_scope() as db:
+        session_row = db.get(SessionModel, session_id)
+        assert session_row is not None
+        assert session_row.country is None
+
+
 def test_track_event_rejects_an_invalid_event_type() -> None:
     response = client.post(
         "/api/events",
