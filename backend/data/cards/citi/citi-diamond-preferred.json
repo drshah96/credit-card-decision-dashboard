@@ -55,20 +55,12 @@
   "status_perks": [],
   "services": [
     {
-      "name": "0% intro APR",
-      "detail": "0% for 12 months on purchases and 21 months on balance transfers from account opening; balance transfers must be completed within the first 4 months. A 16.49%–27.24% variable APR applies after the intro periods end, based on creditworthiness."
-    },
-    {
       "name": "Balance transfer fee",
       "detail": "3% of each transfer ($5 minimum) if completed within the first 4 months of account opening; 5% of each transfer ($5 minimum) after that."
     },
     {
       "name": "Late payment / penalty APR",
       "detail": "Unlike Citi Simplicity, this card does carry a late fee (up to $41) and a variable penalty APR that can apply after a late payment. Citi doesn't publish the exact penalty rate on its public summary page, so check your card agreement for the precise figure."
-    },
-    {
-      "name": "Foreign transaction fee applies",
-      "detail": "3% of the U.S. dollar amount of each transaction (Citi's standard rate, matching Simplicity and the Secured Mastercard); not built for international use."
     },
     {
       "name": "Citi Flex Pay",

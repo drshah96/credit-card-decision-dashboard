@@ -100,10 +100,6 @@
   "status_perks": [],
   "services": [
     {
-      "name": "0% intro APR",
-      "detail": "0% on purchases and balance transfers for the first 12 billing cycles, then 18.24%–28.24% variable."
-    },
-    {
       "name": "U.S. Bank ExtendPay Plan",
       "detail": "Pay off up to 50% of your credit line in fixed installments with a $0 fee offer for plans opened in the first 60 days."
     },

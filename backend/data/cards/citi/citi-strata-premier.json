@@ -187,10 +187,6 @@
   "status_perks": [],
   "services": [
     {
-      "name": "No foreign transaction fees",
-      "detail": "Zero added cost on purchases made outside the US."
-    },
-    {
       "name": "Citi Entertainment",
       "detail": "Presale access to concert, sports, and event tickets."
     },

@@ -86,14 +86,6 @@
   "status_perks": [],
   "services": [
     {
-      "name": "0% intro APR, 21 months",
-      "detail": "0% for 21 months on purchases and qualifying balance transfers (transfers must be made within 120 days of account opening), then a variable 17.49%, 23.99%, or 28.24% APR. One of the longest intro periods available on any card."
-    },
-    {
-      "name": "Foreign transaction fee",
-      "detail": "3% of each transaction, converted to US dollars."
-    },
-    {
       "name": "My Wells Fargo Deals",
       "detail": "Personalized merchant offers that earn a statement credit when you shop through the app."
     },

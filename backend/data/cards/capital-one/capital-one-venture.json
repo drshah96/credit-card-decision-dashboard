@@ -289,10 +289,6 @@
   ],
   "services": [
     {
-      "name": "No foreign transaction fees",
-      "detail": "Zero FX fees on purchases made outside the US."
-    },
-    {
       "name": "Discover network transition",
       "detail": "New accounts are being originated on the Discover network instead of Visa Signature/World Elite Mastercard as of early 2026; existing cards keep their network until reissue. Worth checking Discover acceptance before relying on it abroad."
     },

@@ -319,10 +319,6 @@
   ],
   "services": [
     {
-      "name": "No foreign transaction fees",
-      "detail": "Zero FX fees on international spend."
-    },
-    {
       "name": "Visa Signature Concierge",
       "detail": "Complimentary 24/7 concierge for reservations, tickets, and travel arrangements."
     }

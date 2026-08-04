@@ -126,10 +126,6 @@
   "status_perks": [],
   "services": [
     {
-      "name": "0% intro APR",
-      "detail": "0% on purchases and balance transfers for the first 15 billing cycles, then 17.74%–27.99% variable."
-    },
-    {
       "name": "$250 welcome bonus",
       "detail": "One-time $250 cash bonus after $1,000 in eligible purchases within the first 90 days."
     },

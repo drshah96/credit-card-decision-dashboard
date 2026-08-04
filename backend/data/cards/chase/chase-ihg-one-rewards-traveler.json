@@ -378,10 +378,6 @@
   ],
   "services": [
     {
-      "name": "No foreign transaction fees",
-      "detail": "Zero FX fees on international spend."
-    },
-    {
       "name": "Mastercard World Elite Benefits",
       "detail": "Lyft ride credits, Booking.com prepaid-stay discounts (up to 7% off), Zero Liability protection, and other World Elite Mastercard perks, added July 24, 2025."
     },

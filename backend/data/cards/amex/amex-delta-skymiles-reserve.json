@@ -203,10 +203,6 @@
     {
       "name": "Priority boarding & upgrade priority",
       "detail": "Zone 5 priority boarding, plus upgrade list placement above Gold/Platinum cardholders (below Medallion elites)."
-    },
-    {
-      "name": "No foreign transaction fees",
-      "detail": "Zero FX fees on international spend."
     }
   ],
   "additional_cards": {
