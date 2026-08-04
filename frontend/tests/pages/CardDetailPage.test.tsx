@@ -11,6 +11,15 @@ vi.mock("@/api/cards", () => ({
   fetchCard: vi.fn(),
   fetchCards: vi.fn(),
 }));
+// Real tracking behavior (session id generation, sendBeacon/fetch) is
+// covered in tests/utils/sessionTracking.test.ts — here it's just mocked out
+// so these page tests aren't incidentally exercising a live fetch fallback.
+// (GA4's trackEvent in utils/analytics doesn't need this: it safely no-ops
+// via window.gtag?.(...) when gtag was never loaded, unlike postEvent's
+// fetch fallback.)
+vi.mock("@/utils/sessionTracking", () => ({
+  recordPageView: vi.fn(),
+}));
 
 // Import after mock so we get the mocked version
 import { fetchCard, fetchCards } from "@/api/cards";
