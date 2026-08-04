@@ -11,10 +11,22 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "16.74%-25.74%",
-  "balance_transfer_apr": "16.74%-25.74%",
-  "balance_transfer_fee": "Either $5 or 3% of the amount of each transfer, whichever is greater",
+  "variable_apr": "19.49%-28.49%",
+  "balance_transfer_apr": null,
+  "balance_transfer_fee": null,
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.74%",
+  "penalty_apr": "29.99%",
+  "penalty_apr_trigger": "Missing at least the Minimum Payment Due, or a returned payment; applies for at least 6 months and is reviewed every 6 months after that",
+  "pay_over_time_fee": "Up to 1.33% per month of each purchase placed in a Plan It plan",
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": "Up to $40",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "10,000 miles",
+    "requirement": "after you spend $1,000 in eligible purchases in the first 6 months of Card Membership",
+    "estimated_value": "$115"
+  },
   "verdict": {
     "status": "keep",
     "text": "Free SkyMiles earner: fine as a backup, not a reason to fly Delta",
@@ -24,7 +36,7 @@
     {
       "emoji": "🍽️",
       "multiplier": "2×",
-      "category": "Restaurants worldwide (incl. U.S. takeout/delivery)",
+      "category": "U.S. restaurants, incl. takeout & delivery",
       "highlight": true,
       "is_base": false
     },

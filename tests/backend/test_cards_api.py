@@ -853,25 +853,30 @@ def test_amex_blue_cash_cards_carry_the_only_fx_fee_in_the_amex_lineup(
     )
 
 
-def test_amex_hilton_surpass_is_the_only_amex_card_with_a_two_tier_bt_fee() -> None:
+def test_amex_hilton_surpass_no_longer_has_an_intro_offer_or_bt_support() -> None:
+    # Re-verified 2026-08-03: round 2 found this card as "the only Amex card
+    # with a two-tier BT fee" (0% intro APR + a 3%-then-5% BT fee) — its
+    # current rates-and-fees page has neither an introductory APR mention
+    # nor a "Balance Transfer" section at all, a real product change.
     detail = client.get("/api/cards/amex-hilton-honors-surpass").json()
-    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": 15}
-    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": 15}
-    assert detail["variable_apr"] == "17.49%-27.49%"
-    assert detail["balance_transfer_apr"] == "17.49%-27.49%"
-    assert "60 days" in detail["balance_transfer_fee"]
+    assert detail["intro_apr_purchases"] is None
+    assert detail["intro_apr_balance_transfers"] is None
+    assert detail["variable_apr"] == "19.49%-28.49%"
+    assert detail["balance_transfer_apr"] is None
+    assert detail["balance_transfer_fee"] is None
 
 
-def test_amex_delta_blue_has_no_intro_offer_despite_bt_being_available() -> None:
-    # Delta Blue supports balance transfers at its standard rate (no 0%
-    # promotional period) — distinct from the charge cards above, which
-    # don't support balance transfers at all.
+def test_amex_delta_blue_no_intro_offer_and_no_longer_supports_balance_transfers() -> None:
+    # Re-verified 2026-08-03 against Amex's current rates-and-fees page for
+    # this exact card: no "Balance Transfer" section appears anywhere on it
+    # (unlike round 2, which found it supported BT at a standard rate with
+    # no 0% promo) — a real product change, not a stale re-read.
     detail = client.get("/api/cards/amex-delta-skymiles-blue").json()
     assert detail["intro_apr_purchases"] is None
     assert detail["intro_apr_balance_transfers"] is None
-    assert detail["variable_apr"] == "16.74%-25.74%"
-    assert detail["balance_transfer_apr"] == "16.74%-25.74%"
-    assert detail["balance_transfer_fee"] is not None
+    assert detail["variable_apr"] == "19.49%-28.49%"
+    assert detail["balance_transfer_apr"] is None
+    assert detail["balance_transfer_fee"] is None
 
 
 def test_amex_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
