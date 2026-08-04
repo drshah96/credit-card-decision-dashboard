@@ -8,19 +8,21 @@
   "annual_fee": 39,
   "effective_cost": "$39/yr, no sign-up bonus or credits to offset it; must be earned back through ~$1,300/yr of 3%-category spend",
   "official_url": "https://www.capitalone.com/credit-cards/savorone/",
-  "intro_apr_purchases": {
-    "rate": "0%",
-    "months": 12
-  },
-  "intro_apr_balance_transfers": {
-    "rate": "0%",
-    "months": 12
-  },
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "18.49%-28.49%",
-  "balance_transfer_apr": "18.49%-28.49%",
-  "balance_transfer_fee": "$0 at the standard Transfer APR; 3% during the 0% intro period, or 4% at any other promotional APR Capital One may offer",
+  "variable_apr": "28.99%",
+  "balance_transfer_apr": "28.99%",
+  "balance_transfer_fee": "$0 at the standard Transfer APR, or 4% at any promotional APR Capital One may offer",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.99%",
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": null,
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": null,
+  "returned_check_fee": null,
+  "welcome_bonus": null,
   "verdict": {
     "status": "reconsider",
     "text": "Reconsider: same categories as the no-fee Savor, now behind a $39 fee",

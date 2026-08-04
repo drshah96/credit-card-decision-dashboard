@@ -929,9 +929,7 @@ def test_capital_one_no_card_charges_a_foreign_transaction_fee() -> None:
     [
         ("capital-one-venture-one", 15),
         ("capital-one-savor", 12),
-        ("capital-one-savor-one", 12),
         ("capital-one-quicksilver", 15),
-        ("capital-one-kohls-rewards", 12),
     ],
 )
 def test_capital_one_cards_with_a_real_intro_apr_offer(card_id: str, intro_months: int) -> None:
@@ -946,19 +944,51 @@ def test_capital_one_premium_travel_cards_have_no_intro_offer() -> None:
         detail = client.get(f"/api/cards/{card_id}").json()
         assert detail["intro_apr_purchases"] is None
         assert detail["intro_apr_balance_transfers"] is None
-        assert detail["variable_apr"] == "19.49%-28.49%"
+        # Re-verified 2026-08-03: Capital One's own disclosure quotes this as
+        # three discrete creditworthiness tiers, not a continuous min-max
+        # range — same non-fit as the Bass Pro/BJ's tiered-APR cards below.
+        assert detail["variable_apr"] == "19.49%, 24.49%, or 28.49%, based on creditworthiness"
+
+
+def test_capital_one_kohls_no_longer_has_an_intro_offer() -> None:
+    # Re-verified 2026-08-03: round 1 found a 12-month 0% intro APR with a
+    # 19.49%-28.49% ongoing range; the current disclosure modal on this
+    # card's own official_url shows a flat 29.49% with no intro period.
+    detail = client.get("/api/cards/capital-one-kohls-rewards").json()
+    assert detail["intro_apr_purchases"] is None
+    assert detail["intro_apr_balance_transfers"] is None
+    assert detail["variable_apr"] == "29.49%"
+
+
+def test_capital_one_savor_one_no_longer_has_an_intro_offer() -> None:
+    # Re-verified 2026-08-03 directly against capitalone.com/credit-cards/
+    # savorone/ (this card's own stored official_url): round 1 found a
+    # 12-month 0% intro APR on purchases and balance transfers with an
+    # 18.49%-28.49% ongoing range; the current page shows neither — a flat
+    # 28.99% rate with no intro period at all, a real product change (this
+    # card is now positioned for Fair credit, unlike the Excellent-credit
+    # Savor sibling, which still has its intro offer).
+    detail = client.get("/api/cards/capital-one-savor-one").json()
+    assert detail["intro_apr_purchases"] is None
+    assert detail["intro_apr_balance_transfers"] is None
+    assert detail["variable_apr"] == "28.99%"
+    assert detail["balance_transfer_apr"] == "28.99%"
 
 
 def test_capital_one_bass_pro_cabelas_has_a_bifurcated_purchase_apr() -> None:
     # A genuinely two-tier rate (special in-store rate vs. everything else)
     # rather than a single range — stored verbatim, not force-averaged.
+    # Re-verified 2026-08-03: the "everything else" tier is itself 3
+    # discrete creditworthiness values, not a min-max range.
     detail = client.get("/api/cards/capital-one-bass-pro-cabelas-club").json()
     assert "9.99%" in detail["variable_apr"]
-    assert detail["balance_transfer_apr"] == "20.49%-32.24%"
+    assert detail["balance_transfer_apr"] == "19.49%, 22.99%, or 30.49%, based on creditworthiness"
 
 
 def test_capital_one_bjs_cards_share_the_same_tiered_apr() -> None:
-    tiered = "19.24%, 25.24%, or 29.24% (based on creditworthiness)"
+    # Re-verified 2026-08-03: now a 2-tier rate, not 3 — same finding
+    # (both cards share identical APR terms), different current numbers.
+    tiered = "19.99% or 28.49%, based on creditworthiness"
     for card_id in ("capital-one-bjs-one", "capital-one-bjs-one-plus"):
         detail = client.get(f"/api/cards/{card_id}").json()
         assert detail["variable_apr"] == tiered
