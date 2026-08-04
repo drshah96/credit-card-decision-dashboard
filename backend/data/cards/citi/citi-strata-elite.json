@@ -17,6 +17,18 @@
   "balance_transfer_apr": "20.49%-28.49%",
   "balance_transfer_fee": "5% of each transfer, $5 minimum",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "29.49%",
+  "penalty_apr": "Up to 29.99%",
+  "penalty_apr_trigger": "Making a late payment or a payment that's returned",
+  "pay_over_time_fee": "Up to 1.72% per month, for Citi Flex Plan balances subject to a Plan Fee",
+  "late_payment_fee": "$30, or $41 if another late payment occurs within 6 billing cycles",
+  "returned_payment_fee": "$30, or $41 if another returned payment occurs within 6 billing cycles",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "100,000 points",
+    "requirement": "after you spend $6,000 in purchases in the first 3 months of account opening (limited-time elevated offer)",
+    "estimated_value": "$1,700"
+  },
   "verdict": {
     "status": "situational",
     "text": "Citi's answer to Amex Platinum: unique status perks, narrow credits",
