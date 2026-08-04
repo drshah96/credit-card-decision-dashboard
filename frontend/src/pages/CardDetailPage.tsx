@@ -878,7 +878,13 @@ function CardDetail({ card }: { card: Card }) {
 
       <SecuredPairingNote card={card} />
 
-      {/* Welcome bonus */}
+      {/* Welcome bonus — disabled: sign-up offers rotate on the issuer's own
+      promotional calendar, much faster than APR/fee data drifts, so a stale
+      bonus reads as an active (wrong) promotional claim rather than a dated
+      fact. That's a worse failure mode for a decision-support site that
+      isn't trying to promote applying. Data still flows through the schema
+      and API; only the render is off, so this can come back if we find a
+      way to keep it current.
       {card.welcome_bonus && (
         <Block label="Sign-up offer" title="Welcome bonus" note="from the issuer's current terms">
           <div className="welcome-bonus">
@@ -892,6 +898,7 @@ function CardDetail({ card }: { card: Card }) {
           </div>
         </Block>
       )}
+      */}
 
       {/* Earning */}
       <Block label="Earning" title="How you earn points" note="per $1">
