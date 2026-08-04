@@ -453,3 +453,60 @@ class CardDraft(Base):
     status: Mapped[str] = mapped_column(default="pending")
     reviewer_notes: Mapped[str | None] = mapped_column(default=None)
     reviewed_at: Mapped[datetime | None] = mapped_column(default=None)
+
+
+# ─── Anonymous session/traffic analytics ───────────────────────────────────
+
+
+class SessionModel(Base):
+    """One row per anonymous browser session. `id` is deliberately a
+    client-generated string (a nanoid, minted in localStorage on first page
+    load), not an autoincrement int like every other PK in this file — it has
+    to exist before the first server round-trip, since the frontend stamps it
+    on every tracked event itself. No PII: no IP, no user-agent string, just
+    a random identifier the client controls."""
+
+    __tablename__ = "sessions"
+
+    id: Mapped[str] = mapped_column(primary_key=True)
+    created_at: Mapped[datetime] = mapped_column(server_default=func.now())
+    last_seen_at: Mapped[datetime] = mapped_column(server_default=func.now(), onupdate=func.now())
+    # First-touch referrer host only (e.g. "google.com"), not a full URL —
+    # enough for traffic-source breakdown without capturing query strings.
+    referrer: Mapped[str | None] = mapped_column(default=None)
+
+    page_views: Mapped[list["PageView"]] = relationship(
+        back_populates="session", cascade="all, delete-orphan", order_by="PageView.occurred_at"
+    )
+
+
+class PageView(Base):
+    """One row per tracked issuer-page or card-detail-page view.
+
+    `card_slug`/`issuer` are loose strings, not FKs into cards.card_id /
+    issuers.issuer_id — same philosophy as CardModel.secured_variant_id and
+    points_pool_id above: this is analytics-shaped data, not a core
+    relational entity. An enforced FK would need a slug lookup before every
+    insert on the tracking hot path for no real benefit, since cards are
+    already addressed by slug everywhere the frontend/API touch them. Later
+    aggregate/JOIN queries can still join on cards.slug (already unique),
+    just without a formal constraint enforcing it.
+    """
+
+    __tablename__ = "page_views"
+    __table_args__ = (
+        CheckConstraint(
+            "event_type IN ('issuer_view','card_view')", name="ck_page_view_event_type"
+        ),
+    )
+
+    page_view_id: Mapped[int] = mapped_column(primary_key=True)
+    session_id: Mapped[str] = mapped_column(
+        ForeignKey("sessions.id", ondelete="CASCADE"), index=True
+    )
+    occurred_at: Mapped[datetime] = mapped_column(server_default=func.now(), index=True)
+    event_type: Mapped[str]
+    issuer: Mapped[str | None] = mapped_column(index=True, default=None)
+    card_slug: Mapped[str | None] = mapped_column(index=True, default=None)
+
+    session: Mapped[SessionModel] = relationship(back_populates="page_views")

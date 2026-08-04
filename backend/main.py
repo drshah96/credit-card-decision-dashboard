@@ -5,8 +5,9 @@ from typing import AsyncGenerator
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.models import Card, CardSummary
+from backend.models import Card, CardSummary, EventIn
 from backend.services.cards import get_card, get_card_summaries, get_cards
+from backend.services.events import record_page_view
 
 
 @asynccontextmanager
@@ -35,7 +36,7 @@ _allowed_origins = [
 app.add_middleware(
     CORSMiddleware,
     allow_origins=_allowed_origins,
-    allow_methods=["GET"],
+    allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
 
@@ -78,3 +79,20 @@ def get_card_detail(card_id: str) -> Card:
     if card is None:
         raise HTTPException(status_code=404, detail=f"Card '{card_id}' not found.")
     return card
+
+
+@app.post("/api/events")
+def track_event(event: EventIn) -> dict:
+    """Record one anonymous page-view event. Fire-and-forget from the
+    frontend's side (sent via navigator.sendBeacon, response ignored), so
+    this deliberately does the minimum: no validation beyond the Pydantic
+    schema, no error surfaced back to the caller that would need handling —
+    worst case for a malformed request is one low-quality analytics row, not
+    a broken page for the visitor it came from."""
+    record_page_view(
+        session_id=event.session_id,
+        event_type=event.event_type,
+        issuer=event.issuer,
+        card_slug=event.card_id,
+    )
+    return {"status": "ok"}

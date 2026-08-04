@@ -308,3 +308,20 @@ class CardSummary(BaseModel):
     intro_apr_balance_transfers: IntroApr | None = None
     foreign_transaction_fee: bool | None = None
     has_lounge_access: bool = False
+
+
+# ─── Anonymous session/traffic analytics ───────────────────────────────────
+
+
+class EventIn(BaseModel):
+    """A single tracked page view, posted by the frontend. `session_id` is a
+    client-generated identifier (see backend/db_models.py SessionModel for
+    why); `card_id` matches the frontend's own naming for a card (its slug,
+    e.g. "citi-strata-premier") even though it's stored as `card_slug` on the
+    PageView row, to stay unambiguous next to CardModel's own integer
+    `card_id` primary key in the DB layer."""
+
+    session_id: str
+    event_type: Literal["issuer_view", "card_view"]
+    issuer: str | None = None
+    card_id: str | None = None
