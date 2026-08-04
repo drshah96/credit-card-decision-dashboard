@@ -1,6 +1,7 @@
 import os
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
+from urllib.parse import urlparse
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -81,6 +82,17 @@ def get_card_detail(card_id: str) -> Card:
     return card
 
 
+def _referrer_host(referrer: str | None) -> str | None:
+    """Full referring URL -> bare host (e.g. "google.com"), matching the
+    "not a full URL" contract on SessionModel.referrer. None for a direct
+    visit (empty document.referrer) or anything unparseable as a URL with
+    a host — a malformed value here is worth one blank analytics field,
+    not worth rejecting the whole event over."""
+    if not referrer:
+        return None
+    return urlparse(referrer).hostname
+
+
 @app.post("/api/events")
 def track_event(event: EventIn, request: Request) -> dict:
     """Record one anonymous page-view event. Fire-and-forget from the
@@ -107,6 +119,7 @@ def track_event(event: EventIn, request: Request) -> dict:
         event_type=event.event_type,
         issuer=event.issuer,
         card_slug=event.card_id,
+        referrer=_referrer_host(event.referrer),
         country=country,
     )
     return {"status": "ok"}
