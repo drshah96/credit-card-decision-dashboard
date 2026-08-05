@@ -25,7 +25,18 @@ export function initAnalytics(): void {
   // send_page_view: false — this is a client-side-routed SPA, so a single
   // automatic pageview on script load would never reflect in-app navigation.
   // trackPageView() below fires the real page_view on every route change instead.
-  window.gtag("config", GA_MEASUREMENT_ID, { send_page_view: false });
+  //
+  // transport_url + first_party_collection: true route the actual collect
+  // beacon through thewalletaudit.com/g/collect (a Cloudflare Worker proxy,
+  // see cloudflare/ga-proxy/) instead of straight to google-analytics.com.
+  // Confirmed live that gtag.js loads fine but that collect call gets
+  // silently dropped by ad/privacy blockers targeting Google's domain —
+  // this makes the same hit look first-party so it isn't filtered.
+  window.gtag("config", GA_MEASUREMENT_ID, {
+    send_page_view: false,
+    transport_url: "https://thewalletaudit.com",
+    first_party_collection: true,
+  });
 }
 
 export function trackEvent(name: string, params?: Record<string, string | number>): void {
