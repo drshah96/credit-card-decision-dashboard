@@ -10,6 +10,7 @@ that id, so tests stay independent despite sharing a database that
 persists (and accumulates rows) across the whole test run.
 """
 
+import threading
 from uuid import uuid4
 
 from fastapi.testclient import TestClient
@@ -17,6 +18,7 @@ from fastapi.testclient import TestClient
 from backend.db import session_scope
 from backend.db_models import PageView, SessionModel
 from backend.main import _device_type, app
+from backend.services.events import record_page_view
 
 client = TestClient(app)
 
@@ -315,6 +317,45 @@ def test_track_event_with_an_unrecognized_user_agent_defaults_to_desktop() -> No
         # TestClient's own default User-Agent ("testclient") doesn't match
         # any mobile/tablet signal, same as any other unrecognized UA.
         assert session_row.device_type == "desktop"
+
+
+def test_record_page_view_recovers_from_concurrent_session_insert_race() -> None:
+    """Two requests racing to record the same brand-new session_id (e.g.
+    React StrictMode double-invoking an effect on mount, or two tabs opened
+    at once) must not crash — one wins the INSERT, the other must recover
+    by re-querying instead of surfacing sessions' primary-key UNIQUE
+    constraint as an unhandled IntegrityError. A Barrier gets both threads
+    to record_page_view's entry at the same moment, reliably reproducing
+    the race instead of depending on incidental thread-scheduling luck —
+    same technique as
+    test_upsert.py::test_get_or_create_recovers_from_concurrent_insert_race
+    for the same class of race in a different function."""
+    session_id = _unique_session_id()
+    barrier = threading.Barrier(2)
+    errors: list[BaseException] = []
+
+    def worker() -> None:
+        try:
+            barrier.wait(timeout=5)
+            record_page_view(
+                session_id=session_id,
+                event_type="issuer_view",
+                issuer="Chase",
+                card_slug=None,
+            )
+        except BaseException as exc:  # noqa: BLE001 — surface it to the main thread below
+            errors.append(exc)
+
+    threads = [threading.Thread(target=worker) for _ in range(2)]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join(timeout=10)
+
+    assert not errors, f"record_page_view raised under concurrent access: {errors}"
+    with session_scope() as db:
+        assert db.query(SessionModel).filter(SessionModel.id == session_id).count() == 1
+        assert db.query(PageView).filter(PageView.session_id == session_id).count() == 2
 
 
 def test_track_event_rejects_an_invalid_event_type() -> None:
