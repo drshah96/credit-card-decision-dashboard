@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PageTabs } from "../components/PageTabs";
 import { trackEvent } from "../utils/analytics";
+import { recordPageView } from "../utils/sessionTracking";
 import { ISSUERS } from "../utils/cardTaxonomy";
 import amexLogo from "../assets/logos/amex.svg";
 import chaseLogo from "../assets/logos/chase.svg";
@@ -32,6 +33,10 @@ const HEADLINE_ROTATE_MS = 5000;
 
 export default function IssuersPage() {
   const [headlineIndex, setHeadlineIndex] = useState(0);
+
+  useEffect(() => {
+    recordPageView("home_view");
+  }, []);
 
   useEffect(() => {
     // Auto-updating content that runs longer than 5s needs a way to stop
