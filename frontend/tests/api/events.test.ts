@@ -6,20 +6,23 @@ afterEach(() => {
 });
 
 describe("postEvent", () => {
-  it("uses navigator.sendBeacon when available, with a JSON blob", () => {
+  it("always uses fetch, never navigator.sendBeacon, even when sendBeacon is available", () => {
+    // Regression test: sendBeacon() reports success (returns true) but was
+    // confirmed live against production to silently fail to deliver the
+    // request — see the comment in src/api/events.ts. Guards against
+    // reintroducing it as the primary/preferred path.
     const sendBeacon = vi.fn().mockReturnValue(true);
+    const mockFetch = vi.fn().mockResolvedValue(new Response(null, { status: 200 }));
     vi.stubGlobal("navigator", { sendBeacon });
+    vi.stubGlobal("fetch", mockFetch);
 
     postEvent({ session_id: "s1", event_type: "issuer_view", issuer: "Chase" });
 
-    expect(sendBeacon).toHaveBeenCalledTimes(1);
-    const [url, blob] = sendBeacon.mock.calls[0] as [string, Blob];
-    expect(url).toContain("/events");
-    expect(blob.type).toBe("application/json");
+    expect(sendBeacon).not.toHaveBeenCalled();
+    expect(mockFetch).toHaveBeenCalledTimes(1);
   });
 
-  it("falls back to a fire-and-forget fetch when sendBeacon is unavailable", () => {
-    vi.stubGlobal("navigator", {});
+  it("sends a fire-and-forget POST with keepalive", () => {
     const mockFetch = vi.fn().mockResolvedValue(new Response(null, { status: 200 }));
     vi.stubGlobal("fetch", mockFetch);
 
@@ -37,8 +40,7 @@ describe("postEvent", () => {
     });
   });
 
-  it("never throws, even if the fetch fallback rejects", () => {
-    vi.stubGlobal("navigator", {});
+  it("never throws, even if the fetch call rejects", () => {
     vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("network down")));
 
     expect(() => postEvent({ session_id: "s3", event_type: "issuer_view" })).not.toThrow();
