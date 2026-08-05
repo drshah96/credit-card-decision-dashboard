@@ -616,6 +616,26 @@ def test_health_endpoint() -> None:
     assert response.json() == {"status": "ok"}
 
 
+def test_health_endpoint_reports_503_when_the_database_is_unreachable(monkeypatch) -> None:
+    """Regression test: the old version of this endpoint never touched the
+    database at all, so it would report "ok" even with a fully dead
+    connection pool (e.g. Neon's free-tier compute auto-suspending). Swap
+    out backend.main's `engine` for one whose connect() always raises,
+    without touching the real shared engine every other test relies on."""
+    import backend.main as main_module
+
+    class _BrokenEngine:
+        def connect(self):
+            raise Exception("simulated DB outage")
+
+    monkeypatch.setattr(main_module, "engine", _BrokenEngine())
+
+    response = client.get("/health")
+
+    assert response.status_code == 503
+    assert response.json()["detail"] == "database unreachable"
+
+
 # ─── intro APR / balance transfer / foreign transaction fee ───────────────────
 # Sourced from real issuer terms per-card (see backend/models.py
 # Card.intro_apr_purchases), rolled out incrementally by issuer. None means

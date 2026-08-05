@@ -5,7 +5,9 @@ from urllib.parse import urlparse
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import text
 
+from backend.db import engine
 from backend.models import Card, CardSummary, EventIn
 from backend.services.cards import get_card, get_card_summaries, get_cards
 from backend.services.events import record_page_view
@@ -13,7 +15,9 @@ from backend.services.events import record_page_view
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
-    """Eagerly load and validate cards.json at startup so errors surface immediately."""
+    """Eagerly load the catalog from the database at startup so a broken DB
+    connection or query surfaces immediately at boot, not on the first real
+    request a visitor makes."""
     get_card_summaries()
     yield
 
@@ -51,7 +55,17 @@ def root() -> dict:
 
 @app.get("/health")
 def health() -> dict:
-    """Health check for Render and other uptime monitors."""
+    """Health check for Render and other uptime monitors — actually verifies
+    the database connection works, not just that this process is alive. A
+    process-only check (the old version of this endpoint) would report "ok"
+    even with a fully dead DB connection pool, e.g. after Neon's free-tier
+    compute auto-suspends from being idle — see backend/db.py's
+    pool_pre_ping for the other half of this fix."""
+    try:
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+    except Exception as exc:
+        raise HTTPException(status_code=503, detail="database unreachable") from exc
     return {"status": "ok"}
 
 
