@@ -21,7 +21,7 @@
   "pay_over_time_fee": "Up to 1.72% per month of the amount selected to pay over time, via Chase Pay Over Time",
   "late_payment_fee": "Up to $40",
   "returned_payment_fee": "Up to $40",
-  "returned_check_fee": "None",
+  "returned_check_fee": null,
   "welcome_bonus": {
     "bonus": "45,000 points, plus up to 30,000 more",
     "requirement": "the 45,000 requires spending $5,000 in the first 3 months; the extra up to 30,000 comes from earning 2x (instead of 1x) on up to $15,000 of otherwise-1x spend in the first 6 months",
@@ -318,10 +318,6 @@
     }
   ],
   "services": [
-    {
-      "name": "No foreign transaction fees",
-      "detail": "Zero FX fees on international spend."
-    },
     {
       "name": "Visa Signature Concierge",
       "detail": "Complimentary 24/7 concierge for reservations, tickets, and travel arrangements."

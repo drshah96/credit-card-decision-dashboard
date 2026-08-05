@@ -129,10 +129,6 @@
   "status_perks": [],
   "services": [
     {
-      "name": "No foreign transaction fees",
-      "detail": "$0 on purchases made outside the US."
-    },
-    {
       "name": "Doubles as Costco membership ID",
       "detail": "The card can be used to verify membership at warehouse entry while the membership is active."
     },

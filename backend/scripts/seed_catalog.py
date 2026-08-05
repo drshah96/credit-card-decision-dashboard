@@ -21,20 +21,33 @@ import sys
 from pydantic import ValidationError
 
 from backend.db import session_scope
+from backend.db_models import CardModel
 from backend.models import Card
 from backend.scripts.upsert import upsert_card
 
 DEFAULT_PATTERN = "backend/data/cards/**/*.json"
 
 
-def seed_catalog(pattern: str) -> int:
+def seed_catalog(pattern: str, deactivate_missing: bool | None = None) -> int:
     """Upsert every JSON file matching `pattern`. Returns how many were seeded;
-    exits the process on the first file that isn't a valid Card."""
+    exits the process on the first file that isn't a valid Card.
+
+    deactivate_missing controls whether a previously-seeded card whose slug
+    no longer appears in this run gets CardModel.is_active flipped to False
+    (upsert_card always flips it back True the moment its file reappears).
+    Defaults to on only when `pattern` is the full-catalog DEFAULT_PATTERN —
+    a caller resyncing a narrower subset (a single issuer's files, a test
+    fixture's tmp_path glob) almost certainly doesn't mean "everything else
+    in the catalog just got discontinued," so it stays off unless the whole
+    catalog is actually in view, or a caller opts in explicitly."""
     files = sorted(glob.glob(pattern, recursive=True))
     if not files:
         sys.exit(f"error: no files matched {pattern!r}")
+    if deactivate_missing is None:
+        deactivate_missing = pattern == DEFAULT_PATTERN
 
     with session_scope() as session:
+        seen_slugs = set()
         for path in files:
             with open(path) as f:
                 data = json.load(f)
@@ -47,6 +60,12 @@ def seed_catalog(pattern: str) -> int:
             except ValidationError as exc:
                 sys.exit(f"error: {path} does not match the Card schema:\n{exc}")
             upsert_card(session, data)
+            seen_slugs.add(data["id"])
+
+        if deactivate_missing:
+            session.query(CardModel).filter(
+                CardModel.is_active.is_(True), CardModel.slug.notin_(seen_slugs)
+            ).update({"is_active": False}, synchronize_session=False)
 
     return len(files)
 

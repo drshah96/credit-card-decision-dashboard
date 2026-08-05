@@ -124,14 +124,6 @@
   ],
   "services": [
     {
-      "name": "0% intro APR",
-      "detail": "0% for 15 months on purchases and balance transfers, then 18.49%–28.49% variable ongoing."
-    },
-    {
-      "name": "No foreign transaction fees",
-      "detail": "$0 on purchases made outside the US."
-    },
-    {
       "name": "Complimentary concierge",
       "detail": "24/7, 365-day concierge for dining, entertainment, and travel arrangements."
     },

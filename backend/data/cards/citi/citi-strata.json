@@ -255,10 +255,6 @@
   "status_perks": [],
   "services": [
     {
-      "name": "Foreign transaction fee applies",
-      "detail": "3% on purchases made outside the US; not built for international use."
-    },
-    {
       "name": "Citi Entertainment",
       "detail": "Presale access to concert, sports, and event tickets."
     },

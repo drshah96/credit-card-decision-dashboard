@@ -113,10 +113,6 @@
     {
       "name": "Pay with Miles discount",
       "detail": "Up to $50 off a Delta.com flight for every 5,000 miles redeemed via Pay with Miles."
-    },
-    {
-      "name": "No foreign transaction fees",
-      "detail": "Zero FX fees on international spend."
     }
   ],
   "additional_cards": {

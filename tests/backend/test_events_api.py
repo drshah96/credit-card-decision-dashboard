@@ -136,6 +136,40 @@ def test_track_event_without_the_header_leaves_country_none() -> None:
         assert session_row.country is None
 
 
+def test_track_event_extracts_the_host_from_a_full_referrer_url() -> None:
+    session_id = _unique_session_id()
+
+    response = client.post(
+        "/api/events",
+        json={
+            "session_id": session_id,
+            "event_type": "issuer_view",
+            "issuer": "Amex",
+            "referrer": "https://www.google.com/search?q=amex+gold",
+        },
+    )
+
+    assert response.status_code == 200
+    with session_scope() as db:
+        session_row = db.get(SessionModel, session_id)
+        assert session_row is not None
+        assert session_row.referrer == "www.google.com"
+
+
+def test_track_event_without_a_referrer_leaves_it_none() -> None:
+    session_id = _unique_session_id()
+
+    client.post(
+        "/api/events",
+        json={"session_id": session_id, "event_type": "issuer_view", "issuer": "Amex"},
+    )
+
+    with session_scope() as db:
+        session_row = db.get(SessionModel, session_id)
+        assert session_row is not None
+        assert session_row.referrer is None
+
+
 def test_track_event_rejects_an_invalid_event_type() -> None:
     response = client.post(
         "/api/events",

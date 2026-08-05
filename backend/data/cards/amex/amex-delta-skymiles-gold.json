@@ -182,10 +182,6 @@
     {
       "name": "Award travel discount",
       "detail": "15% off Delta award flights booked with miles."
-    },
-    {
-      "name": "No foreign transaction fees",
-      "detail": "Zero FX fees on international spend."
     }
   ],
   "additional_cards": {

@@ -35,7 +35,7 @@
   "earn_rates": [],
   "earn_note": "This card has no cash-back or points program. Its value proposition is deferred-interest financing (\"no interest if paid in full within 6 months\" on purchases of $250+) plus periodic rebates on tire purchases and welcome offers (e.g., $50 back on a first purchase of $250+). Unlike Citi's Best Buy or Wayfair co-brands, no open-loop Visa/Mastercard version of this card exists; it's a single, closed-loop product usable only at Goodyear's roughly 17,000 locations and about 11,500 participating Exxon and Mobil fuel stations.",
   "points": {
-    "currency": "None",
+    "currency": "No rewards program",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
     "note": "No points or cash back exist on this card. Value comes entirely from promotional 0%-interest financing windows on qualifying purchases, which revert to a high standard variable APR (roughly 22%–27% per Citi's disclosures) if the balance isn't paid in full by the deadline, including retroactive interest back to the purchase date under deferred-interest terms."

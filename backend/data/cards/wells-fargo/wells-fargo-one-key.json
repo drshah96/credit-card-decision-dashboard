@@ -141,10 +141,6 @@
       "detail": "$250 in OneKeyCash after spending $1,000 in purchases within the first 3 months."
     },
     {
-      "name": "No foreign transaction fee",
-      "detail": "$0 on purchases made outside the US."
-    },
-    {
       "name": "Eligibility restriction",
       "detail": "Not eligible for the welcome bonus if you've opened a One Key card within the last 48 months."
     }

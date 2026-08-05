@@ -79,7 +79,6 @@ erDiagram
     COVERAGE_TYPES {
         int coverage_type_id PK
         string name UK
-        string category
     }
     CARDS {
         int card_id PK
