@@ -13,6 +13,7 @@ persists (and accumulates rows) across the whole test run.
 import threading
 from uuid import uuid4
 
+import pytest
 from fastapi.testclient import TestClient
 
 from backend.db import session_scope
@@ -356,6 +357,31 @@ def test_record_page_view_recovers_from_concurrent_session_insert_race() -> None
     with session_scope() as db:
         assert db.query(SessionModel).filter(SessionModel.id == session_id).count() == 1
         assert db.query(PageView).filter(PageView.session_id == session_id).count() == 2
+
+
+@pytest.mark.parametrize(
+    "event_type",
+    [
+        "home_view",
+        "top_pick_view",
+        "compare_view",
+        "methodology_view",
+        "top_pick_card_selected",
+        "compare_card_selected",
+    ],
+)
+def test_track_event_accepts_the_new_page_and_selection_event_types(event_type: str) -> None:
+    session_id = _unique_session_id()
+
+    response = client.post(
+        "/api/events",
+        json={"session_id": session_id, "event_type": event_type, "card_id": "amex-gold"},
+    )
+
+    assert response.status_code == 200
+    with session_scope() as db:
+        view = db.query(PageView).filter(PageView.session_id == session_id).one()
+        assert view.event_type == event_type
 
 
 def test_track_event_rejects_an_invalid_event_type() -> None:

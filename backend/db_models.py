@@ -503,7 +503,7 @@ class SessionModel(Base):
 
 
 class PageView(Base):
-    """One row per tracked issuer-page or card-detail-page view.
+    """One row per tracked page view or selection action.
 
     `card_slug`/`issuer` are loose strings, not FKs into cards.card_id /
     issuers.issuer_id — same philosophy as CardModel.secured_variant_id and
@@ -513,12 +513,28 @@ class PageView(Base):
     already addressed by slug everywhere the frontend/API touch them. Later
     aggregate/JOIN queries can still join on cards.slug (already unique),
     just without a formal constraint enforcing it.
+
+    event_type breakdown:
+    - issuer_view, card_view: original page views (issuer.name / card_slug
+      set respectively).
+    - home_view, top_pick_view, compare_view, methodology_view: page views
+      for the four routes that previously had no tracking at all. No
+      issuer/card_slug — the route itself is the event.
+    - top_pick_card_selected, compare_card_selected: a card in the
+      "My Cards"/comparison set on the Top Pick or Compare page,
+      card_slug set. Multi-card selections (comparing 3 cards at once)
+      insert one row per card rather than adding a separate list-shaped
+      column — keeps every row atomic and reuses the existing singular
+      card_slug field exactly like card_view already does.
     """
 
     __tablename__ = "page_views"
     __table_args__ = (
         CheckConstraint(
-            "event_type IN ('issuer_view','card_view')", name="ck_page_view_event_type"
+            "event_type IN ('issuer_view','card_view','home_view','top_pick_view',"
+            "'compare_view','methodology_view','top_pick_card_selected',"
+            "'compare_card_selected')",
+            name="ck_page_view_event_type",
         ),
     )
 
