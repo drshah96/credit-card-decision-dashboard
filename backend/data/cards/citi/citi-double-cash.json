@@ -15,10 +15,22 @@
     "months": 18
   },
   "foreign_transaction_fee": true,
-  "variable_apr": "17.49%-27.49%",
-  "balance_transfer_apr": "17.49%-27.49%",
+  "variable_apr": "19.24%-29.24%",
+  "balance_transfer_apr": "19.24%-29.24%",
   "balance_transfer_fee": "3% of each transfer (minimum $5) within the first 4 months of account opening; 5% (minimum $5) after",
   "foreign_transaction_fee_rate": "3%",
+  "cash_advance_apr": "29.99%",
+  "penalty_apr": "Up to 29.99%",
+  "penalty_apr_trigger": "Making a late payment or a payment that's returned",
+  "pay_over_time_fee": "Up to 1.72% per month, for Citi Flex Plan balances subject to a Plan Fee",
+  "late_payment_fee": "$30, or $41 if another late payment occurs within 6 billing cycles",
+  "returned_payment_fee": "$30, or $41 if another returned payment occurs within 6 billing cycles",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "$200 cash back",
+    "requirement": "after you spend $1,500 in purchases in the first 6 months of account opening",
+    "estimated_value": null
+  },
   "verdict": {
     "status": "keep",
     "text": "Still the best flat-rate card: 2% on everything, uncapped",
@@ -91,10 +103,6 @@
   "rental_note": "No rental car coverage at all; use a different card for rentals.",
   "status_perks": [],
   "services": [
-    {
-      "name": "Foreign transaction fee applies",
-      "detail": "3% on purchases made outside the US; not built for international use."
-    },
     {
       "name": "Citi Entertainment",
       "detail": "Presale access to concert, sports, and event tickets."

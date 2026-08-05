@@ -21,6 +21,18 @@
   "balance_transfer_apr": "18.49%, 24.49%, or 28.49% (based on creditworthiness)",
   "balance_transfer_fee": "3% of each transfer (minimum $5) within the first 120 days of account opening; up to 5% (minimum $5) after",
   "foreign_transaction_fee_rate": "3%",
+  "cash_advance_apr": "29.49%",
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": null,
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": null,
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "$200 cash rewards",
+    "requirement": "after you spend $500 in purchases within the first 3 months of account opening",
+    "estimated_value": null
+  },
   "verdict": {
     "status": "keep",
     "text": "Keep for the simplicity: a flat 2% on everything, no categories to track",
@@ -109,14 +121,6 @@
     {
       "name": "$200 welcome bonus",
       "detail": "One-time $200 cash rewards bonus after spending $500 in purchases within the first 3 months."
-    },
-    {
-      "name": "0% intro APR",
-      "detail": "0% for 12 months on purchases and qualifying balance transfers (transfers must be made within 120 days of account opening), then a variable 18.49%, 24.49%, or 28.49% APR."
-    },
-    {
-      "name": "Foreign transaction fee",
-      "detail": "3% of each transaction, converted to US dollars."
     },
     {
       "name": "Visa Signature Concierge",

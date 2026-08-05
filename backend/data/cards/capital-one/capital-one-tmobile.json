@@ -11,10 +11,18 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "18.99% or 28.99% (based on creditworthiness)",
-  "balance_transfer_apr": "18.99% or 28.99% (based on creditworthiness)",
+  "variable_apr": "18.49% or 28.49% (based on creditworthiness)",
+  "balance_transfer_apr": "18.49% or 28.49% (based on creditworthiness)",
   "balance_transfer_fee": "Greater of 3% of the amount transferred or $3",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.49%",
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": null,
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": null,
+  "returned_check_fee": null,
+  "welcome_bonus": null,
   "verdict": {
     "status": "situational",
     "text": "Only makes sense for active T-Mobile customers: rewards aren't cashable",
@@ -94,10 +102,6 @@
     {
       "name": "T-Mobile AutoPay discount",
       "detail": "$5/month per line (up to 8 lines) off an eligible T-Mobile wireless plan when AutoPay is set to this card, separate from, and stackable with, the T-Mobile Rewards earned on purchases."
-    },
-    {
-      "name": "No foreign transaction fees",
-      "detail": "$0 on purchases made outside the US."
     },
     {
       "name": "Visa Signature perks",

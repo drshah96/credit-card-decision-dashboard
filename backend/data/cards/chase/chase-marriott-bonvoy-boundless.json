@@ -11,10 +11,22 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "20.24%-27.24%",
+  "variable_apr": "19.24%-27.74%",
   "balance_transfer_apr": "19.24%-27.74%",
   "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.49%",
+  "penalty_apr": "Up to 29.99%",
+  "penalty_apr_trigger": "Failing to make a Minimum Payment when due, or making a payment that's returned unpaid; can remain in effect indefinitely",
+  "pay_over_time_fee": "Up to 1.72% per month of the amount selected to pay over time, via Chase Pay Over Time",
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": "Up to $40",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "125,000 points + 1 Free Night Award (up to a 50,000-point property)",
+    "requirement": "after you spend $3,000 in purchases in the first 3 months from account opening",
+    "estimated_value": "$1,000 for the points alone, per this card's best redemption cpp; the Free Night Award adds more on top"
+  },
   "verdict": {
     "status": "situational",
     "text": "Keep if you'll actually book the annual free night; otherwise a mid-pack earner",
@@ -363,10 +375,6 @@
     }
   ],
   "services": [
-    {
-      "name": "No foreign transaction fees",
-      "detail": "Zero FX fees on international spend."
-    },
     {
       "name": "Visa Signature Concierge",
       "detail": "Complimentary 24/7 concierge for reservations, tickets, and travel arrangements."

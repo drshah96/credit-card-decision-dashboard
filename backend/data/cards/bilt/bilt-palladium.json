@@ -18,6 +18,18 @@
   "balance_transfer_apr": "26.74%-34.74%",
   "balance_transfer_fee": "3% of each transfer (minimum $5) within the first 4 months of account opening; 5% (minimum $5) after",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": null,
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": null,
+  "late_payment_fee": "$30, or $41 if another late payment occurs within 6 billing cycles",
+  "returned_payment_fee": "$30, or $41 if another returned payment occurs within 6 billing cycles",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "$300 Bilt Cash + 50,000 points",
+    "requirement": "$300 Bilt Cash on account opening, no spend required; 50,000 points plus Bilt Gold Elite Status after $4,000 in eligible spend (excluding rent/mortgage) within 90 days",
+    "estimated_value": "$1,400"
+  },
   "verdict": {
     "status": "situational",
     "text": "Keep if you'll use Priority Pass and capture the $400 hotel credit",
@@ -224,14 +236,6 @@
     {
       "name": "No transaction fee on rent, mortgage, and HOA payments",
       "detail": "Pay housing costs through Bilt with no card-processing fee. Funds are debited from a linked bank account within 24 hours, not your credit line."
-    },
-    {
-      "name": "No foreign transaction fees",
-      "detail": "$0 on purchases made outside the US."
-    },
-    {
-      "name": "10% intro APR",
-      "detail": "10% on new eligible purchases for the first 12 billing cycles, then a variable 26.74%–34.74% APR applies."
     },
     {
       "name": "Stainless steel card",

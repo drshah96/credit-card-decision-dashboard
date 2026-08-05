@@ -15,6 +15,14 @@
   "balance_transfer_apr": "28.99%",
   "balance_transfer_fee": "$0 at the standard Transfer APR, or 4% at any promotional APR Capital One may offer",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.99%",
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": null,
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": null,
+  "returned_check_fee": null,
+  "welcome_bonus": null,
   "verdict": {
     "status": "situational",
     "text": "Rare secured card that earns 1.5% cash back like its unsecured sibling",
@@ -84,10 +92,6 @@
     {
       "name": "Deposit refund path",
       "detail": "Earn your deposit back as a statement credit through responsible use, or get it refunded when you close the account with a zero balance. Capital One automatically reviews accounts for a credit-line increase (no added deposit needed) roughly every 6 months."
-    },
-    {
-      "name": "No foreign transaction fees",
-      "detail": "$0 on purchases made outside the US."
     },
     {
       "name": "Credit bureau reporting",

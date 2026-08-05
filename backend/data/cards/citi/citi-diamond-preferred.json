@@ -21,6 +21,14 @@
   "balance_transfer_apr": "16.49%-27.24%",
   "balance_transfer_fee": "3% of each transfer (minimum $5) within the first 4 months of account opening; 5% (minimum $5) after",
   "foreign_transaction_fee_rate": "3%",
+  "cash_advance_apr": "29.99%",
+  "penalty_apr": "Up to 29.99%",
+  "penalty_apr_trigger": "Making a late payment or a payment that's returned",
+  "pay_over_time_fee": "Up to 1.72% per month, for Citi Flex Plan balances subject to a Plan Fee",
+  "late_payment_fee": "$30, or $41 if another late payment occurs within 6 billing cycles",
+  "returned_payment_fee": "$30, or $41 if another returned payment occurs within 6 billing cycles",
+  "returned_check_fee": null,
+  "welcome_bonus": null,
   "verdict": {
     "status": "situational",
     "text": "Not a rewards card: worth it only for a balance transfer or 0% intro window",
@@ -29,7 +37,7 @@
   "earn_rates": [],
   "earn_note": "Diamond Preferred earns no cash back, points, or miles of any kind. It's built entirely around a long 0% intro APR window, not rewards. If you want a Citi card that also earns while you carry it, look at a ThankYou Rewards card like Citi Strata instead; if you specifically need 0% APR with the longest possible runway, this and Citi Simplicity are the two Citi cards built for exactly that.",
   "points": {
-    "currency": "None",
+    "currency": "No rewards program",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
     "note": "No points or cash-back program of any kind. The entire value proposition is 0% intro APR: 12 months on purchases and 21 months on balance transfers from account opening (balance transfers must post within the first 4 months), then a 16.49%–27.24% variable ongoing APR based on creditworthiness. This is one of the longest 0% balance-transfer windows Citi offers on any card."
@@ -47,20 +55,12 @@
   "status_perks": [],
   "services": [
     {
-      "name": "0% intro APR",
-      "detail": "0% for 12 months on purchases and 21 months on balance transfers from account opening; balance transfers must be completed within the first 4 months. A 16.49%–27.24% variable APR applies after the intro periods end, based on creditworthiness."
-    },
-    {
       "name": "Balance transfer fee",
       "detail": "3% of each transfer ($5 minimum) if completed within the first 4 months of account opening; 5% of each transfer ($5 minimum) after that."
     },
     {
       "name": "Late payment / penalty APR",
       "detail": "Unlike Citi Simplicity, this card does carry a late fee (up to $41) and a variable penalty APR that can apply after a late payment. Citi doesn't publish the exact penalty rate on its public summary page, so check your card agreement for the precise figure."
-    },
-    {
-      "name": "Foreign transaction fee applies",
-      "detail": "3% of the U.S. dollar amount of each transaction (Citi's standard rate, matching Simplicity and the Secured Mastercard); not built for international use."
     },
     {
       "name": "Citi Flex Pay",

@@ -15,6 +15,18 @@
   "balance_transfer_apr": "32.49%",
   "balance_transfer_fee": "The greater of $10 or 5% of the amount of each transfer",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": null,
+  "penalty_apr": "Up to 29.99%",
+  "penalty_apr_trigger": "Making a late payment or a payment that's returned",
+  "pay_over_time_fee": null,
+  "late_payment_fee": "$30, or $41 if another late payment occurs within 6 billing cycles",
+  "returned_payment_fee": "$30, or $41 if another returned payment occurs within 6 billing cycles",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "10% Off Shopping Pass (up to $100)",
+    "requirement": "after you spend $100 on the day of account approval",
+    "estimated_value": null
+  },
   "verdict": {
     "status": "situational",
     "text": "Thin rewards and high APR: only for Dillard's regulars who pay in full",
@@ -109,10 +121,6 @@
     {
       "name": "Special financing offers",
       "detail": "In-store-only (not online) promotional financing periodically offered on qualifying Dillard's purchases; check current terms before financing."
-    },
-    {
-      "name": "Foreign transaction fee",
-      "detail": "3% of the U.S. dollar amount of each purchase made outside the US, per Citi's cardholder agreement on file with the CFPB (as of mid-2026)."
     },
     {
       "name": "$0 liability on unauthorized charges",

@@ -18,6 +18,21 @@ class IntroApr(BaseModel):
     months: int
 
 
+class WelcomeBonus(BaseModel):
+    """The current sign-up offer, quoted verbatim from the issuer's own
+    current terms rather than decomposed into numbers — offers change
+    frequently and are structured differently across issuers (points vs.
+    cash, single vs. tiered spend thresholds), so `bonus`/`requirement` stay
+    free text like `effective_cost`/`variable_apr` elsewhere in this schema.
+    `estimated_value` is this card's own best redemption cpp applied to the
+    bonus, when the bonus is a points/miles amount — omitted for cash offers,
+    where the bonus amount already is the value."""
+
+    bonus: str
+    requirement: str
+    estimated_value: str | None = None
+
+
 class EarnRate(BaseModel):
     emoji: str
     multiplier: str
@@ -201,6 +216,27 @@ class Card(BaseModel):
     # boolean above still drives the "No Foreign Transaction Fee" chip
     # unchanged, this is just the detail-page-level specific number.
     foreign_transaction_fee_rate: str | None = None
+    # Round-3 rates/fees (see backlog #12) — same treatment as variable_apr
+    # above: verbatim strings from the issuer's own Pricing & Terms table,
+    # detail-only, None = not yet audited. pay_over_time_fee only applies to
+    # issuers that offer a "pay a purchase off over time for a fixed fee
+    # instead of interest" feature (Amex's Pay Over Time on charge cards,
+    # Chase Pay Over Time on revolving cards) — None for cards with no such
+    # feature at all, not just unaudited ones.
+    cash_advance_apr: str | None = None
+    penalty_apr: str | None = None
+    # When the penalty APR kicks in (e.g. "after a payment more than 60 days
+    # late") — kept separate from the rate itself since issuers phrase the
+    # trigger very differently and it isn't always present even when the
+    # rate is.
+    penalty_apr_trigger: str | None = None
+    pay_over_time_fee: str | None = None
+    late_payment_fee: str | None = None
+    returned_payment_fee: str | None = None
+    returned_check_fee: str | None = None
+    # The current sign-up offer — see WelcomeBonus. Detail-only, same as the
+    # round-3 fields above; None = not yet audited.
+    welcome_bonus: WelcomeBonus | None = None
 
 
 class EarnCategorySummary(BaseModel):
@@ -272,3 +308,24 @@ class CardSummary(BaseModel):
     intro_apr_balance_transfers: IntroApr | None = None
     foreign_transaction_fee: bool | None = None
     has_lounge_access: bool = False
+
+
+# ─── Anonymous session/traffic analytics ───────────────────────────────────
+
+
+class EventIn(BaseModel):
+    """A single tracked page view, posted by the frontend. `session_id` is a
+    client-generated identifier (see backend/db_models.py SessionModel for
+    why); `card_id` matches the frontend's own naming for a card (its slug,
+    e.g. "citi-strata-premier") even though it's stored as `card_slug` on the
+    PageView row, to stay unambiguous next to CardModel's own integer
+    `card_id` primary key in the DB layer."""
+
+    session_id: str
+    event_type: Literal["issuer_view", "card_view"]
+    issuer: str | None = None
+    card_id: str | None = None
+    # The full referring URL (e.g. "https://www.google.com/search?q=..."),
+    # straight from the frontend's own document.referrer — main.py extracts
+    # just the host before it reaches record_page_view/SessionModel.referrer.
+    referrer: str | None = None

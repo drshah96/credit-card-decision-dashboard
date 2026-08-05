@@ -673,7 +673,6 @@ def test_intro_apr_shape_when_present() -> None:
     [
         ("chase-freedom-unlimited", 15, 15, True),
         ("chase-freedom-flex", 15, 15, True),
-        ("chase-slate-edge", 18, 18, True),
     ],
 )
 def test_chase_cards_with_a_real_intro_apr_offer(
@@ -720,12 +719,14 @@ def test_chase_cards_with_confirmed_foreign_transaction_fee() -> None:
         "chase-freedom-rise",
         "chase-disney-premier",
         "chase-amazon-prime-visa",
+        "chase-slate-edge",
     ):
         detail = client.get(f"/api/cards/{card_id}").json()
         assert detail["intro_apr_purchases"] is None
         assert detail["intro_apr_balance_transfers"] is None
     assert client.get("/api/cards/chase-freedom-rise").json()["foreign_transaction_fee"] is True
     assert client.get("/api/cards/chase-disney-premier").json()["foreign_transaction_fee"] is True
+    assert client.get("/api/cards/chase-slate-edge").json()["foreign_transaction_fee"] is True
     assert (
         client.get("/api/cards/chase-amazon-prime-visa").json()["foreign_transaction_fee"] is False
     )
@@ -755,12 +756,17 @@ def test_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
         ("chase-freedom-unlimited", "18.24%-27.74%", "18.24%-27.74%"),
         ("chase-freedom-flex", "18.24%-27.74%", "18.24%-27.74%"),
         ("chase-amazon-prime-visa", "18.74%-27.49%", "18.74%-27.49%"),
-        # Confirmed genuinely distinct BT APR ranges — the whole reason this
-        # field isn't just derived from variable_apr.
-        ("chase-sapphire-reserve", "20.24%-28.74%", "19.49%-27.99%"),
-        ("chase-united-club-infinite", "19.74%-28.24%", "21.49%-28.49%"),
-        ("chase-ihg-one-rewards-premier", "19.24%-27.74%", "19.99%-28.49%"),
-        ("chase-marriott-bonvoy-boundless", "20.24%-27.24%", "19.24%-27.74%"),
+        # Re-verified 2026-08-03 against Chase's current Pricing & Terms pages:
+        # every one of these previously had a genuinely distinct BT APR range
+        # (the whole reason this field isn't just derived from variable_apr) —
+        # Prime Rate has since dropped to 6.75% and Chase re-grouped Purchase/
+        # My Chase Loan/Balance Transfer APR under one range for all of them.
+        # Kept as their own group since a future audit could easily find this
+        # has reverted, unlike the cards above which were never distinct.
+        ("chase-sapphire-reserve", "19.49%-27.99%", "19.49%-27.99%"),
+        ("chase-ihg-one-rewards-premier", "19.24%-27.74%", "19.24%-27.74%"),
+        ("chase-marriott-bonvoy-boundless", "19.24%-27.74%", "19.24%-27.74%"),
+        ("chase-united-club-infinite", "19.74%-28.24%", "19.74%-28.24%"),
     ],
 )
 def test_chase_variable_and_balance_transfer_apr(
@@ -847,25 +853,30 @@ def test_amex_blue_cash_cards_carry_the_only_fx_fee_in_the_amex_lineup(
     )
 
 
-def test_amex_hilton_surpass_is_the_only_amex_card_with_a_two_tier_bt_fee() -> None:
+def test_amex_hilton_surpass_no_longer_has_an_intro_offer_or_bt_support() -> None:
+    # Re-verified 2026-08-03: round 2 found this card as "the only Amex card
+    # with a two-tier BT fee" (0% intro APR + a 3%-then-5% BT fee) — its
+    # current rates-and-fees page has neither an introductory APR mention
+    # nor a "Balance Transfer" section at all, a real product change.
     detail = client.get("/api/cards/amex-hilton-honors-surpass").json()
-    assert detail["intro_apr_purchases"] == {"rate": "0%", "months": 15}
-    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": 15}
-    assert detail["variable_apr"] == "17.49%-27.49%"
-    assert detail["balance_transfer_apr"] == "17.49%-27.49%"
-    assert "60 days" in detail["balance_transfer_fee"]
+    assert detail["intro_apr_purchases"] is None
+    assert detail["intro_apr_balance_transfers"] is None
+    assert detail["variable_apr"] == "19.49%-28.49%"
+    assert detail["balance_transfer_apr"] is None
+    assert detail["balance_transfer_fee"] is None
 
 
-def test_amex_delta_blue_has_no_intro_offer_despite_bt_being_available() -> None:
-    # Delta Blue supports balance transfers at its standard rate (no 0%
-    # promotional period) — distinct from the charge cards above, which
-    # don't support balance transfers at all.
+def test_amex_delta_blue_no_intro_offer_and_no_longer_supports_balance_transfers() -> None:
+    # Re-verified 2026-08-03 against Amex's current rates-and-fees page for
+    # this exact card: no "Balance Transfer" section appears anywhere on it
+    # (unlike round 2, which found it supported BT at a standard rate with
+    # no 0% promo) — a real product change, not a stale re-read.
     detail = client.get("/api/cards/amex-delta-skymiles-blue").json()
     assert detail["intro_apr_purchases"] is None
     assert detail["intro_apr_balance_transfers"] is None
-    assert detail["variable_apr"] == "16.74%-25.74%"
-    assert detail["balance_transfer_apr"] == "16.74%-25.74%"
-    assert detail["balance_transfer_fee"] is not None
+    assert detail["variable_apr"] == "19.49%-28.49%"
+    assert detail["balance_transfer_apr"] is None
+    assert detail["balance_transfer_fee"] is None
 
 
 def test_amex_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
@@ -918,9 +929,7 @@ def test_capital_one_no_card_charges_a_foreign_transaction_fee() -> None:
     [
         ("capital-one-venture-one", 15),
         ("capital-one-savor", 12),
-        ("capital-one-savor-one", 12),
         ("capital-one-quicksilver", 15),
-        ("capital-one-kohls-rewards", 12),
     ],
 )
 def test_capital_one_cards_with_a_real_intro_apr_offer(card_id: str, intro_months: int) -> None:
@@ -935,19 +944,51 @@ def test_capital_one_premium_travel_cards_have_no_intro_offer() -> None:
         detail = client.get(f"/api/cards/{card_id}").json()
         assert detail["intro_apr_purchases"] is None
         assert detail["intro_apr_balance_transfers"] is None
-        assert detail["variable_apr"] == "19.49%-28.49%"
+        # Re-verified 2026-08-03: Capital One's own disclosure quotes this as
+        # three discrete creditworthiness tiers, not a continuous min-max
+        # range — same non-fit as the Bass Pro/BJ's tiered-APR cards below.
+        assert detail["variable_apr"] == "19.49%, 24.49%, or 28.49%, based on creditworthiness"
+
+
+def test_capital_one_kohls_no_longer_has_an_intro_offer() -> None:
+    # Re-verified 2026-08-03: round 1 found a 12-month 0% intro APR with a
+    # 19.49%-28.49% ongoing range; the current disclosure modal on this
+    # card's own official_url shows a flat 29.49% with no intro period.
+    detail = client.get("/api/cards/capital-one-kohls-rewards").json()
+    assert detail["intro_apr_purchases"] is None
+    assert detail["intro_apr_balance_transfers"] is None
+    assert detail["variable_apr"] == "29.49%"
+
+
+def test_capital_one_savor_one_no_longer_has_an_intro_offer() -> None:
+    # Re-verified 2026-08-03 directly against capitalone.com/credit-cards/
+    # savorone/ (this card's own stored official_url): round 1 found a
+    # 12-month 0% intro APR on purchases and balance transfers with an
+    # 18.49%-28.49% ongoing range; the current page shows neither — a flat
+    # 28.99% rate with no intro period at all, a real product change (this
+    # card is now positioned for Fair credit, unlike the Excellent-credit
+    # Savor sibling, which still has its intro offer).
+    detail = client.get("/api/cards/capital-one-savor-one").json()
+    assert detail["intro_apr_purchases"] is None
+    assert detail["intro_apr_balance_transfers"] is None
+    assert detail["variable_apr"] == "28.99%"
+    assert detail["balance_transfer_apr"] == "28.99%"
 
 
 def test_capital_one_bass_pro_cabelas_has_a_bifurcated_purchase_apr() -> None:
     # A genuinely two-tier rate (special in-store rate vs. everything else)
     # rather than a single range — stored verbatim, not force-averaged.
+    # Re-verified 2026-08-03: the "everything else" tier is itself 3
+    # discrete creditworthiness values, not a min-max range.
     detail = client.get("/api/cards/capital-one-bass-pro-cabelas-club").json()
     assert "9.99%" in detail["variable_apr"]
-    assert detail["balance_transfer_apr"] == "20.49%-32.24%"
+    assert detail["balance_transfer_apr"] == "19.49%, 22.99%, or 30.49%, based on creditworthiness"
 
 
 def test_capital_one_bjs_cards_share_the_same_tiered_apr() -> None:
-    tiered = "19.24%, 25.24%, or 29.24% (based on creditworthiness)"
+    # Re-verified 2026-08-03: now a 2-tier rate, not 3 — same finding
+    # (both cards share identical APR terms), different current numbers.
+    tiered = "19.99% or 28.49%, based on creditworthiness"
     for card_id in ("capital-one-bjs-one", "capital-one-bjs-one-plus"):
         detail = client.get(f"/api/cards/{card_id}").json()
         assert detail["variable_apr"] == tiered
@@ -1216,3 +1257,41 @@ def test_wells_fargo_variable_apr_and_fee_fields_are_detail_only_not_on_summary(
         "foreign_transaction_fee_rate",
     ):
         assert field not in summary
+
+
+# ─── Round 3 (#12): cash advance/penalty APR, pay-over-time fee, penalty
+# fees, and Welcome Bonus — same detail-only, verbatim-string, incremental
+# per-issuer rollout as the round 1/2 fields above. None = not yet audited.
+
+
+def test_round_3_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
+    summary = next(
+        c for c in client.get("/api/cards").json() if c["id"] == "chase-sapphire-reserve"
+    )
+    for field in (
+        "cash_advance_apr",
+        "penalty_apr",
+        "penalty_apr_trigger",
+        "pay_over_time_fee",
+        "late_payment_fee",
+        "returned_payment_fee",
+        "returned_check_fee",
+        "welcome_bonus",
+    ):
+        assert field not in summary
+
+
+def test_welcome_bonus_shape_when_present() -> None:
+    """Whichever card ends up with an audited welcome bonus, the field is a
+    {bonus, requirement, estimated_value} object with the right value types,
+    not a bare string."""
+    all_ids = [c["id"] for c in client.get("/api/cards").json()]
+    cards = client.get("/api/cards/detail", params={"ids": ",".join(all_ids)}).json()
+    audited = [c for c in cards if c["welcome_bonus"] is not None]
+    if not audited:
+        pytest.skip("no card has an audited welcome_bonus yet")
+    sample = audited[0]["welcome_bonus"]
+    assert set(sample.keys()) == {"bonus", "requirement", "estimated_value"}
+    assert isinstance(sample["bonus"], str)
+    assert isinstance(sample["requirement"], str)
+    assert sample["estimated_value"] is None or isinstance(sample["estimated_value"], str)

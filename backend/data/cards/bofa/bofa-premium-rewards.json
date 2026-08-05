@@ -15,6 +15,18 @@
   "balance_transfer_apr": "19.49%-27.49%",
   "balance_transfer_fee": "5% of the amount of each transaction",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.49%-29.24%",
+  "penalty_apr": "Up to 29.99%, based on your creditworthiness",
+  "penalty_apr_trigger": "Making a late payment; applies indefinitely once triggered",
+  "pay_over_time_fee": "Monthly fee up to 1.72% of the purchase amount assigned to a BofA Custom Pay Plan",
+  "late_payment_fee": "Up to $41",
+  "returned_payment_fee": null,
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "60,000 points",
+    "requirement": "after you spend $4,000 in purchases within the first 90 days of account opening",
+    "estimated_value": "$600"
+  },
   "verdict": {
     "status": "keep",
     "text": "Keep if the $200 credits offset the fee: solid no-frills 2x rate",
@@ -157,10 +169,6 @@
     {
       "name": "24/7 concierge",
       "detail": "Visa Signature concierge service for travel planning, dining reservations, and event tickets."
-    },
-    {
-      "name": "No foreign transaction fees",
-      "detail": "$0 on purchases made outside the US."
     },
     {
       "name": "BofA Rewards bonus",

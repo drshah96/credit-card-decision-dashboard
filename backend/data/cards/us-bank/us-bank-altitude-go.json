@@ -22,6 +22,18 @@
   "balance_transfer_apr": "17.49%-27.49%",
   "balance_transfer_fee": "5% of each transfer amount, $5 minimum",
   "foreign_transaction_fee_rate": "3%",
+  "cash_advance_apr": "29.49%-30.49%",
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": "A monthly fee up to 1.60% of the original principal amount, for U.S. Bank ExtendPay Plan or Loan balances",
+  "late_payment_fee": "Up to $41",
+  "returned_payment_fee": "Up to $41",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "20,000 points",
+    "requirement": "after you spend $1,000 in net purchases within the first 90 days of account opening",
+    "estimated_value": "$200"
+  },
   "verdict": {
     "status": "keep",
     "text": "Keep if dining is a real category: 4x on the first $2K/quarter",
@@ -142,10 +154,6 @@
     {
       "name": "20,000-point welcome bonus",
       "detail": "After $1,000 in net purchases within the first 90 days. Not eligible if you've received a new-account bonus for this card in the last 5 years."
-    },
-    {
-      "name": "0% intro APR",
-      "detail": "0% on purchases and balance transfers for the first 15 billing cycles, then 17.49%–27.49% variable."
     },
     {
       "name": "U.S. Bank ExtendPay Plan",

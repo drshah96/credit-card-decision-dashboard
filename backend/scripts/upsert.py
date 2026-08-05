@@ -65,6 +65,32 @@ def _parse_event_date(raw: str) -> date | None:
     return None
 
 
+def _mark_transferable(program: LoyaltyProgram) -> None:
+    """OR, not overwrite: once any card proves a loyalty program is
+    transferable — either it has its own transfer partners, or it's named
+    as another card's transfer-partner target — it stays transferable, even
+    if whichever card happened to seed the row first via _get_or_create had
+    no partners of its own. _get_or_create only sets `defaults` on the
+    INSERT path, never on a lookup of an existing row, so without this the
+    stored value is silently order-dependent on seed_catalog.py's
+    alphabetical file-processing order (e.g. "ThankYou Points" landed False
+    because citi-double-cash, with no transfer partners, sorts before
+    citi-strata/-premier/-elite, which have real ones)."""
+    if not program.is_transferable:
+        program.is_transferable = True
+
+
+def _get_transfer_partner_program(session: Session, name: str) -> LoyaltyProgram:
+    """A named transfer-partner target is, by definition, transferable —
+    apply that via _mark_transferable() rather than just the `defaults=`
+    passed to _get_or_create(), since defaults only take effect on the
+    INSERT path and this program may already exist (e.g. as some other
+    card's own currency, created with is_transferable=False at the time)."""
+    program = _get_or_create(session, LoyaltyProgram, name=name, defaults={"is_transferable": True})
+    _mark_transferable(program)
+    return program
+
+
 def _get_or_create(session: Session, model, defaults: dict | None = None, **lookup):
     instance = session.query(model).filter_by(**lookup).one_or_none()
     if instance is not None:
@@ -102,18 +128,20 @@ def upsert_card(session: Session, data: dict) -> CardModel:
         session, Issuer, name=data["issuer"], defaults={"slug": _slugify(data["issuer"])}
     )
     network = _get_or_create(session, Network, name=data["network"])
+    card_has_own_transfer_partners = bool(
+        data["transfer_partners"]["airline_count"] or data["transfer_partners"]["hotel_count"]
+    )
     points_program = _get_or_create(
         session,
         LoyaltyProgram,
         name=data["points"]["currency"],
         defaults={
             "program_type": "bank",
-            "is_transferable": bool(
-                data["transfer_partners"]["airline_count"]
-                or data["transfer_partners"]["hotel_count"]
-            ),
+            "is_transferable": card_has_own_transfer_partners,
         },
     )
+    if card_has_own_transfer_partners:
+        _mark_transferable(points_program)
 
     try:
         # A SAVEPOINT, not the outer transaction: seed_catalog.py reseeds on
@@ -197,6 +225,21 @@ def upsert_card(session: Session, data: dict) -> CardModel:
             card.balance_transfer_apr = data.get("balance_transfer_apr")
             card.balance_transfer_fee = data.get("balance_transfer_fee")
             card.foreign_transaction_fee_rate = data.get("foreign_transaction_fee_rate")
+            card.cash_advance_apr = data.get("cash_advance_apr")
+            card.penalty_apr = data.get("penalty_apr")
+            card.penalty_apr_trigger = data.get("penalty_apr_trigger")
+            card.pay_over_time_fee = data.get("pay_over_time_fee")
+            card.late_payment_fee = data.get("late_payment_fee")
+            card.returned_payment_fee = data.get("returned_payment_fee")
+            card.returned_check_fee = data.get("returned_check_fee")
+            # {"bonus": "...", "requirement": "...", "estimated_value": "..."}
+            # or absent (not yet audited), same shape as intro_apr_* above.
+            welcome_bonus = data.get("welcome_bonus")
+            card.welcome_bonus_bonus = welcome_bonus["bonus"] if welcome_bonus else None
+            card.welcome_bonus_requirement = welcome_bonus["requirement"] if welcome_bonus else None
+            card.welcome_bonus_estimated_value = (
+                welcome_bonus.get("estimated_value") if welcome_bonus else None
+            )
             card.is_active = True
 
             card.earn_rates = [
@@ -285,12 +328,7 @@ def upsert_card(session: Session, data: dict) -> CardModel:
 
             card.transfer_partners = [
                 CardTransferPartner(
-                    loyalty_program=_get_or_create(
-                        session,
-                        LoyaltyProgram,
-                        name=p["name"],
-                        defaults={"is_transferable": True},
-                    ),
+                    loyalty_program=_get_transfer_partner_program(session, p["name"]),
                     partner_type=p["type"],
                     transfer_ratio=p["ratio"],
                     notes=p.get("notes"),

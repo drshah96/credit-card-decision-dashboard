@@ -22,6 +22,18 @@
   "balance_transfer_apr": "17.74%-27.99%",
   "balance_transfer_fee": "5% of each transfer amount, $5 minimum",
   "foreign_transaction_fee_rate": "3%",
+  "cash_advance_apr": "29.49%-30.49%",
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": "A monthly fee up to 1.60% of the original principal amount, for U.S. Bank ExtendPay Plan or Loan balances",
+  "late_payment_fee": "Up to $41",
+  "returned_payment_fee": "Up to $41",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "$250 cash back",
+    "requirement": "after you spend $1,000 in eligible purchases within the first 90 days of account opening",
+    "estimated_value": null
+  },
   "verdict": {
     "status": "keep",
     "text": "Keep if you'll enroll new categories: flexible 5%/2% picks",
@@ -113,10 +125,6 @@
   "rental_note": "No auto rental coverage documented publicly for this card as of this writing.",
   "status_perks": [],
   "services": [
-    {
-      "name": "0% intro APR",
-      "detail": "0% on purchases and balance transfers for the first 15 billing cycles, then 17.74%–27.99% variable."
-    },
     {
       "name": "$250 welcome bonus",
       "detail": "One-time $250 cash bonus after $1,000 in eligible purchases within the first 90 days."

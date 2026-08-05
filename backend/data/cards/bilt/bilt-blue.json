@@ -18,6 +18,18 @@
   "balance_transfer_apr": "26.74%-34.74%",
   "balance_transfer_fee": "The greater of 5% or $5",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": null,
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": null,
+  "late_payment_fee": "$30, or $41 if another late payment occurs within 6 billing cycles",
+  "returned_payment_fee": "$30, or $41 if another returned payment occurs within 6 billing cycles",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "$100 Bilt Cash",
+    "requirement": "on account opening, no spending required",
+    "estimated_value": null
+  },
   "verdict": {
     "status": "keep",
     "text": "The only $0-fee card earning points on rent, with no transaction fee",
@@ -164,14 +176,6 @@
     {
       "name": "No transaction fee on rent, mortgage, and HOA payments",
       "detail": "Pay housing costs through Bilt with no card-processing fee, even if your landlord's portal normally charges one. Funds are debited from a linked bank account within 24 hours, not your credit line."
-    },
-    {
-      "name": "No foreign transaction fees",
-      "detail": "$0 on purchases made outside the US."
-    },
-    {
-      "name": "10% intro APR",
-      "detail": "10% on new eligible purchases for the first 12 billing cycles, then a variable 26.74%–34.74% APR applies."
     }
   ],
   "additional_cards": {

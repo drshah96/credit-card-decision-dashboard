@@ -364,6 +364,100 @@ def test_upsert_transfer_partners_dedupe_loyalty_program(session):
     assert a_program_id == b_program_id
 
 
+def test_upsert_loyalty_program_becomes_transferable_when_named_as_a_partner(session):
+    """Regression test for backlog #13 item 4: LoyaltyProgram.is_transferable
+    used to be order-dependent — whichever card seeded the row first via
+    _get_or_create permanently decided the value, since defaults= only
+    apply on INSERT. Here "Own Currency" is first upserted as a card's own
+    currency with zero transfer partners (computes is_transferable=False at
+    that point), then a second card lists that same name as a named
+    transfer partner — the shared row must end up True either way."""
+    upsert_card(
+        session,
+        make_card_data(
+            {
+                "id": "card-a",
+                "points": {**make_card_data()["points"], "currency": "Own Currency"},
+                "transfer_partners": {
+                    "airline_count": 0,
+                    "hotel_count": 0,
+                    "highlight": "",
+                    "recent_changes": "",
+                    "partners": [],
+                },
+            }
+        ),
+    )
+    program = session.query(LoyaltyProgram).filter_by(name="Own Currency").one()
+    assert program.is_transferable is False
+
+    partner = {"name": "Own Currency", "type": "airline", "ratio": "1:1", "notes": None}
+    upsert_card(
+        session,
+        make_card_data(
+            {
+                "id": "card-b",
+                "transfer_partners": {
+                    "airline_count": 1,
+                    "hotel_count": 0,
+                    "highlight": "",
+                    "recent_changes": "",
+                    "partners": [partner],
+                },
+            }
+        ),
+    )
+    session.commit()
+
+    program = session.query(LoyaltyProgram).filter_by(name="Own Currency").one()
+    assert program.is_transferable is True
+
+
+def test_upsert_loyalty_program_transferable_regardless_of_seed_order(session):
+    """Same fix, opposite order: the named-partner card seeds the row first
+    (True from the start), then the currency's own low-partner-count card
+    upserts afterward and must not regress it back to False."""
+    partner = {"name": "Other Currency", "type": "airline", "ratio": "1:1", "notes": None}
+    upsert_card(
+        session,
+        make_card_data(
+            {
+                "id": "card-a",
+                "transfer_partners": {
+                    "airline_count": 1,
+                    "hotel_count": 0,
+                    "highlight": "",
+                    "recent_changes": "",
+                    "partners": [partner],
+                },
+            }
+        ),
+    )
+    program = session.query(LoyaltyProgram).filter_by(name="Other Currency").one()
+    assert program.is_transferable is True
+
+    upsert_card(
+        session,
+        make_card_data(
+            {
+                "id": "card-b",
+                "points": {**make_card_data()["points"], "currency": "Other Currency"},
+                "transfer_partners": {
+                    "airline_count": 0,
+                    "hotel_count": 0,
+                    "highlight": "",
+                    "recent_changes": "",
+                    "partners": [],
+                },
+            }
+        ),
+    )
+    session.commit()
+
+    program = session.query(LoyaltyProgram).filter_by(name="Other Currency").one()
+    assert program.is_transferable is True
+
+
 # ─── upsert_card: re-promotion / idempotency (regression coverage) ────────
 #
 # A real bug here: reassigning a relationship collection (`card.credits =

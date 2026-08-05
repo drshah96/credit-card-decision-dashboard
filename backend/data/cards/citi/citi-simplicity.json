@@ -21,6 +21,14 @@
   "balance_transfer_apr": "17.49%-28.24%",
   "balance_transfer_fee": "3% of each transfer (minimum $5) within the first 4 months of account opening; 5% (minimum $5) after",
   "foreign_transaction_fee_rate": "3%",
+  "cash_advance_apr": "29.74%",
+  "penalty_apr": "None: Citi guarantees no penalty APR, ever, on this card",
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": "Up to 1.72% per month, for Citi Flex Plan balances subject to a Plan Fee",
+  "late_payment_fee": "None: Citi guarantees no late fees, ever, on this card",
+  "returned_payment_fee": "$30, or $41 if another returned payment occurs within 6 billing cycles",
+  "returned_check_fee": null,
+  "welcome_bonus": null,
   "verdict": {
     "status": "situational",
     "text": "Most forgiving Citi card to carry a balance on, but earns nothing",
@@ -29,7 +37,7 @@
   "earn_rates": [],
   "earn_note": "Simplicity earns no cash back, points, or miles at all. Like Diamond Preferred, it's built around APR mechanics instead of rewards. Its distinguishing feature isn't the intro rate itself (Diamond Preferred's is essentially the same) but Citi's explicit promise of no late fees and no penalty APR, ever, for the life of the account.",
   "points": {
-    "currency": "None",
+    "currency": "No rewards program",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
     "note": "No points or cash-back program of any kind. 0% intro APR for 12 months on purchases and 21 months on balance transfers from account opening (transfers must post within the first 4 months), then a 17.49%–28.24% variable ongoing APR based on creditworthiness."
@@ -47,10 +55,6 @@
   "status_perks": [],
   "services": [
     {
-      "name": "0% intro APR",
-      "detail": "0% for 12 months on purchases and 21 months on balance transfers from account opening; balance transfers must be completed within the first 4 months."
-    },
-    {
       "name": "Balance transfer fee",
       "detail": "3% of each transfer ($5 minimum) if completed within the first 4 months of account opening; 5% of each transfer ($5 minimum) after that."
     },
@@ -61,10 +65,6 @@
     {
       "name": "No penalty APR, ever",
       "detail": "A late or missed payment also never triggers a penalty interest rate; your APR stays the same regardless of payment history."
-    },
-    {
-      "name": "Foreign transaction fee applies",
-      "detail": "3% of the U.S. dollar amount of each transaction (Citi's standard rate, matching Diamond Preferred and the Secured Mastercard); not built for international use."
     },
     {
       "name": "Citi Flex Pay",

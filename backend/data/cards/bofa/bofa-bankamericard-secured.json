@@ -21,6 +21,14 @@
   "balance_transfer_apr": "14.99%-25.99%",
   "balance_transfer_fee": "3% for the first 60 days of account opening; 5% after",
   "foreign_transaction_fee_rate": "3%",
+  "cash_advance_apr": "28.49%-29.24%",
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": "Monthly fee up to 1.72% of the purchase amount assigned to a BofA Custom Pay Plan",
+  "late_payment_fee": "Up to $41",
+  "returned_payment_fee": null,
+  "returned_check_fee": null,
+  "welcome_bonus": null,
   "verdict": {
     "status": "reconsider",
     "text": "No rewards, no intro APR: other secured BofA cards earn for free",
@@ -29,7 +37,7 @@
   "earn_rates": [],
   "earn_note": "This is the secured version of BankAmericard, and it inherits the same no-rewards structure. But secured card products also aren't eligible for BankAmericard's signature 0% intro APR offer, so there's no APR-focused reason to pick this over the unsecured card either. There's no earn-rate or APR reason to choose this over Cash Rewards Secured or Unlimited Cash Rewards Secured, which cost the same to open.",
   "points": {
-    "currency": "None",
+    "currency": "No rewards program",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
     "note": "Nothing to redeem. Value is purely the credit-building mechanism, not any earning."

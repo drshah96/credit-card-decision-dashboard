@@ -22,6 +22,14 @@
   "balance_transfer_apr": "14.99%-25.99%",
   "balance_transfer_fee": "3% for the first 60 days of account opening; 5% after",
   "foreign_transaction_fee_rate": "3%",
+  "cash_advance_apr": "28.49%-29.24%",
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": "Monthly fee up to 1.72% of the purchase amount assigned to a BofA Custom Pay Plan",
+  "late_payment_fee": "Up to $41",
+  "returned_payment_fee": null,
+  "returned_check_fee": null,
+  "welcome_bonus": null,
   "verdict": {
     "status": "situational",
     "text": "No rewards at all: only for the 21-cycle 0% intro APR",
@@ -30,7 +38,7 @@
   "earn_rates": [],
   "earn_note": "BankAmericard isn't a rewards card. It's built entirely around a long 0% intro APR window and no penalty APR. There's no everyday earn rate of any kind.",
   "points": {
-    "currency": "None",
+    "currency": "No rewards program",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
     "note": "Nothing to redeem. The entire value proposition is the intro APR window, not earning."
@@ -73,10 +81,6 @@
   "rental_note": "No auto rental coverage documented publicly for this card.",
   "status_perks": [],
   "services": [
-    {
-      "name": "0% intro APR",
-      "detail": "0% on purchases and balance transfers (within 60 days) for the first 21 billing cycles, then 14.99%–25.99% variable, one of the longest 0% windows available."
-    },
     {
       "name": "Balance transfer fee",
       "detail": "5% of each transfer amount, with no reduced introductory rate on transfers for this card."

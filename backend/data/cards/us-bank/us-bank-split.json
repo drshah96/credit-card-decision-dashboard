@@ -15,6 +15,14 @@
   "balance_transfer_apr": null,
   "balance_transfer_fee": null,
   "foreign_transaction_fee_rate": "3%",
+  "cash_advance_apr": null,
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": null,
+  "late_payment_fee": "Up to $41",
+  "returned_payment_fee": "Up to $41",
+  "returned_check_fee": null,
+  "welcome_bonus": null,
   "verdict": {
     "status": "reconsider",
     "text": "Not a rewards card: forces every purchase into an installment plan",
@@ -23,7 +31,7 @@
   "earn_rates": [],
   "earn_note": "Split isn't a rewards card. It's U.S. Bank's buy-now-pay-later product wearing a Mastercard. Every purchase of $100+ is automatically split into 3 interest-free monthly payments; purchases under $100 in a billing cycle are bundled into one Small Purchase Plan and split the same way. You can extend a Plan to 6 or 12 months for a fixed monthly Plan Fee, but the 3-month default can't be turned off; there's no way to just carry a normal revolving balance.",
   "points": {
-    "currency": "None",
+    "currency": "No rewards program",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
     "note": "There is nothing to redeem. The entire value proposition is interest-free installment financing, not earning."

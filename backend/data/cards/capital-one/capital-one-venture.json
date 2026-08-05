@@ -11,10 +11,22 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.49%-28.49%",
-  "balance_transfer_apr": "19.49%-28.49%",
+  "variable_apr": "19.49%, 24.49%, or 28.49%, based on creditworthiness",
+  "balance_transfer_apr": "19.49%, 24.49%, or 28.49%, based on creditworthiness",
   "balance_transfer_fee": "$0 at the standard Transfer APR, or 4% at any promotional APR Capital One may offer",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.49%",
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": null,
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": null,
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "75,000 miles",
+    "requirement": "after you spend $4,000 in purchases in the first 3 months from account opening",
+    "estimated_value": "$1,388"
+  },
   "verdict": {
     "status": "situational",
     "text": "Solid flat 2x earner, but redundant if you already carry Venture X",
@@ -276,10 +288,6 @@
     }
   ],
   "services": [
-    {
-      "name": "No foreign transaction fees",
-      "detail": "Zero FX fees on purchases made outside the US."
-    },
     {
       "name": "Discover network transition",
       "detail": "New accounts are being originated on the Discover network instead of Visa Signature/World Elite Mastercard as of early 2026; existing cards keep their network until reissue. Worth checking Discover acceptance before relying on it abroad."

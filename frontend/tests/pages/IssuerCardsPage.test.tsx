@@ -9,6 +9,12 @@ vi.mock("@/api/cards", () => ({
   fetchCards: vi.fn(),
   fetchCardDetails: vi.fn(),
 }));
+// Real tracking behavior (session id generation, sendBeacon/fetch) is
+// covered in tests/utils/sessionTracking.test.ts — here it's just mocked out
+// so these page tests aren't incidentally exercising a live fetch fallback.
+vi.mock("@/utils/sessionTracking", () => ({
+  recordPageView: vi.fn(),
+}));
 
 import { fetchCardDetails, fetchCards } from "@/api/cards";
 
@@ -55,6 +61,14 @@ function makeCard(overrides: Partial<Card> = {}): Card {
     balance_transfer_apr: null,
     balance_transfer_fee: null,
     foreign_transaction_fee_rate: null,
+    cash_advance_apr: null,
+    penalty_apr: null,
+    penalty_apr_trigger: null,
+    pay_over_time_fee: null,
+    late_payment_fee: null,
+    returned_payment_fee: null,
+    returned_check_fee: null,
+    welcome_bonus: null,
     earn_rates: [],
     earn_note: "",
     points: { currency: summary.points_program, redemption_options: [], per_100k: "", note: "" },

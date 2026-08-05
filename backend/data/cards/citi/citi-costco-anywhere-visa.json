@@ -15,6 +15,14 @@
   "balance_transfer_apr": "18.74%-26.74%",
   "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "25.49%",
+  "penalty_apr": "Up to 29.99%",
+  "penalty_apr_trigger": "Making a late payment or a payment that's returned",
+  "pay_over_time_fee": "Up to 1.72% per month, for Citi Flex Plan balances subject to a Plan Fee",
+  "late_payment_fee": "$30, or $41 if another late payment occurs within 6 billing cycles",
+  "returned_payment_fee": "$30, or $41 if another returned payment occurs within 6 billing cycles",
+  "returned_check_fee": null,
+  "welcome_bonus": null,
   "verdict": {
     "status": "situational",
     "text": "Excellent if you're already a paying Costco member who drives regularly",
@@ -120,10 +128,6 @@
   "rental_note": "Worldwide Car Rental Insurance applies when you decline the counter's own collision/theft coverage and charge the full rental to this card; Citi's public page doesn't confirm whether it pays primary or secondary to your personal auto policy.",
   "status_perks": [],
   "services": [
-    {
-      "name": "No foreign transaction fees",
-      "detail": "$0 on purchases made outside the US."
-    },
     {
       "name": "Doubles as Costco membership ID",
       "detail": "The card can be used to verify membership at warehouse entry while the membership is active."

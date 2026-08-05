@@ -14,6 +14,18 @@
   "balance_transfer_apr": null,
   "balance_transfer_fee": null,
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.74%",
+  "penalty_apr": "29.99%",
+  "penalty_apr_trigger": "Missing at least the Minimum Payment Due on a Pay Over Time balance, or a returned payment; applies for at least 6 months and is reviewed every 6 months after that",
+  "pay_over_time_fee": "Up to 1.33% per month of each purchase placed in a Plan It plan",
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": "Up to $40",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "40,000 Membership Rewards points",
+    "requirement": "after you spend $3,000 in purchases in the first 6 months of Card Membership",
+    "estimated_value": "$800"
+  },
   "verdict": {
     "status": "keep",
     "text": "Low-commitment MR earner if you use transit + the CLEAR credit",
@@ -229,10 +241,6 @@
     {
       "name": "No Preset Spending Limit",
       "detail": "Purchase power adjusts based on your spending patterns rather than a fixed credit line."
-    },
-    {
-      "name": "No foreign transaction fees",
-      "detail": "Zero FX fees on international spend."
     }
   ],
   "additional_cards": {

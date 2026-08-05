@@ -17,6 +17,18 @@
   "balance_transfer_apr": "20.24%-28.24%",
   "balance_transfer_fee": "5% of each transfer, $5 minimum",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "29.49%",
+  "penalty_apr": "Up to 29.99%",
+  "penalty_apr_trigger": "Making a late payment or a payment that's returned",
+  "pay_over_time_fee": "Up to 1.72% per month, for Citi Flex Plan balances subject to a Plan Fee",
+  "late_payment_fee": "$30, or $41 if another late payment occurs within 6 billing cycles",
+  "returned_payment_fee": "$30, or $41 if another returned payment occurs within 6 billing cycles",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "60,000 points",
+    "requirement": "after you spend $4,000 in purchases in the first 3 months of account opening",
+    "estimated_value": "$1,020"
+  },
   "verdict": {
     "status": "keep",
     "text": "Strong $95 travel card, but cash redemption is capped at 0.75¢/point",
@@ -174,10 +186,6 @@
   "rental_note": "MasterRental coverage is secondary: it pays after your personal auto policy, covering the gap (deductible, etc). For primary coverage, use a card like the Sapphire Preferred or Venture X instead.",
   "status_perks": [],
   "services": [
-    {
-      "name": "No foreign transaction fees",
-      "detail": "Zero added cost on purchases made outside the US."
-    },
     {
       "name": "Citi Entertainment",
       "detail": "Presale access to concert, sports, and event tickets."

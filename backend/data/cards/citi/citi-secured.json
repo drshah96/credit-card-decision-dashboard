@@ -15,6 +15,14 @@
   "balance_transfer_apr": "24.74%",
   "balance_transfer_fee": "5% of each transfer, $5 minimum",
   "foreign_transaction_fee_rate": "3%",
+  "cash_advance_apr": "29.99%",
+  "penalty_apr": "Up to 29.99%",
+  "penalty_apr_trigger": "Making a late payment or a payment that's returned",
+  "pay_over_time_fee": null,
+  "late_payment_fee": "$30, or $41 if another late payment occurs within 6 billing cycles",
+  "returned_payment_fee": "$30, or $41 if another returned payment occurs within 6 billing cycles",
+  "returned_check_fee": null,
+  "welcome_bonus": null,
   "verdict": {
     "status": "situational",
     "text": "Straightforward credit-building card with a clear graduation path",
@@ -23,7 +31,7 @@
   "earn_rates": [],
   "earn_note": "The Citi Secured Mastercard earns no cash back or points. Citi's own product page for this card mentions only optional Merchant Offers (opt-in, targeted discounts at select retailers), not a real rewards currency. If you want a secured card that earns actual cash back, that's not this issuer's secured product; Capital One's Quicksilver Secured is the closer match.",
   "points": {
-    "currency": "None",
+    "currency": "No rewards program",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
     "note": "No points or cash-back program of any kind. The entire value proposition is the refundable security deposit, monthly reporting to all three credit bureaus, and a defined path to an unsecured Citi card."
@@ -55,10 +63,6 @@
     {
       "name": "APR",
       "detail": "Variable rate based on creditworthiness, reported in the mid-to-high-20s% by recent reviews. Citi doesn't publish an exact figure on its public summary page, so check your card agreement for the precise rate."
-    },
-    {
-      "name": "Foreign transaction fee applies",
-      "detail": "3% of the U.S. dollar amount of each transaction."
     },
     {
       "name": "Free FICO Score access",

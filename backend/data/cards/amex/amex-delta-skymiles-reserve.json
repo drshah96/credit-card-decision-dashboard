@@ -15,6 +15,18 @@
   "balance_transfer_apr": null,
   "balance_transfer_fee": null,
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.74%",
+  "penalty_apr": "29.99%",
+  "penalty_apr_trigger": "Missing at least the Minimum Payment Due, or a returned payment; applies for at least 6 months and is reviewed every 6 months after that",
+  "pay_over_time_fee": "Up to 1.33% per month of each purchase placed in a Plan It plan",
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": "Up to $40",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "As high as 100,000 miles",
+    "requirement": "after you spend $5,000 in purchases in the first 6 months of Card Membership; welcome offers vary and you may not be eligible for an offer",
+    "estimated_value": "$1,150"
+  },
   "verdict": {
     "status": "situational",
     "text": "Keep if you fly Delta often and actually use the lounges",
@@ -191,10 +203,6 @@
     {
       "name": "Priority boarding & upgrade priority",
       "detail": "Zone 5 priority boarding, plus upgrade list placement above Gold/Platinum cardholders (below Medallion elites)."
-    },
-    {
-      "name": "No foreign transaction fees",
-      "detail": "Zero FX fees on international spend."
     }
   ],
   "additional_cards": {

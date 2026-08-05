@@ -11,10 +11,22 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "20.24%-27.24%",
-  "balance_transfer_apr": "20.24%-27.24%",
+  "variable_apr": "19.24%-27.74%",
+  "balance_transfer_apr": "19.24%-27.74%",
   "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.49%",
+  "penalty_apr": "Up to 29.99%",
+  "penalty_apr_trigger": "Failing to make a Minimum Payment when due, or making a payment that's returned unpaid; can remain in effect indefinitely",
+  "pay_over_time_fee": "Up to 1.72% per month of the amount selected to pay over time, via Chase Pay Over Time",
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": "Up to $40",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "45,000 points, plus up to 30,000 more",
+    "requirement": "the 45,000 requires spending $5,000 in the first 3 months; the extra up to 30,000 comes from earning 2x (instead of 1x) on up to $15,000 of otherwise-1x spend in the first 6 months",
+    "estimated_value": "$810 for the guaranteed 45,000, per this card's best redemption cpp"
+  },
   "verdict": {
     "status": "situational",
     "text": "Keep if you stay at Hyatt hotels: the free nights are the whole card",
@@ -306,10 +318,6 @@
     }
   ],
   "services": [
-    {
-      "name": "No foreign transaction fees",
-      "detail": "Zero FX fees on international spend."
-    },
     {
       "name": "Visa Signature Concierge",
       "detail": "Complimentary 24/7 concierge for reservations, tickets, and travel arrangements."
