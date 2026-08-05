@@ -26,13 +26,41 @@ describe("initAnalytics", () => {
     // from, so this is the only way to observe the config call's arguments.
     expect(window.dataLayer).toContainEqual([
       "config",
-      "G-BP9B4GDZES",
+      "G-MVE5H49V1S",
       {
         send_page_view: false,
         transport_url: "https://thewalletaudit.com",
         first_party_collection: true,
       },
     ]);
+  });
+
+  it("grants consent by default, before config runs", () => {
+    vi.stubEnv("PROD", true);
+
+    initAnalytics();
+
+    const dataLayer = window.dataLayer!;
+    const consentIndex = dataLayer.findIndex(
+      (entry) => Array.isArray(entry) && entry[0] === "consent" && entry[1] === "default",
+    );
+    const configIndex = dataLayer.findIndex((entry) => Array.isArray(entry) && entry[0] === "config");
+
+    expect(consentIndex).toBeGreaterThanOrEqual(0);
+    expect(dataLayer[consentIndex]).toEqual([
+      "consent",
+      "default",
+      {
+        ad_storage: "granted",
+        analytics_storage: "granted",
+        ad_user_data: "granted",
+        ad_personalization: "granted",
+      },
+    ]);
+    // Google reads consent state at config time — granting it after would
+    // be too late, since gtag.js locks in denied-by-omission behavior once
+    // config has already run.
+    expect(consentIndex).toBeLessThan(configIndex);
   });
 });
 
