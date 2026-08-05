@@ -11,6 +11,7 @@ def record_page_view(
     card_slug: str | None,
     referrer: str | None = None,
     country: str | None = None,
+    device_type: str | None = None,
 ) -> None:
     """Upsert the session row (creating it on first sight, else just bumping
     last_seen_at) and insert one page_views row. Fire-and-forget from the
@@ -19,7 +20,11 @@ def record_page_view(
     with session_scope() as session:
         existing = session.get(SessionModel, session_id)
         if existing is None:
-            session.add(SessionModel(id=session_id, referrer=referrer, country=country))
+            session.add(
+                SessionModel(
+                    id=session_id, referrer=referrer, country=country, device_type=device_type
+                )
+            )
         else:
             existing.last_seen_at = func.now()
         session.add(
