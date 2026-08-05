@@ -1,9 +1,11 @@
-import { describe, it, expect, afterEach } from "vitest";
+import { describe, it, expect, afterEach, vi } from "vitest";
 import { initAnalytics, trackEvent, trackPageView } from "../../src/utils/analytics";
 
 afterEach(() => {
   delete window.gtag;
+  delete window.dataLayer;
   document.querySelectorAll('script[src*="googletagmanager"]').forEach((el) => el.remove());
+  vi.unstubAllEnvs();
 });
 
 describe("initAnalytics", () => {
@@ -12,6 +14,25 @@ describe("initAnalytics", () => {
 
     expect(document.querySelector('script[src*="googletagmanager"]')).toBeNull();
     expect(window.gtag).toBeUndefined();
+  });
+
+  it("configures gtag to send collect hits through the first-party proxy in production", () => {
+    vi.stubEnv("PROD", true);
+
+    initAnalytics();
+
+    // window.gtag pushes every call onto dataLayer rather than sending
+    // anything itself — that's what the async-loaded google script reads
+    // from, so this is the only way to observe the config call's arguments.
+    expect(window.dataLayer).toContainEqual([
+      "config",
+      "G-BP9B4GDZES",
+      {
+        send_page_view: false,
+        transport_url: "https://thewalletaudit.com",
+        first_party_collection: true,
+      },
+    ]);
   });
 });
 
