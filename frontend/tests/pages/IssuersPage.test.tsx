@@ -2,6 +2,17 @@ import { describe, it, expect, vi, afterEach } from "vitest";
 import { act, render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import IssuersPage from "@/pages/IssuersPage";
+import { recordPageView } from "@/utils/sessionTracking";
+
+// Real recordPageView -> postEvent would attempt a real fetch on every
+// render in this file — mocked out the same way IssuerCardsPage.test.tsx /
+// CardDetailPage.test.tsx do, so this file can also assert IssuersPage
+// actually calls it with the right event_type (those two don't bother,
+// since their own event_type has been stable and tested since the
+// original tracking rollout — this one is new, worth pinning down).
+vi.mock("@/utils/sessionTracking", () => ({
+  recordPageView: vi.fn(),
+}));
 
 function renderPage() {
   return render(
@@ -15,9 +26,18 @@ function renderPage() {
 }
 
 describe("IssuersPage", () => {
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("renders the header copy", () => {
     renderPage();
     expect(screen.getByText(/build a smarter card portfolio/i)).toBeInTheDocument();
+  });
+
+  it("records a home_view on mount", () => {
+    renderPage();
+    expect(recordPageView).toHaveBeenCalledWith("home_view");
   });
 
   it("renders one tile per issuer", () => {

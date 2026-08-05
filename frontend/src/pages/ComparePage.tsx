@@ -10,6 +10,7 @@ import { useCompareList } from "../hooks/useCompareList";
 import { useCreditUsage } from "../hooks/useCreditUsage";
 import { useSlowLoadWarning } from "../hooks/useSlowLoadWarning";
 import { trackEvent } from "../utils/analytics";
+import { recordPageView } from "../utils/sessionTracking";
 import { CARD_IMAGES } from "../utils/cardImages";
 import { filterByBrands, filterByCategories, filterByIssuers } from "../utils/cardTaxonomy";
 import type { Card, CardSummary } from "../types/cards";
@@ -56,6 +57,10 @@ export default function ComparePage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { compareIds, setCompareIds } = useCompareList();
   const selectedIds = useMemo(() => parseSelectedIds(searchParams.get("cards")), [searchParams]);
+
+  useEffect(() => {
+    recordPageView("compare_view");
+  }, []);
 
   // Arriving at /compare with no ?cards param (e.g. clicking the bare tab
   // link) — seed the URL from whatever was picked earlier via "Add to
@@ -156,6 +161,23 @@ export default function ComparePage() {
     if (ids.length < 2) return;
     const timeoutId = window.setTimeout(() => {
       trackEvent("compare_cards", { card_ids: validCardIdsKey, card_count: ids.length });
+    }, 1000);
+    return () => window.clearTimeout(timeoutId);
+  }, [validCardIdsKey]);
+
+  // Same debounce as the compare_cards GA4 event above, but fires for a
+  // single selected card too (not gated on ids.length < 2) — this tracks
+  // "a card was in the selection", not "an actual comparison happened",
+  // so even one pick is a real signal. One row per card rather than a
+  // single event carrying a list, consistent with how every other
+  // selection/view event on this table works (see PageView's docstring
+  // in backend/db_models.py) and matching top_pick_card_selected's
+  // treatment on the Top Pick page.
+  useEffect(() => {
+    if (!validCardIdsKey) return;
+    const ids = validCardIdsKey.split(",");
+    const timeoutId = window.setTimeout(() => {
+      for (const id of ids) recordPageView("compare_card_selected", undefined, id);
     }, 1000);
     return () => window.clearTimeout(timeoutId);
   }, [validCardIdsKey]);

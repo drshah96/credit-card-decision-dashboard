@@ -8,6 +8,7 @@ import { FilterChips } from "../components/FilterChips";
 import { SlowLoadNotice } from "../components/SlowLoadNotice";
 import { useSlowLoadWarning } from "../hooks/useSlowLoadWarning";
 import { groupCardsForPicker, hiddenSecuredIds, ISSUERS } from "../utils/cardTaxonomy";
+import { recordPageView } from "../utils/sessionTracking";
 import {
   computeTopPicks,
   TOP_PICK_GROUPS,
@@ -334,6 +335,10 @@ export default function TopPickPage() {
   });
   const slowLoad = useSlowLoadWarning(isLoading);
 
+  useEffect(() => {
+    recordPageView("top_pick_view");
+  }, []);
+
   // Lives in the URL (like Compare's ?cards=) rather than localStorage —
   // the whole interaction (open picker, select, see the table update)
   // happens on this one page, so there's no cross-page tray to sync with,
@@ -352,6 +357,32 @@ export default function TopPickPage() {
     if (selectedIds.size === 0) return allCards;
     return allCards.filter((c) => selectedIds.has(c.id));
   }, [allCards, selectedIds]);
+
+  // Validated against the fetched catalog separately from scopedCards
+  // above, since scopedCards deliberately falls back to the *whole*
+  // catalog when nothing's selected (that's what "no scope" means for
+  // ranking) — using it here would wrongly fire a selection event for
+  // every card any time selectedIds is empty.
+  const selectedCardIdsKey = (allCards ?? [])
+    .filter((c) => selectedIds.has(c.id))
+    .map((c) => c.id)
+    .join(",");
+
+  // Debounced so building "My Cards" one card at a time (pick 1, pick 2,
+  // pick 3...) fires one top_pick_card_selected batch for the settled set
+  // rather than one event per incremental pick — same debounce ComparePage
+  // already uses for its own compare_cards GA4 event. One row per card
+  // (not a single event carrying a list) to match how every other
+  // selection/view event on this table works — see PageView's docstring
+  // in backend/db_models.py.
+  useEffect(() => {
+    if (!selectedCardIdsKey) return;
+    const ids = selectedCardIdsKey.split(",");
+    const timeoutId = window.setTimeout(() => {
+      for (const id of ids) recordPageView("top_pick_card_selected", undefined, id);
+    }, 1000);
+    return () => window.clearTimeout(timeoutId);
+  }, [selectedCardIdsKey]);
 
   // Points pooling (Chase Freedom Flex/Unlimited inheriting a Sapphire
   // account's redemption value) only makes sense once we know which cards

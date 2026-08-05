@@ -314,15 +314,28 @@ class CardSummary(BaseModel):
 
 
 class EventIn(BaseModel):
-    """A single tracked page view, posted by the frontend. `session_id` is a
-    client-generated identifier (see backend/db_models.py SessionModel for
-    why); `card_id` matches the frontend's own naming for a card (its slug,
-    e.g. "citi-strata-premier") even though it's stored as `card_slug` on the
-    PageView row, to stay unambiguous next to CardModel's own integer
-    `card_id` primary key in the DB layer."""
+    """A single tracked page view or selection action, posted by the
+    frontend. `session_id` is a client-generated identifier (see
+    backend/db_models.py SessionModel for why); `card_id` matches the
+    frontend's own naming for a card (its slug, e.g. "citi-strata-premier")
+    even though it's stored as `card_slug` on the PageView row, to stay
+    unambiguous next to CardModel's own integer `card_id` primary key in
+    the DB layer.
+
+    See backend/db_models.py PageView's own docstring for what each
+    event_type means and which of issuer/card_id it carries, if any."""
 
     session_id: str
-    event_type: Literal["issuer_view", "card_view"]
+    event_type: Literal[
+        "issuer_view",
+        "card_view",
+        "home_view",
+        "top_pick_view",
+        "compare_view",
+        "methodology_view",
+        "top_pick_card_selected",
+        "compare_card_selected",
+    ]
     issuer: str | None = None
     card_id: str | None = None
     # The full referring URL (e.g. "https://www.google.com/search?q=..."),

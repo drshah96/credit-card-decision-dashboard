@@ -5,12 +5,17 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ComparePage from "@/pages/ComparePage";
 import type { Card, CardSummary } from "@/types/cards";
 
+vi.mock("@/utils/sessionTracking", () => ({
+  recordPageView: vi.fn(),
+}));
+
 vi.mock("@/api/cards", () => ({
   fetchCards: vi.fn(),
   fetchCard: vi.fn(),
 }));
 
 import { fetchCard, fetchCards } from "@/api/cards";
+import { recordPageView } from "@/utils/sessionTracking";
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 
@@ -614,6 +619,83 @@ describe("ComparePage", () => {
       // so the comparison never reached the 2-card minimum — no event fires.
       await new Promise((resolve) => setTimeout(resolve, 1200));
       expect(calls).toEqual([]);
+    });
+  });
+
+  describe("session tracking", () => {
+    it("records a compare_view on mount", async () => {
+      renderPage();
+
+      await waitFor(() => {
+        expect(recordPageView).toHaveBeenCalledWith("compare_view");
+      });
+    });
+
+    it("fires a debounced compare_card_selected once the selection settles, one row per card", async () => {
+      renderPage("/compare?cards=amex-platinum,chase-sapphire-reserve");
+
+      await waitFor(() => {
+        expect(screen.getByRole("columnheader", { name: /the platinum card/i })).toBeInTheDocument();
+      });
+
+      await waitFor(
+        () => {
+          expect(recordPageView).toHaveBeenCalledWith(
+            "compare_card_selected",
+            undefined,
+            "amex-platinum",
+          );
+          expect(recordPageView).toHaveBeenCalledWith(
+            "compare_card_selected",
+            undefined,
+            "chase-sapphire-reserve",
+          );
+        },
+        { timeout: 2000 },
+      );
+    });
+
+    it("fires compare_card_selected for even a single selected card, unlike the 2-card compare_cards GA4 event", async () => {
+      renderPage("/compare?cards=amex-platinum");
+
+      await waitFor(() => {
+        expect(screen.getByRole("columnheader", { name: /the platinum card/i })).toBeInTheDocument();
+      });
+
+      await waitFor(
+        () => {
+          expect(recordPageView).toHaveBeenCalledWith(
+            "compare_card_selected",
+            undefined,
+            "amex-platinum",
+          );
+        },
+        { timeout: 2000 },
+      );
+    });
+
+    it("excludes ids that don't resolve to a real card from the tracked selection", async () => {
+      renderPage("/compare?cards=amex-platinum,typo-nonexistent-id");
+
+      await waitFor(() => {
+        expect(screen.getByRole("columnheader", { name: /the platinum card/i })).toBeInTheDocument();
+      });
+
+      await waitFor(
+        () => {
+          expect(recordPageView).toHaveBeenCalledWith(
+            "compare_card_selected",
+            undefined,
+            "amex-platinum",
+          );
+        },
+        { timeout: 2000 },
+      );
+      expect(recordPageView).not.toHaveBeenCalledWith(
+        "compare_card_selected",
+        undefined,
+        "typo-nonexistent-id",
+      );
     });
   });
 });
