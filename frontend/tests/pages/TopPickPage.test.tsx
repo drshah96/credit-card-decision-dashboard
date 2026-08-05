@@ -9,8 +9,12 @@ vi.mock("@/api/cards", () => ({
   fetchCards: vi.fn(),
   fetchCard: vi.fn(),
 }));
+vi.mock("@/utils/sessionTracking", () => ({
+  recordPageView: vi.fn(),
+}));
 
 import { fetchCards } from "@/api/cards";
+import { recordPageView } from "@/utils/sessionTracking";
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 
@@ -529,5 +533,75 @@ describe("Choose Your Cards filter", () => {
     )!;
     expect(within(catchAllRow).getByText("Double Cash")).toBeInTheDocument();
     expect(within(catchAllRow).getByText("Boosted by points pooling")).toBeInTheDocument();
+  });
+
+  describe("session tracking", () => {
+    it("records a top_pick_view on mount", async () => {
+      vi.mocked(fetchCards).mockResolvedValue(SUMMARIES);
+      renderPage();
+
+      await waitFor(() => {
+        expect(recordPageView).toHaveBeenCalledWith("top_pick_view");
+      });
+    });
+
+    it("fires a debounced top_pick_card_selected once the selection settles, one row per card", async () => {
+      vi.mocked(fetchCards).mockResolvedValue(SUMMARIES);
+      renderPage("?cards=amex-gold,chase-sapphire-reserve");
+
+      await waitFor(
+        () => {
+          expect(recordPageView).toHaveBeenCalledWith(
+            "top_pick_card_selected",
+            undefined,
+            "amex-gold",
+          );
+          expect(recordPageView).toHaveBeenCalledWith(
+            "top_pick_card_selected",
+            undefined,
+            "chase-sapphire-reserve",
+          );
+        },
+        { timeout: 2000 },
+      );
+    });
+
+    it("excludes ids that don't resolve to a real card from the tracked selection", async () => {
+      vi.mocked(fetchCards).mockResolvedValue(SUMMARIES);
+      renderPage("?cards=amex-gold,typo-nonexistent-id");
+
+      await waitFor(
+        () => {
+          expect(recordPageView).toHaveBeenCalledWith(
+            "top_pick_card_selected",
+            undefined,
+            "amex-gold",
+          );
+        },
+        { timeout: 2000 },
+      );
+      expect(recordPageView).not.toHaveBeenCalledWith(
+        "top_pick_card_selected",
+        undefined,
+        "typo-nonexistent-id",
+      );
+    });
+
+    it("doesn't fire a selection event when nothing is selected", async () => {
+      vi.mocked(fetchCards).mockResolvedValue(SUMMARIES);
+      renderPage();
+
+      await waitFor(() => {
+        expect(recordPageView).toHaveBeenCalledWith("top_pick_view");
+      });
+      // Give the 1s debounce window a chance to have fired if it were
+      // going to — it shouldn't, since selectedIds is empty.
+      await new Promise((resolve) => setTimeout(resolve, 1200));
+      expect(recordPageView).not.toHaveBeenCalledWith(
+        "top_pick_card_selected",
+        expect.anything(),
+        expect.anything(),
+      );
+    });
   });
 });
