@@ -10,13 +10,15 @@ that id, so tests stay independent despite sharing a database that
 persists (and accumulates rows) across the whole test run.
 """
 
+import threading
 from uuid import uuid4
 
 from fastapi.testclient import TestClient
 
 from backend.db import session_scope
 from backend.db_models import PageView, SessionModel
-from backend.main import app
+from backend.main import _device_type, app
+from backend.services.events import record_page_view
 
 client = TestClient(app)
 
@@ -168,6 +170,192 @@ def test_track_event_without_a_referrer_leaves_it_none() -> None:
         session_row = db.get(SessionModel, session_id)
         assert session_row is not None
         assert session_row.referrer is None
+
+
+def test_device_type_returns_none_for_a_missing_user_agent() -> None:
+    """Covers the genuinely-absent-header case (a None argument) directly —
+    unreachable through the HTTP-level tests below, since TestClient always
+    sends some User-Agent value, even an empty-string override."""
+    assert _device_type(None) is None
+
+
+def test_track_event_reads_device_type_mobile_from_an_iphone_user_agent() -> None:
+    session_id = _unique_session_id()
+
+    response = client.post(
+        "/api/events",
+        json={"session_id": session_id, "event_type": "issuer_view", "issuer": "Amex"},
+        headers={
+            "User-Agent": (
+                "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) "
+                "AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1"
+            )
+        },
+    )
+
+    assert response.status_code == 200
+    with session_scope() as db:
+        session_row = db.get(SessionModel, session_id)
+        assert session_row is not None
+        assert session_row.device_type == "mobile"
+
+
+def test_track_event_reads_device_type_mobile_from_an_android_phone_user_agent() -> None:
+    session_id = _unique_session_id()
+
+    client.post(
+        "/api/events",
+        json={"session_id": session_id, "event_type": "issuer_view", "issuer": "Amex"},
+        headers={
+            "User-Agent": (
+                "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 "
+                "(KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36"
+            )
+        },
+    )
+
+    with session_scope() as db:
+        session_row = db.get(SessionModel, session_id)
+        assert session_row is not None
+        assert session_row.device_type == "mobile"
+
+
+def test_track_event_reads_device_type_tablet_from_an_ipad_user_agent() -> None:
+    session_id = _unique_session_id()
+
+    client.post(
+        "/api/events",
+        json={"session_id": session_id, "event_type": "issuer_view", "issuer": "Amex"},
+        headers={
+            "User-Agent": (
+                "Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 "
+                "(KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1"
+            )
+        },
+    )
+
+    with session_scope() as db:
+        session_row = db.get(SessionModel, session_id)
+        assert session_row is not None
+        assert session_row.device_type == "tablet"
+
+
+def test_track_event_reads_device_type_tablet_from_an_android_tablet_user_agent() -> None:
+    """Android tablets omit the "Mobile" token that Android phones include —
+    that's the actual signal _device_type() uses to tell them apart."""
+    session_id = _unique_session_id()
+
+    client.post(
+        "/api/events",
+        json={"session_id": session_id, "event_type": "issuer_view", "issuer": "Amex"},
+        headers={
+            "User-Agent": (
+                "Mozilla/5.0 (Linux; Android 13; SM-X200) AppleWebKit/537.36 "
+                "(KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+            )
+        },
+    )
+
+    with session_scope() as db:
+        session_row = db.get(SessionModel, session_id)
+        assert session_row is not None
+        assert session_row.device_type == "tablet"
+
+
+def test_track_event_reads_device_type_desktop_from_a_desktop_user_agent() -> None:
+    session_id = _unique_session_id()
+
+    client.post(
+        "/api/events",
+        json={"session_id": session_id, "event_type": "issuer_view", "issuer": "Amex"},
+        headers={
+            "User-Agent": (
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+                "(KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+            )
+        },
+    )
+
+    with session_scope() as db:
+        session_row = db.get(SessionModel, session_id)
+        assert session_row is not None
+        assert session_row.device_type == "desktop"
+
+
+def test_track_event_with_an_empty_user_agent_leaves_device_type_none() -> None:
+    """TestClient sends a default "testclient" User-Agent on every request
+    (unlike a real browser omitting the header entirely, which isn't
+    reachable through the test client) — classified as "desktop" like any
+    other non-mobile/tablet UA, covered separately below. This test instead
+    covers the genuinely-empty-header case, which _device_type() treats the
+    same way as a missing one."""
+    session_id = _unique_session_id()
+
+    client.post(
+        "/api/events",
+        json={"session_id": session_id, "event_type": "issuer_view", "issuer": "Amex"},
+        headers={"User-Agent": ""},
+    )
+
+    with session_scope() as db:
+        session_row = db.get(SessionModel, session_id)
+        assert session_row is not None
+        assert session_row.device_type is None
+
+
+def test_track_event_with_an_unrecognized_user_agent_defaults_to_desktop() -> None:
+    session_id = _unique_session_id()
+
+    client.post(
+        "/api/events",
+        json={"session_id": session_id, "event_type": "issuer_view", "issuer": "Amex"},
+    )
+
+    with session_scope() as db:
+        session_row = db.get(SessionModel, session_id)
+        assert session_row is not None
+        # TestClient's own default User-Agent ("testclient") doesn't match
+        # any mobile/tablet signal, same as any other unrecognized UA.
+        assert session_row.device_type == "desktop"
+
+
+def test_record_page_view_recovers_from_concurrent_session_insert_race() -> None:
+    """Two requests racing to record the same brand-new session_id (e.g.
+    React StrictMode double-invoking an effect on mount, or two tabs opened
+    at once) must not crash — one wins the INSERT, the other must recover
+    by re-querying instead of surfacing sessions' primary-key UNIQUE
+    constraint as an unhandled IntegrityError. A Barrier gets both threads
+    to record_page_view's entry at the same moment, reliably reproducing
+    the race instead of depending on incidental thread-scheduling luck —
+    same technique as
+    test_upsert.py::test_get_or_create_recovers_from_concurrent_insert_race
+    for the same class of race in a different function."""
+    session_id = _unique_session_id()
+    barrier = threading.Barrier(2)
+    errors: list[BaseException] = []
+
+    def worker() -> None:
+        try:
+            barrier.wait(timeout=5)
+            record_page_view(
+                session_id=session_id,
+                event_type="issuer_view",
+                issuer="Chase",
+                card_slug=None,
+            )
+        except BaseException as exc:  # noqa: BLE001 — surface it to the main thread below
+            errors.append(exc)
+
+    threads = [threading.Thread(target=worker) for _ in range(2)]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join(timeout=10)
+
+    assert not errors, f"record_page_view raised under concurrent access: {errors}"
+    with session_scope() as db:
+        assert db.query(SessionModel).filter(SessionModel.id == session_id).count() == 1
+        assert db.query(PageView).filter(PageView.session_id == session_id).count() == 2
 
 
 def test_track_event_rejects_an_invalid_event_type() -> None:

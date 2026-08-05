@@ -107,6 +107,25 @@ def _referrer_host(referrer: str | None) -> str | None:
     return urlparse(referrer).hostname
 
 
+def _device_type(user_agent: str | None) -> str | None:
+    """User-Agent request header -> "mobile"/"tablet"/"desktop"/None. Only
+    the derived category is ever kept — the raw header is read here and
+    discarded, never stored, keeping the "no PII" guarantee on SessionModel
+    intact. Simple substring checks rather than a UA-parsing dependency:
+    this only needs a rough web-vs-mobile-vs-tablet split for UI-planning
+    purposes, not per-visitor precision (and UA sniffing has inherent
+    limits regardless of how it's implemented — e.g. modern iPadOS Safari
+    can report as desktop by default)."""
+    if not user_agent:
+        return None
+    ua = user_agent.lower()
+    if "ipad" in ua or "tablet" in ua or ("android" in ua and "mobile" not in ua):
+        return "tablet"
+    if "mobi" in ua or "iphone" in ua or "android" in ua:
+        return "mobile"
+    return "desktop"
+
+
 @app.post("/api/events")
 def track_event(event: EventIn, request: Request) -> dict:
     """Record one anonymous page-view event. Fire-and-forget from the
@@ -124,7 +143,8 @@ def track_event(event: EventIn, request: Request) -> dict:
     normalized to None here rather than stored as a fake location. Absent
     entirely (e.g. local dev, direct-to-origin requests) also maps to None —
     no IP address is ever read or stored, keeping the "no PII" guarantee in
-    backend/db_models.py SessionModel intact."""
+    backend/db_models.py SessionModel intact. Device type is derived the
+    same way, off the User-Agent header — see _device_type()."""
     country = request.headers.get("cf-ipcountry")
     if country == "XX":
         country = None
@@ -135,5 +155,6 @@ def track_event(event: EventIn, request: Request) -> dict:
         card_slug=event.card_id,
         referrer=_referrer_host(event.referrer),
         country=country,
+        device_type=_device_type(request.headers.get("user-agent")),
     )
     return {"status": "ok"}
