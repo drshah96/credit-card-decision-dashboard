@@ -680,6 +680,32 @@ describe("CardDetailPage", () => {
       expect(screen.getByLabelText(/Strength: 3 out of 5/)).toBeInTheDocument();
     });
 
+    it("wires each tab to the panel it opens", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard());
+
+      renderPage();
+
+      const earnTab = await screen.findByRole("tab", { name: "Earn" });
+      expect(earnTab).toHaveAttribute("aria-selected", "true");
+      expect(earnTab).toHaveAttribute("aria-controls", "panel-earn");
+
+      const panel = screen.getByRole("tabpanel");
+      expect(panel).toHaveAttribute("id", "panel-earn");
+      expect(panel).toHaveAttribute("aria-labelledby", "tab-earn");
+
+      // Unselected tabs must not point at a panel that isn't mounted
+      const feesTab = screen.getByRole("tab", { name: "Fees" });
+      expect(feesTab).toHaveAttribute("aria-selected", "false");
+      expect(feesTab).not.toHaveAttribute("aria-controls");
+
+      await switchToTab("Fees");
+      expect(screen.getByRole("tabpanel")).toHaveAttribute("id", "panel-fees");
+      expect(screen.getByRole("tab", { name: "Fees" })).toHaveAttribute(
+        "aria-controls",
+        "panel-fees",
+      );
+    });
+
     it("renders the additional cards section when options are present", async () => {
       vi.mocked(fetchCard).mockResolvedValue(
         makeCard({

@@ -1021,7 +1021,11 @@ function CardDetail({ card }: { card: Card }) {
               key={tab.id}
               type="button"
               role="tab"
+              id={`tab-${tab.id}`}
               aria-selected={activeTab === tab.id}
+              // Only the open panel is mounted, so pointing at it from an
+              // unselected tab would be a dangling reference.
+              aria-controls={activeTab === tab.id ? `panel-${tab.id}` : undefined}
               className={`page-tab ${activeTab === tab.id ? "active" : ""}`}
               onClick={() => setActiveTab(tab.id)}
             >
@@ -1031,7 +1035,7 @@ function CardDetail({ card }: { card: Card }) {
         </div>
 
         {activeTab === "earn" && (
-          <div style={{ marginTop: 24 }}>
+          <div role="tabpanel" id="panel-earn" aria-labelledby="tab-earn" style={{ marginTop: 24 }}>
             <div style={{ fontSize: 11, color: "var(--faint)", marginBottom: 12 }}>
               Multiplier per $1 spent
             </div>
@@ -1052,7 +1056,7 @@ function CardDetail({ card }: { card: Card }) {
         )}
 
         {activeTab === "value" && (
-          <div style={{ marginTop: 24 }}>
+          <div role="tabpanel" id="panel-value" aria-labelledby="tab-value" style={{ marginTop: 24 }}>
             <div style={{ fontSize: 11, color: "var(--faint)", marginBottom: 12 }}>
               Redemption value, in cents per point
             </div>
@@ -1136,7 +1140,7 @@ function CardDetail({ card }: { card: Card }) {
         )}
 
         {activeTab === "perks" && (
-          <div style={{ marginTop: 24 }}>
+          <div role="tabpanel" id="panel-perks" aria-labelledby="tab-perks" style={{ marginTop: 24 }}>
             <div className="perkwrap">
               <div>
                 {card.status_perks.length > 0 && (
@@ -1223,7 +1227,7 @@ function CardDetail({ card }: { card: Card }) {
         )}
 
         {activeTab === "insurance" && (
-          <div style={{ marginTop: 24 }}>
+          <div role="tabpanel" id="panel-insurance" aria-labelledby="tab-insurance" style={{ marginTop: 24 }}>
             <p style={{ color: "var(--muted)", fontSize: 13, lineHeight: 1.6, margin: "0 0 20px", maxWidth: "70ch" }}>
               The value that isn't a credit — coverage carried by the card itself, from the
               issuer's own terms.
@@ -1254,7 +1258,7 @@ function CardDetail({ card }: { card: Card }) {
         )}
 
         {activeTab === "fees" && (
-          <div style={{ marginTop: 24 }}>
+          <div role="tabpanel" id="panel-fees" aria-labelledby="tab-fees" style={{ marginTop: 24 }}>
             <div className="rates-list">
               <div className="rates-row">
                 <span className="rk">Purchase APR</span>
