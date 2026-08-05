@@ -333,7 +333,6 @@ body {
 .addcard li { font-size: 12px; color: var(--muted); line-height: 1.45; padding-left: 16px; position: relative; }
 .addcard li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-size: 10px; top: 2px; }
 .addcard li.no::before { content: "✕"; color: var(--red); }
-.addcard-foot { margin-top: 14px; font-size: 12px; color: var(--faint); line-height: 1.55; }
 
 /* ─── Insurance ────────────────────────────────────────────────────────────── */
 .ins-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 26px; }
@@ -392,6 +391,19 @@ body {
 .section-tag { display: inline-block; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; padding: 3px 9px; border-radius: 100px; margin-bottom: 11px; }
 .section-tag.accent { color: var(--accent); background: var(--accent-soft); border: 1px solid var(--line-2); }
 .section-tag.muted { color: var(--muted); background: var(--panel-3); border: 1px solid var(--line); }
+/* Section tag paired with an "i" button — the tag keeps its own bottom margin
+   when it stands alone, so the row takes it over here. */
+.section-tag-row { display: flex; align-items: center; gap: 7px; margin-bottom: 11px; }
+.section-tag-row .section-tag { margin-bottom: 0; }
+
+/* Small round "i" that opens an explainer popup. */
+.info-btn {
+  width: 15px; height: 15px; border-radius: 50%; border: 1px solid var(--line-2);
+  color: var(--faint); background: none; font-size: 9px; font-family: inherit;
+  display: inline-grid; place-items: center; cursor: pointer; padding: 0; line-height: 1;
+  flex: none;
+}
+.info-btn:hover { border-color: var(--accent); color: var(--accent); }
 .chips { display: flex; flex-direction: column; gap: 10px; }
 .schip { border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px; background: var(--panel-s); }
 .schip-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
@@ -435,12 +447,6 @@ body {
 .hero-take { width: 100%; }
 .hero-take-head { display: flex; align-items: center; gap: 6px; }
 .hero-take-label { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
-.hero-take-info-btn {
-  width: 15px; height: 15px; border-radius: 50%; border: 1px solid var(--line-2);
-  color: var(--faint); background: none; font-size: 9px; font-family: inherit;
-  display: inline-grid; place-items: center; cursor: pointer; padding: 0; line-height: 1;
-}
-.hero-take-info-btn:hover { border-color: var(--accent); color: var(--accent); }
 .hero-take-amount { font-family: "Fraunces Variable", serif; font-size: 22px; font-weight: 600; margin-top: 2px; font-variant-numeric: tabular-nums; }
 .hero-take-bar { height: 5px; background: var(--panel-3); border-radius: 100px; margin-top: 8px; overflow: hidden; max-width: 200px; }
 .hero-take-fill { height: 100%; background: var(--accent); border-radius: 100px; transition: width 0.25s; }

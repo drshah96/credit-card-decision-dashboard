@@ -492,11 +492,24 @@ function CompareWidget({ cardId }: { cardId: string }) {
   );
 }
 
-// ─── Hero "your take, so far" widget ───────────────────────────────────────────
+// ─── Info modal ───────────────────────────────────────────────────────────────
 
-// Same focus-trap / escape-to-close / scroll-lock pattern as CreditModal —
-// reusing the site's one popup design rather than inventing a second one.
-function HeroTakeInfoModal({ text, onClose }: { text: string; onClose: () => void }) {
+// Shared "explain this" popup. Same focus-trap / escape-to-close / scroll-lock
+// pattern as CreditModal, so every popup on the page behaves identically —
+// callers just supply the eyebrow, title and body.
+function InfoModal({
+  category,
+  title,
+  titleId,
+  onClose,
+  children,
+}: {
+  category: string;
+  title: string;
+  titleId: string;
+  onClose: () => void;
+  children: React.ReactNode;
+}) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const onCloseRef = useRef(onClose);
   onCloseRef.current = onClose;
@@ -522,7 +535,7 @@ function HeroTakeInfoModal({ text, onClose }: { text: string; onClose: () => voi
         className="modal-box"
         role="dialog"
         aria-modal="true"
-        aria-labelledby="hero-take-modal-title"
+        aria-labelledby={titleId}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="modal-head">
@@ -535,29 +548,18 @@ function HeroTakeInfoModal({ text, onClose }: { text: string; onClose: () => voi
           >
             ✕
           </button>
-          <div className="modal-cat">Credit calculator</div>
-          <h4 className="modal-title" id="hero-take-modal-title">
-            Your take, so far
+          <div className="modal-cat">{category}</div>
+          <h4 className="modal-title" id={titleId}>
+            {title}
           </h4>
         </div>
-        <div className="modal-body">
-          <div style={{ marginBottom: 22 }}>
-            <h5>What it means</h5>
-            <p className="modal-what">{text}</p>
-          </div>
-          <div>
-            <h5>Make it accurate</h5>
-            <p className="modal-what" style={{ margin: 0 }}>
-              Move the sliders in the Credits section below based on what you'd realistically
-              spend in a year on each one. This number follows along, so you can see what you'd
-              actually be paying once your real usage is counted.
-            </p>
-          </div>
-        </div>
+        <div className="modal-body">{children}</div>
       </div>
     </div>
   );
 }
+
+// ─── Hero "your take, so far" widget ───────────────────────────────────────────
 
 // Surfaces the same running credit total the Credits section uses, right in
 // the hero — so the number a visitor cares about most doesn't require
@@ -584,7 +586,7 @@ function HeroTakeWidget({ totalUsed, annualFee }: { totalUsed: number; annualFee
         <span className="hero-take-label">Your take, so far</span>
         <button
           type="button"
-          className="hero-take-info-btn"
+          className="info-btn"
           onClick={() => setShowModal(true)}
           aria-label="What this means"
         >
@@ -605,7 +607,27 @@ function HeroTakeWidget({ totalUsed, annualFee }: { totalUsed: number; annualFee
         <div className="hero-take-fill" style={{ width: `${fillPct}%` }} />
       </div>
       <div className="hero-take-sub">${totalUsed} of ${annualFee} fee, from the credits below</div>
-      {showModal && <HeroTakeInfoModal text={modalText} onClose={() => setShowModal(false)} />}
+      {showModal && (
+        <InfoModal
+          category="Credit calculator"
+          title="Your take, so far"
+          titleId="hero-take-modal-title"
+          onClose={() => setShowModal(false)}
+        >
+          <div style={{ marginBottom: 22 }}>
+            <h5>What it means</h5>
+            <p className="modal-what">{modalText}</p>
+          </div>
+          <div>
+            <h5>Make it accurate</h5>
+            <p className="modal-what" style={{ margin: 0 }}>
+              Move the sliders in the Credits section below based on what you'd realistically
+              spend in a year on each one. This number follows along, so you can see what you'd
+              actually be paying once your real usage is counted.
+            </p>
+          </div>
+        </InfoModal>
+      )}
     </div>
   );
 }
@@ -757,6 +779,7 @@ function CardDetail({ card }: { card: Card }) {
   const cardImage = CARD_IMAGES[card.id];
   const [showPartnersModal, setShowPartnersModal] = useState(false);
   const hasPartnerDetail = (card.transfer_partners.partners?.length ?? 0) > 0;
+  const [showAddCardsModal, setShowAddCardsModal] = useState(false);
 
   // Credit usage state lives here (not inside CreditsSection) so the hero's
   // "Your take, so far" widget and the Credits section's own calculator
@@ -1134,7 +1157,22 @@ function CardDetail({ card }: { card: Card }) {
                 )}
                 {card.additional_cards.options.length > 0 && (
                   <div style={{ marginTop: card.status_perks.length > 0 ? 22 : 0 }}>
-                    <span className="section-tag muted">Additional cards</span>
+                    {/* The note covers the whole group (on the Platinum it weighs
+                    its two options against each other), so the "i" sits on the
+                    section heading rather than on any one option. */}
+                    <div className="section-tag-row">
+                      <span className="section-tag muted">Additional cards</span>
+                      {card.additional_cards.note && (
+                        <button
+                          type="button"
+                          className="info-btn"
+                          onClick={() => setShowAddCardsModal(true)}
+                          aria-label="About additional cards"
+                        >
+                          i
+                        </button>
+                      )}
+                    </div>
                     <div className="addcards" style={{ gridTemplateColumns: "1fr" }}>
                       {card.additional_cards.options.map((opt) => (
                         <div key={opt.name} className={`addcard ${opt.is_free ? "free" : ""}`}>
@@ -1152,8 +1190,17 @@ function CardDetail({ card }: { card: Card }) {
                         </div>
                       ))}
                     </div>
-                    {card.additional_cards.note && (
-                      <p className="addcard-foot">{card.additional_cards.note}</p>
+                    {showAddCardsModal && card.additional_cards.note && (
+                      <InfoModal
+                        category="Additional cards"
+                        title={card.additional_cards.title || "Additional cards"}
+                        titleId="addcards-modal-title"
+                        onClose={() => setShowAddCardsModal(false)}
+                      >
+                        <p className="modal-what" style={{ margin: 0 }}>
+                          {card.additional_cards.note}
+                        </p>
+                      </InfoModal>
                     )}
                   </div>
                 )}

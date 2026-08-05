@@ -707,7 +707,62 @@ describe("CardDetailPage", () => {
       expect(screen.getByText("Companion Platinum")).toBeInTheDocument();
       expect(screen.getByText("Earns Membership Rewards")).toBeInTheDocument();
       expect(screen.getByText("No lounge access")).toBeInTheDocument();
-      expect(screen.getByText("Up to 3 additional cards.")).toBeInTheDocument();
+      // The note is behind the "i" now, not rendered inline
+      expect(screen.queryByText("Up to 3 additional cards.")).not.toBeInTheDocument();
+    });
+
+    it("opens the additional cards note in a modal from the info button", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({
+          additional_cards: {
+            title: "Authorized users",
+            options: [
+              { name: "Authorized User", fee: "$195 ea", is_free: false, benefits: [] },
+            ],
+            note: "After the 2025 refresh, authorized users cost $195 each.",
+          },
+        }),
+      );
+
+      renderPage();
+      await switchToTab("Status & Perks");
+
+      fireEvent.click(screen.getByRole("button", { name: "About additional cards" }));
+
+      const dialog = await screen.findByRole("dialog");
+      expect(dialog).toBeInTheDocument();
+      // Modal title comes from additional_cards.title, not a hardcoded string
+      expect(screen.getByText("Authorized users")).toBeInTheDocument();
+      expect(
+        screen.getByText("After the 2025 refresh, authorized users cost $195 each."),
+      ).toBeInTheDocument();
+
+      fireEvent.keyDown(document, { key: "Escape" });
+      await waitFor(() => {
+        expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+      });
+    });
+
+    it("omits the additional cards info button when there is no note", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({
+          additional_cards: {
+            title: "Authorized users",
+            options: [
+              { name: "Authorized User", fee: "$0", is_free: true, benefits: [] },
+            ],
+            note: "",
+          },
+        }),
+      );
+
+      renderPage();
+      await switchToTab("Status & Perks");
+
+      expect(screen.getByText("Authorized User")).toBeInTheDocument();
+      expect(
+        screen.queryByRole("button", { name: "About additional cards" }),
+      ).not.toBeInTheDocument();
     });
 
     it("shows 'None here' for an empty tier group", async () => {
