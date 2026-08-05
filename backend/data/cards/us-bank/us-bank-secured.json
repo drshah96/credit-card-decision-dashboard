@@ -31,7 +31,7 @@
   "earn_rates": [],
   "earn_note": "This is the bare-bones version of U.S. Bank's secured lineup: same deposit range and $0 annual fee as Cash+ Secured and Altitude Go Secured, but no cash back or points at all. There's no earn-rate reason to pick this over either of those unless you specifically want the simplest possible product.",
   "points": {
-    "currency": "None",
+    "currency": "No rewards program",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
     "note": "Nothing to redeem. Value is purely the credit-building mechanism, not any earning."

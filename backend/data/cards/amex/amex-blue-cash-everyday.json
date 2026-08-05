@@ -113,10 +113,6 @@
   "rental_note": "No rental car coverage at all; use a different card for rentals.",
   "status_perks": [],
   "services": [
-    {
-      "name": "Foreign transaction fee applies",
-      "detail": "2.7% on purchases made outside the US. Unlike the premium cards in this dashboard, this one is not built for international use."
-    }
   ],
   "additional_cards": {
     "title": "Additional cards",

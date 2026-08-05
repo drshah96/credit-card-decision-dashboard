@@ -7,6 +7,7 @@ export interface EventPayload {
   event_type: "issuer_view" | "card_view";
   issuer?: string;
   card_id?: string;
+  referrer?: string;
 }
 
 // Fire-and-forget: session/page-view tracking should never block the page

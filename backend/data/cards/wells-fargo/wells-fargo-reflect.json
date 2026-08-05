@@ -37,7 +37,7 @@
   "earn_rates": [],
   "earn_note": "No cash back or points program of any kind. This card exists for one reason: one of the longest 0% intro APR periods available, for people who want to finance a purchase or pay down a balance transfer interest-free.",
   "points": {
-    "currency": "None",
+    "currency": "No rewards program",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
     "note": "There is nothing to redeem. Choose this card for the intro APR, not for ongoing value."
@@ -85,14 +85,6 @@
   "rental_note": "No auto rental coverage is publicly documented for this card.",
   "status_perks": [],
   "services": [
-    {
-      "name": "0% intro APR, 21 months",
-      "detail": "0% for 21 months on purchases and qualifying balance transfers (transfers must be made within 120 days of account opening), then a variable 17.49%, 23.99%, or 28.24% APR. One of the longest intro periods available on any card."
-    },
-    {
-      "name": "Foreign transaction fee",
-      "detail": "3% of each transaction, converted to US dollars."
-    },
     {
       "name": "My Wells Fargo Deals",
       "detail": "Personalized merchant offers that earn a statement credit when you shop through the app."

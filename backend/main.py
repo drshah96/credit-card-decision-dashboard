@@ -1,10 +1,13 @@
 import os
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
+from urllib.parse import urlparse
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import text
 
+from backend.db import engine
 from backend.models import Card, CardSummary, EventIn
 from backend.services.cards import get_card, get_card_summaries, get_cards
 from backend.services.events import record_page_view
@@ -12,7 +15,9 @@ from backend.services.events import record_page_view
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
-    """Eagerly load and validate cards.json at startup so errors surface immediately."""
+    """Eagerly load the catalog from the database at startup so a broken DB
+    connection or query surfaces immediately at boot, not on the first real
+    request a visitor makes."""
     get_card_summaries()
     yield
 
@@ -50,7 +55,17 @@ def root() -> dict:
 
 @app.get("/health")
 def health() -> dict:
-    """Health check for Render and other uptime monitors."""
+    """Health check for Render and other uptime monitors — actually verifies
+    the database connection works, not just that this process is alive. A
+    process-only check (the old version of this endpoint) would report "ok"
+    even with a fully dead DB connection pool, e.g. after Neon's free-tier
+    compute auto-suspends from being idle — see backend/db.py's
+    pool_pre_ping for the other half of this fix."""
+    try:
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+    except Exception as exc:
+        raise HTTPException(status_code=503, detail="database unreachable") from exc
     return {"status": "ok"}
 
 
@@ -81,18 +96,65 @@ def get_card_detail(card_id: str) -> Card:
     return card
 
 
+def _referrer_host(referrer: str | None) -> str | None:
+    """Full referring URL -> bare host (e.g. "google.com"), matching the
+    "not a full URL" contract on SessionModel.referrer. None for a direct
+    visit (empty document.referrer) or anything unparseable as a URL with
+    a host — a malformed value here is worth one blank analytics field,
+    not worth rejecting the whole event over."""
+    if not referrer:
+        return None
+    return urlparse(referrer).hostname
+
+
+def _device_type(user_agent: str | None) -> str | None:
+    """User-Agent request header -> "mobile"/"tablet"/"desktop"/None. Only
+    the derived category is ever kept — the raw header is read here and
+    discarded, never stored, keeping the "no PII" guarantee on SessionModel
+    intact. Simple substring checks rather than a UA-parsing dependency:
+    this only needs a rough web-vs-mobile-vs-tablet split for UI-planning
+    purposes, not per-visitor precision (and UA sniffing has inherent
+    limits regardless of how it's implemented — e.g. modern iPadOS Safari
+    can report as desktop by default)."""
+    if not user_agent:
+        return None
+    ua = user_agent.lower()
+    if "ipad" in ua or "tablet" in ua or ("android" in ua and "mobile" not in ua):
+        return "tablet"
+    if "mobi" in ua or "iphone" in ua or "android" in ua:
+        return "mobile"
+    return "desktop"
+
+
 @app.post("/api/events")
-def track_event(event: EventIn) -> dict:
+def track_event(event: EventIn, request: Request) -> dict:
     """Record one anonymous page-view event. Fire-and-forget from the
     frontend's side (sent via navigator.sendBeacon, response ignored), so
     this deliberately does the minimum: no validation beyond the Pydantic
     schema, no error surfaced back to the caller that would need handling —
     worst case for a malformed request is one low-quality analytics row, not
-    a broken page for the visitor it came from."""
+    a broken page for the visitor it came from.
+
+    Country comes from Cloudflare's CF-IPCountry request header (set for
+    every proxied request once IP Geolocation is turned on for the zone),
+    read server-side rather than trusted from the client payload — the
+    client has no reliable way to know its own country anyway. "XX" is
+    Cloudflare's own placeholder for "couldn't determine a country" and is
+    normalized to None here rather than stored as a fake location. Absent
+    entirely (e.g. local dev, direct-to-origin requests) also maps to None —
+    no IP address is ever read or stored, keeping the "no PII" guarantee in
+    backend/db_models.py SessionModel intact. Device type is derived the
+    same way, off the User-Agent header — see _device_type()."""
+    country = request.headers.get("cf-ipcountry")
+    if country == "XX":
+        country = None
     record_page_view(
         session_id=event.session_id,
         event_type=event.event_type,
         issuer=event.issuer,
         card_slug=event.card_id,
+        referrer=_referrer_host(event.referrer),
+        country=country,
+        device_type=_device_type(request.headers.get("user-agent")),
     )
     return {"status": "ok"}

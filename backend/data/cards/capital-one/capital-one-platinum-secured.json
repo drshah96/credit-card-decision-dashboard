@@ -31,7 +31,7 @@
   "earn_rates": [],
   "earn_note": "Like the unsecured Platinum, this card earns no cash back or points at all; it exists purely for credit access. If you want a secured Capital One card that actually earns rewards, use Quicksilver Secured (1.5% flat, same $0 annual fee) instead.",
   "points": {
-    "currency": "None",
+    "currency": "No rewards program",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
     "note": "No points or cash-back program of any kind. The entire value proposition is the refundable security deposit and monthly reporting to all three credit bureaus, with a path to an unsecured Platinum card after demonstrated responsible use."
@@ -59,10 +59,6 @@
     {
       "name": "Automatic credit line review",
       "detail": "Capital One automatically considers cardholders for a higher credit line (with no additional deposit needed) based on payment history and creditworthiness."
-    },
-    {
-      "name": "No foreign transaction fees",
-      "detail": "$0 on purchases made outside the US."
     },
     {
       "name": "Credit bureau reporting",

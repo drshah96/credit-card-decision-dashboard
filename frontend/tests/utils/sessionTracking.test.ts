@@ -37,6 +37,26 @@ describe("recordPageView", () => {
     expect(secondPayload.card_id).toBe("chase-sapphire-preferred");
   });
 
+  it("forwards document.referrer as-is", () => {
+    vi.spyOn(document, "referrer", "get").mockReturnValue(
+      "https://www.google.com/search?q=amex+gold",
+    );
+
+    recordPageView("issuer_view", "Amex");
+
+    const payload = vi.mocked(postEvent).mock.calls[0][0];
+    expect(payload.referrer).toBe("https://www.google.com/search?q=amex+gold");
+  });
+
+  it("omits referrer entirely on a direct visit (empty document.referrer)", () => {
+    vi.spyOn(document, "referrer", "get").mockReturnValue("");
+
+    recordPageView("issuer_view", "Amex");
+
+    const payload = vi.mocked(postEvent).mock.calls[0][0];
+    expect(payload.referrer).toBeUndefined();
+  });
+
   it("still tracks (with a fresh id) if localStorage throws", () => {
     const getItemSpy = vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
       throw new Error("storage disabled");

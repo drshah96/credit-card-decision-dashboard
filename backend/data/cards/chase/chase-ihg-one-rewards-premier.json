@@ -21,7 +21,7 @@
   "pay_over_time_fee": "Up to 1.72% per month of the amount selected to pay over time, via Chase Pay Over Time",
   "late_payment_fee": "Up to $40",
   "returned_payment_fee": "Up to $40",
-  "returned_check_fee": "None",
+  "returned_check_fee": null,
   "welcome_bonus": {
     "bonus": "140,000 points",
     "requirement": "after you spend $3,000 in purchases in the first 3 months from account opening",
@@ -410,10 +410,6 @@
     }
   ],
   "services": [
-    {
-      "name": "No foreign transaction fees",
-      "detail": "Zero FX fees on international spend."
-    },
     {
       "name": "Mastercard World Elite Benefits",
       "detail": "Lyft ride credits, Booking.com prepaid-stay discounts (up to 7% off), and other World Elite Mastercard perks bundled with the card."

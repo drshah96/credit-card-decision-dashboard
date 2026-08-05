@@ -121,10 +121,6 @@
   "status_perks": [],
   "services": [
     {
-      "name": "0% intro APR",
-      "detail": "0% on purchases and balance transfers for the first 21 billing cycles, then 16.99%–27.99% variable, one of U.S. Bank's longest 0% windows."
-    },
-    {
       "name": "Annual $0 fee ExtendPay Plan",
       "detail": "One 3-month, $0-fee ExtendPay Plan offer per calendar year, available after the intro purchase APR expires."
     },

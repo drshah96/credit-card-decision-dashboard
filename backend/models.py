@@ -325,3 +325,7 @@ class EventIn(BaseModel):
     event_type: Literal["issuer_view", "card_view"]
     issuer: str | None = None
     card_id: str | None = None
+    # The full referring URL (e.g. "https://www.google.com/search?q=..."),
+    # straight from the frontend's own document.referrer — main.py extracts
+    # just the host before it reaches record_page_view/SessionModel.referrer.
+    referrer: str | None = None

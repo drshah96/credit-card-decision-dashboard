@@ -6,10 +6,14 @@ anything under that prefix after each test.
 """
 
 import json
+from contextlib import contextmanager
 
 import pytest
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
-from backend.db import session_scope
+import backend.scripts.seed_catalog as seed_catalog_module
+from backend.db import Base, session_scope
 from backend.db_models import CardModel
 from backend.scripts.seed_catalog import seed_catalog
 
@@ -131,3 +135,90 @@ def test_errors_on_non_object_json(tmp_path):
 
     with pytest.raises(SystemExit):
         seed_catalog(str(tmp_path / "*.json"))
+
+
+# ─── deactivate_missing (backlog #13 item 6) ───────────────────────────────
+#
+# These need their own isolated database rather than the shared one every
+# other test in this file uses: conftest.py's session-scoped fixture
+# pre-seeds that shared DB with the real 103-card catalog, and
+# deactivate_missing=True's UPDATE has no way to know which active rows
+# came from this test's tiny tmp_path glob vs. the real catalog — it would
+# flip every one of those 103 real cards to inactive for the rest of the
+# test session. Swapping seed_catalog's session_scope for one bound to a
+# private SQLite file keeps the blast radius to just this test.
+
+
+@pytest.fixture
+def isolated_catalog_db(monkeypatch, tmp_path):
+    engine = create_engine(
+        f"sqlite:///{tmp_path / 'isolated_seed_catalog.db'}",
+        connect_args={"check_same_thread": False},
+    )
+    Base.metadata.create_all(engine)
+    IsolatedSession = sessionmaker(bind=engine)
+
+    @contextmanager
+    def isolated_session_scope():
+        session = IsolatedSession()
+        try:
+            yield session
+            session.commit()
+        finally:
+            session.close()
+
+    monkeypatch.setattr(seed_catalog_module, "session_scope", isolated_session_scope)
+    yield IsolatedSession
+    engine.dispose()
+
+
+def test_deactivate_missing_off_by_default_for_a_non_default_pattern(tmp_path):
+    path = tmp_path / "card.json"
+    path.write_text(json.dumps(make_card_json()))
+    seed_catalog(str(tmp_path / "*.json"))
+
+    path.unlink()
+    (tmp_path / "other.json").write_text(json.dumps(make_card_json({"id": "zz-test-other"})))
+    seed_catalog(str(tmp_path / "*.json"))  # deactivate_missing not passed -> inferred False
+
+    with session_scope() as session:
+        card = session.query(CardModel).filter_by(slug=TEST_SLUG).one()
+        assert card.is_active is True
+
+
+def test_deactivate_missing_marks_a_disappeared_card_inactive(isolated_catalog_db, tmp_path):
+    path = tmp_path / "card.json"
+    path.write_text(json.dumps(make_card_json()))
+    seed_catalog(str(tmp_path / "*.json"), deactivate_missing=True)
+
+    path.unlink()
+    (tmp_path / "other.json").write_text(json.dumps(make_card_json({"id": "zz-test-other"})))
+    seed_catalog(str(tmp_path / "*.json"), deactivate_missing=True)
+
+    session = isolated_catalog_db()
+    card = session.query(CardModel).filter_by(slug=TEST_SLUG).one()
+    assert card.is_active is False
+    session.close()
+
+
+def test_a_reappearing_card_is_reactivated(isolated_catalog_db, tmp_path):
+    path = tmp_path / "card.json"
+    other_path = tmp_path / "other.json"
+    path.write_text(json.dumps(make_card_json()))
+    seed_catalog(str(tmp_path / "*.json"), deactivate_missing=True)
+
+    path.unlink()
+    other_path.write_text(json.dumps(make_card_json({"id": "zz-test-other"})))
+    seed_catalog(str(tmp_path / "*.json"), deactivate_missing=True)
+
+    session = isolated_catalog_db()
+    assert session.query(CardModel).filter_by(slug=TEST_SLUG).one().is_active is False
+    session.close()
+
+    path.write_text(json.dumps(make_card_json()))
+    other_path.unlink()
+    seed_catalog(str(tmp_path / "*.json"), deactivate_missing=True)
+
+    session = isolated_catalog_db()
+    assert session.query(CardModel).filter_by(slug=TEST_SLUG).one().is_active is True
+    session.close()

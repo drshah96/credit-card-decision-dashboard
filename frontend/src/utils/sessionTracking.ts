@@ -32,5 +32,12 @@ export function recordPageView(
     event_type: eventType,
     issuer,
     card_id: cardId,
+    // The full referring URL, e.g. "https://www.google.com/search?q=...".
+    // Backend extracts just the host and only stores it on first-touch (see
+    // backend/main.py track_event) — safe to send on every call even though
+    // document.referrer stays constant across client-side route changes in
+    // this SPA. Empty string on a direct visit, normalized to undefined so
+    // it's omitted from the request body entirely rather than sent as "".
+    referrer: document.referrer || undefined,
   });
 }

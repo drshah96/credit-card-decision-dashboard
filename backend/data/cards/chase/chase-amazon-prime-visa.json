@@ -21,7 +21,7 @@
   "pay_over_time_fee": "Up to 1.72% per month of the amount selected to pay over time, via Chase Pay Over Time",
   "late_payment_fee": "Up to $39",
   "returned_payment_fee": "Up to $39",
-  "returned_check_fee": "None",
+  "returned_check_fee": null,
   "welcome_bonus": {
     "bonus": "$150 Amazon Gift Card",
     "requirement": "instantly loaded into your Amazon account on approval, for Prime members (non-Prime: $50 gift card and a 3% base Amazon/Whole Foods/Audible rate instead of 5%)",
@@ -135,10 +135,6 @@
     {
       "name": "Prime membership required for full value",
       "detail": "The 5% Amazon/Whole Foods rate needs an active Prime membership. Prime itself is a separate paid subscription ($139/yr or $14.99/mo); this card doesn't include or discount it."
-    },
-    {
-      "name": "No foreign transaction fees",
-      "detail": "0% on purchases made outside the US, unusual for a no-fee retail card."
     },
     {
       "name": "Next-day Amazon redemption",

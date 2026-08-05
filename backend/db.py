@@ -25,7 +25,16 @@ DATABASE_URL = _normalize_database_url(
 )
 
 _connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
-engine = create_engine(DATABASE_URL, connect_args=_connect_args)
+# pool_pre_ping + pool_recycle: Neon's free tier auto-suspends its compute
+# after a few minutes idle and can drop connections outright while
+# suspended. Without pre_ping, SQLAlchemy hands a pooled connection back to
+# the app without checking it's still alive, so the first query after any
+# idle period risks a raw OperationalError instead of a transparent
+# reconnect. Harmless no-op overhead on SQLite (local dev), where neither
+# scenario applies.
+engine = create_engine(
+    DATABASE_URL, pool_pre_ping=True, pool_recycle=300, connect_args=_connect_args
+)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False)
 
 if DATABASE_URL.startswith("sqlite"):

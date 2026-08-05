@@ -79,7 +79,6 @@ class CoverageType(Base):
 
     coverage_type_id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(unique=True)
-    category: Mapped[str | None] = mapped_column(default=None)
 
 
 # ─── Core entity ────────────────────────────────────────────────────────────
@@ -463,17 +462,40 @@ class SessionModel(Base):
     client-generated string (a nanoid, minted in localStorage on first page
     load), not an autoincrement int like every other PK in this file — it has
     to exist before the first server round-trip, since the frontend stamps it
-    on every tracked event itself. No PII: no IP, no user-agent string, just
-    a random identifier the client controls."""
+    on every tracked event itself. No PII: no IP, no raw User-Agent string
+    (device_type below stores only a derived category, never the header
+    itself), just a random identifier the client controls."""
 
     __tablename__ = "sessions"
 
+    # Convention, not a constraint: an id starting with "test-" is non-real
+    # traffic — either an automated test (see tests/backend/test_events_api.py
+    # _unique_session_id) or manual/ad-hoc verification (e.g. checking a prod
+    # cutover actually wrote rows) — so it can be filtered out of analytics
+    # queries with a single `WHERE id NOT LIKE 'test-%'`. Not enforced by a
+    # CHECK constraint: real ids come from crypto.randomUUID() on the
+    # frontend and will never collide with this prefix, so there's nothing
+    # for a constraint to actually guard against.
     id: Mapped[str] = mapped_column(primary_key=True)
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
     last_seen_at: Mapped[datetime] = mapped_column(server_default=func.now(), onupdate=func.now())
     # First-touch referrer host only (e.g. "google.com"), not a full URL —
     # enough for traffic-source breakdown without capturing query strings.
     referrer: Mapped[str | None] = mapped_column(default=None)
+    # Two-letter ISO country code, read server-side off Cloudflare's
+    # CF-IPCountry request header (see backend/main.py track_event) — never
+    # the visitor's IP itself, keeping the "no PII" guarantee above intact.
+    # First-touch only, like referrer.
+    country: Mapped[str | None] = mapped_column(default=None)
+    # Coarse device category ("mobile"/"tablet"/"desktop"), derived
+    # server-side from the User-Agent request header via _device_type() in
+    # backend/main.py — the raw header itself is never stored, keeping the
+    # "no PII" guarantee above intact. User-Agent sniffing is inherently
+    # approximate (e.g. modern iPadOS Safari can report as desktop), fine
+    # for a rough web vs. mobile vs. tablet usage breakdown, not something
+    # meant to identify individual visitors. First-touch only, like referrer
+    # and country.
+    device_type: Mapped[str | None] = mapped_column(default=None)
 
     page_views: Mapped[list["PageView"]] = relationship(
         back_populates="session", cascade="all, delete-orphan", order_by="PageView.occurred_at"

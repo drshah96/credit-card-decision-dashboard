@@ -151,10 +151,6 @@
   "status_perks": [],
   "services": [
     {
-      "name": "No foreign transaction fees",
-      "detail": "Zero FX fees on purchases made outside the US."
-    },
-    {
       "name": "Discover network transition",
       "detail": "New Savor accounts are being originated on the Discover network instead of Mastercard as of early 2026."
     }
