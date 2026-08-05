@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, type ReactNode } from "react";
+import { useState, useEffect, useRef } from "react";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { fetchCard, fetchCards } from "../api/cards";
@@ -351,86 +351,10 @@ function CreditRow({ credit, value, tierIdx, onSlider, onTierMove, onOpenModal }
   );
 }
 
-// ─── Credit calculator ────────────────────────────────────────────────────────
-
-function CreditCalculator({
-  totalUsed,
-  annualFee,
-  onReset,
-}: {
-  totalUsed: number;
-  annualFee: number;
-  onReset: () => void;
-}) {
-  const net = totalUsed - annualFee;
-  const scale = Math.max(annualFee, totalUsed, 1);
-  const fillPct = Math.min((totalUsed / scale) * 100, 100);
-  const markerPct = Math.min((annualFee / scale) * 100, 100);
-
-  let verdict: ReactNode;
-  if (net >= 0) {
-    verdict = (
-      <>With your inputs, the credits alone <b>more than cover the fee</b>. You're ahead ${net} before you count points, lounges, or insurance.</>
-    );
-  } else if (totalUsed >= annualFee * 0.6) {
-    verdict = (
-      <>Credits recoup <b>most</b> of the fee (${totalUsed} of ${annualFee}). Whether it's worth it comes down to how much you value the lounges, points and insurance on top.</>
-    );
-  } else {
-    verdict = (
-      <>Credits only recoup <b>${totalUsed} of ${annualFee}</b>. You'd be paying ${Math.abs(net)} for the lounges, points and status. Make sure those are worth it to you.</>
-    );
-  }
-
-  return (
-    <div className="calc">
-      <div className="calc-top">
-        <h4>Will the credits offset the ${annualFee} fee?</h4>
-        <button type="button" className="calc-reset" onClick={onReset}>
-          Reset sliders
-        </button>
-      </div>
-      <div className="calc-nums">
-        <div className="calc-cell">
-          <div className="cl">Credits you'll use</div>
-          <div className="cv pos">${totalUsed}</div>
-        </div>
-        <div className="calc-cell">
-          <div className="cl">Annual fee</div>
-          <div className="cv" style={{ color: "var(--muted)" }}>${annualFee}</div>
-        </div>
-        <div className="calc-cell">
-          <div className="cl">{net >= 0 ? "Ahead by" : "Short by"}</div>
-          <div className={`cv ${net >= 0 ? "pos" : "neg"}`}>
-            {net >= 0 ? "+" : "−"}${Math.abs(net)}
-          </div>
-        </div>
-      </div>
-      <div
-        className="calc-bar"
-        role="progressbar"
-        aria-valuenow={Math.min(totalUsed, annualFee)}
-        aria-valuemin={0}
-        aria-valuemax={annualFee}
-        aria-label={`$${totalUsed} of $${annualFee} fee covered by credits`}
-      >
-        <div className="cbfill" style={{ width: `${fillPct}%` }} />
-        <div className="cbmark" style={{ left: `${markerPct}%` }} />
-      </div>
-      <div className="calc-verdict">{verdict}</div>
-      <div className="calc-disc">
-        Counts statement credits + cash-like perks only (not points earning, lounge value, or insurance).
-        Move the sliders to match your real usage. The dark line marks the annual fee.
-      </div>
-    </div>
-  );
-}
-
 // ─── Credits section ──────────────────────────────────────────────────────────
 
 function CreditsSection({
   credits,
-  annualFee,
   values,
   tiers,
   onSlider,
@@ -438,7 +362,6 @@ function CreditsSection({
   onReset,
 }: {
   credits: Credit[];
-  annualFee: number;
   values: Record<string, number>;
   tiers: Record<string, CreditTier>;
   onSlider: (id: string, v: number) => void;
@@ -455,8 +378,6 @@ function CreditsSection({
     setModal({ credit, tier });
   }
 
-  const totalUsed = active.reduce((sum, c) => sum + (values[c.id] ?? 0), 0);
-
   const tierGroups: Record<CreditTier, Credit[]> = { easy: [], plan: [], niche: [] };
   active.forEach((c) => {
     const t = tiers[c.id] ?? c.tier;
@@ -471,6 +392,12 @@ function CreditsSection({
         Resy might be effortless for you and niche for someone else. The calculator below
         tallies it against the fee.
       </p>
+
+      <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 14 }}>
+        <button type="button" className="reset-sliders-btn" onClick={onReset}>
+          Reset sliders
+        </button>
+      </div>
 
       <div className="credit-cols">
         {TIER_ORDER.map((tier) => {
@@ -502,12 +429,6 @@ function CreditsSection({
           );
         })}
       </div>
-
-      <CreditCalculator
-        totalUsed={totalUsed}
-        annualFee={annualFee}
-        onReset={onReset}
-      />
 
       {modal && (
         <CreditModal
@@ -573,20 +494,89 @@ function CompareWidget({ cardId }: { cardId: string }) {
 
 // ─── Hero "your take, so far" widget ───────────────────────────────────────────
 
-// Surfaces the same running credit total the Credits section and its
-// calculator use, right in the hero — so the number a visitor cares about
-// most doesn't require scrolling past everything else first. Purely a
-// display of state owned by CardDetail (the credit sliders live there now,
-// not inside CreditsSection), so this never drifts out of sync with the
-// calculator below it.
+// Same focus-trap / escape-to-close / scroll-lock pattern as CreditModal —
+// reusing the site's one popup design rather than inventing a second one.
+function HeroTakeInfoModal({ text, onClose }: { text: string; onClose: () => void }) {
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+
+  useEffect(() => {
+    const prevFocus = document.activeElement as HTMLElement | null;
+    closeButtonRef.current?.focus();
+    document.body.style.overflow = "hidden";
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") onCloseRef.current();
+    }
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+      prevFocus?.focus();
+    };
+  }, []);
+
+  return (
+    <div className="modal-backdrop" onClick={onClose}>
+      <div
+        className="modal-box"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="hero-take-modal-title"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="modal-head">
+          <button
+            ref={closeButtonRef}
+            type="button"
+            className="modal-x-btn"
+            onClick={onClose}
+            aria-label="Close"
+          >
+            ✕
+          </button>
+          <div className="modal-cat">Credit calculator</div>
+          <h4 className="modal-title" id="hero-take-modal-title">
+            Your take, so far
+          </h4>
+        </div>
+        <div className="modal-body">
+          <div style={{ marginBottom: 22 }}>
+            <h5>What it means</h5>
+            <p className="modal-what">{text}</p>
+          </div>
+          <div>
+            <h5>Make it accurate</h5>
+            <p className="modal-what" style={{ margin: 0 }}>
+              Move the sliders in the Credits section below based on what you'd realistically
+              spend in a year on each one. This number follows along, so you can see what you'd
+              actually be paying once your real usage is counted.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Surfaces the same running credit total the Credits section uses, right in
+// the hero — so the number a visitor cares about most doesn't require
+// scrolling past everything else first. Purely a display of state owned by
+// CardDetail (the credit sliders live there now, not inside CreditsSection),
+// so this never drifts out of sync with the sliders below it.
 function HeroTakeWidget({ totalUsed, annualFee }: { totalUsed: number; annualFee: number }) {
-  const [showInfo, setShowInfo] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const fillPct = Math.min(100, Math.round((totalUsed / annualFee) * 100));
   const diff = totalUsed - annualFee;
-  const summary =
-    diff >= 0
-      ? `Credits cover the $${annualFee} fee with $${diff} to spare.`
-      : `Credits only recoup $${totalUsed} of $${annualFee}. You'd be paying $${Math.abs(diff)} for the lounges, points and status. Make sure those are worth it to you.`;
+  let summary: string;
+  if (diff >= 0) {
+    summary = `With your inputs, the credits alone more than cover the fee. You're ahead $${diff} before you count points, lounges, or insurance.`;
+  } else if (totalUsed >= annualFee * 0.6) {
+    summary = `Credits recoup most of the fee ($${totalUsed} of $${annualFee}). Whether it's worth it comes down to how much you value the lounges, points and insurance on top.`;
+  } else {
+    summary = `Credits only recoup $${totalUsed} of $${annualFee}. You'd be paying $${Math.abs(diff)} for the lounges, points and status. Make sure those are worth it to you.`;
+  }
+  const modalText = `${summary} Counts statement credits + cash-like perks only (not points earning, lounge value, or insurance).`;
 
   return (
     <div className="hero-take">
@@ -595,24 +585,27 @@ function HeroTakeWidget({ totalUsed, annualFee }: { totalUsed: number; annualFee
         <button
           type="button"
           className="hero-take-info-btn"
-          onClick={() => setShowInfo((s) => !s)}
+          onClick={() => setShowModal(true)}
           aria-label="What this means"
-          aria-expanded={showInfo}
         >
           i
         </button>
       </div>
-      <div className="hero-take-amount">${totalUsed}</div>
-      <div className="hero-take-bar">
+      <div className="hero-take-amount" style={{ color: diff >= 0 ? "var(--green)" : "var(--red)" }}>
+        {diff >= 0 ? `+$${diff}` : `−$${Math.abs(diff)}`}
+      </div>
+      <div
+        className="hero-take-bar"
+        role="progressbar"
+        aria-valuenow={Math.min(totalUsed, annualFee)}
+        aria-valuemin={0}
+        aria-valuemax={annualFee}
+        aria-label={`$${totalUsed} of $${annualFee} fee covered by credits`}
+      >
         <div className="hero-take-fill" style={{ width: `${fillPct}%` }} />
       </div>
-      <div className="hero-take-sub">of ${annualFee} fee, from the credits below</div>
-      {showInfo && (
-        <div className="hero-take-detail">
-          {summary} Counts statement credits + cash-like perks only (not points earning, lounge
-          value, or insurance).
-        </div>
-      )}
+      <div className="hero-take-sub">${totalUsed} of ${annualFee} fee, from the credits below</div>
+      {showModal && <HeroTakeInfoModal text={modalText} onClose={() => setShowModal(false)} />}
     </div>
   );
 }
@@ -623,16 +616,21 @@ function Block({
   label,
   title,
   note,
+  noDivider,
   children,
 }: {
   label: string;
   title: string;
   note?: string;
+  // Skip the trailing rule after the title — for blocks whose content (e.g.
+  // a tab bar) supplies its own full-width divider right below, so the two
+  // don't stack into a doubled line.
+  noDivider?: boolean;
   children: React.ReactNode;
 }) {
   return (
     <div style={{ marginTop: 36 }}>
-      <div className="block-head">
+      <div className={`block-head${noDivider ? " no-divider" : ""}`}>
         <span className="lbl">{label}</span>
         <h3>{title}</h3>
         {note && <span className="note">{note}</span>}
@@ -793,14 +791,17 @@ function CardDetail({ card }: { card: Card }) {
     for (const c of activeCredits) setCreditValue(card.id, c.id, c.default_value);
   }
 
-  // Details tabs — consolidates what used to be five separate always-visible
+  // Details tabs — consolidates what used to be six separate always-visible
   // sections (Earning, Value, Additional cards, Insurance, Status & Perks,
   // Fees) into one "explore the full picture" area below Credits, so the
   // interactive calculator is the first thing after the hero instead of the
-  // last thing at the bottom of a long scroll.
-  const [activeTab, setActiveTab] = useState<"value" | "perks" | "insurance" | "fees">("value");
+  // last thing at the bottom of a long scroll. Earn and Value & Redemption
+  // are separate tabs (not combined into one "Value" tab) so the tab label
+  // itself carries the heading — no sub-heading needed inside either pane.
+  const [activeTab, setActiveTab] = useState<"earn" | "value" | "perks" | "insurance" | "fees">("earn");
   const detailTabs: { id: typeof activeTab; label: string }[] = [
-    { id: "value", label: "Value" },
+    { id: "earn", label: "Earn" },
+    { id: "value", label: "Value & Redemption" },
     { id: "perks", label: "Status & Perks" },
     { id: "insurance", label: "Insurance & Protections" },
     { id: "fees", label: "Fees" },
@@ -895,6 +896,10 @@ function CardDetail({ card }: { card: Card }) {
               ))}
             </div>
 
+            <div style={{ margin: "20px 0 0", maxWidth: 340 }}>
+              <HeroTakeWidget totalUsed={totalCreditsUsed} annualFee={card.annual_fee} />
+            </div>
+
             {/* Effective cost — always its own row since it's a sentence, not a short stat */}
             <div style={{ margin: "16px 0 0" }}>
               <div
@@ -942,7 +947,6 @@ function CardDetail({ card }: { card: Card }) {
               );
             })()}
             <CompareWidget cardId={card.id} />
-            <HeroTakeWidget totalUsed={totalCreditsUsed} annualFee={card.annual_fee} />
           </div>
         </div>
       </header>
@@ -976,7 +980,6 @@ function CardDetail({ card }: { card: Card }) {
       <Block label="Credits" title="Credits: set what you'll really use">
         <CreditsSection
           credits={card.credits}
-          annualFee={card.annual_fee}
           values={creditValues}
           tiers={creditTiers}
           onSlider={handleCreditSlider}
@@ -985,10 +988,10 @@ function CardDetail({ card }: { card: Card }) {
         />
       </Block>
 
-      {/* Details — Earning/Value, Status & Perks, Insurance, and Fees behind
-      tabs instead of six separate always-visible sections stacked below
-      Credits. */}
-      <Block label="Details" title="Explore the full picture">
+      {/* Details — Earn, Value & Redemption, Status & Perks, Insurance, and
+      Fees behind tabs instead of six separate always-visible sections
+      stacked below Credits. */}
+      <Block label="Details" title="Explore the full picture" noDivider>
         <div className="page-tabs" role="tablist">
           {detailTabs.map((tab) => (
             <button
@@ -1004,96 +1007,100 @@ function CardDetail({ card }: { card: Card }) {
           ))}
         </div>
 
-        {activeTab === "value" && (
-          <div style={{ marginTop: 8 }}>
-            {/* Earning */}
-            <Block label="Earning" title="How you earn points" note="per $1">
-              <div className="earn-grid">
-                {sortEarnRates(card.earn_rates).map((rate) => (
-                  <div
-                    key={rate.category}
-                    className={`earn-tile ${rate.highlight ? "hi" : ""} ${rate.is_base ? "base" : ""}`}
-                  >
-                    <div className="ei">{rate.emoji}</div>
-                    <div className="em">{rate.multiplier}</div>
-                    <div className="el">{rate.category}</div>
-                  </div>
-                ))}
-              </div>
-              {card.earn_note && <div className="earn-foot">{card.earn_note}</div>}
-            </Block>
-
-            {/* Points value */}
-            <Block label="Value" title="What your points are worth" note="cents per point">
-              <div className="grid2">
-                {/* Redemption ladder */}
-                <div className="panel-box">
-                  <div className="ladder-top">
-                    <span className="ladder-cur">{card.points.currency}</span>
-                    <span className="ladder-100k">
-                      100,000 pts ≈ <b>{card.points.per_100k}</b>
-                    </span>
-                  </div>
-                  {card.points.redemption_options.map((opt) => {
-                    const w = Math.min((opt.cpp / 2.2) * 100, 100);
-                    return (
-                      <div key={opt.method} className={`lrow ${opt.best ? "best" : ""}`}>
-                        <span className="ll">{opt.method}</span>
-                        <div className="ltrack">
-                          <div className={`lfill ${opt.best ? "" : "dim"}`} style={{ width: `${w}%` }} />
-                        </div>
-                        <span className="lval">{opt.cpp.toFixed(2)}¢</span>
-                      </div>
-                    );
-                  })}
-                  {card.points.note && <div className="ladder-note">{card.points.note}</div>}
-                </div>
-
-                {/* Transfer partners */}
+        {activeTab === "earn" && (
+          <div style={{ marginTop: 24 }}>
+            <div style={{ fontSize: 11, color: "var(--faint)", marginBottom: 12 }}>
+              Multiplier per $1 spent
+            </div>
+            <div className="earn-grid">
+              {sortEarnRates(card.earn_rates).map((rate) => (
                 <div
-                  className={`panel-box partners ${hasPartnerDetail ? "clickable" : ""}`}
-                  role={hasPartnerDetail ? "button" : undefined}
-                  tabIndex={hasPartnerDetail ? 0 : undefined}
-                  onClick={hasPartnerDetail ? () => setShowPartnersModal(true) : undefined}
-                  onKeyDown={
-                    hasPartnerDetail
-                      ? (e) => {
-                          if (e.key === "Enter" || e.key === " ") {
-                            e.preventDefault();
-                            setShowPartnersModal(true);
-                          }
-                        }
-                      : undefined
-                  }
-                  aria-label={hasPartnerDetail ? "View full transfer partner list" : undefined}
+                  key={rate.category}
+                  className={`earn-tile ${rate.highlight ? "hi" : ""} ${rate.is_base ? "base" : ""}`}
                 >
-                  <div className="pt">
-                    Transfer partners
-                    {hasPartnerDetail && <span className="pt-cta">View list →</span>}
-                  </div>
-                  <div className="pcount">
-                    {card.transfer_partners.airline_count > 0 || card.transfer_partners.hotel_count > 0 ? (
-                      <>
-                        <div className="pc">
-                          <b>{card.transfer_partners.airline_count}</b>airlines
-                        </div>
-                        <div className="pc">
-                          <b>{card.transfer_partners.hotel_count}</b>hotels
-                        </div>
-                      </>
-                    ) : (
-                      <div className="pc">
-                        <b>0</b>transfer out
+                  <div className="ei">{rate.emoji}</div>
+                  <div className="em">{rate.multiplier}</div>
+                  <div className="el">{rate.category}</div>
+                </div>
+              ))}
+            </div>
+            {card.earn_note && <div className="earn-foot">{card.earn_note}</div>}
+          </div>
+        )}
+
+        {activeTab === "value" && (
+          <div style={{ marginTop: 24 }}>
+            <div style={{ fontSize: 11, color: "var(--faint)", marginBottom: 12 }}>
+              Redemption value, in cents per point
+            </div>
+            <div className="grid2">
+              {/* Redemption ladder */}
+              <div className="panel-box">
+                <div className="ladder-top">
+                  <span className="ladder-cur">{card.points.currency}</span>
+                  <span className="ladder-100k">
+                    100,000 pts ≈ <b>{card.points.per_100k}</b>
+                  </span>
+                </div>
+                {card.points.redemption_options.map((opt) => {
+                  const w = Math.min((opt.cpp / 2.2) * 100, 100);
+                  return (
+                    <div key={opt.method} className={`lrow ${opt.best ? "best" : ""}`}>
+                      <span className="ll">{opt.method}</span>
+                      <div className="ltrack">
+                        <div className={`lfill ${opt.best ? "" : "dim"}`} style={{ width: `${w}%` }} />
                       </div>
-                    )}
-                  </div>
-                  <div className="phi">{card.transfer_partners.highlight}</div>
-                  {card.transfer_partners.recent_changes && (
-                    <div className="pchg">{card.transfer_partners.recent_changes}</div>
+                      <span className="lval">{opt.cpp.toFixed(2)}¢</span>
+                    </div>
+                  );
+                })}
+                {card.points.note && <div className="ladder-note">{card.points.note}</div>}
+              </div>
+
+              {/* Transfer partners */}
+              <div
+                className={`panel-box partners ${hasPartnerDetail ? "clickable" : ""}`}
+                role={hasPartnerDetail ? "button" : undefined}
+                tabIndex={hasPartnerDetail ? 0 : undefined}
+                onClick={hasPartnerDetail ? () => setShowPartnersModal(true) : undefined}
+                onKeyDown={
+                  hasPartnerDetail
+                    ? (e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          setShowPartnersModal(true);
+                        }
+                      }
+                    : undefined
+                }
+                aria-label={hasPartnerDetail ? "View full transfer partner list" : undefined}
+              >
+                <div className="pt">
+                  Transfer partners
+                  {hasPartnerDetail && <span className="pt-cta">View list →</span>}
+                </div>
+                <div className="pcount">
+                  {card.transfer_partners.airline_count > 0 || card.transfer_partners.hotel_count > 0 ? (
+                    <>
+                      <div className="pc">
+                        <b>{card.transfer_partners.airline_count}</b>airlines
+                      </div>
+                      <div className="pc">
+                        <b>{card.transfer_partners.hotel_count}</b>hotels
+                      </div>
+                    </>
+                  ) : (
+                    <div className="pc">
+                      <b>0</b>transfer out
+                    </div>
                   )}
                 </div>
+                <div className="phi">{card.transfer_partners.highlight}</div>
+                {card.transfer_partners.recent_changes && (
+                  <div className="pchg">{card.transfer_partners.recent_changes}</div>
+                )}
               </div>
-            </Block>
+            </div>
 
             {showPartnersModal && (
               <TransferPartnersModal

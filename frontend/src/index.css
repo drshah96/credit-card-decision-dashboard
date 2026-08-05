@@ -150,6 +150,10 @@ body {
   height: 1px;
   background: var(--line);
 }
+/* Blocks whose content supplies its own full-width divider right below
+   (e.g. a tab bar) skip this rule so the two don't stack into one doubled
+   line. */
+.block-head.no-divider::after { content: none; }
 .block-head .lbl {
   font-size: 10.5px;
   letter-spacing: 0.2em;
@@ -311,27 +315,9 @@ body {
 .tier-btn:hover:not(:disabled) { color: var(--ink); border-color: var(--line-2); }
 .tier-btn:disabled { opacity: 0.25; cursor: default; }
 
-/* ─── Calculator ───────────────────────────────────────────────────────────── */
-.calc {
-  margin-top: 22px; border: 1px solid var(--line-2); border-radius: 16px;
-  padding: 20px 22px; background: linear-gradient(160deg, var(--panel-2), var(--panel-s));
-}
-.calc-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; align-items: baseline; }
-.calc-top h4 { font-family: "Fraunces Variable", serif; font-size: 18px; margin: 0; color: var(--ink); font-weight: 600; }
-.calc-reset { background: none; border: 1px solid var(--line); color: var(--muted); font-family: inherit; font-size: 11.5px; padding: 5px 11px; border-radius: 100px; cursor: pointer; }
-.calc-reset:hover { color: var(--ink); border-color: var(--line-2); }
-.calc-nums { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 16px 0 12px; }
-@media (max-width: 640px) { .calc-nums { grid-template-columns: 1fr; } }
-.calc-cell .cl { font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
-.calc-cell .cv { font-family: "Fraunces Variable", serif; font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums; margin-top: 3px; color: var(--ink); }
-.calc-cell .cv.pos { color: var(--green); }
-.calc-cell .cv.neg { color: var(--red); }
-.calc-bar { height: 12px; border-radius: 100px; background: var(--panel-3); overflow: hidden; position: relative; margin-top: 6px; }
-.calc-bar .cbfill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--green), #8FD6B0); transition: width 0.35s; }
-.calc-bar .cbmark { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--ink); opacity: 0.55; border-radius: 1px; }
-.calc-verdict { margin-top: 14px; font-size: 13px; line-height: 1.6; color: var(--muted); }
-.calc-verdict b { color: var(--ink); }
-.calc-disc { margin-top: 8px; font-size: 11px; color: var(--faint); line-height: 1.5; }
+/* ─── Reset sliders button (credits section header) ─────────────────────────── */
+.reset-sliders-btn { background: none; border: 1px solid var(--line); color: var(--muted); font-family: inherit; font-size: 11.5px; padding: 5px 11px; border-radius: 100px; cursor: pointer; white-space: nowrap; }
+.reset-sliders-btn:hover { color: var(--ink); border-color: var(--line-2); }
 
 /* ─── Additional cards ─────────────────────────────────────────────────────── */
 .addcards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -446,7 +432,7 @@ body {
 .verdict-badge.reconsider { color: var(--red); background: rgba(242, 112, 138, 0.10); border-color: rgba(242, 112, 138, 0.3); }
 
 /* ─── Hero "your take, so far" widget (card detail page) ───────────────────── */
-.hero-take { border: 1px solid var(--line); background: var(--panel-s); border-radius: 12px; padding: 14px 16px; width: 100%; }
+.hero-take { width: 100%; }
 .hero-take-head { display: flex; align-items: center; gap: 6px; }
 .hero-take-label { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
 .hero-take-info-btn {
@@ -455,11 +441,10 @@ body {
   display: inline-grid; place-items: center; cursor: pointer; padding: 0; line-height: 1;
 }
 .hero-take-info-btn:hover { border-color: var(--accent); color: var(--accent); }
-.hero-take-amount { font-family: "Fraunces Variable", serif; font-size: 24px; font-weight: 600; color: var(--accent); margin-top: 6px; font-variant-numeric: tabular-nums; }
-.hero-take-bar { height: 5px; background: var(--panel-3); border-radius: 100px; margin-top: 8px; overflow: hidden; }
+.hero-take-amount { font-family: "Fraunces Variable", serif; font-size: 22px; font-weight: 600; margin-top: 2px; font-variant-numeric: tabular-nums; }
+.hero-take-bar { height: 5px; background: var(--panel-3); border-radius: 100px; margin-top: 8px; overflow: hidden; max-width: 200px; }
 .hero-take-fill { height: 100%; background: var(--accent); border-radius: 100px; transition: width 0.25s; }
-.hero-take-sub { margin-top: 8px; font-size: 11px; color: var(--faint); }
-.hero-take-detail { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 11.5px; line-height: 1.5; color: var(--faint); }
+.hero-take-sub { margin-top: 6px; font-size: 11px; color: var(--faint); }
 
 /* ─── Modal ────────────────────────────────────────────────────────────────── */
 @keyframes cm-fade { from { opacity: 0 } to { opacity: 1 } }

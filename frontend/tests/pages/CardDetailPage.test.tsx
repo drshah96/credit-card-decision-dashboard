@@ -183,6 +183,14 @@ async function switchToTab(name: string) {
   fireEvent.click(tab);
 }
 
+// The "Your take, so far" hero widget's verdict text now lives behind its
+// info button in a modal (matching CreditModal's popup pattern) instead of
+// always rendered inline.
+async function openHeroTakeInfo() {
+  const btn = await screen.findByRole("button", { name: "What this means" });
+  fireEvent.click(btn);
+}
+
 // ─── Tests ────────────────────────────────────────────────────────────────────
 
 beforeEach(() => {
@@ -345,8 +353,7 @@ describe("CardDetailPage", () => {
       renderPage();
 
       await waitFor(() => {
-        // $895 appears in both the header strip and the calculator
-        expect(screen.getAllByText("$895").length).toBeGreaterThanOrEqual(2);
+        expect(screen.getByText("$895")).toBeInTheDocument();
       });
       // "$2984" also appears on the credit row's own max badge — assert at least one
       expect(screen.getAllByText("$2984").length).toBeGreaterThanOrEqual(1);
@@ -433,6 +440,7 @@ describe("CardDetailPage", () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
+      await switchToTab("Value & Redemption");
 
       await waitFor(() => {
         // "Transfer partners" appears twice: once as the panel heading, once as the redemption method
@@ -726,6 +734,7 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Value & Redemption");
 
       await waitFor(() => {
         // Rendered as <b>0</b>transfer out — queryable as combined text content
@@ -739,6 +748,7 @@ describe("CardDetailPage", () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
+      await switchToTab("Value & Redemption");
 
       await waitFor(() => {
         expect(screen.getByText("Deepest airline list of any bank currency.")).toBeInTheDocument();
@@ -765,6 +775,7 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Value & Redemption");
 
       const panel = await screen.findByRole("button", { name: /view full transfer partner list/i });
       expect(screen.getByText("View list →")).toBeInTheDocument();
@@ -793,6 +804,7 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Value & Redemption");
 
       const panel = await screen.findByRole("button", { name: /view full transfer partner list/i });
       fireEvent.click(panel);
@@ -887,26 +899,25 @@ describe("CardDetailPage", () => {
     });
   });
 
-  describe("credit calculator", () => {
-    it("renders the calculator panel with the annual fee", async () => {
+  describe("credits: 'your take, so far' hero widget & sliders", () => {
+    it("renders the hero widget with the annual fee", async () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
 
       await waitFor(() => {
-        expect(
-          screen.getByText(/Will the credits offset the \$895 fee/),
-        ).toBeInTheDocument();
+        expect(screen.getByText("Your take, so far")).toBeInTheDocument();
       });
+      expect(screen.getByText(/of \$895 fee, from the credits below/)).toBeInTheDocument();
     });
 
-    it("shows $0 credits used when all default_values are 0", async () => {
+    it("shows $0 in the hero widget when all default_values are 0", async () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
 
       await waitFor(() => {
-        expect(screen.getByText(/Will the credits offset the \$895 fee/)).toBeInTheDocument();
+        expect(screen.getByText("Your take, so far")).toBeInTheDocument();
       });
       // With all default_values at 0, credits used = $0
       const creditsUsed = screen.getAllByText("$0");
@@ -947,15 +958,15 @@ describe("CardDetailPage", () => {
       renderPage();
 
       await waitFor(() => {
-        // Credits used = $300 + $100 = $400, fee = $395, net = +$5 — shown both in the
-        // header's best-case net (same $400 total, since max_annual == default_value here)
-        // and the calculator's verdict, so at least one match rather than exactly one.
-        expect(screen.getAllByText("+$5").length).toBeGreaterThanOrEqual(1);
+        // Credits used = $300 + $100 = $400 — shown in the hero widget's total
+        expect(screen.getAllByText("$400").length).toBeGreaterThanOrEqual(1);
       });
-      expect(screen.getByText("Ahead by")).toBeInTheDocument();
+      // fee $395 - $400 credits = +$5, shown both in the header's best-case net
+      // stat and the hero widget (default_value == max_annual here, so they match)
+      expect(screen.getAllByText("+$5").length).toBeGreaterThanOrEqual(1);
     });
 
-    it("updates the calculator when a slider is changed", async () => {
+    it("updates the hero widget's total when a slider is changed", async () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
@@ -969,8 +980,7 @@ describe("CardDetailPage", () => {
         target: { value: "150" },
       });
 
-      // $150 credits used, $895 fee, short by $745
-      expect(screen.getByText("−$745")).toBeInTheDocument();
+      expect(screen.getAllByText("$150").length).toBeGreaterThanOrEqual(1);
     });
 
     it("resets all sliders to default values when Reset is clicked", async () => {
@@ -986,12 +996,13 @@ describe("CardDetailPage", () => {
       fireEvent.change(screen.getByLabelText(/How much of Uber Cash/i), {
         target: { value: "200" },
       });
-      expect(screen.getByText("−$695")).toBeInTheDocument();
+      expect(screen.getAllByText("$200").length).toBeGreaterThanOrEqual(1);
 
       fireEvent.click(screen.getByRole("button", { name: /reset sliders/i }));
 
       // Back to $0 (all default_values are 0 in the fixture)
-      expect(screen.getByText("−$895")).toBeInTheDocument();
+      const creditsUsed = screen.getAllByText("$0");
+      expect(creditsUsed.length).toBeGreaterThanOrEqual(1);
     });
 
     it("moves a credit to a different tier when tier button is clicked", async () => {
@@ -1110,10 +1121,9 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await openHeroTakeInfo();
 
-      await waitFor(() => {
-        expect(screen.getByText(/Credits recoup/i)).toBeInTheDocument();
-      });
+      expect(screen.getByText(/Credits recoup/i)).toBeInTheDocument();
       // "most" branch verdict — not the "only recoup" (<60%) branch
       expect(screen.queryByText(/Credits only recoup/i)).not.toBeInTheDocument();
     });
@@ -1140,11 +1150,12 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await openHeroTakeInfo();
 
-      await waitFor(() => {
-        expect(screen.getByText(/Credits only recoup/i)).toBeInTheDocument();
-      });
-      expect(screen.getByText(/\$150 of \$895/i)).toBeInTheDocument();
+      expect(screen.getByText(/Credits only recoup/i)).toBeInTheDocument();
+      // "$150 of $895" appears both in the modal verdict and the hero widget's
+      // sub-line below the status bar
+      expect(screen.getAllByText(/\$150 of \$895/i).length).toBeGreaterThanOrEqual(1);
       // "only recoup" branch verdict — not the "most" branch
       expect(screen.queryByText(/Credits recoup.*most/i)).not.toBeInTheDocument();
     });
@@ -1189,12 +1200,10 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await openHeroTakeInfo();
 
-      await waitFor(() => {
-        expect(screen.getByText(/more than cover the fee/i)).toBeInTheDocument();
-      });
-      expect(screen.getByText("Ahead by")).toBeInTheDocument();
-      expect(screen.getByText("+$50")).toBeInTheDocument();
+      expect(screen.getByText(/more than cover the fee/i)).toBeInTheDocument();
+      expect(screen.getByText(/ahead \$50/i)).toBeInTheDocument();
     });
 
     it("clamps progress bar aria-valuenow to annual fee when credits exceed fee", async () => {
