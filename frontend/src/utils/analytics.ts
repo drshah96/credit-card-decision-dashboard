@@ -43,14 +43,15 @@ export function initAnalytics(): void {
   // automatic pageview on script load would never reflect in-app navigation.
   // trackPageView() below fires the real page_view on every route change instead.
   //
-  // transport_url + first_party_collection: true route the actual collect
-  // beacon through thewalletaudit.com/g/collect (a Cloudflare Worker proxy,
-  // see cloudflare/ga-proxy/) instead of straight to google-analytics.com,
-  // so ad/privacy blockers that filter by Google's domain don't catch it.
+  // Deliberately NOT using transport_url here for now. A Cloudflare Worker
+  // proxy exists at cloudflare/ga-proxy/ to route collect hits through our
+  // own domain for ad-blocker resistance, but the previous data stream
+  // never recorded a single hit even with the proxy verified working
+  // end-to-end — so we're isolating variables: confirm plain gtag.js
+  // reaches Google directly first, then layer the proxy back in once
+  // that's proven, rather than debug both at once.
   gtag("config", GA_MEASUREMENT_ID, {
     send_page_view: false,
-    transport_url: "https://thewalletaudit.com",
-    first_party_collection: true,
   });
 }
 
