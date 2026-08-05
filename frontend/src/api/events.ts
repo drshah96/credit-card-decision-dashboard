@@ -2,9 +2,19 @@
 // points at the deployed backend — see api/cards.ts, which does the same.
 const BASE_URL = import.meta.env.VITE_API_URL ?? "/api";
 
+export type EventType =
+  | "issuer_view"
+  | "card_view"
+  | "home_view"
+  | "top_pick_view"
+  | "compare_view"
+  | "methodology_view"
+  | "top_pick_card_selected"
+  | "compare_card_selected";
+
 export interface EventPayload {
   session_id: string;
-  event_type: "issuer_view" | "card_view";
+  event_type: EventType;
   issuer?: string;
   card_id?: string;
   referrer?: string;

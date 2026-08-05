@@ -1,7 +1,12 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import MethodologyPage from "@/pages/MethodologyPage";
+import { recordPageView } from "@/utils/sessionTracking";
+
+vi.mock("@/utils/sessionTracking", () => ({
+  recordPageView: vi.fn(),
+}));
 
 function renderPage() {
   return render(
@@ -15,6 +20,15 @@ function renderPage() {
 }
 
 describe("MethodologyPage", () => {
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("records a methodology_view on mount", () => {
+    renderPage();
+    expect(recordPageView).toHaveBeenCalledWith("methodology_view");
+  });
+
   it("renders the header", () => {
     renderPage();
     expect(

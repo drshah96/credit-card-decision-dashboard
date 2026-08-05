@@ -1,4 +1,4 @@
-import { postEvent } from "../api/events";
+import { postEvent, type EventType } from "../api/events";
 
 const STORAGE_KEY = "wa_session_id";
 
@@ -22,11 +22,7 @@ function getSessionId(): string {
   }
 }
 
-export function recordPageView(
-  eventType: "issuer_view" | "card_view",
-  issuer?: string,
-  cardId?: string,
-): void {
+export function recordPageView(eventType: EventType, issuer?: string, cardId?: string): void {
   postEvent({
     session_id: getSessionId(),
     event_type: eventType,

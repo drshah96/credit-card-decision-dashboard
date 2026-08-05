@@ -1,0 +1,9 @@
+name = "thewalletaudit-ga-proxy"
+main = "worker.js"
+compatibility_date = "2026-08-05"
+
+# Only intercepts /g/collect on the apex domain — everything else on
+# thewalletaudit.com keeps flowing to the existing Render origin unchanged.
+routes = [
+  { pattern = "thewalletaudit.com/g/collect", zone_name = "thewalletaudit.com" },
+]

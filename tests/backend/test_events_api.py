@@ -13,11 +13,12 @@ persists (and accumulates rows) across the whole test run.
 import threading
 from uuid import uuid4
 
+import pytest
 from fastapi.testclient import TestClient
 
 from backend.db import session_scope
 from backend.db_models import PageView, SessionModel
-from backend.main import _device_type, app
+from backend.main import _device_type, _is_bot, app
 from backend.services.events import record_page_view
 
 client = TestClient(app)
@@ -179,6 +180,57 @@ def test_device_type_returns_none_for_a_missing_user_agent() -> None:
     assert _device_type(None) is None
 
 
+@pytest.mark.parametrize(
+    "user_agent",
+    [
+        "Googlebot/2.1 (+http://www.google.com/bot.html)",
+        "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)",
+        "Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)",
+        "facebookexternalhit/1.1",
+        "curl/8.4.0",
+        "Wget/1.21.3",
+        "python-requests/2.31.0",
+        "PostmanRuntime/7.32.3",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+        "HeadlessChrome/119.0.0.0 Safari/537.36",
+    ],
+)
+def test_is_bot_true_for_known_bot_and_tool_user_agents(user_agent: str) -> None:
+    assert _is_bot(user_agent) is True
+
+
+@pytest.mark.parametrize(
+    "user_agent",
+    [
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 "
+        "(KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+    ],
+)
+def test_is_bot_false_for_real_browser_user_agents(user_agent: str) -> None:
+    assert _is_bot(user_agent) is False
+
+
+def test_is_bot_true_for_a_missing_user_agent() -> None:
+    assert _is_bot(None) is True
+
+
+def test_track_event_from_a_bot_user_agent_returns_ok_but_records_nothing() -> None:
+    session_id = _unique_session_id()
+
+    response = client.post(
+        "/api/events",
+        json={"session_id": session_id, "event_type": "issuer_view", "issuer": "Chase"},
+        headers={"User-Agent": "Googlebot/2.1 (+http://www.google.com/bot.html)"},
+    )
+
+    assert response.status_code == 200
+    with session_scope() as db:
+        assert db.query(SessionModel).filter(SessionModel.id == session_id).count() == 0
+        assert db.query(PageView).filter(PageView.session_id == session_id).count() == 0
+
+
 def test_track_event_reads_device_type_mobile_from_an_iphone_user_agent() -> None:
     session_id = _unique_session_id()
 
@@ -282,13 +334,16 @@ def test_track_event_reads_device_type_desktop_from_a_desktop_user_agent() -> No
         assert session_row.device_type == "desktop"
 
 
-def test_track_event_with_an_empty_user_agent_leaves_device_type_none() -> None:
+def test_track_event_with_an_empty_user_agent_records_nothing() -> None:
     """TestClient sends a default "testclient" User-Agent on every request
     (unlike a real browser omitting the header entirely, which isn't
     reachable through the test client) — classified as "desktop" like any
     other non-mobile/tablet UA, covered separately below. This test instead
-    covers the genuinely-empty-header case, which _device_type() treats the
-    same way as a missing one."""
+    covers the genuinely-empty-header case: since _is_bot() treats a falsy
+    User-Agent as a bot signal (every real browser sends one), this no
+    longer even reaches device_type classification — the event is dropped
+    before any row is written, same as test_track_event_from_a_bot_user_agent
+    above."""
     session_id = _unique_session_id()
 
     client.post(
@@ -298,9 +353,7 @@ def test_track_event_with_an_empty_user_agent_leaves_device_type_none() -> None:
     )
 
     with session_scope() as db:
-        session_row = db.get(SessionModel, session_id)
-        assert session_row is not None
-        assert session_row.device_type is None
+        assert db.get(SessionModel, session_id) is None
 
 
 def test_track_event_with_an_unrecognized_user_agent_defaults_to_desktop() -> None:
@@ -356,6 +409,31 @@ def test_record_page_view_recovers_from_concurrent_session_insert_race() -> None
     with session_scope() as db:
         assert db.query(SessionModel).filter(SessionModel.id == session_id).count() == 1
         assert db.query(PageView).filter(PageView.session_id == session_id).count() == 2
+
+
+@pytest.mark.parametrize(
+    "event_type",
+    [
+        "home_view",
+        "top_pick_view",
+        "compare_view",
+        "methodology_view",
+        "top_pick_card_selected",
+        "compare_card_selected",
+    ],
+)
+def test_track_event_accepts_the_new_page_and_selection_event_types(event_type: str) -> None:
+    session_id = _unique_session_id()
+
+    response = client.post(
+        "/api/events",
+        json={"session_id": session_id, "event_type": event_type, "card_id": "amex-gold"},
+    )
+
+    assert response.status_code == 200
+    with session_scope() as db:
+        view = db.query(PageView).filter(PageView.session_id == session_id).one()
+        assert view.event_type == event_type
 
 
 def test_track_event_rejects_an_invalid_event_type() -> None:
