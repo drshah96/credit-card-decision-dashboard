@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { recordPageView } from "../utils/sessionTracking";
 
 // ─── Shared section styling ─────────────────────────────────────────────────────
 
@@ -74,6 +75,10 @@ function BackLink() {
 // ─── Page ────────────────────────────────────────────────────────────────────────
 
 export default function MethodologyPage() {
+  useEffect(() => {
+    recordPageView("methodology_view");
+  }, []);
+
   return (
     <div style={{ minHeight: "100vh" }}>
       <div className="wrap" style={{ paddingTop: 24, paddingBottom: 80 }}>
