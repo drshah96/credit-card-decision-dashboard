@@ -16,7 +16,7 @@ describe("initAnalytics", () => {
     expect(window.gtag).toBeUndefined();
   });
 
-  it("configures gtag to send collect hits through the first-party proxy in production", () => {
+  it("configures gtag with manual SPA page views, sent straight to Google (no proxy for now)", () => {
     vi.stubEnv("PROD", true);
 
     initAnalytics();
@@ -24,15 +24,37 @@ describe("initAnalytics", () => {
     // window.gtag pushes every call onto dataLayer rather than sending
     // anything itself — that's what the async-loaded google script reads
     // from, so this is the only way to observe the config call's arguments.
-    expect(window.dataLayer).toContainEqual([
-      "config",
-      "G-BP9B4GDZES",
+    // No transport_url: isolating variables while we confirm plain gtag.js
+    // reaches Google at all before layering the Worker proxy back in.
+    expect(window.dataLayer).toContainEqual(["config", "G-MVE5H49V1S", { send_page_view: false }]);
+  });
+
+  it("grants consent by default, before config runs", () => {
+    vi.stubEnv("PROD", true);
+
+    initAnalytics();
+
+    const dataLayer = window.dataLayer!;
+    const consentIndex = dataLayer.findIndex(
+      (entry) => Array.isArray(entry) && entry[0] === "consent" && entry[1] === "default",
+    );
+    const configIndex = dataLayer.findIndex((entry) => Array.isArray(entry) && entry[0] === "config");
+
+    expect(consentIndex).toBeGreaterThanOrEqual(0);
+    expect(dataLayer[consentIndex]).toEqual([
+      "consent",
+      "default",
       {
-        send_page_view: false,
-        transport_url: "https://thewalletaudit.com",
-        first_party_collection: true,
+        ad_storage: "granted",
+        analytics_storage: "granted",
+        ad_user_data: "granted",
+        ad_personalization: "granted",
       },
     ]);
+    // Google reads consent state at config time — granting it after would
+    // be too late, since gtag.js locks in denied-by-omission behavior once
+    // config has already run.
+    expect(consentIndex).toBeLessThan(configIndex);
   });
 });
 
