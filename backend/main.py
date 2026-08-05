@@ -126,14 +126,65 @@ def _device_type(user_agent: str | None) -> str | None:
     return "desktop"
 
 
+# Substring match against a lowercased User-Agent — covers the major search
+# engine/social-preview crawlers (Googlebot, Bingbot, DuckDuckBot, Applebot,
+# facebookexternalhit, Slurp, ...; most self-identify with "bot" or "spider"
+# somewhere in the UA), common HTTP client libraries/CLI tools that aren't
+# real browsers at all (curl, wget, python-requests, PostmanRuntime), and
+# headless/automated browser signatures (HeadlessChrome, PhantomJS) that
+# tools like Puppeteer/Playwright default to unless overridden. Same
+# lightweight-heuristic philosophy as _device_type() above: this only needs
+# to keep obviously-automated traffic out of "how many real people visited"
+# numbers, not withstand a bot deliberately spoofing a real browser's UA —
+# that's a fundamentally different, much harder problem this isn't trying
+# to solve.
+_BOT_UA_SIGNATURES = (
+    "bot",
+    "spider",
+    "crawl",
+    "slurp",
+    "curl",
+    "wget",
+    "python-requests",
+    "python-urllib",
+    "postmanruntime",
+    "headlesschrome",
+    "phantomjs",
+    "facebookexternalhit",
+    "whatsapp",
+    "telegrambot",
+    "discordbot",
+    "linkedinbot",
+)
+
+
+def _is_bot(user_agent: str | None) -> bool:
+    """True for a missing User-Agent (every real browser sends one; a
+    genuine visit without one is vanishingly rare next to the volume of
+    scripts/tools that omit it) or one matching a known
+    automation/crawler/bot signature."""
+    if not user_agent:
+        return True
+    ua = user_agent.lower()
+    return any(signature in ua for signature in _BOT_UA_SIGNATURES)
+
+
 @app.post("/api/events")
 def track_event(event: EventIn, request: Request) -> dict:
     """Record one anonymous page-view event. Fire-and-forget from the
-    frontend's side (sent via navigator.sendBeacon, response ignored), so
-    this deliberately does the minimum: no validation beyond the Pydantic
+    frontend's side (sent via a keepalive fetch, response ignored), so this
+    deliberately does the minimum: no validation beyond the Pydantic
     schema, no error surfaced back to the caller that would need handling —
     worst case for a malformed request is one low-quality analytics row, not
     a broken page for the visitor it came from.
+
+    Silently drops the event (still returns 200, same as a real recorded
+    one — the caller ignores the response either way) if the User-Agent
+    looks like a bot/crawler/automation tool rather than a real visitor —
+    see _is_bot(). Checked before touching the database at all, so bot
+    traffic never creates a session or page_view row in the first place,
+    rather than being flagged after the fact and requiring every future
+    query to remember to filter it back out.
 
     Country comes from Cloudflare's CF-IPCountry request header (set for
     every proxied request once IP Geolocation is turned on for the zone),
@@ -145,6 +196,10 @@ def track_event(event: EventIn, request: Request) -> dict:
     no IP address is ever read or stored, keeping the "no PII" guarantee in
     backend/db_models.py SessionModel intact. Device type is derived the
     same way, off the User-Agent header — see _device_type()."""
+    user_agent = request.headers.get("user-agent")
+    if _is_bot(user_agent):
+        return {"status": "ok"}
+
     country = request.headers.get("cf-ipcountry")
     if country == "XX":
         country = None
@@ -155,6 +210,6 @@ def track_event(event: EventIn, request: Request) -> dict:
         card_slug=event.card_id,
         referrer=_referrer_host(event.referrer),
         country=country,
-        device_type=_device_type(request.headers.get("user-agent")),
+        device_type=_device_type(user_agent),
     )
     return {"status": "ok"}
