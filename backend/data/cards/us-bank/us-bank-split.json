@@ -31,7 +31,7 @@
   "earn_rates": [],
   "earn_note": "Split isn't a rewards card. It's U.S. Bank's buy-now-pay-later product wearing a Mastercard. Every purchase of $100+ is automatically split into 3 interest-free monthly payments; purchases under $100 in a billing cycle are bundled into one Small Purchase Plan and split the same way. You can extend a Plan to 6 or 12 months for a fixed monthly Plan Fee, but the 3-month default can't be turned off; there's no way to just carry a normal revolving balance.",
   "points": {
-    "currency": "None",
+    "currency": "No rewards program",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
     "note": "There is nothing to redeem. The entire value proposition is interest-free installment financing, not earning."

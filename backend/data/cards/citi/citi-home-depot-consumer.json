@@ -31,7 +31,7 @@
   "earn_rates": [],
   "earn_note": "This card has no cash-back or points program of any kind. Its entire value proposition is deferred-interest financing (\"no interest if paid in full within the promotional period\") on Home Depot purchases, plus a modest new-account discount and an extended return window. If you want rewards for home-improvement spend, a general-purpose card with a home-improvement or everyday-purchases category will out-earn this every time.",
   "points": {
-    "currency": "None",
+    "currency": "No rewards program",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
     "note": "No points or cash back exist on this card. Its value is entirely about financing terms: promotional 0%-interest windows (commonly 6 months on purchases of $299+, with longer up-to-24-month windows during special promotions) that revert to a high standard variable APR (published around 29.99% as of Citi's 2025/2026 disclosures) if not paid in full by the deadline, including retroactive interest back to the purchase date under deferred-interest terms, which is a real risk if you carry a balance past the promo window."

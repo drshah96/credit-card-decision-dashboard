@@ -37,7 +37,7 @@
   "earn_rates": [],
   "earn_note": "This is the secured version of BankAmericard, and it inherits the same no-rewards structure. But secured card products also aren't eligible for BankAmericard's signature 0% intro APR offer, so there's no APR-focused reason to pick this over the unsecured card either. There's no earn-rate or APR reason to choose this over Cash Rewards Secured or Unlimited Cash Rewards Secured, which cost the same to open.",
   "points": {
-    "currency": "None",
+    "currency": "No rewards program",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
     "note": "Nothing to redeem. Value is purely the credit-building mechanism, not any earning."

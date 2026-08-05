@@ -37,7 +37,7 @@
   "earn_rates": [],
   "earn_note": "Simplicity earns no cash back, points, or miles at all. Like Diamond Preferred, it's built around APR mechanics instead of rewards. Its distinguishing feature isn't the intro rate itself (Diamond Preferred's is essentially the same) but Citi's explicit promise of no late fees and no penalty APR, ever, for the life of the account.",
   "points": {
-    "currency": "None",
+    "currency": "No rewards program",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
     "note": "No points or cash-back program of any kind. 0% intro APR for 12 months on purchases and 21 months on balance transfers from account opening (transfers must post within the first 4 months), then a 17.49%–28.24% variable ongoing APR based on creditworthiness."

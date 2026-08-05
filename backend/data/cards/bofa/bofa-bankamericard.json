@@ -38,7 +38,7 @@
   "earn_rates": [],
   "earn_note": "BankAmericard isn't a rewards card. It's built entirely around a long 0% intro APR window and no penalty APR. There's no everyday earn rate of any kind.",
   "points": {
-    "currency": "None",
+    "currency": "No rewards program",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
     "note": "Nothing to redeem. The entire value proposition is the intro APR window, not earning."
