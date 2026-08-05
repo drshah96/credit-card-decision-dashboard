@@ -172,6 +172,17 @@ function renderPage(cardId = "amex", state?: { from?: string }) {
   );
 }
 
+// Earning/Value, Status & Perks, Insurance & Protections, and Fees now live
+// behind tabs (see the "Details" section in CardDetailPage.tsx) instead of
+// being always-visible sections — tests asserting on non-default-tab content
+// need to switch tabs first. findByRole already waits for the tab to exist,
+// so this doubles as the "page finished loading" wait these tests used to do
+// via a heading/text lookup.
+async function switchToTab(name: string) {
+  const tab = await screen.findByRole("tab", { name });
+  fireEvent.click(tab);
+}
+
 // ─── Tests ────────────────────────────────────────────────────────────────────
 
 beforeEach(() => {
@@ -434,10 +445,9 @@ describe("CardDetailPage", () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
+      await switchToTab("Insurance & Protections");
 
-      await waitFor(() => {
-        expect(screen.getByText("Purchase protection")).toBeInTheDocument();
-      });
+      expect(screen.getByText("Purchase protection")).toBeInTheDocument();
     });
 
     it("renders interest rates & fees with real audited data", async () => {
@@ -454,10 +464,8 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Fees");
 
-      await waitFor(() => {
-        expect(screen.getByText("Interest rates & fees")).toBeInTheDocument();
-      });
       // Intro offer and ongoing rate fold into one row, not two separate ones.
       expect(
         screen.getByText("0% intro APR for 15 months, after that 20.24%-28.74%"),
@@ -475,10 +483,8 @@ describe("CardDetailPage", () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard()); // all null by default
 
       renderPage();
+      await switchToTab("Fees");
 
-      await waitFor(() => {
-        expect(screen.getByText("Interest rates & fees")).toBeInTheDocument();
-      });
       // Purchase APR, balance transfer APR, balance_transfer_fee, foreign
       // transaction fee, cash advance APR, penalty APR, late payment fee,
       // returned payment fee, and returned check fee all fall back — Pay
@@ -501,10 +507,8 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Fees");
 
-      await waitFor(() => {
-        expect(screen.getByText("Interest rates & fees")).toBeInTheDocument();
-      });
       expect(screen.getByText("29.99%, after a payment more than 60 days late")).toBeInTheDocument();
       expect(screen.getByText("1.33% of the Pay Over Time balance")).toBeInTheDocument();
       expect(screen.getAllByText("Up to $41")).toHaveLength(3);
@@ -514,10 +518,8 @@ describe("CardDetailPage", () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
+      await switchToTab("Fees");
 
-      await waitFor(() => {
-        expect(screen.getByText("Interest rates & fees")).toBeInTheDocument();
-      });
       expect(screen.queryByText("Pay Over Time fee")).not.toBeInTheDocument();
     });
 
@@ -525,10 +527,9 @@ describe("CardDetailPage", () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard({ foreign_transaction_fee: false }));
 
       renderPage();
+      await switchToTab("Fees");
 
-      await waitFor(() => {
-        expect(screen.getByText("None")).toBeInTheDocument();
-      });
+      expect(screen.getByText("None")).toBeInTheDocument();
     });
 
     // Welcome bonus rendering is disabled: sign-up offers rotate on the
@@ -575,7 +576,7 @@ describe("CardDetailPage", () => {
       renderPage();
 
       await waitFor(() => {
-        expect(screen.getByText("Interest rates & fees")).toBeInTheDocument();
+        expect(screen.getByRole("heading", { name: "The Platinum Card" })).toBeInTheDocument();
       });
       expect(screen.queryByText("Welcome bonus")).not.toBeInTheDocument();
     });
@@ -586,7 +587,7 @@ describe("CardDetailPage", () => {
       renderPage();
 
       await waitFor(() => {
-        expect(screen.getByText("Interest rates & fees")).toBeInTheDocument();
+        expect(screen.getByRole("heading", { name: "The Platinum Card" })).toBeInTheDocument();
       });
       expect(screen.queryByText("Welcome bonus")).not.toBeInTheDocument();
     });
@@ -649,10 +650,9 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Status & Perks");
 
-      await waitFor(() => {
-        expect(screen.getByText("Platinum Concierge")).toBeInTheDocument();
-      });
+      expect(screen.getByText("Platinum Concierge")).toBeInTheDocument();
       expect(screen.getByText("Car Rental Privileges")).toBeInTheDocument();
     });
 
@@ -666,11 +666,10 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Status & Perks");
 
-      await waitFor(() => {
-        // Strength 3/5 means dots 4 and 5 are unfilled — exercises the bg-white/10 branch
-        expect(screen.getByLabelText(/Strength: 3 out of 5/)).toBeInTheDocument();
-      });
+      // Strength 3/5 means dots 4 and 5 are unfilled — exercises the bg-white/10 branch
+      expect(screen.getByLabelText(/Strength: 3 out of 5/)).toBeInTheDocument();
     });
 
     it("renders the additional cards section when options are present", async () => {
@@ -695,10 +694,9 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Status & Perks");
 
-      await waitFor(() => {
-        expect(screen.getByText("Companion Platinum")).toBeInTheDocument();
-      });
+      expect(screen.getByText("Companion Platinum")).toBeInTheDocument();
       expect(screen.getByText("Earns Membership Rewards")).toBeInTheDocument();
       expect(screen.getByText("No lounge access")).toBeInTheDocument();
       expect(screen.getByText("Up to 3 additional cards.")).toBeInTheDocument();
@@ -811,10 +809,9 @@ describe("CardDetailPage", () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
+      await switchToTab("Insurance & Protections");
 
-      await waitFor(() => {
-        expect(screen.getByText("Purchase protection is best-in-class.")).toBeInTheDocument();
-      });
+      expect(screen.getByText("Purchase protection is best-in-class.")).toBeInTheDocument();
     });
 
     it("does not render protection_note when absent", async () => {
@@ -832,10 +829,9 @@ describe("CardDetailPage", () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
+      await switchToTab("Insurance & Protections");
 
-      await waitFor(() => {
-        expect(screen.getByText("Use CSR or Venture X for rentals.")).toBeInTheDocument();
-      });
+      expect(screen.getByText("Use CSR or Venture X for rentals.")).toBeInTheDocument();
     });
 
     it("does not render rental_note when absent", async () => {
@@ -859,10 +855,9 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Status & Perks");
 
-      await waitFor(() => {
-        expect(screen.getByLabelText(/Strength: 5 out of 5/)).toBeInTheDocument();
-      });
+      expect(screen.getByLabelText(/Strength: 5 out of 5/)).toBeInTheDocument();
       expect(screen.getByText("elite")).toBeInTheDocument();
     });
 
@@ -879,10 +874,9 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Insurance & Protections");
 
-      await waitFor(() => {
-        expect(screen.getByText("Strong Coverage")).toBeInTheDocument();
-      });
+      expect(screen.getByText("Strong Coverage")).toBeInTheDocument();
 
       // Insurance grid splits into two halves; DOM order matches original array order
       const dots = document.querySelectorAll(".ins-dot");

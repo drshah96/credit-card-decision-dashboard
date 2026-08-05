@@ -445,6 +445,22 @@ body {
 .verdict-badge.situational { color: var(--gold); background: rgba(227, 183, 120, 0.10); border-color: rgba(227, 183, 120, 0.3); }
 .verdict-badge.reconsider { color: var(--red); background: rgba(242, 112, 138, 0.10); border-color: rgba(242, 112, 138, 0.3); }
 
+/* ─── Hero "your take, so far" widget (card detail page) ───────────────────── */
+.hero-take { border: 1px solid var(--line); background: var(--panel-s); border-radius: 12px; padding: 14px 16px; width: 100%; }
+.hero-take-head { display: flex; align-items: center; gap: 6px; }
+.hero-take-label { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+.hero-take-info-btn {
+  width: 15px; height: 15px; border-radius: 50%; border: 1px solid var(--line-2);
+  color: var(--faint); background: none; font-size: 9px; font-family: inherit;
+  display: inline-grid; place-items: center; cursor: pointer; padding: 0; line-height: 1;
+}
+.hero-take-info-btn:hover { border-color: var(--accent); color: var(--accent); }
+.hero-take-amount { font-family: "Fraunces Variable", serif; font-size: 24px; font-weight: 600; color: var(--accent); margin-top: 6px; font-variant-numeric: tabular-nums; }
+.hero-take-bar { height: 5px; background: var(--panel-3); border-radius: 100px; margin-top: 8px; overflow: hidden; }
+.hero-take-fill { height: 100%; background: var(--accent); border-radius: 100px; transition: width 0.25s; }
+.hero-take-sub { margin-top: 8px; font-size: 11px; color: var(--faint); }
+.hero-take-detail { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 11.5px; line-height: 1.5; color: var(--faint); }
+
 /* ─── Modal ────────────────────────────────────────────────────────────────── */
 @keyframes cm-fade { from { opacity: 0 } to { opacity: 1 } }
 @keyframes cm-pop  { from { opacity: 0; transform: scale(0.94) translateY(12px) } to { opacity: 1; transform: none } }

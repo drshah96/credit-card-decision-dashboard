@@ -431,48 +431,25 @@ function CreditCalculator({
 function CreditsSection({
   credits,
   annualFee,
-  cardId,
+  values,
+  tiers,
+  onSlider,
+  onTierMove,
+  onReset,
 }: {
   credits: Credit[];
   annualFee: number;
-  cardId: string;
+  values: Record<string, number>;
+  tiers: Record<string, CreditTier>;
+  onSlider: (id: string, v: number) => void;
+  onTierMove: (id: string, dir: "up" | "down") => void;
+  onReset: () => void;
 }) {
   // Credits an issuer has discontinued are tracked in the History timeline
   // below (as a "Cut" entry) instead — showing them here too, in a section
   // that's otherwise exclusively "credits you can use," was confusing.
   const active = credits.filter((c) => !c.removed);
-  const { getCardUsage, setCreditValue } = useCreditUsage();
-
-  // Seeded from whatever this cardholder already saved for this card (so a
-  // return visit — or the Compare page — sees the same numbers), falling
-  // back to each credit's own default only for ones never touched yet.
-  const [values, setValues] = useState<Record<string, number>>(() => {
-    const saved = getCardUsage(cardId);
-    return Object.fromEntries(active.map((c) => [c.id, saved?.[c.id] ?? c.default_value]));
-  });
-  const [tiers, setTiers] = useState<Record<string, CreditTier>>(
-    () => Object.fromEntries(active.map((c) => [c.id, c.tier])),
-  );
   const [modal, setModal] = useState<{ credit: Credit; tier: CreditTier } | null>(null);
-
-  function handleSlider(id: string, v: number) {
-    setValues((prev) => ({ ...prev, [id]: v }));
-    setCreditValue(cardId, id, v);
-  }
-
-  function handleTierMove(id: string, dir: "up" | "down") {
-    setTiers((prev) => {
-      const cur = TIER_ORDER.indexOf(prev[id] ?? "niche");
-      const next = dir === "up" ? Math.max(0, cur - 1) : Math.min(2, cur + 1);
-      return { ...prev, [id]: TIER_ORDER[next] };
-    });
-  }
-
-  function handleReset() {
-    setValues(Object.fromEntries(active.map((c) => [c.id, c.default_value])));
-    setTiers(Object.fromEntries(active.map((c) => [c.id, c.tier])));
-    for (const c of active) setCreditValue(cardId, c.id, c.default_value);
-  }
 
   function handleOpenModal(credit: Credit, tier: CreditTier) {
     setModal({ credit, tier });
@@ -512,8 +489,8 @@ function CreditsSection({
                       credit={c}
                       value={values[c.id] ?? 0}
                       tierIdx={TIER_ORDER.indexOf(tiers[c.id] ?? c.tier)}
-                      onSlider={handleSlider}
-                      onTierMove={handleTierMove}
+                      onSlider={onSlider}
+                      onTierMove={onTierMove}
                       onOpenModal={handleOpenModal}
                     />
                   ))
@@ -529,7 +506,7 @@ function CreditsSection({
       <CreditCalculator
         totalUsed={totalUsed}
         annualFee={annualFee}
-        onReset={handleReset}
+        onReset={onReset}
       />
 
       {modal && (
@@ -591,6 +568,52 @@ function CompareWidget({ cardId }: { cardId: string }) {
     <button type="button" className="compare-widget-btn" onClick={() => addCard(cardId)}>
       + Add to Compare
     </button>
+  );
+}
+
+// ─── Hero "your take, so far" widget ───────────────────────────────────────────
+
+// Surfaces the same running credit total the Credits section and its
+// calculator use, right in the hero — so the number a visitor cares about
+// most doesn't require scrolling past everything else first. Purely a
+// display of state owned by CardDetail (the credit sliders live there now,
+// not inside CreditsSection), so this never drifts out of sync with the
+// calculator below it.
+function HeroTakeWidget({ totalUsed, annualFee }: { totalUsed: number; annualFee: number }) {
+  const [showInfo, setShowInfo] = useState(false);
+  const fillPct = Math.min(100, Math.round((totalUsed / annualFee) * 100));
+  const diff = totalUsed - annualFee;
+  const summary =
+    diff >= 0
+      ? `Credits cover the $${annualFee} fee with $${diff} to spare.`
+      : `Credits only recoup $${totalUsed} of $${annualFee}. You'd be paying $${Math.abs(diff)} for the lounges, points and status. Make sure those are worth it to you.`;
+
+  return (
+    <div className="hero-take">
+      <div className="hero-take-head">
+        <span className="hero-take-label">Your take, so far</span>
+        <button
+          type="button"
+          className="hero-take-info-btn"
+          onClick={() => setShowInfo((s) => !s)}
+          aria-label="What this means"
+          aria-expanded={showInfo}
+        >
+          i
+        </button>
+      </div>
+      <div className="hero-take-amount">${totalUsed}</div>
+      <div className="hero-take-bar">
+        <div className="hero-take-fill" style={{ width: `${fillPct}%` }} />
+      </div>
+      <div className="hero-take-sub">of ${annualFee} fee, from the credits below</div>
+      {showInfo && (
+        <div className="hero-take-detail">
+          {summary} Counts statement credits + cash-like perks only (not points earning, lounge
+          value, or insurance).
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -737,6 +760,52 @@ function CardDetail({ card }: { card: Card }) {
   const [showPartnersModal, setShowPartnersModal] = useState(false);
   const hasPartnerDetail = (card.transfer_partners.partners?.length ?? 0) > 0;
 
+  // Credit usage state lives here (not inside CreditsSection) so the hero's
+  // "Your take, so far" widget and the Credits section's own calculator
+  // share one source of truth instead of two copies that could drift.
+  const activeCredits = card.credits.filter((c) => !c.removed);
+  const { getCardUsage, setCreditValue } = useCreditUsage();
+  const [creditValues, setCreditValues] = useState<Record<string, number>>(() => {
+    const saved = getCardUsage(card.id);
+    return Object.fromEntries(activeCredits.map((c) => [c.id, saved?.[c.id] ?? c.default_value]));
+  });
+  const [creditTiers, setCreditTiers] = useState<Record<string, CreditTier>>(() =>
+    Object.fromEntries(activeCredits.map((c) => [c.id, c.tier])),
+  );
+  const totalCreditsUsed = activeCredits.reduce((sum, c) => sum + (creditValues[c.id] ?? 0), 0);
+
+  function handleCreditSlider(id: string, v: number) {
+    setCreditValues((prev) => ({ ...prev, [id]: v }));
+    setCreditValue(card.id, id, v);
+  }
+
+  function handleCreditTierMove(id: string, dir: "up" | "down") {
+    setCreditTiers((prev) => {
+      const cur = TIER_ORDER.indexOf(prev[id] ?? "niche");
+      const next = dir === "up" ? Math.max(0, cur - 1) : Math.min(2, cur + 1);
+      return { ...prev, [id]: TIER_ORDER[next] };
+    });
+  }
+
+  function handleCreditReset() {
+    setCreditValues(Object.fromEntries(activeCredits.map((c) => [c.id, c.default_value])));
+    setCreditTiers(Object.fromEntries(activeCredits.map((c) => [c.id, c.tier])));
+    for (const c of activeCredits) setCreditValue(card.id, c.id, c.default_value);
+  }
+
+  // Details tabs — consolidates what used to be five separate always-visible
+  // sections (Earning, Value, Additional cards, Insurance, Status & Perks,
+  // Fees) into one "explore the full picture" area below Credits, so the
+  // interactive calculator is the first thing after the hero instead of the
+  // last thing at the bottom of a long scroll.
+  const [activeTab, setActiveTab] = useState<"value" | "perks" | "insurance" | "fees">("value");
+  const detailTabs: { id: typeof activeTab; label: string }[] = [
+    { id: "value", label: "Value" },
+    { id: "perks", label: "Status & Perks" },
+    { id: "insurance", label: "Insurance & Protections" },
+    { id: "fees", label: "Fees" },
+  ];
+
   return (
     <div>
       {/* Hero */}
@@ -873,6 +942,7 @@ function CardDetail({ card }: { card: Card }) {
               );
             })()}
             <CompareWidget cardId={card.id} />
+            <HeroTakeWidget totalUsed={totalCreditsUsed} annualFee={card.annual_fee} />
           </div>
         </div>
       </header>
@@ -901,255 +971,286 @@ function CardDetail({ card }: { card: Card }) {
       )}
       */}
 
-      {/* Earning */}
-      <Block label="Earning" title="How you earn points" note="per $1">
-        <div className="earn-grid">
-          {sortEarnRates(card.earn_rates).map((rate) => (
-            <div
-              key={rate.category}
-              className={`earn-tile ${rate.highlight ? "hi" : ""} ${rate.is_base ? "base" : ""}`}
-            >
-              <div className="ei">{rate.emoji}</div>
-              <div className="em">{rate.multiplier}</div>
-              <div className="el">{rate.category}</div>
-            </div>
-          ))}
-        </div>
-        {card.earn_note && <div className="earn-foot">{card.earn_note}</div>}
+      {/* Credits — right after the hero: it's the primary interactive tool
+      on the page, not something to scroll past everything else to reach. */}
+      <Block label="Credits" title="Credits: set what you'll really use">
+        <CreditsSection
+          credits={card.credits}
+          annualFee={card.annual_fee}
+          values={creditValues}
+          tiers={creditTiers}
+          onSlider={handleCreditSlider}
+          onTierMove={handleCreditTierMove}
+          onReset={handleCreditReset}
+        />
       </Block>
 
-      {/* Points value */}
-      <Block label="Value" title="What your points are worth" note="cents per point">
-        <div className="grid2">
-          {/* Redemption ladder */}
-          <div className="panel-box">
-            <div className="ladder-top">
-              <span className="ladder-cur">{card.points.currency}</span>
-              <span className="ladder-100k">
-                100,000 pts ≈ <b>{card.points.per_100k}</b>
-              </span>
-            </div>
-            {card.points.redemption_options.map((opt) => {
-              const w = Math.min((opt.cpp / 2.2) * 100, 100);
-              return (
-                <div key={opt.method} className={`lrow ${opt.best ? "best" : ""}`}>
-                  <span className="ll">{opt.method}</span>
-                  <div className="ltrack">
-                    <div className={`lfill ${opt.best ? "" : "dim"}`} style={{ width: `${w}%` }} />
-                  </div>
-                  <span className="lval">{opt.cpp.toFixed(2)}¢</span>
-                </div>
-              );
-            })}
-            {card.points.note && <div className="ladder-note">{card.points.note}</div>}
-          </div>
+      {/* Details — Earning/Value, Status & Perks, Insurance, and Fees behind
+      tabs instead of six separate always-visible sections stacked below
+      Credits. */}
+      <Block label="Details" title="Explore the full picture">
+        <div className="page-tabs" role="tablist">
+          {detailTabs.map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              role="tab"
+              aria-selected={activeTab === tab.id}
+              className={`page-tab ${activeTab === tab.id ? "active" : ""}`}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
 
-          {/* Transfer partners */}
-          <div
-            className={`panel-box partners ${hasPartnerDetail ? "clickable" : ""}`}
-            role={hasPartnerDetail ? "button" : undefined}
-            tabIndex={hasPartnerDetail ? 0 : undefined}
-            onClick={hasPartnerDetail ? () => setShowPartnersModal(true) : undefined}
-            onKeyDown={
-              hasPartnerDetail
-                ? (e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setShowPartnersModal(true);
-                    }
+        {activeTab === "value" && (
+          <div style={{ marginTop: 8 }}>
+            {/* Earning */}
+            <Block label="Earning" title="How you earn points" note="per $1">
+              <div className="earn-grid">
+                {sortEarnRates(card.earn_rates).map((rate) => (
+                  <div
+                    key={rate.category}
+                    className={`earn-tile ${rate.highlight ? "hi" : ""} ${rate.is_base ? "base" : ""}`}
+                  >
+                    <div className="ei">{rate.emoji}</div>
+                    <div className="em">{rate.multiplier}</div>
+                    <div className="el">{rate.category}</div>
+                  </div>
+                ))}
+              </div>
+              {card.earn_note && <div className="earn-foot">{card.earn_note}</div>}
+            </Block>
+
+            {/* Points value */}
+            <Block label="Value" title="What your points are worth" note="cents per point">
+              <div className="grid2">
+                {/* Redemption ladder */}
+                <div className="panel-box">
+                  <div className="ladder-top">
+                    <span className="ladder-cur">{card.points.currency}</span>
+                    <span className="ladder-100k">
+                      100,000 pts ≈ <b>{card.points.per_100k}</b>
+                    </span>
+                  </div>
+                  {card.points.redemption_options.map((opt) => {
+                    const w = Math.min((opt.cpp / 2.2) * 100, 100);
+                    return (
+                      <div key={opt.method} className={`lrow ${opt.best ? "best" : ""}`}>
+                        <span className="ll">{opt.method}</span>
+                        <div className="ltrack">
+                          <div className={`lfill ${opt.best ? "" : "dim"}`} style={{ width: `${w}%` }} />
+                        </div>
+                        <span className="lval">{opt.cpp.toFixed(2)}¢</span>
+                      </div>
+                    );
+                  })}
+                  {card.points.note && <div className="ladder-note">{card.points.note}</div>}
+                </div>
+
+                {/* Transfer partners */}
+                <div
+                  className={`panel-box partners ${hasPartnerDetail ? "clickable" : ""}`}
+                  role={hasPartnerDetail ? "button" : undefined}
+                  tabIndex={hasPartnerDetail ? 0 : undefined}
+                  onClick={hasPartnerDetail ? () => setShowPartnersModal(true) : undefined}
+                  onKeyDown={
+                    hasPartnerDetail
+                      ? (e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            setShowPartnersModal(true);
+                          }
+                        }
+                      : undefined
                   }
-                : undefined
-            }
-            aria-label={hasPartnerDetail ? "View full transfer partner list" : undefined}
-          >
-            <div className="pt">
-              Transfer partners
-              {hasPartnerDetail && <span className="pt-cta">View list →</span>}
-            </div>
-            <div className="pcount">
-              {card.transfer_partners.airline_count > 0 || card.transfer_partners.hotel_count > 0 ? (
-                <>
-                  <div className="pc">
-                    <b>{card.transfer_partners.airline_count}</b>airlines
+                  aria-label={hasPartnerDetail ? "View full transfer partner list" : undefined}
+                >
+                  <div className="pt">
+                    Transfer partners
+                    {hasPartnerDetail && <span className="pt-cta">View list →</span>}
                   </div>
-                  <div className="pc">
-                    <b>{card.transfer_partners.hotel_count}</b>hotels
+                  <div className="pcount">
+                    {card.transfer_partners.airline_count > 0 || card.transfer_partners.hotel_count > 0 ? (
+                      <>
+                        <div className="pc">
+                          <b>{card.transfer_partners.airline_count}</b>airlines
+                        </div>
+                        <div className="pc">
+                          <b>{card.transfer_partners.hotel_count}</b>hotels
+                        </div>
+                      </>
+                    ) : (
+                      <div className="pc">
+                        <b>0</b>transfer out
+                      </div>
+                    )}
                   </div>
-                </>
-              ) : (
-                <div className="pc">
-                  <b>0</b>transfer out
+                  <div className="phi">{card.transfer_partners.highlight}</div>
+                  {card.transfer_partners.recent_changes && (
+                    <div className="pchg">{card.transfer_partners.recent_changes}</div>
+                  )}
+                </div>
+              </div>
+            </Block>
+
+            {showPartnersModal && (
+              <TransferPartnersModal
+                partners={card.transfer_partners.partners ?? []}
+                currency={card.points.currency}
+                onClose={() => setShowPartnersModal(false)}
+              />
+            )}
+          </div>
+        )}
+
+        {activeTab === "perks" && (
+          <div style={{ marginTop: 24 }}>
+            <div className="perkwrap">
+              <div>
+                {card.status_perks.length > 0 && (
+                  <>
+                    <span className="section-tag accent">Elite status</span>
+                    <div className="chips">
+                      {card.status_perks.map((perk) => (
+                        <div key={perk.name} className="schip">
+                          <div className="schip-top">
+                            <span className="schip-name">{perk.name}</span>
+                            <Pips strength={perk.strength} />
+                          </div>
+                          <p>{perk.note}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
+                {card.additional_cards.options.length > 0 && (
+                  <div style={{ marginTop: card.status_perks.length > 0 ? 22 : 0 }}>
+                    <span className="section-tag muted">Additional cards</span>
+                    <div className="addcards" style={{ gridTemplateColumns: "1fr" }}>
+                      {card.additional_cards.options.map((opt) => (
+                        <div key={opt.name} className={`addcard ${opt.is_free ? "free" : ""}`}>
+                          <div className="addcard-top">
+                            <span className="addcard-name">{opt.name}</span>
+                            <span className={`addcard-fee ${opt.is_free ? "free" : "paid"}`}>{opt.fee}</span>
+                          </div>
+                          <ul>
+                            {opt.benefits.map((b, i) => (
+                              <li key={i} className={b.included ? "" : "no"}>
+                                {b.text}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                    {card.additional_cards.note && (
+                      <p className="addcard-foot">{card.additional_cards.note}</p>
+                    )}
+                  </div>
+                )}
+              </div>
+              {card.services.length > 0 && (
+                <div>
+                  <span className="section-tag muted">Services &amp; perks</span>
+                  <div className="svc-box">
+                    {card.services.map((svc) => (
+                      <div key={svc.name} className="svc-item">
+                        <div className="sn">{svc.name}</div>
+                        <div className="sd">{svc.detail}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
-            <div className="phi">{card.transfer_partners.highlight}</div>
-            {card.transfer_partners.recent_changes && (
-              <div className="pchg">{card.transfer_partners.recent_changes}</div>
-            )}
           </div>
-        </div>
-      </Block>
-
-      {showPartnersModal && (
-        <TransferPartnersModal
-          partners={card.transfer_partners.partners ?? []}
-          currency={card.points.currency}
-          onClose={() => setShowPartnersModal(false)}
-        />
-      )}
-
-      {/* Credits */}
-      <Block label="Credits" title="Credits: set what you'll really use">
-        <CreditsSection credits={card.credits} annualFee={card.annual_fee} cardId={card.id} />
-      </Block>
-
-      {/* Additional cards */}
-      {card.additional_cards.options.length > 0 && (
-        <Block label="Cards" title="Additional cards for a partner or family">
-          <div className="addcards">
-            {card.additional_cards.options.map((opt) => (
-              <div key={opt.name} className={`addcard ${opt.is_free ? "free" : ""}`}>
-                <div className="addcard-top">
-                  <span className="addcard-name">{opt.name}</span>
-                  <span className={`addcard-fee ${opt.is_free ? "free" : "paid"}`}>{opt.fee}</span>
-                </div>
-                <ul>
-                  {opt.benefits.map((b, i) => (
-                    <li key={i} className={b.included ? "" : "no"}>
-                      {b.text}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-          {card.additional_cards.note && (
-            <p className="addcard-foot">{card.additional_cards.note}</p>
-          )}
-        </Block>
-      )}
-
-      {/* Insurance */}
-      <Block label="Protection" title="Insurance & protections" note="the value that isn't a credit">
-        <div className="ins-grid">
-          {card.insurance.slice(0, Math.ceil(card.insurance.length / 2)).map((item) => (
-            <div key={item.coverage} className="ins-row">
-              <span className={`ins-dot ${INS_DOT_CLASS[item.level]}`} />
-              <span className="ik">{item.coverage}</span>
-              <span className="iv">{item.detail}</span>
-            </div>
-          ))}
-          {card.insurance.slice(Math.ceil(card.insurance.length / 2)).map((item) => (
-            <div key={item.coverage} className="ins-row">
-              <span className={`ins-dot ${INS_DOT_CLASS[item.level]}`} />
-              <span className="ik">{item.coverage}</span>
-              <span className="iv">{item.detail}</span>
-            </div>
-          ))}
-        </div>
-        {card.protection_note && (
-          <p className="protect-note">{card.protection_note}</p>
         )}
-        {card.rental_note && (
-          <div className="rental-call">{card.rental_note}</div>
-        )}
-      </Block>
 
-      {/* Status, perks & services */}
-      {(card.status_perks.length > 0 || card.services.length > 0) && (
-        <Block label="Perks & status" title="Status, perks & services">
-          <div className="perkwrap">
-            {card.status_perks.length > 0 && (
-              <div>
-                <div>
-                  <span className="section-tag accent">Elite status</span>
+        {activeTab === "insurance" && (
+          <div style={{ marginTop: 24 }}>
+            <p style={{ color: "var(--muted)", fontSize: 13, lineHeight: 1.6, margin: "0 0 20px", maxWidth: "70ch" }}>
+              The value that isn't a credit — coverage carried by the card itself, from the
+              issuer's own terms.
+            </p>
+            <div className="ins-grid">
+              {card.insurance.slice(0, Math.ceil(card.insurance.length / 2)).map((item) => (
+                <div key={item.coverage} className="ins-row">
+                  <span className={`ins-dot ${INS_DOT_CLASS[item.level]}`} />
+                  <span className="ik">{item.coverage}</span>
+                  <span className="iv">{item.detail}</span>
                 </div>
-                <div className="chips">
-                  {card.status_perks.map((perk) => (
-                    <div key={perk.name} className="schip">
-                      <div className="schip-top">
-                        <span className="schip-name">{perk.name}</span>
-                        <Pips strength={perk.strength} />
-                      </div>
-                      <p>{perk.note}</p>
-                    </div>
-                  ))}
+              ))}
+              {card.insurance.slice(Math.ceil(card.insurance.length / 2)).map((item) => (
+                <div key={item.coverage} className="ins-row">
+                  <span className={`ins-dot ${INS_DOT_CLASS[item.level]}`} />
+                  <span className="ik">{item.coverage}</span>
+                  <span className="iv">{item.detail}</span>
                 </div>
-              </div>
-            )}
-            {card.services.length > 0 && (
-              <div>
-                <div>
-                  <span className="section-tag muted">Services &amp; perks</span>
-                </div>
-                <div className="svc-box">
-                  {card.services.map((svc) => (
-                    <div key={svc.name} className="svc-item">
-                      <div className="sn">{svc.name}</div>
-                      <div className="sd">{svc.detail}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </Block>
-      )}
-
-      {/* Interest rates & fees */}
-      <Block
-        label="Miscellaneous Charges"
-        title="Interest rates & fees"
-        note="from each issuer's own terms"
-      >
-        <div className="rates-list">
-          <div className="rates-row">
-            <span className="rk">Purchase APR</span>
-            <span className="rv">{formatAprRow(card.intro_apr_purchases, card.variable_apr)}</span>
-          </div>
-          <div className="rates-row">
-            <span className="rk">Balance transfer APR</span>
-            <span className="rv">
-              {formatAprRow(card.intro_apr_balance_transfers, card.balance_transfer_apr)}
-            </span>
-          </div>
-          <div className="rates-row">
-            <span className="rk">Balance transfer fee</span>
-            <span className="rv">{card.balance_transfer_fee ?? "—"}</span>
-          </div>
-          <div className="rates-row">
-            <span className="rk">Foreign transaction fee</span>
-            <span className="rv">
-              {formatForeignTransactionFee(card.foreign_transaction_fee, card.foreign_transaction_fee_rate)}
-            </span>
-          </div>
-          <div className="rates-row">
-            <span className="rk">Cash advance APR</span>
-            <span className="rv">{card.cash_advance_apr ?? "—"}</span>
-          </div>
-          <div className="rates-row">
-            <span className="rk">Penalty APR</span>
-            <span className="rv">{formatPenaltyApr(card.penalty_apr, card.penalty_apr_trigger)}</span>
-          </div>
-          {card.pay_over_time_fee && (
-            <div className="rates-row">
-              <span className="rk">Pay Over Time fee</span>
-              <span className="rv">{card.pay_over_time_fee}</span>
+              ))}
             </div>
-          )}
-          <div className="rates-row">
-            <span className="rk">Late payment fee</span>
-            <span className="rv">{card.late_payment_fee ?? "—"}</span>
+            {card.protection_note && (
+              <p className="protect-note">{card.protection_note}</p>
+            )}
+            {card.rental_note && (
+              <div className="rental-call">{card.rental_note}</div>
+            )}
           </div>
-          <div className="rates-row">
-            <span className="rk">Returned payment fee</span>
-            <span className="rv">{card.returned_payment_fee ?? "—"}</span>
+        )}
+
+        {activeTab === "fees" && (
+          <div style={{ marginTop: 24 }}>
+            <div className="rates-list">
+              <div className="rates-row">
+                <span className="rk">Purchase APR</span>
+                <span className="rv">{formatAprRow(card.intro_apr_purchases, card.variable_apr)}</span>
+              </div>
+              <div className="rates-row">
+                <span className="rk">Balance transfer APR</span>
+                <span className="rv">
+                  {formatAprRow(card.intro_apr_balance_transfers, card.balance_transfer_apr)}
+                </span>
+              </div>
+              <div className="rates-row">
+                <span className="rk">Balance transfer fee</span>
+                <span className="rv">{card.balance_transfer_fee ?? "—"}</span>
+              </div>
+              <div className="rates-row">
+                <span className="rk">Foreign transaction fee</span>
+                <span className="rv">
+                  {formatForeignTransactionFee(card.foreign_transaction_fee, card.foreign_transaction_fee_rate)}
+                </span>
+              </div>
+              <div className="rates-row">
+                <span className="rk">Cash advance APR</span>
+                <span className="rv">{card.cash_advance_apr ?? "—"}</span>
+              </div>
+              <div className="rates-row">
+                <span className="rk">Penalty APR</span>
+                <span className="rv">{formatPenaltyApr(card.penalty_apr, card.penalty_apr_trigger)}</span>
+              </div>
+              {card.pay_over_time_fee && (
+                <div className="rates-row">
+                  <span className="rk">Pay Over Time fee</span>
+                  <span className="rv">{card.pay_over_time_fee}</span>
+                </div>
+              )}
+              <div className="rates-row">
+                <span className="rk">Late payment fee</span>
+                <span className="rv">{card.late_payment_fee ?? "—"}</span>
+              </div>
+              <div className="rates-row">
+                <span className="rk">Returned payment fee</span>
+                <span className="rv">{card.returned_payment_fee ?? "—"}</span>
+              </div>
+              <div className="rates-row">
+                <span className="rk">Returned check fee</span>
+                <span className="rv">{card.returned_check_fee ?? "—"}</span>
+              </div>
+            </div>
           </div>
-          <div className="rates-row">
-            <span className="rk">Returned check fee</span>
-            <span className="rv">{card.returned_check_fee ?? "—"}</span>
-          </div>
-        </div>
+        )}
       </Block>
 
       {/* Timeline */}
