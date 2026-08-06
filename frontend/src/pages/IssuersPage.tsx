@@ -12,6 +12,7 @@ import usBankLogo from "../assets/logos/us-bank.svg";
 import bofaLogo from "../assets/logos/bofa.svg";
 import biltLogo from "../assets/logos/bilt.svg";
 import wellsFargoLogo from "../assets/logos/wells-fargo.svg";
+import { useSeo } from "../utils/seo";
 
 const ISSUER_LOGOS: Record<string, string> = {
   amex: amexLogo,
@@ -33,6 +34,13 @@ const HEADLINE_ROTATE_MS = 5000;
 
 export default function IssuersPage() {
   const [headlineIndex, setHeadlineIndex] = useState(0);
+
+  useSeo({
+    title: "The Wallet Audit \u2014 Credit Cards Rated on Real Value",
+    description:
+      "Compare premium credit cards on what they are actually worth: annual fees against real statement-credit value, honest points valuations, and no marketing hype.",
+    path: "/",
+  });
 
   useEffect(() => {
     recordPageView("home_view");

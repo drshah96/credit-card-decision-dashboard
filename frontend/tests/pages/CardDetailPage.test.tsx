@@ -172,6 +172,35 @@ function renderPage(cardId = "amex", state?: { from?: string }) {
   );
 }
 
+// Earning/Value, Status & Perks, Insurance & Protections, and Fees now live
+// behind tabs (see the "Details" section in CardDetailPage.tsx) instead of
+// being always-visible sections — tests asserting on non-default-tab content
+// need to switch tabs first. findByRole already waits for the tab to exist,
+// so this doubles as the "page finished loading" wait these tests used to do
+// via a heading/text lookup.
+// Each tab renders a full label and a short one, with CSS showing only the
+// right one per breakpoint. jsdom doesn't apply the stylesheet, so both are
+// present and the accessible name is their concatenation ("Value &
+// RedemptionValue"). Match on the full label as a substring rather than
+// exactly, so these tests don't depend on CSS being loaded.
+async function findTab(name: string) {
+  return screen.findByRole("tab", {
+    name: (accessibleName: string) => accessibleName.includes(name),
+  });
+}
+
+async function switchToTab(name: string) {
+  fireEvent.click(await findTab(name));
+}
+
+// The "Your take, so far" hero widget's verdict text now lives behind its
+// info button in a modal (matching CreditModal's popup pattern) instead of
+// always rendered inline.
+async function openHeroTakeInfo() {
+  const btn = await screen.findByRole("button", { name: "What this means" });
+  fireEvent.click(btn);
+}
+
 // ─── Tests ────────────────────────────────────────────────────────────────────
 
 beforeEach(() => {
@@ -260,6 +289,21 @@ describe("CardDetailPage", () => {
       expect(screen.getByText("American Express")).toBeInTheDocument();
     });
 
+    it("uses the card name as the page's h1", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard());
+
+      renderPage();
+
+      // Level matters: this is the page's top-level heading, matching every
+      // other route. It was an h2 until the accessibility pass.
+      await waitFor(() => {
+        expect(
+          screen.getByRole("heading", { level: 1, name: "The Platinum Card" }),
+        ).toBeInTheDocument();
+      });
+      expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
+    });
+
     it("links the card name to official_url when present", async () => {
       vi.mocked(fetchCard).mockResolvedValue(
         makeCard({ official_url: "https://www.americanexpress.com/us/credit-cards/card/platinum/" }),
@@ -334,8 +378,7 @@ describe("CardDetailPage", () => {
       renderPage();
 
       await waitFor(() => {
-        // $895 appears in both the header strip and the calculator
-        expect(screen.getAllByText("$895").length).toBeGreaterThanOrEqual(2);
+        expect(screen.getByText("$895")).toBeInTheDocument();
       });
       // "$2984" also appears on the credit row's own max badge — assert at least one
       expect(screen.getAllByText("$2984").length).toBeGreaterThanOrEqual(1);
@@ -422,6 +465,7 @@ describe("CardDetailPage", () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
+      await switchToTab("Value & Redemption");
 
       await waitFor(() => {
         // "Transfer partners" appears twice: once as the panel heading, once as the redemption method
@@ -434,10 +478,9 @@ describe("CardDetailPage", () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
+      await switchToTab("Insurance & Protections");
 
-      await waitFor(() => {
-        expect(screen.getByText("Purchase protection")).toBeInTheDocument();
-      });
+      expect(screen.getByText("Purchase protection")).toBeInTheDocument();
     });
 
     it("renders interest rates & fees with real audited data", async () => {
@@ -454,10 +497,8 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Fees");
 
-      await waitFor(() => {
-        expect(screen.getByText("Interest rates & fees")).toBeInTheDocument();
-      });
       // Intro offer and ongoing rate fold into one row, not two separate ones.
       expect(
         screen.getByText("0% intro APR for 15 months, after that 20.24%-28.74%"),
@@ -475,10 +516,8 @@ describe("CardDetailPage", () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard()); // all null by default
 
       renderPage();
+      await switchToTab("Fees");
 
-      await waitFor(() => {
-        expect(screen.getByText("Interest rates & fees")).toBeInTheDocument();
-      });
       // Purchase APR, balance transfer APR, balance_transfer_fee, foreign
       // transaction fee, cash advance APR, penalty APR, late payment fee,
       // returned payment fee, and returned check fee all fall back — Pay
@@ -501,10 +540,8 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Fees");
 
-      await waitFor(() => {
-        expect(screen.getByText("Interest rates & fees")).toBeInTheDocument();
-      });
       expect(screen.getByText("29.99%, after a payment more than 60 days late")).toBeInTheDocument();
       expect(screen.getByText("1.33% of the Pay Over Time balance")).toBeInTheDocument();
       expect(screen.getAllByText("Up to $41")).toHaveLength(3);
@@ -514,10 +551,8 @@ describe("CardDetailPage", () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
+      await switchToTab("Fees");
 
-      await waitFor(() => {
-        expect(screen.getByText("Interest rates & fees")).toBeInTheDocument();
-      });
       expect(screen.queryByText("Pay Over Time fee")).not.toBeInTheDocument();
     });
 
@@ -525,10 +560,9 @@ describe("CardDetailPage", () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard({ foreign_transaction_fee: false }));
 
       renderPage();
+      await switchToTab("Fees");
 
-      await waitFor(() => {
-        expect(screen.getByText("None")).toBeInTheDocument();
-      });
+      expect(screen.getByText("None")).toBeInTheDocument();
     });
 
     // Welcome bonus rendering is disabled: sign-up offers rotate on the
@@ -575,7 +609,7 @@ describe("CardDetailPage", () => {
       renderPage();
 
       await waitFor(() => {
-        expect(screen.getByText("Interest rates & fees")).toBeInTheDocument();
+        expect(screen.getByRole("heading", { name: "The Platinum Card" })).toBeInTheDocument();
       });
       expect(screen.queryByText("Welcome bonus")).not.toBeInTheDocument();
     });
@@ -586,7 +620,7 @@ describe("CardDetailPage", () => {
       renderPage();
 
       await waitFor(() => {
-        expect(screen.getByText("Interest rates & fees")).toBeInTheDocument();
+        expect(screen.getByRole("heading", { name: "The Platinum Card" })).toBeInTheDocument();
       });
       expect(screen.queryByText("Welcome bonus")).not.toBeInTheDocument();
     });
@@ -649,10 +683,9 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Status & Perks");
 
-      await waitFor(() => {
-        expect(screen.getByText("Platinum Concierge")).toBeInTheDocument();
-      });
+      expect(screen.getByText("Platinum Concierge")).toBeInTheDocument();
       expect(screen.getByText("Car Rental Privileges")).toBeInTheDocument();
     });
 
@@ -666,11 +699,36 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Status & Perks");
 
-      await waitFor(() => {
-        // Strength 3/5 means dots 4 and 5 are unfilled — exercises the bg-white/10 branch
-        expect(screen.getByLabelText(/Strength: 3 out of 5/)).toBeInTheDocument();
-      });
+      // Strength 3/5 means dots 4 and 5 are unfilled — exercises the bg-white/10 branch
+      expect(screen.getByLabelText(/Strength: 3 out of 5/)).toBeInTheDocument();
+    });
+
+    it("wires each tab to the panel it opens", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard());
+
+      renderPage();
+
+      const earnTab = await findTab("Earn");
+      expect(earnTab).toHaveAttribute("aria-selected", "true");
+      expect(earnTab).toHaveAttribute("aria-controls", "panel-earn");
+
+      const panel = screen.getByRole("tabpanel");
+      expect(panel).toHaveAttribute("id", "panel-earn");
+      expect(panel).toHaveAttribute("aria-labelledby", "tab-earn");
+
+      // Unselected tabs must not point at a panel that isn't mounted
+      const feesTab = await findTab("Fees");
+      expect(feesTab).toHaveAttribute("aria-selected", "false");
+      expect(feesTab).not.toHaveAttribute("aria-controls");
+
+      await switchToTab("Fees");
+      expect(screen.getByRole("tabpanel")).toHaveAttribute("id", "panel-fees");
+      expect(await findTab("Fees")).toHaveAttribute(
+        "aria-controls",
+        "panel-fees",
+      );
     });
 
     it("renders the additional cards section when options are present", async () => {
@@ -695,13 +753,67 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Status & Perks");
 
-      await waitFor(() => {
-        expect(screen.getByText("Companion Platinum")).toBeInTheDocument();
-      });
+      expect(screen.getByText("Companion Platinum")).toBeInTheDocument();
       expect(screen.getByText("Earns Membership Rewards")).toBeInTheDocument();
       expect(screen.getByText("No lounge access")).toBeInTheDocument();
-      expect(screen.getByText("Up to 3 additional cards.")).toBeInTheDocument();
+      // The note is behind the "i" now, not rendered inline
+      expect(screen.queryByText("Up to 3 additional cards.")).not.toBeInTheDocument();
+    });
+
+    it("opens the additional cards note in a modal from the info button", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({
+          additional_cards: {
+            title: "Authorized users",
+            options: [
+              { name: "Authorized User", fee: "$195 ea", is_free: false, benefits: [] },
+            ],
+            note: "After the 2025 refresh, authorized users cost $195 each.",
+          },
+        }),
+      );
+
+      renderPage();
+      await switchToTab("Status & Perks");
+
+      fireEvent.click(screen.getByRole("button", { name: "About additional cards" }));
+
+      const dialog = await screen.findByRole("dialog");
+      expect(dialog).toBeInTheDocument();
+      // Modal title comes from additional_cards.title, not a hardcoded string
+      expect(screen.getByText("Authorized users")).toBeInTheDocument();
+      expect(
+        screen.getByText("After the 2025 refresh, authorized users cost $195 each."),
+      ).toBeInTheDocument();
+
+      fireEvent.keyDown(document, { key: "Escape" });
+      await waitFor(() => {
+        expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+      });
+    });
+
+    it("omits the additional cards info button when there is no note", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(
+        makeCard({
+          additional_cards: {
+            title: "Authorized users",
+            options: [
+              { name: "Authorized User", fee: "$0", is_free: true, benefits: [] },
+            ],
+            note: "",
+          },
+        }),
+      );
+
+      renderPage();
+      await switchToTab("Status & Perks");
+
+      expect(screen.getByText("Authorized User")).toBeInTheDocument();
+      expect(
+        screen.queryByRole("button", { name: "About additional cards" }),
+      ).not.toBeInTheDocument();
     });
 
     it("shows 'None here' for an empty tier group", async () => {
@@ -728,6 +840,7 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Value & Redemption");
 
       await waitFor(() => {
         // Rendered as <b>0</b>transfer out — queryable as combined text content
@@ -741,6 +854,7 @@ describe("CardDetailPage", () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
+      await switchToTab("Value & Redemption");
 
       await waitFor(() => {
         expect(screen.getByText("Deepest airline list of any bank currency.")).toBeInTheDocument();
@@ -767,6 +881,7 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Value & Redemption");
 
       const panel = await screen.findByRole("button", { name: /view full transfer partner list/i });
       expect(screen.getByText("View list →")).toBeInTheDocument();
@@ -795,6 +910,7 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Value & Redemption");
 
       const panel = await screen.findByRole("button", { name: /view full transfer partner list/i });
       fireEvent.click(panel);
@@ -811,10 +927,9 @@ describe("CardDetailPage", () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
+      await switchToTab("Insurance & Protections");
 
-      await waitFor(() => {
-        expect(screen.getByText("Purchase protection is best-in-class.")).toBeInTheDocument();
-      });
+      expect(screen.getByText("Purchase protection is best-in-class.")).toBeInTheDocument();
     });
 
     it("does not render protection_note when absent", async () => {
@@ -832,10 +947,9 @@ describe("CardDetailPage", () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
+      await switchToTab("Insurance & Protections");
 
-      await waitFor(() => {
-        expect(screen.getByText("Use CSR or Venture X for rentals.")).toBeInTheDocument();
-      });
+      expect(screen.getByText("Use CSR or Venture X for rentals.")).toBeInTheDocument();
     });
 
     it("does not render rental_note when absent", async () => {
@@ -859,10 +973,9 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Status & Perks");
 
-      await waitFor(() => {
-        expect(screen.getByLabelText(/Strength: 5 out of 5/)).toBeInTheDocument();
-      });
+      expect(screen.getByLabelText(/Strength: 5 out of 5/)).toBeInTheDocument();
       expect(screen.getByText("elite")).toBeInTheDocument();
     });
 
@@ -879,10 +992,9 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await switchToTab("Insurance & Protections");
 
-      await waitFor(() => {
-        expect(screen.getByText("Strong Coverage")).toBeInTheDocument();
-      });
+      expect(screen.getByText("Strong Coverage")).toBeInTheDocument();
 
       // Insurance grid splits into two halves; DOM order matches original array order
       const dots = document.querySelectorAll(".ins-dot");
@@ -893,26 +1005,25 @@ describe("CardDetailPage", () => {
     });
   });
 
-  describe("credit calculator", () => {
-    it("renders the calculator panel with the annual fee", async () => {
+  describe("credits: 'your take, so far' hero widget & sliders", () => {
+    it("renders the hero widget with the annual fee", async () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
 
       await waitFor(() => {
-        expect(
-          screen.getByText(/Will the credits offset the \$895 fee/),
-        ).toBeInTheDocument();
+        expect(screen.getByText("Your take, so far")).toBeInTheDocument();
       });
+      expect(screen.getByText(/of \$895 fee, from the credits below/)).toBeInTheDocument();
     });
 
-    it("shows $0 credits used when all default_values are 0", async () => {
+    it("shows $0 in the hero widget when all default_values are 0", async () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
 
       await waitFor(() => {
-        expect(screen.getByText(/Will the credits offset the \$895 fee/)).toBeInTheDocument();
+        expect(screen.getByText("Your take, so far")).toBeInTheDocument();
       });
       // With all default_values at 0, credits used = $0
       const creditsUsed = screen.getAllByText("$0");
@@ -953,15 +1064,15 @@ describe("CardDetailPage", () => {
       renderPage();
 
       await waitFor(() => {
-        // Credits used = $300 + $100 = $400, fee = $395, net = +$5 — shown both in the
-        // header's best-case net (same $400 total, since max_annual == default_value here)
-        // and the calculator's verdict, so at least one match rather than exactly one.
-        expect(screen.getAllByText("+$5").length).toBeGreaterThanOrEqual(1);
+        // Credits used = $300 + $100 = $400 — shown in the hero widget's total
+        expect(screen.getAllByText("$400").length).toBeGreaterThanOrEqual(1);
       });
-      expect(screen.getByText("Ahead by")).toBeInTheDocument();
+      // fee $395 - $400 credits = +$5, shown both in the header's best-case net
+      // stat and the hero widget (default_value == max_annual here, so they match)
+      expect(screen.getAllByText("+$5").length).toBeGreaterThanOrEqual(1);
     });
 
-    it("updates the calculator when a slider is changed", async () => {
+    it("updates the hero widget's total when a slider is changed", async () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
       renderPage();
@@ -975,8 +1086,7 @@ describe("CardDetailPage", () => {
         target: { value: "150" },
       });
 
-      // $150 credits used, $895 fee, short by $745
-      expect(screen.getByText("−$745")).toBeInTheDocument();
+      expect(screen.getAllByText("$150").length).toBeGreaterThanOrEqual(1);
     });
 
     it("resets all sliders to default values when Reset is clicked", async () => {
@@ -992,12 +1102,13 @@ describe("CardDetailPage", () => {
       fireEvent.change(screen.getByLabelText(/How much of Uber Cash/i), {
         target: { value: "200" },
       });
-      expect(screen.getByText("−$695")).toBeInTheDocument();
+      expect(screen.getAllByText("$200").length).toBeGreaterThanOrEqual(1);
 
       fireEvent.click(screen.getByRole("button", { name: /reset sliders/i }));
 
       // Back to $0 (all default_values are 0 in the fixture)
-      expect(screen.getByText("−$895")).toBeInTheDocument();
+      const creditsUsed = screen.getAllByText("$0");
+      expect(creditsUsed.length).toBeGreaterThanOrEqual(1);
     });
 
     it("moves a credit to a different tier when tier button is clicked", async () => {
@@ -1116,10 +1227,9 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await openHeroTakeInfo();
 
-      await waitFor(() => {
-        expect(screen.getByText(/Credits recoup/i)).toBeInTheDocument();
-      });
+      expect(screen.getByText(/Credits recoup/i)).toBeInTheDocument();
       // "most" branch verdict — not the "only recoup" (<60%) branch
       expect(screen.queryByText(/Credits only recoup/i)).not.toBeInTheDocument();
     });
@@ -1146,11 +1256,12 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await openHeroTakeInfo();
 
-      await waitFor(() => {
-        expect(screen.getByText(/Credits only recoup/i)).toBeInTheDocument();
-      });
-      expect(screen.getByText(/\$150 of \$895/i)).toBeInTheDocument();
+      expect(screen.getByText(/Credits only recoup/i)).toBeInTheDocument();
+      // "$150 of $895" appears both in the modal verdict and the hero widget's
+      // sub-line below the status bar
+      expect(screen.getAllByText(/\$150 of \$895/i).length).toBeGreaterThanOrEqual(1);
       // "only recoup" branch verdict — not the "most" branch
       expect(screen.queryByText(/Credits recoup.*most/i)).not.toBeInTheDocument();
     });
@@ -1195,12 +1306,10 @@ describe("CardDetailPage", () => {
       );
 
       renderPage();
+      await openHeroTakeInfo();
 
-      await waitFor(() => {
-        expect(screen.getByText(/more than cover the fee/i)).toBeInTheDocument();
-      });
-      expect(screen.getByText("Ahead by")).toBeInTheDocument();
-      expect(screen.getByText("+$50")).toBeInTheDocument();
+      expect(screen.getByText(/more than cover the fee/i)).toBeInTheDocument();
+      expect(screen.getByText(/ahead \$50/i)).toBeInTheDocument();
     });
 
     it("clamps progress bar aria-valuenow to annual fee when credits exceed fee", async () => {

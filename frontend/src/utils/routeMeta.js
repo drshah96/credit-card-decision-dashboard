@@ -1,0 +1,108 @@
+// Single source of truth for every route's title and description.
+//
+// Plain JS on purpose: this is imported both by the React app (via useSeo) and
+// by the Node build scripts that emit sitemap.xml and the prerendered per-route
+// HTML. If the app and the prerendered <head> disagreed, crawlers and users
+// would see different titles for the same URL, so they read from here.
+
+export const SITE_URL = "https://thewalletaudit.com";
+export const SITE_NAME = "The Wallet Audit";
+
+/** Mirrors ISSUERS in cardTaxonomy.ts (slug + display label only). */
+export const SEO_ISSUERS = [
+  { slug: "amex", label: "American Express" },
+  { slug: "chase", label: "Chase" },
+  { slug: "capital-one", label: "Capital One" },
+  { slug: "citi", label: "Citi" },
+  { slug: "us-bank", label: "U.S. Bank" },
+  { slug: "bofa", label: "Bank of America" },
+  { slug: "bilt", label: "Bilt" },
+  { slug: "wells-fargo", label: "Wells Fargo" },
+];
+
+/** @param {string} specific */
+export function pageTitle(specific) {
+  return `${specific} | ${SITE_NAME}`;
+}
+
+/**
+ * @typedef {{ path: string, title: string, description: string }} RouteMeta
+ */
+
+/** @type {RouteMeta[]} */
+export const STATIC_ROUTE_META = [
+  {
+    path: "/",
+    title: "The Wallet Audit — Credit Cards Rated on Real Value",
+    description:
+      "Compare premium credit cards on what they are actually worth: annual fees against real statement-credit value, honest points valuations, and no marketing hype.",
+  },
+  {
+    path: "/top-picks",
+    title: pageTitle("Best Credit Cards by Category"),
+    description:
+      "The cards worth carrying, ranked by what they return rather than what they advertise. Filter by travel, dining, groceries, cash back and everyday spend.",
+  },
+  {
+    path: "/compare",
+    title: pageTitle("Compare Credit Cards Side by Side"),
+    description:
+      "Put up to four cards next to each other and compare the things that decide it: annual fee, real credit value, earn rates, lounge access, insurance and foreign transaction fees.",
+  },
+  {
+    path: "/methodology",
+    title: pageTitle("How We Rank Cards"),
+    description:
+      "The method behind the ratings: how statement credits are valued, where points valuations come from, and why a card's advertised perks are not the same as real value.",
+  },
+];
+
+/**
+ * Total advertised credit value, ignoring credits the issuer has discontinued.
+ * @param {{ credits?: Array<{ max_annual: number, removed?: boolean }> }} card
+ */
+export function maxCreditValue(card) {
+  return (card.credits ?? [])
+    .filter((c) => !c.removed)
+    .reduce((sum, c) => sum + c.max_annual, 0);
+}
+
+/**
+ * @param {{ id: string, name: string, issuer: string, annual_fee: number,
+ *           credits?: Array<{ max_annual: number, removed?: boolean }> }} card
+ * @returns {RouteMeta}
+ */
+export function cardRouteMeta(card) {
+  return {
+    path: `/cards/${card.id}`,
+    // Leads with the card name because that's the search term.
+    title: pageTitle(`${card.name} — ${card.issuer}`),
+    description: `${card.name} has a $${card.annual_fee} annual fee and up to $${maxCreditValue(card)} in statement credits. See what those credits are really worth, how the points redeem, and whether the fee pays for itself.`,
+  };
+}
+
+/**
+ * @param {string} slug
+ * @param {string} label
+ * @returns {RouteMeta}
+ */
+export function issuerRouteMeta(slug, label) {
+  return {
+    path: `/issuer/${slug}`,
+    title: pageTitle(`${label} Credit Cards`),
+    description: `Every ${label} card compared on real value: annual fees, what the statement credits are actually worth, points valuations, and which cards earn their keep.`,
+  };
+}
+
+/**
+ * Every route the site can serve, for the sitemap and the prerender pass.
+ * @param {Array<Parameters<typeof cardRouteMeta>[0]>} cards
+ * @returns {RouteMeta[]}
+ */
+export function allRouteMeta(cards) {
+  return [
+    ...STATIC_ROUTE_META,
+    ...SEO_ISSUERS.map((i) => issuerRouteMeta(i.slug, i.label)),
+    ...cards.map(cardRouteMeta),
+  ];
+}

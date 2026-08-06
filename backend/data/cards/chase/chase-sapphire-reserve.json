@@ -78,7 +78,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Strong bonus categories (dining and direct travel), but the 1\u00d7 base still lags Venture X for uncategorized spend.",
+  "earn_note": "Strong bonus categories (dining and direct travel), but the 1\u00d7 base is weak for uncategorized spend, so a flat-rate earner covers that better.",
   "points": {
     "currency": "Ultimate Rewards",
     "redemption_options": [
@@ -247,7 +247,7 @@
       "subtitle": "$150 \u00d7 2 \u00b7 Exclusive Tables",
       "max_annual": 300,
       "default_value": 0,
-      "tier": "plan",
+      "tier": "easy",
       "removed": false,
       "description": "Semi-annual credit, but ONLY at ~400 'Exclusive Tables' restaurants on OpenTable across ~26 cities.",
       "tips": [
@@ -262,7 +262,7 @@
       "subtitle": "$150 \u00d7 2 \u00b7 enroll",
       "max_annual": 300,
       "default_value": 0,
-      "tier": "plan",
+      "tier": "niche",
       "removed": false,
       "description": "Semi-annual credit toward concerts and events.",
       "tips": [
@@ -276,7 +276,7 @@
       "subtitle": "$0 delivery fees · 12 mo",
       "max_annual": 120,
       "default_value": 0,
-      "tier": "plan",
+      "tier": "niche",
       "removed": false,
       "description": "Complimentary 12-month DashPass membership ($0 delivery fees, reduced service fees), a $120 value per Chase, if activated by Dec 31, 2027.",
       "tips": [
@@ -302,7 +302,7 @@
       "subtitle": "$10/mo · thru 9/30/27",
       "max_annual": 120,
       "default_value": 0,
-      "tier": "plan",
+      "tier": "niche",
       "removed": false,
       "description": "Up to $10 in monthly in-app Lyft ride credits through Sep 30, 2027, on top of 5× total points on Lyft rides through the same date.",
       "tips": [
