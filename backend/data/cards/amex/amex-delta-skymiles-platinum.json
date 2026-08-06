@@ -69,7 +69,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Fine for Delta spend, but you earn SkyMiles, the weakest currency here. For everyday spend, Venture X earns more and more flexibly.",
+  "earn_note": "Fine for Delta spend, but you earn SkyMiles, the weakest currency here. For everyday spend outside Delta, a flat-rate card in a transferable currency earns more and leaves you freer in how you redeem.",
   "points": {
     "currency": "Delta SkyMiles",
     "redemption_options": [
@@ -211,8 +211,8 @@
       "level": "good"
     }
   ],
-  "protection_note": "Thinner than the others: note the weaker $300/12-hour trip delay (vs. $500/6 hrs elsewhere) and secondary rental. It does keep Amex cell-phone protection and Premium Global Assist (incl. no-cost emergency evacuation coordination). Charge trips you want fully insured to the Sapphire Reserve.",
-  "rental_note": "Secondary only: it pays after your own auto policy. For rentals, your CSR or Venture X (free primary) is the better card to put it on.",
+  "protection_note": "Thinner than the others: note the weaker $300/12-hour trip delay (vs. $500/6 hrs elsewhere) and secondary rental. It does keep Amex cell-phone protection and Premium Global Assist (incl. no-cost emergency evacuation coordination). For trips you want fully insured, reach for a card with real trip-cancellation limits.",
+  "rental_note": "Secondary only: it pays after your own auto policy. If you carry a card with free primary coverage, that's the better one to put rentals on.",
   "status_perks": [
     {
       "name": "Medallion head start",
