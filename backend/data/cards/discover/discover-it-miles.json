@@ -1,0 +1,202 @@
+{
+  "id": "discover-it-miles",
+  "name": "Discover it Miles",
+  "issuer": "Discover",
+  "network": "DISCOVER",
+  "points_program": "Discover Miles",
+  "accent_color": "#FF6000",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee",
+  "official_url": "https://www.discover.com/credit-cards/travel/",
+  "intro_apr_purchases": {
+    "rate": "0%",
+    "months": 15
+  },
+  "intro_apr_balance_transfers": {
+    "rate": "0%",
+    "months": 15
+  },
+  "foreign_transaction_fee": false,
+  "variable_apr": "17.49%, 21.49%, 24.49% or 26.49%, based on creditworthiness",
+  "balance_transfer_apr": "17.49%, 21.49%, 24.49% or 26.49%, based on creditworthiness",
+  "balance_transfer_fee": "3% of each transfer during the first 15 months, then 5% on transfers posted at a promotional APR and none at the standard Purchase APR",
+  "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.49%",
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": null,
+  "late_payment_fee": "None the first time you pay late, up to $41 after that",
+  "returned_payment_fee": "Up to $30",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "Discover Match, which doubles every mile you earn in your first year",
+    "requirement": "automatic on all miles earned from account approval through your first 365 days, with no minimum spend and no cap, paid within two billing periods",
+    "estimated_value": null
+  },
+  "verdict": {
+    "status": "situational",
+    "text": "A flat 1.5x cash back card in travel language, doubled in year one",
+    "short_tag": "Flat 1.5x"
+  },
+  "earn_rates": [
+    {
+      "emoji": "✈️",
+      "multiplier": "1.5x",
+      "category": "Travel and every other purchase, unlimited",
+      "highlight": true,
+      "is_base": true
+    }
+  ],
+  "earn_note": "One rate on everything, no categories to track and no caps to run into. Discover Match doubles the first 12 months, so year one effectively earns 3x before settling to 1.5x. Worth understanding what the word miles is doing here: these are not airline miles and there are no transfer partners, so 1.5x at a penny a mile is 1.5% back in a travel-flavoured wrapper.",
+  "points": {
+    "currency": "Discover Miles",
+    "redemption_options": [
+      {
+        "method": "Partner gift cards, which carry at least 5% added value",
+        "cpp": 1.05,
+        "best": true
+      },
+      {
+        "method": "Statement credit against a travel purchase",
+        "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Deposit to a bank account, in any amount",
+        "cpp": 1.0,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,050",
+    "note": "The thing that genuinely sets this apart: cash is worth exactly as much as travel. Discover says so twice on its own page, that miles \"keep the same value\" however you redeem, and 100 miles is $1 either way. Most travel cards quietly cut cash redemptions to half a cent, which is how a 1.5x card turns into 0.75% back if you ever stop booking flights. That does not happen here, so there is no penalty for taking the money. Travel redemptions work as a statement credit against a purchase you already made, covering airfare, hotels, rideshares, gas and restaurants, rather than a booking portal you have to shop inside. Gift cards became available to Miles cardholders with the move to Capital One and carry the same guaranteed 5% minimum added value as the rest of the lineup, which makes them the best standing option, though Discover's own Miles page still lists only the cash and travel routes. Discover also prints its own hedge that redemption rates may vary and are subject to change."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No airline or hotel transfer partners. Despite the name, Discover Miles are a fixed-value currency, not a transferable one.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Price protection",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Trip cancellation or interruption",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Baggage delay",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not covered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "This is the row that should give a travel shopper pause. A card sold on travel carries no trip cancellation, no trip interruption, no baggage delay, no travel accident insurance and no rental car coverage. Discover cut its protections in February 2018, price protection followed that October, and the current cardmember agreement contains no benefit terms at all. Competing no-fee travel cards usually keep at least rental coverage or trip delay, so if a cancelled flight or a lost bag is the risk you want covered, this card does not do it and no amount of miles earning changes that.",
+  "rental_note": "No rental car coverage of any kind. Booking a car with this card leaves the collision waiver decision entirely to your own auto policy or the rental counter, which is a real gap on a card marketed for travel.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "$0 fraud liability",
+      "detail": "You are never held responsible for unauthorized purchases. No enrollment needed."
+    },
+    {
+      "name": "Free FICO score",
+      "detail": "Your FICO score from TransUnion on your statement and in the app, with the factors moving it. Discover offers this to non-cardholders too, so it is not really exclusive."
+    },
+    {
+      "name": "Social Security number alerts",
+      "detail": "Daily dark web scans for your SSN plus new-account alerts on your credit report. Requires enrollment, and only the primary cardmember can sign up."
+    },
+    {
+      "name": "Freeze It",
+      "detail": "Freeze the account from the app or website to block new purchases and cash advances if you misplace the card."
+    },
+    {
+      "name": "24/7 US-based customer service",
+      "detail": "Live agents at any hour, without a menu tree to fight through first."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Their spending earns miles into your account",
+            "included": true
+          },
+          {
+            "text": "Counts toward Discover Match in year one",
+            "included": true
+          },
+          {
+            "text": "Any travel or rental car coverage",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add, and worth doing in year one, since an authorized user's spending gets matched alongside yours."
+  },
+  "timeline": [
+    {
+      "date": "July 2026",
+      "type": "neutral",
+      "badge": "Migration",
+      "text": "Capital One begins moving Discover card accounts onto its own platform, in waves running through 2027. Earn rates, rewards balances, APRs and the Discover network branding stay put. Miles cardholders gain gift card redemption, which they did not previously have, while the gift card minimum across the lineup rises from $5 to $25, rewards can no longer be applied to a minimum payment, and Pay with Rewards through Apple Pay goes away."
+    },
+    {
+      "date": "May 2025",
+      "type": "neutral",
+      "badge": "Acquisition",
+      "text": "Capital One completes its acquisition of Discover Financial Services. Discover Bank later merges into Capital One, N.A., though the cards keep Discover branding and terms."
+    },
+    {
+      "date": "October 2018",
+      "type": "cut",
+      "badge": "Benefit cut",
+      "text": "Price protection is discontinued, following the larger round of cuts earlier in the year."
+    },
+    {
+      "date": "February 2018",
+      "type": "cut",
+      "badge": "Benefit cut",
+      "text": "Discover drops purchase protection, extended warranty, return guarantee, auto rental collision coverage and travel accident insurance across its consumer cards. This is why the protections section below is empty."
+    }
+  ]
+}

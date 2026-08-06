@@ -1,0 +1,189 @@
+{
+  "id": "discover-it-student-cash-back",
+  "name": "Discover it Student Cash Back",
+  "issuer": "Discover",
+  "network": "DISCOVER",
+  "points_program": "Cashback Bonus",
+  "accent_color": "#FF6000",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee",
+  "official_url": "https://www.discover.com/credit-cards/student-credit-card/it-card/",
+  "intro_apr_purchases": {
+    "rate": "0%",
+    "months": 6
+  },
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "16.49%, 19.49%, 23.49% or 25.49%, based on creditworthiness",
+  "balance_transfer_apr": "16.49%, 19.49%, 23.49% or 25.49%, based on creditworthiness",
+  "balance_transfer_fee": "5% on transfers posted at a promotional APR, none at the standard Transfer APR",
+  "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.49%",
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": null,
+  "late_payment_fee": "None the first time you pay late, up to $41 after that",
+  "returned_payment_fee": "Up to $30",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "$100 statement credit, plus Cashback Match doubling every dollar of cash back you earn in year one",
+    "requirement": "spend $300 in the first 3 months for the $100 bonus; the match is automatic on all cash back earned in your first 365 days, with no minimum spend and no cap",
+    "estimated_value": null
+  },
+  "verdict": {
+    "status": "keep",
+    "text": "Real rewards, no credit history needed, and a first year that pays double",
+    "short_tag": "Student 5%"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🔄",
+      "multiplier": "5%",
+      "category": "Rotating quarterly categories, on up to $1,500 per quarter, once you activate",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1%",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "Same rewards engine as Discover's main cash back card, which is unusual for a student product: most student cards pay a flat 1% and leave it there. The 5% covers rotating quarterly categories on up to $1,500 of spending, worth $75 a quarter, and it only counts if you activate each quarter. Forget, and the quarter earns 1%. Discover's own rewards calendar is offline as of August 2026, so treat any 2026 category list you find elsewhere as unconfirmed. On top of that, year one pays twice: the $100 bonus for spending $300 in three months is easy to hit on ordinary spending, and Cashback Match then doubles everything else you earn.",
+  "points": {
+    "currency": "Cashback Bonus",
+    "redemption_options": [
+      {
+        "method": "Partner gift cards, which carry at least 5% added value",
+        "cpp": 1.05,
+        "best": true
+      },
+      {
+        "method": "Statement credit or deposit to a bank account",
+        "cpp": 1.0,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,050",
+    "note": "Cash back is a flat 1 cent as a statement credit or a bank deposit, with no minimum and no expiry while the account is open. Partner gift cards do better, carrying a guaranteed 5% minimum added value, so $47.50 of rewards buys a $50 card, and rotating merchant promotions have reached 15% to 25% on names like Apple, Uber, Instacart and Chipotle. The catch for a student balance: the gift card minimum rose from $5 to $25 with the move to Capital One, so it takes longer to reach. Statement credits have no minimum at all, so there is always somewhere to put small amounts."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners. Cashback Bonus is cash, not a transferable currency.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Price protection",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not covered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "Nothing here, and that is true of every Discover card since the February 2018 cuts, with price protection following that October. The live application terms confirm it: asked whether any other fees or protections apply beyond what is disclosed, Discover answers no. Worth knowing if you are buying a laptop for the semester, since a card with purchase protection or an extended warranty would cover it and this one will not.",
+  "rental_note": "No rental car coverage, primary or secondary. Renting a car on a student card is rare, but if you do, this card offers nothing at the counter and you would be relying on your own policy or buying the waiver.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "No credit score required to apply",
+      "detail": "Discover states outright that no credit score is required, using scores only if you already have them. That is the single most useful thing about this card for a first-time applicant, since the usual problem is needing credit to build credit."
+    },
+    {
+      "name": "$0 fraud liability",
+      "detail": "You are never held responsible for unauthorized purchases. No enrollment needed."
+    },
+    {
+      "name": "Free FICO score",
+      "detail": "Your FICO score from TransUnion on your statement and in the app, with the factors moving it. Genuinely useful when you are starting from no credit history and want to watch it build."
+    },
+    {
+      "name": "Social Security number alerts",
+      "detail": "Daily dark web scans for your SSN plus new-account alerts on your credit report. Requires enrollment, and only the primary cardmember can sign up."
+    },
+    {
+      "name": "Freeze It",
+      "detail": "Freeze the account from the app or website to block new purchases and cash advances if you misplace the card."
+    },
+    {
+      "name": "Nothing changes when you graduate",
+      "detail": "Discover confirms the account keeps the same terms, rewards and features after you finish college. There is no conversion to a different product and nothing you need to do, contrary to what several comparison sites claim."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Their spending earns cash back into your account",
+            "included": true
+          },
+          {
+            "text": "Counts toward your Cashback Match in year one",
+            "included": true
+          },
+          {
+            "text": "Any purchase protection or travel coverage",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add. Bear in mind you stay responsible for everything an authorized user charges, which matters more than usual on a card whose main job is building your credit history."
+  },
+  "timeline": [
+    {
+      "date": "July 2026",
+      "type": "neutral",
+      "badge": "Migration",
+      "text": "Capital One begins moving Discover card accounts onto its own platform, in waves running through 2027. Earn rates, rewards balances, APRs and the Discover network branding stay put. The gift card redemption minimum rises from $5 to $25, rewards can no longer be applied to a minimum payment, and Pay with Rewards through Apple Pay goes away."
+    },
+    {
+      "date": "May 2025",
+      "type": "neutral",
+      "badge": "Acquisition",
+      "text": "Capital One completes its acquisition of Discover Financial Services. Discover Bank later merges into Capital One, N.A., though the cards keep Discover branding and terms."
+    },
+    {
+      "date": "February 2018",
+      "type": "cut",
+      "badge": "Benefit cut",
+      "text": "Discover drops purchase protection, extended warranty, return guarantee, auto rental collision coverage and travel accident insurance across its consumer cards. This is why the protections section below is empty."
+    }
+  ]
+}

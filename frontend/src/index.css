@@ -553,6 +553,11 @@ body {
 }
 .issuer-tile {
   display: flex;
+  /* Column rather than row so a tile can carry a note under its logo
+     (see ISSUER_NOTES in IssuersPage). With a single centred child this
+     lays out identically to the row it replaced, so tiles without a note
+     are unchanged. */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 168px;
@@ -573,6 +578,13 @@ body {
   width: auto;
   max-width: 100%;
   object-fit: contain;
+}
+.issuer-tile-note {
+  margin-top: 12px;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--faint);
+  text-align: center;
 }
 
 /* ─── Filter chips (issuer page) ───────────────────────────────────────────── */
