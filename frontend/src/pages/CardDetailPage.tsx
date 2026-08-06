@@ -316,6 +316,14 @@ function CreditRow({ credit, value, tierIdx, onSlider, onTierMove, onOpenModal }
             value={value}
             onChange={(e) => onSlider(credit.id, Number(e.target.value))}
             aria-label={`How much of ${credit.name} you'll use`}
+            // Drives the filled portion of the track. A range input can't
+            // style "up to the thumb" on its own, so the percentage is handed
+            // to CSS as a variable and painted as a hard-stop gradient.
+            style={
+              {
+                "--slider-fill": `${Math.min(100, Math.max(0, (value / credit.max_annual) * 100))}%`,
+              } as React.CSSProperties
+            }
           />
           <span className="credit-use">${value}</span>
         </div>
