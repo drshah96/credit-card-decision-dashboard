@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { recordPageView } from "../utils/sessionTracking";
+import { useSeo, pageTitle } from "../utils/seo";
 
 // ─── Shared section styling ─────────────────────────────────────────────────────
 
@@ -78,6 +79,13 @@ export default function MethodologyPage() {
   useEffect(() => {
     recordPageView("methodology_view");
   }, []);
+
+  useSeo({
+    title: pageTitle("How We Rank Cards"),
+    description:
+      "The method behind the ratings: how statement credits are valued, where points valuations come from, and why a card's advertised perks are not the same as real value.",
+    path: "/methodology",
+  });
 
   return (
     <div style={{ minHeight: "100vh" }}>

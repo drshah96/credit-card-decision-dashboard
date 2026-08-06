@@ -16,6 +16,7 @@ import {
   type TopPickRow,
 } from "../utils/topPickCategories";
 import type { CardSummary } from "../types/cards";
+import { useSeo, pageTitle } from "../utils/seo";
 
 const NO_CATEGORY_FILTER = new Set<string>();
 
@@ -338,6 +339,13 @@ export default function TopPickPage() {
   useEffect(() => {
     recordPageView("top_pick_view");
   }, []);
+
+  useSeo({
+    title: pageTitle("Best Credit Cards by Category"),
+    description:
+      "The cards worth carrying, ranked by what they return rather than what they advertise. Filter by travel, dining, groceries, cash back and everyday spend.",
+    path: "/top-picks",
+  });
 
   // Lives in the URL (like Compare's ?cards=) rather than localStorage —
   // the whole interaction (open picker, select, see the table update)
