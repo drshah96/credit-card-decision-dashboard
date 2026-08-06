@@ -127,4 +127,13 @@ describe("MethodologyPage", () => {
       screen.getByText(/we don't have any affiliate partnerships today/i),
     ).toBeInTheDocument();
   });
+
+  // The independence claims on this page are only credible with a named
+  // person attached; this pins that the attribution stays.
+  it("names the author and links their profile", () => {
+    renderPage();
+    const link = screen.getByRole("link", { name: /dhruvin shah/i });
+    expect(link).toHaveAttribute("href", expect.stringContaining("linkedin.com/in/"));
+    expect(link).toHaveAttribute("rel", expect.stringContaining("noopener"));
+  });
 });
