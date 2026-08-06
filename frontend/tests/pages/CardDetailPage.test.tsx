@@ -23,6 +23,7 @@ vi.mock("@/utils/sessionTracking", () => ({
 
 // Import after mock so we get the mocked version
 import { fetchCard, fetchCards } from "@/api/cards";
+import { recordPageView } from "@/utils/sessionTracking";
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 
@@ -1089,6 +1090,22 @@ describe("CardDetailPage", () => {
       expect(screen.getAllByText("$150").length).toBeGreaterThanOrEqual(1);
     });
 
+    it("fills the slider track in proportion to the value", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard());
+
+      renderPage();
+
+      // Uber Cash maxes at $200 in the fixture
+      const slider = await screen.findByLabelText(/How much of Uber Cash/i);
+      expect(slider).toHaveStyle({ "--slider-fill": "0%" });
+
+      fireEvent.change(slider, { target: { value: "50" } });
+      expect(slider).toHaveStyle({ "--slider-fill": "25%" });
+
+      fireEvent.change(slider, { target: { value: "200" } });
+      expect(slider).toHaveStyle({ "--slider-fill": "100%" });
+    });
+
     it("resets all sliders to default values when Reset is clicked", async () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
@@ -1785,3 +1802,88 @@ describe("CardDetailPage", () => {
   });
 });
 
+
+// ─── Preference signals ───────────────────────────────────────────────────────
+//
+// These four events exist to feed a future recommendation system: what someone
+// does with a card says more about fit than any inferred demographic. GA4 calls
+// are observed through window.gtag (same pattern the view_card tests use);
+// backend calls through the mocked recordPageView, since that's where the data
+// has to land to be queryable.
+describe("preference signal tracking", () => {
+  // Without this, a failure between useFakeTimers() and the end of a test
+  // leaves timers faked, and every later test hangs in findBy* polling.
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it("records a slider value once it settles, not on every step", async () => {
+    vi.mocked(fetchCard).mockResolvedValue(makeCard());
+
+    renderPage();
+
+    // Find the slider on real timers first: findBy* polls, so installing fake
+    // timers before this point hangs the query rather than the debounce.
+    const slider = await screen.findByLabelText(/How much of Uber Cash/i);
+
+    vi.useFakeTimers();
+    // A drag fires a change per step; only the settled value should post
+    fireEvent.change(slider, { target: { value: "50" } });
+    fireEvent.change(slider, { target: { value: "100" } });
+    fireEvent.change(slider, { target: { value: "150" } });
+
+    const slid = () =>
+      vi.mocked(recordPageView).mock.calls.filter((c) => c[0] === "credit_slider_set");
+    expect(slid()).toHaveLength(0);
+
+    await vi.advanceTimersByTimeAsync(900);
+
+    expect(slid()).toHaveLength(1);
+    // event_type, issuer, card id, credit id, value
+    expect(slid()[0]).toEqual(["credit_slider_set", "American Express", "amex", "uber", "150"]);
+  });
+
+  it("records a tier move with the destination tier", async () => {
+    vi.mocked(fetchCard).mockResolvedValue(makeCard());
+
+    renderPage();
+
+    // Uber Cash starts in "easy"; the down arrow moves it to "plan"
+    const down = await screen.findByRole("button", { name: /Move Uber Cash to harder tier/i });
+    fireEvent.click(down);
+
+    const moves = vi.mocked(recordPageView).mock.calls.filter((c) => c[0] === "credit_tier_moved");
+    expect(moves).toHaveLength(1);
+    expect(moves[0]).toEqual(["credit_tier_moved", "American Express", "amex", "uber", "plan"]);
+  });
+
+  it("records which details tab was opened, but not re-clicks of the active one", async () => {
+    vi.mocked(fetchCard).mockResolvedValue(makeCard());
+
+    renderPage();
+
+    await switchToTab("Fees");
+    await switchToTab("Fees"); // already active — must not count again
+
+    const tabs = vi.mocked(recordPageView).mock.calls.filter((c) => c[0] === "card_tab_viewed");
+    expect(tabs).toHaveLength(1);
+    expect(tabs[0]).toEqual(["card_tab_viewed", "American Express", "amex", "fees"]);
+  });
+
+  it("records a click through to the issuer's own site", async () => {
+    vi.mocked(fetchCard).mockResolvedValue(
+      makeCard({ official_url: "https://americanexpress.com/platinum" }),
+    );
+
+    renderPage();
+
+    const link = await screen.findByTitle(/Open The Platinum Card on American Express's site/i);
+    fireEvent.click(link);
+
+    const clicks = vi.mocked(recordPageView).mock.calls.filter(
+      (c) => c[0] === "issuer_link_clicked",
+    );
+    expect(clicks).toHaveLength(1);
+    expect(clicks[0]).toEqual(["issuer_link_clicked", "American Express", "amex"]);
+  });
+});

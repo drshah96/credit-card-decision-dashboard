@@ -10,7 +10,15 @@ export type EventType =
   | "compare_view"
   | "methodology_view"
   | "top_pick_card_selected"
-  | "compare_card_selected";
+  | "compare_card_selected"
+  // Preference signals from the card detail page — what someone actually
+  // does with a card, which is a stronger input for a future recommendation
+  // system than any inferred demographic. See backend/db_models.py PageView
+  // for what detail/value carry per type.
+  | "credit_slider_set"
+  | "credit_tier_moved"
+  | "card_tab_viewed"
+  | "issuer_link_clicked";
 
 export interface EventPayload {
   session_id: string;
@@ -18,6 +26,9 @@ export interface EventPayload {
   issuer?: string;
   card_id?: string;
   referrer?: string;
+  /** Only the preference-signal events use these; see EventType above. */
+  detail?: string;
+  value?: string;
 }
 
 // Fire-and-forget: session/page-view tracking should never block the page

@@ -22,12 +22,20 @@ function getSessionId(): string {
   }
 }
 
-export function recordPageView(eventType: EventType, issuer?: string, cardId?: string): void {
+export function recordPageView(
+  eventType: EventType,
+  issuer?: string,
+  cardId?: string,
+  detail?: string,
+  value?: string,
+): void {
   postEvent({
     session_id: getSessionId(),
     event_type: eventType,
     issuer,
     card_id: cardId,
+    detail,
+    value,
     // The full referring URL, e.g. "https://www.google.com/search?q=...".
     // Backend extracts just the host and only stores it on first-touch (see
     // backend/main.py track_event) — safe to send on every call even though

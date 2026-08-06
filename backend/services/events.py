@@ -13,6 +13,8 @@ def record_page_view(
     referrer: str | None = None,
     country: str | None = None,
     device_type: str | None = None,
+    detail: str | None = None,
+    value: str | None = None,
 ) -> None:
     """Upsert the session row (creating it on first sight, else just bumping
     last_seen_at) and insert one page_views row. Fire-and-forget from the
@@ -52,5 +54,7 @@ def record_page_view(
                 event_type=event_type,
                 issuer=issuer,
                 card_slug=card_slug,
+                detail=detail,
+                value=value,
             )
         )
