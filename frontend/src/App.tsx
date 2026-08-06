@@ -27,18 +27,25 @@ export default function App() {
 
   return (
     <>
+      <a className="skip-link" href="#main">
+        Skip to main content
+      </a>
       <ScrollToTop />
       <SiteMark />
-      <ErrorBoundary>
-        <Routes>
-          <Route path="/" element={<IssuersPage />} />
-          <Route path="/top-picks" element={<TopPickPage />} />
-          <Route path="/compare" element={<ComparePage />} />
-          <Route path="/issuer/:issuerSlug" element={<IssuerCardsPage />} />
-          <Route path="/cards/:id" element={<CardDetailPage />} />
-          <Route path="/methodology" element={<MethodologyPage />} />
-        </Routes>
-      </ErrorBoundary>
+      {/* Single <main> landmark wrapping every route, so screen-reader users
+      can jump straight to page content and the skip link has a target. */}
+      <main id="main">
+        <ErrorBoundary>
+          <Routes>
+            <Route path="/" element={<IssuersPage />} />
+            <Route path="/top-picks" element={<TopPickPage />} />
+            <Route path="/compare" element={<ComparePage />} />
+            <Route path="/issuer/:issuerSlug" element={<IssuerCardsPage />} />
+            <Route path="/cards/:id" element={<CardDetailPage />} />
+            <Route path="/methodology" element={<MethodologyPage />} />
+          </Routes>
+        </ErrorBoundary>
+      </main>
       <CompareTray />
       <Footer />
     </>

@@ -8,7 +8,10 @@
   --panel-3: #E3E6ED;
   --ink: #14171C;
   --muted: #5B6472;
-  --faint: #6B7280;
+  /* Darkened from #6B7280, which sat at 4.43:1 on --panel-s and failed WCAG
+     AA for normal text. 5.01:1 on --base and 4.59:1 on --panel-s, the only
+     two surfaces faint text is ever placed on. */
+  --faint: #67707E;
   --line: rgba(15, 23, 42, 0.09);
   --line-2: rgba(15, 23, 42, 0.16);
   --green: #15803D;
@@ -17,6 +20,28 @@
   --blue: #1D4ED8;
   --accent: #475569;
   --accent-soft: rgba(71, 85, 105, 0.10);
+}
+
+/* ─── Skip link ────────────────────────────────────────────────────────────── */
+/* Offscreen until focused, so keyboard users can jump straight past the
+   header instead of tabbing through it on every page. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 10px 16px;
+  background: var(--base);
+  color: var(--ink);
+  border: 1px solid var(--line-2);
+  border-radius: 0 0 8px 0;
+  font-size: 13.5px;
+  text-decoration: none;
+}
+.skip-link:focus {
+  left: 0;
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
 }
 
 /* ─── Base ─────────────────────────────────────────────────────────────────── */
@@ -294,7 +319,14 @@ body {
 .credit-slider { display: flex; align-items: center; gap: 9px; }
 .credit-slider input[type="range"] {
   flex: 1; -webkit-appearance: none; appearance: none;
-  height: 5px; border-radius: 100px; background: var(--panel-3); outline: none;
+  height: 5px; border-radius: 100px; background: var(--panel-3);
+}
+/* These sliders are the main interactive control on the card detail page, so
+   keyboard focus has to be visible. Suppressed on mouse focus only; the ring
+   is offset because the track itself is just 5px tall. */
+.credit-slider input[type="range"]:focus { outline: none; }
+.credit-slider input[type="range"]:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 4px;
 }
 .credit-slider input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none; width: 15px; height: 15px; border-radius: 50%;
@@ -314,6 +346,13 @@ body {
 }
 .tier-btn:hover:not(:disabled) { color: var(--ink); border-color: var(--line-2); }
 .tier-btn:disabled { opacity: 0.25; cursor: default; }
+/* Same idea as .info-btn, but the two arrows sit 4px apart, so the target
+   only grows vertically and by 2px horizontally — enough to help a thumb
+   without the two buttons stealing each other's taps. */
+@media (pointer: coarse) {
+  .tier-btn { position: relative; }
+  .tier-btn::after { content: ""; position: absolute; inset: -7px -2px; }
+}
 
 /* ─── Reset sliders button (credits section header) ─────────────────────────── */
 .reset-sliders-btn { background: none; border: 1px solid var(--line); color: var(--muted); font-family: inherit; font-size: 11.5px; padding: 5px 11px; border-radius: 100px; cursor: pointer; white-space: nowrap; }
@@ -404,6 +443,15 @@ body {
   flex: none;
 }
 .info-btn:hover { border-color: var(--accent); color: var(--accent); }
+/* The dot is 15px by design, which is a hard target to hit with a thumb. On
+   touch devices a transparent pseudo-element widens the tappable area to
+   ~37px without changing anything visually. Mouse pointers are precise
+   enough not to need it, and leaving them alone avoids invisible boxes
+   intercepting text selection. */
+@media (pointer: coarse) {
+  .info-btn { position: relative; }
+  .info-btn::after { content: ""; position: absolute; inset: -11px; }
+}
 .chips { display: flex; flex-direction: column; gap: 10px; }
 .schip { border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px; background: var(--panel-s); }
 .schip-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
@@ -564,7 +612,17 @@ body {
   gap: 4px;
   border-bottom: 1px solid var(--line);
   margin-bottom: 32px;
+  /* The card detail page's Details bar carries five tabs with long labels
+     ("Value & Redemption", "Insurance & Protections"). On a 390px phone they
+     don't fit, and without this the last tab pushed the whole page 23px wider
+     than the viewport, so every card page scrolled sideways. Scrolling the
+     strip itself is the fix rather than wrapping: the active tab's 2px
+     underline is aligned to this container's border, and a wrapped row would
+     leave it floating mid-block. */
+  overflow-x: auto;
+  scrollbar-width: none;
 }
+.page-tabs::-webkit-scrollbar { display: none; }
 .page-tab {
   font-size: 13.5px;
   font-weight: 500;
@@ -574,8 +632,20 @@ body {
   margin-bottom: -1px;
   border-bottom: 2px solid transparent;
   transition: color 0.15s, border-color 0.15s;
+  /* Labels stay on one line and keep their width inside the scrolling strip
+     above, instead of squeezing or breaking mid-phrase. */
+  white-space: nowrap;
+  flex: none;
 }
 .page-tab + .page-tab { margin-left: 20px; }
+/* On phones: tighter spacing, and tabs that carry a short label swap to it so
+   all five fit without scrolling. Tabs with no short label are unaffected. */
+.tab-label-short { display: none; }
+@media (max-width: 640px) {
+  .page-tab + .page-tab { margin-left: 14px; }
+  .tab-label-full { display: none; }
+  .tab-label-short { display: inline; }
+}
 .page-tab:hover { color: var(--ink); }
 .page-tab.active {
   color: var(--ink);
@@ -889,6 +959,12 @@ body {
   gap: 8px;
   padding: 10px 10px 10px 14px;
   border-bottom: 1px solid var(--line);
+}
+/* The input clears its own outline (it's borderless by design), so the focus
+   ring goes on the wrapper instead of disappearing entirely. */
+.card-picker-search:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
 }
 .card-picker-search input {
   flex: 1;

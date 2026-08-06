@@ -823,12 +823,15 @@ function CardDetail({ card }: { card: Card }) {
   // are separate tabs (not combined into one "Value" tab) so the tab label
   // itself carries the heading — no sub-heading needed inside either pane.
   const [activeTab, setActiveTab] = useState<"earn" | "value" | "perks" | "insurance" | "fees">("earn");
-  const detailTabs: { id: typeof activeTab; label: string }[] = [
-    { id: "earn", label: "Earn" },
-    { id: "value", label: "Value & Redemption" },
-    { id: "perks", label: "Status & Perks" },
-    { id: "insurance", label: "Insurance & Protections" },
-    { id: "fees", label: "Fees" },
+  // shortLabel is what shows on phones. At full length these five labels run
+  // ~549px, so on a 390px screen the last two sat off the edge of the
+  // scrolling strip where nobody would find them.
+  const detailTabs: { id: typeof activeTab; label: string; shortLabel: string }[] = [
+    { id: "earn", label: "Earn", shortLabel: "Earn" },
+    { id: "value", label: "Value & Redemption", shortLabel: "Value" },
+    { id: "perks", label: "Status & Perks", shortLabel: "Perks" },
+    { id: "insurance", label: "Insurance & Protections", shortLabel: "Insurance" },
+    { id: "fees", label: "Fees", shortLabel: "Fees" },
   ];
 
   return (
@@ -858,7 +861,10 @@ function CardDetail({ card }: { card: Card }) {
             >
               {card.issuer}
             </p>
-            <h2
+            {/* h1, not h2: this is the page's top-level heading, and every
+            other route already leads with one. Inline styles carry the full
+            look, so the level change is semantic only. */}
+            <h1
               style={{
                 fontFamily: '"Fraunces Variable", serif',
                 fontWeight: 600,
@@ -881,7 +887,7 @@ function CardDetail({ card }: { card: Card }) {
               ) : (
                 card.name
               )}
-            </h2>
+            </h1>
             <p
               style={{
                 fontSize: 12.5,
@@ -1030,7 +1036,10 @@ function CardDetail({ card }: { card: Card }) {
               className={`page-tab ${activeTab === tab.id ? "active" : ""}`}
               onClick={() => setActiveTab(tab.id)}
             >
-              {tab.label}
+              {/* Only one is ever displayed, and display:none keeps the other
+              out of the accessibility tree, so the tab isn't announced twice. */}
+              <span className="tab-label-full">{tab.label}</span>
+              <span className="tab-label-short">{tab.shortLabel}</span>
             </button>
           ))}
         </div>

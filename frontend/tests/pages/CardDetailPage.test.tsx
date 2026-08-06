@@ -178,9 +178,19 @@ function renderPage(cardId = "amex", state?: { from?: string }) {
 // need to switch tabs first. findByRole already waits for the tab to exist,
 // so this doubles as the "page finished loading" wait these tests used to do
 // via a heading/text lookup.
+// Each tab renders a full label and a short one, with CSS showing only the
+// right one per breakpoint. jsdom doesn't apply the stylesheet, so both are
+// present and the accessible name is their concatenation ("Value &
+// RedemptionValue"). Match on the full label as a substring rather than
+// exactly, so these tests don't depend on CSS being loaded.
+async function findTab(name: string) {
+  return screen.findByRole("tab", {
+    name: (accessibleName: string) => accessibleName.includes(name),
+  });
+}
+
 async function switchToTab(name: string) {
-  const tab = await screen.findByRole("tab", { name });
-  fireEvent.click(tab);
+  fireEvent.click(await findTab(name));
 }
 
 // The "Your take, so far" hero widget's verdict text now lives behind its
@@ -277,6 +287,21 @@ describe("CardDetailPage", () => {
         expect(screen.getByRole("heading", { name: "The Platinum Card" })).toBeInTheDocument();
       });
       expect(screen.getByText("American Express")).toBeInTheDocument();
+    });
+
+    it("uses the card name as the page's h1", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard());
+
+      renderPage();
+
+      // Level matters: this is the page's top-level heading, matching every
+      // other route. It was an h2 until the accessibility pass.
+      await waitFor(() => {
+        expect(
+          screen.getByRole("heading", { level: 1, name: "The Platinum Card" }),
+        ).toBeInTheDocument();
+      });
+      expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     });
 
     it("links the card name to official_url when present", async () => {
@@ -685,7 +710,7 @@ describe("CardDetailPage", () => {
 
       renderPage();
 
-      const earnTab = await screen.findByRole("tab", { name: "Earn" });
+      const earnTab = await findTab("Earn");
       expect(earnTab).toHaveAttribute("aria-selected", "true");
       expect(earnTab).toHaveAttribute("aria-controls", "panel-earn");
 
@@ -694,13 +719,13 @@ describe("CardDetailPage", () => {
       expect(panel).toHaveAttribute("aria-labelledby", "tab-earn");
 
       // Unselected tabs must not point at a panel that isn't mounted
-      const feesTab = screen.getByRole("tab", { name: "Fees" });
+      const feesTab = await findTab("Fees");
       expect(feesTab).toHaveAttribute("aria-selected", "false");
       expect(feesTab).not.toHaveAttribute("aria-controls");
 
       await switchToTab("Fees");
       expect(screen.getByRole("tabpanel")).toHaveAttribute("id", "panel-fees");
-      expect(screen.getByRole("tab", { name: "Fees" })).toHaveAttribute(
+      expect(await findTab("Fees")).toHaveAttribute(
         "aria-controls",
         "panel-fees",
       );
