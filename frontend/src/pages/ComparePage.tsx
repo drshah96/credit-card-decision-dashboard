@@ -14,6 +14,7 @@ import { recordPageView } from "../utils/sessionTracking";
 import { CARD_IMAGES } from "../utils/cardImages";
 import { filterByBrands, filterByCategories, filterByIssuers } from "../utils/cardTaxonomy";
 import type { Card, CardSummary } from "../types/cards";
+import { useSeo, pageTitle } from "../utils/seo";
 
 const MAX_CARDS = 4;
 
@@ -56,6 +57,13 @@ export default function ComparePage() {
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const { compareIds, setCompareIds } = useCompareList();
+
+  useSeo({
+    title: pageTitle("Compare Credit Cards Side by Side"),
+    description:
+      "Put up to four cards next to each other and compare the things that decide it: annual fee, real credit value, earn rates, lounge access, insurance and foreign transaction fees.",
+    path: "/compare",
+  });
   const selectedIds = useMemo(() => parseSelectedIds(searchParams.get("cards")), [searchParams]);
 
   useEffect(() => {
