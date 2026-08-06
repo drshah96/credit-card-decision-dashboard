@@ -109,6 +109,12 @@ CARD_IDS = [
     "wells-fargo-one-key-plus",
     "wells-fargo-choice-privileges",
     "wells-fargo-choice-privileges-select",
+    "discover-it-cash-back",
+    "discover-it-chrome",
+    "discover-it-miles",
+    "discover-it-secured",
+    "discover-it-student-cash-back",
+    "discover-it-student-chrome",
 ]
 
 

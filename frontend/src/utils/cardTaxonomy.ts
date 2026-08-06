@@ -50,6 +50,7 @@ export const ISSUERS: IssuerInfo[] = [
   { slug: "bofa", label: "Bank of America", issuerField: "Bank of America" },
   { slug: "bilt", label: "Bilt", issuerField: "Bilt" },
   { slug: "wells-fargo", label: "Wells Fargo", issuerField: "Wells Fargo" },
+  { slug: "discover", label: "Discover", issuerField: "Discover" },
 ];
 
 export function getIssuerBySlug(slug: string | undefined): IssuerInfo | undefined {
@@ -200,6 +201,16 @@ export const CLASSIFICATION: Record<string, Classification> = {
   "wells-fargo-one-key-plus": { group: "cobrand", brand: "Expedia One Key" },
   "wells-fargo-choice-privileges": { group: "hotel", brand: "Choice Privileges" },
   "wells-fargo-choice-privileges-select": { group: "hotel", brand: "Choice Privileges" },
+
+  // ── Discover ──
+  // All "personal": Discover runs no airline, hotel or retail co-brands, so
+  // the whole lineup is its own product line.
+  "discover-it-cash-back": { group: "personal" },
+  "discover-it-chrome": { group: "personal" },
+  "discover-it-miles": { group: "personal" },
+  "discover-it-secured": { group: "personal" },
+  "discover-it-student-cash-back": { group: "personal" },
+  "discover-it-student-chrome": { group: "personal" },
 };
 
 export function classify(cardId: string): Classification {
