@@ -1089,6 +1089,22 @@ describe("CardDetailPage", () => {
       expect(screen.getAllByText("$150").length).toBeGreaterThanOrEqual(1);
     });
 
+    it("fills the slider track in proportion to the value", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard());
+
+      renderPage();
+
+      // Uber Cash maxes at $200 in the fixture
+      const slider = await screen.findByLabelText(/How much of Uber Cash/i);
+      expect(slider).toHaveStyle({ "--slider-fill": "0%" });
+
+      fireEvent.change(slider, { target: { value: "50" } });
+      expect(slider).toHaveStyle({ "--slider-fill": "25%" });
+
+      fireEvent.change(slider, { target: { value: "200" } });
+      expect(slider).toHaveStyle({ "--slider-fill": "100%" });
+    });
+
     it("resets all sliders to default values when Reset is clicked", async () => {
       vi.mocked(fetchCard).mockResolvedValue(makeCard());
 
