@@ -7,8 +7,17 @@ import { useEffect } from "react";
 // with. Setting these per route imperatively is enough: it needs no SSR and
 // no extra dependency, unlike react-helmet.
 
-export const SITE_URL = "https://thewalletaudit.com";
-export const SITE_NAME = "The Wallet Audit";
+// Titles and descriptions live in routeMeta.js, shared with the Node build
+// scripts, so the prerendered <head> and the client-set one can't disagree.
+export {
+  SITE_URL,
+  SITE_NAME,
+  pageTitle,
+  cardRouteMeta,
+  issuerRouteMeta,
+  STATIC_ROUTE_META,
+} from "./routeMeta.js";
+import { SITE_URL as SITE } from "./routeMeta.js";
 
 export type SeoInput = {
   /** Full document title. Skipped while a page is still loading its data. */
@@ -57,14 +66,9 @@ export function useSeo({ title, description, path }: SeoInput): void {
       upsertMeta("name", "twitter:description", description);
     }
     if (path) {
-      const url = `${SITE_URL}${path}`;
+      const url = `${SITE}${path}`;
       upsertCanonical(url);
       upsertMeta("property", "og:url", url);
     }
   }, [title, description, path]);
-}
-
-/** Keeps titles inside Google's ~60-character display budget. */
-export function pageTitle(specific: string): string {
-  return `${specific} | ${SITE_NAME}`;
 }

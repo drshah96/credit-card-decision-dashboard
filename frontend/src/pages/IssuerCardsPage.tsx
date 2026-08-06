@@ -8,7 +8,7 @@ import { SlowLoadNotice } from "../components/SlowLoadNotice";
 import { useCompareList } from "../hooks/useCompareList";
 import { useSlowLoadWarning } from "../hooks/useSlowLoadWarning";
 import { recordPageView } from "../utils/sessionTracking";
-import { useSeo, pageTitle } from "../utils/seo";
+import { useSeo, issuerRouteMeta } from "../utils/seo";
 import type { Card, CardSummary } from "../types/cards";
 import {
   ALL_CARDS_FILTER,
@@ -76,13 +76,8 @@ export default function IssuerCardsPage() {
     if (issuer) recordPageView("issuer_view", issuer.issuerField);
   }, [issuer]);
 
-  useSeo({
-    title: issuer ? pageTitle(`${issuer.label} Credit Cards`) : undefined,
-    description: issuer
-      ? `Every ${issuer.label} card compared on real value: annual fees, what the statement credits are actually worth, points valuations, and which cards earn their keep.`
-      : undefined,
-    path: issuerSlug ? `/issuer/${issuerSlug}` : undefined,
-  });
+  const seoMeta = issuer && issuerSlug ? issuerRouteMeta(issuerSlug, issuer.label) : undefined;
+  useSeo({ title: seoMeta?.title, description: seoMeta?.description, path: seoMeta?.path });
 
   const { compareIds } = useCompareList();
   // Defaults to "on" whenever picks already exist (e.g. returning from a

@@ -8,7 +8,7 @@ import { trackEvent } from "../utils/analytics";
 import { ISSUERS, getIssuerBySlug, parseMultiplierValue } from "../utils/cardTaxonomy";
 import { recordPageView } from "../utils/sessionTracking";
 import { CARD_IMAGES } from "../utils/cardImages";
-import { useSeo, pageTitle } from "../utils/seo";
+import { useSeo, cardRouteMeta } from "../utils/seo";
 import type {
   Card,
   Credit,
@@ -1348,19 +1348,11 @@ export default function CardDetailPage() {
     }
   }, [card]);
 
-  // Leads with the card name because that's what people search for. Stays
-  // undefined until the card resolves, so a slow load never publishes a
-  // half-built title.
-  const maxCredits = card
-    ? card.credits.filter((c) => !c.removed).reduce((sum, c) => sum + c.max_annual, 0)
-    : 0;
-  useSeo({
-    title: card ? pageTitle(`${card.name} — ${card.issuer}`) : undefined,
-    description: card
-      ? `${card.name} has a $${card.annual_fee} annual fee and up to $${maxCredits} in statement credits. See what those credits are really worth, how the points redeem, and whether the fee pays for itself.`
-      : undefined,
-    path: id ? `/cards/${id}` : undefined,
-  });
+  // Built from the same helper the prerender pass uses, so the served HTML
+  // and the client-set tags can't disagree. Stays undefined until the card
+  // resolves, so a slow load never publishes a half-built title.
+  const meta = card ? cardRouteMeta(card) : undefined;
+  useSeo({ title: meta?.title, description: meta?.description, path: meta?.path });
 
   const is404 = error instanceof Error && error.message.includes("404");
   const issuer = card ? ISSUERS.find((i) => i.issuerField === card.issuer) : undefined;

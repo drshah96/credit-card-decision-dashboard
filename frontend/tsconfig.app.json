@@ -7,6 +7,9 @@
     "types": ["vite/client"],
     "allowArbitraryExtensions": true,
     "skipLibCheck": true,
+    /* routeMeta.js is shared with the Node build scripts (sitemap +
+       prerender), so it stays plain JS rather than TS. */
+    "allowJs": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",

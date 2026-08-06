@@ -12,7 +12,8 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
-    "prebuild": "node scripts/generate-sitemap.mjs"
+    "prebuild": "node scripts/generate-sitemap.mjs",
+    "postbuild": "node scripts/prerender.mjs"
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.2.9",
