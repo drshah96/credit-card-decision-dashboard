@@ -1321,3 +1321,22 @@ def test_welcome_bonus_shape_when_present() -> None:
     assert isinstance(sample["bonus"], str)
     assert isinstance(sample["requirement"], str)
     assert sample["estimated_value"] is None or isinstance(sample["estimated_value"], str)
+
+
+def test_catalog_response_is_gzipped() -> None:
+    """The catalog is ~115 KB of repetitive JSON fetched on the issuer and Top
+    Pick pages, and compresses by roughly 8x. Without GZipMiddleware every
+    visitor paid the full weight, so pin that it's actually applied."""
+    response = client.get("/api/cards", headers={"Accept-Encoding": "gzip"})
+
+    assert response.status_code == 200
+    assert response.headers.get("content-encoding") == "gzip"
+
+
+def test_small_responses_are_not_gzipped() -> None:
+    """minimum_size exists so tiny responses don't pay a compression pass that
+    costs more than the bytes it saves."""
+    response = client.get("/health", headers={"Accept-Encoding": "gzip"})
+
+    assert response.status_code == 200
+    assert "content-encoding" not in response.headers

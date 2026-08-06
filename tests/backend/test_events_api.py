@@ -447,3 +447,136 @@ def test_track_event_rejects_an_invalid_event_type() -> None:
 def test_track_event_requires_a_session_id() -> None:
     response = client.post("/api/events", json={"event_type": "issuer_view"})
     assert response.status_code == 422
+
+
+# ─── Input caps ───────────────────────────────────────────────────────────────
+# /api/events is public, unauthenticated and writes a row per call, so every
+# string it accepts is length-capped. detail/value always were; session_id,
+# issuer, card_id and referrer were not, and a 100 KB session_id was accepted
+# and stored at full length. These pin every field so that can't come back.
+
+
+@pytest.mark.parametrize(
+    ("field", "limit"),
+    [
+        ("session_id", 64),
+        ("issuer", 64),
+        ("card_id", 64),
+        ("detail", 64),
+        ("value", 32),
+        ("referrer", 2048),
+    ],
+)
+def test_track_event_rejects_oversized_strings(field: str, limit: int) -> None:
+    payload = {"session_id": _unique_session_id(), "event_type": "home_view"}
+    payload[field] = "A" * (limit + 1)
+
+    response = client.post("/api/events", json=payload)
+
+    assert response.status_code == 422, f"{field} accepted {limit + 1} characters"
+
+
+def test_track_event_accepts_a_string_at_the_cap() -> None:
+    """The caps are generous multiples of the real values, so a legitimate
+    payload must never be rejected by them."""
+    session_id = f"s-{uuid4()}".ljust(64, "x")[:64]
+
+    response = client.post(
+        "/api/events",
+        json={"session_id": session_id, "event_type": "home_view"},
+    )
+
+    assert response.status_code == 200
+    with session_scope() as db:
+        assert db.query(SessionModel).filter(SessionModel.id == session_id).one()
+
+
+def test_oversized_payload_never_reaches_the_database() -> None:
+    """The regression this whole section exists for: before the caps, this
+    exact request returned 200 and wrote a 100 KB row."""
+    huge = "A" * 100_000
+
+    response = client.post(
+        "/api/events",
+        json={"session_id": huge, "event_type": "home_view"},
+    )
+
+    assert response.status_code == 422
+    with session_scope() as db:
+        assert db.query(SessionModel).filter(SessionModel.id == huge).one_or_none() is None
+
+
+# ─── Rate limiting ────────────────────────────────────────────────────────────
+
+
+@pytest.fixture
+def clean_rate_limiter():
+    """The limiter's state is module-level and shared, so tests that exercise
+    it have to reset it or they'd inherit counts from every earlier request in
+    the run (TestClient sends no CF-Connecting-IP, so every other test in this
+    file shares one key)."""
+    from backend import main
+
+    main._rate_limit_hits.clear()
+    yield main
+    main._rate_limit_hits.clear()
+
+
+def test_events_are_rate_limited_per_client(clean_rate_limiter) -> None:
+    main = clean_rate_limiter
+    ip = {"CF-Connecting-IP": "203.0.113.10"}
+    limit = main._RATE_LIMIT_MAX_EVENTS
+
+    accepted = []
+    for _ in range(limit + 25):
+        session_id = _unique_session_id()
+        client.post(
+            "/api/events",
+            json={"session_id": session_id, "event_type": "home_view"},
+            headers=ip,
+        )
+        accepted.append(session_id)
+
+    # Silent drop, not an error: the caller ignores the response either way.
+    with session_scope() as db:
+        stored = (
+            db.query(SessionModel).filter(SessionModel.id.in_(accepted)).count()
+        )
+    assert stored == limit, f"expected exactly {limit} rows written, got {stored}"
+
+
+def test_rate_limit_is_per_client_not_global(clean_rate_limiter) -> None:
+    """One client exhausting its allowance must not block everyone else."""
+    main = clean_rate_limiter
+    noisy = {"CF-Connecting-IP": "203.0.113.20"}
+
+    for _ in range(main._RATE_LIMIT_MAX_EVENTS + 5):
+        client.post(
+            "/api/events",
+            json={"session_id": _unique_session_id(), "event_type": "home_view"},
+            headers=noisy,
+        )
+
+    quiet_session = _unique_session_id()
+    client.post(
+        "/api/events",
+        json={"session_id": quiet_session, "event_type": "home_view"},
+        headers={"CF-Connecting-IP": "198.51.100.7"},
+    )
+
+    with session_scope() as db:
+        assert db.query(SessionModel).filter(SessionModel.id == quiet_session).one()
+
+
+def test_client_key_never_returns_the_raw_ip(clean_rate_limiter) -> None:
+    """The limiter reads an IP but must never retain it in a readable form —
+    that's what keeps SessionModel's no-PII-stored guarantee intact."""
+    main = clean_rate_limiter
+
+    class _Req:
+        headers = {"cf-connecting-ip": "203.0.113.99"}
+        client = None
+
+    key = main._client_key(_Req())
+    assert "203.0.113.99" not in key
+    assert len(key) == 32
