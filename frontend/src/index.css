@@ -319,7 +319,19 @@ body {
 .credit-slider { display: flex; align-items: center; gap: 9px; }
 .credit-slider input[type="range"] {
   flex: 1; -webkit-appearance: none; appearance: none;
-  height: 5px; border-radius: 100px; background: var(--panel-3);
+  height: 5px; border-radius: 100px;
+  /* Fill the track up to the thumb so the slider reads as "how much of this
+     credit am I claiming" at a glance, instead of a flat grey bar whose only
+     cue is the thumb's position. --slider-fill is set per credit in
+     CardDetailPage; the fallback keeps the track plain if it's ever missing.
+     Two hard stops at the same offset give a crisp edge rather than a blend. */
+  background: linear-gradient(
+    to right,
+    var(--accent) 0%,
+    var(--accent) var(--slider-fill, 0%),
+    var(--panel-3) var(--slider-fill, 0%),
+    var(--panel-3) 100%
+  );
 }
 /* These sliders are the main interactive control on the card detail page, so
    keyboard focus has to be visible. Suppressed on mouse focus only; the ring
