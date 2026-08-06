@@ -574,3 +574,51 @@ class PageView(Base):
     value: Mapped[str | None] = mapped_column(default=None)
 
     session: Mapped[SessionModel] = relationship(back_populates="page_views")
+
+
+class ClientError(Base):
+    """One row per JavaScript error reported by the frontend — the
+    first-party answer to "a crash on a card page is invisible unless the
+    visitor emails us" (issue #149). Deliberately a table in our own
+    database rather than a third-party service: errors sit next to
+    page_views in the same Neon console the analytics already get read
+    from, nothing about a visitor leaves our infrastructure, and the same
+    no-PII guarantee applies — no IP, no raw User-Agent, only the derived
+    device category.
+
+    `session_id` is the same client-minted id the sessions table keys on,
+    but stored loose (no FK): an error can fire before the first
+    /api/events round-trip has created the session row, and error capture
+    must never depend on analytics having succeeded first. Join on
+    sessions.id when correlating; expect the occasional orphan.
+
+    Volume is bounded at both ends: the frontend deduplicates repeated
+    errors and stops after a handful per page load, and the endpoint sits
+    behind the same per-client rate limiter as /api/events. Every string
+    is length-capped at the API layer (see ClientErrorIn in models.py)."""
+
+    __tablename__ = "client_errors"
+
+    error_id: Mapped[int] = mapped_column(primary_key=True)
+    occurred_at: Mapped[datetime] = mapped_column(server_default=func.now(), index=True)
+    session_id: Mapped[str | None] = mapped_column(index=True, default=None)
+    # The SPA route (pathname only, never query strings — they could carry
+    # who-knows-what from inbound links) where the error fired.
+    path: Mapped[str | None] = mapped_column(default=None)
+    # "TypeError: x is undefined" — name and message folded into one field,
+    # which is also the natural GROUP BY for "what's breaking most".
+    message: Mapped[str]
+    # Minified production stack. Not symbolicated — with the repo checked
+    # out, `npm run build` reproduces the same chunk names locally when a
+    # trace needs decoding, and message + path + component_stack identifies
+    # most issues on a site this size without it.
+    stack: Mapped[str | None] = mapped_column(default=None)
+    # React component stack from ErrorBoundary.componentDidCatch — names
+    # component boundaries, so it stays readable even when `stack` is
+    # minified noise.
+    component_stack: Mapped[str | None] = mapped_column(default=None)
+    # Same derived "mobile"/"tablet"/"desktop" as sessions.device_type,
+    # computed by the same helper — a mobile-only crash looks identical to
+    # a working page from desktop-only testing, so this is the first filter
+    # worth having.
+    device_type: Mapped[str | None] = mapped_column(default=None)

@@ -7,7 +7,7 @@ const STORAGE_KEY = "wa_session_id";
 // reloads and new tabs in the same browser; a cleared localStorage (or a
 // different browser/device) just starts a new session, which is fine for
 // traffic analysis at this scale.
-function getSessionId(): string {
+export function getSessionId(): string {
   try {
     let id = localStorage.getItem(STORAGE_KEY);
     if (!id) {

@@ -360,3 +360,24 @@ class EventIn(BaseModel):
     # Capped at 2048, the practical URL length ceiling browsers and proxies
     # settle on, since a real referrer can carry a long query string.
     referrer: str | None = Field(default=None, max_length=2048)
+
+
+class ClientErrorIn(BaseModel):
+    """A single JavaScript error reported by the frontend's error reporter
+    (frontend/src/utils/errorReporting.ts). Same posture as EventIn above:
+    public, unauthenticated, writes a row — so every string is length-capped
+    here, before anything touches the database. The generous stack caps are
+    still hard ceilings: a minified stack frame line runs ~100-200 chars, so
+    4000 keeps the useful top of the trace and discards the tail, which is
+    exactly the part that stops being informative anyway.
+
+    `message` is the only required field: an error with no message is not
+    worth a row, and everything else degrades gracefully to NULL."""
+
+    message: str = Field(min_length=1, max_length=500)
+    session_id: str | None = Field(default=None, max_length=64)
+    # pathname only by contract with the reporter — never a full URL, so
+    # inbound-link query strings can't smuggle junk (or worse) into the table.
+    path: str | None = Field(default=None, max_length=512)
+    stack: str | None = Field(default=None, max_length=4000)
+    component_stack: str | None = Field(default=None, max_length=4000)

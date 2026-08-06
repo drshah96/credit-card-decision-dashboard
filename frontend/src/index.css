@@ -71,7 +71,13 @@ html { scroll-behavior: smooth; }
   from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: none; }
 }
-.headline-rotator { animation: headline-fade 0.5s ease; }
+/* The rotation itself is already disabled for reduced-motion users (the
+   JS interval never starts — see IssuersPage), but this entry fade ran
+   unconditionally, so they still got one 0.5s animation on load. Parked at
+   #16, closed here. */
+@media (prefers-reduced-motion: no-preference) {
+  .headline-rotator { animation: headline-fade 0.5s ease; }
+}
 
 body {
   margin: 0;
