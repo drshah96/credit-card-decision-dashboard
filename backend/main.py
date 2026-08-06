@@ -1,15 +1,19 @@
+import hashlib
 import os
+import time
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 from urllib.parse import urlparse
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from sqlalchemy import text
 
 from backend.db import engine
-from backend.models import Card, CardSummary, EventIn
+from backend.models import Card, CardSummary, ClientErrorIn, EventIn
 from backend.services.cards import get_card, get_card_summaries, get_cards
+from backend.services.errors import record_client_error
 from backend.services.events import record_page_view
 
 
@@ -44,6 +48,13 @@ app.add_middleware(
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
+
+# The catalog response is ~115 KB of highly repetitive JSON and compresses by
+# roughly 8x, which matters most on the cold-start fetch every visitor pays for
+# on the issuer and Top Pick pages. minimum_size skips the tiny responses
+# (/health, the event 200s) where a compression pass would cost more than the
+# bytes it saves.
+app.add_middleware(GZipMiddleware, minimum_size=1024)
 
 
 @app.get("/")
@@ -169,6 +180,66 @@ def _is_bot(user_agent: str | None) -> bool:
     return any(signature in ua for signature in _BOT_UA_SIGNATURES)
 
 
+# ─── Rate limiting for /api/events ────────────────────────────────────────────
+# /api/events is public, unauthenticated and writes a row per call, so without
+# a ceiling one client can grow the table without limit. The field caps in
+# EventIn bound how big each row can be; this bounds how many.
+#
+# Deliberately in-process and dependency-free: this is a cheap analytics
+# endpoint, and a shared store (Redis) would be more moving parts than the
+# problem justifies. The consequence is that the limit is per worker, so N
+# workers allow N x the rate. That is fine — the point is to turn "unbounded"
+# into "bounded", not to meter precisely.
+#
+# The key is a salted hash of the client IP, held only in memory and never
+# written anywhere. That keeps SessionModel's "no PII stored" guarantee intact:
+# the raw IP is read from the request, used to derive a key, and dropped.
+_RATE_LIMIT_MAX_EVENTS = 120
+_RATE_LIMIT_WINDOW_SECONDS = 60
+# Bounds worst-case memory if a lot of distinct clients (or spoofed
+# X-Forwarded-For values) arrive inside one window. Past this the map is
+# cleared wholesale rather than grown; dropping counters fails open, which for
+# analytics is the right direction to fail.
+_RATE_LIMIT_MAX_KEYS = 10_000
+_rate_limit_salt = os.urandom(16)
+_rate_limit_hits: dict[str, tuple[float, int]] = {}
+
+
+def _client_key(request: Request) -> str:
+    """A stable, non-reversible per-client key. Prefers Cloudflare's
+    CF-Connecting-IP, then the first hop of X-Forwarded-For, then the direct
+    peer. Hashed with a per-process random salt so the value in memory isn't
+    a raw address even transiently in a dump."""
+    ip = (
+        request.headers.get("cf-connecting-ip")
+        or (request.headers.get("x-forwarded-for") or "").split(",")[0].strip()
+        or (request.client.host if request.client else "")
+    )
+    return hashlib.blake2b(_rate_limit_salt + ip.encode(), digest_size=16).hexdigest()
+
+
+def _rate_limited(request: Request) -> bool:
+    """True when this client has already spent its allowance for the current
+    window. Fixed window rather than sliding: a burst straddling a boundary can
+    briefly get double the allowance, which does not matter here."""
+    now = time.monotonic()
+    key = _client_key(request)
+
+    if len(_rate_limit_hits) > _RATE_LIMIT_MAX_KEYS:
+        _rate_limit_hits.clear()
+
+    window_start, count = _rate_limit_hits.get(key, (now, 0))
+    if now - window_start >= _RATE_LIMIT_WINDOW_SECONDS:
+        window_start, count = now, 0
+
+    if count >= _RATE_LIMIT_MAX_EVENTS:
+        _rate_limit_hits[key] = (window_start, count)
+        return True
+
+    _rate_limit_hits[key] = (window_start, count + 1)
+    return False
+
+
 @app.post("/api/events")
 def track_event(event: EventIn, request: Request) -> dict:
     """Record one anonymous page-view event. Fire-and-forget from the
@@ -200,6 +271,14 @@ def track_event(event: EventIn, request: Request) -> dict:
     if _is_bot(user_agent):
         return {"status": "ok"}
 
+    # Same silent-drop contract as the bot check above: the caller ignores the
+    # response either way, so a limited client gets a 200 and no row rather
+    # than an error it would never read. Note the bot filter is analytics
+    # hygiene, not a control — any client can send a browser User-Agent — so
+    # this runs independently of it rather than behind it.
+    if _rate_limited(request):
+        return {"status": "ok"}
+
     country = request.headers.get("cf-ipcountry")
     if country == "XX":
         country = None
@@ -213,5 +292,33 @@ def track_event(event: EventIn, request: Request) -> dict:
         device_type=_device_type(user_agent),
         detail=event.detail,
         value=event.value,
+    )
+    return {"status": "ok"}
+
+
+@app.post("/api/client-errors")
+def track_client_error(error: ClientErrorIn, request: Request) -> dict:
+    """Record one frontend JavaScript error — the first-party half of issue
+    #149. Same contract as /api/events in every way that matters: fire-and-
+    forget from the client, silent drop for bot traffic, and the same
+    per-client rate limiter (a shared budget is deliberate — an error storm
+    from one client shouldn't get its own fresh allowance on top of the
+    events one, and the reporter already dedupes and self-caps per page
+    load, so legitimate error volume is a rounding error next to page
+    views). Length caps live on ClientErrorIn, so by the time this body
+    runs, every field is bounded."""
+    user_agent = request.headers.get("user-agent")
+    if _is_bot(user_agent):
+        return {"status": "ok"}
+    if _rate_limited(request):
+        return {"status": "ok"}
+
+    record_client_error(
+        message=error.message,
+        session_id=error.session_id,
+        path=error.path,
+        stack=error.stack,
+        component_stack=error.component_stack,
+        device_type=_device_type(user_agent),
     )
     return {"status": "ok"}

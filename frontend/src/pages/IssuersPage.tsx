@@ -12,6 +12,7 @@ import usBankLogo from "../assets/logos/us-bank.svg";
 import bofaLogo from "../assets/logos/bofa.svg";
 import biltLogo from "../assets/logos/bilt.svg";
 import wellsFargoLogo from "../assets/logos/wells-fargo.svg";
+import discoverLogo from "../assets/logos/discover.svg";
 import { useSeo } from "../utils/seo";
 
 const ISSUER_LOGOS: Record<string, string> = {
@@ -23,6 +24,16 @@ const ISSUER_LOGOS: Record<string, string> = {
   bofa: bofaLogo,
   bilt: biltLogo,
   "wells-fargo": wellsFargoLogo,
+  discover: discoverLogo,
+};
+
+// Capital One bought Discover and started moving accounts onto its own
+// platform in July 2026, but the cards keep Discover branding, their own
+// terms and their own network — so they stay a separate issuer here. Worth
+// saying out loud, because a cardholder who sees Capital One on a statement
+// or gets sent to capitalone.com to apply will reasonably wonder.
+const ISSUER_NOTES: Record<string, string> = {
+  discover: "Now serviced by Capital One",
 };
 
 const HEADLINES = [
@@ -72,8 +83,8 @@ export default function IssuersPage() {
   const headline = HEADLINES[headlineIndex];
 
   return (
-    <div style={{ minHeight: "100vh" }}>
-      <div className="wrap" style={{ paddingTop: 24, paddingBottom: 80 }}>
+    <div>
+      <div className="wrap page-body">
         {/* Header — the site's own name/mark lives in the persistent
             SiteMark bar above every page (see App.tsx), not here, so this
             headline doesn't have to also carry brand identity. */}
@@ -119,7 +130,15 @@ export default function IssuersPage() {
             <Link
               key={issuer.slug}
               to={`/issuer/${issuer.slug}`}
-              aria-label={`View ${issuer.label} cards`}
+              // The note is folded into the label rather than left to be read
+              // from the tile: aria-label replaces an element's contents as its
+              // accessible name, so a screen reader would otherwise never hear
+              // "Now serviced by Capital One" at all.
+              aria-label={
+                ISSUER_NOTES[issuer.slug]
+                  ? `View ${issuer.label} cards. ${ISSUER_NOTES[issuer.slug]}.`
+                  : `View ${issuer.label} cards`
+              }
               className="issuer-tile"
             >
               <img
@@ -127,6 +146,11 @@ export default function IssuersPage() {
                 alt=""
                 className="issuer-tile-logo"
               />
+              {ISSUER_NOTES[issuer.slug] && (
+                <span className="issuer-tile-note">
+                  {ISSUER_NOTES[issuer.slug]}
+                </span>
+              )}
             </Link>
           ))}
         </div>

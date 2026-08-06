@@ -149,7 +149,7 @@ export default function IssuerCardsPage() {
 
   if (!issuer) {
     return (
-      <div className="wrap" style={{ paddingTop: 24, paddingBottom: 80 }}>
+      <div className="wrap page-body">
         <p style={{ color: "var(--muted)" }}>Unknown issuer.</p>
         <Link to="/" style={{ color: "var(--accent)" }}>
           ← All issuers
@@ -170,8 +170,8 @@ export default function IssuerCardsPage() {
   const sections = activeFilter === ALL_CARDS_FILTER ? groupCardsForAllView(issuerCards) : null;
 
   return (
-    <div style={{ minHeight: "100vh" }}>
-      <div className="wrap" style={{ paddingTop: 24, paddingBottom: 80 }}>
+    <div>
+      <div className="wrap page-body">
         <Link
           to="/"
           style={{

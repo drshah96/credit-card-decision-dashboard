@@ -1448,8 +1448,8 @@ export default function CardDetailPage() {
           : "All issuers";
 
   return (
-    <div style={{ minHeight: "100vh" }}>
-      <div className="wrap" style={{ paddingTop: 24, paddingBottom: 80 }}>
+    <div>
+      <div className="wrap page-body">
         <Link
           to={backTo}
           style={{

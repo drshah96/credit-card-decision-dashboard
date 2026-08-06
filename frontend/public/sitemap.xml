@@ -12,6 +12,7 @@
   <url><loc>https://thewalletaudit.com/issuer/bofa</loc></url>
   <url><loc>https://thewalletaudit.com/issuer/bilt</loc></url>
   <url><loc>https://thewalletaudit.com/issuer/wells-fargo</loc></url>
+  <url><loc>https://thewalletaudit.com/issuer/discover</loc></url>
   <url><loc>https://thewalletaudit.com/cards/amex-blue-cash-everyday</loc></url>
   <url><loc>https://thewalletaudit.com/cards/amex-blue-cash-preferred</loc></url>
   <url><loc>https://thewalletaudit.com/cards/amex-delta-skymiles-blue</loc></url>
@@ -98,6 +99,12 @@
   <url><loc>https://thewalletaudit.com/cards/citi-strata-premier</loc></url>
   <url><loc>https://thewalletaudit.com/cards/citi-tractor-supply</loc></url>
   <url><loc>https://thewalletaudit.com/cards/citi-wayfair</loc></url>
+  <url><loc>https://thewalletaudit.com/cards/discover-it-cash-back</loc></url>
+  <url><loc>https://thewalletaudit.com/cards/discover-it-chrome</loc></url>
+  <url><loc>https://thewalletaudit.com/cards/discover-it-miles</loc></url>
+  <url><loc>https://thewalletaudit.com/cards/discover-it-secured</loc></url>
+  <url><loc>https://thewalletaudit.com/cards/discover-it-student-cash-back</loc></url>
+  <url><loc>https://thewalletaudit.com/cards/discover-it-student-chrome</loc></url>
   <url><loc>https://thewalletaudit.com/cards/us-bank-altitude-connect</loc></url>
   <url><loc>https://thewalletaudit.com/cards/us-bank-altitude-go</loc></url>
   <url><loc>https://thewalletaudit.com/cards/us-bank-altitude-go-secured</loc></url>

@@ -1,4 +1,4 @@
-# Backend — card catalog database
+# Backend: card catalog database
 
 The card catalog is a normalized relational schema (18 tables), not a single JSON
 blob. This doc covers the schema shape, how data actually gets in, and how to add
@@ -24,7 +24,7 @@ letting the catalog grow without a PR per edit.
   `timeline_events`. Each has a `sort_order` column standing in for array position,
   and cascades on delete with its card.
 - **`card_transfer_partners`** — junction table (card ↔ named transfer partner).
-  Populated for 27 of 95 cards so far, where a reliable, verified per-partner
+  Populated for 27 of 109 cards so far, where a reliable, verified per-partner
   source exists (name, type, ratio); the rest still only have the aggregate
   counts (`transfer_airline_count`/`transfer_hotel_count` on `cards`). Extend
   this as verified per-partner sources become available for other cards,
@@ -32,6 +32,22 @@ letting the catalog grow without a PR per edit.
 - **`card_drafts`** — the review queue. Not part of the normalized schema itself;
   holds fetched-and-extracted card data pending human approval before it's promoted
   into the tables above.
+- **`sessions` / `page_views`** — anonymous first-party analytics (no IP, no raw
+  User-Agent; see the model docstrings for the PII stance). Written by
+  `POST /api/events`, rate limited and length-capped.
+- **`client_errors`** — frontend JavaScript errors, reported first-party by
+  `POST /api/client-errors` instead of a third-party service (issue #149). Same
+  PII stance and rate limiting as the analytics tables. To see what's breaking,
+  in the Neon console (or any client):
+
+  ```sql
+  SELECT occurred_at, message, path, device_type
+  FROM client_errors ORDER BY occurred_at DESC LIMIT 50;
+
+  -- what's breaking most, grouped
+  SELECT message, count(*), max(occurred_at) AS latest
+  FROM client_errors GROUP BY message ORDER BY count(*) DESC;
+  ```
 
 ```mermaid
 erDiagram

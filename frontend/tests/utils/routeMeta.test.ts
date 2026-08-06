@@ -27,7 +27,7 @@ describe("routeMeta", () => {
   it("builds a card route from the card's own data", () => {
     const meta = cardRouteMeta(CARD);
     expect(meta.path).toBe("/cards/chase-sapphire-reserve");
-    expect(meta.title).toBe("Sapphire Reserve — Chase | The Wallet Audit");
+    expect(meta.title).toBe("Sapphire Reserve (Chase) | The Wallet Audit");
     expect(meta.description).toContain("$795 annual fee");
     expect(meta.description).toContain("$800 in statement credits");
   });
@@ -42,7 +42,34 @@ describe("routeMeta", () => {
     expect(meta.title).toBe("American Express Credit Cards | The Wallet Audit");
   });
 
-  it("gives every route a distinct title — the whole point of the change", () => {
+  // Titles and descriptions here are exactly what a shared link preview and a
+  // search result display, so they're the most public copy on the site. Em and
+  // en dashes are deliberately not used anywhere in that copy; this pins it,
+  // because the previous card-title format ("Name — Issuer") put one in front
+  // of every card link that got shared.
+  it("uses no em or en dashes in any route title or description", () => {
+    const routes = allRouteMeta([CARD]);
+    const offenders = routes
+      .flatMap((r) => [
+        { field: `${r.path} title`, value: r.title },
+        { field: `${r.path} description`, value: r.description },
+      ])
+      .filter((f) => /[—–]/.test(f.value));
+    expect(offenders).toEqual([]);
+  });
+
+  it("index.html ships no em or en dashes in its shell metadata", () => {
+    const html = readFileSync(join(__dirname, "..", "..", "index.html"), "utf-8");
+    const metaLines = html
+      .split("\n")
+      .filter((l) => /<title>|<meta\s+(name|property)="(description|og:|twitter:)/.test(l));
+    // Guard against the filter silently matching nothing and the assertion
+    // below passing vacuously if index.html's tag formatting ever changes.
+    expect(metaLines.length).toBeGreaterThanOrEqual(7);
+    expect(metaLines.filter((l) => /[—–]/.test(l))).toEqual([]);
+  });
+
+  it("gives every route a distinct title, the whole point of the change", () => {
     const routes = allRouteMeta([CARD, { ...CARD, id: "other", name: "Other Card" }]);
     const titles = routes.map((r) => r.title);
     expect(new Set(titles).size).toBe(titles.length);

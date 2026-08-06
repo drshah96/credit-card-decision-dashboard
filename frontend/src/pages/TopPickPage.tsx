@@ -211,7 +211,9 @@ function RankCell({ entry }: { entry: TopPickEntry | undefined }) {
         state={{ from: "/top-picks" }}
         className={`top-pick-card-link ${entry.isFallback ? "fallback" : ""}`}
       >
-        {cardImage && <img src={cardImage} alt="" className="top-pick-card-art" />}
+        {cardImage && (
+          <img src={cardImage} alt="" className="top-pick-card-art" loading="lazy" />
+        )}
         <span className="top-pick-card-text">
           <span className="top-pick-issuer">{entry.card.issuer}</span>
           <span className="top-pick-name">{entry.card.name}</span>
@@ -400,8 +402,8 @@ export default function TopPickPage() {
     : [];
 
   return (
-    <div style={{ minHeight: "100vh" }}>
-      <div className="wrap" style={{ paddingTop: 24, paddingBottom: 80 }}>
+    <div>
+      <div className="wrap page-body">
         <header style={{ marginBottom: 40 }}>
           <h1
             style={{

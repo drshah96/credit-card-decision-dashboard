@@ -325,7 +325,15 @@ class EventIn(BaseModel):
     See backend/db_models.py PageView's own docstring for what each
     event_type means and which of issuer/card_id it carries, if any."""
 
-    session_id: str
+    # Every string here is length-capped. /api/events is public, unauthenticated
+    # and writes straight to the database, so an uncapped field is an invitation
+    # to fill the table with megabyte rows: a storage and cost problem rather
+    # than a data-exposure one, but a real one. detail/value were capped from
+    # the start; these four were not, and a 100 KB session_id was demonstrably
+    # accepted and stored at full length before this. The limits are generous
+    # multiples of the real values (a session id is a 36-char UUID, slugs are
+    # tens of characters) so nothing legitimate is ever rejected.
+    session_id: str = Field(max_length=64)
     event_type: Literal[
         "issuer_view",
         "card_view",
@@ -340,15 +348,36 @@ class EventIn(BaseModel):
         "card_tab_viewed",
         "issuer_link_clicked",
     ]
-    issuer: str | None = None
-    card_id: str | None = None
+    issuer: str | None = Field(default=None, max_length=64)
+    card_id: str | None = Field(default=None, max_length=64)
     # Only the four preference-signal events populate these; see
-    # backend/db_models.py PageView for what each carries. Length-capped so a
-    # malformed or hostile payload can't write unbounded strings through an
-    # endpoint that deliberately does no other validation.
+    # backend/db_models.py PageView for what each carries.
     detail: str | None = Field(default=None, max_length=64)
     value: str | None = Field(default=None, max_length=32)
     # The full referring URL (e.g. "https://www.google.com/search?q=..."),
     # straight from the frontend's own document.referrer — main.py extracts
     # just the host before it reaches record_page_view/SessionModel.referrer.
-    referrer: str | None = None
+    # Capped at 2048, the practical URL length ceiling browsers and proxies
+    # settle on, since a real referrer can carry a long query string.
+    referrer: str | None = Field(default=None, max_length=2048)
+
+
+class ClientErrorIn(BaseModel):
+    """A single JavaScript error reported by the frontend's error reporter
+    (frontend/src/utils/errorReporting.ts). Same posture as EventIn above:
+    public, unauthenticated, writes a row — so every string is length-capped
+    here, before anything touches the database. The generous stack caps are
+    still hard ceilings: a minified stack frame line runs ~100-200 chars, so
+    4000 keeps the useful top of the trace and discards the tail, which is
+    exactly the part that stops being informative anyway.
+
+    `message` is the only required field: an error with no message is not
+    worth a row, and everything else degrades gracefully to NULL."""
+
+    message: str = Field(min_length=1, max_length=500)
+    session_id: str | None = Field(default=None, max_length=64)
+    # pathname only by contract with the reporter — never a full URL, so
+    # inbound-link query strings can't smuggle junk (or worse) into the table.
+    path: str | None = Field(default=None, max_length=512)
+    stack: str | None = Field(default=None, max_length=4000)
+    component_stack: str | None = Field(default=None, max_length=4000)
