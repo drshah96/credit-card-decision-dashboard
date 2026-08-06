@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import brandMark from "../assets/brand-mark.png";
+import brandMark from "../assets/brand-mark.webp";
 
 // The site's actual brand mark — shown once, consistently, above every page
 // (rendered globally in App.tsx), rather than as a small caption duplicated

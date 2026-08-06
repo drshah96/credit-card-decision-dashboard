@@ -38,7 +38,7 @@ export function CompareTray() {
             return (
               <div key={id} className="compare-tray-card">
                 {art ? (
-                  <img src={art} alt="" className="compare-tray-art" />
+                  <img src={art} alt="" className="compare-tray-art" loading="lazy" />
                 ) : (
                   <div className="compare-tray-art-fallback" aria-hidden="true" />
                 )}

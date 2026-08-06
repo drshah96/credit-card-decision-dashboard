@@ -96,6 +96,7 @@ export function CardSummaryCard({ card, selectMode = false }: Props) {
               src={cardImage}
               alt=""
               className="h-16 w-auto max-w-24 rounded-md shadow-[0_8px_16px_-8px_rgba(15,23,42,0.35)]"
+              loading="lazy"
             />
           )}
         </div>
