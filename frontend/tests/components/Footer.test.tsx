@@ -15,4 +15,19 @@ describe("Footer", () => {
       "/methodology",
     );
   });
+
+  // The footer is the only place on the site that tells a visitor how to reach
+  // us at all, and corrections from cardholders are the cheapest source of the
+  // per-card accuracy this catalog is built on.
+  it("offers a contact address for corrections", () => {
+    render(
+      <MemoryRouter>
+        <Footer />
+      </MemoryRouter>,
+    );
+    expect(screen.getByRole("link", { name: /hello@thewalletaudit\.com/i })).toHaveAttribute(
+      "href",
+      "mailto:hello@thewalletaudit.com",
+    );
+  });
 });
