@@ -34,7 +34,7 @@ export function pageTitle(specific) {
 export const STATIC_ROUTE_META = [
   {
     path: "/",
-    title: "The Wallet Audit — Credit Cards Rated on Real Value",
+    title: "The Wallet Audit: Credit Cards Rated on Real Value",
     description:
       "Compare premium credit cards on what they are actually worth: annual fees against real statement-credit value, honest points valuations, and no marketing hype.",
   },
@@ -76,8 +76,11 @@ export function maxCreditValue(card) {
 export function cardRouteMeta(card) {
   return {
     path: `/cards/${card.id}`,
-    // Leads with the card name because that's the search term.
-    title: pageTitle(`${card.name} — ${card.issuer}`),
+    // Leads with the card name because that's the search term. The issuer is
+    // parenthesised rather than set off with a dash: these titles are what
+    // link previews and search results show, and the site's copy avoids
+    // dashes throughout.
+    title: pageTitle(`${card.name} (${card.issuer})`),
     description: `${card.name} has a $${card.annual_fee} annual fee and up to $${maxCreditValue(card)} in statement credits. See what those credits are really worth, how the points redeem, and whether the fee pays for itself.`,
   };
 }

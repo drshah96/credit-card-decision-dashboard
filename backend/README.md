@@ -1,4 +1,4 @@
-# Backend — card catalog database
+# Backend: card catalog database
 
 The card catalog is a normalized relational schema (18 tables), not a single JSON
 blob. This doc covers the schema shape, how data actually gets in, and how to add
@@ -24,7 +24,7 @@ letting the catalog grow without a PR per edit.
   `timeline_events`. Each has a `sort_order` column standing in for array position,
   and cascades on delete with its card.
 - **`card_transfer_partners`** — junction table (card ↔ named transfer partner).
-  Populated for 27 of 95 cards so far, where a reliable, verified per-partner
+  Populated for 27 of 109 cards so far, where a reliable, verified per-partner
   source exists (name, type, ratio); the rest still only have the aggregate
   counts (`transfer_airline_count`/`transfer_hotel_count` on `cards`). Extend
   this as verified per-partner sources become available for other cards,

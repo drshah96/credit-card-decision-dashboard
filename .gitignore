@@ -37,3 +37,6 @@ frontend/coverage/
 # Database
 *.db
 *.db-journal
+# Design handoffs, prototypes and scratch reference material. Kept locally
+# for provenance, never pushed.
+reference/
