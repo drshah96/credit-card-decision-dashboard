@@ -26,7 +26,14 @@ export default function App() {
   usePageViewTracking();
 
   return (
-    <>
+    // Flex column at full viewport height so the footer sits at the bottom on
+    // short pages without anything having to pad content to reach it. Each
+    // page used to carry its own `minHeight: 100vh`, which pushed the footer
+    // down by a full viewport regardless of the header and footer already
+    // occupying part of it — that overshoot is what left ~470px of blank
+    // space under /compare's empty state. Solving it once here means pages
+    // only describe their own content. See issue #147.
+    <div className="app-shell">
       <a className="skip-link" href="#main">
         Skip to main content
       </a>
@@ -48,6 +55,6 @@ export default function App() {
       </main>
       <CompareTray />
       <Footer />
-    </>
+    </div>
   );
 }

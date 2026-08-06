@@ -83,8 +83,8 @@ export default function IssuersPage() {
   const headline = HEADLINES[headlineIndex];
 
   return (
-    <div style={{ minHeight: "100vh" }}>
-      <div className="wrap" style={{ paddingTop: 24, paddingBottom: 80 }}>
+    <div>
+      <div className="wrap page-body">
         {/* Header — the site's own name/mark lives in the persistent
             SiteMark bar above every page (see App.tsx), not here, so this
             headline doesn't have to also carry brand identity. */}

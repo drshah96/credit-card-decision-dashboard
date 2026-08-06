@@ -88,8 +88,8 @@ export default function MethodologyPage() {
   });
 
   return (
-    <div style={{ minHeight: "100vh" }}>
-      <div className="wrap" style={{ paddingTop: 24, paddingBottom: 80 }}>
+    <div>
+      <div className="wrap page-body">
         <div style={{ marginBottom: 20 }}>
           <BackLink />
         </div>

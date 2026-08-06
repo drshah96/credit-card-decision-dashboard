@@ -87,8 +87,29 @@ body {
   line-height: 1.5;
 }
 
+/* ─── App shell ────────────────────────────────────────────────────────────── */
+/* Holds the footer at the bottom of the viewport on short pages. Pages used
+   to each set `minHeight: 100vh` on their own root, which pushed the footer a
+   full viewport down without accounting for the sticky header or the footer
+   itself already taking space — the overshoot left ~470px of dead space under
+   /compare's empty state, and ~120-190px everywhere else. Owning it here
+   means a page only has to describe its own content. See issue #147. */
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.app-shell > main {
+  flex: 1;
+}
+
 /* ─── Page wrapper ─────────────────────────────────────────────────────────── */
 .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+/* Vertical rhythm for a route's content block. Was an inline
+   `paddingBottom: 80` repeated in seven page files, on top of the footer's
+   own 40px margin — 120px of combined air that read as an unfinished page
+   rather than a deliberate margin. One declaration now, and a smaller one. */
+.page-body { padding-top: 24px; padding-bottom: 40px; }
 
 /* ─── Site mark (brand lockup header) ────────────────────────────────────────
    Sticky so it stays reachable as a way back to "/" on long pages, and
