@@ -346,6 +346,13 @@ body {
 }
 .tier-btn:hover:not(:disabled) { color: var(--ink); border-color: var(--line-2); }
 .tier-btn:disabled { opacity: 0.25; cursor: default; }
+/* Same idea as .info-btn, but the two arrows sit 4px apart, so the target
+   only grows vertically and by 2px horizontally — enough to help a thumb
+   without the two buttons stealing each other's taps. */
+@media (pointer: coarse) {
+  .tier-btn { position: relative; }
+  .tier-btn::after { content: ""; position: absolute; inset: -7px -2px; }
+}
 
 /* ─── Reset sliders button (credits section header) ─────────────────────────── */
 .reset-sliders-btn { background: none; border: 1px solid var(--line); color: var(--muted); font-family: inherit; font-size: 11.5px; padding: 5px 11px; border-radius: 100px; cursor: pointer; white-space: nowrap; }
@@ -436,6 +443,15 @@ body {
   flex: none;
 }
 .info-btn:hover { border-color: var(--accent); color: var(--accent); }
+/* The dot is 15px by design, which is a hard target to hit with a thumb. On
+   touch devices a transparent pseudo-element widens the tappable area to
+   ~37px without changing anything visually. Mouse pointers are precise
+   enough not to need it, and leaving them alone avoids invisible boxes
+   intercepting text selection. */
+@media (pointer: coarse) {
+  .info-btn { position: relative; }
+  .info-btn::after { content: ""; position: absolute; inset: -11px; }
+}
 .chips { display: flex; flex-direction: column; gap: 10px; }
 .schip { border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px; background: var(--panel-s); }
 .schip-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
@@ -596,7 +612,17 @@ body {
   gap: 4px;
   border-bottom: 1px solid var(--line);
   margin-bottom: 32px;
+  /* The card detail page's Details bar carries five tabs with long labels
+     ("Value & Redemption", "Insurance & Protections"). On a 390px phone they
+     don't fit, and without this the last tab pushed the whole page 23px wider
+     than the viewport, so every card page scrolled sideways. Scrolling the
+     strip itself is the fix rather than wrapping: the active tab's 2px
+     underline is aligned to this container's border, and a wrapped row would
+     leave it floating mid-block. */
+  overflow-x: auto;
+  scrollbar-width: none;
 }
+.page-tabs::-webkit-scrollbar { display: none; }
 .page-tab {
   font-size: 13.5px;
   font-weight: 500;
@@ -606,8 +632,20 @@ body {
   margin-bottom: -1px;
   border-bottom: 2px solid transparent;
   transition: color 0.15s, border-color 0.15s;
+  /* Labels stay on one line and keep their width inside the scrolling strip
+     above, instead of squeezing or breaking mid-phrase. */
+  white-space: nowrap;
+  flex: none;
 }
 .page-tab + .page-tab { margin-left: 20px; }
+/* On phones: tighter spacing, and tabs that carry a short label swap to it so
+   all five fit without scrolling. Tabs with no short label are unaffected. */
+.tab-label-short { display: none; }
+@media (max-width: 640px) {
+  .page-tab + .page-tab { margin-left: 14px; }
+  .tab-label-full { display: none; }
+  .tab-label-short { display: inline; }
+}
 .page-tab:hover { color: var(--ink); }
 .page-tab.active {
   color: var(--ink);
