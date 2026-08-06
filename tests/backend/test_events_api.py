@@ -539,9 +539,7 @@ def test_events_are_rate_limited_per_client(clean_rate_limiter) -> None:
 
     # Silent drop, not an error: the caller ignores the response either way.
     with session_scope() as db:
-        stored = (
-            db.query(SessionModel).filter(SessionModel.id.in_(accepted)).count()
-        )
+        stored = db.query(SessionModel).filter(SessionModel.id.in_(accepted)).count()
     assert stored == limit, f"expected exactly {limit} rows written, got {stored}"
 
 
