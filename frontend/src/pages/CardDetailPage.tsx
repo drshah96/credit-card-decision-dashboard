@@ -857,7 +857,10 @@ function CardDetail({ card }: { card: Card }) {
             >
               {card.issuer}
             </p>
-            <h2
+            {/* h1, not h2: this is the page's top-level heading, and every
+            other route already leads with one. Inline styles carry the full
+            look, so the level change is semantic only. */}
+            <h1
               style={{
                 fontFamily: '"Fraunces Variable", serif',
                 fontWeight: 600,
@@ -880,7 +883,7 @@ function CardDetail({ card }: { card: Card }) {
               ) : (
                 card.name
               )}
-            </h2>
+            </h1>
             <p
               style={{
                 fontSize: 12.5,

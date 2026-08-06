@@ -8,7 +8,10 @@
   --panel-3: #E3E6ED;
   --ink: #14171C;
   --muted: #5B6472;
-  --faint: #6B7280;
+  /* Darkened from #6B7280, which sat at 4.43:1 on --panel-s and failed WCAG
+     AA for normal text. 5.01:1 on --base and 4.59:1 on --panel-s, the only
+     two surfaces faint text is ever placed on. */
+  --faint: #67707E;
   --line: rgba(15, 23, 42, 0.09);
   --line-2: rgba(15, 23, 42, 0.16);
   --green: #15803D;
@@ -17,6 +20,28 @@
   --blue: #1D4ED8;
   --accent: #475569;
   --accent-soft: rgba(71, 85, 105, 0.10);
+}
+
+/* ─── Skip link ────────────────────────────────────────────────────────────── */
+/* Offscreen until focused, so keyboard users can jump straight past the
+   header instead of tabbing through it on every page. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 10px 16px;
+  background: var(--base);
+  color: var(--ink);
+  border: 1px solid var(--line-2);
+  border-radius: 0 0 8px 0;
+  font-size: 13.5px;
+  text-decoration: none;
+}
+.skip-link:focus {
+  left: 0;
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
 }
 
 /* ─── Base ─────────────────────────────────────────────────────────────────── */
@@ -294,7 +319,14 @@ body {
 .credit-slider { display: flex; align-items: center; gap: 9px; }
 .credit-slider input[type="range"] {
   flex: 1; -webkit-appearance: none; appearance: none;
-  height: 5px; border-radius: 100px; background: var(--panel-3); outline: none;
+  height: 5px; border-radius: 100px; background: var(--panel-3);
+}
+/* These sliders are the main interactive control on the card detail page, so
+   keyboard focus has to be visible. Suppressed on mouse focus only; the ring
+   is offset because the track itself is just 5px tall. */
+.credit-slider input[type="range"]:focus { outline: none; }
+.credit-slider input[type="range"]:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 4px;
 }
 .credit-slider input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none; width: 15px; height: 15px; border-radius: 50%;
@@ -889,6 +921,12 @@ body {
   gap: 8px;
   padding: 10px 10px 10px 14px;
   border-bottom: 1px solid var(--line);
+}
+/* The input clears its own outline (it's borderless by design), so the focus
+   ring goes on the wrapper instead of disappearing entirely. */
+.card-picker-search:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
 }
 .card-picker-search input {
   flex: 1;

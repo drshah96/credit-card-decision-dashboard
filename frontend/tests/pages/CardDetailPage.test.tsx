@@ -279,6 +279,21 @@ describe("CardDetailPage", () => {
       expect(screen.getByText("American Express")).toBeInTheDocument();
     });
 
+    it("uses the card name as the page's h1", async () => {
+      vi.mocked(fetchCard).mockResolvedValue(makeCard());
+
+      renderPage();
+
+      // Level matters: this is the page's top-level heading, matching every
+      // other route. It was an h2 until the accessibility pass.
+      await waitFor(() => {
+        expect(
+          screen.getByRole("heading", { level: 1, name: "The Platinum Card" }),
+        ).toBeInTheDocument();
+      });
+      expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
+    });
+
     it("links the card name to official_url when present", async () => {
       vi.mocked(fetchCard).mockResolvedValue(
         makeCard({ official_url: "https://www.americanexpress.com/us/credit-cards/card/platinum/" }),
