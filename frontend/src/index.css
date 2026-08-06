@@ -20,6 +20,16 @@
   --blue: #1D4ED8;
   --accent: #475569;
   --accent-soft: rgba(71, 85, 105, 0.10);
+
+  /* Brand lockup tokens (design handoff 1C). Deliberately separate from
+     --ink: the wordmark is brand navy, not body-text near-black. The kicker
+     and descriptor reuse --muted (#5B6472) rather than adding a near-identical
+     token for the handoff's #5B6470 — a 2-point difference on one channel is
+     not worth a second grey in the palette. Measured 6.0:1 on white, so it
+     clears WCAG AA comfortably at the 10px the lockup uses them at. */
+  --brand-navy: #243B56;
+  --brand-navy-hover: #1A2C42;
+  --rule-grey: #C9D0D7;
 }
 
 /* ─── Skip link ────────────────────────────────────────────────────────────── */
@@ -80,14 +90,22 @@ body {
 /* ─── Page wrapper ─────────────────────────────────────────────────────────── */
 .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
 
-/* ─── Site mark (logo + wordmark header) ──────────────────────────────────────
+/* ─── Site mark (brand lockup header) ────────────────────────────────────────
    Sticky so it stays reachable as a way back to "/" on long pages, and
    shrinks once scrolled (.is-compact) rather than permanently eating
-   vertical space. Both images share --sitemark-logo-h; wordmark-tagline.png
-   bakes its text into a fixed ~6.3:1-aspect-ratio image, so clamp()'d height
-   (not a fixed px value) is what keeps the lockup from overflowing off the
-   right edge on phone widths — there's no way to reflow text baked into an
-   image, only to scale the whole thing down with the viewport. */
+   vertical space.
+
+   Layout follows design handoff option 1C (kept out of the repo; see
+   SiteMark.tsx for the reasoning it encodes):
+   mark, hairline rule, then a kicker / name / descriptor stack. The sizes are
+   fixed px with explicit breakpoints rather than clamp(), because the stack
+   has to stay shorter than the mark at every size — the symbol is meant to
+   bracket the type, and fluid type would drift past that bound between
+   breakpoints.
+
+   Deliberately set in the body sans, NOT Fraunces. The mark is a hairline
+   line-drawing, so a high-contrast display serif next to it reads as two
+   competing logos; light tracked-out caps share the mark's stroke weight. */
 .sitemark {
   position: sticky;
   top: 0;
@@ -96,21 +114,18 @@ body {
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  --sitemark-logo-h: clamp(24px, 7vw, 44px);
+  --sitemark-logo-h: 48px;
+  --sitemark-rule-h: 36px;
+  --sitemark-gap: 14px;
   --sitemark-pad: clamp(12px, 3vw, 20px);
   transition: background .2s ease;
 }
 .sitemark.is-compact {
-  /* Bigger than the plain shrink-both size used to be — once the wordmark
-     drops out, the logo is the only brand element left in the sticky bar,
-     so it can carry more visual weight than a purely proportional shrink
-     would give it. Padding shrinks further than before too, so the bar
-     doesn't just trade "shrink both" width for an oversized logo — it
-     actually reads as noticeably more compact once scrolled. Grey
-     (var(--panel-s), the same panel background used elsewhere in the
-     dashboard) instead of white/frosted, so the compact bar reads as a
-     distinct "scrolled" state rather than looking identical to the top. */
-  --sitemark-logo-h: clamp(30px, 6.5vw, 40px);
+  /* Once the lockup's text collapses, the mark is the only brand element
+     left, so it keeps more presence than a proportional shrink would give.
+     Grey (var(--panel-s)) rather than frosted white so the compact bar reads
+     as a distinct "scrolled" state instead of looking identical to the top. */
+  --sitemark-logo-h: 40px;
   --sitemark-pad: clamp(4px, 1vw, 6px);
   background: rgba(244, 245, 247, 0.94);
 }
@@ -118,40 +133,127 @@ body {
 .sitemark-link {
   display: inline-flex;
   align-items: center;
-  gap: clamp(4px, 1vw, 6px);
+  gap: var(--sitemark-gap);
+  text-decoration: none;
   /* Without this, the inline-flex box (sitting inside a text-align: center
      block) gets baseline-aligned like a line of text — reserving invisible
-     descender space below it the way "g"/"y" would need, even though there's
-     no actual text. That's what made the logo look vertically off-center:
-     real, measured ~6.5px of dead space under it and none above, not an
-     optical illusion. middle-aligning it against the line box removes that
-     reserved space entirely. */
+     descender space below it the way "g"/"y" would need. That's what made the
+     logo look vertically off-center: real, measured ~6.5px of dead space
+     under it and none above, not an optical illusion. */
   vertical-align: middle;
   transition: gap .2s ease;
 }
-.sitemark-logo, .sitemark-wordmark {
+.sitemark-link:focus-visible {
+  outline: 2px solid #5980A6;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.sitemark-logo {
   height: var(--sitemark-logo-h);
   width: auto;
   display: block;
   transition: height .2s ease;
 }
-/* EXPERIMENT: on scroll, drop the wordmark entirely and keep just the logo
-   mark, instead of shrinking both together. Kept in the DOM (not
-   conditionally unmounted) so it can fade/collapse smoothly rather than
-   snapping away. Link's aria-label already carries the accessible name, so
-   dropping the wordmark's own alt text from the a11y tree here is fine.
+.sitemark-rule {
+  display: block;
+  width: 1px;
+  height: var(--sitemark-rule-h);
+  background: var(--rule-grey);
+  flex: none;
+  transition: height .2s ease, opacity .15s ease;
+}
+.sitemark-text {
+  display: flex;
+  flex-direction: column;
+  /* Handoff says 5px, but its own numbers contradict its governing rule that
+     the stack must never exceed the symbol's height. At line-height 1 the
+     three lines are 10 + 20 + 10 = 40px, so two 5px gaps put the stack at
+     50px against a 48px mark — the type would bracket the symbol rather than
+     the other way round. (The handoff predicts "~45px", which its figures
+     cannot produce, and it explicitly says to re-check this if sizes move.)
+     4px lands the stack at exactly 48px, keeping every specified font size,
+     tracking value and the 48px symbol untouched. */
+  gap: 4px;
+  line-height: 1;
+  text-align: left;
+  font-family: "Space Grotesk Variable", system-ui, sans-serif;
+  text-transform: uppercase;
+  /* See the collapse rules below — an explicit max-width is what makes the
+     scrolled state animate rather than snap. */
+  max-width: 400px;
+  overflow: hidden;
+}
+.sitemark-kicker,
+.sitemark-name,
+.sitemark-desc { white-space: nowrap; display: block; }
+.sitemark-kicker {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: var(--muted);
+}
+.sitemark-name {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  color: var(--brand-navy);
+  transition: color .15s ease;
+}
+.sitemark-desc {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+}
+.sitemark-link:hover .sitemark-name { color: var(--brand-navy-hover); }
+
+/* On scroll, collapse the whole text stack and the rule, keeping just the
+   mark, instead of shrinking everything together. Kept in the DOM (not
+   conditionally unmounted) so it collapses smoothly rather than snapping. The
+   Link's aria-label already carries the accessible name, so the text leaving
+   the a11y tree here changes nothing.
+
    The base rule needs an explicit (generously large) max-width, not the
-   default `none` — a transition can't interpolate from the keyword `none`
-   to a pixel value, so without this the collapse snapped instantly instead
-   of animating, which is what made the centered row jerk sideways as
-   .sitemark-inner's text-align: center suddenly had less content to center. */
-.sitemark-wordmark { max-width: 400px; }
+   default `none` — a transition can't interpolate from the keyword `none` to
+   a pixel value, so without it the collapse snapped instantly, which made the
+   centered row jerk sideways as .sitemark-inner's text-align: center suddenly
+   had less content to center.
+
+   nowrap on each line plus hidden overflow on the stack are what let this
+   work with text rather than an image: squeezing max-width to 0 would
+   otherwise reflow each line into a one-word-per-line column on the way down,
+   growing the header instead of collapsing it. */
 .sitemark.is-compact .sitemark-link { gap: 0; }
-.sitemark.is-compact .sitemark-wordmark {
+.sitemark.is-compact .sitemark-text {
   opacity: 0;
   max-width: 0;
   margin: 0;
-  transition: height .2s ease, opacity .15s ease, max-width .2s ease;
+  transition: opacity .15s ease, max-width .2s ease;
+}
+.sitemark.is-compact .sitemark-rule {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Below 720px the descriptor and the rule go, and the lockup tightens: at
+   this width the three-line stack would otherwise crowd the mark and push
+   the header taller than it earns. */
+@media (max-width: 719.98px) {
+  .sitemark { --sitemark-logo-h: 40px; --sitemark-gap: 10px; }
+  .sitemark.is-compact { --sitemark-logo-h: 36px; }
+  .sitemark-rule { display: none; }
+  .sitemark-desc { display: none; }
+  .sitemark-kicker { font-size: 9px; }
+  .sitemark-name { font-size: 17px; }
+}
+
+/* Below 420px, the mark alone. The handoff is explicit that the wordmark must
+   not stack underneath the symbol, so it drops out entirely rather than
+   rewrapping. */
+@media (max-width: 419.98px) {
+  .sitemark-text { display: none; }
+  .sitemark { --sitemark-gap: 0px; }
 }
 
 /* ─── Block heading ────────────────────────────────────────────────────────── */
