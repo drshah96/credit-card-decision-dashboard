@@ -62,7 +62,9 @@ export function CompareSlot({
       >
         ×
       </button>
-      {cardImage && <img src={cardImage} alt="" className="compare-slot-art" />}
+      {cardImage && (
+        <img src={cardImage} alt="" className="compare-slot-art" loading="lazy" />
+      )}
       <div className="compare-slot-issuer">{cardSummary.issuer}</div>
       <div className="compare-slot-name">{cardSummary.name}</div>
       <span
