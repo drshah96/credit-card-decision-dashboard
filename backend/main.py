@@ -211,5 +211,7 @@ def track_event(event: EventIn, request: Request) -> dict:
         referrer=_referrer_host(event.referrer),
         country=country,
         device_type=_device_type(user_agent),
+        detail=event.detail,
+        value=event.value,
     )
     return {"status": "ok"}
