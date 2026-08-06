@@ -13,12 +13,23 @@ export function initAnalytics(): void {
   if (!import.meta.env.PROD) return;
 
   window.dataLayer = window.dataLayer || [];
-  // Google's own canonical gtag.js snippet, not a hand-rolled equivalent —
-  // this pushes the raw `arguments` object, exactly what gtag.js itself
-  // expects to find queued once it loads and takes over dataLayer.push.
-  function gtag(...args: unknown[]) {
-    window.dataLayer!.push(args);
-  }
+  // This MUST push the `arguments` object itself, never a rest-parameter
+  // array. gtag.js decides whether a dataLayer entry is a command by checking
+  // Object.prototype.toString.call(entry) === "[object Arguments]"; a real
+  // Array looks like plain data and is silently dropped.
+  //
+  // That one detail is why this property recorded zero hits for its entire
+  // lifetime. `function gtag(...args) { dataLayer.push(args) }` reads as an
+  // equivalent modernisation of Google's snippet, and the queued dataLayer
+  // looks completely correct when you inspect it, but gtag.js never
+  // recognised consent/js/config/event as commands — so it loaded, ran, and
+  // never configured a measurement id or attempted a single request.
+  // Verified on production 2026-08-05: zero /g/collect requests before,
+  // two immediately after re-issuing the same commands in this form.
+  const gtag = function () {
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer!.push(arguments);
+  } as (...args: unknown[]) => void;
   window.gtag = gtag;
 
   const script = document.createElement("script");
