@@ -247,6 +247,29 @@ export default function MethodologyPage() {
             click through to a card's own page and check its issuer's terms before applying.
           </P>
         </Section>
+
+        {/* Named authorship, deliberately on this page rather than a separate
+            About route: the independence stance above is only credible if a
+            real person stands behind it, and search engines weigh exactly
+            that for financial content. A fuller About page can come later;
+            this is the part that couldn't wait. */}
+        <Section label="Who" title="Who's behind this">
+          <P>
+            One person:{" "}
+            <a
+              href="https://www.linkedin.com/in/dhruvinshah1996/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "var(--blue)" }}
+            >
+              Dhruvin Shah
+            </a>
+            . The Wallet Audit is independently built and maintained, with every card
+            sourced by hand from the issuer's own pricing terms and cardmember
+            agreements. There's no team behind the "we" on this page, and no affiliate
+            deals behind the rankings above.
+          </P>
+        </Section>
       </div>
     </div>
   );
