@@ -74,7 +74,38 @@ services:
       # point the frontend at it directly instead of the onrender.com URL.
       - key: VITE_API_URL
         value: https://api.thewalletaudit.com/api
+    # The build prerenders one HTML file per route (frontend/scripts/prerender.mjs)
+    # so crawlers that never run JS — LinkedIn, Twitter/X, Facebook, Slack,
+    # iMessage — read that route's own title and OpenGraph tags instead of the
+    # generic shell.
+    #
+    # Those files land at e.g. dist/cards/<id>/index.html. Render serves a
+    # directory's index.html only when the request path ends in a slash; for
+    # "/cards/<id>" nothing matches that exact path, so the catch-all below
+    # fired and returned the root shell. Every shared card link previewed as
+    # the homepage, with og:url pointing there too.
+    #
+    # These rules map the extensionless form (what we link, canonicalise and
+    # list in sitemap.xml) onto the file that actually exists. Order matters:
+    # Render evaluates top down, so each specific rule has to precede the
+    # catch-all, which still handles unknown paths so client-side routing and
+    # 404s keep working.
     routes:
+      - type: rewrite
+        source: /cards/:id
+        destination: /cards/:id/index.html
+      - type: rewrite
+        source: /issuer/:slug
+        destination: /issuer/:slug/index.html
+      - type: rewrite
+        source: /compare
+        destination: /compare/index.html
+      - type: rewrite
+        source: /top-picks
+        destination: /top-picks/index.html
+      - type: rewrite
+        source: /methodology
+        destination: /methodology/index.html
       - type: rewrite
         source: /*
         destination: /index.html
