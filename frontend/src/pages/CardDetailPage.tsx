@@ -796,17 +796,57 @@ function CardDetail({ card }: { card: Card }) {
   );
   const totalCreditsUsed = activeCredits.reduce((sum, c) => sum + (creditValues[c.id] ?? 0), 0);
 
+  // Dragging a slider fires onChange on every step, so the value is only
+  // recorded once it settles. Keyed by credit id so adjusting two sliders in
+  // quick succession still records both rather than the second cancelling the
+  // first. Cleared on unmount so a timer can't fire against a closed page.
+  const sliderTrackTimers = useRef<Record<string, number>>({});
+  useEffect(() => {
+    const timers = sliderTrackTimers.current;
+    return () => {
+      for (const t of Object.values(timers)) window.clearTimeout(t);
+    };
+  }, []);
+
   function handleCreditSlider(id: string, v: number) {
     setCreditValues((prev) => ({ ...prev, [id]: v }));
     setCreditValue(card.id, id, v);
+
+    // What someone claims they'll actually use out of a given credit is a
+    // direct statement about how they spend — the strongest preference
+    // signal on the page, and the reason these events exist.
+    window.clearTimeout(sliderTrackTimers.current[id]);
+    sliderTrackTimers.current[id] = window.setTimeout(() => {
+      trackEvent("credit_slider_set", { card_id: card.id, credit_id: id, value: v });
+      recordPageView("credit_slider_set", card.issuer, card.id, id, String(v));
+    }, 800);
   }
 
   function handleCreditTierMove(id: string, dir: "up" | "down") {
-    setCreditTiers((prev) => {
-      const cur = TIER_ORDER.indexOf(prev[id] ?? "niche");
-      const next = dir === "up" ? Math.max(0, cur - 1) : Math.min(2, cur + 1);
-      return { ...prev, [id]: TIER_ORDER[next] };
-    });
+    // Computed outside the updater, not inside it: a state updater has to be
+    // pure, and StrictMode double-invokes it in development, which would post
+    // every tier move twice. Reading current state directly is safe here
+    // because this only runs from a click, one discrete move at a time.
+    const cur = TIER_ORDER.indexOf(creditTiers[id] ?? "niche");
+    const next = dir === "up" ? Math.max(0, cur - 1) : Math.min(2, cur + 1);
+    const tier = TIER_ORDER[next];
+    // At either end the arrow is disabled, but guard anyway so a no-op can't
+    // be recorded as intent.
+    if (tier === creditTiers[id]) return;
+
+    setCreditTiers((prev) => ({ ...prev, [id]: tier }));
+    // Promoting a credit out of "Niche" is someone saying this fits my life;
+    // demoting it says the opposite. Both are explicit fit signals.
+    trackEvent("credit_tier_moved", { card_id: card.id, credit_id: id, tier });
+    recordPageView("credit_tier_moved", card.issuer, card.id, id, tier);
+  }
+
+  // Clicking through to the issuer is the closest thing to a conversion this
+  // site has, and was the one high-intent action with no tracking at all.
+  // Both the card name and the card art link out, so they share this.
+  function handleIssuerLinkClick() {
+    trackEvent("issuer_link_clicked", { card_id: card.id, issuer: card.issuer });
+    recordPageView("issuer_link_clicked", card.issuer, card.id);
   }
 
   function handleCreditReset() {
@@ -879,6 +919,7 @@ function CardDetail({ card }: { card: Card }) {
                   href={card.official_url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={handleIssuerLinkClick}
                   style={{ color: "inherit", textDecoration: "none" }}
                   title={`Open ${card.name} on ${card.issuer}'s site`}
                 >
@@ -968,6 +1009,7 @@ function CardDetail({ card }: { card: Card }) {
                   href={card.official_url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={handleIssuerLinkClick}
                   title={`Open ${card.name} on ${card.issuer}'s site`}
                 >
                   {img}
@@ -1034,7 +1076,16 @@ function CardDetail({ card }: { card: Card }) {
               // unselected tab would be a dangling reference.
               aria-controls={activeTab === tab.id ? `panel-${tab.id}` : undefined}
               className={`page-tab ${activeTab === tab.id ? "active" : ""}`}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => {
+                setActiveTab(tab.id);
+                // Which pane someone opens says what they judge a card on:
+                // fees, insurance, earn rates. Only fires on a real change,
+                // so re-clicking the active tab isn't counted as interest.
+                if (tab.id !== activeTab) {
+                  trackEvent("card_tab_viewed", { card_id: card.id, tab: tab.id });
+                  recordPageView("card_tab_viewed", card.issuer, card.id, tab.id);
+                }
+              }}
             >
               {/* Only one is ever displayed, and display:none keeps the other
               out of the accessibility tree, so the tab isn't announced twice. */}

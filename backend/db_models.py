@@ -526,6 +526,26 @@ class PageView(Base):
       insert one row per card rather than adding a separate list-shaped
       column — keeps every row atomic and reuses the existing singular
       card_slug field exactly like card_view already does.
+    - credit_slider_set, credit_tier_moved, card_tab_viewed,
+      issuer_link_clicked: preference signals from the card detail page.
+      These are the ones worth having for a future recommendation system:
+      dragging a card's Dining credit to its maximum, or promoting its Lyft
+      credit out of "Niche", is a visitor telling us directly how they
+      spend, which is a far stronger signal than any inferred demographic.
+      All four set card_slug, plus detail/value below.
+
+    detail/value are a deliberately generic pair rather than one column per
+    event type, since each new signal would otherwise need its own
+    migration. Both are nullable and only the four events above populate
+    them:
+    - credit_slider_set:   detail = credit id ("dining"), value = dollars ("150")
+    - credit_tier_moved:   detail = credit id,            value = new tier ("niche")
+    - card_tab_viewed:     detail = tab id ("insurance"), value = None
+    - issuer_link_clicked: detail = None,                 value = None
+
+    value is text, not an integer, because it carries a dollar amount for
+    one event and a tier name for another. Cast at query time; storing two
+    mostly-null typed columns to avoid one cast isn't worth it.
     """
 
     __tablename__ = "page_views"
@@ -533,7 +553,8 @@ class PageView(Base):
         CheckConstraint(
             "event_type IN ('issuer_view','card_view','home_view','top_pick_view',"
             "'compare_view','methodology_view','top_pick_card_selected',"
-            "'compare_card_selected')",
+            "'compare_card_selected','credit_slider_set','credit_tier_moved',"
+            "'card_tab_viewed','issuer_link_clicked')",
             name="ck_page_view_event_type",
         ),
     )
@@ -546,5 +567,10 @@ class PageView(Base):
     event_type: Mapped[str]
     issuer: Mapped[str | None] = mapped_column(index=True, default=None)
     card_slug: Mapped[str | None] = mapped_column(index=True, default=None)
+    # See the class docstring for what these carry per event type. Indexed
+    # because the recommendation queries these exist for group by it, e.g.
+    # "average slider value per credit across sessions".
+    detail: Mapped[str | None] = mapped_column(index=True, default=None)
+    value: Mapped[str | None] = mapped_column(default=None)
 
     session: Mapped[SessionModel] = relationship(back_populates="page_views")

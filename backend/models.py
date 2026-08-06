@@ -1,6 +1,6 @@
 from typing import Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class Verdict(BaseModel):
@@ -335,9 +335,19 @@ class EventIn(BaseModel):
         "methodology_view",
         "top_pick_card_selected",
         "compare_card_selected",
+        "credit_slider_set",
+        "credit_tier_moved",
+        "card_tab_viewed",
+        "issuer_link_clicked",
     ]
     issuer: str | None = None
     card_id: str | None = None
+    # Only the four preference-signal events populate these; see
+    # backend/db_models.py PageView for what each carries. Length-capped so a
+    # malformed or hostile payload can't write unbounded strings through an
+    # endpoint that deliberately does no other validation.
+    detail: str | None = Field(default=None, max_length=64)
+    value: str | None = Field(default=None, max_length=32)
     # The full referring URL (e.g. "https://www.google.com/search?q=..."),
     # straight from the frontend's own document.referrer — main.py extracts
     # just the host before it reaches record_page_view/SessionModel.referrer.
