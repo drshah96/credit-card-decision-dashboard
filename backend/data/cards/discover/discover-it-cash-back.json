@@ -1,0 +1,195 @@
+{
+  "id": "discover-it-cash-back",
+  "secured_variant_id": "discover-it-secured",
+  "name": "Discover it Cash Back",
+  "issuer": "Discover",
+  "network": "DISCOVER",
+  "points_program": "Cashback Bonus",
+  "accent_color": "#FF6000",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee",
+  "official_url": "https://www.discover.com/credit-cards/cash-back/it-card/",
+  "intro_apr_purchases": {
+    "rate": "0%",
+    "months": 15
+  },
+  "intro_apr_balance_transfers": {
+    "rate": "0%",
+    "months": 15
+  },
+  "foreign_transaction_fee": false,
+  "variable_apr": "17.49% to 26.49%, based on creditworthiness",
+  "balance_transfer_apr": "17.49% to 26.49%, based on creditworthiness",
+  "balance_transfer_fee": "3% of each transfer during the first 15 months, 5% after that",
+  "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.49%",
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": null,
+  "late_payment_fee": "None the first time you pay late, up to $41 after that",
+  "returned_payment_fee": "Up to $30",
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "Cashback Match, which doubles every dollar of cash back you earn in your first year",
+    "requirement": "automatic on all cash back earned from account approval through your first 365 days, with no minimum spend and no cap, paid within two billing periods",
+    "estimated_value": null
+  },
+  "verdict": {
+    "status": "keep",
+    "text": "Year one pays double, if you remember to activate the categories",
+    "short_tag": "Rotating 5%"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🔄",
+      "multiplier": "5%",
+      "category": "Rotating quarterly categories, on up to $1,500 per quarter, once you activate",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1%",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "The 5% rate is capped at $1,500 of spending each quarter, which works out to $75 of cash back, and it only pays if you remember to activate the categories. Miss the activation and the quarter earns the 1% base instead. That activation step is the single biggest reason people underuse this card. Discover publishes the categories a quarter or two ahead, and they have historically clustered around groceries, restaurants, gas and online shopping, but its own rewards calendar is down as of August 2026, so treat any 2026 category list you see elsewhere as unconfirmed. The real headline is Cashback Match: everything above is doubled for the first 12 months, so a first year of maxed-out quarters plus ordinary base spend lands closer to an effective 10% and 2% than the printed rates suggest.",
+  "points": {
+    "currency": "Cashback Bonus",
+    "redemption_options": [
+      {
+        "method": "Partner gift cards, which carry at least 5% added value",
+        "cpp": 1.05,
+        "best": true
+      },
+      {
+        "method": "Statement credit or deposit to a bank account",
+        "cpp": 1.0,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,050",
+    "note": "Cash back is worth a flat 1 cent as a statement credit or a bank deposit, with no minimum and no expiration while the account is open. The part most comparisons miss is gift cards: Discover guarantees at least 5% added value on partner gift cards, so $47.50 of rewards buys a $50 card, and rotating merchant promotions have gone as high as 15% to 25% on names like Apple, Uber, Instacart, Chipotle and GameStop. Treat the 5% as the floor you can count on and the bigger promotions as opportunistic, since they are merchant-specific and time-limited. One catch worth knowing: the minimum gift card redemption rose from $5 to $25 when accounts moved to Capital One."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners. Cashback Bonus is cash, not a transferable currency.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Price protection",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not covered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "There is nothing here, and that is the honest answer rather than a gap in our research. Discover dropped purchase protection, extended warranty, return guarantee, auto rental coverage and travel accident insurance at the end of February 2018, then price protection that October, and the current cardmember agreement contains no benefit terms of any kind. That makes Discover unusual among big US issuers: even most no-fee cards from Chase, Capital One and Citi still carry a purchase protection or extended warranty row. What Discover does spend its money on is fraud and identity work instead, which is real but covers a different risk than a cracked phone screen or a stolen laptop.",
+  "rental_note": "No rental car coverage at all, primary or secondary. If you decline the counter's collision waiver with this card, nothing backs you up, so either buy the waiver, rely on your own auto policy, or pay for the rental with a card that actually covers it.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "$0 fraud liability",
+      "detail": "You are never held responsible for unauthorized purchases. No enrollment needed."
+    },
+    {
+      "name": "Free FICO score",
+      "detail": "Your FICO score from TransUnion on your statement and in the app, with the factors moving it. Discover offers this to non-cardholders too, so it is not really exclusive."
+    },
+    {
+      "name": "Social Security number alerts",
+      "detail": "Daily dark web scans for your SSN plus new-account alerts on your credit report. Requires enrollment, and only the primary cardmember can sign up."
+    },
+    {
+      "name": "Freeze It",
+      "detail": "Freeze the account from the app or website to block new purchases and cash advances if you misplace the card."
+    },
+    {
+      "name": "24/7 US-based customer service",
+      "detail": "Live agents at any hour, without a menu tree to fight through first."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Their spending earns cash back into your account",
+            "included": true
+          },
+          {
+            "text": "Counts toward your Cashback Match in year one",
+            "included": true
+          },
+          {
+            "text": "Any purchase protection or travel coverage",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add, and in the first year it is genuinely worth doing: an authorized user's spending is matched right along with yours, so household spend concentrated here doubles too."
+  },
+  "timeline": [
+    {
+      "date": "July 2026",
+      "type": "neutral",
+      "badge": "Migration",
+      "text": "Capital One begins moving Discover card accounts onto its own platform, in waves running through 2027. Account numbers, earn rates, rewards balances, APRs and the Discover network branding all stay put. Rewards redemption changes though: the gift card minimum rises from $5 to $25, rewards can no longer be applied to a minimum payment, Pay with Rewards through Apple Pay goes away, and automatic statement credit has to be re-enrolled on Capital One's site."
+    },
+    {
+      "date": "May 2025",
+      "type": "neutral",
+      "badge": "Acquisition",
+      "text": "Capital One completes its acquisition of Discover Financial Services. Discover Bank later merges into Capital One, N.A., though the cards keep Discover branding and terms."
+    },
+    {
+      "date": "October 2018",
+      "type": "cut",
+      "badge": "Benefit cut",
+      "text": "Price protection is discontinued, following the larger round of cuts earlier in the year."
+    },
+    {
+      "date": "February 2018",
+      "type": "cut",
+      "badge": "Benefit cut",
+      "text": "Discover drops purchase protection, extended warranty, return guarantee, auto rental collision coverage and travel accident insurance across its consumer cards. This is why the protections section below is empty."
+    }
+  ]
+}

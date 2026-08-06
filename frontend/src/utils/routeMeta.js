@@ -18,6 +18,7 @@ export const SEO_ISSUERS = [
   { slug: "bofa", label: "Bank of America" },
   { slug: "bilt", label: "Bilt" },
   { slug: "wells-fargo", label: "Wells Fargo" },
+  { slug: "discover", label: "Discover" },
 ];
 
 /** @param {string} specific */

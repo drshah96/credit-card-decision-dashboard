@@ -1,0 +1,200 @@
+{
+  "id": "discover-it-secured",
+  "name": "Discover it Secured Cash Back",
+  "issuer": "Discover",
+  "network": "DISCOVER",
+  "points_program": "Cashback Bonus",
+  "accent_color": "#FF6000",
+  "annual_fee": 0,
+  "effective_cost": "Free, with no annual fee; refundable deposit of $49, $99 or $200 unlocks a larger credit line",
+  "official_url": "https://www.discover.com/credit-cards/secured-credit-card/",
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
+  "foreign_transaction_fee": false,
+  "variable_apr": "28.99%",
+  "balance_transfer_apr": "28.99%",
+  "balance_transfer_fee": "5% on transfers posted at a promotional APR, none at the standard Transfer APR",
+  "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.99%",
+  "penalty_apr": null,
+  "penalty_apr_trigger": null,
+  "pay_over_time_fee": null,
+  "late_payment_fee": "None the first time you pay late, up to $41 after that",
+  "returned_payment_fee": null,
+  "returned_check_fee": null,
+  "welcome_bonus": {
+    "bonus": "Cashback Match, which doubles every dollar of cash back you earn in your first year",
+    "requirement": "automatic on all cash back earned from account approval through your first 365 days, with no minimum spend and no cap, paid within two billing periods",
+    "estimated_value": null
+  },
+  "verdict": {
+    "status": "situational",
+    "text": "Opens at a $49 deposit and still pays the full 5%, rare for secured",
+    "short_tag": "Credit Building"
+  },
+  "earn_rates": [
+    {
+      "emoji": "🔄",
+      "multiplier": "5%",
+      "category": "Rotating quarterly categories, up to the quarterly maximum, once you activate",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "💳",
+      "multiplier": "1%",
+      "category": "Everything else",
+      "highlight": false,
+      "is_base": true
+    }
+  ],
+  "earn_note": "Unusually for a secured card, the rewards are not a watered down version of the real thing: this earns the same 5% rotating categories and 1% base as Discover's flagship cash back card, and Cashback Match doubles all of it in year one. Most secured cards pay nothing at all. The 5% still needs activating each quarter, and Discover's own rewards calendar is down as of August 2026, so the specific 2026 categories are not something we can confirm. Bear in mind the point of a card like this is the payment history it builds, not the rewards, and at a 28.99% APR carrying a balance would wipe out the earnings several times over.",
+  "points": {
+    "currency": "Cashback Bonus",
+    "redemption_options": [
+      {
+        "method": "Partner gift cards, which carry at least 5% added value",
+        "cpp": 1.05,
+        "best": true
+      },
+      {
+        "method": "Statement credit or deposit to a bank account",
+        "cpp": 1.0,
+        "best": false
+      }
+    ],
+    "per_100k": "$1,050",
+    "note": "Same redemption menu as the rest of the Discover lineup. Cash back is a flat 1 cent as a statement credit or bank deposit, with no minimum and no expiry while the account is open, and partner gift cards carry a guaranteed 5% minimum added value, so $47.50 of rewards buys a $50 card. The gift card minimum rose from $5 to $25 with the move to Capital One, which bites harder here than elsewhere, since a credit-building card with a small limit generates rewards slowly."
+  },
+  "transfer_partners": {
+    "airline_count": 0,
+    "hotel_count": 0,
+    "highlight": "No transfer partners. Cashback Bonus is cash, not a transferable currency.",
+    "recent_changes": "Not applicable."
+  },
+  "credits": [],
+  "insurance": [
+    {
+      "coverage": "Purchase protection",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Price protection",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Rental car CDW",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "Not covered",
+      "level": "none"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "Not covered",
+      "level": "none"
+    }
+  ],
+  "protection_note": "Nothing here, which is consistent across every Discover card since the February 2018 cuts and the removal of price protection that October. The current cardmember agreement carries no benefit terms at all. For a credit-building card this matters less than it would elsewhere, since the job is establishing a payment history rather than insuring purchases, but it is worth knowing that graduating to the unsecured version does not unlock protections either. There are none to unlock.",
+  "rental_note": "No rental car coverage, primary or secondary. Renting a car on this card means relying on your own auto policy or buying the counter's collision waiver.",
+  "status_perks": [],
+  "services": [
+    {
+      "name": "Refundable security deposit, tiered rather than flat",
+      "detail": "A $49, $99 or $200 minimum deposit, tiered by your creditworthiness at approval, opens an account with a credit line of at least $200. Worth noting that the deposit does not simply become your credit line the way it does on most secured cards, so $49 down can still open a $200 line. You can deposit more to start higher, and you have 35 days after approval to fund it, before activating the card. The maximum limit runs $1,000 to $3,000 depending on creditworthiness."
+    },
+    {
+      "name": "No interest paid on the deposit",
+      "detail": "The money sits in a Security Deposit Account that is FDIC insured and stays in your name, but it earns nothing while it is held, and you cannot withdraw from it while the account is open. That is a real if small cost of the card, since the same cash in a savings account would earn."
+    },
+    {
+      "name": "Path to an unsecured card",
+      "detail": "Used responsibly, the account can be unsecured, at which point the deposit comes back as a statement credit and the account becomes the standard Discover it Cash Back, with all other terms unchanged. Otherwise the deposit is refunded when you close the account and pay the balance in full. Discover no longer publishes a review timetable, so the widely repeated \"automatic reviews from month 7\" figure describes the older version of this card and should not be relied on."
+    },
+    {
+      "name": "$0 fraud liability",
+      "detail": "You are never held responsible for unauthorized purchases. No enrollment needed."
+    },
+    {
+      "name": "Free FICO score",
+      "detail": "Your FICO score from TransUnion on your statement and in the app, with the factors moving it. Genuinely useful on a credit-building card, since it lets you watch the thing you are trying to move."
+    },
+    {
+      "name": "Social Security number alerts",
+      "detail": "Daily dark web scans for your SSN plus new-account alerts on your credit report. Requires enrollment, and only the primary cardmember can sign up."
+    },
+    {
+      "name": "Freeze It",
+      "detail": "Freeze the account from the app or website to block new purchases and cash advances if you misplace the card."
+    },
+    {
+      "name": "24/7 US-based customer service",
+      "detail": "Live agents at any hour, without a menu tree to fight through first."
+    }
+  ],
+  "additional_cards": {
+    "title": "Additional cards",
+    "options": [
+      {
+        "name": "Authorized User",
+        "fee": "$0",
+        "is_free": true,
+        "benefits": [
+          {
+            "text": "Free to add",
+            "included": true
+          },
+          {
+            "text": "Their spending earns cash back into your account",
+            "included": true
+          },
+          {
+            "text": "Shares your credit line, which starts small on a secured card",
+            "included": true
+          },
+          {
+            "text": "Any purchase protection or travel coverage",
+            "included": false
+          }
+        ]
+      }
+    ],
+    "note": "Free to add, though a secured card's opening limit is low enough that sharing it usually creates more friction than it is worth."
+  },
+  "timeline": [
+    {
+      "date": "2026",
+      "type": "add",
+      "badge": "Relaunch",
+      "text": "The card returns, rebuilt on Capital One's secured platform with materially better terms than the version that was pulled. The deposit is now tiered at $49, $99 or $200 based on creditworthiness rather than a flat $200 minimum, and the rewards move from 2% on gas and restaurants to the same 5% rotating categories the flagship card earns. Note that most comparison sites are still describing the old card."
+    },
+    {
+      "date": "June 2026",
+      "type": "cut",
+      "badge": "Paused",
+      "text": "Discover stops accepting new applications for its secured card on June 2, saying the pause is temporary and the product will relaunch later in the year. Existing cardholders were not told of changes at the time."
+    },
+    {
+      "date": "May 2025",
+      "type": "neutral",
+      "badge": "Acquisition",
+      "text": "Capital One completes its acquisition of Discover Financial Services. Discover Bank later merges into Capital One, N.A., though the cards keep Discover branding and terms."
+    },
+    {
+      "date": "February 2018",
+      "type": "cut",
+      "badge": "Benefit cut",
+      "text": "Discover drops purchase protection, extended warranty, return guarantee, auto rental collision coverage and travel accident insurance across its consumer cards. This is why the protections section below is empty."
+    }
+  ]
+}
