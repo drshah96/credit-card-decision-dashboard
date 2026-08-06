@@ -1,5 +1,6 @@
 import { Component } from "react";
 import type { ErrorInfo, ReactNode } from "react";
+import { reportError } from "../utils/errorReporting";
 
 interface Props {
   children: ReactNode;
@@ -21,6 +22,9 @@ export class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, info: ErrorInfo) {
     console.error("[ErrorBoundary]", error, info.componentStack);
+    // The component stack is the readable half of a production report —
+    // it names component boundaries while the JS stack is minified noise.
+    reportError(error, info.componentStack ?? undefined);
   }
 
   render() {

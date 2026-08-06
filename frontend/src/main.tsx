@@ -10,6 +10,7 @@ import "./index.css";
 import App from "./App.tsx";
 import { fetchCards } from "./api/cards";
 import { initAnalytics } from "./utils/analytics";
+import { installGlobalErrorReporting } from "./utils/errorReporting";
 
 // Render's redirect rules only match on path, not hostname, so the raw
 // thewalletaudit.onrender.com URL can't be redirected to the custom domain
@@ -38,7 +39,10 @@ if (window.location.hostname === "thewalletaudit.onrender.com") {
   const rootElement = document.getElementById("root");
   if (!rootElement) throw new Error("Root element #root not found in index.html");
 
-  createRoot(rootElement).render(
+  // Before render, so even a crash during initial mount gets reported.
+installGlobalErrorReporting();
+
+createRoot(rootElement).render(
     <StrictMode>
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>

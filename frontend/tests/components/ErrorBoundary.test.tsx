@@ -1,6 +1,11 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { reportError } from "@/utils/errorReporting";
+
+// The boundary must hand every caught error to the first-party reporter
+// (issue #149) — mocked here so no fetch fires.
+vi.mock("@/utils/errorReporting", () => ({ reportError: vi.fn() }));
 
 // Component that throws on render for testing purposes
 function ThrowingComponent(): never {
@@ -79,6 +84,19 @@ describe("ErrorBoundary", () => {
       "[ErrorBoundary]",
       expect.any(Error),
       expect.anything(),
+    );
+  });
+
+  it("reports the caught error with its component stack (issue #149)", () => {
+    render(
+      <ErrorBoundary>
+        <ThrowingComponent />
+      </ErrorBoundary>,
+    );
+
+    expect(reportError).toHaveBeenCalledWith(
+      expect.objectContaining({ message: "Test render error" }),
+      expect.stringContaining("ThrowingComponent"),
     );
   });
 });

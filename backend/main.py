@@ -11,8 +11,9 @@ from fastapi.middleware.gzip import GZipMiddleware
 from sqlalchemy import text
 
 from backend.db import engine
-from backend.models import Card, CardSummary, EventIn
+from backend.models import Card, CardSummary, ClientErrorIn, EventIn
 from backend.services.cards import get_card, get_card_summaries, get_cards
+from backend.services.errors import record_client_error
 from backend.services.events import record_page_view
 
 
@@ -291,5 +292,33 @@ def track_event(event: EventIn, request: Request) -> dict:
         device_type=_device_type(user_agent),
         detail=event.detail,
         value=event.value,
+    )
+    return {"status": "ok"}
+
+
+@app.post("/api/client-errors")
+def track_client_error(error: ClientErrorIn, request: Request) -> dict:
+    """Record one frontend JavaScript error — the first-party half of issue
+    #149. Same contract as /api/events in every way that matters: fire-and-
+    forget from the client, silent drop for bot traffic, and the same
+    per-client rate limiter (a shared budget is deliberate — an error storm
+    from one client shouldn't get its own fresh allowance on top of the
+    events one, and the reporter already dedupes and self-caps per page
+    load, so legitimate error volume is a rounding error next to page
+    views). Length caps live on ClientErrorIn, so by the time this body
+    runs, every field is bounded."""
+    user_agent = request.headers.get("user-agent")
+    if _is_bot(user_agent):
+        return {"status": "ok"}
+    if _rate_limited(request):
+        return {"status": "ok"}
+
+    record_client_error(
+        message=error.message,
+        session_id=error.session_id,
+        path=error.path,
+        stack=error.stack,
+        component_stack=error.component_stack,
+        device_type=_device_type(user_agent),
     )
     return {"status": "ok"}

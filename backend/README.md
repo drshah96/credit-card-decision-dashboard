@@ -32,6 +32,22 @@ letting the catalog grow without a PR per edit.
 - **`card_drafts`** — the review queue. Not part of the normalized schema itself;
   holds fetched-and-extracted card data pending human approval before it's promoted
   into the tables above.
+- **`sessions` / `page_views`** — anonymous first-party analytics (no IP, no raw
+  User-Agent; see the model docstrings for the PII stance). Written by
+  `POST /api/events`, rate limited and length-capped.
+- **`client_errors`** — frontend JavaScript errors, reported first-party by
+  `POST /api/client-errors` instead of a third-party service (issue #149). Same
+  PII stance and rate limiting as the analytics tables. To see what's breaking,
+  in the Neon console (or any client):
+
+  ```sql
+  SELECT occurred_at, message, path, device_type
+  FROM client_errors ORDER BY occurred_at DESC LIMIT 50;
+
+  -- what's breaking most, grouped
+  SELECT message, count(*), max(occurred_at) AS latest
+  FROM client_errors GROUP BY message ORDER BY count(*) DESC;
+  ```
 
 ```mermaid
 erDiagram
