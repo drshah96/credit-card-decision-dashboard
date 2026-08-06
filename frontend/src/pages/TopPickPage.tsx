@@ -402,8 +402,8 @@ export default function TopPickPage() {
     : [];
 
   return (
-    <div style={{ minHeight: "100vh" }}>
-      <div className="wrap" style={{ paddingTop: 24, paddingBottom: 80 }}>
+    <div>
+      <div className="wrap page-body">
         <header style={{ marginBottom: 40 }}>
           <h1
             style={{
