@@ -1,0 +1,36 @@
+name: Weekly dependency audit
+
+# Surfaces new vulnerability advisories as a visibly failed scheduled run,
+# instead of waiting for someone to think of running an audit by hand.
+# Deliberately NOT a PR gate: a "high" advisory can be unexploitable here
+# (the react-router RSC advisory was exactly that), and a blocking gate
+# would teach us to ignore it. A red weekly run is a prompt to assess.
+on:
+  schedule:
+    - cron: "0 13 * * 1" # Mondays, 9am ET
+  workflow_dispatch:
+
+jobs:
+  npm-audit:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm audit --omit=dev
+
+  python-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+      - name: Audit production dependencies
+        run: |
+          uv export --frozen --no-dev --format requirements-txt -o /tmp/requirements.txt
+          uvx pip-audit -r /tmp/requirements.txt
