@@ -1,17 +1,31 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { CompareTray } from "./components/CompareTray";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { Footer } from "./components/Footer";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { SiteMark } from "./components/SiteMark";
-import CardDetailPage from "./pages/CardDetailPage";
-import ComparePage from "./pages/ComparePage";
-import IssuerCardsPage from "./pages/IssuerCardsPage";
+// The home page stays in the entry chunk: it's the most common landing
+// route, and lazy-loading it would put a chunk fetch between first paint
+// and the page every visitor came for. Everything else loads on demand —
+// CardDetailPage alone is a quarter of the frontend, and before this every
+// home visitor parsed all of it just to see nine issuer tiles (issue #151;
+// measured directly as mobile LCP render delay).
 import IssuersPage from "./pages/IssuersPage";
-import MethodologyPage from "./pages/MethodologyPage";
-import TopPickPage from "./pages/TopPickPage";
 import { trackPageView } from "./utils/analytics";
+
+const CardDetailPage = lazy(() => import("./pages/CardDetailPage"));
+const ComparePage = lazy(() => import("./pages/ComparePage"));
+const IssuerCardsPage = lazy(() => import("./pages/IssuerCardsPage"));
+const MethodologyPage = lazy(() => import("./pages/MethodologyPage"));
+const TopPickPage = lazy(() => import("./pages/TopPickPage"));
+
+// Occupies real height while a route chunk loads so the flex app-shell
+// doesn't collapse <main> and yank the footer up to mid-viewport for a
+// frame — the pages' own skeletons take over the moment they mount.
+function RouteFallback() {
+  return <div style={{ minHeight: "60vh" }} aria-busy="true" />;
+}
 
 // Centralized here (rather than per-page) so every route — present and
 // future — gets pageview tracking automatically, with no per-page opt-in.
@@ -43,14 +57,16 @@ export default function App() {
       can jump straight to page content and the skip link has a target. */}
       <main id="main">
         <ErrorBoundary>
-          <Routes>
-            <Route path="/" element={<IssuersPage />} />
-            <Route path="/top-picks" element={<TopPickPage />} />
-            <Route path="/compare" element={<ComparePage />} />
-            <Route path="/issuer/:issuerSlug" element={<IssuerCardsPage />} />
-            <Route path="/cards/:id" element={<CardDetailPage />} />
-            <Route path="/methodology" element={<MethodologyPage />} />
-          </Routes>
+          <Suspense fallback={<RouteFallback />}>
+            <Routes>
+              <Route path="/" element={<IssuersPage />} />
+              <Route path="/top-picks" element={<TopPickPage />} />
+              <Route path="/compare" element={<ComparePage />} />
+              <Route path="/issuer/:issuerSlug" element={<IssuerCardsPage />} />
+              <Route path="/cards/:id" element={<CardDetailPage />} />
+              <Route path="/methodology" element={<MethodologyPage />} />
+            </Routes>
+          </Suspense>
         </ErrorBoundary>
       </main>
       <CompareTray />

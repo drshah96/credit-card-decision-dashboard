@@ -32,10 +32,37 @@ export function initAnalytics(): void {
   } as (...args: unknown[]) => void;
   window.gtag = gtag;
 
-  const script = document.createElement("script");
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-  document.head.appendChild(script);
+  // The script fetch is deferred until after the page has loaded and the
+  // main thread is idle. gtag.js is ~170 KB transfer — bigger than this
+  // entire app's bundle — and when injected at boot it competes with the
+  // code that actually paints the page, which showed up directly in mobile
+  // Lighthouse (LCP is a text node waiting on JS execution). Deferral is
+  // free: the gtag() stub above queues every command into dataLayer, and
+  // gtag.js replays the whole queue when it eventually arrives, so consent
+  // ordering, config, and any page_views fired before load are all
+  // delivered exactly as if the script had been there from the start.
+  const injectGtagScript = () => {
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+    document.head.appendChild(script);
+  };
+  const scheduleInject = () => {
+    // typeof-check rather than `in`: the DOM lib types requestIdleCallback as
+    // always present, so an `in` guard narrows the else branch to `never` —
+    // but Safari and jsdom genuinely lack it at runtime.
+    if (typeof window.requestIdleCallback === "function") {
+      // timeout so a busy page still loads analytics within a few seconds
+      window.requestIdleCallback(injectGtagScript, { timeout: 4000 });
+    } else {
+      window.setTimeout(injectGtagScript, 1500);
+    }
+  };
+  if (document.readyState === "complete") {
+    scheduleInject();
+  } else {
+    window.addEventListener("load", scheduleInject, { once: true });
+  }
 
   // Consent must be set before `js`/`config` — gtag.js reads it at config
   // time and locks in behavior for the session. We have no cookie banner
