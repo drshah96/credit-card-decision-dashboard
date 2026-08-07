@@ -100,13 +100,69 @@
       }
     ],
     "per_100k": "$1,000+",
-    "note": "Wells Fargo doesn't publish a bonused travel-portal rate, so redemption value stays close to 1 cent per point across cash, portal, and gift-card options. Transfers to loyalty programs exist but Wells Fargo doesn't publish per-partner ratios on its marketing pages, so the effective value there varies by partner and isn't independently confirmed here."
+    "note": "Wells Fargo doesn't publish a bonused travel-portal rate, so redemption value stays close to 1 cent per point across cash, portal, and gift-card options. Transferring is where the points get interesting: 8 airlines take them at 1:1 and Choice Privileges and Wyndham at 1:2, which can push well past a cent per point on the right award. Wells Fargo still doesn't list the partners on its card marketing pages, so the roster here is compiled from the Rewards portal and major trackers rather than a single issuer page."
   },
   "transfer_partners": {
-    "airline_count": 0,
-    "hotel_count": 0,
-    "highlight": "Wells Fargo Rewards points can transfer to select airline and hotel loyalty programs, but the current partner list and transfer ratios aren't published on the card's marketing pages; treat the transfer option as unverified until confirmed in the Wells Fargo Rewards portal at account level.",
-    "recent_changes": "Not publicly documented."
+    "airline_count": 8,
+    "hotel_count": 2,
+    "highlight": "10 partners in all: 8 airlines at a flat 1:1 and 2 hotel programs at 1:2, which makes Choice and Wyndham unusually generous on paper. Flying Blue, Avianca LifeMiles, and Virgin Atlantic are the ones worth learning; the rest are situational.",
+    "recent_changes": "A young program that is still growing. JetBlue TrueBlue joined in Nov 2025, then Cathay Pacific and Wyndham Rewards both arrived in Apr 2026.",
+    "partners": [
+      {
+        "name": "Aer Lingus AerClub",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Air France-KLM Flying Blue",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Avianca LifeMiles",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "British Airways Club",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Cathay Pacific",
+        "type": "airline",
+        "ratio": "1:1",
+        "notes": "Added Apr 2026."
+      },
+      {
+        "name": "Iberia Club",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "JetBlue TrueBlue",
+        "type": "airline",
+        "ratio": "1:1",
+        "notes": "Added Nov 2025, the program's first addition after launch."
+      },
+      {
+        "name": "Virgin Atlantic Flying Club / Virgin Red",
+        "type": "airline",
+        "ratio": "1:1"
+      },
+      {
+        "name": "Choice Privileges",
+        "type": "hotel",
+        "ratio": "1:2",
+        "notes": "Enhanced ratio: each point becomes two Choice points."
+      },
+      {
+        "name": "Wyndham Rewards",
+        "type": "hotel",
+        "ratio": "1:2",
+        "notes": "Enhanced ratio, added Apr 2026."
+      }
+    ]
   },
   "credits": [
     {
