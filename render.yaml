@@ -61,14 +61,34 @@ services:
     runtime: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
-    # Custom domain — verified, DNS (Cloudflare, proxied CNAME to
-    # thewalletaudit.onrender.com) is live and the cert is issued. www is
-    # also registered on this service and redirects to the bare domain.
-    # All three records (root, www, api) are proxied through Cloudflare
-    # (orange cloud) as of 2026-07-28, for DDoS protection/caching/traffic
-    # analytics — SSL/TLS mode on Cloudflare is "Full".
+    # Custom domain — verified; www also registered here and redirects to
+    # the bare domain. DNS on Cloudflare: root + www are DNS-only (grey
+    # cloud) as of 2026-08-07 — the free-plan "JS Detections" script that
+    # Cloudflare force-injects into proxied HTML cost ~2.8s of mobile CPU
+    # per page and cannot be disabled on free. Render's own static CDN
+    # (which itself runs on Cloudflare's network, minus the injections)
+    # serves the site. Only api.thewalletaudit.com stays proxied, for the
+    # CF-IPCountry header the analytics read.
     domains:
       - thewalletaudit.com
+    # Baseline security headers (issue #152, partial). With Cloudflare out of
+    # the HTML path these are the only response-header mechanism the site
+    # has. Deliberately no Content-Security-Policy yet: a wrong CSP silently
+    # breaks GA and fonts, so it needs a Report-Only bake first — tracked in
+    # the issue, not rushed out days before launch.
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: Permissions-Policy
+        value: camera=(), microphone=(), geolocation=(), payment=()
     envVars:
       # api.thewalletaudit.com is registered, verified, and has a live cert —
       # point the frontend at it directly instead of the onrender.com URL.
