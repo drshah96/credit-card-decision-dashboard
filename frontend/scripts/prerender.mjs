@@ -17,7 +17,7 @@
 // /* -> /index.html rewrite in render.yaml only handles paths without a file,
 // which is still every unknown URL.
 
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { loadRoutes, DIST } from "./routes.mjs";
 import { SITE_URL } from "../src/utils/routeMeta.js";
@@ -91,7 +91,33 @@ function applyMeta(html, route) {
   }
 
   // Canonical isn't in the shell (useSeo creates it at runtime), so append it.
-  return out.replace("</head>", `    <link rel="canonical" href="${attr(url)}" />\n  </head>`);
+  out = out.replace("</head>", `    <link rel="canonical" href="${attr(url)}" />\n  </head>`);
+  // Preload the two fonts the first paint actually renders in: the LCP
+  // element is body text (Space Grotesk) under a Fraunces H1. Without this
+  // the browser only discovers the woff2 files after CSS parses, so the
+  // text paints in a fallback and reflows when the swap lands. Only the
+  // latin subsets — preloading all unicode ranges would push ~10 files.
+  // crossorigin is required even same-origin: fonts fetch in CORS mode, and
+  // a preload whose mode mismatches is silently wasted (double download).
+  return out.replace(
+    "</head>",
+    fontPreloadTags.map((h) => `    ${h}`).join("\n") + "\n  </head>",
+  );
+}
+
+// Resolve the hashed filenames of the two first-paint fonts from the built
+// output. Hard failure if either is missing: a rename inside the fontsource
+// packages would otherwise silently ship dead preloads on every page.
+const assetFiles = await readdir(join(DIST, "assets"));
+const fontPreloadTags = [];
+for (const stem of ["space-grotesk-latin-wght-normal", "fraunces-latin-standard-normal"]) {
+  const file = assetFiles.find((f) => f.startsWith(stem) && f.endsWith(".woff2"));
+  if (!file) {
+    throw new Error(`[prerender] expected ${stem}*.woff2 in dist/assets — font packaging changed`);
+  }
+  fontPreloadTags.push(
+    `<link rel="preload" href="/assets/${file}" as="font" type="font/woff2" crossorigin />`,
+  );
 }
 
 const shell = await readFile(join(DIST, "index.html"), "utf-8");
