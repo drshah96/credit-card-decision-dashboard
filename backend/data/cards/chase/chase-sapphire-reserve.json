@@ -390,12 +390,12 @@
     {
       "name": "$75k spend unlocks",
       "strength": 4,
-      "note": "IHG Diamond, World of Hyatt status, Southwest A-List + $500 credit, $250 Shops at Chase. Valuable, but only if you'd spend $75k anyway."
+      "note": "IHG Diamond, World of Hyatt Explorist, Southwest A-List + $500 credit, $250 Shops at Chase. Valuable, but only if you'd spend $75k anyway, and Explorist is the weakest of the four: a 20% point bonus, 2pm checkout, and non-suite upgrades."
     },
     {
       "name": "Lounge access",
       "strength": 4,
-      "note": "Chase Sapphire Lounges + Priority Pass: Priority Pass includes 2 guests free (unlike Amex)."
+      "note": "Chase Sapphire Lounges + Priority Pass: Priority Pass includes 2 guests free (unlike Amex). From Aug 15, 2026 the Sapphire Lounges shut out Priority Pass and LoungeKey members who got their membership from a non-Chase card, which should cut the queues. Reserve access is untouched, and the connecting-flight arrival window widens from 3 hours to 5."
     }
   ],
   "services": [
@@ -463,6 +463,12 @@
       "type": "future",
       "badge": "Upcoming",
       "text": "Legacy 1.5\u00a2 redemption on pre-Oct-2025 points expires; after this, only Points Boost or 1\u00a2 remain."
+    },
+    {
+      "date": "Aug 15, 2026",
+      "type": "add",
+      "badge": "Upcoming",
+      "text": "Chase Sapphire Lounges stop admitting Priority Pass and LoungeKey members whose membership came from a non-Chase card, so the lounges get less crowded for Reserve holders. The connecting-flight arrival window also stretches from 3 hours to 5. Nothing changes for Reserve access itself."
     },
     {
       "date": "Jul 2026",
