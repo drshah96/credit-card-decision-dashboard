@@ -40,3 +40,24 @@ frontend/coverage/
 # Design handoffs, prototypes and scratch reference material. Kept locally
 # for provenance, never pushed.
 reference/
+
+# Claude Code. The directory is deliberately partly tracked: agent definitions
+# and team-wide settings are shared, machine-local state is not. Until now the
+# local files were only kept out by one developer's global gitignore, which
+# doesn't travel with a clone; these rules do.
+#
+# Shared (do NOT add ignores for these): .claude/agents/, .claude/settings.json,
+# .claude/agent-memory/
+.claude/settings.local.json
+.claude/agent-memory-local/
+.claude/worktrees/
+# Runtime state the tooling writes as it goes. Noise in a diff at best, and a
+# source of spurious conflicts between machines at worst.
+.claude/checkpoints/
+.claude/mailbox/
+.claude/routines/.state/
+.claude/agent-registry.json
+.claude/scheduled_tasks.json
+.claude/scheduled_tasks.lock
+.claude/assistant-daemon-state.json
+.claude/first-run
