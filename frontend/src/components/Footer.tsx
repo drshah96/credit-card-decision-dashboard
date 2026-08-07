@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { TERMS_AS_OF } from "../utils/routeMeta";
 
 export function Footer() {
   return (
@@ -13,7 +14,7 @@ export function Footer() {
           textAlign: "center",
         }}
       >
-        Card terms, fees, and credits shown here reflect issuer offers as of August 2026, but
+        Card terms, fees, and credits shown here reflect issuer offers as of {TERMS_AS_OF}, but
         banks change pricing, credits, and benefits without notice. Always confirm current
         terms on the issuer's official site before applying. This dashboard is for
         informational purposes only and isn't financial advice.

@@ -9,6 +9,7 @@ import {
   pageTitle,
   STATIC_ROUTE_META,
   SEO_ISSUERS,
+  TERMS_AS_OF,
 } from "@/utils/routeMeta.js";
 
 const CARD = {
@@ -100,5 +101,18 @@ describe("routeMeta", () => {
     ]) {
       expect(html).toMatch(pattern);
     }
+  });
+});
+
+describe("TERMS_AS_OF", () => {
+  // The footer's freshness claim went stale by hand once already ("July
+  // 2026" in August). This alarm fails the build when the claim falls ~2
+  // months behind, forcing either a data re-verification or a deliberate
+  // bump — never silent drift. (issue #154)
+  it("is no more than about two months behind today", () => {
+    const parsed = new Date(`1 ${TERMS_AS_OF}`);
+    expect(Number.isNaN(parsed.getTime())).toBe(false);
+    const ageDays = (Date.now() - parsed.getTime()) / 86_400_000;
+    expect(ageDays).toBeLessThan(75);
   });
 });
