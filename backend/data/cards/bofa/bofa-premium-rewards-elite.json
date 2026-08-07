@@ -196,7 +196,7 @@
     },
     {
       "name": "BofA Rewards bonus",
-      "detail": "10% (Member), 25% (Preferred Plus), 50% (Preferred Honors), or 75% (Premier) bonus on points earned, based on combined Bank of America/Merrill balance."
+      "detail": "10% (Member, under $30k), 25% (Preferred Plus, $30k), 50% (Preferred Honors, $100k), or 75% (Premier, $1M) bonus on points earned, set by your three-month average combined Bank of America and Merrill balance. Needs a BofA personal checking account."
     }
   ],
   "additional_cards": {
@@ -224,5 +224,12 @@
     ],
     "note": "No cost to add, and unlike many premium cards, authorized users can share in the complimentary Priority Pass memberships rather than needing their own paid enrollment."
   },
-  "timeline": []
+  "timeline": [
+    {
+      "date": "May 27, 2026",
+      "type": "neutral",
+      "badge": "Program change",
+      "text": "Preferred Rewards became BofA Rewards. The tiers were renamed (Gold and Platinum folded into Preferred Plus, Platinum Honors became Preferred Honors, Diamond became Premier) and existing members moved over automatically. The 25–75% card bonus survived the change and a 10% Member tier was added below it, so nobody earning a bonus before is earning less now. Preferred Honors and Premier also picked up subscription reimbursement worth up to $96 and $180 a year."
+    }
+  ]
 }

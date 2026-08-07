@@ -30,7 +30,7 @@
   "returned_payment_fee": null,
   "returned_check_fee": null,
   "welcome_bonus": {
-    "bonus": "$200 cash back",
+    "bonus": "$250 cash back",
     "requirement": "after you spend $1,000 in purchases within the first 90 days of account opening",
     "estimated_value": null
   },
@@ -48,7 +48,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 2% rate only applies for the first 12 months from account opening; after that it drops to a flat 1.5% with no caps or categories to track. Enrolled BofA Rewards members get a 10–75% bonus on top of these rates depending on combined deposit/investment balance.",
+  "earn_note": "A flat 1.5% on everything, with no caps, no categories, and no elevated first-year rate. Enrolled BofA Rewards members get a 10–75% bonus on top of that depending on combined deposit/investment balance, which is where this card actually gets interesting: at the Premier tier the effective rate is 2.62%.",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
@@ -105,8 +105,8 @@
   "status_perks": [],
   "services": [
     {
-      "name": "$200 welcome bonus",
-      "detail": "One-time $200 cash bonus after $1,000 in purchases within the first 90 days."
+      "name": "$250 welcome bonus",
+      "detail": "One-time $250 cash bonus after $1,000 in purchases within the first 90 days. Bank of America is running this as a limited-time offer, up from the standing $200."
     },
     {
       "name": "Intro balance transfer fee",
@@ -114,7 +114,7 @@
     },
     {
       "name": "BofA Rewards bonus",
-      "detail": "10% (Member), 25% (Preferred Plus), 50% (Preferred Honors), or 75% (Premier) bonus on cash back earned, based on combined Bank of America/Merrill balance."
+      "detail": "10% (Member, under $30k), 25% (Preferred Plus, $30k), 50% (Preferred Honors, $100k), or 75% (Premier, $1M) bonus on cash back earned, set by your three-month average combined Bank of America and Merrill balance. Needs a BofA personal checking account."
     }
   ],
   "additional_cards": {
@@ -138,5 +138,12 @@
     ],
     "note": "No cost to add: flat-rate earning means there's no category math to coordinate across users."
   },
-  "timeline": []
+  "timeline": [
+    {
+      "date": "May 27, 2026",
+      "type": "neutral",
+      "badge": "Program change",
+      "text": "Preferred Rewards became BofA Rewards. The tiers were renamed (Gold and Platinum folded into Preferred Plus, Platinum Honors became Preferred Honors, Diamond became Premier) and existing members moved over automatically. The 25–75% card bonus survived the change and a 10% Member tier was added below it, so nobody earning a bonus before is earning less now. Preferred Honors and Premier also picked up subscription reimbursement worth up to $96 and $180 a year."
+    }
+  ]
 }
