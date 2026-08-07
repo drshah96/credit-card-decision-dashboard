@@ -135,6 +135,12 @@
   },
   "timeline": [
     {
+      "date": "May 17, 2026",
+      "type": "cut",
+      "badge": "Program cut",
+      "text": "Citi ended person-to-person ThankYou point sharing, the most generous policy of its kind in the industry: you could send points to anyone, with no household requirement. May 16 was the last day to send or receive. Points already shared stay valid 90 days from the share date, so the last of them expire around Aug 15, 2026. Combining points between cards held in your own name is untouched, so pooling a Double Cash into a Strata Premier or Strata Elite still works."
+    },
+    {
       "date": "2024",
       "type": "neutral",
       "badge": "Program change",

@@ -106,7 +106,7 @@
     "airline_count": 19,
     "hotel_count": 7,
     "highlight": "19 airline and 7 hotel partners, almost all at 1:1 (Accor Live Limitless is 3:2): Hyatt, Marriott, Hilton, IHG, Wyndham, and I Prefer on the hotel side; United, Air France/KLM, Emirates, Cathay Pacific, and Southwest among the airlines.",
-    "recent_changes": "Wyndham Rewards and I Prefer Hotel Rewards (Preferred Hotels & Resorts, 700+ independent properties) were both added as transfer partners in 2026.",
+    "recent_changes": "Wyndham Rewards and I Prefer Hotel Rewards (Preferred Hotels & Resorts, 700+ independent properties) were both added as transfer partners in 2026. Separately, from Aug 5, 2026 Bilt members who hold a Qatar Airways Privilege Club card earn 3 Avios per $1 of rent paid through Bilt, up to $50,000/yr, instead of Bilt Points. That is a competing way to use Bilt for rent, not a change to this card.",
     "partners": [
       { "name": "Aer Lingus AerClub", "type": "airline", "ratio": "1:1" },
       { "name": "Air Canada Aeroplan", "type": "airline", "ratio": "1:1" },
@@ -269,10 +269,10 @@
   },
   "timeline": [
     {
-      "date": "2026",
+      "date": "Feb 7, 2026",
       "type": "add",
       "badge": "Relaunch",
-      "text": "Bilt Card 2.0 launches as a three-tier lineup (Blue/Obsidian/Palladium), replacing the original single Bilt Mastercard and removing its 5-transaction-per-month requirement to earn on rent."
+      "text": "Bilt Card 2.0 launches as a three-tier lineup (Blue/Obsidian/Palladium), replacing the original single Bilt Mastercard and removing its 5-transaction-per-month requirement to earn on rent. Cardless takes over as issuer from Wells Fargo; the old Wells Fargo card stopped working on Feb 6."
     }
   ]
 }

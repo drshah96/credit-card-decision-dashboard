@@ -43,7 +43,7 @@
     {
       "emoji": "\ud83d\udd04",
       "multiplier": "5%",
-      "category": "Quarterly rotating category. This quarter (Q3): Gas, transit, EV charging, entertainment",
+      "category": "Quarterly rotating category. This quarter (Q3): Gas, EV charging, transit, entertainment, United Way",
       "highlight": true,
       "is_base": false
     },
@@ -76,7 +76,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "You need to opt in every quarter, and missing the activation window drops you back to the base 1%. Combined spend is capped at $1,500 per quarter, so the most you can get back is $75. Full 2026 calendar: Q1 was Norwegian Cruise Line and dining, Q2 was Amazon and Chase Travel, Q3 is gas, transit, EV charging, and select live entertainment, and Q4 hasn't been announced yet.",
+  "earn_note": "You need to opt in every quarter, and missing the activation window drops you back to the base 1%. Combined spend is capped at $1,500 per quarter, so the most you can get back is $75. Full 2026 calendar: Q1 was Norwegian Cruise Line and dining, Q2 was Amazon and Chase Travel, Q3 is gas stations and EV charging, public transit, select live entertainment, and United Way donations, and Q4 hasn't been announced yet. The Q3 activation deadline is Sep 14, 2026.",
   "points": {
     "currency": "Ultimate Rewards (cash back)",
     "redemption_options": [

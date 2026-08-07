@@ -181,7 +181,7 @@
     },
     {
       "name": "GigSky global data",
-      "detail": "Complimentary GigSky mobile data plans in over 175 countries; register at gigsky.com/visa-usb-ac. Benefit redeemable through Nov 30, 2026."
+      "detail": "A complimentary 5 GB, 15-day GigSky data plan usable in 175+ countries, once per card number, claimable again on later trips as long as only one plan is active at a time. The card has to be the default payment method in the GigSky app; register at gigsky.com/visa-usb-ac. Redeemable through Nov 30, 2026, though that same end date has been rolled forward every year so far."
     },
     {
       "name": "U.S. Bank ExtendPay Plan",
@@ -218,7 +218,7 @@
       "date": "Nov 30, 2026",
       "type": "future",
       "badge": "Upcoming",
-      "text": "The complimentary GigSky global data benefit is redeemable through this date under current terms."
+      "text": "The complimentary GigSky global data benefit is redeemable through this date under current terms. Worth not reading too much into: U.S. Bank has published an end date like this for several years running and extended it each time, so treat it as a renewal checkpoint rather than a scheduled cut."
     }
   ]
 }

@@ -1,10 +1,12 @@
 import { describe, it, expect } from "vitest";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import {
   allRouteMeta,
   cardRouteMeta,
+  CARDS_AUDITED,
   issuerRouteMeta,
+  LAST_AUDITED,
   maxCreditValue,
   pageTitle,
   STATIC_ROUTE_META,
@@ -114,5 +116,35 @@ describe("TERMS_AS_OF", () => {
     expect(Number.isNaN(parsed.getTime())).toBe(false);
     const ageDays = (Date.now() - parsed.getTime()) / 86_400_000;
     expect(ageDays).toBeLessThan(75);
+  });
+});
+
+describe("LAST_AUDITED / CARDS_AUDITED", () => {
+  // The footer's audit-trail line names a date and a card count. Both are
+  // hand-maintained, and a wrong count is worse than no count: it asserts
+  // coverage the audit never had. These lock both to reality the same way
+  // TERMS_AS_OF is locked to the clock.
+  const cardsDir = join(__dirname, "..", "..", "..", "backend", "data", "cards");
+
+  const countCardFiles = () =>
+    readdirSync(cardsDir, { withFileTypes: true })
+      .filter((issuer) => issuer.isDirectory() && issuer.name !== "staging")
+      .reduce(
+        (total, issuer) =>
+          total +
+          readdirSync(join(cardsDir, issuer.name)).filter((f) => f.endsWith(".json")).length,
+        0,
+      );
+
+  it("counts every card in the catalogue", () => {
+    expect(CARDS_AUDITED).toBe(countCardFiles());
+  });
+
+  it("is a parseable date that is not in the future", () => {
+    const parsed = new Date(LAST_AUDITED);
+    expect(Number.isNaN(parsed.getTime())).toBe(false);
+    // Date-only strings parse as UTC midnight; allow a day of slack so a
+    // late-in-the-day audit in a behind-UTC timezone doesn't read as future.
+    expect(parsed.getTime() - Date.now()).toBeLessThan(86_400_000);
   });
 });
