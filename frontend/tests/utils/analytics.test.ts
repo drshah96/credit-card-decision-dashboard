@@ -23,6 +23,29 @@ describe("initAnalytics", () => {
   // silently ignores it, so no measurement id is ever configured and no
   // request is attempted. The earlier version of this suite asserted the
   // array shape, so it passed against the broken code. Pin the real contract.
+  // gtag.js is ~170 KB — bigger than the app bundle — so its fetch is
+  // deferred past page load. Commands still queue into dataLayer from the
+  // first moment (asserted by every other test here); only the script tag
+  // waits. This pins the deferral so a refactor can't quietly reintroduce
+  // the script at boot, where it competes with first paint.
+  it("defers the gtag.js script fetch until after load + idle", () => {
+    vi.stubEnv("PROD", true);
+    vi.useFakeTimers();
+    try {
+      initAnalytics();
+
+      // Immediately after init: commands queued, script NOT yet requested.
+      expect(window.dataLayer!.length).toBeGreaterThan(0);
+      expect(document.querySelector('script[src*="googletagmanager"]')).toBeNull();
+
+      vi.runAllTimers();
+
+      expect(document.querySelector('script[src*="googletagmanager"]')).not.toBeNull();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it("queues commands as Arguments objects, not arrays, or gtag.js ignores them", () => {
     vi.stubEnv("PROD", true);
 
