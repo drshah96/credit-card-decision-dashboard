@@ -6,6 +6,15 @@
 // would see different titles for the same URL, so they read from here.
 
 export const SITE_URL = "https://thewalletaudit.com";
+
+/**
+ * The freshness claim the footer makes ("offers as of ..."). One place, on
+ * purpose: the footer's hand-written copy went stale within a day of the
+ * month changing (issue #154). A test fails when this falls more than ~2
+ * months behind the clock, turning silent staleness into a red build that
+ * demands either a data re-verification or a conscious bump.
+ */
+export const TERMS_AS_OF = "August 2026";
 export const SITE_NAME = "The Wallet Audit";
 
 /** Mirrors ISSUERS in cardTaxonomy.ts (slug + display label only). */
