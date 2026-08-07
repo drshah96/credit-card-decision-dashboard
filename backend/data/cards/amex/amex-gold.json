@@ -174,10 +174,12 @@
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "Up to $50 in statement credits twice a year (Jan–Jun, Jul–Dec) at qualifying Resy restaurants.",
+      "description": "Up to $50 in statement credits twice a year (Jan–Jun, Jul–Dec) at qualifying Resy restaurants. Since Aug 1, 2026 the restaurant has to be flagged as Resy Credit eligible on the Resy site or app when you pay.",
       "tips": [
         "Enrollment required.",
-        "No rollover between halves; an unused H1 doesn't carry into H2."
+        "No rollover between halves; an unused H1 doesn't carry into H2.",
+        "Look for the Resy Credit badge on the restaurant's page first. Being bookable on Resy is no longer enough on its own.",
+        "Amex says no venues were dropped when the badge rule started, and Tock restaurants become bookable on Resy later in 2026."
       ]
     },
     {
@@ -257,6 +259,12 @@
     "note": "Up to five Additional Cards are free, a cheap way to add earning power across a household without raising the $325 primary fee."
   },
   "timeline": [
+    {
+      "date": "Aug 1, 2026",
+      "type": "cut",
+      "badge": "Cut",
+      "text": "The Resy credit narrows: a restaurant now has to be flagged as Resy Credit eligible on the Resy site or app at the time you pay. Amex says no venues were dropped when the rule went live, so most spots still count, but the badge is now what to look for rather than a plain Resy listing."
+    },
     {
       "date": "Apr 30, 2026",
       "type": "add",

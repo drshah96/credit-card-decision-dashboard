@@ -90,15 +90,16 @@
   "credits": [
     {
       "id": "disney",
-      "name": "Disney Bundle Credit",
-      "subtitle": "$7/mo",
+      "name": "Disney Streaming Credit",
+      "subtitle": "$7/mo · enroll",
       "max_annual": 84,
       "default_value": 0,
       "tier": "easy",
       "removed": false,
-      "description": "Monthly statement credit toward a Disney Bundle subscription (Disney+, Hulu, ESPN+).",
+      "description": "Up to $7/month in statement credits after you use the enrolled card for a subscription at DisneyPlus.com, Hulu.com, or Stream.ESPN.com. Standalone subscriptions count, not just the bundle, and the old $9.99 minimum monthly spend is gone. Enrollment required.",
       "tips": [
-        "Only worth it if you already subscribe to the Disney Bundle; otherwise it's $0 to you."
+        "Only worth it if you already subscribe to one of these services; otherwise it's $0 to you.",
+        "The purchase has to run through the U.S. Disney+, Hulu, or ESPN sites and be set to auto-renew. Billing through Apple or Roku won't trigger it."
       ]
     }
   ],

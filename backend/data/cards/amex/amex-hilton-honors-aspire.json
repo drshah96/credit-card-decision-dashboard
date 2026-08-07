@@ -209,7 +209,7 @@
     {
       "name": "Hilton Honors Diamond Status",
       "strength": 5,
-      "note": "Top Hilton tier, complimentary with the card: 100% bonus points on stays, space-available room upgrades, premium Wi-Fi, and executive lounge access at select properties."
+      "note": "Complimentary with the card: 100% bonus points on stays, space-available room upgrades, premium Wi-Fi, and executive lounge access at select properties. Diamond stopped being the top published tier on Jan 1, 2026, when Hilton added Diamond Reserve above it; that one takes 80 nights and $18,000 of spend and no card confers it."
     }
   ],
   "services": [],
@@ -239,6 +239,12 @@
     "note": "Authorized users are free: an easy way to pool household spend toward the 14× Hilton rate."
   },
   "timeline": [
+    {
+      "date": "Jan 1, 2026",
+      "type": "neutral",
+      "badge": "Program change",
+      "text": "Hilton launched Diamond Reserve above Diamond, so the card's Diamond status is no longer the top published tier. Diamond Reserve needs 80 nights plus $18,000 of spend and can't be had from any credit card. Hilton also lowered the earning bars for the tiers below it: Gold to 25 nights and Diamond to 50."
+    },
     {
       "date": "Nov 1, 2024",
       "type": "cut",
