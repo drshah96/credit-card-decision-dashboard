@@ -36,10 +36,13 @@ unless it argues explicitly for the reversal.
   cascade agree; they are easy to set on one side only.
 - **`card_drafts` has no FK to `cards`, deliberately.** It is a staging area
   outside the normalized graph. Do not "fix" this.
-- **`upsert_card()` is the single write path** and is idempotent: re-running for
-  a live card updates the row and fully replaces its child collections rather
-  than duplicating them. Any new write path that bypasses it is a blocking issue.
-  Any change to child-collection handling must preserve full replacement.
+- **`upsert_card()` is the single catalog write path** and is idempotent:
+  re-running for a live card updates the row and fully replaces its child
+  collections rather than duplicating them. Any new write path into the catalog
+  that bypasses it is a blocking issue. Any change to child-collection handling
+  must preserve full replacement. This is scoped to the catalog on purpose:
+  `drafts.py` writes `card_drafts` and `events.py` writes the analytics tables,
+  and neither is a violation.
 
 ## Review checklist
 
