@@ -15,6 +15,25 @@ export const SITE_URL = "https://thewalletaudit.com";
  * demands either a data re-verification or a conscious bump.
  */
 export const TERMS_AS_OF = "August 2026";
+
+/**
+ * The date the full issuer-by-issuer re-verification last ran, as opposed to
+ * TERMS_AS_OF's month-level claim about the offers themselves. Kept separate
+ * because the two answer different questions: TERMS_AS_OF is the freshness
+ * disclaimer, this is the audit trail. Bump it only when every issuer has
+ * actually been re-checked against official sources, not on incidental edits
+ * to a single card.
+ */
+export const LAST_AUDITED = "August 7, 2026";
+
+/**
+ * How many cards that audit covered. Hardcoded because the Footer renders in
+ * the app shell with no card data in scope, and fetching the catalogue just to
+ * print a number in a disclaimer isn't worth a network dependency. A test
+ * counts the card JSON files and fails if this drifts, so adding a card turns
+ * the build red rather than quietly making the footer lie.
+ */
+export const CARDS_AUDITED = 109;
 export const SITE_NAME = "The Wallet Audit";
 
 /** Mirrors ISSUERS in cardTaxonomy.ts (slug + display label only). */

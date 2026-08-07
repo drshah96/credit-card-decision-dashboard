@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { TERMS_AS_OF } from "../utils/routeMeta";
+import { CARDS_AUDITED, LAST_AUDITED, TERMS_AS_OF } from "../utils/routeMeta";
 
 export function Footer() {
   return (
@@ -18,6 +18,12 @@ export function Footer() {
         banks change pricing, credits, and benefits without notice. Always confirm current
         terms on the issuer's official site before applying. This dashboard is for
         informational purposes only and isn't financial advice.
+        {/* Separate from TERMS_AS_OF above on purpose: that line is the freshness
+            disclaimer about the offers, this one is the audit trail. Readers asking
+            "when did someone actually check this?" want a date, not a month. */}
+        <div style={{ marginTop: 10 }}>
+          All {CARDS_AUDITED} cards last re-verified against issuer sources on {LAST_AUDITED}.
+        </div>
         {/* Framed as "spotted something wrong" rather than a generic "contact us":
             the corrections this invites are the ones worth having on a site whose
             value is per-card accuracy, and cardholders notice a stale APR long
