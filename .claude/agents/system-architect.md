@@ -56,9 +56,20 @@ CLASSIFICATION table, and every existing link.
 
 **Loyalty programs are not global.** Amex Membership Rewards US and MR UK are
 different pools with different transfer partners and different realistic
-valuations. `topPickCategories.ts` pools by program and inherits the pool's best
-redemption value — pooling across markets would produce confidently wrong
-rankings. Decide whether `loyalty_programs` gains a market dimension or splits.
+valuations. Get the mechanism right before reasoning about it, because it is
+narrower than it first looks. `topPickCategories.ts` pools on `points_pool_id`,
+an authored field on the card, *not* on `points_program`. The two happen to
+agree one-for-one today, and that is exactly what makes the market fix cheap:
+distinct pool ids per market separate the pools without touching
+`loyalty_programs` at all. Two further limits bound the blast radius: only a
+card flagged `points_pool_receiver` can be the source of a boost, so feeder
+cards never lift each other, and pooling is opt-in via `applyPointsPooling`,
+which `TopPickPage` sets only once the user has actually selected cards. The
+whole-catalog default ranking never pools. So cross-market pooling is a real
+bug but a contained one, reachable only through a mixed-market "My Cards"
+selection. Decide whether pool ids carry the market, and treat any
+`loyalty_programs` market dimension as a separate question driven by transfer
+partners and valuations rather than by ranking behavior.
 
 **Valuations are market-specific.** `best_cpp` and every `default_value_cents`
 encode assumptions about local prices and local redemption behavior. A US
