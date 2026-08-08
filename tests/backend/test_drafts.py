@@ -273,3 +273,65 @@ def test_reject_marks_status_and_notes(json_file):
 def test_reject_missing_draft_errors():
     with pytest.raises(SystemExit):
         drafts.cmd_reject(argparse.Namespace(draft_id=999_999, notes="n/a"))
+
+
+# ─── the interactive gate ────────────────────────────────────────────────────
+#
+# These go through main() rather than the cmd_* functions, because the gate is
+# on how the CLI was invoked. Every other test in this file calls cmd_* directly
+# and is deliberately unaffected.
+
+
+class _Stdin:
+    def __init__(self, tty: bool):
+        self._tty = tty
+
+    def isatty(self) -> bool:
+        return self._tty
+
+
+def run_main(monkeypatch, argv: list[str], *, tty: bool):
+    """Invoke the CLI as a shell would, with stdin's tty-ness controlled.
+    Replaces the command implementations with spies so nothing touches the
+    database: what's under test is whether the gate lets the call through."""
+    called = []
+    for name in ("cmd_add", "cmd_list", "cmd_show", "cmd_promote", "cmd_reject"):
+        monkeypatch.setattr(drafts, name, lambda args, _n=name: called.append(_n))
+    monkeypatch.setattr(drafts.sys, "stdin", _Stdin(tty))
+    monkeypatch.setattr(drafts.sys, "argv", ["drafts", *argv])
+    drafts.main()
+    return called
+
+
+@pytest.mark.parametrize("command", ["promote", "reject"])
+def test_review_commands_refuse_a_non_tty(monkeypatch, command):
+    argv = [command, "1"] + (["--notes", "n/a"] if command == "reject" else [])
+    with pytest.raises(SystemExit) as exc:
+        run_main(monkeypatch, argv, tty=False)
+
+    # A bare `SystemExit(1)` here would mean argparse rejected the arguments
+    # rather than the gate refusing, and the test would pass for the wrong
+    # reason, so assert on the message the gate actually writes.
+    assert "interactive terminal" in str(exc.value)
+    assert command in str(exc.value)
+
+
+@pytest.mark.parametrize("command", ["promote", "reject"])
+def test_review_commands_run_from_a_real_terminal(monkeypatch, command):
+    argv = [command, "1"] + (["--notes", "n/a"] if command == "reject" else [])
+    assert run_main(monkeypatch, argv, tty=True) == [f"cmd_{command}"]
+
+
+@pytest.mark.parametrize(
+    "argv",
+    [
+        ["add", "zz-test-card", "https://example.com", "card.json"],
+        ["list"],
+        ["show", "1"],
+    ],
+    ids=["add", "list", "show"],
+)
+def test_non_review_commands_are_ungated(monkeypatch, argv):
+    """The gate is narrow on purpose. Drafting and reading stay automatable;
+    only approval and rejection need a person."""
+    assert run_main(monkeypatch, argv, tty=False) == [f"cmd_{argv[0]}"]

@@ -10,6 +10,11 @@ Workflow:
    uv run python -m backend.scripts.drafts add <slug> "<source url>" backend/data/cards/staging/<slug>.json
    ```
 3. Review and promote (or reject) via `drafts show` / `drafts promote` / `drafts reject`.
+
+   The last two only run from an interactive terminal: they exit immediately if
+   stdin isn't a tty, so an agent, a script, or a piped shell can't approve a
+   draft. Step 1 and step 2 stay automatable, this step doesn't.
+
 4. Once promoted, move the file out of staging into its issuer folder:
    ```bash
    git mv backend/data/cards/staging/<slug>.json backend/data/cards/{issuer}/<slug>.json
