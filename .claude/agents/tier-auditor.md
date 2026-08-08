@@ -32,6 +32,28 @@ columns, so it is the wrong source for these names — use the `Card` model in
 `backend/models.py`, or a real card file. Working from the column names would
 have you searching for keys that don't exist in any file.
 
+### Zero is an error, not a clean result
+
+Check your extraction before you analyse it, because the way this audit fails is
+by succeeding quietly. A wrong field path doesn't raise; it returns nothing. Zero
+credits extracted yields zero groups, zero outliers, and a confident "no action
+needed" that is indistinguishable from a catalog in perfect order. That has
+already happened here: this agent shipped asking for `default_value_cents` and
+`max_annual_cents`, which exist in no card file.
+
+So, before analysing:
+
+- Count the files you opened and the credits you extracted. If either is zero,
+  stop and report a tooling failure. Do not report an audit.
+- For each field you extract, count how many credits actually carried it. A
+  field the `Card` model says exists that comes back empty across the whole
+  catalog is a broken path, not a catalog-wide absence. Stop and say so.
+- Sanity-check one card by hand against its file before trusting the batch.
+
+Never convert an extraction failure into a finding, and never let it read as a
+pass. An audit you could not perform is its own outcome, the same way
+card-verifier keeps "unverified" distinct from "matches".
+
 Group credits by *structure*, not by name:
 
 - Auto-applying, no user action
@@ -75,6 +97,12 @@ its own section, even if each individual call looks defensible.
 
 ## Output format
 
+Lead with coverage, so a no-op is visible on the face of the report rather than
+inferred from a suspiciously short findings list:
+
+- **Coverage** — files opened, credits extracted, and the per-field counts. A
+  reader must be able to tell "nothing was wrong" from "nothing was read"
+  without asking you.
 - **Summary** — credits audited, groups formed, outliers found
 - **Tier outliers** — grouped by structure. Card, credit, assigned tier, the
   tier its peers get, and whether you think the exception is justified

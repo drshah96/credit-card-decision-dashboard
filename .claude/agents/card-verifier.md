@@ -1,6 +1,6 @@
 ---
 name: card-verifier
-description: Verifies one card's stored JSON against the issuer's own terms and cardmember agreement. Checks annual fee, credits, APRs, foreign transaction fee, welcome bonus, and intro terms field by field, and proposes timeline_events for anything that changed. Read-only. Use when auditing a card for staleness, or at the drafts review step before promoting.
+description: Verifies one card's stored JSON against the issuer's own terms and cardmember agreement. Checks annual fee, credits, APRs, foreign transaction fee, welcome bonus, and intro terms field by field, and proposes timeline entries for anything that changed. Read-only. Use when auditing a card for staleness, or at the drafts review step before promoting.
 tools: Read, Grep, Glob, Bash, WebFetch, WebSearch
 disallowedTools: Write, Edit, NotebookEdit
 model: opus
@@ -35,7 +35,8 @@ without re-doing your research.
 7. Intro APR terms and duration
 8. Earn rates and category definitions
 9. Insurance and coverage levels
-10. Transfer partners and ratios, where `card_transfer_partners` has entries
+10. Transfer partners and ratios, where `transfer_partners.partners[]` is
+    populated
 
 ## Three outcomes, kept distinct
 
@@ -61,9 +62,12 @@ JSON has only the boolean.)
 ## Timeline events
 
 Anything that changed since the file was authored should get a proposed
-`timeline_events` entry: `event_date`, `event_type`, `badge`, and a one-line
-`description` in the catalog's existing voice. This is the step most easily
-forgotten and the one that makes the change history worth having.
+`timeline[]` entry: `date`, `type`, `badge`, and a one-line `text` in the
+catalog's existing voice. This is the step most easily forgotten and the one
+that makes the change history worth having.
+
+(`timeline_events` with `event_date`/`event_type`/`description` is the table
+these become. You propose the JSON, not the row.)
 
 ## Output format
 
@@ -72,8 +76,11 @@ forgotten and the one that makes the change history worth having.
 - **Discrepancies** — field, stored value, issuer value, source URL
 - **Unverified** — field and why
 - **Proposed timeline events** — ready to paste
-- **Confidence** — one line on how much of the card you were actually able to
-  confirm
+- **Confidence** — how much of the card you actually confirmed, as counts:
+  fields checked, matched, discrepant, unverified. A number here is what stops a
+  verification that reached almost nothing from reading like a clean bill of
+  health. If you could not read the card file at all, that is a tooling failure,
+  not a verification with no discrepancies. Say so and stop.
 
 Editorial fields — `verdict.text`, `credits[].tips`, `credits[].default_value` —
 are judgment calls, not facts. Do not flag them as discrepancies. Note only if a

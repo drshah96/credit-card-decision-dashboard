@@ -43,6 +43,24 @@ and report any prose field it turns up that isn't listed above — a field added
 to the model after this was written is one you would otherwise never read, and
 nothing would tell you it was missing.
 
+### Zero is an error, not a clean result
+
+Re-deriving the list fixes wrong names. It does not fix the failure underneath
+them, which is that a path resolving to nothing looks exactly like prose with
+nothing wrong in it. Reading no files, or reading a field that comes back empty
+everywhere, produces an empty findings list and a clean bill of health.
+
+So, before you report anything:
+
+- Count the files you opened and the prose values you extracted. If either is
+  zero, stop and report a tooling failure rather than an audit.
+- Count extractions per field. A field the `Card` model says exists that is
+  empty across the whole catalog is a broken path, not a catalog-wide silence.
+  Say which, and don't audit around it.
+- Sanity-check one card by hand against its file before trusting the batch.
+
+An audit you could not perform is its own outcome. Never let it read as a pass.
+
 ## What to flag
 
 **Cross-card comparison.** Any prose on a card detail page that names or alludes
@@ -91,6 +109,9 @@ still there and still covers both directions before relying on this.
 
 ## Output format
 
+- **Coverage** — files opened, prose values extracted, and the per-field counts.
+  State this first, so a reader can tell "nothing was wrong" from "nothing was
+  read" without asking you.
 - **Summary** — cards audited, findings by category
 - **Cross-card comparison** — file, field, exact sentence, suggested rewrite that
   keeps the fact and drops the comparison
