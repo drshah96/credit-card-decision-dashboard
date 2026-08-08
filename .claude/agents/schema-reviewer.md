@@ -54,7 +54,7 @@ unless it argues explicitly for the reversal.
   `frontend/src/types/` still match? This mirror is manual and unpinned by any
   test — flag drift explicitly, it will not fail CI.
 - New per-card data: is it genuinely per-card, or is it a lookup table that
-  will drift when repeated across 109 files?
+  will drift when repeated across every file in the catalog?
 - Does the change alter what `total_max_credits` or `total_easy_credits` sum
   over? Those two numbers are load-bearing on every listing page.
 - Aggregate-vs-detail: `card_transfer_partners` is populated for a subset of
