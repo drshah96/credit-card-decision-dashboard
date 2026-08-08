@@ -11,6 +11,9 @@ returns before it's allowed into the queue — a draft that doesn't parse
 never becomes something a reviewer has to puzzle over. `promote` re-validates
 before writing, then runs it through the shared upsert_card() so a promoted
 draft and a hand-authored card go through identical code.
+
+`promote` and `reject` are the human review gate, so they refuse to run
+unless stdin is a terminal. See _require_interactive() below.
 """
 
 import argparse
@@ -24,6 +27,38 @@ from backend.db import session_scope
 from backend.db_models import CardDraft
 from backend.models import Card
 from backend.scripts.upsert import upsert_card
+
+INTERACTIVE_ONLY = ("promote", "reject")
+
+
+def _require_interactive(command: str) -> None:
+    """Refuse to run when stdin isn't a terminal.
+
+    Approving or rejecting a draft is the one step in this pipeline meant to be
+    a person's decision. Everything else is mechanical and safe to automate:
+    `add` only writes to the queue, `list` and `show` only read.
+
+    The check is on *how* the command was invoked rather than on what it looks
+    like, which is what makes it hold. An agent, a script, a CI job and a piped
+    shell all arrive here the same way, with no terminal on stdin, regardless of
+    which tool is driving or how the command string is spelled. Pattern-matching
+    the command text instead would both miss invocations that don't look like
+    the pattern and fire on ones that merely mention it.
+
+    Consequence worth knowing before changing this: promotion happens in a real
+    terminal, not through an assistant's shell tool. That is the intent, not a
+    side effect. If it ever becomes genuinely obstructive, the alternative is an
+    explicit --confirm flag, which keeps the deliberate-act property while
+    allowing an in-session run.
+    """
+    if sys.stdin.isatty():
+        return
+    sys.exit(
+        f"error: '{command}' needs an interactive terminal and stdin is not one.\n"
+        f"Approving or rejecting a draft is the human review gate for the catalog, "
+        f"so it is deliberately not runnable from an agent, a script, or a pipe.\n"
+        f"Run it yourself:  uv run python -m backend.scripts.drafts {command} <draft-id>"
+    )
 
 
 def cmd_add(args: argparse.Namespace) -> None:
@@ -154,6 +189,8 @@ def main() -> None:
     p_reject.set_defaults(func=cmd_reject)
 
     args = parser.parse_args()
+    if args.command in INTERACTIVE_ONLY:
+        _require_interactive(args.command)
     args.func(args)
 
 
