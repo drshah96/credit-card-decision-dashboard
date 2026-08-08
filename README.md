@@ -115,9 +115,9 @@ ranking function can't even see the affiliate flag.
 
 ## Cards covered
 
-109 cards across 9 issuers, one hand-authored JSON file each under
-`backend/data/cards/{issuer}/`. See [`backend/README.md`](backend/README.md) for
-the schema and the add → review → promote flow.
+One hand-authored JSON file per card under `backend/data/cards/{issuer}/`, one
+folder per issuer. See [`backend/README.md`](backend/README.md) for the schema
+and the add → review → promote flow.
 
 | Issuer | Cards |
 |--------|-------|
