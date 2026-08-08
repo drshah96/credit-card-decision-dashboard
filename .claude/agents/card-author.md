@@ -41,22 +41,43 @@ unsourced. Never fill a gap with a plausible number.
 
 ## Conventions
 
-- **Money is integer cents.** `annual_fee_cents`, `max_annual_cents`,
-  `default_value_cents`. Never a float, never a dollar figure.
+**You write JSON, not database rows.** The two shapes differ, and the database
+column names are not the field names you want. `backend/README.md` documents the
+columns; it is the wrong source for authoring. The `Card` model in
+`backend/models.py` is the right one, and an existing card file is the fastest
+check. Getting this backwards produces a draft that `drafts add` rejects, or
+worse, one that validates with a number a hundred times too large.
+
+- **Money is whole dollars, spelled without a suffix.** `annual_fee`,
+  `max_annual`, `default_value`. Integers, not floats, not strings. The
+  `_cents` columns (`annual_fee_cents`, `max_annual_cents`,
+  `default_value_cents`) exist only in the database; `upsert_card()` converts
+  on the way in. A card JSON has never contained a `_cents` key. Writing `9500`
+  for a $95 fee is the single most expensive mistake available to you here.
 - **Slug.** Standard cards: `{issuer}-{product}`. Co-branded cards tied to an
   airline or hotel programme: `{issuer}-{brand}-{type}`, e.g.
   `amex-hilton-honors-aspire`. This keeps a loyalty programme's cards grouped
-  alphabetically and makes the issuer unambiguous.
-- **`sort_order`** reflects the order a reader should encounter items, not the
-  order you found them.
-- **Discontinued benefits** are `is_removed: true` with a `removed_on` date, not
-  omissions. The card detail timeline depends on that history.
+  alphabetically and makes the issuer unambiguous. The filename must equal the
+  `id` inside the file, and card art is looked up by that same stem, so a
+  mismatch silently drops the image. `tests/backend/test_catalog_files.py`
+  fails CI on it.
+- **Array order is the order.** There is no `sort_order` field in the JSON;
+  the database derives it from array position. So the order you write items in
+  is the order a reader meets them, and it should reflect what matters first,
+  not the order you found things.
+- **Discontinued benefits** are `"removed": true` on the credit, not omissions.
+  The field is `removed`, a plain boolean; `is_removed` and `removed_on` are
+  database columns with no JSON equivalent. Record when it changed as a
+  `timeline[]` entry instead, since that history is what the card detail page
+  renders.
 - **Lookup values** — issuer, network, loyalty programme names — must match the
   exact strings existing cards use. "American Express", not "Amex" or "AmEx".
   Grep the catalog before inventing a spelling.
-- **`card_transfer_partners`** only gets per-partner entries where you have a
-  verified per-partner source with name, type and ratio. Otherwise populate the
-  aggregate counts only. Do not invent partner rows.
+- **`transfer_partners.partners[]`** only gets per-partner entries where you
+  have a verified per-partner source with name and ratio. Otherwise populate
+  `transfer_partners.airline_count` and `.hotel_count` and leave the array
+  empty. Do not invent partner rows. (`card_transfer_partners` is the table
+  these become; you never write that name.)
 
 ## Credit tiers and default_value
 
@@ -69,18 +90,19 @@ calculator, so reason explicitly rather than guessing:
   is the realistic outcome.
 - **Niche** — worth something only if it happens to fit the person's life.
 
-`max_annual_cents` is the advertised ceiling. `default_value_cents` is what a
-typical person actually captures, and for anything instalment-based or
-category-restricted it should be meaningfully below the ceiling. Before setting
-it, grep the catalog for a structurally similar credit and match its treatment —
-consistency across cards matters more than precision on any one.
+`max_annual` is the advertised ceiling. `default_value` is what a typical person
+actually captures, and for anything instalment-based or category-restricted it
+should be meaningfully below the ceiling. Both are whole dollars. Before setting
+`default_value`, grep the catalog for a structurally similar credit and match
+its treatment — consistency across cards matters more than precision on any one.
 
 State your reasoning for every tier assignment in your report.
 
 ## Editorial fields
 
-`verdict_text`, tips, and notes are your judgment, written in the catalog's
-voice: plain, specific, unimpressed by marketing. Two rules that are absolute:
+`verdict.text`, `credits[].tips`, and the various `*_note` fields are your
+judgment, written in the catalog's voice: plain, specific, unimpressed by
+marketing. Two rules that are absolute:
 
 - **No comparative or superlative claims.** Never "the best", "the only card",
   "unlike Card X", or any count of the catalog. Comparison belongs on `/compare`.

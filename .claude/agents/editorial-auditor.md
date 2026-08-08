@@ -14,10 +14,34 @@ whether prose written across the catalog over many months still holds together
 and still tells the truth.
 
 Read every file under `backend/data/cards/{issuer}/*.json`; skip `staging/`.
-Extract every prose field: `verdict_text`, `earn_note`, `points_note`,
-`protection_note`, `rental_note`, `transfer_highlight`,
-`transfer_recent_changes`, credit `description` and `subtitle`, credit tips,
-`additional_cards_note`, timeline `description`.
+
+**You read JSON files, not database columns.** These are not the same shape and
+the names differ: the JSON nests `transfer_partners.highlight` where the
+`cards` table has a `transfer_highlight` column, and `upsert_card()` maps
+between them. `backend/README.md` documents the columns, so it is the wrong
+source for this list. The right source is the `Card` model in
+`backend/models.py`, or any real card file.
+
+The prose fields, as JSON paths:
+
+- `verdict.text`, `verdict.short_tag`
+- `earn_note`, `protection_note`, `rental_note`, `effective_cost`
+- `points.note`, `points.redemption_options[].method`
+- `transfer_partners.highlight`, `transfer_partners.recent_changes`,
+  `transfer_partners.partners[].notes`
+- `credits[].name`, `credits[].subtitle`, `credits[].description`,
+  `credits[].tips`
+- `insurance[].coverage`, `insurance[].detail`
+- `status_perks[].note`, `services[].detail`
+- `additional_cards.title`, `additional_cards.note`,
+  `additional_cards.options[].benefits[].text`
+- `timeline[].text` (there is no `timeline[].description`)
+
+Before you start, re-derive that list rather than trusting it. Walk
+`Card.model_fields` in `backend/models.py` recursively for `str`-typed leaves,
+and report any prose field it turns up that isn't listed above — a field added
+to the model after this was written is one you would otherwise never read, and
+nothing would tell you it was missing.
 
 ## What to flag
 
@@ -38,9 +62,9 @@ check its neighbours in the same file, since stale text clusters.
 "currently", "as of last year". Anything whose truth depends on when it is read.
 
 **Contradiction.** Prose that disagrees with the structured data in the same
-file — a note describing a credit that is `is_removed: true`, a verdict implying
-no annual fee where `annual_fee_cents` is nonzero, a protection note describing
-coverage absent from `insurance_benefits`.
+file — a note describing a credit whose `removed` is `true`, a verdict implying
+no annual fee where `annual_fee` is nonzero, a protection note describing
+coverage absent from `insurance[]`.
 
 **Voice drift.** The catalog's register is plain, specific, and unimpressed by
 marketing. Flag issuer marketing language reproduced uncritically ("premium
@@ -49,15 +73,21 @@ says nothing, and any sentence that reads as if written to sell rather than to
 inform.
 
 **Coverage gaps.** Cards whose editorial fields are thin or empty relative to
-their peers, and cards whose `verdict_text` has not been touched since a timeline
+their peers, and cards whose `verdict.text` has not been touched since a timeline
 event that would plausibly change the verdict. Use `git log -1 --format=%ci` per
-file against the latest `event_date` inside it.
+file against the latest `date` in that file's `timeline[]`.
 
 **Trademarked assets.** `frontend/src/assets/` holds issuer logos and card art
-that are explicitly excluded from the project's MIT licence by NOTICE. Flag any
-card added without a corresponding asset, and any asset present with no card —
-the second is the one that matters, since unused third-party marks in a public
-repo serve no purpose.
+that are explicitly excluded from the project's MIT licence by NOTICE, so an
+asset for a card that no longer exists is a third-party mark in a public repo
+serving no purpose.
+
+Card art specifically is now pinned by `tests/backend/test_catalog_files.py`,
+which fails CI on a card with no art, art with no card, and art whose extension
+the `cardImages.ts` glob would ignore. Don't re-audit it by hand and don't
+report a clean result as a finding. Issuer logos and everything else under
+`assets/` are *not* covered, so those are still yours. Check that the test is
+still there and still covers both directions before relying on this.
 
 ## Output format
 

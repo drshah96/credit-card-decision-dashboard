@@ -25,8 +25,8 @@ without re-doing your research.
 
 ## Fields to verify, in priority order
 
-1. `annual_fee_cents`
-2. Every credit: `max_annual_cents`, whether it is still offered, and its
+1. `annual_fee` (whole dollars in the JSON, not cents)
+2. Every credit: `credits[].max_annual`, whether it is still offered, and its
    structure (auto-applying, monthly instalment, capped, category-restricted)
 3. APR ranges — purchase, balance transfer, cash advance, penalty
 4. Foreign transaction fee
@@ -52,9 +52,11 @@ not confirmation. Report unverified fields as their own list, with the reason.
 ## Discontinued credits
 
 If a credit no longer appears in the issuer's terms, do not propose deleting it.
-This catalog marks credits `is_removed = true` with a `removed_on` date, because
-the card detail timeline depends on that history. Propose the flag and the date,
-and say how confident you are in the date.
+This catalog marks the credit `"removed": true` and records when it changed as a
+`timeline[]` entry, because the card detail timeline depends on that history.
+Propose the flag and the timeline entry, and say how confident you are in the
+date. (`is_removed` and `removed_on` are the database's columns for this; the
+JSON has only the boolean.)
 
 ## Timeline events
 
@@ -73,9 +75,16 @@ forgotten and the one that makes the change history worth having.
 - **Confidence** — one line on how much of the card you were actually able to
   confirm
 
-Editorial fields — `verdict_text`, tips, `default_value_cents` — are judgment
-calls, not facts. Do not flag them as discrepancies. Note only if a factual
-change makes the existing verdict misleading.
+Editorial fields — `verdict.text`, `credits[].tips`, `credits[].default_value` —
+are judgment calls, not facts. Do not flag them as discrepancies. Note only if a
+factual change makes the existing verdict misleading.
+
+Those are JSON paths, because that is what you read. The card files and the
+database columns are different shapes with different names: the JSON nests
+`verdict.text` and carries whole-dollar `default_value`, where the database has
+a `verdict_text` column and integer-cents `default_value_cents`.
+`backend/README.md` documents the columns, so don't take field names from it —
+take them from the `Card` model in `backend/models.py` or from a real card file.
 
 ## Memory
 
