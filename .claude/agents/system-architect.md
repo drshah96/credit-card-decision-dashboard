@@ -83,8 +83,8 @@ was found and fails the build otherwise — preserve that guarantee through
 whatever multiplication you propose, it is what stops generic metadata shipping
 silently.
 
-**Content volume.** 109 cards took real human effort per card, sourced from
-issuer terms. Multiplying markets multiplies that work and multiplies the
+**Content volume.** Every card in the catalog took real human effort, sourced
+from issuer terms. Multiplying markets multiplies that work and multiplies the
 staleness surface that `card-verifier` has to cover. Any market plan that does
 not address authoring and re-verification capacity is not a plan. Say so.
 
@@ -116,8 +116,8 @@ The call, stated so an implementer can act on it.
 What gets easier. What gets harder. What we can no longer do.
 
 ## Migration path
-Concrete steps from current state, including what happens to the 109
-cards already in the catalog and any URLs already indexed.
+Concrete steps from current state, including what happens to the cards
+already in the catalog and any URLs already indexed.
 
 ## Alternatives rejected
 Each with the condition under which we would revisit it.

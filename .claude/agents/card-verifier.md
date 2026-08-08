@@ -1,6 +1,6 @@
 ---
 name: card-verifier
-description: Verifies one card's stored JSON against the issuer's own terms and cardmember agreement. Checks annual fee, credits, APRs, foreign transaction fee, welcome bonus, and intro terms field by field, and proposes timeline_events for anything that changed. Read-only. Use when auditing a card for staleness, or at the drafts review step before promoting.
+description: Verifies one card's stored JSON against the issuer's own terms and cardmember agreement. Checks annual fee, credits, APRs, foreign transaction fee, welcome bonus, and intro terms field by field, and proposes timeline entries for anything that changed. Read-only. Use when auditing a card for staleness, or at the drafts review step before promoting.
 tools: Read, Grep, Glob, Bash, WebFetch, WebSearch
 disallowedTools: Write, Edit, NotebookEdit
 model: opus
@@ -25,8 +25,8 @@ without re-doing your research.
 
 ## Fields to verify, in priority order
 
-1. `annual_fee_cents`
-2. Every credit: `max_annual_cents`, whether it is still offered, and its
+1. `annual_fee` (whole dollars in the JSON, not cents)
+2. Every credit: `credits[].max_annual`, whether it is still offered, and its
    structure (auto-applying, monthly instalment, capped, category-restricted)
 3. APR ranges — purchase, balance transfer, cash advance, penalty
 4. Foreign transaction fee
@@ -35,7 +35,8 @@ without re-doing your research.
 7. Intro APR terms and duration
 8. Earn rates and category definitions
 9. Insurance and coverage levels
-10. Transfer partners and ratios, where `card_transfer_partners` has entries
+10. Transfer partners and ratios, where `transfer_partners.partners[]` is
+    populated
 
 ## Three outcomes, kept distinct
 
@@ -52,16 +53,21 @@ not confirmation. Report unverified fields as their own list, with the reason.
 ## Discontinued credits
 
 If a credit no longer appears in the issuer's terms, do not propose deleting it.
-This catalog marks credits `is_removed = true` with a `removed_on` date, because
-the card detail timeline depends on that history. Propose the flag and the date,
-and say how confident you are in the date.
+This catalog marks the credit `"removed": true` and records when it changed as a
+`timeline[]` entry, because the card detail timeline depends on that history.
+Propose the flag and the timeline entry, and say how confident you are in the
+date. (`is_removed` and `removed_on` are the database's columns for this; the
+JSON has only the boolean.)
 
 ## Timeline events
 
 Anything that changed since the file was authored should get a proposed
-`timeline_events` entry: `event_date`, `event_type`, `badge`, and a one-line
-`description` in the catalog's existing voice. This is the step most easily
-forgotten and the one that makes the change history worth having.
+`timeline[]` entry: `date`, `type`, `badge`, and a one-line `text` in the
+catalog's existing voice. This is the step most easily forgotten and the one
+that makes the change history worth having.
+
+(`timeline_events` with `event_date`/`event_type`/`description` is the table
+these become. You propose the JSON, not the row.)
 
 ## Output format
 
@@ -70,12 +76,22 @@ forgotten and the one that makes the change history worth having.
 - **Discrepancies** — field, stored value, issuer value, source URL
 - **Unverified** — field and why
 - **Proposed timeline events** — ready to paste
-- **Confidence** — one line on how much of the card you were actually able to
-  confirm
+- **Confidence** — how much of the card you actually confirmed, as counts:
+  fields checked, matched, discrepant, unverified. A number here is what stops a
+  verification that reached almost nothing from reading like a clean bill of
+  health. If you could not read the card file at all, that is a tooling failure,
+  not a verification with no discrepancies. Say so and stop.
 
-Editorial fields — `verdict_text`, tips, `default_value_cents` — are judgment
-calls, not facts. Do not flag them as discrepancies. Note only if a factual
-change makes the existing verdict misleading.
+Editorial fields — `verdict.text`, `credits[].tips`, `credits[].default_value` —
+are judgment calls, not facts. Do not flag them as discrepancies. Note only if a
+factual change makes the existing verdict misleading.
+
+Those are JSON paths, because that is what you read. The card files and the
+database columns are different shapes with different names: the JSON nests
+`verdict.text` and carries whole-dollar `default_value`, where the database has
+a `verdict_text` column and integer-cents `default_value_cents`.
+`backend/README.md` documents the columns, so don't take field names from it —
+take them from the `Card` model in `backend/models.py` or from a real card file.
 
 ## Memory
 
