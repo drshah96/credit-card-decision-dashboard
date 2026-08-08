@@ -19,10 +19,10 @@ goes generic. Most of your value is knowing where they are.
 
 **`SEO_ISSUERS` ↔ `ISSUERS`.** `utils/routeMeta.js` holds `SEO_ISSUERS`;
 `utils/cardTaxonomy.ts` holds `ISSUERS`. They must agree or the sitemap and the
-prerender miss an issuer page entirely. Unlike `CLASSIFICATION` — which has a
-test asserting it matches the catalog in both directions — this pair appears to
-rely on discipline alone. Verify whether a test now pins it; if not, say so in
-every review that touches either file, and recommend the test.
+prerender miss an issuer page entirely. `routeMeta.test.ts` pins this: whole-array
+equality against `ISSUERS`, plus both lists against the issuers actually on disk.
+So a one-sided edit fails CI rather than shipping quietly. Treat a change here as
+covered, and if that test is what's failing, the fix is the list, not the test.
 
 **`cardImages.ts` glob.** Card art is auto-discovered from `assets/cards/*` by
 glob, with the filename minus extension used as the card id. A file whose
