@@ -13,6 +13,9 @@ import {
   SEO_ISSUERS,
   TERMS_AS_OF,
 } from "@/utils/routeMeta.js";
+import { ISSUERS } from "@/utils/cardTaxonomy";
+
+const CARDS_DIR = join(__dirname, "..", "..", "..", "backend", "data", "cards");
 
 const CARD = {
   id: "chase-sapphire-reserve",
@@ -124,15 +127,13 @@ describe("LAST_AUDITED / CARDS_AUDITED", () => {
   // hand-maintained, and a wrong count is worse than no count: it asserts
   // coverage the audit never had. These lock both to reality the same way
   // TERMS_AS_OF is locked to the clock.
-  const cardsDir = join(__dirname, "..", "..", "..", "backend", "data", "cards");
-
   const countCardFiles = () =>
-    readdirSync(cardsDir, { withFileTypes: true })
+    readdirSync(CARDS_DIR, { withFileTypes: true })
       .filter((issuer) => issuer.isDirectory() && issuer.name !== "staging")
       .reduce(
         (total, issuer) =>
           total +
-          readdirSync(join(cardsDir, issuer.name)).filter((f) => f.endsWith(".json")).length,
+          readdirSync(join(CARDS_DIR, issuer.name)).filter((f) => f.endsWith(".json")).length,
         0,
       );
 
@@ -146,5 +147,53 @@ describe("LAST_AUDITED / CARDS_AUDITED", () => {
     // Date-only strings parse as UTC midnight; allow a day of slack so a
     // late-in-the-day audit in a behind-UTC timezone doesn't read as future.
     expect(parsed.getTime() - Date.now()).toBeLessThan(86_400_000);
+  });
+});
+
+// ─── Issuer list drift ────────────────────────────────────────────────────────
+// SEO_ISSUERS (here, plain JS, read by the Node build scripts) is a hand-kept
+// copy of ISSUERS (cardTaxonomy.ts, read by the React app). An issuer added to
+// one and not the other fails silently: allRouteMeta drives both the sitemap and
+// the prerender, so the missing issuer's /issuer/:slug page ships with generic
+// metadata and never enters the sitemap. Nothing else in the build notices.
+
+describe("SEO_ISSUERS vs. ISSUERS", () => {
+  it("mirrors ISSUERS exactly: same issuers, same labels, same order", () => {
+    // Whole-array equality is deliberately both directions at once — it fails on
+    // an issuer missing here, one left here after removal from ISSUERS, a label
+    // edited on one side, and a reordering that would shuffle the sitemap.
+    expect(SEO_ISSUERS).toEqual(ISSUERS.map(({ slug, label }) => ({ slug, label })));
+  });
+});
+
+// The pair above can agree with each other and still both be wrong about what is
+// actually in the catalog, so this checks the lists against the cards on disk.
+// It matches on `issuerField` (the `issuer` value inside each card's JSON), not
+// on directory names: cards/{dir}/ happening to equal ISSUERS[].slug today is a
+// coincidence this test has no business freezing.
+
+describe("ISSUERS vs. the real card catalog", () => {
+  const catalogIssuers = (): Set<string> => {
+    const issuers = new Set<string>();
+    for (const dir of readdirSync(CARDS_DIR, { withFileTypes: true })) {
+      if (!dir.isDirectory() || dir.name === "staging") continue;
+      for (const file of readdirSync(join(CARDS_DIR, dir.name))) {
+        if (!file.endsWith(".json")) continue;
+        issuers.add(JSON.parse(readFileSync(join(CARDS_DIR, dir.name, file), "utf-8")).issuer);
+      }
+    }
+    return issuers;
+  };
+
+  it("has an entry for every issuer with cards in the catalog", () => {
+    const known = new Set(ISSUERS.map((i) => i.issuerField));
+    const unlisted = [...catalogIssuers()].filter((issuer) => !known.has(issuer));
+    expect(unlisted).toEqual([]);
+  });
+
+  it("doesn't list an issuer that has no cards in the catalog", () => {
+    const onDisk = catalogIssuers();
+    const empty = ISSUERS.filter((i) => !onDisk.has(i.issuerField)).map((i) => i.slug);
+    expect(empty).toEqual([]);
   });
 });
