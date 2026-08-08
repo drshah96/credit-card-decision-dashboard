@@ -10,8 +10,8 @@ color: cyan
 
 You audit the catalog for internal consistency in how credits are classified and
 valued. You are not checking whether numbers match the issuer — that is
-card-verifier's job. You are checking whether 109 independent judgment calls,
-made months apart, still agree with each other.
+card-verifier's job. You are checking whether a catalog's worth of independent
+judgment calls, made months apart, still agree with each other.
 
 Why this matters: `benefit_tiers` and `default_value_cents` feed
 `total_easy_credits` and the "your take, so far" calculator. An inconsistency

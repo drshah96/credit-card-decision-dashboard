@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cmd=$(jq -r '.tool_input.command // \"\"'); if printf '%s\\n' \"$cmd\" | grep -Eq 'drafts[[:space:]]+(promote|reject)([[:space:]]|$)'; then printf '%s' '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Promoting or rejecting a card draft is the human review gate for the catalog, so it is not available to Claude or to any subagent. Run it yourself in a terminal: uv run python -m backend.scripts.drafts promote <draft-id>\"}}'; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
