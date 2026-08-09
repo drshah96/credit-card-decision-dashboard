@@ -1,0 +1,4 @@
+- [Catalog voice conventions](voice_conventions.md) — the register the card prose is written in, and the sentinel/boilerplate phrases that are deliberate, not decay.
+- [Audit log](audit_log.md) — dates of full catalog audits, counts covered, and what each run cleared.
+- [Extraction method](extraction_method.md) — how to re-derive the prose field list and the field-count floors a healthy run should hit.
+- [Pre-compare prose cluster](project_pre_compare_prose_cluster.md) — the structural cause of the cross-card/superlative findings: prose authored 2026-07-11..21, before /compare shipped.

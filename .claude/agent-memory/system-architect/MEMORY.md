@@ -1,0 +1,4 @@
+- [ADR log](project_adr_log.md) — every ADR written, its number and what it settled. Check before proposing; build on an existing ADR rather than reopening it.
+- [Repo architectural constraints](project_repo_constraints.md) — boot-path blast radius, glob reach, tty-gated promote, CI bot-blocking, the drift-pin pattern.
+- [Multi-market deferred](project_multi_market_deferred.md) — no ADR yet; records the corrected (narrower) framing of the cross-market points-pooling blast radius.
+- [ADR rigor standards](feedback_adr_rigor.md) — measured numbers over estimates, CI checks over policy sentences, no field seeded with a proxy. Read before finishing any ADR.

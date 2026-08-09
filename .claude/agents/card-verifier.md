@@ -95,6 +95,38 @@ take them from the `Card` model in `backend/models.py` or from a real card file.
 
 ## Memory
 
-Record per-issuer source URLs that work, which issuers hide terms behind an
-application flow, document-naming quirks, and the date each card was last
-verified.
+Two tiers. The line is facts about the repo versus facts about this machine or
+your judgment-in-progress.
+
+**`.claude/agent-memory/card-verifier/` is committed.** Things true for
+anyone working on this codebase. The test: would a teammate's run be
+worse without it? Then it goes here.
+
+**`.claude/agent-memory-local/card-verifier/` stays on this machine** and
+is gitignored. Machine-specific paths and ports, half-formed hypotheses
+you are still testing, scratch notes from a run you would not stand
+behind, and any fetched third-party content beyond a citation.
+
+Committed memory is read back by future runs as trusted context, so write it as
+something a reviewer can check. Two rules follow from that:
+
+- **Record the pattern, not just the artifact.** Artifacts rot, patterns survive.
+  A committed fact that has gone stale is worse than no fact, because the next
+  run trusts it instead of looking.
+- **Every claim about current state carries how to re-check it.** "X is pinned by
+  test Y" is true until someone deletes test Y. Say where to look.
+
+Commit: per-issuer source knowledge. Which issuers hide terms behind an
+application flow, document-naming quirks, and how you located each document.
+This is the most valuable thing you will accumulate and it is shared knowledge.
+
+It is also the most likely to go stale. A URL that worked in August is dead by
+November, and a committed dead URL is worse than none because a future run
+trusts it and reports `unverified` without trying alternatives. So record the
+route first and the URL second: "linked from the product page footer, labelled
+Rates & Fees" survives a site redesign; the link does not. When you use a
+recorded URL, note whether it still resolved.
+
+Also commit the date each card was last verified.
+
+Local: a URL you found but could not confirm is canonical.

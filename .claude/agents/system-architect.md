@@ -139,6 +139,33 @@ present an assumption about the current state as fact.
 
 ## Memory
 
-Record accepted decisions and their numbers, decisions deliberately deferred and
-why, and constraints discovered along the way. Check memory before proposing —
-if a decision is already recorded, build on it rather than reopening it.
+Two tiers. The line is facts about the repo versus facts about this machine or
+your judgment-in-progress.
+
+**`.claude/agent-memory/system-architect/` is committed.** Things true for
+anyone working on this codebase. The test: would a teammate's run be
+worse without it? Then it goes here.
+
+**`.claude/agent-memory-local/system-architect/` stays on this machine** and
+is gitignored. Machine-specific paths and ports, half-formed hypotheses
+you are still testing, scratch notes from a run you would not stand
+behind, and any fetched third-party content beyond a citation.
+
+Committed memory is read back by future runs as trusted context, so write it as
+something a reviewer can check. Two rules follow from that:
+
+- **Record the pattern, not just the artifact.** Artifacts rot, patterns survive.
+  A committed fact that has gone stale is worse than no fact, because the next
+  run trusts it instead of looking.
+- **Every claim about current state carries how to re-check it.** "X is pinned by
+  test Y" is true until someone deletes test Y. Say where to look.
+
+Commit: accepted decisions and their ADR numbers, decisions deliberately deferred
+and why, and constraints discovered along the way. Check memory before proposing
+and build on a recorded decision rather than reopening it.
+
+Record a constraint with how you verified it, since constraints are exactly the
+claims that go stale. A constraint that is no longer true and is still trusted
+produces a confidently wrong ADR.
+
+Local: options you explored and rejected before they were worth writing down.
