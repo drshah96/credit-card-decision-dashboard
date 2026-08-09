@@ -27,7 +27,7 @@ CARDS_DIR = Path(__file__).parent.parent.parent / "backend" / "data" / "cards"
 
 
 def card_files() -> list[Path]:
-    files = sorted(p for p in CARDS_DIR.glob("*/*.json") if p.parent.name != "staging")
+    files = sorted(p for p in CARDS_DIR.glob("**/*.json") if "staging" not in p.parts)
     assert files, f"no card files found under {CARDS_DIR} — the glob is wrong, not the catalog"
     return files
 

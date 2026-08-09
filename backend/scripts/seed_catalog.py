@@ -11,12 +11,20 @@ schema change (e.g. a new field added to every card's JSON).
 Each file is validated against the same Pydantic Card schema the API
 returns before it's written, so a malformed file fails loudly instead of
 silently corrupting the catalog.
+
+`staging/` is excluded. A file there is a draft awaiting human review, and
+this script runs on every API boot (see render.yaml's startCommand), so
+without the exclusion the act of writing a draft would publish it at the
+next restart, with no promotion and no review. Everything else that walks
+this tree already skips staging; this is the one that writes to the live
+database, so it matters most here.
 """
 
 import argparse
 import glob
 import json
 import sys
+from pathlib import Path
 
 from pydantic import ValidationError
 
@@ -26,6 +34,32 @@ from backend.models import Card
 from backend.scripts.upsert import upsert_card
 
 DEFAULT_PATTERN = "backend/data/cards/**/*.json"
+
+# The directory name marking a card as drafted-but-not-promoted. Matched against
+# every path segment rather than just the parent, so a nested draft is excluded
+# too and a card whose own filename contains the word is not.
+STAGING_DIR = "staging"
+
+
+def is_staged(path: str) -> bool:
+    return STAGING_DIR in Path(path).parts
+
+
+def select_files(pattern: str) -> list[str]:
+    """The files `seed_catalog` will actually upsert, for `pattern`.
+
+    Selection is its own function so tests can assert on it directly. Asserting
+    against a private glob expression instead is what allowed the staging gap to
+    sit here unnoticed while every other consumer of this tree filtered it out.
+    """
+    matched = sorted(glob.glob(pattern, recursive=True))
+    files = [p for p in matched if not is_staged(p)]
+    if not files and matched:
+        sys.exit(
+            f"error: every file matching {pattern!r} is under {STAGING_DIR}/ — "
+            "those are drafts awaiting human review and are never seeded"
+        )
+    return files
 
 
 def seed_catalog(pattern: str, deactivate_missing: bool | None = None) -> int:
@@ -40,7 +74,7 @@ def seed_catalog(pattern: str, deactivate_missing: bool | None = None) -> int:
     fixture's tmp_path glob) almost certainly doesn't mean "everything else
     in the catalog just got discontinued," so it stays off unless the whole
     catalog is actually in view, or a caller opts in explicitly."""
-    files = sorted(glob.glob(pattern, recursive=True))
+    files = select_files(pattern)
     if not files:
         sys.exit(f"error: no files matched {pattern!r}")
     if deactivate_missing is None:
