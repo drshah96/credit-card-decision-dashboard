@@ -1,7 +1,7 @@
 ---
 name: editorial-auditor
 description: Audits editorial prose across the whole card catalog — verdicts, notes, tips, descriptions. Flags cross-card comparisons that belong on /compare, superlatives and catalog counts that decay as cards are added, stale claims, and voice drift. Read-only, catalog-wide. Use quarterly or after adding a batch of cards. For factual accuracy against issuer terms use card-verifier; for tier and value consistency use tier-auditor.
-tools: Read, Grep, Glob, Bash
+tools: Read, Grep, Glob
 disallowedTools: Write, Edit, NotebookEdit
 model: opus
 memory: project
@@ -37,11 +37,14 @@ The prose fields, as JSON paths:
   `additional_cards.options[].benefits[].text`
 - `timeline[].text` (there is no `timeline[].description`)
 
-Before you start, re-derive that list rather than trusting it. Walk
-`Card.model_fields` in `backend/models.py` recursively for `str`-typed leaves,
-and report any prose field it turns up that isn't listed above — a field added
-to the model after this was written is one you would otherwise never read, and
-nothing would tell you it was missing.
+Before you start, re-derive that list rather than trusting it. You have no
+shell, so read `backend/models.py` and walk the `Card` model by hand, following
+every nested model and list, and collect the `str`-typed leaves. Report any
+prose field it turns up that isn't listed above — a field added to the model
+after this was written is one you would otherwise never read, and nothing would
+tell you it was missing. This is how the list was found to be missing
+`welcome_bonus.bonus`, `.requirement` and `.estimated_value`, so it is not a
+formality.
 
 ### Zero is an error, not a clean result
 
@@ -91,9 +94,20 @@ says nothing, and any sentence that reads as if written to sell rather than to
 inform.
 
 **Coverage gaps.** Cards whose editorial fields are thin or empty relative to
-their peers, and cards whose `verdict.text` has not been touched since a timeline
-event that would plausibly change the verdict. Use `git log -1 --format=%ci` per
-file against the latest `date` in that file's `timeline[]`.
+their peers.
+
+The stronger version of this check compares when a card's `verdict.text` was
+last edited against the latest `date` in its `timeline[]`, which catches a
+verdict that outlived the event that should have changed it. **You cannot run
+it**: it needs `git log -1 --format=%ci` per file and you have no shell. If the
+caller supplies those timestamps, do the comparison. If not, say the check was
+not run rather than omitting it, so a reader doesn't take its absence for a
+clean result.
+
+The same limit applies to anything else about history — when prose was written,
+which cards were seeded together, whether a claim predates a feature. Those are
+real findings and you cannot reach them unaided. Ask for the timestamps when the
+question turns on them.
 
 **Trademarked assets.** `frontend/src/assets/` holds issuer logos and card art
 that are explicitly excluded from the project's MIT licence by NOTICE, so an

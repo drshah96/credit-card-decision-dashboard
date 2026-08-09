@@ -54,6 +54,24 @@ sequential, starting at 0001.
      not just a frozen list; enum values are a persisted format, so renaming one
      is a 109-file migration.
 
+  **Amended 2026-08-09 (second round)** after empirical testing of assumption 1:
+  headless invocation PROVEN, so the assumption narrowed to runner auth, runner
+  network reachability, and permission mode. Reachability is now migration step 1
+  because a mostly-blocked result invalidates the hosting choice. Decision 6 was
+  corrected: it had cited "`card-verifier` can't write" as an existing capability
+  control, which is false (see [[repo-architectural-constraints]]). Added a third
+  guard — assert `git status --porcelain` is empty after the verifier stage —
+  chosen because an outcome check does not depend on tool grants and survives a
+  grant being loosened later.
+
+  **Amended 2026-08-09** after PR #192/#193 landed: Decision 1's outage argument
+  upgraded from inference to demonstrated (see [[repo-architectural-constraints]]);
+  §7f rewritten because the glob gap it flagged is now fixed; migration step 2's
+  guard corrected from a `--no-group` dry run to `uv lock --check`; step 3 now
+  adds a `uv lock --check` CI step and drops the seed_catalog test as already
+  landed. **Assumption 1 (headless `card-verifier`) remains unproven and gates
+  steps 2-10** — re-confirmed zero agent references in `.github/workflows/`.
+
   **The staleness floor, not hash movement, is the dominant trigger.** Nearly all
   of the 1.87/day are cards where the hash did not move; hash-triggered runs are
   ~0.1/day. This is the design working, not waste: verify-only-on-change means a

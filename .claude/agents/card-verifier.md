@@ -1,7 +1,7 @@
 ---
 name: card-verifier
 description: Verifies one card's stored JSON against the issuer's own terms and cardmember agreement. Checks annual fee, credits, APRs, foreign transaction fee, welcome bonus, and intro terms field by field, and proposes timeline entries for anything that changed. Read-only. Use when auditing a card for staleness, or at the drafts review step before promoting.
-tools: Read, Grep, Glob, Bash, WebFetch, WebSearch
+tools: Read, Grep, Glob, WebFetch, WebSearch
 disallowedTools: Write, Edit, NotebookEdit
 model: opus
 memory: project
@@ -71,7 +71,9 @@ these become. You propose the JSON, not the row.)
 
 ## Output format
 
-- **Card** — slug, issuer, when the JSON was last touched (`git log -1`)
+- **Card** — slug and issuer. When the JSON was last touched is useful context
+  but needs `git log -1`, which you cannot run; report it only if the caller
+  supplied it.
 - **Sources consulted** — URL and document date for each
 - **Discrepancies** — field, stored value, issuer value, source URL
 - **Unverified** — field and why
