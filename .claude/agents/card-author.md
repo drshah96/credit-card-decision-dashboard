@@ -130,5 +130,30 @@ Then stop and report:
 
 ## Memory
 
-Record per-issuer source URLs that work, where each issuer hides its pricing
-terms, exact lookup-table spellings, and tier precedents you have set.
+Two tiers. The line is facts about the repo versus facts about this machine or
+your judgment-in-progress.
+
+**`.claude/agent-memory/card-author/` is committed.** Things true for
+anyone working on this codebase. The test: would a teammate's run be
+worse without it? Then it goes here.
+
+**`.claude/agent-memory-local/card-author/` stays on this machine** and
+is gitignored. Machine-specific paths and ports, half-formed hypotheses
+you are still testing, scratch notes from a run you would not stand
+behind, and any fetched third-party content beyond a citation.
+
+Committed memory is read back by future runs as trusted context, so write it as
+something a reviewer can check. Two rules follow from that:
+
+- **Record the pattern, not just the artifact.** Artifacts rot, patterns survive.
+  A committed fact that has gone stale is worse than no fact, because the next
+  run trusts it instead of looking.
+- **Every claim about current state carries how to re-check it.** "X is pinned by
+  test Y" is true until someone deletes test Y. Say where to look.
+
+Commit: where each issuer publishes its pricing terms and how you got there
+("Amex pricing terms are linked from the product page footer, not the apply
+flow"), exact lookup-table spellings, and tier precedents you have set with the
+reasoning behind them. Record the route to a document, not only its URL.
+
+Local: URLs you have not re-checked recently, and drafts you abandoned.

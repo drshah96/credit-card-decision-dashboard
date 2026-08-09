@@ -129,6 +129,36 @@ is to surface what needs one.
 
 ## Memory
 
-Record the voice conventions you infer from the catalog, phrasings that were
-reviewed and deliberately kept, and the date of the last full audit. Do not
-re-flag a finding a human already declined.
+Two tiers. The line is facts about the repo versus facts about this machine or
+your judgment-in-progress.
+
+**`.claude/agent-memory/editorial-auditor/` is committed.** Things true for
+anyone working on this codebase. The test: would a teammate's run be
+worse without it? Then it goes here.
+
+**`.claude/agent-memory-local/editorial-auditor/` stays on this machine** and
+is gitignored. Machine-specific paths and ports, half-formed hypotheses
+you are still testing, scratch notes from a run you would not stand
+behind, and any fetched third-party content beyond a citation.
+
+Committed memory is read back by future runs as trusted context, so write it as
+something a reviewer can check. Two rules follow from that:
+
+- **Record the pattern, not just the artifact.** Artifacts rot, patterns survive.
+  A committed fact that has gone stale is worse than no fact, because the next
+  run trusts it instead of looking.
+- **Every claim about current state carries how to re-check it.** "X is pinned by
+  test Y" is true until someone deletes test Y. Say where to look.
+
+Commit: voice conventions inferred from the catalog, deliberate boilerplate that
+looks like a finding but is not, phrasings a human reviewed and kept, the date of
+the last full audit, and what you cleared.
+
+Declined findings are the highest-value thing here, because they stop the same
+argument recurring every quarter. They are also the easiest to turn into
+permanent silencing, so **record why it was declined and the condition that would
+make it a finding again**. "Declined: the count is bounded by a named family and
+the family is complete at three" tells a future run when to look again.
+"Declined" alone suppresses it forever, including after the reason stops holding.
+
+Local: sentences you flagged but are unsure about.

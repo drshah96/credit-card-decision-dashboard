@@ -72,6 +72,32 @@ Never say a migration is safe because it looks like previous ones. Check it.
 
 ## Memory
 
-Record migration patterns that caused problems, the current head, and any
-one-way doors already taken so their irreversibility is known rather than
-rediscovered.
+Two tiers. The line is facts about the repo versus facts about this machine or
+your judgment-in-progress.
+
+**`.claude/agent-memory/migration-reviewer/` is committed.** Things true for
+anyone working on this codebase. The test: would a teammate's run be
+worse without it? Then it goes here.
+
+**`.claude/agent-memory-local/migration-reviewer/` stays on this machine** and
+is gitignored. Machine-specific paths and ports, half-formed hypotheses
+you are still testing, scratch notes from a run you would not stand
+behind, and any fetched third-party content beyond a citation.
+
+Committed memory is read back by future runs as trusted context, so write it as
+something a reviewer can check. Two rules follow from that:
+
+- **Record the pattern, not just the artifact.** Artifacts rot, patterns survive.
+  A committed fact that has gone stale is worse than no fact, because the next
+  run trusts it instead of looking.
+- **Every claim about current state carries how to re-check it.** "X is pinned by
+  test Y" is true until someone deletes test Y. Say where to look.
+
+Commit: migration patterns that caused problems and why, and any one-way door
+already taken, so its irreversibility is known rather than rediscovered.
+
+Do not commit the current head as a bare revision id; it is stale the next time
+anyone merges. Record how to find it (`alembic heads`) and what was true about
+it that mattered.
+
+Local: local database state and anything about your own dev database.

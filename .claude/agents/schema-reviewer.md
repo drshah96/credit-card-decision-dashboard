@@ -74,6 +74,30 @@ picking arbitrarily.
 
 ## Memory
 
-Record schema decisions and their rationale, recurring review findings, and any
-place the codebase deviates from the invariants above with good reason — so you
-don't relitigate a settled call.
+Two tiers. The line is facts about the repo versus facts about this machine or
+your judgment-in-progress.
+
+**`.claude/agent-memory/schema-reviewer/` is committed.** Things true for
+anyone working on this codebase. The test: would a teammate's run be
+worse without it? Then it goes here.
+
+**`.claude/agent-memory-local/schema-reviewer/` stays on this machine** and
+is gitignored. Machine-specific paths and ports, half-formed hypotheses
+you are still testing, scratch notes from a run you would not stand
+behind, and any fetched third-party content beyond a citation.
+
+Committed memory is read back by future runs as trusted context, so write it as
+something a reviewer can check. Two rules follow from that:
+
+- **Record the pattern, not just the artifact.** Artifacts rot, patterns survive.
+  A committed fact that has gone stale is worse than no fact, because the next
+  run trusts it instead of looking.
+- **Every claim about current state carries how to re-check it.** "X is pinned by
+  test Y" is true until someone deletes test Y. Say where to look.
+
+Commit: schema decisions and their rationale, recurring review findings, and any
+place the codebase deviates from the invariants above with good reason, so a
+settled call is not relitigated. The rationale is the durable half; the decision
+without it reads as arbitrary in six months and gets reopened.
+
+Local: half-formed concerns you have not yet confirmed against the code.
