@@ -104,7 +104,7 @@
   "transfer_partners": {
     "airline_count": 10,
     "hotel_count": 4,
-    "highlight": "World of Hyatt is the crown jewel: 1:1 and exclusive to Chase & Bilt, routinely 2\u20133\u00a2+. Also Aeroplan, Virgin Atlantic, Flying Blue, Singapore. Wyndham added Feb 2026.",
+    "highlight": "World of Hyatt is the standout: 1:1, routinely 2\u20133\u00a2+. Also Aeroplan, Virgin Atlantic, Flying Blue, Singapore. Wyndham added Feb 2026.",
     "recent_changes": "Ten airline partners and four hotel partners, with World of Hyatt at 1:1 the standout.",
     "partners": [
       {
@@ -177,7 +177,7 @@
         "name": "Wyndham Rewards",
         "type": "hotel",
         "ratio": "1:1",
-        "notes": "Newest partner, added Feb 2026."
+        "notes": "Added Feb 2026."
       }
     ]
   },
@@ -379,7 +379,7 @@
       "level": "good"
     }
   ],
-  "protection_note": "Primary rental, real trip-cancellation limits, baggage delay, and emergency evacuation with a dollar limit. The one glaring gap: no cell-phone protection (Amex and Venture X have it).",
+  "protection_note": "Primary rental, real trip-cancellation limits, baggage delay, and emergency evacuation with a dollar limit. The one glaring gap: no cell-phone protection.",
   "rental_note": "The CSR includes free primary coverage (up to $75k), paying first, before your own auto policy. Decline the counter's CDW and pay with the card.",
   "status_perks": [
     {
@@ -395,7 +395,7 @@
     {
       "name": "Lounge access",
       "strength": 4,
-      "note": "Chase Sapphire Lounges + Priority Pass: Priority Pass includes 2 guests free (unlike Amex). From Aug 15, 2026 the Sapphire Lounges shut out Priority Pass and LoungeKey members who got their membership from a non-Chase card, which should cut the queues. Reserve access is untouched, and the connecting-flight arrival window widens from 3 hours to 5."
+      "note": "Chase Sapphire Lounges + Priority Pass: Priority Pass includes 2 guests free. From Aug 15, 2026 the Sapphire Lounges shut out Priority Pass and LoungeKey members who got their membership from a non-Chase card, which should cut the queues. Reserve access is untouched, and the connecting-flight arrival window widens from 3 hours to 5."
     }
   ],
   "services": [

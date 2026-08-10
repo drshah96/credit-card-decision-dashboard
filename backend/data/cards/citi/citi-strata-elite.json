@@ -31,7 +31,7 @@
   },
   "verdict": {
     "status": "situational",
-    "text": "Citi's answer to Amex Platinum: unique status perks, narrow credits",
+    "text": "Unique status perks, narrow credits",
     "short_tag": "Premium Travel Perks"
   },
   "earn_rates": [
@@ -216,7 +216,7 @@
       "level": "none"
     }
   ],
-  "protection_note": "Strong purchase protection ($10k/item, $50k/yr, on par with the Venture X) is the standout here. Trip protections exist but Citi doesn't publish exact cancellation caps the way Chase does, so budget conservatively for that one. Rental coverage flips to primary only outside the US, which is a real gap for domestic renters compared to the Venture X's always-primary $75k coverage.",
+  "protection_note": "Strong purchase protection ($10k/item, $50k/yr) is the standout here. Trip protections exist but Citi doesn't publish exact cancellation caps, so budget conservatively for that one. Rental coverage flips to primary only outside the US, which is a real gap for domestic renters.",
   "rental_note": "MasterRental is secondary in the US (pays after your personal auto policy) but becomes primary on international rentals. If you rent domestically often, pair this with a card that offers primary coverage everywhere.",
   "status_perks": [
     {
@@ -282,7 +282,7 @@
         ]
       }
     ],
-    "note": "Unlike the Venture X (free AUs) or CSR ($75), Strata Elite charges $75/yr per authorized user, worth it mainly for a partner who'll use the Priority Pass access; the hotel status and Admirals passes don't extend to them."
+    "note": "Strata Elite charges $75/yr per authorized user, worth it mainly for a partner who'll use the Priority Pass access; the hotel status and Admirals passes don't extend to them."
   },
   "timeline": [
     {
