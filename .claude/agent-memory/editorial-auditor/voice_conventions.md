@@ -15,6 +15,7 @@ The catalog's register, inferred from ~6,300 prose values across 109 cards.
 - No em-dashes (see the repo-level user preference). Uses commas and colons instead.
 
 **Deliberate boilerplate — do NOT flag these**
+- `chase-sapphire-reserve` `status_perks[].note`: "Explorist is the weakest of the four". Reviewed and kept 2026-08-10. The four are the four perks named in that same sentence (IHG Diamond, Hyatt Explorist, Southwest A-List, Shops at Chase), not the four-card catalog, so it is bounded by its own sentence and cannot decay. It survives a grep for "of the four" after the catalog-scoped instances were fixed. Flag it again only if the perk list in that sentence changes length without the phrase being updated.
 - `transfer_partners.recent_changes` = `"Not applicable."` on all 71 cards with no transfer program. A sentinel, not thin prose.
 - `insurance[]` empty *with* a protection_note that says so explicitly (7 cards: capital-one-platinum, capital-one-platinum-secured, citi-aadvantage-mileup, citi-aadvantage-platinum-select, citi-diamond-preferred, citi-secured, citi-simplicity). Prose and structure agree.
 - A `removed: true` credit whose name carries "(Removed)" and whose description/tips say it is gone (amex-platinum Saks). This is the intended pattern, not a contradiction.
