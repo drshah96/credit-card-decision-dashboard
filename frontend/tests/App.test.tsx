@@ -51,3 +51,38 @@ describe("App accessibility shell", () => {
     expect(focusables[0]).toBe(skip);
   });
 });
+
+// ─── unknown routes ───────────────────────────────────────────────────────────
+// Render serves the SPA shell with HTTP 200 for any path without a matching
+// file, so an unknown URL is indistinguishable from a real page to anything
+// reading status codes. These pin the client-side mitigation: a catch-all route
+// that renders a real not-found page and marks it noindex.
+
+describe("unknown routes", () => {
+  it("renders the not-found page instead of a blank shell", async () => {
+    renderApp("/no-such-page");
+    expect(await screen.findByRole("heading", { name: /page not found/i })).toBeInTheDocument();
+  });
+
+  it("marks the not-found page noindex", async () => {
+    renderApp("/no-such-page");
+    await screen.findByRole("heading", { name: /page not found/i });
+    expect(document.head.querySelector('meta[name="robots"]')?.getAttribute("content")).toBe(
+      "noindex",
+    );
+  });
+
+  it("does not claim a canonical for a URL that has no content", async () => {
+    renderApp("/no-such-page");
+    await screen.findByRole("heading", { name: /page not found/i });
+    const canonical = document.head
+      .querySelector('link[rel="canonical"]')
+      ?.getAttribute("href");
+    expect(canonical ?? "").not.toContain("/no-such-page");
+  });
+
+  it("leaves a real route indexable", async () => {
+    renderApp("/");
+    expect(document.head.querySelector('meta[name="robots"]')).toBeNull();
+  });
+});
