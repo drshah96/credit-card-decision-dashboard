@@ -77,7 +77,14 @@ export default function IssuerCardsPage() {
   }, [issuer]);
 
   const seoMeta = issuer && issuerSlug ? issuerRouteMeta(issuerSlug, issuer.label) : undefined;
-  useSeo({ title: seoMeta?.title, description: seoMeta?.description, path: seoMeta?.path });
+  useSeo({
+    title: seoMeta?.title,
+    description: seoMeta?.description,
+    path: seoMeta?.path,
+    // An unknown slug renders "Unknown issuer" below but still returns 200,
+    // so it needs to be kept out of the index.
+    noindex: Boolean(issuerSlug) && !issuer,
+  });
 
   const { compareIds } = useCompareList();
   // Defaults to "on" whenever picks already exist (e.g. returning from a

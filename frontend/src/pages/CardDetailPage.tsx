@@ -1420,9 +1420,16 @@ export default function CardDetailPage() {
   // and the client-set tags can't disagree. Stays undefined until the card
   // resolves, so a slow load never publishes a half-built title.
   const meta = card ? cardRouteMeta(card) : undefined;
-  useSeo({ title: meta?.title, description: meta?.description, path: meta?.path });
-
+  // A card id that resolves to nothing is a URL that shouldn't be in the index.
+  // Computed above the hook so it can be passed in, since hooks can't be called
+  // conditionally.
   const is404 = error instanceof Error && error.message.includes("404");
+  useSeo({
+    title: meta?.title,
+    description: meta?.description,
+    path: meta?.path,
+    noindex: is404,
+  });
   const issuer = card ? ISSUERS.find((i) => i.issuerField === card.issuer) : undefined;
   // Prefer the exact page we were linked from (an issuer page's card tile,
   // a Top Pick ranking cell, or a Compare Cards row all pass this via
