@@ -18,6 +18,7 @@ const CardDetailPage = lazy(() => import("./pages/CardDetailPage"));
 const ComparePage = lazy(() => import("./pages/ComparePage"));
 const IssuerCardsPage = lazy(() => import("./pages/IssuerCardsPage"));
 const MethodologyPage = lazy(() => import("./pages/MethodologyPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const TopPickPage = lazy(() => import("./pages/TopPickPage"));
 
 // Occupies real height while a route chunk loads so the flex app-shell
@@ -65,6 +66,10 @@ export default function App() {
               <Route path="/issuer/:issuerSlug" element={<IssuerCardsPage />} />
               <Route path="/cards/:id" element={<CardDetailPage />} />
               <Route path="/methodology" element={<MethodologyPage />} />
+              {/* Anything else. Render serves the SPA shell with a 200 for
+                  unknown paths, so without this the URL looks like a real page
+                  to search engines. NotFoundPage sets noindex. */}
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>
         </ErrorBoundary>

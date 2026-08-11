@@ -255,7 +255,8 @@ export default function MethodologyPage() {
             this is the part that couldn't wait. */}
         <Section label="Who" title="Who's behind this">
           <P>
-            One person:{" "}
+            <strong>Built by one. Made for every wallet.</strong> The Wallet Audit is
+            independently built by{" "}
             <a
               href="https://www.linkedin.com/in/dhruvinshah1996/"
               target="_blank"
@@ -264,10 +265,10 @@ export default function MethodologyPage() {
             >
               Dhruvin Shah
             </a>
-            . The Wallet Audit is independently built and maintained, with every card
-            sourced by hand from the issuer's own pricing terms and cardmember
-            agreements. There's no team behind the "we" on this page, and no affiliate
-            deals behind the rankings above.
+            , with every card researched straight from the issuer's own terms and
+            agreements. No hidden team, no paid rankings, no affiliate influence. Just
+            clear, unbiased insights to help you decide what's actually worth keeping in
+            your wallet.
           </P>
         </Section>
       </div>

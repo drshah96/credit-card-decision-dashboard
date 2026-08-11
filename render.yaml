@@ -61,6 +61,27 @@ services:
     runtime: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
+    # PR previews, scoped to this service only.
+    #
+    # The routing rules at the bottom of this block cannot be changed safely
+    # without somewhere to test them. They are load-bearing: `/cards/<id>` has
+    # no trailing slash, Render only serves a directory's index.html for paths
+    # that do, and the catch-all would otherwise return the root shell for
+    # every card page. Getting that wrong takes all 109 card pages and 9
+    # issuer pages down at once, and today the only way to find out is to
+    # deploy it to the live site.
+    #
+    # There is a known bug waiting on this: an unknown card id rewrites to a
+    # file that doesn't exist and Render answers HTTP 200 with an empty body,
+    # so a stale or mistyped card link renders a blank page and the SPA never
+    # loads to say otherwise.
+    #
+    # Deliberately NOT set on the API service or the database above. A preview
+    # of the API would need its own DATABASE_URL, which is `sync: false`
+    # because it's a secret, so the preview would boot into a failing
+    # migration. Static previews need no secrets and no database.
+    previews:
+      generation: automatic
     # Custom domain — verified; www also registered here and redirects to
     # the bare domain. DNS on Cloudflare: root + www are DNS-only (grey
     # cloud) as of 2026-08-07 — the free-plan "JS Detections" script that

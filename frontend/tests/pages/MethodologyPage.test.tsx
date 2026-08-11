@@ -136,4 +136,29 @@ describe("MethodologyPage", () => {
     expect(link).toHaveAttribute("href", expect.stringContaining("linkedin.com/in/"));
     expect(link).toHaveAttribute("rel", expect.stringContaining("noopener"));
   });
+
+  // The independence claims are the page's whole point, so pin the wording
+  // rather than only the link. jsdom concatenates the paragraph text across the
+  // inline <strong> and <a>, so match on substrings.
+  it("states the independence claims in full", () => {
+    renderPage();
+    const text =
+      screen.getByText(/Built by one\. Made for every wallet\./i).closest("p")?.textContent ?? "";
+
+    expect(text).toContain("independently built by");
+    expect(text).toContain("Dhruvin Shah");
+    expect(text).toContain("straight from the issuer's own terms and agreements");
+    expect(text).toContain("No hidden team, no paid rankings, no affiliate influence.");
+    expect(text).toContain("worth keeping in your wallet");
+  });
+
+  // A missing separator here reads as a typo on a public page: the supplied
+  // copy ran "no affiliate influence just clear" with nothing between the
+  // clauses. This pins the boundary, and the repo's no-dashes convention.
+  it("keeps the sentence boundary before Just clear", () => {
+    renderPage();
+    const text = screen.getByText(/Built by one/i).closest("p")?.textContent ?? "";
+    expect(text).toMatch(/affiliate influence\.\s+Just clear/);
+    expect(text).not.toMatch(/[—–]/);
+  });
 });

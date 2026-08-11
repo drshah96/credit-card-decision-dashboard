@@ -25,6 +25,17 @@ export type SeoInput = {
   description?: string;
   /** Route path such as "/cards/amex-platinum"; becomes canonical + og:url. */
   path?: string;
+  /**
+   * True on a not-found state: an unknown card id, an unknown issuer slug, or
+   * a path matching no route. Adds `<meta name="robots" content="noindex">`.
+   *
+   * Unlike every other field here this is **reconciled on every run, not
+   * skipped when falsy**. The skip-when-undefined rule exists so a page can
+   * set tags before its data loads; applied to this field it would be a bug,
+   * because a `noindex` left over from a 404 would follow the user into the
+   * next route and deindex a page that should rank. Absent means absent.
+   */
+  noindex?: boolean;
 };
 
 function upsertMeta(attr: "name" | "property", key: string, content: string) {
@@ -48,12 +59,36 @@ function upsertCanonical(href: string) {
 }
 
 /**
+ * Owns the robots tag outright: sets it when `on`, removes it otherwise.
+ *
+ * Nothing else ships one — not `index.html`, not the prerender pass — so this
+ * is the only writer and it is safe to remove any tag it finds.
+ * `tests/utils/seo.test.tsx` pins that assumption, so if a robots tag is ever
+ * added to the shell, the test fails rather than this silently deleting it.
+ */
+function setRobots(on: boolean) {
+  const el = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]');
+  if (!on) {
+    el?.remove();
+    return;
+  }
+  if (el) {
+    el.setAttribute("content", "noindex");
+    return;
+  }
+  const created = document.createElement("meta");
+  created.setAttribute("name", "robots");
+  created.setAttribute("content", "noindex");
+  document.head.appendChild(created);
+}
+
+/**
  * Points the document's title, description, canonical URL and social tags at
  * the current route. Values are left untouched while undefined, so a page can
  * call this before its data has loaded without clobbering the previous route's
- * tags with empty strings.
+ * tags with empty strings. `noindex` is the exception — see its doc comment.
  */
-export function useSeo({ title, description, path }: SeoInput): void {
+export function useSeo({ title, description, path, noindex }: SeoInput): void {
   useEffect(() => {
     if (title) {
       document.title = title;
@@ -70,5 +105,6 @@ export function useSeo({ title, description, path }: SeoInput): void {
       upsertCanonical(url);
       upsertMeta("property", "og:url", url);
     }
-  }, [title, description, path]);
+    setRobots(Boolean(noindex));
+  }, [title, description, path, noindex]);
 }
