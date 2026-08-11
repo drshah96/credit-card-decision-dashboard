@@ -12,6 +12,7 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "generate:routes": "node scripts/renderRoutes.mjs",
     "prebuild": "node scripts/generate-sitemap.mjs",
     "postbuild": "node scripts/prerender.mjs"
   },
