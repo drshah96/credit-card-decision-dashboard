@@ -1,5 +1,7 @@
 import { describe, it, expect, afterEach } from "vitest";
 import { act, render, screen } from "@testing-library/react";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { MemoryRouter } from "react-router-dom";
 import { SiteMark } from "@/components/SiteMark";
 
@@ -77,5 +79,33 @@ describe("SiteMark", () => {
 
     await scrollTo(0);
     expect(bar.className).not.toMatch(/is-compact/);
+  });
+});
+
+// The mark ships as fixed-size files chosen by device pixel ratio, so the CSS
+// display size and the generated files are a contract. If the display size
+// grows past 48px every variant is undersized and the logo goes blurry on the
+// densest screens — which no test can see, since jsdom applies no stylesheet
+// and blur is a rendering property. What is checkable is the number that
+// drives it.
+describe("brand mark resolution contract", () => {
+  const css = readFileSync(join(__dirname, "..", "..", "src", "index.css"), "utf-8");
+
+  it("never renders the mark larger than the 1x asset, 48px", () => {
+    const sizes = [...css.matchAll(/--sitemark-logo-h:\s*(\d+)px/g)].map((m) => Number(m[1]));
+    expect(sizes.length).toBeGreaterThan(0);
+    expect(Math.max(...sizes)).toBeLessThanOrEqual(48);
+  });
+
+  it("offers a variant for 1x, 2x and 3x", () => {
+    render(<MemoryRouter><SiteMark /></MemoryRouter>);
+    // alt="" makes it presentational, so it has no img role to query by.
+    const img = document.querySelector("img.sitemark-logo") as HTMLImageElement;
+    expect(img).not.toBeNull();
+    const srcset = img.getAttribute("srcset") ?? "";
+    for (const d of ["1x", "2x", "3x"]) expect(srcset).toContain(d);
+    // Intrinsic size, so the header reserves space before the image loads.
+    expect(img).toHaveAttribute("width", "48");
+    expect(img).toHaveAttribute("height", "48");
   });
 });

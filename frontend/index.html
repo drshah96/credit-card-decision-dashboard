@@ -31,6 +31,13 @@
       content="Compare credit cards by real, honest value, not marketing hype. See best-case net worth, honest points valuations, and how issuer credits actually add up."
     />
     <meta name="twitter:image" content="https://thewalletaudit.com/og-image-2026-08.png" />
+    <!-- The card data lives on a different origin, so DNS, TCP and TLS to it
+         only begin once the JS bundle has parsed and fired /api/cards — which
+         is why that request sits at the end of the critical chain. Warming the
+         connection here overlaps the handshake with the bundle download. It
+         does not make the API faster, it removes the setup from the chain. -->
+    <link rel="preconnect" href="https://api.thewalletaudit.com" crossorigin />
+    <link rel="dns-prefetch" href="https://api.thewalletaudit.com" />
   </head>
   <body>
     <div id="root"></div>
