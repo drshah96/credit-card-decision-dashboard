@@ -62,6 +62,39 @@ export function jsonForScript(value) {
 
 const money = (n) => (n === 0 ? "$0" : `$${Number(n).toLocaleString("en-US")}`);
 
+/**
+ * Who built this, in both prose and structured data.
+ *
+ * Four AI assistants were asked about this site on 2026-08-11. Three answered
+ * "no identified founder", "no About the founder page", "does not publicly
+ * display individual names". The methodology page has said otherwise for days
+ * — but only in React, so only a crawler that executes JavaScript ever saw it.
+ * A fourth, which does execute it, read the name correctly and then attached it
+ * to a different person of the same name.
+ *
+ * Both failures are the same missing thing. `sameAs` is the answer to the
+ * second one specifically: it is how structured data says *which* Dhruvin Shah,
+ * by pointing at a profile that is already an established identity elsewhere.
+ */
+const AUTHOR = {
+  name: "Dhruvin Shah",
+  url: "https://www.linkedin.com/in/dhruvinshah1996/",
+};
+
+const AUTHOR_JSON_LD = {
+  "@type": "Person",
+  name: AUTHOR.name,
+  url: SITE_URL,
+  sameAs: [AUTHOR.url],
+};
+
+/** Mirrors the authorship paragraph on /methodology, which until now was React-only. */
+const AUTHOR_LINE =
+  `<p><strong>Built by one. Made for every wallet.</strong> The Wallet Audit is ` +
+  `independently built by <a href="${escAttr(AUTHOR.url)}" rel="author noopener">${esc(AUTHOR.name)}</a>, ` +
+  `with every card researched straight from the issuer's own terms and agreements. ` +
+  `No hidden team, no paid rankings, no affiliate influence.</p>`;
+
 /** The one-line explanation of what this site does differently. */
 const METHOD_LINE =
   "The Wallet Audit values statement credits at what a typical person actually " +
@@ -165,6 +198,7 @@ function homeBody(cards, issuers) {
 <p>${cards.length} cards across ${issuers.length} issuers, each hand-authored from
 the issuer's own cardmember agreement and pricing terms rather than from
 aggregators. Rankings are not paid for and carry no affiliate influence.</p>
+${AUTHOR_LINE}
 <h2>Issuers</h2>
 <ul>${list}</ul>
 ${VISIT_LINE("/top-picks", "Category rankings by real returned value, the side-by-side comparison, and the per-card credit sliders all run in the browser.")}
@@ -189,6 +223,8 @@ all.</p>
 <p>Every card is hand-authored from the issuer's own cardmember agreement and
 pricing-and-terms documents, not from aggregators, which during a product
 transition are routinely months out of date.</p>
+<h2>Who builds this</h2>
+${AUTHOR_LINE}
 ${VISIT_LINE("/methodology", "The tier definitions, the worked arithmetic and the per-card figures are on the site.")}
 `.trim(),
   "/compare": `
@@ -223,6 +259,9 @@ function cardJsonLd(card) {
     url: `${SITE_URL}/cards/${card.id}`,
     category: "Credit card",
     provider: { "@type": "Organization", name: card.issuer },
+    // provider is the bank that issues the card. publisher is who wrote the
+    // analysis. Conflating them would credit Chase with this site's opinions.
+    publisher: AUTHOR_JSON_LD,
     ...(card.annual_fee != null && {
       feesAndCommissionsSpecification: `Annual fee ${money(card.annual_fee)}`,
     }),
@@ -237,6 +276,29 @@ const SITE_JSON_LD = {
   description:
     "Independent credit card analysis. Statement credits valued at what a typical " +
     "person actually captures, and one honest cents-per-point figure per currency.",
+  author: AUTHOR_JSON_LD,
+  publisher: AUTHOR_JSON_LD,
+};
+
+/**
+ * Authorship on every page type, not only the ones that mention it in prose.
+ * A crawler that lands on /issuer/chase or /compare should be able to say who
+ * publishes this, since "no identified author" was the reported failure and a
+ * direct landing is the common case for both.
+ */
+const pageJsonLd = (type, name, path) => ({
+  "@context": "https://schema.org",
+  "@type": type,
+  name,
+  url: `${SITE_URL}${path}`,
+  author: AUTHOR_JSON_LD,
+  publisher: AUTHOR_JSON_LD,
+});
+
+const STATIC_JSON_LD = {
+  "/methodology": pageJsonLd("AboutPage", "How we rate cards", "/methodology"),
+  "/compare": pageJsonLd("WebPage", "Compare credit cards side by side", "/compare"),
+  "/top-picks": pageJsonLd("WebPage", "Best credit cards by category", "/top-picks"),
 };
 
 /**
@@ -255,13 +317,17 @@ export function bodyForRoute(route, { cards, issuers }) {
     const issuer = issuers.find((i) => i.slug === issuerMatch[1]);
     if (!issuer) return null;
     const owned = cards.filter((c) => c.issuer === issuer.issuerField);
-    return { body: issuerBody(issuer.slug, issuer.label, owned), jsonLd: null };
+    return {
+      body: issuerBody(issuer.slug, issuer.label, owned),
+      jsonLd: pageJsonLd("CollectionPage", `${issuer.label} credit cards`, `/issuer/${issuer.slug}`),
+    };
   }
 
   if (route.path === "/") return { body: homeBody(cards, issuers), jsonLd: SITE_JSON_LD };
 
   const staticBody = STATIC_BODIES[route.path];
-  return staticBody ? { body: staticBody, jsonLd: null } : null;
+  if (!staticBody) return null;
+  return { body: staticBody, jsonLd: STATIC_JSON_LD[route.path] ?? null };
 }
 
-export { METHOD_LINE };
+export { METHOD_LINE, AUTHOR };

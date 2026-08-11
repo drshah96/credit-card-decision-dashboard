@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import { bodyForRoute, esc, escAttr, jsonForScript } from "../scripts/crawlableBody.mjs";
+import { bodyForRoute, esc, escAttr, jsonForScript, AUTHOR } from "../scripts/crawlableBody.mjs";
 import { ISSUERS } from "@/utils/cardTaxonomy";
 
 // The prerendered pages ship static body content so clients that never run
@@ -348,5 +348,94 @@ describe("the escaping helpers", () => {
     expect(out).not.toContain("</script>");
     expect(out).toContain("\\u003c");
     expect(JSON.parse(out).name).toBe("</script><img onerror=alert(1)>");
+  });
+});
+
+// Asked about this site on 2026-08-11, three of four AI assistants reported no
+// identifiable author: "no About the founder page", "no clearly identified
+// editorial team", "does not publicly display individual names". The
+// methodology page had said otherwise for days, but only in React, so only an
+// assistant that executes JavaScript ever saw it. The fourth, which does, read
+// the name and attached it to a different person of the same name.
+describe("the crawlable body says who built the site", () => {
+  const render = (path: string) =>
+    bodyForRoute({ path } as never, { cards: ALL, issuers: ISSUERS })?.body ?? "";
+
+  // The literal, not AUTHOR.url. Asserting through the constant is circular:
+  // blank the constant and both sides of toContain go empty together, which is
+  // how a mutation that erased the LinkedIn link passed the whole suite.
+  const LINKEDIN = "https://www.linkedin.com/in/dhruvinshah1996/";
+
+  it("points at the real LinkedIn profile", () => {
+    expect(AUTHOR.url).toBe(LINKEDIN);
+    expect(AUTHOR.name).toBe("Dhruvin Shah");
+    for (const path of ["/", "/methodology"]) {
+      expect(render(path)).toContain(`href="${LINKEDIN}"`);
+    }
+    const ld = bodyForRoute({ path: "/" } as never, { cards: ALL, issuers: ISSUERS })
+      ?.jsonLd as Record<string, unknown>;
+    expect((ld.author as Record<string, unknown>).sameAs).toEqual([LINKEDIN]);
+  });
+
+  it.each(["/", "/methodology"])("names the author in the body of %s", (path) => {
+    const body = render(path);
+    expect(body).toContain(AUTHOR.name);
+    expect(body).toContain(AUTHOR.url);
+  });
+
+  // sameAs is the part that disambiguates. Without it the name is a string that
+  // any number of people share, which is exactly the failure that happened.
+  // Every page type, because a crawler's landing page is not up to us.
+  it.each([
+    ["/", "author"],
+    ["/methodology", "author"],
+    ["/compare", "author"],
+    ["/top-picks", "author"],
+    ["/issuer/chase", "author"],
+    ["/cards/amex-platinum", "publisher"],
+  ])("attaches an identified Person to %s as %s", (path, key) => {
+    const ld = bodyForRoute({ path } as never, { cards: ALL, issuers: ISSUERS })?.jsonLd as
+      | Record<string, unknown>
+      | null;
+    expect(ld).toBeTruthy();
+    const person = ld![key] as Record<string, unknown>;
+    expect(person).toMatchObject({ "@type": "Person", name: AUTHOR.name });
+    expect(person.sameAs).toContain(AUTHOR.url);
+  });
+
+  // A card page's provider is the bank. Crediting the issuer with this site's
+  // analysis would be worse than saying nothing.
+  it("keeps the issuer as provider and the author as publisher", () => {
+    const ld = bodyForRoute({ path: "/cards/amex-platinum" } as never, {
+      cards: ALL, issuers: ISSUERS,
+    })?.jsonLd as Record<string, unknown>;
+    expect(ld.provider).toMatchObject({ "@type": "Organization", name: "American Express" });
+    expect(ld.publisher).toMatchObject({ "@type": "Person", name: AUTHOR.name });
+  });
+
+  // The React page and the crawlable body are two copies of one claim. Pin them
+  // to the same source so a future edit to one cannot silently leave the other
+  // saying something different.
+  it("leaves no built page without an identified publisher", () => {
+    const routes = [
+      "/", "/methodology", "/compare", "/top-picks",
+      ...ISSUERS.map((i) => `/issuer/${i.slug}`),
+      ...ALL.map((c) => `/cards/${c.id}`),
+    ];
+    const missing = routes.filter((path) => {
+      const ld = bodyForRoute({ path } as never, { cards: ALL, issuers: ISSUERS })
+        ?.jsonLd as Record<string, unknown> | null | undefined;
+      const person = (ld?.author ?? ld?.publisher) as Record<string, unknown> | undefined;
+      return !person || person.name !== AUTHOR.name;
+    });
+    expect(missing).toEqual([]);
+  });
+
+  it("matches the authorship the React page renders", () => {
+    const page = readFileSync(join(__dirname, "..", "src", "pages", "MethodologyPage.tsx"), "utf-8");
+    expect(page).toContain(AUTHOR.name);
+    expect(page).toContain(AUTHOR.url);
+    expect(page).toContain("Built by one. Made for every wallet.");
+    expect(render("/methodology")).toContain("Built by one. Made for every wallet.");
   });
 });
