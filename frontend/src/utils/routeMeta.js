@@ -133,27 +133,31 @@ export function issuerRouteMeta(slug, label) {
  */
 /**
  * A route path as the URL we publish for it: canonical tag, og:url and
- * sitemap entry all go through here.
+ * sitemap entry all go through here, so the runtime tag, the prerendered tag
+ * and the sitemap cannot drift into three opinions about one URL.
  *
- * Every one ends in a slash, because that is the form Render serves directly.
- * A directory's index.html is only served for a path that ends in a slash, so
- * `/cards/x` has to be routed somewhere, and the rule that used to do it —
- * rewriting `/cards/:id` to `/cards/:id/index.html` — also matched ids with no
- * file behind them. Render answers a rewrite onto a missing file with 200 and
- * an empty body rather than a 404 or a fall-through, so a mistyped card link
- * rendered a blank page.
+ * No trailing slash, except on the root. This matches what the app's own
+ * internal links use, which is what Google follows and has been indexing.
  *
- * `/cards/x` now redirects to `/cards/x/`, which means an unknown id redirects
- * to a path that matches nothing and reaches the catch-all, which serves the
- * app. The app already handles it: CardDetailPage reads the API's 404, sets
- * noindex and renders "Card not found".
+ * It briefly published the trailing-slash form instead. That existed only to
+ * support redirecting `/cards/:id` to `/cards/:id/`, so canonical would not
+ * point at a URL that 301s elsewhere. The redirect turned out to loop on
+ * unknown ids and was reverted, which left the canonical change in place with
+ * nothing to support: internal links said one form, canonical said another,
+ * and both served 200 with identical content.
  *
- * The slash is applied to every route rather than only the redirected ones. A
- * single rule ("published URLs end in a slash") is easier to keep true than a
- * per-route exception list, and `tests/utils/routeMeta.test.ts` pins it.
+ * Worth knowing if this comes up again, because it is genuinely the better
+ * form for this host: Render serves a directory's index.html only for a path
+ * ending in a slash, so `/cards/x/` is served natively while `/cards/x` needs
+ * a rewrite — and that rewrite is what renders a blank page for ids with no
+ * file behind them. Moving to the slash form would remove the rule and the
+ * bug together, at the cost of a URL migration and of legacy no-slash links
+ * losing their prerendered social tags. That is backlog #20, not a change to
+ * make as a side effect of something else, which is how it happened the first
+ * time.
  */
 export function canonicalUrl(path) {
-  return path === "/" ? SITE_URL + "/" : `${SITE_URL}${path}/`;
+  return `${SITE_URL}${path}`;
 }
 
 export function allRouteMeta(cards) {
