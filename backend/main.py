@@ -8,6 +8,7 @@ from urllib.parse import urlparse
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
+from fastapi.responses import PlainTextResponse
 from sqlalchemy import text
 
 from backend.db import engine
@@ -62,6 +63,40 @@ def root() -> dict:
     """Points humans hitting the bare API domain at something useful; the
     actual frontend lives on a separate service and calls /api/* directly."""
     return {"name": "The Wallet Audit API", "docs": "/docs", "health": "/health"}
+
+
+# robots.txt for the API host. `api.thewalletaudit.com` is a separate origin
+# from the site, so the frontend's robots.txt does not apply to it and never
+# has. Until now this host served no robots.txt of its own, and the one that
+# answered came from Cloudflare's content-signals feature: 1,248 bytes of
+# comment with zero directives, which tells a crawler nothing.
+#
+# That matters because the prerendered pages deliberately withhold the
+# analysis — verdicts, realistic credit values, tiers, editorial tips — and
+# this API serves all of it as clean JSON at /api/cards/<id>. A crawler that
+# finds the API gets by the side door exactly what the front door withholds,
+# in a format it prefers.
+#
+# This is not a security control and is not treated as one. The repository is
+# public, the data is in it, and a client that ignores robots.txt is
+# unaffected. It is the standard, honest way to say "this host is a machine
+# interface, not content" to the crawlers that do honour it, which includes
+# Google, OpenAI, Anthropic and Perplexity.
+ROBOTS_TXT = """\
+# api.thewalletaudit.com is a JSON API for the site's own frontend.
+# There are no pages here to index. The readable content, including how any
+# of these numbers are arrived at, is at https://thewalletaudit.com
+User-agent: *
+Disallow: /
+
+Sitemap: https://thewalletaudit.com/sitemap.xml
+"""
+
+
+@app.get("/robots.txt", response_class=PlainTextResponse, include_in_schema=False)
+def robots() -> str:
+    """Ask crawlers not to index the API host. See ROBOTS_TXT for why."""
+    return ROBOTS_TXT
 
 
 @app.get("/health")
