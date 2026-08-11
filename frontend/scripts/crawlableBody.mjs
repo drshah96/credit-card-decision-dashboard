@@ -40,6 +40,26 @@ export function esc(value) {
     .replace(/>/g, "&gt;");
 }
 
+/**
+ * Escapes a value going inside a double-quoted attribute. `esc` is not enough
+ * there: it leaves quotes alone, so a card id containing one would break out of
+ * the href. Nothing in the catalog does today and `test_catalog_files.py` keeps
+ * ids matching their filenames, but that is a convention rather than a
+ * guarantee, and there is no reason for the guarantee to be a convention.
+ */
+export function escAttr(value) {
+  return esc(value).replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+
+/**
+ * JSON for a <script> block. JSON.stringify escapes what JSON needs but not
+ * `</script>`, which ends the element in the HTML tokenizer no matter what JS
+ * string it sits inside. Escaping `<` as \u003c is inert in JSON and closes it.
+ */
+export function jsonForScript(value) {
+  return JSON.stringify(value).replace(/</g, "\\u003c");
+}
+
 const money = (n) => (n === 0 ? "$0" : `$${Number(n).toLocaleString("en-US")}`);
 
 /** The one-line explanation of what this site does differently. */
@@ -49,20 +69,37 @@ const METHOD_LINE =
   "currency a single honest cents-per-point figure.";
 
 const VISIT_LINE = (path, what) =>
-  `<p>${esc(what)} <a href="${SITE_URL}${path}">Open ${SITE_URL}${path}</a>.</p>`;
+  `<p>${esc(what)} <a href="${escAttr(SITE_URL + path)}">Open ${esc(SITE_URL + path)}</a>.</p>`;
+
+// Caps on how much of a list the body prints. They exist so one unusual card
+// cannot balloon every page, not to hide anything.
+const MAX_EARN = 8;
+const MAX_CREDITS = 12;
+
+/**
+ * A truncated list has to say so. Silently printing 6 of a card's 8 earn rates
+ * reads as the complete set — a crawler has no way to tell it was cut, and the
+ * credits list sits directly above a stated advertised total, so a quiet cut
+ * there is a total that does not add up.
+ */
+const andMore = (total, shown) =>
+  total > shown ? `<li>and ${total - shown} more, on the card's page</li>` : "";
 
 /** Facts only: no default_value, no tier, no verdict, no tips. */
 function cardBody(card) {
   const credits = (card.credits ?? []).filter((c) => !c.removed);
   const advertised = credits.reduce((t, c) => t + (c.max_annual ?? 0), 0);
-  const earn = (card.earn_rates ?? [])
-    .slice(0, 6)
-    .map((r) => `<li>${esc(r.multiplier)} ${esc(r.category)}</li>`)
-    .join("");
-  const creditList = credits
-    .slice(0, 12)
-    .map((c) => `<li>${esc(c.name)}, up to ${esc(money(c.max_annual ?? 0))} a year</li>`)
-    .join("");
+  const rates = card.earn_rates ?? [];
+  const earn =
+    rates
+      .slice(0, MAX_EARN)
+      .map((r) => `<li>${esc(r.multiplier)} ${esc(r.category)}</li>`)
+      .join("") + andMore(rates.length, MAX_EARN);
+  const creditList =
+    credits
+      .slice(0, MAX_CREDITS)
+      .map((c) => `<li>${esc(c.name)}, up to ${esc(money(c.max_annual ?? 0))} a year</li>`)
+      .join("") + andMore(credits.length, MAX_CREDITS);
 
   return `
 <h1>${esc(card.name)}</h1>
@@ -84,7 +121,16 @@ estimate for each of these instead, which is usually lower, plus sliders to set
 your own figures.</p>`
     : ""
 }
-${card.foreign_transaction_fee ? `<p>Foreign transaction fee: ${esc(card.foreign_transaction_fee)}</p>` : ""}
+${
+  // foreign_transaction_fee is a boolean flag, not the rate — the rate lives in
+  // foreign_transaction_fee_rate. Interpolating the flag rendered the literal
+  // word "true" on all 34 cards that charge one.
+  card.foreign_transaction_fee && card.foreign_transaction_fee_rate
+    ? `<p>Foreign transaction fee: ${esc(card.foreign_transaction_fee_rate)}</p>`
+    : card.foreign_transaction_fee === false
+      ? `<p>No foreign transaction fee.</p>`
+      : ""
+}
 ${card.variable_apr ? `<p>Purchase APR: ${esc(card.variable_apr)}</p>` : ""}
 ${VISIT_LINE(`/cards/${card.id}`, "The verdict, the realistic credit values, the points valuation and the earn-rate breakdown are on the card's page.")}
 `.trim();
@@ -92,7 +138,7 @@ ${VISIT_LINE(`/cards/${card.id}`, "The verdict, the realistic credit values, the
 
 function issuerBody(slug, label, cards) {
   const list = cards
-    .map((c) => `<li><a href="${SITE_URL}/cards/${c.id}">${esc(c.name)}</a>, annual fee ${esc(money(c.annual_fee ?? 0))}</li>`)
+    .map((c) => `<li><a href="${escAttr(`${SITE_URL}/cards/${c.id}`)}">${esc(c.name)}</a>, annual fee ${esc(money(c.annual_fee ?? 0))}</li>`)
     .join("");
   return `
 <h1>${esc(label)} credit cards</h1>
@@ -104,7 +150,7 @@ ${VISIT_LINE(`/issuer/${slug}`, "Each card's verdict and realistic credit value 
 
 function homeBody(cards, issuers) {
   const list = issuers
-    .map((i) => `<li><a href="${SITE_URL}/issuer/${i.slug}">${esc(i.label)}</a></li>`)
+    .map((i) => `<li><a href="${escAttr(`${SITE_URL}/issuer/${i.slug}`)}">${esc(i.label)}</a></li>`)
     .join("");
   return `
 <h1>The Wallet Audit</h1>
@@ -171,7 +217,6 @@ function cardJsonLd(card) {
     category: "Credit card",
     provider: { "@type": "Organization", name: card.issuer },
     ...(card.annual_fee != null && {
-      annualPercentageRate: undefined,
       feesAndCommissionsSpecification: `Annual fee ${money(card.annual_fee)}`,
     }),
   };

@@ -22,7 +22,7 @@ import { join } from "node:path";
 import { loadRoutes, loadCards, DIST } from "./routes.mjs";
 import { SITE_URL } from "../src/utils/routeMeta.js";
 import { ISSUERS } from "../src/utils/cardTaxonomy.ts";
-import { bodyForRoute } from "./crawlableBody.mjs";
+import { bodyForRoute, jsonForScript } from "./crawlableBody.mjs";
 
 /** Escapes a string for use inside a double-quoted HTML attribute. */
 function attr(value) {
@@ -148,7 +148,7 @@ for (const route of routes) {
   const content = bodyForRoute(route, { cards, issuers: ISSUERS });
   if (content) {
     const ld = content.jsonLd
-      ? `\n    <script type="application/ld+json">${JSON.stringify(content.jsonLd)}</script>`
+      ? `\n    <script type="application/ld+json">${jsonForScript(content.jsonLd)}</script>`
       : "";
     html = html.replace(EMPTY_ROOT, `<div id="root">${content.body}</div>${ld}`);
     withBody += 1;
