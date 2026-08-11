@@ -24,6 +24,14 @@ const MAXIMIZES: { value: NonNullable<FeedbackPayload["maximizes_value"]>; label
 /**
  * Asks someone who holds this card how it is actually working out.
  *
+ * Question order is deliberate and runs easy-factual to evaluative to
+ * decision: rating, then how long they have held it, then whether they
+ * capture its value, then whether they would keep it. "How long" precedes
+ * "do you capture the value" because it is the easier question to answer and
+ * because it conditions the next one — someone three months in has not seen a
+ * full year of credits yet, so answering "no" means something different for
+ * them than for a five-year holder.
+ *
  * The whole site estimates what a typical person captures from a card's
  * credits. This is the only place that number gets checked against someone who
  * actually holds it, which is why "are you able to use its value?" is the
@@ -124,23 +132,6 @@ export function CardFeedbackForm({ cardId, cardName }: Props) {
       </fieldset>
 
       <fieldset className="feedback-field">
-        <legend>Are you able to use this card&rsquo;s value?</legend>
-        <div className="feedback-options">
-          {MAXIMIZES.map((o) => (
-            <label key={o.value} className="feedback-option">
-              <input
-                type="radio"
-                name="maximizes"
-                checked={maximizes === o.value}
-                onChange={() => setMaximizes(o.value)}
-              />
-              <span>{o.label}</span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
-
-      <fieldset className="feedback-field">
         <legend>How long have you held it?</legend>
         <div className="feedback-options">
           {HELD_FOR.map((o) => (
@@ -150,6 +141,23 @@ export function CardFeedbackForm({ cardId, cardName }: Props) {
                 name="heldFor"
                 checked={heldFor === o.value}
                 onChange={() => setHeldFor(o.value)}
+              />
+              <span>{o.label}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <fieldset className="feedback-field">
+        <legend>Are you able to use this card&rsquo;s value?</legend>
+        <div className="feedback-options">
+          {MAXIMIZES.map((o) => (
+            <label key={o.value} className="feedback-option">
+              <input
+                type="radio"
+                name="maximizes"
+                checked={maximizes === o.value}
+                onChange={() => setMaximizes(o.value)}
               />
               <span>{o.label}</span>
             </label>
