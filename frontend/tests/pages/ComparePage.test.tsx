@@ -144,7 +144,7 @@ function renderPage(initialPath = "/compare") {
  * Category / Brand. Its accessible name picks up the count badge, so match on
  * the prefix. */
 async function openPicker() {
-  const btn = await screen.findByRole("button", { name: /^cards/i });
+  const btn = await screen.findByRole("button", { name: /cards to compare/i });
   fireEvent.click(btn);
   return btn;
 }

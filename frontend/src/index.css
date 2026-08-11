@@ -1147,9 +1147,12 @@ body {
   margin-bottom: 6px;
 }
 /* Wider than a filter panel: rows carry a card name and a fee, and names run
-   long. */
+   long. Capped to the viewport because min-width alone let long names push the
+   panel to 436px on a 390px screen, which scrolled the whole page sideways.
+   The 40px is the page's own horizontal padding. */
 .compare-card-select .compare-filter-panel {
-  min-width: 320px;
+  min-width: min(320px, calc(100vw - 40px));
+  max-width: min(420px, calc(100vw - 40px));
   max-height: 340px;
 }
 

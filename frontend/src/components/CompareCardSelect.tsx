@@ -61,6 +61,8 @@ export function CompareCardSelect({
   }, [open]);
 
   const atCap = selectedIds.length >= max;
+  const triggerText =
+    selectedIds.length === 0 ? "None selected" : `Selected: ${selectedIds.length} of ${max}`;
 
   // Selected cards are listed separately above, so drop them from the groups
   // rather than rendering each one twice.
@@ -97,15 +99,16 @@ export function CompareCardSelect({
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         // The visible text is short because the label above it supplies the
-        // context. A screen reader reaching this button by tab has not read
-        // that label, so the accessible name has to carry both.
-        aria-label={
-          selectedIds.length === 0
-            ? "Cards to compare: none selected"
-            : `Cards to compare: ${selectedIds.length} of ${max} selected`
-        }
+        // context, and that label is aria-hidden, so a tab user never reads it.
+        // The accessible name therefore carries both — but it must START with
+        // the visible text verbatim. WCAG 2.5.3 (Label in Name) requires the
+        // visible label to be a substring of the accessible name, so a voice
+        // user saying "click Selected 2 of 4" matches. An earlier version read
+        // "Cards to compare: 2 of 4 selected", which inverted the word order
+        // and silently broke that in the common, filled state.
+        aria-label={`${triggerText}, cards to compare`}
       >
-        {selectedIds.length === 0 ? "None selected" : `Selected: ${selectedIds.length} of ${max}`}
+        {triggerText}
         <span className="compare-filter-caret" aria-hidden="true" />
       </button>
 
