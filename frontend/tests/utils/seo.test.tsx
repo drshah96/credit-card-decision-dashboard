@@ -22,7 +22,7 @@ describe("useSeo", () => {
 
     expect(document.title).toBe("Sapphire Reserve — Chase");
     expect(head('meta[name="description"]')).toBe("A card.");
-    expect(head('link[rel="canonical"]', "href")).toBe(`${SITE_URL}/cards/csr/`);
+    expect(head('link[rel="canonical"]', "href")).toBe(`${SITE_URL}/cards/csr`);
   });
 
   it("mirrors title and description into the social tags", () => {
@@ -32,7 +32,7 @@ describe("useSeo", () => {
     expect(head('meta[name="twitter:title"]')).toBe("T");
     expect(head('meta[property="og:description"]')).toBe("D");
     expect(head('meta[name="twitter:description"]')).toBe("D");
-    expect(head('meta[property="og:url"]')).toBe(`${SITE_URL}/x/`);
+    expect(head('meta[property="og:url"]')).toBe(`${SITE_URL}/x`);
   });
 
   it("updates tags in place rather than appending duplicates", () => {
@@ -44,7 +44,7 @@ describe("useSeo", () => {
     expect(document.head.querySelectorAll('meta[name="description"]')).toHaveLength(1);
     expect(document.head.querySelectorAll("link[rel=canonical]")).toHaveLength(1);
     expect(head('meta[name="description"]')).toBe("Two");
-    expect(head('link[rel="canonical"]', "href")).toBe(`${SITE_URL}/b/`);
+    expect(head('link[rel="canonical"]', "href")).toBe(`${SITE_URL}/b`);
   });
 
   it("leaves tags untouched while a page is still loading its data", () => {
@@ -125,38 +125,46 @@ describe("the robots tag has exactly one writer", () => {
   });
 });
 
-// Published URLs end in a slash, and that is load-bearing rather than cosmetic.
+// Published URLs carry no trailing slash, and every place that publishes one
+// goes through the same helper, so the runtime tag, the prerendered tag and the
+// sitemap cannot disagree about a single URL.
 //
-// Render serves a directory's index.html only for a path that ends in one, so
-// `/cards/x` has to be routed. The rule that used to do it rewrote
-// `/cards/:id` onto `/cards/:id/index.html`, which also matched ids with no
-// file behind them — and a rewrite onto a missing file is answered with 200
-// and an empty body, not a 404 and not a fall-through. Mistyped card links
-// rendered blank pages.
-//
-// render.yaml now redirects to the slash form instead, so canonical has to
-// point there too. Canonical pointing at a URL that 301s elsewhere is the
-// "duplicate without user-selected canonical" problem this file already
-// covers further up, arrived at from the other direction.
-describe("canonical URLs are the form the server serves without redirecting", () => {
-  it("ends every route's canonical URL in a slash", () => {
+// This briefly published the trailing-slash form. That existed only to support
+// redirecting /cards/:id to /cards/:id/, so canonical would not point at a URL
+// that 301s elsewhere. The redirect looped on unknown ids and was reverted,
+// leaving canonical pointing somewhere the app's own links never went: internal
+// links said one form, canonical said the other, and both served 200 with
+// identical content on all 122 pages.
+describe("canonical URLs match the form the app links to", () => {
+  it("adds no trailing slash to a route", () => {
     for (const path of ["/cards/x", "/issuer/chase", "/compare", "/top-picks", "/methodology"]) {
-      expect(canonicalUrl(path)).toBe(`${SITE_URL}${path}/`);
+      expect(canonicalUrl(path)).toBe(`${SITE_URL}${path}`);
+      expect(canonicalUrl(path).endsWith("/")).toBe(false);
     }
   });
 
-  it("does not double the slash on the root", () => {
+  it("still publishes the root as a single slash", () => {
     expect(canonicalUrl("/")).toBe(`${SITE_URL}/`);
-    expect(canonicalUrl("/")).not.toContain("//" + "/");
+  });
+
+  it("matches the form the app's own internal links use", () => {
+    // A canonical the site never links to is a canonical Google has to be
+    // told about twice. CardDetailPage, TopPickPage, IssuerCardsPage and
+    // ComparePage all link to `/cards/${id}`.
+    const page = readFileSync(
+      join(__dirname, "..", "..", "src", "pages", "IssuerCardsPage.tsx"),
+      "utf-8",
+    );
+    expect(page).toContain("to={`/cards/${card.id}`}");
+    expect(canonicalUrl("/cards/amex-platinum")).toBe(`${SITE_URL}/cards/amex-platinum`);
   });
 
   it("matches what the prerendered pages and the sitemap publish", () => {
-    // Same helper, so the runtime tag, the prerendered tag and the sitemap
-    // entry cannot drift into three different opinions about one URL.
     const sitemap = readFileSync(join(__dirname, "..", "..", "public", "sitemap.xml"), "utf-8");
     const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
     expect(locs.length).toBeGreaterThan(100);
-    expect(locs.filter((l) => !l.endsWith("/"))).toEqual([]);
+    // Only the root ends in a slash.
+    expect(locs.filter((l) => l.endsWith("/"))).toEqual([`${SITE_URL}/`]);
     expect(locs).toContain(canonicalUrl("/cards/amex-platinum"));
   });
 });
