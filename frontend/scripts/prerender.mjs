@@ -19,8 +19,10 @@
 
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { loadRoutes, DIST } from "./routes.mjs";
+import { loadRoutes, loadCards, DIST } from "./routes.mjs";
 import { SITE_URL } from "../src/utils/routeMeta.js";
+import { ISSUERS } from "../src/utils/cardTaxonomy.ts";
+import { bodyForRoute, jsonForScript } from "./crawlableBody.mjs";
 
 /** Escapes a string for use inside a double-quoted HTML attribute. */
 function attr(value) {
@@ -122,10 +124,35 @@ for (const stem of ["space-grotesk-latin-wght-normal", "fraunces-latin-standard-
 
 const shell = await readFile(join(DIST, "index.html"), "utf-8");
 const routes = await loadRoutes();
+const cards = await loadCards();
+
+// The empty root the shell ships. Every page previously served exactly this and
+// nothing else to a client that does not run JavaScript.
+const EMPTY_ROOT = '<div id="root"></div>';
+if (!shell.includes(EMPTY_ROOT)) {
+  throw new Error(
+    `[prerender] expected ${EMPTY_ROOT} in dist/index.html — the mount point changed ` +
+      "shape, so the crawlable body has nowhere to go. Update this or the body silently " +
+      "stops being written while every page still builds.",
+  );
+}
 
 let written = 0;
+let withBody = 0;
 for (const route of routes) {
-  const html = applyMeta(shell, route);
+  let html = applyMeta(shell, route);
+
+  // Static content for clients that never run the bundle. React mounts with
+  // createRoot, which clears the container, so this never reaches a real
+  // visitor — see crawlableBody.mjs for what is deliberately left out.
+  const content = bodyForRoute(route, { cards, issuers: ISSUERS });
+  if (content) {
+    const ld = content.jsonLd
+      ? `\n    <script type="application/ld+json">${jsonForScript(content.jsonLd)}</script>`
+      : "";
+    html = html.replace(EMPTY_ROOT, `<div id="root">${content.body}</div>${ld}`);
+    withBody += 1;
+  }
   if (route.path === "/") {
     // The root shell itself, so a bare visit and a crawler agree.
     await writeFile(join(DIST, "index.html"), html, "utf-8");
@@ -137,4 +164,7 @@ for (const route of routes) {
   written += 1;
 }
 
-console.log(`[prerender] wrote ${written} route shells with per-route metadata`);
+console.log(
+  `[prerender] wrote ${written} route shells with per-route metadata, ` +
+    `${withBody} with crawlable body content`,
+);

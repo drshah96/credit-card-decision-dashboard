@@ -10,5 +10,7 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false
   },
-  "include": ["src", "tests.setup.ts", "tests"]
+  // scripts/ is included because tests now import a build script directly
+  // (crawlableBody.mjs) rather than only reading one as text.
+  "include": ["src", "tests.setup.ts", "tests", "scripts"]
 }
