@@ -76,7 +76,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The advertised 11x on United flights bundles the 6x base MileagePlus member earn with the card's own multiplier, still the richest United-flight earn of the three cards. Earning is a side benefit here, though; the Club is the reason to hold this card.",
+  "earn_note": "The advertised 11x on United flights bundles the 6x base MileagePlus member earn with the card's own multiplier, the richest United-flight earn of the three cards. Earning is a side benefit here, though; the Club is the reason to hold this card.",
   "points": {
     "currency": "MileagePlus",
     "redemption_options": [
@@ -256,7 +256,7 @@
     }
   ],
   "protection_note": "A real step up from Explorer/Quest on trip cancellation: $10,000/person matches CSR outright, plus a return-protection benefit and Visa Infinite exclusives (travel accident insurance, $1M emergency evacuation coverage) neither cheaper United card gets. The 12-hour trip-delay trigger is still dated (CSR triggers at 6 hrs), and there's still no cell-phone protection.",
-  "rental_note": "Primary coverage up to $60,000: decline the counter's CDW and pay with the card. Same cap as Explorer/Quest; CSR and Venture X go higher at $75k.",
+  "rental_note": "Primary coverage up to $60,000: decline the counter's CDW and pay with the card. Same cap as Explorer/Quest.",
   "status_perks": [
     {
       "name": "United Club membership",
