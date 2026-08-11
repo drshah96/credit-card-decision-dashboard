@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState} from "react";
 import type { CardSummary } from "../types/cards";
 import {
   brandTagsForCards,
@@ -86,6 +86,17 @@ function MultiSelectDropdown({
       </button>
       {open && (
         <div className="compare-filter-panel" role="group" aria-label={`Filter by ${label}`}>
+          {/* Top of the panel, not the bottom: with 30 brand options in a
+              280px scrolling panel, a control below the list is never seen. */}
+          {selected.size > 0 && (
+            <button
+              type="button"
+              className="compare-filter-clear"
+              onClick={() => onChange(new Set())}
+            >
+              Remove selection
+            </button>
+          )}
           {options.length === 0 && (
             <p className="compare-filter-panel-empty">No options match the other filters.</p>
           )}
@@ -99,25 +110,15 @@ function MultiSelectDropdown({
               {option}
             </label>
           ))}
-          {selected.size > 0 && (
-            <button
-              type="button"
-              className="compare-filter-clear"
-              onClick={() => onChange(new Set())}
-            >
-              Clear {label.toLowerCase()}
-            </button>
-          )}
         </div>
       )}
     </div>
   );
 }
 
-/** A single shared filter bar above all four compare slots — set Issuer,
- * Category, and Brand (all multi-select, OR'd within a filter and AND'd
- * across them) once, and every "+ Add a card" picker respects it instead of
- * each slot re-filtering independently.
+/** The shared filter bar on /compare. Issuer, Category and Brand are
+ * multi-select, OR'd within a filter and AND'd across them, and they narrow
+ * what the Cards select (passed in as `leading`) offers.
  *
  * Every dropdown's options are computed from the *other two* filters only
  * (never its own current selection) — e.g. Issuer's options come from cards
@@ -158,6 +159,11 @@ export function CompareFilterBar({
 
   return (
     <div className="compare-filter-bar">
+      {/* These narrow the card list, not the comparison: changing them never
+          moves a column in the table. Saying so is the point of the label —
+          without it they read as peers of card selection, which is the page's
+          actual input. */}
+      <span className="compare-filter-bar-label">Filter the List</span>
       <MultiSelectDropdown
         label="Issuer"
         options={issuerOptions}

@@ -175,3 +175,47 @@ describe("CompareFilterBar", () => {
     });
   });
 });
+
+// "Remove selection" existed before this, rendered after the options. In a
+// 280px scrolling panel with 30 brand options that is below the fold and never
+// seen, which is indistinguishable from it not existing. DOM order is the part
+// jsdom can actually check; the right-alignment is CSS and is not asserted here
+// because no stylesheet is applied.
+describe("Remove selection", () => {
+  // Selecting through the UI rather than seeding props, because Harness owns
+  // the state and the clear button only renders once that filter has one.
+  function openWithSelection(label: string, option: string) {
+    render(<Harness cards={ALL_CARDS} />);
+    fireEvent.click(screen.getByRole("button", { name: new RegExp(`^${label}`) }));
+    fireEvent.click(screen.getByText(option));
+  }
+
+  it.each([
+    ["Issuer", "Chase"],
+    ["Brand", "Delta SkyMiles"],
+  ])("is offered by the %s filter once it has a selection", (label, option) => {
+    openWithSelection(label, option);
+    expect(screen.getByRole("button", { name: /remove selection/i })).toBeInTheDocument();
+  });
+
+  it("sits above the options, not below them", () => {
+    openWithSelection("Issuer", "Chase");
+
+    const clear = screen.getByRole("button", { name: /remove selection/i });
+    const firstOption = screen.getAllByRole("checkbox")[0];
+    // DOCUMENT_POSITION_FOLLOWING === 4: the option comes after the button.
+    expect(clear.compareDocumentPosition(firstOption) & 4).toBeTruthy();
+  });
+
+  it("clears that filter's selection", () => {
+    openWithSelection("Issuer", "Chase");
+    fireEvent.click(screen.getByRole("button", { name: /remove selection/i }));
+    expect(screen.queryByRole("button", { name: /remove selection/i })).not.toBeInTheDocument();
+  });
+
+  it("is absent while that filter has nothing selected", () => {
+    render(<Harness cards={ALL_CARDS} />);
+    fireEvent.click(screen.getByRole("button", { name: /^Issuer/ }));
+    expect(screen.queryByRole("button", { name: /remove selection/i })).not.toBeInTheDocument();
+  });
+});
