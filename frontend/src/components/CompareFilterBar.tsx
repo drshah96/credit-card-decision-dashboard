@@ -86,6 +86,17 @@ function MultiSelectDropdown({
       </button>
       {open && (
         <div className="compare-filter-panel" role="group" aria-label={`Filter by ${label}`}>
+          {/* Top of the panel, not the bottom: with 30 brand options in a
+              280px scrolling panel, a control below the list is never seen. */}
+          {selected.size > 0 && (
+            <button
+              type="button"
+              className="compare-filter-clear"
+              onClick={() => onChange(new Set())}
+            >
+              Remove selection
+            </button>
+          )}
           {options.length === 0 && (
             <p className="compare-filter-panel-empty">No options match the other filters.</p>
           )}
@@ -99,15 +110,6 @@ function MultiSelectDropdown({
               {option}
             </label>
           ))}
-          {selected.size > 0 && (
-            <button
-              type="button"
-              className="compare-filter-clear"
-              onClick={() => onChange(new Set())}
-            >
-              Remove selection
-            </button>
-          )}
         </div>
       )}
     </div>

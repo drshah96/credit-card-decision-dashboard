@@ -1044,10 +1044,12 @@ body {
   color: var(--accent);
   background: transparent;
   border: none;
-  border-top: 1px solid var(--line);
-  margin-top: 4px;
-  padding: 8px;
-  text-align: left;
+  /* Right-aligned in both parents it has: a flex column (the filter panel) and
+     a plain block (the card panel's results list). */
+  display: block;
+  margin: 0 0 4px auto;
+  padding: 6px 8px;
+  text-align: right;
   cursor: pointer;
 }
 
