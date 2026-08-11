@@ -952,7 +952,28 @@ body {
 }
 
 /* ─── Compare page: shared filter bar ───────────────────────────────────────── */
-.compare-filter-bar { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
+.compare-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+/* These narrow the card list; they never change a column in the table. Stating
+   that is what stops them reading as peers of card selection, which is the
+   page's actual input rather than a filter on it. */
+.compare-filter-bar-label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-right: 2px;
+}
+/* Quieter than the Cards trigger above, deliberately. */
+.compare-filter-bar .compare-filter-trigger {
+  font-size: 12.5px;
+  padding: 6px 10px;
+}
 .compare-filter-trigger {
   font-family: inherit;
   font-size: 14.5px;
@@ -1093,12 +1114,41 @@ body {
    would be that header restated. Two earlier versions of this page did exactly
    that, first as four slots and then as chips. */
 
-/* The one visual difference from a filter. Issuer/Category/Brand narrow a page
-   that already works; with no cards chosen there is nothing to compare, so the
-   empty state is drawn as an invitation rather than an inactive filter. */
-.compare-filter-trigger.is-required {
+/* Card selection sits on its own row above the filters and is drawn as the
+   page's input, not one more filter. Placement alone was not enough: four
+   identical triggers in one row read as four filters however the first one is
+   coloured. */
+.compare-card-select {
+  display: block;
+  margin-bottom: 12px;
+}
+.compare-card-select .compare-filter-trigger {
+  font-size: 14.5px;
+  font-weight: 600;
+  padding: 12px 16px;
+  min-height: 46px;
+  border-radius: 12px;
+}
+/* Empty means there is nothing to compare at all, so the control invites a
+   click rather than sitting inactive. */
+.compare-card-select .compare-filter-trigger.is-required {
   border-color: var(--accent);
   color: var(--accent);
+  background: var(--panel-s);
+}
+.compare-card-select-label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 6px;
+}
+/* Wider than a filter panel: rows carry a card name and a fee, and names run
+   long. */
+.compare-card-select .compare-filter-panel {
+  min-width: 320px;
+  max-height: 340px;
 }
 
 /* Rows inside the panel carry a name and a fee. .compare-filter-option is a

@@ -276,6 +276,20 @@ export default function ComparePage() {
 
         {!summariesLoading && !summariesError && (
           <>
+            <CompareCardSelect
+              cards={pickerCards}
+              selectedIds={selectedIds}
+              selected={selectedSummaries}
+              categories={filterCategories}
+              max={MAX_CARDS}
+              onToggle={(id) =>
+                updateSelection(
+                  selectedIds.includes(id)
+                    ? selectedIds.filter((x) => x !== id)
+                    : [...selectedIds, id],
+                )
+              }
+            />
             <CompareFilterBar
               cards={allCards ?? []}
               issuers={filterIssuers}
@@ -284,22 +298,6 @@ export default function ComparePage() {
               onBrandsChange={setFilterBrands}
               categories={filterCategories}
               onCategoriesChange={setFilterCategories}
-              leading={
-                <CompareCardSelect
-                  cards={pickerCards}
-                  selectedIds={selectedIds}
-                  selected={selectedSummaries}
-                  categories={filterCategories}
-                  max={MAX_CARDS}
-                  onToggle={(id) =>
-                    updateSelection(
-                      selectedIds.includes(id)
-                        ? selectedIds.filter((x) => x !== id)
-                        : [...selectedIds, id],
-                    )
-                  }
-                />
-              }
             />
 
             {selectedSummaries.length === 0 ? (

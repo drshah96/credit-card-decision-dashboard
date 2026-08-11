@@ -17,21 +17,22 @@ interface Props {
 }
 
 /**
- * Card selection for /compare.
+ * Card selection for /compare. The page's input, not a filter on it.
  *
- * Deliberately the same control as TopPickPage's "My Cards": the same trigger,
- * count badge and caret as the Issuer/Category/Brand filters beside it, with
- * selected cards pinned to the top of the list under a "Selected" heading.
+ * It sits on its own row above the Issuer/Category/Brand bar and is drawn
+ * larger, because those three narrow the list you choose from and never touch
+ * the comparison: `pickerCards` is filtered by them, `selectedSummaries` is
+ * not. Change a filter and no column in the table moves. Sharing a row made
+ * all four read as filters however the first one was coloured.
  *
- * It does not display the chosen cards anywhere. The comparison table below is
- * already a full-width, per-card breakdown with art, issuer, name and verdict,
- * so any summary here is the same information twice. Two earlier versions of
- * this page did exactly that: four slots showing art/issuer/name/verdict, then
- * chips showing issuer/name. Both were the table's own header, restated.
+ * The panel itself follows TopPickPage's "My Cards": search, then selected
+ * cards pinned to the top under a "Selected" heading, then the rest grouped by
+ * issuer.
  *
- * It is a filter in appearance only. Issuer, Category and Brand narrow an
- * already-useful page; this one is the page's input, and with nothing selected
- * there is no comparison at all, which is what `is-required` marks.
+ * It displays nothing about what is selected. The table below is already a
+ * per-card breakdown with art, issuer, name and verdict, so a summary here is
+ * that header restated. Two earlier versions of this page did exactly that,
+ * first as four slots and then as chips.
  */
 export function CompareCardSelect({
   cards,
@@ -76,22 +77,24 @@ export function CompareCardSelect({
   return (
     <div
       ref={rootRef}
-      className="compare-filter-dropdown"
+      className="compare-card-select compare-filter-dropdown"
       // The old picker closed on Escape and a test pinned it; keep that.
       onKeyDown={(e) => {
         if (e.key === "Escape" && open) setOpen(false);
       }}
     >
+      <span className="compare-card-select-label" aria-hidden="true">
+        Cards to compare
+      </span>
       <button
         type="button"
         className={`compare-filter-trigger${selectedIds.length > 0 ? " active" : " is-required"}`}
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
       >
-        Cards
-        {selectedIds.length > 0 && (
-          <span className="compare-filter-count">{selectedIds.length}</span>
-        )}
+        {selectedIds.length === 0
+          ? "Cards to compare: none selected"
+          : `Cards to compare: ${selectedIds.length} of ${max}`}
         <span className="compare-filter-caret" aria-hidden="true" />
       </button>
 

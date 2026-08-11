@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState} from "react";
 import type { CardSummary } from "../types/cards";
 import {
   brandTagsForCards,
@@ -18,9 +18,6 @@ interface Props {
   onBrandsChange: (brands: Set<string>) => void;
   categories: Set<string>;
   onCategoriesChange: (categories: Set<string>) => void;
-  /** Rendered first inside the bar. /compare puts card selection here so it
-   * shares the row, gap and wrapping with the filters it visually matches. */
-  leading?: ReactNode;
 }
 
 /** Drops any selected option no longer present in its own options list (e.g.
@@ -135,7 +132,6 @@ export function CompareFilterBar({
   onBrandsChange,
   categories,
   onCategoriesChange,
-  leading,
 }: Props) {
   const issuerOptions = useMemo(() => {
     const scoped = filterByCategories(filterByBrands(cards, brands), categories);
@@ -161,9 +157,11 @@ export function CompareFilterBar({
 
   return (
     <div className="compare-filter-bar">
-      {/* Card selection renders here rather than as a sibling so it shares the
-          row, gap and wrapping with the filters it visually matches. */}
-      {leading}
+      {/* These narrow the card list, not the comparison: changing them never
+          moves a column in the table. Saying so is the point of the label —
+          without it they read as peers of card selection, which is the page's
+          actual input. */}
+      <span className="compare-filter-bar-label">Narrow the list</span>
       <MultiSelectDropdown
         label="Issuer"
         options={issuerOptions}
