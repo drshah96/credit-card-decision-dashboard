@@ -197,3 +197,48 @@ describe("ISSUERS vs. the real card catalog", () => {
     expect(empty).toEqual([]);
   });
 });
+
+// Every route the site publishes has to be reachable through one of
+// render.yaml's rules, or it lands on the catch-all and loses its prerendered
+// title and social tags — silently, since the page still renders.
+//
+// The rules are patterns now rather than one per page, so this checks coverage
+// by shape: a new route shape (say /guides/:slug) added without a matching
+// rule fails here rather than in production.
+describe("render.yaml routes every published path", () => {
+  const yaml = readFileSync(join(__dirname, "..", "..", "..", "render.yaml"), "utf-8");
+  const sources = [...yaml.matchAll(/^\s+source:\s*(\S+)$/gm)].map((m) => m[1]);
+
+  /** Turns `/cards/:id` into a matcher; `:param` matches one path segment. */
+  const toRegExp = (source: string) =>
+    new RegExp(`^${source.replace(/:[^/]+/g, "[^/]+").replace(/\*/g, ".*")}$`);
+
+  const cards = () => {
+    const out: Record<string, unknown>[] = [];
+    for (const dir of readdirSync(CARDS_DIR, { withFileTypes: true })) {
+      if (!dir.isDirectory() || dir.name === "staging") continue;
+      for (const file of readdirSync(join(CARDS_DIR, dir.name))) {
+        if (file.endsWith(".json")) {
+          out.push(JSON.parse(readFileSync(join(CARDS_DIR, dir.name, file), "utf-8")));
+        }
+      }
+    }
+    return out;
+  };
+
+  it("has a rule covering every route, or is the root", () => {
+    const specific = sources.filter((s) => s !== "/*").map(toRegExp);
+    const routes = allRouteMeta(cards()).map((r) => r.path);
+    expect(routes.length).toBeGreaterThan(100);
+    const uncovered = routes.filter((p) => p !== "/" && !specific.some((re) => re.test(p)));
+    expect(uncovered).toEqual([]);
+  });
+
+  it("covers cards and issuers by pattern rather than one rule each", () => {
+    // 122 enumerated rules were tried first and Render never applied them.
+    // Six patterns do the same job and scale with the catalog.
+    expect(sources.length).toBeLessThan(10);
+    expect(sources).toContain("/cards/:id");
+    expect(sources).toContain("/issuer/:slug");
+  });
+});
