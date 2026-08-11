@@ -289,6 +289,7 @@ export default function ComparePage() {
                     : [...selectedIds, id],
                 )
               }
+              onClear={() => updateSelection([])}
             />
             <CompareFilterBar
               cards={allCards ?? []}

@@ -672,6 +672,25 @@ describe("ComparePage", () => {
     expect(comparedCount()).toBe(1);
   });
 
+  it("Remove selection clears every card, not just one", async () => {
+    // A loop over onToggle would leave all but one selected: each call reads
+    // the same pre-loop selectedIds, so only the last update survives.
+    renderPage("/compare?cards=amex-platinum,chase-sapphire-reserve,bilt-blue");
+    await waitFor(() => expect(comparedCount()).toBe(3));
+
+    await openPicker();
+    fireEvent.click(screen.getByRole("button", { name: /remove selection/i }));
+
+    await waitFor(() => expect(comparedCount()).toBe(0));
+    expect(window.location.search).not.toContain("cards=");
+  });
+
+  it("offers no Remove selection when nothing is selected", async () => {
+    renderPage("/compare");
+    await openPicker();
+    expect(screen.queryByRole("button", { name: /remove selection/i })).not.toBeInTheDocument();
+  });
+
   describe("analytics", () => {
     afterEach(() => {
       delete window.gtag;

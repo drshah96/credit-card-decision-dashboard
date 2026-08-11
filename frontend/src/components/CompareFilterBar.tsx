@@ -105,7 +105,7 @@ function MultiSelectDropdown({
               className="compare-filter-clear"
               onClick={() => onChange(new Set())}
             >
-              Clear {label.toLowerCase()}
+              Remove selection
             </button>
           )}
         </div>
@@ -161,7 +161,7 @@ export function CompareFilterBar({
           moves a column in the table. Saying so is the point of the label —
           without it they read as peers of card selection, which is the page's
           actual input. */}
-      <span className="compare-filter-bar-label">Narrow the list</span>
+      <span className="compare-filter-bar-label">Filter the List</span>
       <MultiSelectDropdown
         label="Issuer"
         options={issuerOptions}

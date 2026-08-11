@@ -14,6 +14,10 @@ interface Props {
   categories: Set<string>;
   max: number;
   onToggle: (id: string) => void;
+  /** Clears in one update. Looping onToggle would not work: every call in the
+   * loop reads the same pre-loop `selectedIds`, so only the last one survives
+   * and it removes a single card. */
+  onClear: () => void;
 }
 
 /**
@@ -41,6 +45,7 @@ export function CompareCardSelect({
   categories,
   max,
   onToggle,
+  onClear,
 }: Props) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -91,10 +96,16 @@ export function CompareCardSelect({
         className={`compare-filter-trigger${selectedIds.length > 0 ? " active" : " is-required"}`}
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
+        // The visible text is short because the label above it supplies the
+        // context. A screen reader reaching this button by tab has not read
+        // that label, so the accessible name has to carry both.
+        aria-label={
+          selectedIds.length === 0
+            ? "Cards to compare: none selected"
+            : `Cards to compare: ${selectedIds.length} of ${max} selected`
+        }
       >
-        {selectedIds.length === 0
-          ? "Cards to compare: none selected"
-          : `Cards to compare: ${selectedIds.length} of ${max}`}
+        {selectedIds.length === 0 ? "None selected" : `Selected: ${selectedIds.length} of ${max}`}
         <span className="compare-filter-caret" aria-hidden="true" />
       </button>
 
@@ -112,6 +123,15 @@ export function CompareCardSelect({
           </div>
 
           <div className="card-picker-results">
+            {selected.length > 0 && (
+              <button
+                type="button"
+                className="compare-filter-clear"
+                onClick={onClear}
+              >
+                Remove selection
+              </button>
+            )}
             {selected.length > 0 && (
               <div className="card-picker-group">
                 <div className="card-picker-group-label">
