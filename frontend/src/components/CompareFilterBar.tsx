@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import type { CardSummary } from "../types/cards";
 import {
   brandTagsForCards,
@@ -18,6 +18,9 @@ interface Props {
   onBrandsChange: (brands: Set<string>) => void;
   categories: Set<string>;
   onCategoriesChange: (categories: Set<string>) => void;
+  /** Rendered first inside the bar. /compare puts card selection here so it
+   * shares the row, gap and wrapping with the filters it visually matches. */
+  leading?: ReactNode;
 }
 
 /** Drops any selected option no longer present in its own options list (e.g.
@@ -114,10 +117,9 @@ function MultiSelectDropdown({
   );
 }
 
-/** A single shared filter bar above all four compare slots — set Issuer,
- * Category, and Brand (all multi-select, OR'd within a filter and AND'd
- * across them) once, and every "+ Add a card" picker respects it instead of
- * each slot re-filtering independently.
+/** The shared filter bar on /compare. Issuer, Category and Brand are
+ * multi-select, OR'd within a filter and AND'd across them, and they narrow
+ * what the Cards select (passed in as `leading`) offers.
  *
  * Every dropdown's options are computed from the *other two* filters only
  * (never its own current selection) — e.g. Issuer's options come from cards
@@ -133,6 +135,7 @@ export function CompareFilterBar({
   onBrandsChange,
   categories,
   onCategoriesChange,
+  leading,
 }: Props) {
   const issuerOptions = useMemo(() => {
     const scoped = filterByCategories(filterByBrands(cards, brands), categories);
@@ -158,6 +161,9 @@ export function CompareFilterBar({
 
   return (
     <div className="compare-filter-bar">
+      {/* Card selection renders here rather than as a sibling so it shares the
+          row, gap and wrapping with the filters it visually matches. */}
+      {leading}
       <MultiSelectDropdown
         label="Issuer"
         options={issuerOptions}

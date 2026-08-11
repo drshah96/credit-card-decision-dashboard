@@ -1032,22 +1032,6 @@ body {
 
 /* ─── Compare page: slots ──────────────────────────────────────────────────── */
 /* ─── Compare page: card picker ────────────────────────────────────────────── */
-.card-picker {
-  position: absolute;
-  z-index: 20;
-  top: calc(100% + 8px);
-  left: 0;
-  right: 0;
-  min-width: 260px;
-  max-height: 340px;
-  display: flex;
-  flex-direction: column;
-  background: var(--base);
-  border: 1px solid var(--line-2);
-  border-radius: 14px;
-  box-shadow: 0 20px 44px -16px rgba(15, 23, 42, 0.28);
-  overflow: hidden;
-}
 .card-picker-search {
   display: flex;
   align-items: center;
@@ -1094,141 +1078,47 @@ body {
   color: var(--faint);
   padding: 8px 8px 4px;
 }
-.card-picker-result {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  width: 100%;
-  text-align: left;
-  font-family: inherit;
-  font-size: 13px;
-  color: var(--ink);
-  background: transparent;
-  border: none;
-  border-radius: 8px;
-  padding: 8px;
-  cursor: pointer;
-}
-.card-picker-result:hover { background: var(--panel-2); }
-.card-picker-result .cpr-name { font-weight: 500; }
-.card-picker-result .cpr-fee { color: var(--faint); font-size: 12px; flex-shrink: 0; }
 
 /* ─── Compare page: credits-usage hint ──────────────────────────────────────── */
 .compare-credit-hint { margin-top: 4px; font-size: 11.5px; }
 .compare-credit-hint a { color: var(--accent); text-decoration: none; }
 .compare-credit-hint a:hover { text-decoration: underline; }
 
-/* Card selection for /compare. Replaced a 4-slot grid that duplicated the
-   comparison table's own header and cost ~608px of empty boxes on a phone,
-   where auto-fill collapsed it to a single column. */
-.compare-select {
-  position: relative;
-  margin-top: 8px;
-}
-.compare-select-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-}
-.compare-select-add {
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--ink);
-  background: var(--panel-s);
-  border: 1px solid var(--line-2);
-  border-radius: 12px;
-  padding: 10px 14px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  /* Comfortable target on touch without changing the visual box. */
-  min-height: 44px;
-}
-.compare-select-add:hover {
+/* Card selection on /compare renders as one more block in the filter bar (see
+   CompareCardSelect), so it inherits .compare-filter-trigger and
+   .compare-filter-panel. Only the differences live here.
+
+   Nothing displays the chosen cards: the comparison table below is already a
+   per-card breakdown with art, issuer, name and verdict, so a summary here
+   would be that header restated. Two earlier versions of this page did exactly
+   that, first as four slots and then as chips. */
+
+/* The one visual difference from a filter. Issuer/Category/Brand narrow a page
+   that already works; with no cards chosen there is nothing to compare, so the
+   empty state is drawn as an invitation rather than an inactive filter. */
+.compare-filter-trigger.is-required {
   border-color: var(--accent);
+  color: var(--accent);
 }
-.compare-select-add:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-.compare-select-count {
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--faint);
-  background: var(--panel-2);
-  border-radius: 999px;
-  padding: 2px 8px;
-}
-.compare-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  max-width: 100%;
-  background: var(--panel-s);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 6px 6px 6px 12px;
-  font-size: 13.5px;
-  min-height: 36px;
-}
-.compare-chip-issuer {
-  color: var(--faint);
-  font-size: 12px;
-}
-.compare-chip-name {
-  font-weight: 600;
-  color: var(--ink);
+
+/* Rows inside the panel carry a name and a fee. .compare-filter-option is a
+   flex row, so the name takes the slack and the fee sits hard right. Without
+   the flex:1 the name floats between the checkbox and the fee, which is what
+   happened when a third child was added to .card-picker-result. */
+.compare-filter-option .cpr-name {
+  flex: 1;
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-align: left;
 }
-.compare-chip-remove {
+.compare-filter-option .cpr-fee {
   flex: none;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: none;
-  background: transparent;
   color: var(--faint);
-  font-size: 17px;
-  line-height: 1;
-  cursor: pointer;
+  font-size: 12px;
 }
-.compare-chip-remove:hover {
-  background: var(--panel-2);
-  color: var(--ink);
-}
-.compare-chip-remove:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
-}
-.compare-select-picker {
-  position: relative;
-  margin-top: 10px;
-  max-width: 420px;
-}
-.compare-select-hint {
-  margin: 10px 0 0;
-  font-size: 13px;
-  color: var(--faint);
-}
-.cpr-check {
-  flex: none;
-  width: 16px;
-  color: var(--accent);
-  font-weight: 700;
-}
-.card-picker-result.is-selected {
-  background: var(--panel-2);
-}
-.card-picker-result:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
+
 .compare-table-wrap {
   overflow-x: auto;
   border: 1px solid var(--line);

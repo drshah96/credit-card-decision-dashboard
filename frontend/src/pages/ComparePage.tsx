@@ -3,7 +3,7 @@ import { useQueries, useQuery } from "@tanstack/react-query";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { fetchCard, fetchCards } from "../api/cards";
 import { PageTabs } from "../components/PageTabs";
-import { CompareSelectionBar } from "../components/CompareSelectionBar";
+import { CompareCardSelect } from "../components/CompareCardSelect";
 import { CompareFilterBar } from "../components/CompareFilterBar";
 import { SlowLoadNotice } from "../components/SlowLoadNotice";
 import { useCompareList } from "../hooks/useCompareList";
@@ -131,7 +131,7 @@ export default function ComparePage() {
   // Filtered here (shared across every slot) using the same predicates
   // CompareFilterBar uses to compute its own dropdown options, so the two
   // can never drift apart. Final ordering — grouped by issuer, ranked by
-  // category relevance within each group — happens inside CardPicker itself,
+  // category relevance within each group — happens inside CompareCardSelect,
   // since it also needs to re-rank after its own free-text search narrows
   // the list further.
   const pickerCards = useMemo(() => {
@@ -140,7 +140,6 @@ export default function ComparePage() {
     return filterByCategories(byBrand, filterCategories);
   }, [allCards, filterIssuers, filterBrands, filterCategories]);
 
-  const pickerFilterLabel = [...filterIssuers, ...filterCategories, ...filterBrands].join(", ");
 
   const detailsById = useMemo(() => {
     const map = new Map<string, Card>();
@@ -285,20 +284,21 @@ export default function ComparePage() {
               onBrandsChange={setFilterBrands}
               categories={filterCategories}
               onCategoriesChange={setFilterCategories}
-            />
-            <CompareSelectionBar
-              selected={selectedSummaries}
-              selectedIds={selectedIds}
-              pickerCards={pickerCards}
-              pickerCategories={filterCategories}
-              pickerFilterLabel={pickerFilterLabel}
-              max={MAX_CARDS}
-              onToggle={(id) =>
-                updateSelection(
-                  selectedIds.includes(id)
-                    ? selectedIds.filter((x) => x !== id)
-                    : [...selectedIds, id],
-                )
+              leading={
+                <CompareCardSelect
+                  cards={pickerCards}
+                  selectedIds={selectedIds}
+                  selected={selectedSummaries}
+                  categories={filterCategories}
+                  max={MAX_CARDS}
+                  onToggle={(id) =>
+                    updateSelection(
+                      selectedIds.includes(id)
+                        ? selectedIds.filter((x) => x !== id)
+                        : [...selectedIds, id],
+                    )
+                  }
+                />
               }
             />
 
