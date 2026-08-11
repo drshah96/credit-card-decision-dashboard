@@ -12,10 +12,11 @@ from fastapi.responses import PlainTextResponse
 from sqlalchemy import text
 
 from backend.db import engine
-from backend.models import Card, CardSummary, ClientErrorIn, EventIn
+from backend.models import Card, CardFeedbackIn, CardSummary, ClientErrorIn, EventIn
 from backend.services.cards import get_card, get_card_summaries, get_cards
 from backend.services.errors import record_client_error
 from backend.services.events import record_page_view
+from backend.services.feedback import record_card_feedback
 
 
 @asynccontextmanager
@@ -357,3 +358,81 @@ def track_client_error(error: ClientErrorIn, request: Request) -> dict:
         device_type=_device_type(user_agent),
     )
     return {"status": "ok"}
+
+
+# Feedback gets its own, far tighter budget. /api/events is calibrated for page
+# views at 120/minute; that many *written opinions* per minute from one client
+# is a spam firehose against a table whose whole purpose is human text. This is
+# the same fixed-window mechanism, counted separately so the two cannot spend
+# each other's allowance.
+_FEEDBACK_RATE_LIMIT_MAX = 6
+_FEEDBACK_RATE_LIMIT_WINDOW_SECONDS = 3600
+_feedback_rate_limit_hits: dict[str, tuple[float, int]] = {}
+
+
+def _feedback_rate_limited(request: Request) -> bool:
+    now = time.monotonic()
+    key = _client_key(request)
+    if len(_feedback_rate_limit_hits) > _RATE_LIMIT_MAX_KEYS:
+        _feedback_rate_limit_hits.clear()
+    window_start, count = _feedback_rate_limit_hits.get(key, (now, 0))
+    if now - window_start >= _FEEDBACK_RATE_LIMIT_WINDOW_SECONDS:
+        window_start, count = now, 0
+    if count >= _FEEDBACK_RATE_LIMIT_MAX:
+        _feedback_rate_limit_hits[key] = (window_start, count)
+        return True
+    _feedback_rate_limit_hits[key] = (window_start, count + 1)
+    return False
+
+
+def _is_known_card(slug: str) -> bool:
+    """Whether the slug names a real card. A junk analytics row is inert, but
+    a junk feedback row lands in a per-card average — and a plausible
+    misspelling would quietly split a real card's score rather than obviously
+    breaking. Checked against the already-warm catalog, not the database."""
+    return any(card.id == slug for card in get_card_summaries())
+
+
+@app.post("/api/feedback", status_code=201)
+def submit_feedback(feedback: CardFeedbackIn, request: Request) -> dict:
+    """Record one visitor's experience of a card they hold.
+
+    Unlike /api/events, this is a person pressing a button and waiting, so it
+    behaves like a form and not like a beacon: it returns 201 with the new
+    row's id, and a failure is a real error the UI can show rather than a
+    silently dropped write. Someone who took the time to write a paragraph
+    should not be told "thanks" when nothing was saved.
+
+    Rate limited by the same per-client budget as /api/events. Sharing it is
+    deliberate: it is one bound on how much a single client can write to this
+    database, and splitting it into two budgets would raise the total rather
+    than lower it.
+
+    Bot submissions are accepted and dropped, exactly like track_event, rather
+    than rejected with an error. A spammer learns nothing from a 201, and a
+    misclassified real visitor is never shown a failure for a submission that
+    a human could not distinguish from a successful one. The cost is that
+    genuine feedback from an unusual client is silently lost, which is the
+    same trade the analytics endpoint already makes.
+    """
+    if _feedback_rate_limited(request):
+        raise HTTPException(status_code=429, detail="Too many submissions. Try again later.")
+
+    # Accepted and dropped rather than refused, exactly like track_event. A
+    # spammer learns nothing from a 201, and a misclassified visitor is never
+    # shown a failure. The cost is that genuine feedback from an unusual
+    # client is lost silently, the same trade the analytics endpoint makes.
+    if _is_bot(request.headers.get("user-agent")) or not _is_known_card(feedback.card_id):
+        return {"status": "ok"}
+
+    feedback_id = record_card_feedback(
+        card_slug=feedback.card_id,
+        rating=feedback.rating,
+        maximizes_value=feedback.maximizes_value,
+        held_for=feedback.held_for,
+        would_keep=feedback.would_keep,
+        comment=feedback.comment,
+        session_id=feedback.session_id,
+        device_type=_device_type(request.headers.get("user-agent")),
+    )
+    return {"status": "ok", "feedback_id": feedback_id}

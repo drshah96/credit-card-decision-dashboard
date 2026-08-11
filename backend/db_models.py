@@ -13,6 +13,7 @@ from sqlalchemy import (
     CheckConstraint,
     Enum,
     ForeignKey,
+    String,
     UniqueConstraint,
     func,
 )
@@ -622,3 +623,93 @@ class ClientError(Base):
     # a working page from desktop-only testing, so this is the first filter
     # worth having.
     device_type: Mapped[str | None] = mapped_column(default=None)
+
+
+class CardFeedback(Base):
+    """One row per visitor telling us how a card is actually working out for
+    them: a rating, whether they manage to capture the card's value, roughly
+    how long they have held it, whether they would keep it, and an optional
+    short comment.
+
+    This is the first table on the site that stores something a person wrote
+    rather than something they did, and that difference drives most of the
+    decisions below.
+
+    `card_slug` is a loose string rather than a FK into cards.card_id, for
+    PageView's reason and only that one: the public insert path must not
+    depend on a catalog lookup or on catalog state. It is *not* because a FK
+    would cascade — this schema never deletes cards, it flips `is_active` —
+    and it is not because a slug survives a rename, which is backwards, since
+    a FK survives a rename transparently and a stored slug orphans on one.
+    The write path validates the slug against the catalog instead, so junk
+    slugs never reach the table and cannot split a real card's average.
+
+    `session_id` is loose for a different and better reason: a first-time
+    visitor can submit before their first /api/events round-trip has created
+    the session row, exactly like ClientError, and sessions cascade-delete,
+    so someone's written opinion should not vanish as a side effect of an
+    analytics cleanup. Join on sessions.id when correlating; expect orphans.
+
+    Still no PII. Nothing asks who the visitor is, and there is no email,
+    name or account. The only free text is `comment`, bounded here as well as
+    at the API layer, and nothing is shown to anyone until `review_status`
+    says so.
+    """
+
+    __tablename__ = "card_feedback"
+    __table_args__ = (
+        # One opinion per session per card. A double click, a retried fetch or
+        # thirty seconds of curl otherwise produce N rows for one view, and
+        # per-card averages are the entire point of this table.
+        #
+        # Two things this is not. NULL session_ids are mutually distinct on
+        # both Postgres and SQLite, so this constrains only sessioned
+        # submissions. And session_id is client-minted, so this is a duplicate
+        # guard, never an abuse control — that job belongs to the rate limiter.
+        UniqueConstraint("session_id", "card_slug", name="uq_card_feedback_session_card"),
+        CheckConstraint("rating BETWEEN 1 AND 5", name="ck_card_feedback_rating_range"),
+        CheckConstraint(
+            "maximizes_value IS NULL OR maximizes_value IN ('yes','partly','no')",
+            name="ck_card_feedback_maximizes_value",
+        ),
+        CheckConstraint(
+            "held_for IS NULL OR held_for IN ('under_6m','6_to_12m','1_to_2y','2_to_5y','over_5y')",
+            name="ck_card_feedback_held_for",
+        ),
+        CheckConstraint(
+            "review_status IN ('pending','published','rejected')",
+            name="ck_card_feedback_review_status",
+        ),
+        CheckConstraint("length(comment) <= 1000", name="ck_card_feedback_comment_length"),
+    )
+
+    feedback_id: Mapped[int] = mapped_column(primary_key=True)
+    submitted_at: Mapped[datetime] = mapped_column(server_default=func.now(), index=True)
+    # Indexed because every question worth asking starts with "for this card":
+    # average rating, and what share of holders capture the value.
+    card_slug: Mapped[str] = mapped_column(index=True)
+    # The only required answer. Every extra required field costs submissions,
+    # and a rating alone is already usable.
+    rating: Mapped[int]
+    # The question this feature exists to answer: does the holder actually
+    # capture what the card advertises? "partly" is a real answer, not a
+    # fence-sitter, and is expected to be the common one.
+    maximizes_value: Mapped[str | None] = mapped_column(default=None)
+    # A bucket, not a month count, because the form asks for a bucket. Storing
+    # an int would fabricate precision nobody supplied and would throw away
+    # the one thing actually collected, which is which bucket they chose.
+    held_for: Mapped[str | None] = mapped_column(default=None)
+    would_keep: Mapped[bool | None] = mapped_column(default=None)
+    # Bounded here as well as in CardFeedbackIn. The API cap is the first line
+    # and this is the last: it is the one field where a bypass costs unbounded
+    # storage rather than one bad value.
+    comment: Mapped[str | None] = mapped_column(String(1000), default=None)
+    session_id: Mapped[str | None] = mapped_column(index=True, default=None)
+    # Same derived "mobile"/"tablet"/"desktop" as sessions.device_type.
+    device_type: Mapped[str | None] = mapped_column(default=None)
+    # Three states, not a published boolean. A boolean collapses "nobody has
+    # looked at this yet" with "looked at and rejected", so the moderation
+    # queue re-serves every spam row already dismissed, forever. CardDraft
+    # solves the same problem one class up with pending/approved/rejected.
+    review_status: Mapped[str] = mapped_column(server_default="pending", default="pending")
+    reviewed_at: Mapped[datetime | None] = mapped_column(default=None)
