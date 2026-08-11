@@ -158,3 +158,34 @@ describe("accessibility", () => {
     });
   });
 });
+
+describe("moving to another card", () => {
+  it("clears the form rather than carrying answers across", async () => {
+    // Card-to-card navigation stays on the same route, so this component can
+    // survive the change. Before this, submitting on one card and following
+    // the link to its secured pair thanked you for a review you never wrote.
+    const { rerender } = render(<CardFeedbackForm cardId="a" cardName="A" />);
+    await userEvent.click(screen.getByRole("button", { name: "5 stars" }));
+    await userEvent.type(screen.getByLabelText(/anything else/i), "Great card.");
+    expect(screen.getByRole("button", { name: "5 stars" })).toHaveAttribute("aria-pressed", "true");
+
+    rerender(<CardFeedbackForm cardId="b" cardName="B" />);
+    expect(screen.getByRole("button", { name: "5 stars" })).toHaveAttribute(
+      "aria-pressed",
+      "false",
+    );
+    expect(screen.getByLabelText(/anything else/i)).toHaveValue("");
+    expect(screen.getByRole("button", { name: /share your experience/i })).toBeDisabled();
+  });
+
+  it("clears the thank-you state too, not just the inputs", async () => {
+    const { rerender } = render(<CardFeedbackForm cardId="a" cardName="A" />);
+    await userEvent.click(screen.getByRole("button", { name: "4 stars" }));
+    await userEvent.click(screen.getByRole("button", { name: /share your experience/i }));
+    expect(await screen.findByRole("status")).toBeInTheDocument();
+
+    rerender(<CardFeedbackForm cardId="b" cardName="B" />);
+    expect(screen.queryByRole("status")).toBeNull();
+    expect(screen.getByRole("button", { name: /share your experience/i })).toBeInTheDocument();
+  });
+});

@@ -1514,7 +1514,15 @@ export default function CardDetailPage() {
           </div>
         )}
 
-        {card && <CardDetail card={card} />}
+        {/* key={card.id} is load-bearing, not a lint appeasement. Navigating
+            card to card stays on the same route (SecuredPairingNote links
+            straight from one /cards/:id to another), so without it React
+            reuses this instance and every piece of per-card local state
+            underneath survives the change. CardFeedbackForm is the first
+            child that holds any: you would submit feedback on one card, click
+            through to its secured pair, and be thanked for a review you never
+            wrote, with your rating and comment still in the form. */}
+        {card && <CardDetail key={card.id} card={card} />}
       </div>
     </div>
   );

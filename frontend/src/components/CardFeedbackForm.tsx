@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { postFeedback, type FeedbackPayload } from "../api/feedback";
 import { getSessionId } from "../utils/sessionTracking";
 
@@ -45,6 +45,22 @@ export function CardFeedbackForm({ cardId, cardName }: Props) {
   const [comment, setComment] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "done">("idle");
   const [error, setError] = useState<string>();
+
+  // Belt and braces with the key={card.id} on CardDetail in CardDetailPage.
+  // Navigating card to card stays on the same route, so without one of these
+  // this component keeps its state across the change and thanks the visitor
+  // for a review of a card they never reviewed. The key alone would do it;
+  // this makes the form correct on its own rather than correct only while a
+  // caller two files away remembers why that key is there.
+  useEffect(() => {
+    setRating(0);
+    setMaximizes(undefined);
+    setHeldFor(undefined);
+    setWouldKeep(undefined);
+    setComment("");
+    setState("idle");
+    setError(undefined);
+  }, [cardId]);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
