@@ -50,11 +50,22 @@ export function CompareCardSelect({
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const rootRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!open) return;
     function handleClickOutside(e: MouseEvent) {
-      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false);
+      const target = e.target as Node;
+      // Deliberately the trigger and the panel, not the wrapper. Testing the
+      // wrapper makes closing depend on its box being exactly the control's,
+      // which is a CSS fact no test can see: as a full-width block its own
+      // whitespace counted as inside and clicks beside the trigger did nothing.
+      // The wrapper also holds a non-interactive label, and clicking that
+      // should close like any other outside click.
+      if (triggerRef.current?.contains(target)) return;
+      if (panelRef.current?.contains(target)) return;
+      setOpen(false);
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -94,6 +105,7 @@ export function CompareCardSelect({
         Cards to compare
       </span>
       <button
+        ref={triggerRef}
         type="button"
         className={`compare-filter-trigger${selectedIds.length > 0 ? " active" : " is-required"}`}
         onClick={() => setOpen((o) => !o)}
@@ -113,7 +125,12 @@ export function CompareCardSelect({
       </button>
 
       {open && (
-        <div className="compare-filter-panel" role="group" aria-label="Choose cards to compare">
+        <div
+          ref={panelRef}
+          className="compare-filter-panel"
+          role="group"
+          aria-label="Choose cards to compare"
+        >
           <div className="card-picker-search">
             <input
               type="text"

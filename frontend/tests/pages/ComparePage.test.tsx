@@ -691,6 +691,40 @@ describe("ComparePage", () => {
     expect(screen.queryByRole("button", { name: /remove selection/i })).not.toBeInTheDocument();
   });
 
+  // Reported from the running app: clicking the blank strip beside the trigger,
+  // between "Cards to compare" and "Filter the List", left the panel open while
+  // clicking anywhere else closed it. The wrapper was a full-width block, so
+  // that whitespace was inside it, and the handler tested the wrapper.
+  //
+  // The wrapper now hugs its content AND the handler tests the trigger and
+  // panel instead. Only the second half is checkable here: jsdom applies no
+  // stylesheet, so the box fix is invisible to this test. That is precisely why
+  // the handler was changed rather than only the CSS.
+  it("closes when the wrapper's own whitespace is clicked, not just elsewhere", async () => {
+    renderPage("/compare");
+    await openPicker();
+    expect(screen.getByLabelText("Search cards")).toBeInTheDocument();
+
+    const wrapper = document.querySelector(".compare-card-select") as HTMLElement;
+    const label = wrapper.querySelector(".compare-card-select-label") as HTMLElement;
+    // The label is inside the wrapper but outside the trigger and the panel —
+    // the same relationship as the whitespace that was reported.
+    fireEvent.mouseDown(label);
+
+    await waitFor(() => {
+      expect(screen.queryByLabelText("Search cards")).not.toBeInTheDocument();
+    });
+  });
+
+  it("stays open when the panel itself is clicked", async () => {
+    renderPage("/compare");
+    await openPicker();
+
+    fireEvent.mouseDown(screen.getByLabelText("Search cards"));
+
+    expect(screen.getByLabelText("Search cards")).toBeInTheDocument();
+  });
+
   describe("analytics", () => {
     afterEach(() => {
       delete window.gtag;

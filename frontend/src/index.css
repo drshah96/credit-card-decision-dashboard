@@ -1121,7 +1121,13 @@ body {
    identical triggers in one row read as four filters however the first one is
    coloured. */
 .compare-card-select {
-  display: block;
+  /* Hugs its content. As a full-width block the wrapper's own whitespace, all
+     the way to the right edge, counted as "inside the control" for the
+     click-outside handler, so clicking beside the trigger did not close the
+     panel. The three filters never had this because they sit in a flex row and
+     shrink to their triggers. */
+  display: inline-block;
+  width: fit-content;
   margin-bottom: 12px;
 }
 .compare-card-select .compare-filter-trigger {
