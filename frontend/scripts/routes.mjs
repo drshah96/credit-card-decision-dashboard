@@ -25,6 +25,11 @@ export async function loadCards() {
   const cards = [];
   for (const issuerDir of await readdir(CARDS_DIR, { withFileTypes: true })) {
     if (!issuerDir.isDirectory()) continue;
+    // staging/ holds drafts awaiting human review. Without this a draft would
+    // get a prerendered page and a sitemap entry, i.e. be published to search
+    // engines before anyone approved it. Same class of gap that let
+    // seed_catalog upsert drafts into the live catalog (fixed in PR #192).
+    if (issuerDir.name === "staging") continue;
     const dir = join(CARDS_DIR, issuerDir.name);
     for (const file of await readdir(dir)) {
       if (!file.endsWith(".json")) continue;
