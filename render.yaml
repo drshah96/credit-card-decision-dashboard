@@ -126,47 +126,42 @@ services:
     # fired and returned the root shell. Every shared card link previewed as
     # the homepage, with og:url pointing there too.
     #
-    # Every published URL ends in a slash, because that is the form Render
-    # serves directly: a directory's index.html is only served for a path that
-    # ends in one. These rules redirect the extensionless form onto it.
+    # Rewrites, not redirects. This is the configuration that ran in
+    # production for weeks, restored after the redirect version caused an
+    # infinite loop on unknown ids.
     #
-    # They are redirects, not rewrites, and that is the whole fix. The rule
-    # here used to rewrite `/cards/:id` to `/cards/:id/index.html`, which also
-    # matched ids with no file behind them — and Render answers a rewrite onto
-    # a missing file with HTTP 200 and an empty body, not a 404 and not a
-    # fall-through to the next rule. A stale or mistyped card link rendered a
-    # blank white page.
+    # What happened: `/cards/:id` redirecting to `/cards/:id/` looks correct
+    # and is correct for a real card, because Render serves an existing file
+    # before applying any route, so `/cards/amex-platinum/` is served and never
+    # re-matches. An unknown id has no file, so `/cards/nope/` fell through to
+    # the same `/cards/:id` rule, which matched the already-slashed path and
+    # redirected it to itself. Browsers showed ERR_TOO_MANY_REDIRECTS.
     #
-    # A redirect has no such failure mode. `/cards/nope` redirects to
-    # `/cards/nope/`, which matches no file and reaches the catch-all, which
-    # serves the app. CardDetailPage then reads the API's 404, sets noindex and
-    # renders "Card not found" — which it could always do, but was never served
-    # the shell it needed to run.
+    # The known bug these rules carry is milder and is the one being accepted
+    # back: a rewrite onto a missing file is answered by Render with 200 and an
+    # empty body rather than a 404, so an unknown card id renders a blank page.
+    # A blank page is worse for a person and better for a crawler than a loop.
     #
-    # An earlier attempt enumerated one rewrite per real page instead, to avoid
-    # changing any URL. It was correct in principle and Render never applied
-    # it: the Blueprint sync left the old routes in place and triggered no
-    # deploy, while the `headers` block from this same file stayed live. Six
-    # rules that scale to any catalog size beat 122 that do not take effect.
-    #
-    # Order matters: Render evaluates top down, so the catch-all stays last.
+    # Any future attempt needs a rule that matches the *slashed* form and sends
+    # it somewhere terminal, and it cannot be verified on a PR preview, because
+    # previews reuse the service's existing settings and never read this file.
+    # See backlog #20.
     routes:
-      - type: redirect
+      - type: rewrite
         source: /cards/:id
-        destination: /cards/:id/
-      - type: redirect
+        destination: /cards/:id/index.html
+      - type: rewrite
         source: /issuer/:slug
-        destination: /issuer/:slug/
-      - type: redirect
+        destination: /issuer/:slug/index.html
+      - type: rewrite
         source: /compare
-        destination: /compare/
-      - type: redirect
+        destination: /compare/index.html
+      - type: rewrite
         source: /top-picks
-        destination: /top-picks/
-      - type: redirect
+        destination: /top-picks/index.html
+      - type: rewrite
         source: /methodology
-        destination: /methodology/
-      # Everything else: client-side routing, and the app's own 404 page.
+        destination: /methodology/index.html
       - type: rewrite
         source: /*
         destination: /index.html

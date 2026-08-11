@@ -51,17 +51,26 @@ def test_every_route_is_well_formed() -> None:
         assert route["destination"].startswith("/"), route
 
 
-def test_the_catch_all_is_the_only_rewrite() -> None:
-    """The invariant this whole file exists for.
+def test_no_rule_redirects_a_path_onto_something_that_matches_it_again() -> None:
+    """The loop that took this configuration down.
 
-    Any other rewrite can name a file that does not exist, and Render answers
-    that with 200 and an empty body rather than a 404 — a blank page, served
-    silently, with the app never loading to say otherwise.
+    `/cards/:id` redirecting to `/cards/:id/` is correct for a real card,
+    because Render serves an existing file before applying routes. For an
+    unknown id there is no file, so the slashed path fell through to the same
+    rule, matched, and redirected to itself until the browser gave up.
+
+    Stated as a general rule rather than a ban on redirects: a redirect whose
+    destination still matches its own source pattern is a loop whenever the
+    destination has no file behind it.
     """
-    rewrites = [r for r in ROUTES if r["type"] == "rewrite"]
-    assert len(rewrites) == 1, f"expected only the catch-all to be a rewrite, got {rewrites}"
-    assert rewrites[0]["source"] == "/*"
-    assert rewrites[0]["destination"] == "/index.html"
+    for route in ROUTES:
+        if route["type"] != "redirect":
+            continue
+        source, destination = route["source"], route["destination"]
+        assert not destination.startswith(source.rstrip("/") + "/"), (
+            f"{source} -> {destination} redirects onto a path its own pattern "
+            "still matches; unknown ids will loop"
+        )
 
 
 def test_the_catch_all_is_last() -> None:
@@ -71,20 +80,13 @@ def test_the_catch_all_is_last() -> None:
     assert [r["source"] for r in ROUTES].count("/*") == 1
 
 
-def test_every_redirect_points_at_its_own_slash_form() -> None:
-    """`/cards/:id` -> `/cards/:id/` and nothing more creative. The destination
-    is the same path Render serves natively, so the redirect lands on a real
-    file for a real card and on nothing for an unknown one."""
+def test_each_rewrite_points_at_a_real_destination_shape() -> None:
+    """Every rule maps a path onto the index.html that actually exists for it,
+    or onto the app shell. Render serves a directory's index.html only for a
+    path ending in a slash, and none of the published URLs do."""
     for route in ROUTES:
-        if route["type"] == "rewrite":
-            continue
-        assert route["destination"] == f"{route['source']}/", route
-
-
-def test_no_redirect_targets_a_file() -> None:
-    """A redirect to `…/index.html` would put that suffix in the address bar
-    and in every shared link, and canonical would disagree with it."""
-    assert [r for r in ROUTES if r["destination"].endswith(".html") and r["source"] != "/*"] == []
+        expected = "/index.html" if route["source"] == "/*" else f"{route['source']}/index.html"
+        assert route["destination"] == expected, route
 
 
 def test_no_source_is_declared_twice() -> None:
