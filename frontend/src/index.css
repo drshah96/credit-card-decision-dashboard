@@ -1031,6 +1031,94 @@ body {
 }
 
 /* ─── Compare page: slots ──────────────────────────────────────────────────── */
+/* ─── Compare page: card picker ────────────────────────────────────────────── */
+.card-picker {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  min-width: 260px;
+  max-height: 340px;
+  display: flex;
+  flex-direction: column;
+  background: var(--base);
+  border: 1px solid var(--line-2);
+  border-radius: 14px;
+  box-shadow: 0 20px 44px -16px rgba(15, 23, 42, 0.28);
+  overflow: hidden;
+}
+.card-picker-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 10px 10px 14px;
+  border-bottom: 1px solid var(--line);
+}
+/* The input clears its own outline (it's borderless by design), so the focus
+   ring goes on the wrapper instead of disappearing entirely. */
+.card-picker-search:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+.card-picker-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 13.5px;
+  color: var(--ink);
+  background: transparent;
+}
+.card-picker-search button {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 14px;
+  display: grid;
+  place-items: center;
+  font-family: inherit;
+  flex-shrink: 0;
+}
+.card-picker-results { overflow-y: auto; padding: 8px; }
+.card-picker-empty { font-size: 13px; color: var(--faint); padding: 12px; margin: 0; }
+.card-picker-group { margin-bottom: 6px; }
+.card-picker-group-label {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding: 8px 8px 4px;
+}
+.card-picker-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+}
+.card-picker-result:hover { background: var(--panel-2); }
+.card-picker-result .cpr-name { font-weight: 500; }
+.card-picker-result .cpr-fee { color: var(--faint); font-size: 12px; flex-shrink: 0; }
+
+/* ─── Compare page: credits-usage hint ──────────────────────────────────────── */
+.compare-credit-hint { margin-top: 4px; font-size: 11.5px; }
+.compare-credit-hint a { color: var(--accent); text-decoration: none; }
+.compare-credit-hint a:hover { text-decoration: underline; }
+
 /* Card selection for /compare. Replaced a 4-slot grid that duplicated the
    comparison table's own header and cost ~608px of empty boxes on a phone,
    where auto-fill collapsed it to a single column. */
@@ -1071,7 +1159,7 @@ body {
   font-size: 12.5px;
   font-weight: 600;
   color: var(--faint);
-  background: var(--panel);
+  background: var(--panel-2);
   border-radius: 999px;
   padding: 2px 8px;
 }
@@ -1111,7 +1199,7 @@ body {
   cursor: pointer;
 }
 .compare-chip-remove:hover {
-  background: var(--panel);
+  background: var(--panel-2);
   color: var(--ink);
 }
 .compare-chip-remove:focus-visible {
@@ -1135,7 +1223,7 @@ body {
   font-weight: 700;
 }
 .card-picker-result.is-selected {
-  background: var(--panel);
+  background: var(--panel-2);
 }
 .card-picker-result:disabled {
   opacity: 0.4;

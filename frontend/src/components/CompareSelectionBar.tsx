@@ -50,7 +50,11 @@ export function CompareSelectionBar({
           className="compare-select-add"
           onClick={() => setPickerOpen((o) => !o)}
           aria-expanded={pickerOpen}
-          aria-haspopup="dialog"
+          // Not "dialog": the panel has no role="dialog", no focus trap, and
+          // dismisses on outside-click/Escape. Nor a strict listbox, since
+          // there's no roving tabindex or arrow-key navigation — the rows are
+          // ordinary tab-reachable buttons.
+          aria-haspopup="true"
         >
           {selected.length === 0 ? "Select cards to compare" : "Add or remove cards"}
           <span className="compare-select-count">
@@ -76,6 +80,17 @@ export function CompareSelectionBar({
 
       {pickerOpen && (
         <div className="compare-select-picker">
+          {full && (
+            // The disabled rows below are only visible while the picker is
+            // open, so the reason for them has to live here too. Referenced by
+            // the rows via aria-describedby so it is announced rather than
+            // merely displayed: a disabled button is skipped in the tab order,
+            // and a screen-reader user would otherwise meet unreachable rows
+            // with nothing explaining why.
+            <p className="compare-select-hint" id="compare-cap-hint">
+              {max} cards selected. Uncheck one to swap in a different card.
+            </p>
+          )}
           <CardPicker
             cards={pickerCards}
             selectedIds={selectedIds}
@@ -92,6 +107,7 @@ export function CompareSelectionBar({
               }
             }}
             onClose={() => setPickerOpen(false)}
+            capHintId={full ? "compare-cap-hint" : undefined}
           />
         </div>
       )}

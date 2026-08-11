@@ -20,6 +20,9 @@ interface Props {
   /** Rows are disabled once this many are selected, so the cap is enforced
    * where the user is looking rather than silently on submit. */
   maxSelected: number;
+  /** Id of the "you're at the cap" explanation, attached to disabled rows so
+   * the reason is announced rather than only shown. */
+  capHintId?: string;
   onToggle: (id: string) => void;
   onClose: () => void;
 }
@@ -28,11 +31,13 @@ function CardRow({
   card,
   checked,
   disabled,
+  describedBy,
   onToggle,
 }: {
   card: CardSummary;
   checked: boolean;
   disabled: boolean;
+  describedBy?: string;
   onToggle: (id: string) => void;
 }) {
   return (
@@ -41,6 +46,7 @@ function CardRow({
       role="checkbox"
       aria-checked={checked}
       disabled={disabled}
+      aria-describedby={disabled ? describedBy : undefined}
       className={`card-picker-result${checked ? " is-selected" : ""}`}
       onClick={() => onToggle(card.id)}
     >
@@ -59,6 +65,7 @@ export function CardPicker({
   categories,
   filterLabel,
   maxSelected,
+  capHintId,
   onToggle,
   onClose,
 }: Props) {
@@ -135,6 +142,7 @@ export function CardPicker({
                   // At the cap, everything unselected is unclickable, but the
                   // selected ones stay live so you can swap without closing.
                   disabled={atCap && !checked}
+                  describedBy={capHintId}
                   onToggle={onToggle}
                 />
               );
