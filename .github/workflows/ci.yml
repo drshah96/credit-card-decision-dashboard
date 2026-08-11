@@ -21,6 +21,17 @@ jobs:
       - name: Set up Python 3.13
         run: uv python install 3.13
 
+      # `--frozen` installs from uv.lock without checking it still matches
+      # pyproject.toml, and render.yaml's build command uses it too. So a
+      # dependency added without committing the regenerated lock does not fail
+      # anywhere: CI and production both install the old resolution, and the
+      # missing package surfaces as an ImportError at run time instead. This
+      # asserts the lock is current, which is what `--frozen` deliberately
+      # does not do. It runs before install so the failure names the real
+      # problem rather than a confusing downstream one.
+      - name: Check uv.lock is in sync with pyproject.toml
+        run: uv lock --check
+
       - name: Install dependencies
         run: uv sync --group dev --frozen
 
