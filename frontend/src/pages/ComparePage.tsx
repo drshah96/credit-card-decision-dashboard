@@ -3,7 +3,7 @@ import { useQueries, useQuery } from "@tanstack/react-query";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { fetchCard, fetchCards } from "../api/cards";
 import { PageTabs } from "../components/PageTabs";
-import { CompareSlot } from "../components/CompareSlot";
+import { CompareSelectionBar } from "../components/CompareSelectionBar";
 import { CompareFilterBar } from "../components/CompareFilterBar";
 import { SlowLoadNotice } from "../components/SlowLoadNotice";
 import { useCompareList } from "../hooks/useCompareList";
@@ -286,22 +286,21 @@ export default function ComparePage() {
               categories={filterCategories}
               onCategoriesChange={setFilterCategories}
             />
-            <div className="compare-grid" style={{ marginTop: 8 }}>
-              {Array.from({ length: MAX_CARDS }, (_, i) => (
-                <CompareSlot
-                  key={i}
-                  cardSummary={selectedSummaries[i]}
-                  pickerCards={pickerCards}
-                  pickerCategories={filterCategories}
-                  pickerFilterLabel={pickerFilterLabel}
-                  excludeIds={selectedIds}
-                  onPick={(id) => updateSelection([...selectedIds, id])}
-                  onRemove={() =>
-                    updateSelection(selectedIds.filter((_, idx) => idx !== i))
-                  }
-                />
-              ))}
-            </div>
+            <CompareSelectionBar
+              selected={selectedSummaries}
+              selectedIds={selectedIds}
+              pickerCards={pickerCards}
+              pickerCategories={filterCategories}
+              pickerFilterLabel={pickerFilterLabel}
+              max={MAX_CARDS}
+              onToggle={(id) =>
+                updateSelection(
+                  selectedIds.includes(id)
+                    ? selectedIds.filter((x) => x !== id)
+                    : [...selectedIds, id],
+                )
+              }
+            />
 
             {selectedSummaries.length === 0 ? (
               <p style={{ color: "var(--faint)", marginTop: 32, fontSize: 14.5 }}>

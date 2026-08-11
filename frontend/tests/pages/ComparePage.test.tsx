@@ -140,6 +140,22 @@ function renderPage(initialPath = "/compare") {
   );
 }
 
+/** The 4 fixed "+ Add a card" slots are gone: selection is one button that
+ * opens a multi-select picker. Its label changes once something is picked, so
+ * match on either. */
+async function openPicker() {
+  const btn = await screen.findByRole("button", {
+    name: /select cards to compare|add or remove cards/i,
+  });
+  fireEvent.click(btn);
+  return btn;
+}
+
+/** Rows in the picker are checkboxes now, not plain buttons. */
+function pickerRow(name: RegExp) {
+  return screen.findByRole("checkbox", { name });
+}
+
 beforeEach(() => {
   vi.clearAllMocks();
   localStorage.clear();
@@ -154,7 +170,7 @@ describe("ComparePage", () => {
     await waitFor(() => {
       expect(screen.getByText(/pick up to 4 cards to compare/i)).toBeInTheDocument();
     });
-    expect(screen.getAllByRole("button", { name: "+ Add a card" })).toHaveLength(4);
+    expect(await screen.findByRole("button", { name: /select cards to compare/i })).toBeInTheDocument();
   });
 
   it("loads selected cards from the URL and renders the comparison table", async () => {
@@ -346,19 +362,18 @@ describe("ComparePage", () => {
   it("picking a card via the search panel fills a slot and updates the URL", async () => {
     renderPage("/compare");
 
-    const addButtons = await screen.findAllByRole("button", { name: "+ Add a card" });
-    fireEvent.click(addButtons[0]);
+    await openPicker();
     fireEvent.change(screen.getByLabelText("Search cards"), {
       target: { value: "sapphire reserve" },
     });
 
-    const result = await screen.findByRole("button", { name: /sapphire reserve/i });
+    const result = await pickerRow(/sapphire reserve/i);
     fireEvent.click(result);
 
     await waitFor(() => {
       expect(screen.getByRole("columnheader", { name: /sapphire reserve/i })).toBeInTheDocument();
     });
-    expect(screen.getAllByRole("button", { name: "+ Add a card" })).toHaveLength(3);
+    expect(screen.getByText("1 of 4")).toBeInTheDocument();
   });
 
   it("removing a card clears its slot and its table column", async () => {
@@ -384,7 +399,7 @@ describe("ComparePage", () => {
     await waitFor(() => {
       expect(screen.getByRole("columnheader", { name: /double cash/i })).toBeInTheDocument();
     });
-    expect(screen.queryByRole("button", { name: "+ Add a card" })).not.toBeInTheDocument();
+    expect(screen.getByText("4 of 4")).toBeInTheDocument();
   });
 
   it("dedupes a repeated card id in the URL instead of double-counting it", async () => {
@@ -393,22 +408,35 @@ describe("ComparePage", () => {
     await waitFor(() => {
       expect(screen.getByRole("columnheader", { name: /sapphire reserve/i })).toBeInTheDocument();
     });
-    // Only 2 distinct cards selected despite 3 ids in the URL -> 2 open slots.
-    expect(screen.getAllByRole("button", { name: "+ Add a card" })).toHaveLength(2);
+    // Only 2 distinct cards selected despite 3 ids in the URL.
+    expect(screen.getByText("2 of 4")).toBeInTheDocument();
   });
 
-  it("the card picker excludes already-selected cards", async () => {
+  // Deliberately the opposite of the old slot behaviour, which removed picked
+  // cards from the list. In a multi-select the list is also how you deselect,
+  // so a selected card stays visible and renders checked.
+  it("the card picker shows an already-selected card as checked, not hidden", async () => {
     renderPage("/compare?cards=amex-platinum");
 
     await waitFor(() => {
-      expect(screen.getAllByRole("button", { name: "+ Add a card" })).toHaveLength(3);
+      expect(screen.getByText("1 of 4")).toBeInTheDocument();
     });
-    fireEvent.click(screen.getAllByRole("button", { name: "+ Add a card" })[0]);
-    const search = screen.getByLabelText("Search cards");
-    fireEvent.change(search, { target: { value: "platinum" } });
+    await openPicker();
+    fireEvent.change(screen.getByLabelText("Search cards"), { target: { value: "platinum" } });
 
-    const picker = search.closest(".card-picker") as HTMLElement;
-    expect(within(picker).queryByText("The Platinum Card")).not.toBeInTheDocument();
+    const row = await screen.findByRole("checkbox", { name: /the platinum card/i });
+    expect(row).toHaveAttribute("aria-checked", "true");
+  });
+
+  it("unchecking a selected row in the picker removes it from the comparison", async () => {
+    renderPage("/compare?cards=amex-platinum");
+    await waitFor(() => expect(screen.getByText("1 of 4")).toBeInTheDocument());
+
+    await openPicker();
+    fireEvent.change(screen.getByLabelText("Search cards"), { target: { value: "platinum" } });
+    fireEvent.click(await screen.findByRole("checkbox", { name: /the platinum card/i }));
+
+    await waitFor(() => expect(screen.getByText("0 of 4")).toBeInTheDocument());
   });
 
   it("the Category filter offers and narrows by a behavioral chip sourced from CardSummary alone", async () => {
@@ -428,7 +456,7 @@ describe("ComparePage", () => {
     });
 
     fireEvent.click(screen.getByText("Lounge Access"));
-    fireEvent.click(screen.getAllByRole("button", { name: "+ Add a card" })[0]);
+    await openPicker();
 
     const picker = screen.getByLabelText("Search cards").closest(".card-picker") as HTMLElement;
     expect(within(picker).getByText("The Platinum Card")).toBeInTheDocument();
@@ -448,8 +476,7 @@ describe("ComparePage", () => {
     ));
     renderPage("/compare");
 
-    const addButtons = await screen.findAllByRole("button", { name: "+ Add a card" });
-    fireEvent.click(addButtons[0]);
+    await openPicker();
     const search = screen.getByLabelText("Search cards");
     fireEvent.change(search, { target: { value: "platinum" } });
 
@@ -465,14 +492,13 @@ describe("ComparePage", () => {
     ]);
     renderPage("/compare");
 
-    const addButtons = await screen.findAllByRole("button", { name: "+ Add a card" });
-    fireEvent.click(addButtons[0]);
+    await openPicker();
     const groupLabel = (await screen.findAllByText("American Express")).find((el) =>
       el.classList.contains("card-picker-group-label"),
     )!;
     const group = groupLabel.closest(".card-picker-group") as HTMLElement;
     const names = within(group)
-      .getAllByRole("button")
+      .getAllByRole("checkbox")
       .map((b) => b.textContent);
     expect(names[0]).toMatch(/gold/i);
     expect(names[1]).toMatch(/platinum/i);
@@ -481,8 +507,7 @@ describe("ComparePage", () => {
   it("clicking outside the open picker closes it without selecting a card", async () => {
     renderPage("/compare");
 
-    const addButtons = await screen.findAllByRole("button", { name: "+ Add a card" });
-    fireEvent.click(addButtons[0]);
+    await openPicker();
     await screen.findByLabelText("Search cards");
 
     fireEvent.mouseDown(document.body);
@@ -490,7 +515,7 @@ describe("ComparePage", () => {
     await waitFor(() => {
       expect(screen.queryByLabelText("Search cards")).not.toBeInTheDocument();
     });
-    expect(screen.getAllByRole("button", { name: "+ Add a card" })).toHaveLength(4);
+    expect(await screen.findByRole("button", { name: /select cards to compare/i })).toBeInTheDocument();
   });
 
   it("links each compared card to its full detail page", async () => {
@@ -515,7 +540,7 @@ describe("ComparePage", () => {
     await waitFor(() => {
       expect(screen.getByText(/pick up to 4 cards to compare/i)).toBeInTheDocument();
     });
-    expect(screen.getAllByRole("button", { name: "+ Add a card" })).toHaveLength(4);
+    expect(await screen.findByRole("button", { name: /select cards to compare/i })).toBeInTheDocument();
   });
 
   it("shows a Status & perks row only when at least one selected card has one", async () => {
@@ -541,15 +566,14 @@ describe("ComparePage", () => {
   it("closing the picker without selecting anything leaves the slot empty", async () => {
     renderPage("/compare");
 
-    const addButtons = await screen.findAllByRole("button", { name: "+ Add a card" });
-    fireEvent.click(addButtons[0]);
+    await openPicker();
     const search = await screen.findByLabelText("Search cards");
     fireEvent.keyDown(search, { key: "Escape" });
 
     await waitFor(() => {
       expect(screen.queryByLabelText("Search cards")).not.toBeInTheDocument();
     });
-    expect(screen.getAllByRole("button", { name: "+ Add a card" })).toHaveLength(4);
+    expect(await screen.findByRole("button", { name: /select cards to compare/i })).toBeInTheDocument();
   });
 
   it("seeds the URL from a previously-persisted compare list when none is in the URL", async () => {
@@ -562,15 +586,15 @@ describe("ComparePage", () => {
     expect(screen.getByRole("columnheader", { name: /bilt blue card/i })).toBeInTheDocument();
   });
 
-  it("keeps the persisted compare list in sync with slot edits made on this page", async () => {
+  it("keeps the persisted compare list in sync with edits made on this page", async () => {
     renderPage("/compare?cards=amex-platinum");
 
     await waitFor(() => {
       expect(screen.getByRole("columnheader", { name: /the platinum card/i })).toBeInTheDocument();
     });
-    fireEvent.click(screen.getAllByRole("button", { name: "+ Add a card" })[0]);
+    await openPicker();
     fireEvent.change(screen.getByLabelText("Search cards"), { target: { value: "sapphire" } });
-    fireEvent.click(await screen.findByRole("button", { name: /sapphire reserve/i }));
+    fireEvent.click(await pickerRow(/sapphire reserve/i));
 
     await waitFor(() => {
       expect(JSON.parse(localStorage.getItem("compare-cards")!)).toEqual([
@@ -578,6 +602,65 @@ describe("ComparePage", () => {
         "chase-sapphire-reserve",
       ]);
     });
+  });
+
+  // ─── multi-select behaviour ────────────────────────────────────────────────
+
+  it("closes the picker on the selection that fills the fourth slot", async () => {
+    renderPage("/compare?cards=amex-platinum,chase-sapphire-reserve,bilt-blue");
+    await waitFor(() => expect(screen.getByText("3 of 4")).toBeInTheDocument());
+
+    await openPicker();
+    fireEvent.change(screen.getByLabelText("Search cards"), { target: { value: "double cash" } });
+    fireEvent.click(await pickerRow(/double cash/i));
+
+    await waitFor(() => expect(screen.getByText("4 of 4")).toBeInTheDocument());
+    expect(screen.queryByLabelText("Search cards")).not.toBeInTheDocument();
+  });
+
+  // Only closes on the way up. Unchecking at the cap is a swap in progress, so
+  // shutting the picker would force the user to reopen it every time.
+  it("stays open when unchecking a card while at the cap", async () => {
+    renderPage("/compare?cards=amex-platinum,chase-sapphire-reserve,bilt-blue,citi-double-cash");
+    await waitFor(() => expect(screen.getByText("4 of 4")).toBeInTheDocument());
+
+    await openPicker();
+    fireEvent.change(screen.getByLabelText("Search cards"), { target: { value: "platinum" } });
+    fireEvent.click(await pickerRow(/the platinum card/i));
+
+    await waitFor(() => expect(screen.getByText("3 of 4")).toBeInTheDocument());
+    expect(screen.getByLabelText("Search cards")).toBeInTheDocument();
+  });
+
+  it("disables unselected rows at the cap but leaves selected ones toggleable", async () => {
+    renderPage("/compare?cards=amex-platinum,chase-sapphire-reserve,bilt-blue,citi-double-cash");
+    await waitFor(() => expect(screen.getByText("4 of 4")).toBeInTheDocument());
+
+    await openPicker();
+    fireEvent.change(screen.getByLabelText("Search cards"), { target: { value: "a" } });
+
+    const rows = await screen.findAllByRole("checkbox");
+    const selected = rows.filter((r) => r.getAttribute("aria-checked") === "true");
+    const unselected = rows.filter((r) => r.getAttribute("aria-checked") === "false");
+    expect(selected.length).toBeGreaterThan(0);
+    selected.forEach((r) => expect(r).not.toBeDisabled());
+    unselected.forEach((r) => expect(r).toBeDisabled());
+  });
+
+  it("removing via a chip drops the card and its table column", async () => {
+    renderPage("/compare?cards=amex-platinum,chase-sapphire-reserve");
+    await waitFor(() =>
+      expect(screen.getByRole("columnheader", { name: /the platinum card/i })).toBeInTheDocument(),
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: /remove the platinum card/i }));
+
+    await waitFor(() =>
+      expect(
+        screen.queryByRole("columnheader", { name: /the platinum card/i }),
+      ).not.toBeInTheDocument(),
+    );
+    expect(screen.getByText("1 of 4")).toBeInTheDocument();
   });
 
   describe("analytics", () => {

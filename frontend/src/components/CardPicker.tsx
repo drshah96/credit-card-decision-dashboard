@@ -8,19 +8,45 @@ interface Props {
    * the final ordering (grouped by issuer, ranked by category relevance
    * within each group — see `groupCardsForPicker`). */
   cards: CardSummary[];
-  excludeIds: string[];
+  /** Currently-selected ids. Selected cards stay in the list and render
+   * checked, rather than disappearing: this is a multi-select, so the list is
+   * also how you deselect. */
+  selectedIds: string[];
   /** The active Category filter(s), if any — needed here (not just upstream)
    * because it decides the sort order *within* each issuer group, not just
    * which cards are included. */
   categories: Set<string>;
   filterLabel: string;
-  onSelect: (id: string) => void;
+  /** Rows are disabled once this many are selected, so the cap is enforced
+   * where the user is looking rather than silently on submit. */
+  maxSelected: number;
+  onToggle: (id: string) => void;
   onClose: () => void;
 }
 
-function CardRow({ card, onSelect }: { card: CardSummary; onSelect: (id: string) => void }) {
+function CardRow({
+  card,
+  checked,
+  disabled,
+  onToggle,
+}: {
+  card: CardSummary;
+  checked: boolean;
+  disabled: boolean;
+  onToggle: (id: string) => void;
+}) {
   return (
-    <button type="button" className="card-picker-result" onClick={() => onSelect(card.id)}>
+    <button
+      type="button"
+      role="checkbox"
+      aria-checked={checked}
+      disabled={disabled}
+      className={`card-picker-result${checked ? " is-selected" : ""}`}
+      onClick={() => onToggle(card.id)}
+    >
+      <span className="cpr-check" aria-hidden="true">
+        {checked ? "✓" : ""}
+      </span>
       <span className="cpr-name">{card.name}</span>
       <span className="cpr-fee">{card.annual_fee === 0 ? "$0" : `$${card.annual_fee}/yr`}</span>
     </button>
@@ -29,10 +55,11 @@ function CardRow({ card, onSelect }: { card: CardSummary; onSelect: (id: string)
 
 export function CardPicker({
   cards,
-  excludeIds,
+  selectedIds,
   categories,
   filterLabel,
-  onSelect,
+  maxSelected,
+  onToggle,
   onClose,
 }: Props) {
   const [query, setQuery] = useState("");
@@ -48,10 +75,11 @@ export function CardPicker({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
-  const available = useMemo(
-    () => excludeHiddenSecuredCards(cards.filter((c) => !excludeIds.includes(c.id))),
-    [cards, excludeIds],
-  );
+  // Secured variants are hidden from every listing surface (see
+  // excludeHiddenSecuredCards); selected cards are deliberately NOT filtered
+  // out here, since unchecking them is the only way to remove one from inside
+  // the picker.
+  const available = useMemo(() => excludeHiddenSecuredCards(cards), [cards]);
 
   const matches = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -61,10 +89,9 @@ export function CardPicker({
     );
   }, [available, query]);
 
-  const groups = useMemo(
-    () => groupCardsForPicker(matches, categories),
-    [matches, categories],
-  );
+  const groups = useMemo(() => groupCardsForPicker(matches, categories), [matches, categories]);
+
+  const atCap = selectedIds.length >= maxSelected;
 
   return (
     <div
@@ -98,9 +125,20 @@ export function CardPicker({
         {groups.map(({ label, cards: groupCards }) => (
           <div key={label} className="card-picker-group">
             <div className="card-picker-group-label">{label}</div>
-            {groupCards.map((c) => (
-              <CardRow key={c.id} card={c} onSelect={onSelect} />
-            ))}
+            {groupCards.map((c) => {
+              const checked = selectedIds.includes(c.id);
+              return (
+                <CardRow
+                  key={c.id}
+                  card={c}
+                  checked={checked}
+                  // At the cap, everything unselected is unclickable, but the
+                  // selected ones stay live so you can swap without closing.
+                  disabled={atCap && !checked}
+                  onToggle={onToggle}
+                />
+              );
+            })}
           </div>
         ))}
       </div>
