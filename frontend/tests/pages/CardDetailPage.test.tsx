@@ -156,11 +156,11 @@ function makeCard(overrides: Partial<Card> = {}): Card {
 
 // ─── Render helper ────────────────────────────────────────────────────────────
 
-function renderPage(cardId = "amex", state?: { from?: string }) {
+function renderTree(cardId = "amex", state?: { from?: string }) {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false } },
   });
-  return render(
+  return (
     <QueryClientProvider client={queryClient}>
       <MemoryRouter initialEntries={[{ pathname: `/cards/${cardId}`, state }]}>
         <Routes>
@@ -169,8 +169,12 @@ function renderPage(cardId = "amex", state?: { from?: string }) {
           <Route path="/issuer/:issuerSlug" element={<div>Issuer page</div>} />
         </Routes>
       </MemoryRouter>
-    </QueryClientProvider>,
+    </QueryClientProvider>
   );
+}
+
+function renderPage(cardId = "amex", state?: { from?: string }) {
+  return render(renderTree(cardId, state));
 }
 
 // Earning/Value, Status & Perks, Insurance & Protections, and Fees now live

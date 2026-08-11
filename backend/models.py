@@ -381,3 +381,32 @@ class ClientErrorIn(BaseModel):
     path: str | None = Field(default=None, max_length=512)
     stack: str | None = Field(default=None, max_length=4000)
     component_stack: str | None = Field(default=None, max_length=4000)
+
+
+class CardFeedbackIn(BaseModel):
+    """One visitor's experience of a card they hold, posted from the card
+    detail page. Same posture as EventIn and ClientErrorIn above: public,
+    unauthenticated, writes a row, so every field is bounded here before
+    anything reaches the database.
+
+    Only `card_id` and `rating` are required. Every other answer is optional
+    because each required field costs submissions, and a rating on its own is
+    already a usable signal. `card_id` is the frontend's slug
+    ("chase-sapphire-reserve"), stored as `card_slug` on the row, matching
+    EventIn's naming above.
+
+    `comment` is the one free-text field and the only place a person writes
+    prose on this site. 1000 characters is a few paragraphs: long enough for a
+    real account of living with a card, short enough that the table cannot be
+    filled with megabyte rows. It is stored exactly as typed and escaped at
+    render time, never interpolated into HTML here."""
+
+    card_id: str = Field(min_length=1, max_length=64)
+    rating: int = Field(ge=1, le=5)
+    maximizes_value: Literal["yes", "partly", "no"] | None = None
+    # A bucket, matching the form. An integer month count would invent
+    # precision the visitor never gave and discard which bucket they picked.
+    held_for: Literal["under_6m", "6_to_12m", "1_to_2y", "2_to_5y", "over_5y"] | None = None
+    would_keep: bool | None = None
+    comment: str | None = Field(default=None, max_length=1000)
+    session_id: str | None = Field(default=None, max_length=64)
