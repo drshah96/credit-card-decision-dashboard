@@ -1891,3 +1891,25 @@ describe("preference signal tracking", () => {
     expect(clicks[0]).toEqual(["issuer_link_clicked", "American Express", "amex"]);
   });
 });
+
+// jsdom applies no stylesheet, so the divider itself is invisible to a test.
+// The class that suppresses it is not, and that is the thing that was wrong:
+// the feedback block was given `noDivider`, which exists only for blocks whose
+// own content supplies a full-width rule right below (the tab bar), so the two
+// do not stack. The feedback form supplies nothing of the kind, and the
+// heading lost its rule.
+describe("section headings keep their divider unless their content replaces it", () => {
+  it("does not suppress the divider under the feedback heading", async () => {
+    renderPage();
+    const heading = await screen.findByRole("heading", { name: "Do you hold this card?" });
+    const head = heading.closest(".block-head");
+    expect(head).not.toBeNull();
+    expect(head!.className).not.toContain("no-divider");
+  });
+
+  it("still suppresses it under Details, whose tab bar supplies its own", async () => {
+    renderPage();
+    const heading = await screen.findByRole("heading", { name: "Explore the full picture" });
+    expect(heading.closest(".block-head")!.className).toContain("no-divider");
+  });
+});
