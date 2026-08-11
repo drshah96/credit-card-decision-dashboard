@@ -69,7 +69,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Fine for Delta spend, but you earn SkyMiles, the weakest currency here. For everyday spend outside Delta, a flat-rate card in a transferable currency earns more and leaves you freer in how you redeem.",
+  "earn_note": "Fine for Delta spend, but you earn SkyMiles, which have no published award chart and no transfer partners. For everyday spend outside Delta, a flat-rate card in a transferable currency earns more and leaves you freer in how you redeem.",
   "points": {
     "currency": "Delta SkyMiles",
     "redemption_options": [
@@ -222,7 +222,7 @@
     {
       "name": "Hertz Five Star",
       "strength": 2,
-      "note": "Mid-tier Hertz status (counter skip, free additional driver, upgrades), a step below Venture X's President's Circle."
+      "note": "Mid-tier Hertz status: counter skip, free additional driver, upgrades."
     },
     {
       "name": "Lounge access",

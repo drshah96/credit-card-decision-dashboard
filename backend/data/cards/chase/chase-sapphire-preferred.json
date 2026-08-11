@@ -113,7 +113,7 @@
       }
     ],
     "per_100k": "$2,000+",
-    "note": "CSP lost its old 25% Chase Travel redemption bonus in the Jun 2025 overhaul and, unlike the Reserve, wasn't given a strong Points Boost to replace it (capped around 1.5\u00a2 on hotels, 1.75\u00a2 on select premium-cabin flights). Transferring to airline/hotel partners is still the best play for this card."
+    "note": "CSP lost its old 25% Chase Travel redemption bonus in the Jun 2025 overhaul and, unlike the Reserve, wasn't given a strong Points Boost to replace it (capped around 1.5\u00a2 on hotels, 1.75\u00a2 on select premium-cabin flights). Transferring to airline/hotel partners is the best play for this card."
   },
   "transfer_partners": {
     "airline_count": 10,
@@ -191,7 +191,7 @@
         "name": "Wyndham Rewards",
         "type": "hotel",
         "ratio": "1:1",
-        "notes": "Newest partner, added Feb 2026."
+        "notes": "Added Feb 2026."
       }
     ]
   },

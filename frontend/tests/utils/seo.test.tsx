@@ -1,5 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { renderHook } from "@testing-library/react";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { useSeo, pageTitle, SITE_URL } from "@/utils/seo";
 
 function head(selector: string, attr = "content") {
@@ -56,5 +58,68 @@ describe("useSeo", () => {
 
   it("pageTitle suffixes the site name", () => {
     expect(pageTitle("Compare Cards")).toBe("Compare Cards | The Wallet Audit");
+  });
+});
+
+// ─── robots / noindex ─────────────────────────────────────────────────────────
+// Unknown card ids, unknown issuer slugs and unmatched paths all serve the SPA
+// shell with HTTP 200, so search engines see a live page. The shell carries no
+// canonical, which is what put them in Search Console as "duplicate without
+// user-selected canonical". noindex is the client-side fix; these pin it.
+
+describe("useSeo noindex", () => {
+  beforeEach(() => {
+    document.head.querySelectorAll("meta, link[rel=canonical]").forEach((el) => el.remove());
+    document.title = "";
+  });
+
+  it("adds a robots noindex tag when asked", () => {
+    renderHook(() => useSeo({ title: "Page not found", noindex: true }));
+    expect(head('meta[name="robots"]')).toBe("noindex");
+  });
+
+  it("ships no robots tag on an ordinary route", () => {
+    renderHook(() => useSeo({ title: "A card", path: "/cards/csr" }));
+    expect(document.head.querySelector('meta[name="robots"]')).toBeNull();
+  });
+
+  // The failure this guards is the expensive one. Every other field in useSeo
+  // is skipped when undefined so a loading page doesn't blank the previous
+  // route's tags. If robots followed that rule, navigating from a 404 to a real
+  // card would carry the noindex along and deindex a page that should rank.
+  it("removes a stale noindex when the next route doesn't want one", () => {
+    const { rerender } = renderHook((props: { noindex?: boolean }) => useSeo(props), {
+      initialProps: { noindex: true } as { noindex?: boolean },
+    });
+    expect(head('meta[name="robots"]')).toBe("noindex");
+
+    rerender({ noindex: false });
+    expect(document.head.querySelector('meta[name="robots"]')).toBeNull();
+
+    rerender({});
+    expect(document.head.querySelector('meta[name="robots"]')).toBeNull();
+  });
+
+  it("is idempotent rather than appending a second tag", () => {
+    const { rerender } = renderHook((props: { noindex?: boolean }) => useSeo(props), {
+      initialProps: { noindex: true } as { noindex?: boolean },
+    });
+    rerender({ noindex: true });
+    expect(document.head.querySelectorAll('meta[name="robots"]')).toHaveLength(1);
+  });
+});
+
+// setRobots removes any robots tag it finds, which is only safe while nothing
+// else ships one. If that changes, this fails instead of the tag being silently
+// deleted at runtime.
+describe("the robots tag has exactly one writer", () => {
+  it("index.html ships no robots tag", () => {
+    const html = readFileSync(join(__dirname, "..", "..", "index.html"), "utf-8");
+    expect(html).not.toMatch(/name=["']robots["']/);
+  });
+
+  it("the prerender pass adds no robots tag", () => {
+    const script = readFileSync(join(__dirname, "..", "..", "scripts", "prerender.mjs"), "utf-8");
+    expect(script).not.toMatch(/name=["']robots["']/);
   });
 });
