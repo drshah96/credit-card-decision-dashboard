@@ -16,8 +16,16 @@ export default defineConfig({
     // Issuer logos keep the default behaviour: they're ~1 KB SVGs, nine of
     // them render together above the fold on the home page, and inlining them
     // genuinely does save nine requests.
+    //
+    // The brand mark is excluded for a related reason. It ships as a srcset of
+    // 48/96/144px files, and the 48px one is small enough to inline by default
+    // — which would base64 it into the bundle and hand it to every 2x and 3x
+    // device that will never render it, while those devices also download their
+    // own variant. Keeping all three as files is what makes the srcset pick one.
     assetsInlineLimit: (filePath: string) =>
-      filePath.includes("/assets/cards/") ? false : undefined,
+      filePath.includes("/assets/cards/") || filePath.includes("brand-mark-")
+        ? false
+        : undefined,
   },
   resolve: {
     alias: {
