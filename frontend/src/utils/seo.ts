@@ -17,7 +17,7 @@ export {
   issuerRouteMeta,
   STATIC_ROUTE_META,
 } from "./routeMeta.js";
-import { SITE_URL as SITE } from "./routeMeta.js";
+import { canonicalUrl } from "./routeMeta.js";
 
 export type SeoInput = {
   /** Full document title. Skipped while a page is still loading its data. */
@@ -101,7 +101,10 @@ export function useSeo({ title, description, path, noindex }: SeoInput): void {
       upsertMeta("name", "twitter:description", description);
     }
     if (path) {
-      const url = `${SITE}${path}`;
+      // Trailing-slash form: the URL Render serves without a redirect. See
+      // canonicalUrl. Pointing canonical at the redirecting form would make
+      // every card page's canonical a URL that 301s somewhere else.
+      const url = canonicalUrl(path);
       upsertCanonical(url);
       upsertMeta("property", "og:url", url);
     }

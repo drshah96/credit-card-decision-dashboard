@@ -20,7 +20,7 @@
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { loadRoutes, loadCards, DIST } from "./routes.mjs";
-import { SITE_URL } from "../src/utils/routeMeta.js";
+import { canonicalUrl } from "../src/utils/routeMeta.js";
 import { ISSUERS } from "../src/utils/cardTaxonomy.ts";
 import { bodyForRoute, jsonForScript } from "./crawlableBody.mjs";
 
@@ -45,7 +45,7 @@ function text(value) {
  * emitting pages with the wrong metadata.
  */
 function applyMeta(html, route) {
-  const url = `${SITE_URL}${route.path}`;
+  const url = canonicalUrl(route.path);
   /** @type {Array<[RegExp, string, string]>} */
   const swaps = [
     [/<title>[\s\S]*?<\/title>/, `<title>${text(route.title)}</title>`, "<title>"],
