@@ -3,6 +3,7 @@ import { renderHook } from "@testing-library/react";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { useSeo, pageTitle, SITE_URL } from "@/utils/seo";
+import { canonicalUrl } from "@/utils/routeMeta.js";
 
 function head(selector: string, attr = "content") {
   return document.head.querySelector(selector)?.getAttribute(attr) ?? null;
@@ -21,7 +22,7 @@ describe("useSeo", () => {
 
     expect(document.title).toBe("Sapphire Reserve — Chase");
     expect(head('meta[name="description"]')).toBe("A card.");
-    expect(head('link[rel="canonical"]', "href")).toBe(`${SITE_URL}/cards/csr`);
+    expect(head('link[rel="canonical"]', "href")).toBe(`${SITE_URL}/cards/csr/`);
   });
 
   it("mirrors title and description into the social tags", () => {
@@ -31,7 +32,7 @@ describe("useSeo", () => {
     expect(head('meta[name="twitter:title"]')).toBe("T");
     expect(head('meta[property="og:description"]')).toBe("D");
     expect(head('meta[name="twitter:description"]')).toBe("D");
-    expect(head('meta[property="og:url"]')).toBe(`${SITE_URL}/x`);
+    expect(head('meta[property="og:url"]')).toBe(`${SITE_URL}/x/`);
   });
 
   it("updates tags in place rather than appending duplicates", () => {
@@ -43,7 +44,7 @@ describe("useSeo", () => {
     expect(document.head.querySelectorAll('meta[name="description"]')).toHaveLength(1);
     expect(document.head.querySelectorAll("link[rel=canonical]")).toHaveLength(1);
     expect(head('meta[name="description"]')).toBe("Two");
-    expect(head('link[rel="canonical"]', "href")).toBe(`${SITE_URL}/b`);
+    expect(head('link[rel="canonical"]', "href")).toBe(`${SITE_URL}/b/`);
   });
 
   it("leaves tags untouched while a page is still loading its data", () => {
@@ -121,5 +122,41 @@ describe("the robots tag has exactly one writer", () => {
   it("the prerender pass adds no robots tag", () => {
     const script = readFileSync(join(__dirname, "..", "..", "scripts", "prerender.mjs"), "utf-8");
     expect(script).not.toMatch(/name=["']robots["']/);
+  });
+});
+
+// Published URLs end in a slash, and that is load-bearing rather than cosmetic.
+//
+// Render serves a directory's index.html only for a path that ends in one, so
+// `/cards/x` has to be routed. The rule that used to do it rewrote
+// `/cards/:id` onto `/cards/:id/index.html`, which also matched ids with no
+// file behind them — and a rewrite onto a missing file is answered with 200
+// and an empty body, not a 404 and not a fall-through. Mistyped card links
+// rendered blank pages.
+//
+// render.yaml now redirects to the slash form instead, so canonical has to
+// point there too. Canonical pointing at a URL that 301s elsewhere is the
+// "duplicate without user-selected canonical" problem this file already
+// covers further up, arrived at from the other direction.
+describe("canonical URLs are the form the server serves without redirecting", () => {
+  it("ends every route's canonical URL in a slash", () => {
+    for (const path of ["/cards/x", "/issuer/chase", "/compare", "/top-picks", "/methodology"]) {
+      expect(canonicalUrl(path)).toBe(`${SITE_URL}${path}/`);
+    }
+  });
+
+  it("does not double the slash on the root", () => {
+    expect(canonicalUrl("/")).toBe(`${SITE_URL}/`);
+    expect(canonicalUrl("/")).not.toContain("//" + "/");
+  });
+
+  it("matches what the prerendered pages and the sitemap publish", () => {
+    // Same helper, so the runtime tag, the prerendered tag and the sitemap
+    // entry cannot drift into three different opinions about one URL.
+    const sitemap = readFileSync(join(__dirname, "..", "..", "public", "sitemap.xml"), "utf-8");
+    const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+    expect(locs.length).toBeGreaterThan(100);
+    expect(locs.filter((l) => !l.endsWith("/"))).toEqual([]);
+    expect(locs).toContain(canonicalUrl("/cards/amex-platinum"));
   });
 });

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { CardFeedbackForm } from "../components/CardFeedbackForm";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { fetchCard, fetchCards } from "../api/cards";
@@ -1394,6 +1395,13 @@ function CardDetail({ card }: { card: Card }) {
           ))}
         </ol>
       </Block>
+
+      {/* Last, deliberately. Someone is only in a position to say whether they
+          capture this card's value after reading what the page claims it is
+          worth, so the ask sits after the argument rather than interrupting it. */}
+      <Block label="Your turn" title="Do you hold this card?" noDivider>
+        <CardFeedbackForm cardId={card.id} cardName={card.name} />
+      </Block>
     </div>
   );
 }
@@ -1506,7 +1514,15 @@ export default function CardDetailPage() {
           </div>
         )}
 
-        {card && <CardDetail card={card} />}
+        {/* key={card.id} is load-bearing, not a lint appeasement. Navigating
+            card to card stays on the same route (SecuredPairingNote links
+            straight from one /cards/:id to another), so without it React
+            reuses this instance and every piece of per-card local state
+            underneath survives the change. CardFeedbackForm is the first
+            child that holds any: you would submit feedback on one card, click
+            through to its secured pair, and be thanked for a review you never
+            wrote, with your rating and comment still in the form. */}
+        {card && <CardDetail key={card.id} card={card} />}
       </div>
     </div>
   );

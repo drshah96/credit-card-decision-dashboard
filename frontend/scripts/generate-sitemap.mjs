@@ -5,14 +5,14 @@
 import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { loadRoutes, PUBLIC } from "./routes.mjs";
-import { SITE_URL } from "../src/utils/routeMeta.js";
+import { canonicalUrl } from "../src/utils/routeMeta.js";
 
 const routes = await loadRoutes();
 
 const xml = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-  ...routes.map((r) => `  <url><loc>${SITE_URL}${r.path}</loc></url>`),
+  ...routes.map((r) => `  <url><loc>${canonicalUrl(r.path)}</loc></url>`),
   "</urlset>",
   "",
 ].join("\n");

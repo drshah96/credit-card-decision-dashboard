@@ -1,109 +1,102 @@
 """Structural checks on render.yaml's routing rules.
 
-frontend/tests/renderRoutes.test.ts already pins these rules against the route
-list the prerender step builds. This file checks a different thing with a
-different tool: that the committed file is valid YAML with the shape Render
-expects, parsed by a real YAML parser rather than by the regexes that generated
-it. A generator and a test that both read the file the same way agree with each
-other whether or not either is right.
+The rules exist because Render serves a directory's index.html only for a path
+that ends in a slash, and the URLs we publish do not. Something has to bridge
+that, and how it bridges it is the whole point of this file.
 
-The rules are enumerated, one per real page, rather than written as
-`/cards/:id`. A pattern also matches ids that are not cards, and Render answers
-a rewrite onto a missing file with 200 and an empty body — not a 404, and not a
-fall-through to the next rule. So an unknown card id served a blank page while
-the app, which handles the case correctly, never got to run.
+It used to be a rewrite: `/cards/:id` onto `/cards/:id/index.html`. That also
+matched ids with no file behind them, and Render answers a rewrite onto a
+missing file with HTTP 200 and an empty body — not a 404, and not a
+fall-through to the next rule. A stale or mistyped card link rendered a blank
+white page, and the app, which handles the case correctly, was never served the
+shell it needed to run.
+
+A redirect has no such failure mode: `/cards/nope` redirects to `/cards/nope/`,
+which matches no file and reaches the catch-all, which serves the app.
+
+So the invariant these tests defend is narrow and specific: **the catch-all is
+the only rewrite.** Every other rule is a redirect. A rewrite anywhere else is
+a rewrite that can point at a file that does not exist, which is the bug.
 """
 
 import pathlib
 
-import pytest
 import yaml
 
 RENDER_YAML = pathlib.Path(__file__).resolve().parents[2] / "render.yaml"
-CARDS_DIR = pathlib.Path(__file__).resolve().parents[2] / "backend" / "data" / "cards"
 
 
-@pytest.fixture(scope="module")
-def static_service() -> dict:
-    """The static site service block, found by role rather than by position."""
+def _static_service() -> dict:
     config = yaml.safe_load(RENDER_YAML.read_text())
     services = [s for s in config["services"] if s.get("runtime") == "static"]
     assert len(services) == 1, "expected exactly one static site service"
     return services[0]
 
 
-@pytest.fixture(scope="module")
-def routes(static_service: dict) -> list[dict]:
-    return static_service["routes"]
+ROUTES: list[dict] = _static_service()["routes"]
 
 
-def test_render_yaml_is_valid_yaml(static_service: dict) -> None:
-    """The generator splices text into this file. Valid YAML is the floor."""
-    assert static_service["staticPublishPath"] == "frontend/dist"
+def test_render_yaml_is_valid_yaml() -> None:
+    """The floor. Everything below reads parsed YAML, so if this fails the
+    rest are meaningless rather than passing."""
+    assert _static_service()["staticPublishPath"] == "frontend/dist"
 
 
-def test_every_route_is_a_well_formed_rewrite(routes: list[dict]) -> None:
-    assert len(routes) > 100
-    for route in routes:
+def test_every_route_is_well_formed() -> None:
+    assert ROUTES, "no routes declared at all"
+    for route in ROUTES:
         assert set(route) == {"type", "source", "destination"}, route
-        assert route["type"] == "rewrite", route
+        assert route["type"] in {"redirect", "rewrite"}, route
         assert route["source"].startswith("/"), route
         assert route["destination"].startswith("/"), route
 
 
-def test_no_route_uses_a_parameter_pattern(routes: list[dict]) -> None:
-    """`/cards/:id` is the bug. It matches ids with no file behind them."""
-    assert [r["source"] for r in routes if ":" in r["source"]] == []
+def test_the_catch_all_is_the_only_rewrite() -> None:
+    """The invariant this whole file exists for.
+
+    Any other rewrite can name a file that does not exist, and Render answers
+    that with 200 and an empty body rather than a 404 — a blank page, served
+    silently, with the app never loading to say otherwise.
+    """
+    rewrites = [r for r in ROUTES if r["type"] == "rewrite"]
+    assert len(rewrites) == 1, f"expected only the catch-all to be a rewrite, got {rewrites}"
+    assert rewrites[0]["source"] == "/*"
+    assert rewrites[0]["destination"] == "/index.html"
 
 
-def test_the_catch_all_is_last_and_appears_once(routes: list[dict]) -> None:
-    """Render matches top down, so a catch-all anywhere but last would shadow
-    every rule after it — taking all 109 card pages down at once."""
-    sources = [r["source"] for r in routes]
-    assert sources.count("/*") == 1
-    assert sources[-1] == "/*"
-    assert routes[-1]["destination"] == "/index.html"
+def test_the_catch_all_is_last() -> None:
+    """Render evaluates top down. A catch-all above the redirects would shadow
+    every one of them, taking all 109 card pages down at once."""
+    assert ROUTES[-1]["source"] == "/*"
+    assert [r["source"] for r in ROUTES].count("/*") == 1
 
 
-def test_no_source_is_declared_twice(routes: list[dict]) -> None:
-    sources = [r["source"] for r in routes]
+def test_every_redirect_points_at_its_own_slash_form() -> None:
+    """`/cards/:id` -> `/cards/:id/` and nothing more creative. The destination
+    is the same path Render serves natively, so the redirect lands on a real
+    file for a real card and on nothing for an unknown one."""
+    for route in ROUTES:
+        if route["type"] == "rewrite":
+            continue
+        assert route["destination"] == f"{route['source']}/", route
+
+
+def test_no_redirect_targets_a_file() -> None:
+    """A redirect to `…/index.html` would put that suffix in the address bar
+    and in every shared link, and canonical would disagree with it."""
+    assert [r for r in ROUTES if r["destination"].endswith(".html") and r["source"] != "/*"] == []
+
+
+def test_no_source_is_declared_twice() -> None:
+    sources = [r["source"] for r in ROUTES]
     assert sorted(s for s in set(sources) if sources.count(s) > 1) == []
 
 
-def test_every_card_in_the_catalog_has_a_rule(routes: list[dict]) -> None:
-    """The catalog is the source of truth, read here straight off disk rather
-    than through the generator that wrote these rules."""
-    ids = sorted(
-        p.stem
-        for p in CARDS_DIR.glob("*/*.json")
-        if p.parent.name != "staging"  # drafts are not published
-    )
-    assert len(ids) > 100
-    sources = {r["source"] for r in routes}
-    assert [i for i in ids if f"/cards/{i}" not in sources] == []
-
-
-def test_no_staged_draft_leaked_into_the_rules(routes: list[dict]) -> None:
-    """A draft with a rule would be a page Render serves before anyone
-    approved it — the same class of gap as seeding drafts into the catalog.
-
-    Skipped rather than silently passing when staging is empty, which it
-    usually is: iterating an empty list and asserting nothing was found looks
-    identical to a real check that found nothing. The exclusion is exercised
-    for real, against a written draft, in frontend/tests/renderRoutes.test.ts.
-    """
-    staged = sorted(p.stem for p in (CARDS_DIR / "staging").glob("*.json"))
-    if not staged:
-        pytest.skip("no drafts in staging; see renderRoutes.test.ts for the live check")
-    sources = {r["source"] for r in routes}
-    assert [s for s in staged if f"/cards/{s}" in sources] == []
-
-
-def test_each_rule_points_at_its_own_directory_index(routes: list[dict]) -> None:
-    """Render serves a directory's index.html only for paths ending in a
-    slash, and none of ours do — mapping each path onto its own index.html is
-    the whole reason these rules exist."""
-    for route in routes:
-        if route["source"] == "/*":
-            continue
-        assert route["destination"] == f"{route['source']}/index.html", route
+def test_the_dynamic_shapes_are_routed() -> None:
+    """Cards and issuers are the two parameterised shapes the site publishes,
+    and they are the two that carry unknown-id risk. frontend's
+    routeMeta.test.ts checks the full route list against these patterns; this
+    only pins that neither shape lost its rule outright."""
+    sources = {r["source"] for r in ROUTES}
+    assert "/cards/:id" in sources
+    assert "/issuer/:slug" in sources

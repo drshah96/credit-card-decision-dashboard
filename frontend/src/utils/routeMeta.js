@@ -131,6 +131,31 @@ export function issuerRouteMeta(slug, label) {
  * @param {Array<Parameters<typeof cardRouteMeta>[0]>} cards
  * @returns {RouteMeta[]}
  */
+/**
+ * A route path as the URL we publish for it: canonical tag, og:url and
+ * sitemap entry all go through here.
+ *
+ * Every one ends in a slash, because that is the form Render serves directly.
+ * A directory's index.html is only served for a path that ends in a slash, so
+ * `/cards/x` has to be routed somewhere, and the rule that used to do it —
+ * rewriting `/cards/:id` to `/cards/:id/index.html` — also matched ids with no
+ * file behind them. Render answers a rewrite onto a missing file with 200 and
+ * an empty body rather than a 404 or a fall-through, so a mistyped card link
+ * rendered a blank page.
+ *
+ * `/cards/x` now redirects to `/cards/x/`, which means an unknown id redirects
+ * to a path that matches nothing and reaches the catch-all, which serves the
+ * app. The app already handles it: CardDetailPage reads the API's 404, sets
+ * noindex and renders "Card not found".
+ *
+ * The slash is applied to every route rather than only the redirected ones. A
+ * single rule ("published URLs end in a slash") is easier to keep true than a
+ * per-route exception list, and `tests/utils/routeMeta.test.ts` pins it.
+ */
+export function canonicalUrl(path) {
+  return path === "/" ? SITE_URL + "/" : `${SITE_URL}${path}/`;
+}
+
 export function allRouteMeta(cards) {
   return [
     ...STATIC_ROUTE_META,
