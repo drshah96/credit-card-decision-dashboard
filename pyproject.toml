@@ -19,6 +19,13 @@ dev = [
     "pytest-asyncio>=0.24.0",
     "ruff>=0.16.1",
     "httpx2>=2.9.1",
+    # For tests/backend/test_render_yaml.py, which parses render.yaml with a
+    # real YAML parser rather than the regexes that generate it. Already
+    # installed transitively via uvicorn[standard], but declared here because
+    # a test that depends on another package's extra breaks confusingly when
+    # that extra changes. Dev-only: the production build runs
+    # `uv sync --frozen --no-group dev`.
+    "pyyaml>=6.0.3",
 ]
 
 [tool.ruff]
