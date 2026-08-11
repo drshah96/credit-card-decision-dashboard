@@ -100,8 +100,28 @@ describe("the crawlable body withholds the analysis", () => {
 // the generator must not read the withheld fields at all. That holds whatever
 // the data happens to contain.
 describe("the generator never reads the withheld fields", () => {
-  const src = readFileSync(join(__dirname, "..", "scripts", "crawlableBody.mjs"), "utf-8");
-  const body = src.slice(src.indexOf("function cardBody"), src.indexOf("function issuerBody"));
+  // The whole module, not a slice between two function names. A slice looks
+  // tighter and is worse in three ways: `String.slice(start, end)` with
+  // start > end returns "", and `expect("").not.toMatch(x)` passes for every
+  // pattern, so reordering the two functions would turn this entire block into
+  // a silent no-op; a helper defined above the start anchor escapes it; and a
+  // name like `cardBodyPreamble` moves a boundary. Scanning everything has no
+  // boundary to get wrong.
+  //
+  // Comments are stripped because the header comment names the withheld fields
+  // on purpose, in the course of explaining that they are withheld.
+  const raw = readFileSync(join(__dirname, "..", "scripts", "crawlableBody.mjs"), "utf-8");
+  const body = raw.replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+
+  // Positive controls. Without these, an over-eager stripper or a moved file
+  // would leave `body` empty or tiny and every assertion below would pass
+  // while checking nothing — the exact failure this rewrite exists to remove.
+  it("is actually scanning the generator's code", () => {
+    expect(body.length).toBeGreaterThan(2000);
+    for (const marker of ["max_annual", "annual_fee", "foreign_transaction_fee_rate", "escAttr"]) {
+      expect(body).toContain(marker);
+    }
+  });
 
   // Field *access*, not the word. The visit line says "The verdict ... is on
   // the card's page", which is the one place the word belongs.
@@ -174,6 +194,30 @@ describe("the crawlable body says enough to be worth crawling", () => {
     }
   });
 
+  it.each([
+    ["charges one, rate authored", { foreign_transaction_fee: true, foreign_transaction_fee_rate: "3%" }, "Foreign transaction fee: 3%"],
+    ["charges one, no rate", { foreign_transaction_fee: true }, "This card charges a foreign transaction fee"],
+    ["charges none", { foreign_transaction_fee: false }, "No foreign transaction fee"],
+  ])("handles the foreign transaction fee when a card %s", (_l, fields, expected) => {
+    const body = bodyForRoute({ path: "/cards/f" } as never, {
+      cards: [{ id: "f", name: "F", issuer: "Test", annual_fee: 0, ...fields }],
+      issuers: ISSUERS,
+    })!.body;
+    expect(body).toContain(expected);
+  });
+
+  // null is not false. Two Citi cards are genuinely unconfirmed, and claiming
+  // either way would be a factual error rather than a missing sentence.
+  it("stays silent when the foreign transaction fee is unconfirmed", () => {
+    const unknown = ALL.filter((c) => c.foreign_transaction_fee == null);
+    expect(unknown.length).toBeGreaterThan(0);
+    for (const c of unknown) {
+      const b = render(`/cards/${c.id}`);
+      expect(b).not.toContain("foreign transaction fee");
+      expect(b).not.toContain("Foreign transaction fee");
+    }
+  });
+
   it("says so plainly when a card charges no foreign transaction fee", () => {
     const free = ALL.filter((c) => c.foreign_transaction_fee === false);
     expect(free.length).toBeGreaterThan(20);
@@ -223,7 +267,7 @@ describe("the crawlable body says enough to be worth crawling", () => {
       const b = render(`/cards/${c.id}`);
       expect(b).toContain("&amp;");
       // No bare "&" survives: every one is the start of an entity.
-      expect(b.replace(/&(amp|lt|gt|quot|#39|middot|times);/g, "")).not.toContain("&");
+      expect(b.replace(/&(amp|lt|gt|quot|#39|middot);/g, "")).not.toContain("&");
     }
   });
 

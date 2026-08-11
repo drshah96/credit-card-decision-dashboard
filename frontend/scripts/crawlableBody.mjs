@@ -127,9 +127,16 @@ ${
   // word "true" on all 34 cards that charge one.
   card.foreign_transaction_fee && card.foreign_transaction_fee_rate
     ? `<p>Foreign transaction fee: ${esc(card.foreign_transaction_fee_rate)}</p>`
-    : card.foreign_transaction_fee === false
-      ? `<p>No foreign transaction fee.</p>`
-      : ""
+    : card.foreign_transaction_fee === true
+      ? // Flagged as charging one, with no rate authored. No card is in this
+        // state today, but saying nothing would drop the fee from the page
+        // entirely, which reads as "no fee" — the wrong direction to fail.
+        `<p>This card charges a foreign transaction fee.</p>`
+      : card.foreign_transaction_fee === false
+        ? `<p>No foreign transaction fee.</p>`
+        : // null means genuinely unconfirmed, on two Citi cards. Silence is
+          // correct there: neither claim would be true.
+          ""
 }
 ${card.variable_apr ? `<p>Purchase APR: ${esc(card.variable_apr)}</p>` : ""}
 ${VISIT_LINE(`/cards/${card.id}`, "The verdict, the realistic credit values, the points valuation and the earn-rate breakdown are on the card's page.")}
