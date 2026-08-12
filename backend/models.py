@@ -389,10 +389,17 @@ class ClientErrorIn(BaseModel):
 # A cap forces a priority call while still letting a premium card's credits,
 # lounge and insurance all count.
 #
-# Both branches share it deliberately. Holders and interested respondents answer
-# the same option set so the two distributions can be compared directly, and
-# different caps would make them different measurements: a share-of-picks
-# comparison would silently weight whichever branch was allowed more.
+# Both branches share the cap deliberately, so a share-of-picks comparison does
+# not silently weight whichever branch was allowed more.
+#
+# They do NOT share the whole option domain, and anything comparing them has to
+# know it. The form withholds the two intro-APR options from holders, because an
+# intro period is over long before someone can say whether it earns its keep —
+# see NOT_ASKED_OF_HOLDERS in frontend/src/utils/cardFeatures.ts. Those two can
+# therefore only ever come from an interested respondent, while every other
+# option can come from both. A `GROUP BY feature` that does not also group by
+# respondent_type puts a single-branch count beside two-branch counts and ranks
+# them against each other.
 #
 # Mirrored by MAX_FEATURES in frontend/src/api/feedback.ts and pinned against it
 # by tests/backend/test_liked_feature_options.py. A frontend that let someone

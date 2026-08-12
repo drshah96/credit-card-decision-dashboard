@@ -795,6 +795,13 @@ class CardFeedbackFeature(Base):
       leads with it and serves the join on both backends. There is a migration
       in this repo that adds indexes to foreign key columns, so this is the
       kind of omission someone reflexively 'fixes'.
+    - A `relationship()`, on either side. The write path sets `feedback_id`
+      explicitly. This is the one arrangement where the ORM's cascade and the
+      database's `ondelete` cannot disagree, because only one of them exists.
+      Adding one later is the trap: SQLAlchemy's default on parent delete is to
+      NULL the child's foreign key, and `feedback_id` is NOT NULL, so a
+      `relationship()` without `cascade="all, delete-orphan"` and
+      `passive_deletes=True` turns a delete into an IntegrityError.
 
     `ON DELETE CASCADE` is a safety net rather than a mechanism: nothing
     deletes feedback rows, since rejecting sets `review_status`. Note it does

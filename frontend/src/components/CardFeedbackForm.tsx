@@ -16,7 +16,14 @@ interface Props {
   cardName: string;
   /** The features this card actually has, from availableFeatures(). Only these
    * are offered, so nobody can pick "Statement credits" on a card without any.
-   * Empty is handled: the interested branch then asks only for a comment. */
+   *
+   * Never empty in practice, and pinned that way by a catalog test rather than
+   * merely expected: every card offers at least one. It matters because
+   * CardFeedbackIn requires a feature of an interested respondent and cannot
+   * make that conditional — "when the card offers any" is a fact about the
+   * catalog a payload has no access to. A card offering nothing would render
+   * this branch, invite a comment and then 422, with nothing the visitor could
+   * do about it. */
   features: LikedFeature[];
 }
 

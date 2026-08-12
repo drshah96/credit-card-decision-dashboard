@@ -191,3 +191,21 @@ describe("featuresForRespondent", () => {
     }
   });
 });
+
+describe("every card offers at least one option", () => {
+  it("holds for the whole catalog, because the API requires one of an interested respondent", () => {
+    // CardFeedbackIn rejects an interested submission naming no feature, and it
+    // cannot make that conditional: "when the card offers any" is a fact about
+    // the catalog the payload has no access to. So a card that offered nothing
+    // would render the interested branch, invite a comment, and 422 on submit
+    // with no way for the visitor to clear it.
+    //
+    // Reaching zero needs a card with no earn rates, no insurance above "none",
+    // a non-zero annual fee, no live credits, neither intro APR, a best flagged
+    // cpp at or below a cent, no transfer partners, no lounge and no other
+    // status perk. Nothing like that exists today; this is what keeps it that
+    // way, since the failure would otherwise reach a visitor before a test.
+    const bare = allCards().filter((c) => availableFeatures(c).length === 0);
+    expect(bare.map((c) => c.id)).toEqual([]);
+  });
+});

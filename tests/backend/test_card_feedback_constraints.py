@@ -22,14 +22,13 @@ import sys
 from pathlib import Path
 
 import pytest
-from sqlalchemy import inspect
 
-from backend.db import engine
 from backend.db_models import LIKED_FEATURES, CardFeedback, CardFeedbackFeature
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 TABLE = "card_feedback"
+CHILD_TABLE = "card_feedback_features"
 
 # Columns that both branches share, or that are bookkeeping. Everything else is
 # holder-only by definition and must appear in the exclusivity constraint. A new
@@ -58,7 +57,37 @@ def _orm_checks() -> dict[str, str]:
 
 
 @pytest.fixture(scope="module")
-def migrated_ddl(tmp_path_factory: pytest.TempPathFactory) -> str:
+def migrated_db(tmp_path_factory: pytest.TempPathFactory):
+    """A SQLite file built the way production builds one: `alembic upgrade head`.
+
+    Everything below reads from this rather than from `backend.db.engine`,
+    because conftest points that engine at a database built with `create_all`
+    from ORM metadata. Asking it what the schema looks like asks the ORM to
+    confirm itself.
+    """
+    db = tmp_path_factory.mktemp("migrated") / "schema.sqlite"
+    result = subprocess.run(
+        [sys.executable, "-m", "alembic", "upgrade", "head"],
+        cwd=REPO_ROOT,
+        env={**os.environ, "DATABASE_URL": f"sqlite:///{db}"},
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, f"alembic upgrade head failed:\n{result.stderr}"
+    return db
+
+
+def _table_ddl(db, table: str) -> str:
+    with sqlite3.connect(db) as conn:
+        row = conn.execute(
+            "SELECT sql FROM sqlite_master WHERE type='table' AND name=?", (table,)
+        ).fetchone()
+    assert row, f"the migrations did not create {table}"
+    return row[0]
+
+
+@pytest.fixture(scope="module")
+def migrated_ddl(migrated_db) -> str:
     """The CREATE TABLE produced by running the migrations, not by create_all.
 
     This distinction is the whole point. conftest builds the test database from
@@ -75,21 +104,7 @@ def migrated_ddl(tmp_path_factory: pytest.TempPathFactory) -> str:
     table, so the branch that does the intricate work has been running
     unverified.
     """
-    db = tmp_path_factory.mktemp("migrated") / "schema.sqlite"
-    result = subprocess.run(
-        [sys.executable, "-m", "alembic", "upgrade", "head"],
-        cwd=REPO_ROOT,
-        env={**os.environ, "DATABASE_URL": f"sqlite:///{db}"},
-        capture_output=True,
-        text=True,
-    )
-    assert result.returncode == 0, f"alembic upgrade head failed:\n{result.stderr}"
-    with sqlite3.connect(db) as conn:
-        row = conn.execute(
-            "SELECT sql FROM sqlite_master WHERE type='table' AND name=?", (TABLE,)
-        ).fetchone()
-    assert row, "the migrations did not create card_feedback"
-    return row[0]
+    return _table_ddl(migrated_db, TABLE)
 
 
 def _database_checks(ddl: str) -> dict[str, str]:
@@ -237,12 +252,21 @@ def test_the_child_table_docstring_cites_the_real_constraint_and_column_counts(
     )
 
 
-def test_the_indexes_survived_the_migration_rebuild() -> None:
+def test_the_indexes_survived_the_migration_rebuild(migrated_db) -> None:
     """SQLite cannot ALTER a column to nullable, so the migration rebuilds the
     table. The rebuild dropped every index on the first attempt and nothing
     failed: the table kept working and every per-card aggregate would have
-    started scanning."""
-    names = {i["name"] for i in inspect(engine).get_indexes(TABLE)}
+    started scanning.
+
+    Read off the migrated database, not off `backend.db.engine`. conftest
+    points that engine at a scratch file built with `create_all`, so asking it
+    which indexes exist asks the ORM to confirm its own declarations — it would
+    pass whether or not the rebuild kept a single one, which is the failure this
+    test names in its first sentence. Same circularity the `migrated_ddl`
+    docstring warns about, in the one test that was not using it.
+    """
+    with sqlite3.connect(migrated_db) as conn:
+        names = {r[1] for r in conn.execute(f"PRAGMA index_list('{TABLE}')")}
     assert {
         "ix_card_feedback_card_slug",
         "ix_card_feedback_session_id",
@@ -250,11 +274,8 @@ def test_the_indexes_survived_the_migration_rebuild() -> None:
     } <= names
 
 
-CHILD_TABLE = "card_feedback_features"
-
-
 @pytest.fixture(scope="module")
-def migrated_child_ddl(tmp_path_factory: pytest.TempPathFactory) -> str:
+def migrated_child_ddl(migrated_db) -> str:
     """The child table's CREATE TABLE as the migrations actually produce it.
 
     Separate from `migrated_ddl` above and for the same reason that one exists.
@@ -264,21 +285,7 @@ def migrated_child_ddl(tmp_path_factory: pytest.TempPathFactory) -> str:
     them. `alembic check` cannot close the gap either, because it does not
     compare CHECK constraints at all.
     """
-    db = tmp_path_factory.mktemp("migrated-child") / "schema.sqlite"
-    result = subprocess.run(
-        [sys.executable, "-m", "alembic", "upgrade", "head"],
-        cwd=REPO_ROOT,
-        env={**os.environ, "DATABASE_URL": f"sqlite:///{db}"},
-        capture_output=True,
-        text=True,
-    )
-    assert result.returncode == 0, f"alembic upgrade head failed:\n{result.stderr}"
-    with sqlite3.connect(db) as conn:
-        row = conn.execute(
-            "SELECT sql FROM sqlite_master WHERE type='table' AND name=?", (CHILD_TABLE,)
-        ).fetchone()
-    assert row, "the migrations did not create card_feedback_features"
-    return row[0]
+    return _table_ddl(migrated_db, CHILD_TABLE)
 
 
 def test_the_migrated_feature_check_lists_exactly_the_canonical_options(
