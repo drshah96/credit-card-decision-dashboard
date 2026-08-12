@@ -1,0 +1,188 @@
+"""The card_feedback CHECK constraints, pinned against drift nothing else sees.
+
+Two gaps this closes, both raised by schema-reviewer.
+
+`alembic check` compares tables, columns, indexes and unique constraints. It
+does **not** compare CHECK constraints — which is the one class of object the
+migration's `copy_from` exists to preserve, and therefore the one class nothing
+verified. The ORM's constraint text and the migration's constraint text are
+maintained by hand in two files and agree today only because someone diffed all
+eleven by eye.
+
+And the branch-exclusivity constraint names holder-only columns one by one.
+Adding a holder-only column without adding it to that list is silent: the
+column simply escapes the rule, and an interested row could carry it.
+"""
+
+import os
+import re
+import sqlite3
+import subprocess
+import sys
+from pathlib import Path
+
+import pytest
+from sqlalchemy import inspect
+
+from backend.db import engine
+from backend.db_models import CardFeedback
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+
+TABLE = "card_feedback"
+
+# Columns that both branches share, or that are bookkeeping. Everything else is
+# holder-only by definition and must appear in the exclusivity constraint. A new
+# column lands in neither set until someone classifies it, which is the point.
+SHARED_OR_BOOKKEEPING = {
+    "feedback_id",
+    "submitted_at",
+    "card_slug",
+    "respondent_type",
+    "liked_feature",
+    "comment",
+    "session_id",
+    "device_type",
+    "review_status",
+    "reviewed_at",
+}
+
+EXCLUSIVITY = "ck_card_feedback_interested_has_no_holder_fields"
+
+
+def _orm_checks() -> dict[str, str]:
+    return {
+        c.name: str(c.sqltext)
+        for c in CardFeedback.__table__.constraints
+        if c.__class__.__name__ == "CheckConstraint"
+    }
+
+
+@pytest.fixture(scope="module")
+def migrated_ddl(tmp_path_factory: pytest.TempPathFactory) -> str:
+    """The CREATE TABLE produced by running the migrations, not by create_all.
+
+    This distinction is the whole point. conftest builds the test database from
+    ORM metadata, so comparing the ORM against it is circular: change the model
+    and the database changes with it, and the two can never disagree. Production
+    runs `alembic upgrade head`, so the only way to catch the model and the
+    migrations drifting apart is to build a database the way production does.
+
+    A first version of this file compared against the create_all database and
+    reported everything as fine while the two said different things.
+
+    This is also the only place the SQLite migration path executes at all. CI
+    runs migrations against Postgres, where batch_alter_table never rebuilds a
+    table, so the branch that does the intricate work has been running
+    unverified.
+    """
+    db = tmp_path_factory.mktemp("migrated") / "schema.sqlite"
+    result = subprocess.run(
+        [sys.executable, "-m", "alembic", "upgrade", "head"],
+        cwd=REPO_ROOT,
+        env={**os.environ, "DATABASE_URL": f"sqlite:///{db}"},
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, f"alembic upgrade head failed:\n{result.stderr}"
+    with sqlite3.connect(db) as conn:
+        row = conn.execute(
+            "SELECT sql FROM sqlite_master WHERE type='table' AND name=?", (TABLE,)
+        ).fetchone()
+    assert row, "the migrations did not create card_feedback"
+    return row[0]
+
+
+def _database_checks(ddl: str) -> dict[str, str]:
+    """Constraint name -> its condition, as the database actually stores it.
+
+    Scanned with balanced parentheses rather than a regex. A non-greedy
+    `CHECK \\((.*?)\\)` stops at the first closing paren, which for
+    `length(comment) <= 1000` is the one inside `length(` — so that constraint
+    silently parsed as absent and the comparison below reported it as drift.
+    """
+    out: dict[str, str] = {}
+    for match in re.finditer(r"CONSTRAINT (ck_card_feedback_\w+) CHECK \(", ddl):
+        depth, i = 1, match.end()
+        while depth and i < len(ddl):
+            depth += (ddl[i] == "(") - (ddl[i] == ")")
+            i += 1
+        out[match.group(1)] = _norm(ddl[match.end() : i - 1])
+    return out
+
+
+def _norm(sql: str) -> str:
+    """Collapse whitespace so formatting differences are not reported as drift."""
+    return re.sub(r"\s+", " ", sql).strip()
+
+
+def test_every_orm_check_constraint_exists_in_the_database_with_the_same_condition(
+    migrated_ddl: str,
+) -> None:
+    """The ORM declares them; the migration creates them; nothing compared the
+    two. Tests build the schema with create_all from the ORM, production runs
+    the migration, so a divergence would pass CI and enforce something else in
+    production.
+
+    Compares the condition, not just the name. A first version of this test
+    checked only that the name was present, which passed happily while the ORM
+    said one thing and the database enforced another.
+    """
+    in_db = _database_checks(migrated_ddl)
+    assert len(in_db) >= 8, f"only parsed {len(in_db)} constraints out of the DDL; regex stale?"
+    drift = [
+        f"{name}: model has {_norm(condition)!r}, database has {in_db.get(name)!r}"
+        for name, condition in _orm_checks().items()
+        if in_db.get(name) != _norm(condition)
+    ]
+    assert drift == [], "\n".join(drift)
+
+
+def test_the_database_has_no_check_constraint_the_model_does_not_declare(
+    migrated_ddl: str,
+) -> None:
+    """The other direction. A constraint left behind by a migration would
+    reject writes the model believes are legal."""
+    in_db = set(re.findall(r"CONSTRAINT (ck_card_feedback_\w+)", migrated_ddl))
+    assert in_db - set(_orm_checks()) == set()
+
+
+def test_every_holder_only_column_is_named_in_the_exclusivity_constraint() -> None:
+    """Adding a holder-only column without adding it here is silent: an
+    interested row could then carry it, and the branches stop being exclusive
+    one column at a time."""
+    condition = _orm_checks()[EXCLUSIVITY]
+    columns = {c.name for c in CardFeedback.__table__.columns}
+    holder_only = sorted(columns - SHARED_OR_BOOKKEEPING)
+    assert holder_only, "the classification lists every column as shared; is it stale?"
+    unnamed = [c for c in holder_only if not re.search(rf"\b{c}\b", condition)]
+    assert unnamed == [], (
+        f"{unnamed} are holder-only but not named in {EXCLUSIVITY}, so an "
+        "interested row could carry them"
+    )
+
+
+def test_the_classification_covers_every_column() -> None:
+    """The forcing function for the test above: a column in neither set means
+    nobody decided which branch it belongs to."""
+    columns = {c.name for c in CardFeedback.__table__.columns}
+    condition = _orm_checks()[EXCLUSIVITY]
+    unclassified = sorted(
+        c
+        for c in columns
+        if c not in SHARED_OR_BOOKKEEPING and not re.search(rf"\b{c}\b", condition)
+    )
+    assert unclassified == []
+
+
+def test_the_indexes_survived_the_migration_rebuild() -> None:
+    """SQLite cannot ALTER a column to nullable, so the migration rebuilds the
+    table. The rebuild dropped every index on the first attempt and nothing
+    failed: the table kept working and every per-card aggregate would have
+    started scanning."""
+    names = {i["name"] for i in inspect(engine).get_indexes(TABLE)}
+    assert {
+        "ix_card_feedback_card_slug",
+        "ix_card_feedback_session_id",
+        "ix_card_feedback_submitted_at",
+    } <= names

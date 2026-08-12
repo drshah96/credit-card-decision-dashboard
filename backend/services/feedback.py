@@ -81,7 +81,17 @@ def record_card_feedback(
         except IntegrityError:
             # Two submissions from one session raced. The row that won is the
             # answer; this one is the same person saying the same thing twice.
+            #
+            # Only reachable with a session id. Without one there is nothing to
+            # race: NULLs are mutually distinct under
+            # uq_card_feedback_session_card, so a unique violation cannot
+            # happen, and the only way here is a CHECK violation. Recovering
+            # from that would look up `session_id IS NULL AND card_slug = ?`,
+            # match an unrelated stranger's unsessioned row, and return their
+            # feedback_id with a 201 while this submission was silently lost.
             session.rollback()
+            if session_id is None:
+                raise
             winner = session.scalar(
                 select(CardFeedback).where(
                     CardFeedback.session_id == session_id,

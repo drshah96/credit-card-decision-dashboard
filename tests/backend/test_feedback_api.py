@@ -384,6 +384,16 @@ def test_the_two_branches_cannot_be_mixed() -> None:
             "interested with would_keep",
             {"respondent_type": "interested", "liked_feature": "credits", "would_keep": True},
         ),
+        (
+            # The fourth holder-only field, and the one most likely to be
+            # forgotten when this list is extended.
+            "interested with maximizes_value",
+            {
+                "respondent_type": "interested",
+                "liked_feature": "credits",
+                "maximizes_value": "partly",
+            },
+        ),
         ("interested naming nothing", {"respondent_type": "interested"}),
     ]
     for label, payload in mixed:

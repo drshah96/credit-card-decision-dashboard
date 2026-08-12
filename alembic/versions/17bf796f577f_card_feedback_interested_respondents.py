@@ -21,6 +21,7 @@ would silently drop the five constraints the table already has. `copy_from`
 supplies the full definition so the rebuild keeps them.
 """
 
+import os
 from typing import Sequence, Union
 
 import sqlalchemy as sa
@@ -136,9 +137,13 @@ def _recreate_indexes() -> None:
 
     The two backends diverge here and the naive version was wrong on each in
     turn. SQLite cannot ALTER a column to nullable, so batch mode copies the
-    table — and it does not carry indexes across even when copy_from declares
-    them, verified by the rebuilt table coming back with none. Postgres can
+    table, and on the Alembic version installed here the rebuilt table came
+    back with no indexes even though copy_from declares them. Postgres can
     ALTER in place, so batch mode never rebuilds and every index survives.
+
+    Whether a given Alembic version recreates them is not worth depending on
+    either way: the inspector guard below is idempotent, so this is correct
+    if they survive and correct if they do not.
 
     Recreating unconditionally therefore worked locally and failed on Postgres
     with `DuplicateTable: relation "ix_card_feedback_card_slug" already
@@ -184,9 +189,29 @@ def upgrade() -> None:
 
 
 def downgrade() -> None:
-    """Reverse it. Any interested-respondent rows would violate the restored
-    NOT NULL on rating, so they are removed first: they are rows the previous
-    schema had no way to represent."""
+    """Reverse it.
+
+    Interested rows violate the restored NOT NULL on rating, so they have to
+    go. There is no honest conversion: turning one into a holder row would mean
+    inventing a rating, and an invented rating lands in the per-card average.
+
+    So it refuses rather than deletes. Nothing runs downgrade automatically —
+    render.yaml runs `alembic upgrade head` only — so an operator is always
+    present and a hard stop costs them a minute, against rows that are the only
+    copy of what a visitor wrote.
+    """
+    interested = (
+        op.get_bind()
+        .execute(sa.text("SELECT count(*) FROM card_feedback WHERE respondent_type = 'interested'"))
+        .scalar_one()
+    )
+    if interested and os.environ.get("ALEMBIC_ALLOW_FEEDBACK_DATA_LOSS") != "1":
+        raise RuntimeError(
+            f"{interested} interested-respondent rows cannot be represented by the "
+            "previous schema and would be deleted. They are the only copy of what "
+            "those visitors wrote: there is no export and no analytics duplicate. "
+            "Re-run with ALEMBIC_ALLOW_FEEDBACK_DATA_LOSS=1 to accept that."
+        )
     op.execute("DELETE FROM card_feedback WHERE respondent_type = 'interested'")
 
     with op.batch_alter_table(
