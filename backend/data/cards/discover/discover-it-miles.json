@@ -19,7 +19,7 @@
   "foreign_transaction_fee": false,
   "variable_apr": "17.49%, 21.49%, 24.49% or 26.49%, based on creditworthiness",
   "balance_transfer_apr": "17.49%, 21.49%, 24.49% or 26.49%, based on creditworthiness",
-  "balance_transfer_fee": "3% of each transfer during the first 15 months, then 5% on transfers posted at a promotional APR and none at the standard Purchase APR",
+  "balance_transfer_fee": "Intro fee of 3% for transfers posting by November 10, 2026 under the intro APR offer, then 5% of each transfer",
   "foreign_transaction_fee_rate": null,
   "cash_advance_apr": "28.49%",
   "penalty_apr": null,
@@ -178,7 +178,7 @@
       "date": "2026-2027",
       "type": "future",
       "badge": "Upcoming",
-      "text": "When your own account moves to Capital One, three earning routes switch on that Discover never had: 5% on hotels, rental cars, vacation rentals and activities booked through Capital One Travel, 5% on tickets and events through Capital One Entertainment, and Capital One Offers for online shopping. These are not live for most cardholders yet, and Discover's own product pages do not list them."
+      "text": "When your own account moves to Capital One, new earning routes switch on that Discover never had: 5% on hotels and rental cars booked through Capital One Travel, and Capital One Offers for online shopping. Capital One Entertainment tickets are reported to earn 5% too, though neither issuer documents it. These are not live for most cardholders yet, and Discover's own product pages do not list them."
     },
     {
       "date": "July 2026",
