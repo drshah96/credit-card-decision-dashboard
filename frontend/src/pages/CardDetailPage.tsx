@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { CardFeedbackForm } from "../components/CardFeedbackForm";
+import { availableFeatures } from "../utils/cardFeatures";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { fetchCard, fetchCards } from "../api/cards";
@@ -1400,7 +1401,7 @@ function CardDetail({ card }: { card: Card }) {
           capture this card's value after reading what the page claims it is
           worth, so the ask sits after the argument rather than interrupting it. */}
       <Block label="Your turn" title="Do you hold this card?">
-        <CardFeedbackForm cardId={card.id} cardName={card.name} />
+        <CardFeedbackForm cardId={card.id} cardName={card.name} features={availableFeatures(card)} />
       </Block>
     </div>
   );

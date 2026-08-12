@@ -427,7 +427,9 @@ def submit_feedback(feedback: CardFeedbackIn, request: Request) -> dict:
 
     feedback_id = record_card_feedback(
         card_slug=feedback.card_id,
+        respondent_type=feedback.respondent_type,
         rating=feedback.rating,
+        liked_feature=feedback.liked_feature,
         maximizes_value=feedback.maximizes_value,
         held_for=feedback.held_for,
         would_keep=feedback.would_keep,

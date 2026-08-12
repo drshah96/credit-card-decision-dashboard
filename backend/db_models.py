@@ -667,7 +667,38 @@ class CardFeedback(Base):
         # submissions. And session_id is client-minted, so this is a duplicate
         # guard, never an abuse control — that job belongs to the rate limiter.
         UniqueConstraint("session_id", "card_slug", name="uq_card_feedback_session_card"),
-        CheckConstraint("rating BETWEEN 1 AND 5", name="ck_card_feedback_rating_range"),
+        CheckConstraint(
+            "rating IS NULL OR rating BETWEEN 1 AND 5", name="ck_card_feedback_rating_range"
+        ),
+        CheckConstraint(
+            "respondent_type IN ('holder','interested')",
+            name="ck_card_feedback_respondent_type",
+        ),
+        CheckConstraint(
+            "liked_feature IS NULL OR liked_feature IN "
+            "('earn_rates','credits','welcome_bonus','lounge_access','insurance',"
+            "'no_annual_fee','intro_apr','transfer_partners')",
+            name="ck_card_feedback_liked_feature",
+        ),
+        # The two branches are mutually exclusive, enforced here rather than
+        # trusted from the endpoint. Someone who does not hold the card cannot
+        # rate it, say how long they have held it, or say whether they would
+        # keep it — and someone who does hold it is answering from experience
+        # rather than naming the feature that caught their eye.
+        CheckConstraint(
+            "respondent_type <> 'holder' OR rating IS NOT NULL",
+            name="ck_card_feedback_holder_has_rating",
+        ),
+        CheckConstraint(
+            "respondent_type <> 'interested' OR ("
+            "rating IS NULL AND held_for IS NULL AND would_keep IS NULL "
+            "AND maximizes_value IS NULL)",
+            name="ck_card_feedback_interested_has_no_holder_fields",
+        ),
+        CheckConstraint(
+            "liked_feature IS NULL OR respondent_type = 'interested'",
+            name="ck_card_feedback_liked_feature_is_interest_only",
+        ),
         CheckConstraint(
             "maximizes_value IS NULL OR maximizes_value IN ('yes','partly','no')",
             name="ck_card_feedback_maximizes_value",
@@ -688,9 +719,17 @@ class CardFeedback(Base):
     # Indexed because every question worth asking starts with "for this card":
     # average rating, and what share of holders capture the value.
     card_slug: Mapped[str] = mapped_column(index=True)
-    # The only required answer. Every extra required field costs submissions,
-    # and a rating alone is already usable.
-    rating: Mapped[int]
+    # Which question set this row answers. Defaults to 'holder' because every
+    # row that existed before this column did was one.
+    respondent_type: Mapped[str] = mapped_column(server_default="holder", default="holder")
+    # Required of holders and forbidden of everyone else, per the conditional
+    # constraints above. Nullable at the column level because a person who does
+    # not hold the card is not withholding a rating, they have nothing to rate.
+    rating: Mapped[int | None] = mapped_column(default=None)
+    # Interested respondents only: the feature that caught their eye. The form
+    # offers only the options a given card actually has, so "credits" is never
+    # offered on a card with none.
+    liked_feature: Mapped[str | None] = mapped_column(default=None)
     # The question this feature exists to answer: does the holder actually
     # capture what the card advertises? "partly" is a real answer, not a
     # fence-sitter, and is expected to be the common one.

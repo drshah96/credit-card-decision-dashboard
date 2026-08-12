@@ -1,6 +1,6 @@
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 
 class Verdict(BaseModel):
@@ -402,7 +402,29 @@ class CardFeedbackIn(BaseModel):
     render time, never interpolated into HTML here."""
 
     card_id: str = Field(min_length=1, max_length=64)
-    rating: int = Field(ge=1, le=5)
+    # Which branch of the form this is. Defaults to "holder" so a browser
+    # still running the previous bundle during a deploy keeps working: every
+    # submission that existed before this field was a holder's.
+    respondent_type: Literal["holder", "interested"] = "holder"
+    # Required of holders, forbidden of everyone else. See the validator below;
+    # the same rule is a CHECK constraint on the table, because this endpoint
+    # is public and Pydantic is only the first of the two lines.
+    rating: int | None = Field(default=None, ge=1, le=5)
+    # Interested respondents only: the feature that caught their eye. The form
+    # offers only the ones a given card actually has.
+    liked_feature: (
+        Literal[
+            "earn_rates",
+            "credits",
+            "welcome_bonus",
+            "lounge_access",
+            "insurance",
+            "no_annual_fee",
+            "intro_apr",
+            "transfer_partners",
+        ]
+        | None
+    ) = None
     maximizes_value: Literal["yes", "partly", "no"] | None = None
     # A bucket, matching the form. An integer month count would invent
     # precision the visitor never gave and discard which bucket they picked.
@@ -410,3 +432,34 @@ class CardFeedbackIn(BaseModel):
     would_keep: bool | None = None
     comment: str | None = Field(default=None, max_length=1000)
     session_id: str | None = Field(default=None, max_length=64)
+
+    @model_validator(mode="after")
+    def _branches_are_exclusive(self) -> "CardFeedbackIn":
+        """A holder rates the card; someone interested names what drew them to
+        it. Neither can answer the other's questions.
+
+        Rejected here rather than quietly dropped, because a submission that
+        answers the wrong branch means the client and this model disagree about
+        the form, and silently discarding half of it would hide that.
+        """
+        holder_only = {
+            "rating": self.rating,
+            "held_for": self.held_for,
+            "would_keep": self.would_keep,
+            "maximizes_value": self.maximizes_value,
+        }
+        if self.respondent_type == "holder":
+            if self.rating is None:
+                raise ValueError("rating is required when respondent_type is 'holder'")
+            if self.liked_feature is not None:
+                raise ValueError("liked_feature applies only to interested respondents")
+        else:
+            answered = sorted(k for k, v in holder_only.items() if v is not None)
+            if answered:
+                raise ValueError(
+                    f"{', '.join(answered)} apply only to holders, "
+                    "but respondent_type is 'interested'"
+                )
+            if self.liked_feature is None:
+                raise ValueError("liked_feature is required when respondent_type is 'interested'")
+        return self

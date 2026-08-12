@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
-import { postFeedback, type FeedbackPayload } from "../api/feedback";
+import { postFeedback, type FeedbackPayload, type LikedFeature } from "../api/feedback";
+import { LIKED_FEATURE_LABELS } from "../utils/cardFeatures";
 import { getSessionId } from "../utils/sessionTracking";
 
 interface Props {
   cardId: string;
   cardName: string;
+  /** The features this card actually has, from availableFeatures(). Only these
+   * are offered, so nobody can pick "the statement credits" on a card without
+   * any. Empty is handled: the interested branch then asks only for a comment. */
+  features: LikedFeature[];
 }
+
+type Respondent = "holder" | "interested";
 
 const HELD_FOR: { value: NonNullable<FeedbackPayload["held_for"]>; label: string }[] = [
   { value: "under_6m", label: "Under 6 months" },
@@ -22,31 +29,29 @@ const MAXIMIZES: { value: NonNullable<FeedbackPayload["maximizes_value"]>; label
 ];
 
 /**
- * Asks someone who holds this card how it is actually working out.
+ * Asks about this card, branching on whether the visitor actually holds it.
  *
- * Question order is deliberate and runs easy-factual to evaluative to
- * decision: rating, then how long they have held it, then whether they
- * capture its value, then whether they would keep it. "How long" precedes
- * "do you capture the value" because it is the easier question to answer and
- * because it conditions the next one — someone three months in has not seen a
- * full year of credits yet, so answering "no" means something different for
- * them than for a five-year holder.
+ * The two branches collect different things because they know different
+ * things. Someone holding the card can say whether it delivers what the site
+ * estimates it delivers, which is the number this whole site is built on.
+ * Someone who does not hold it cannot answer that at all, but can say what
+ * drew them to the page, which is the other half of the picture and was
+ * previously thrown away: before this, a visitor who did not hold the card had
+ * nothing to submit and left no trace.
  *
- * The whole site estimates what a typical person captures from a card's
- * credits. This is the only place that number gets checked against someone who
- * actually holds it, which is why "are you able to use its value?" is the
- * question the form is built around rather than an afterthought below a star
- * rating.
+ * Neither branch can answer the other's questions. That is enforced three
+ * times over: the form only renders one set, CardFeedbackIn rejects a mixed
+ * payload with a 422, and CHECK constraints on card_feedback reject it again.
  *
- * Only the rating is required. Every other field is optional because each
- * required answer costs submissions, and a rating alone is still usable.
- *
- * Submitting twice for the same card updates the first answer rather than
- * adding a second, enforced server-side by a unique constraint on
- * (session_id, card_slug) with the endpoint updating in place.
+ * Question order within the holder branch runs easy-factual to evaluative to
+ * decision: how long, then whether they capture the value, then whether they
+ * would keep it. "How long" precedes "do you capture the value" because it is
+ * the easier question and because it conditions the next one.
  */
-export function CardFeedbackForm({ cardId, cardName }: Props) {
+export function CardFeedbackForm({ cardId, cardName, features }: Props) {
+  const [respondent, setRespondent] = useState<Respondent>();
   const [rating, setRating] = useState(0);
+  const [likedFeature, setLikedFeature] = useState<LikedFeature>();
   const [maximizes, setMaximizes] = useState<FeedbackPayload["maximizes_value"]>();
   const [heldFor, setHeldFor] = useState<FeedbackPayload["held_for"]>();
   const [wouldKeep, setWouldKeep] = useState<boolean>();
@@ -56,12 +61,12 @@ export function CardFeedbackForm({ cardId, cardName }: Props) {
 
   // Belt and braces with the key={card.id} on CardDetail in CardDetailPage.
   // Navigating card to card stays on the same route, so without one of these
-  // this component keeps its state across the change and thanks the visitor
-  // for a review of a card they never reviewed. The key alone would do it;
-  // this makes the form correct on its own rather than correct only while a
-  // caller two files away remembers why that key is there.
+  // the form keeps its state across the change and thanks the visitor for a
+  // review of a card they never reviewed.
   useEffect(() => {
+    setRespondent(undefined);
     setRating(0);
+    setLikedFeature(undefined);
     setMaximizes(undefined);
     setHeldFor(undefined);
     setWouldKeep(undefined);
@@ -70,21 +75,53 @@ export function CardFeedbackForm({ cardId, cardName }: Props) {
     setError(undefined);
   }, [cardId]);
 
+  // Switching branch clears the other one's answers. The payload would be
+  // rejected otherwise, but more importantly someone who picks "I hold it",
+  // rates it, then corrects themselves should not have that rating submitted.
+  function chooseRespondent(next: Respondent) {
+    setRespondent(next);
+    setError(undefined);
+    if (next === "interested") {
+      setRating(0);
+      setMaximizes(undefined);
+      setHeldFor(undefined);
+      setWouldKeep(undefined);
+    } else {
+      setLikedFeature(undefined);
+    }
+  }
+
+  const ready =
+    respondent === "holder"
+      ? rating > 0
+      : respondent === "interested" && (features.length === 0 || likedFeature !== undefined);
+
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (rating === 0 || state === "sending") return;
+    if (!ready || state === "sending") return;
     setState("sending");
     setError(undefined);
     try {
-      await postFeedback({
-        card_id: cardId,
-        rating,
-        maximizes_value: maximizes,
-        held_for: heldFor,
-        would_keep: wouldKeep,
-        comment: comment.trim() || undefined,
-        session_id: getSessionId(),
-      });
+      await postFeedback(
+        respondent === "holder"
+          ? {
+              card_id: cardId,
+              respondent_type: "holder",
+              rating,
+              maximizes_value: maximizes,
+              held_for: heldFor,
+              would_keep: wouldKeep,
+              comment: comment.trim() || undefined,
+              session_id: getSessionId(),
+            }
+          : {
+              card_id: cardId,
+              respondent_type: "interested",
+              liked_feature: likedFeature,
+              comment: comment.trim() || undefined,
+              session_id: getSessionId(),
+            },
+      );
       setState("done");
     } catch (err) {
       setError(err instanceof Error ? err.message : "That didn't save.");
@@ -97,8 +134,10 @@ export function CardFeedbackForm({ cardId, cardName }: Props) {
       <div className="feedback-done" role="status">
         <p className="feedback-done-title">Thank you.</p>
         <p className="feedback-done-body">
-          Real numbers from people who hold the card are worth more than any estimate. If you want
-          to change your answer, submit again and it replaces this one.
+          {respondent === "holder"
+            ? "Real numbers from people who hold the card are worth more than any estimate."
+            : "Knowing what drew you to this card tells us which parts of it are worth explaining better."}{" "}
+          If you want to change your answer, submit again and it replaces this one.
         </p>
       </div>
     );
@@ -107,40 +146,25 @@ export function CardFeedbackForm({ cardId, cardName }: Props) {
   return (
     <form className="feedback-form" onSubmit={submit}>
       <p className="feedback-intro">
-        Do you hold the {cardName}? The site estimates what a typical person gets out of it. Tell us
-        what you actually get.
+        The site estimates what a typical person gets out of the {cardName}. Tell us how that
+        matches your own experience, or what brought you here.
       </p>
 
       <fieldset className="feedback-field">
-        <legend>Your rating</legend>
-        <div className="feedback-stars">
-          {[1, 2, 3, 4, 5].map((n) => (
-            <button
-              key={n}
-              type="button"
-              className={`feedback-star${n <= rating ? " is-on" : ""}`}
-              onClick={() => setRating(n)}
-              aria-pressed={n <= rating}
-              // The visible glyph is a star, which reads as nothing useful to a
-              // screen reader, so each button carries its own full label.
-              aria-label={`${n} ${n === 1 ? "star" : "stars"}`}
-            >
-              <span aria-hidden="true">★</span>
-            </button>
-          ))}
-        </div>
-      </fieldset>
-
-      <fieldset className="feedback-field">
-        <legend>How long have you held it?</legend>
+        <legend>Do you hold this card?</legend>
         <div className="feedback-options">
-          {HELD_FOR.map((o) => (
+          {(
+            [
+              { value: "holder", label: "Yes, I hold it" },
+              { value: "interested", label: "No, but I'm interested" },
+            ] as const
+          ).map((o) => (
             <label key={o.value} className="feedback-option">
               <input
                 type="radio"
-                name="heldFor"
-                checked={heldFor === o.value}
-                onChange={() => setHeldFor(o.value)}
+                name="respondent"
+                checked={respondent === o.value}
+                onChange={() => chooseRespondent(o.value)}
               />
               <span>{o.label}</span>
             </label>
@@ -148,58 +172,124 @@ export function CardFeedbackForm({ cardId, cardName }: Props) {
         </div>
       </fieldset>
 
-      <fieldset className="feedback-field">
-        <legend>Are you able to use this card&rsquo;s value?</legend>
-        <div className="feedback-options">
-          {MAXIMIZES.map((o) => (
-            <label key={o.value} className="feedback-option">
-              <input
-                type="radio"
-                name="maximizes"
-                checked={maximizes === o.value}
-                onChange={() => setMaximizes(o.value)}
-              />
-              <span>{o.label}</span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
+      {respondent === "holder" && (
+        <>
+          <fieldset className="feedback-field">
+            <legend>Your rating</legend>
+            <div className="feedback-stars">
+              {[1, 2, 3, 4, 5].map((n) => (
+                <button
+                  key={n}
+                  type="button"
+                  className={`feedback-star${n <= rating ? " is-on" : ""}`}
+                  onClick={() => setRating(n)}
+                  aria-pressed={n <= rating}
+                  // The visible glyph is a star, which reads as nothing useful
+                  // to a screen reader, so each button carries its own label.
+                  aria-label={`${n} ${n === 1 ? "star" : "stars"}`}
+                >
+                  <span aria-hidden="true">★</span>
+                </button>
+              ))}
+            </div>
+          </fieldset>
 
-      <fieldset className="feedback-field">
-        <legend>Would you keep it?</legend>
-        <div className="feedback-options">
-          {[
-            { value: true, label: "Yes" },
-            { value: false, label: "No" },
-          ].map((o) => (
-            <label key={String(o.value)} className="feedback-option">
-              <input
-                type="radio"
-                name="wouldKeep"
-                checked={wouldKeep === o.value}
-                onChange={() => setWouldKeep(o.value)}
-              />
-              <span>{o.label}</span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
+          <fieldset className="feedback-field">
+            <legend>How long have you held it?</legend>
+            <div className="feedback-options">
+              {HELD_FOR.map((o) => (
+                <label key={o.value} className="feedback-option">
+                  <input
+                    type="radio"
+                    name="heldFor"
+                    checked={heldFor === o.value}
+                    onChange={() => setHeldFor(o.value)}
+                  />
+                  <span>{o.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
 
-      <div className="feedback-field">
-        <label className="feedback-label" htmlFor="feedback-comment">
-          Anything else? (optional)
-        </label>
-        <textarea
-          id="feedback-comment"
-          className="feedback-comment"
-          rows={3}
-          maxLength={1000}
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          placeholder="What works, what doesn't, what you wish you'd known."
-        />
-        <p className="feedback-counter">{1000 - comment.length} characters left</p>
-      </div>
+          <fieldset className="feedback-field">
+            <legend>Are you able to use this card&rsquo;s value?</legend>
+            <div className="feedback-options">
+              {MAXIMIZES.map((o) => (
+                <label key={o.value} className="feedback-option">
+                  <input
+                    type="radio"
+                    name="maximizes"
+                    checked={maximizes === o.value}
+                    onChange={() => setMaximizes(o.value)}
+                  />
+                  <span>{o.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset className="feedback-field">
+            <legend>Would you keep it?</legend>
+            <div className="feedback-options">
+              {[
+                { value: true, label: "Yes" },
+                { value: false, label: "No" },
+              ].map((o) => (
+                <label key={String(o.value)} className="feedback-option">
+                  <input
+                    type="radio"
+                    name="wouldKeep"
+                    checked={wouldKeep === o.value}
+                    onChange={() => setWouldKeep(o.value)}
+                  />
+                  <span>{o.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        </>
+      )}
+
+      {respondent === "interested" && features.length > 0 && (
+        <fieldset className="feedback-field">
+          <legend>What appeals to you most about it?</legend>
+          <div className="feedback-options">
+            {features.map((f) => (
+              <label key={f} className="feedback-option">
+                <input
+                  type="radio"
+                  name="likedFeature"
+                  checked={likedFeature === f}
+                  onChange={() => setLikedFeature(f)}
+                />
+                <span>{LIKED_FEATURE_LABELS[f]}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      )}
+
+      {respondent && (
+        <div className="feedback-field">
+          <label className="feedback-label" htmlFor="feedback-comment">
+            Anything else? (optional)
+          </label>
+          <textarea
+            id="feedback-comment"
+            className="feedback-comment"
+            rows={3}
+            maxLength={1000}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            placeholder={
+              respondent === "holder"
+                ? "What works, what doesn't, what you wish you'd known."
+                : "What would make you apply, or what's putting you off."
+            }
+          />
+          <p className="feedback-counter">{1000 - comment.length} characters left</p>
+        </div>
+      )}
 
       {error && (
         <p className="feedback-error" role="alert">
@@ -207,16 +297,16 @@ export function CardFeedbackForm({ cardId, cardName }: Props) {
         </p>
       )}
 
-      <button
-        type="submit"
-        className="feedback-submit"
-        disabled={rating === 0 || state === "sending"}
-      >
-        {state === "sending" ? "Sending…" : "Share your experience"}
-      </button>
-      <p className="feedback-privacy">
-        No name, no email, no account. Nothing you write is shown on the site.
-      </p>
+      {respondent && (
+        <>
+          <button type="submit" className="feedback-submit" disabled={!ready || state === "sending"}>
+            {state === "sending" ? "Sending…" : "Share your experience"}
+          </button>
+          <p className="feedback-privacy">
+            No name, no email, no account. Nothing you write is shown on the site.
+          </p>
+        </>
+      )}
     </form>
   );
 }

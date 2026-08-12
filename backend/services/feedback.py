@@ -16,7 +16,9 @@ from backend.db_models import CardFeedback
 
 def record_card_feedback(
     card_slug: str,
-    rating: int,
+    respondent_type: str = "holder",
+    rating: int | None = None,
+    liked_feature: str | None = None,
     maximizes_value: str | None = None,
     held_for: str | None = None,
     would_keep: bool | None = None,
@@ -38,7 +40,9 @@ def record_card_feedback(
     """
     cleaned = (comment.strip() if comment else None) or None
     values = dict(
+        respondent_type=respondent_type,
         rating=rating,
+        liked_feature=liked_feature,
         maximizes_value=maximizes_value,
         held_for=held_for,
         would_keep=would_keep,

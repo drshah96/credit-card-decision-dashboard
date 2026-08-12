@@ -317,3 +317,146 @@ def test_spending_the_feedback_budget_does_not_block_analytics() -> None:
         headers=BROWSER,
     )
     assert event.status_code == 200
+
+
+# ─── Interested respondents ──────────────────────────────────────────────────
+# The second branch of the form: someone who does not hold the card but is
+# interested, naming the feature that drew them. Before this, that visitor had
+# nothing to submit and left no trace.
+
+
+def test_an_interested_respondent_is_stored_without_holder_fields() -> None:
+    sid = _session_id()
+    response = client.post(
+        "/api/feedback",
+        json={
+            "card_id": REAL_CARD,
+            "respondent_type": "interested",
+            "liked_feature": "credits",
+            "comment": "The Uber credit looks useful.",
+            "session_id": sid,
+        },
+        headers=BROWSER,
+    )
+    assert response.status_code == 201
+    row = _rows(sid)[0]
+    assert row.respondent_type == "interested"
+    assert row.liked_feature == "credits"
+    assert row.rating is None
+    assert row.held_for is None
+    assert row.would_keep is None
+    assert row.maximizes_value is None
+
+
+def test_a_submission_without_a_respondent_type_is_treated_as_a_holder() -> None:
+    """A browser still running the previous bundle during a deploy posts no
+    respondent_type. Every submission that existed before the column did was a
+    holder's, so that is what it defaults to rather than a 422."""
+    sid = _session_id()
+    response = client.post(
+        "/api/feedback",
+        json={"card_id": REAL_CARD, "rating": 4, "session_id": sid},
+        headers=BROWSER,
+    )
+    assert response.status_code == 201
+    assert _rows(sid)[0].respondent_type == "holder"
+
+
+def test_the_two_branches_cannot_be_mixed() -> None:
+    """Rejected rather than quietly stripped: a payload answering both branches
+    means the client and the model disagree about the form, and silently
+    dropping half of it would hide that."""
+    mixed = [
+        ("holder with no rating", {"respondent_type": "holder"}),
+        (
+            "holder naming a feature",
+            {"respondent_type": "holder", "rating": 4, "liked_feature": "credits"},
+        ),
+        (
+            "interested with a rating",
+            {"respondent_type": "interested", "rating": 4, "liked_feature": "credits"},
+        ),
+        (
+            "interested with held_for",
+            {"respondent_type": "interested", "liked_feature": "credits", "held_for": "1_to_2y"},
+        ),
+        (
+            "interested with would_keep",
+            {"respondent_type": "interested", "liked_feature": "credits", "would_keep": True},
+        ),
+        ("interested naming nothing", {"respondent_type": "interested"}),
+    ]
+    for label, payload in mixed:
+        response = client.post(
+            "/api/feedback", json={"card_id": REAL_CARD, **payload}, headers=BROWSER
+        )
+        assert response.status_code == 422, label
+
+
+def test_an_unknown_liked_feature_is_rejected() -> None:
+    """These strings live in three places: the form, the Pydantic Literal and a
+    DB CHECK. A typo in any one is a 422 in production."""
+    response = client.post(
+        "/api/feedback",
+        json={"card_id": REAL_CARD, "respondent_type": "interested", "liked_feature": "vibes"},
+        headers=BROWSER,
+    )
+    assert response.status_code == 422
+
+
+def test_every_liked_feature_the_form_can_send_is_accepted() -> None:
+    """The other direction: a value the form offers that the API or the CHECK
+    constraint rejects would be a dead option nobody could submit."""
+    for feature in (
+        "earn_rates",
+        "credits",
+        "welcome_bonus",
+        "lounge_access",
+        "insurance",
+        "no_annual_fee",
+        "intro_apr",
+        "transfer_partners",
+    ):
+        # Eight submissions exceeds the 6-per-hour budget, which is the
+        # limiter doing its job. Cleared per iteration so this test measures
+        # what it claims to and not the rate limiter, which
+        # test_the_rate_limit_actually_bites covers on purpose.
+        main._feedback_rate_limit_hits.clear()
+        response = client.post(
+            "/api/feedback",
+            json={
+                "card_id": REAL_CARD,
+                "respondent_type": "interested",
+                "liked_feature": feature,
+                "session_id": _session_id(),
+            },
+            headers=BROWSER,
+        )
+        assert response.status_code == 201, feature
+
+
+def test_switching_branch_on_resubmission_clears_the_other_side() -> None:
+    """Someone who rates the card, then corrects themselves to 'interested',
+    must not leave a stale rating behind on the row that replaces it."""
+    sid = _session_id()
+    client.post(
+        "/api/feedback",
+        json={"card_id": REAL_CARD, "rating": 5, "held_for": "1_to_2y", "session_id": sid},
+        headers=BROWSER,
+    )
+    client.post(
+        "/api/feedback",
+        json={
+            "card_id": REAL_CARD,
+            "respondent_type": "interested",
+            "liked_feature": "earn_rates",
+            "session_id": sid,
+        },
+        headers=BROWSER,
+    )
+    rows = _rows(sid)
+    assert len(rows) == 1
+    assert rows[0].respondent_type == "interested"
+    assert rows[0].rating is None
+    assert rows[0].held_for is None
+    assert rows[0].liked_feature == "earn_rates"
