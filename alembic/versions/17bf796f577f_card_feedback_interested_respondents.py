@@ -132,17 +132,27 @@ INDEXES = [
 
 
 def _recreate_indexes() -> None:
-    """Batch mode rebuilds the table and does not carry its indexes across,
-    even when copy_from declares them. Declaring index=True there is not
-    enough — verified, the rebuilt table came back with none. So they are
-    recreated explicitly after every rebuild, in both directions.
+    """Restore the indexes the rebuild dropped, on the backends that rebuild.
 
-    Losing them would not fail anything: the table would keep working and
-    every per-card aggregate would just start scanning. `alembic check` is
-    what noticed, by comparing the ORM's indexes against the database.
+    The two backends diverge here and the naive version was wrong on each in
+    turn. SQLite cannot ALTER a column to nullable, so batch mode copies the
+    table — and it does not carry indexes across even when copy_from declares
+    them, verified by the rebuilt table coming back with none. Postgres can
+    ALTER in place, so batch mode never rebuilds and every index survives.
+
+    Recreating unconditionally therefore worked locally and failed on Postgres
+    with `DuplicateTable: relation "ix_card_feedback_card_slug" already
+    exists`. Asking the database which indexes it actually has is the only
+    version that is right on both.
+
+    Losing them silently would fail nothing: the table keeps working and every
+    per-card aggregate quietly starts scanning. `alembic check` caught the
+    SQLite half; the Neon preview migration caught the Postgres half.
     """
+    existing = {i["name"] for i in sa.inspect(op.get_bind()).get_indexes("card_feedback")}
     for name, column in INDEXES:
-        op.create_index(name, "card_feedback", [column], unique=False)
+        if name not in existing:
+            op.create_index(name, "card_feedback", [column], unique=False)
 
 
 def upgrade() -> None:
