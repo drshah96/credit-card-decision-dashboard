@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { MAX_FEATURES, postFeedback, type FeedbackPayload, type LikedFeature } from "../api/feedback";
+import {
+  MAX_FEATURES,
+  postFeedback,
+  type FeedbackPayload,
+  type LikedFeature,
+} from "../api/feedback";
 import { LIKED_FEATURE_LABELS } from "../utils/cardFeatures";
 import { getSessionId } from "../utils/sessionTracking";
 
@@ -14,7 +19,10 @@ interface Props {
 
 type Respondent = "holder" | "interested";
 
-const HELD_FOR: { value: NonNullable<FeedbackPayload["held_for"]>; label: string }[] = [
+const HELD_FOR: {
+  value: NonNullable<FeedbackPayload["held_for"]>;
+  label: string;
+}[] = [
   { value: "under_6m", label: "Under 6 months" },
   { value: "6_to_12m", label: "6 to 12 months" },
   { value: "1_to_2y", label: "1 to 2 years" },
@@ -22,7 +30,10 @@ const HELD_FOR: { value: NonNullable<FeedbackPayload["held_for"]>; label: string
   { value: "over_5y", label: "Over 5 years" },
 ];
 
-const MAXIMIZES: { value: NonNullable<FeedbackPayload["maximizes_value"]>; label: string }[] = [
+const MAXIMIZES: {
+  value: NonNullable<FeedbackPayload["maximizes_value"]>;
+  label: string;
+}[] = [
   { value: "yes", label: "Yes, I use most of it" },
   { value: "partly", label: "Partly" },
   { value: "no", label: "No, most of it goes unused" },
@@ -52,7 +63,8 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
   const [respondent, setRespondent] = useState<Respondent>();
   const [rating, setRating] = useState(0);
   const [likedFeatures, setLikedFeatures] = useState<LikedFeature[]>([]);
-  const [maximizes, setMaximizes] = useState<FeedbackPayload["maximizes_value"]>();
+  const [maximizes, setMaximizes] =
+    useState<FeedbackPayload["maximizes_value"]>();
   const [heldFor, setHeldFor] = useState<FeedbackPayload["held_for"]>();
   const [wouldKeep, setWouldKeep] = useState<boolean>();
   const [comment, setComment] = useState("");
@@ -114,10 +126,28 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
 
   const atFeatureCap = likedFeatures.length >= MAX_FEATURES;
 
+  // One id, because the two feature fieldsets are mutually exclusive: the form
+  // renders the holder branch or the interested branch, never both.
+  const FEATURE_HINT_ID = "feedback-features-hint";
+
+  // Doubles as the group's description and as a live region. Reaching the cap
+  // greys out the remaining options, which tells a sighted person what happened
+  // and tells a screen reader nothing: disabled controls announce their state
+  // only once focus lands on one. The text changes only at the boundary, so
+  // this announces twice per visit at most rather than on every pick.
+  //
+  // aria-live rather than role="status" on purpose. The thank-you panel is the
+  // form's status message and tests identify it by that role; a second one here
+  // would make "the status message" ambiguous for both a reader and a test.
+  const featureHint = atFeatureCap
+    ? `${MAX_FEATURES} of ${MAX_FEATURES} chosen. Clear one to choose another.`
+    : `Pick up to ${MAX_FEATURES}.`;
+
   const ready =
     respondent === "holder"
       ? rating > 0
-      : respondent === "interested" && (features.length === 0 || likedFeatures.length > 0);
+      : respondent === "interested" &&
+        (features.length === 0 || likedFeatures.length > 0);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -166,7 +196,11 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
         {/* The claim that submitting again replaces the first answer is true —
             the endpoint upserts on (session_id, card_slug) — but it used to be
             made with no way back to the form short of reloading the page. */}
-        <button type="button" className="feedback-again" onClick={() => setState("idle")}>
+        <button
+          type="button"
+          className="feedback-again"
+          onClick={() => setState("idle")}
+        >
           Change your answer
         </button>
       </div>
@@ -176,8 +210,8 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
   return (
     <form className="feedback-form" onSubmit={submit}>
       <p className="feedback-intro">
-        The site estimates what a typical person gets out of the {cardName}. Tell us how that
-        matches your own experience, or what brought you here.
+        The site estimates what a typical person gets out of the {cardName}.
+        Tell us how that matches your own experience, or what brought you here.
       </p>
 
       <fieldset className="feedback-field">
@@ -260,7 +294,10 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
           </fieldset>
 
           {features.length > 0 && (
-            <fieldset className="feedback-field">
+            <fieldset
+              className="feedback-field"
+              aria-describedby={FEATURE_HINT_ID}
+            >
               {/* Different wording from the interested branch on purpose. A
                   holder is saying what actually delivers; someone interested is
                   saying what drew them. Same option set, and the parent's
@@ -281,7 +318,13 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
                   </label>
                 ))}
               </div>
-              <p className="feedback-hint">Pick up to {MAX_FEATURES}.</p>
+              <p
+                className="feedback-hint"
+                id={FEATURE_HINT_ID}
+                aria-live="polite"
+              >
+                {featureHint}
+              </p>
             </fieldset>
           )}
 
@@ -308,7 +351,7 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
       )}
 
       {respondent === "interested" && features.length > 0 && (
-        <fieldset className="feedback-field">
+        <fieldset className="feedback-field" aria-describedby={FEATURE_HINT_ID}>
           <legend>What appeals to you about it?</legend>
           <div className="feedback-options is-grid">
             {features.map((f) => (
@@ -324,7 +367,9 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
               </label>
             ))}
           </div>
-          <p className="feedback-hint">Pick up to {MAX_FEATURES}.</p>
+          <p className="feedback-hint" id={FEATURE_HINT_ID} aria-live="polite">
+            {featureHint}
+          </p>
         </fieldset>
       )}
 
@@ -346,7 +391,9 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
                 : "What would make you apply, or what's putting you off."
             }
           />
-          <p className="feedback-counter">{1000 - comment.length} characters left</p>
+          <p className="feedback-counter">
+            {1000 - comment.length} characters left
+          </p>
         </div>
       )}
 
@@ -358,11 +405,16 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
 
       {respondent && (
         <>
-          <button type="submit" className="feedback-submit" disabled={!ready || state === "sending"}>
+          <button
+            type="submit"
+            className="feedback-submit"
+            disabled={!ready || state === "sending"}
+          >
             {state === "sending" ? "Sending…" : "Share your experience"}
           </button>
           <p className="feedback-privacy">
-            No name, no email, no account. Nothing you write is shown on the site.
+            No name, no email, no account. Nothing you write is shown on the
+            site.
           </p>
         </>
       )}

@@ -17,7 +17,9 @@ vi.mock("@/api/feedback", async (orig) => ({
   ...(await orig<Record<string, unknown>>()),
   postFeedback: (p: unknown) => postFeedback(p),
 }));
-vi.mock("@/utils/sessionTracking", () => ({ getSessionId: () => "test-session" }));
+vi.mock("@/utils/sessionTracking", () => ({
+  getSessionId: () => "test-session",
+}));
 
 beforeEach(() => {
   postFeedback.mockReset();
@@ -26,34 +28,52 @@ beforeEach(() => {
 
 const FEATURES: LikedFeature[] = ["earn_rates", "credits", "redemption_rate"];
 const setup = (features = FEATURES) =>
-  render(<CardFeedbackForm cardId="amex-platinum" cardName="Platinum Card" features={features} />);
+  render(
+    <CardFeedbackForm
+      cardId="amex-platinum"
+      cardName="Platinum Card"
+      features={features}
+    />,
+  );
 
 const holder = () => userEvent.click(screen.getByLabelText("Yes, I hold it"));
-const interested = () => userEvent.click(screen.getByLabelText("No, but I'm interested"));
-const submitButton = () => screen.getByRole("button", { name: /share your experience/i });
+const interested = () =>
+  userEvent.click(screen.getByLabelText("No, but I'm interested"));
+const submitButton = () =>
+  screen.getByRole("button", { name: /share your experience/i });
 
 describe("choosing a branch", () => {
   it("asks nothing else until the visitor says whether they hold the card", () => {
     setup();
     expect(screen.queryByRole("button", { name: "5 stars" })).toBeNull();
     expect(screen.queryByText(/what appeals to you/i)).toBeNull();
-    expect(screen.queryByRole("button", { name: /share your experience/i })).toBeNull();
+    expect(
+      screen.queryByRole("button", { name: /share your experience/i }),
+    ).toBeNull();
   });
 
   it("shows the holder questions and not the interest one", async () => {
     setup();
     await holder();
     expect(screen.getByRole("button", { name: "5 stars" })).toBeInTheDocument();
-    expect(screen.getByRole("group", { name: /how long have you held it/i })).toBeInTheDocument();
-    expect(screen.queryByRole("group", { name: /what appeals to you/i })).toBeNull();
+    expect(
+      screen.getByRole("group", { name: /how long have you held it/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("group", { name: /what appeals to you/i }),
+    ).toBeNull();
   });
 
   it("shows the interest question and not the holder ones", async () => {
     setup();
     await interested();
-    expect(screen.getByRole("group", { name: /what appeals to you/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("group", { name: /what appeals to you/i }),
+    ).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "5 stars" })).toBeNull();
-    expect(screen.queryByRole("group", { name: /how long have you held it/i })).toBeNull();
+    expect(
+      screen.queryByRole("group", { name: /how long have you held it/i }),
+    ).toBeNull();
   });
 
   it("discards the other branch's answers when the visitor changes their mind", async () => {
@@ -106,7 +126,10 @@ describe("the holder branch", () => {
     await userEvent.click(screen.getByLabelText("Partly"));
     await userEvent.click(screen.getByLabelText("1 to 2 years"));
     await userEvent.click(screen.getByLabelText("Yes"));
-    await userEvent.type(screen.getByLabelText(/anything else/i), "  Worth it if you fly.  ");
+    await userEvent.type(
+      screen.getByLabelText(/anything else/i),
+      "  Worth it if you fly.  ",
+    );
     await userEvent.click(submitButton());
     await waitFor(() => expect(postFeedback).toHaveBeenCalledOnce());
     // Literals, not the union type: these strings also live in a Pydantic
@@ -155,7 +178,10 @@ describe("the interested branch", () => {
     setup();
     await interested();
     await userEvent.click(screen.getByLabelText("Statement credits"));
-    await userEvent.type(screen.getByLabelText(/anything else/i), "The Uber credit looks useful.");
+    await userEvent.type(
+      screen.getByLabelText(/anything else/i),
+      "The Uber credit looks useful.",
+    );
     await userEvent.click(submitButton());
     await waitFor(() => expect(postFeedback).toHaveBeenCalledOnce());
     expect(postFeedback).toHaveBeenCalledWith({
@@ -182,7 +208,10 @@ describe("the interested branch", () => {
     setup([]);
     await interested();
     expect(screen.queryByRole("group", { name: /what appeals/i })).toBeNull();
-    await userEvent.type(screen.getByLabelText(/anything else/i), "Curious about it.");
+    await userEvent.type(
+      screen.getByLabelText(/anything else/i),
+      "Curious about it.",
+    );
     await userEvent.click(submitButton());
     await waitFor(() => expect(postFeedback).toHaveBeenCalledOnce());
     expect(postFeedback.mock.calls[0][0].features).toBeUndefined();
@@ -196,11 +225,15 @@ describe("after submitting", () => {
     await userEvent.click(screen.getByRole("button", { name: "5 stars" }));
     await userEvent.click(submitButton());
     expect(await screen.findByRole("status")).toHaveTextContent(/thank you/i);
-    expect(screen.queryByRole("button", { name: /share your experience/i })).toBeNull();
+    expect(
+      screen.queryByRole("button", { name: /share your experience/i }),
+    ).toBeNull();
   });
 
   it("shows the failure instead of thanking them for nothing", async () => {
-    postFeedback.mockRejectedValue(new Error("That didn't save. Try again in a moment."));
+    postFeedback.mockRejectedValue(
+      new Error("That didn't save. Try again in a moment."),
+    );
     setup();
     await holder();
     await userEvent.click(screen.getByRole("button", { name: "5 stars" }));
@@ -237,9 +270,16 @@ describe("accessibility", () => {
 
   it("groups every question so its options are announced with it", async () => {
     setup();
-    expect(screen.getByRole("group", { name: /do you hold this card/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("group", { name: /do you hold this card/i }),
+    ).toBeInTheDocument();
     await holder();
-    for (const name of [/your rating/i, /how long have you held it/i, /able to use this card/i, /would you keep it/i]) {
+    for (const name of [
+      /your rating/i,
+      /how long have you held it/i,
+      /able to use this card/i,
+      /would you keep it/i,
+    ]) {
       expect(screen.getByRole("group", { name })).toBeInTheDocument();
     }
   });
@@ -250,8 +290,14 @@ describe("accessibility", () => {
     setup();
     await holder();
     await userEvent.click(screen.getByRole("button", { name: "3 stars" }));
-    expect(screen.getByRole("button", { name: "3 stars" })).toHaveAttribute("aria-pressed", "true");
-    expect(screen.getByRole("button", { name: "4 stars" })).toHaveAttribute("aria-pressed", "false");
+    expect(screen.getByRole("button", { name: "3 stars" })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    expect(screen.getByRole("button", { name: "4 stars" })).toHaveAttribute(
+      "aria-pressed",
+      "false",
+    );
   });
 });
 
@@ -287,16 +333,26 @@ describe("moving to another card", () => {
 // have surfaced as a 422 in production.
 describe("the payload matches the model it mirrors", () => {
   const root = join(__dirname, "..", "..", "..");
-  const ts = readFileSync(join(root, "frontend", "src", "api", "feedback.ts"), "utf-8");
+  const ts = readFileSync(
+    join(root, "frontend", "src", "api", "feedback.ts"),
+    "utf-8",
+  );
   const py = readFileSync(join(root, "backend", "models.py"), "utf-8");
 
   const tsFields = new Set(
-    [...ts.slice(ts.indexOf("export interface FeedbackPayload")).matchAll(/^\s{2}(\w+)\??:/gm)].map(
-      (m) => m[1],
-    ),
+    [
+      ...ts
+        .slice(ts.indexOf("export interface FeedbackPayload"))
+        .matchAll(/^\s{2}(\w+)\??:/gm),
+    ].map((m) => m[1]),
   );
-  const pyBlock = py.slice(py.indexOf("class CardFeedbackIn"), py.indexOf("@model_validator"));
-  const pyFields = new Set([...pyBlock.matchAll(/^\s{4}(\w+):/gm)].map((m) => m[1]));
+  const pyBlock = py.slice(
+    py.indexOf("class CardFeedbackIn"),
+    py.indexOf("@model_validator"),
+  );
+  const pyFields = new Set(
+    [...pyBlock.matchAll(/^\s{4}(\w+):/gm)].map((m) => m[1]),
+  );
 
   it("reads both files, rather than passing over nothing", () => {
     expect(tsFields.size).toBeGreaterThan(5);
@@ -323,7 +379,9 @@ describe("the thank-you screen", () => {
     // clicking any more; asserted on the resolved copy regardless.
     expect(screen.getByLabelText("No, but I'm interested")).toBeDisabled();
     release();
-    expect(await screen.findByRole("status")).toHaveTextContent(/real numbers from people who hold/i);
+    expect(await screen.findByRole("status")).toHaveTextContent(
+      /real numbers from people who hold/i,
+    );
   });
 
   it("offers a way back to the form, since it says the answer can be replaced", async () => {
@@ -332,7 +390,9 @@ describe("the thank-you screen", () => {
     await userEvent.click(screen.getByRole("button", { name: "4 stars" }));
     await userEvent.click(submitButton());
     await screen.findByRole("status");
-    await userEvent.click(screen.getByRole("button", { name: /change your answer/i }));
+    await userEvent.click(
+      screen.getByRole("button", { name: /change your answer/i }),
+    );
     expect(screen.getByLabelText("Yes, I hold it")).toBeInTheDocument();
     expect(screen.queryByRole("status")).toBeNull();
   });
@@ -342,7 +402,9 @@ describe("holders are asked which parts earn their keep", () => {
   it("offers the same options to a holder, optionally", async () => {
     setup();
     await holder();
-    expect(screen.getByRole("group", { name: /which parts earn their keep/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("group", { name: /which parts earn their keep/i }),
+    ).toBeInTheDocument();
     // Optional: a rating alone is still submittable.
     await userEvent.click(screen.getByRole("button", { name: "4 stars" }));
     expect(submitButton()).toBeEnabled();
@@ -389,13 +451,20 @@ describe("the feature question takes several answers", () => {
     await userEvent.click(screen.getByLabelText("Statement credits"));
     await userEvent.click(submitButton());
     await waitFor(() => expect(postFeedback).toHaveBeenCalledOnce());
-    expect(postFeedback.mock.calls[0][0].features).toEqual(["earn_rates", "credits"]);
+    expect(postFeedback.mock.calls[0][0].features).toEqual([
+      "earn_rates",
+      "credits",
+    ]);
   });
 
   it("refuses picks past the cap by disabling them, not by silently dropping them", async () => {
     setup(MANY);
     await interested();
-    for (const label of ["Earn rates", "Statement credits", "Redemption value"]) {
+    for (const label of [
+      "Earn rates",
+      "Statement credits",
+      "Redemption value",
+    ]) {
       await userEvent.click(screen.getByLabelText(label));
     }
     // The chosen ones stay clickable so the choice can be undone.
@@ -416,7 +485,11 @@ describe("the feature question takes several answers", () => {
   it("frees a slot when a pick is taken back", async () => {
     setup(MANY);
     await interested();
-    for (const label of ["Earn rates", "Statement credits", "Redemption value"]) {
+    for (const label of [
+      "Earn rates",
+      "Statement credits",
+      "Redemption value",
+    ]) {
       await userEvent.click(screen.getByLabelText(label));
     }
     expect(screen.getByLabelText("Lounge access")).toBeDisabled();
@@ -438,7 +511,11 @@ describe("the feature question takes several answers", () => {
     setup(MANY);
     await holder();
     await userEvent.click(screen.getByRole("button", { name: "5 stars" }));
-    for (const label of ["Earn rates", "Statement credits", "Redemption value"]) {
+    for (const label of [
+      "Earn rates",
+      "Statement credits",
+      "Redemption value",
+    ]) {
       await userEvent.click(screen.getByLabelText(label));
     }
     expect(screen.getByLabelText("Lounge access")).toBeDisabled();
@@ -450,5 +527,66 @@ describe("the feature question takes several answers", () => {
     expect(submitButton()).toBeDisabled();
     await userEvent.click(screen.getByLabelText("Earn rates"));
     expect(submitButton()).toBeEnabled();
+  });
+});
+
+describe("the pick cap is announced, not only shown", () => {
+  const MANY: LikedFeature[] = [
+    "earn_rates",
+    "credits",
+    "redemption_rate",
+    "transfer_partners",
+    "lounge_access",
+  ];
+
+  const fill = async () => {
+    for (const label of [
+      "Earn rates",
+      "Statement credits",
+      "Redemption value",
+    ]) {
+      await userEvent.click(screen.getByLabelText(label));
+    }
+  };
+
+  it("describes the cap to the group before anyone hits it", async () => {
+    setup(MANY);
+    await interested();
+    expect(
+      screen.getByRole("group", { name: /what appeals to you/i }),
+    ).toHaveAccessibleDescription(/pick up to 3/i);
+  });
+
+  it("says the cap is reached, since greying the rest out is a visual-only signal", async () => {
+    setup(MANY);
+    await interested();
+    await fill();
+    // A live region, so this is spoken when it changes rather than only when
+    // focus happens to land on the group.
+    const hint = document.getElementById("feedback-features-hint")!;
+    expect(hint).toHaveAttribute("aria-live", "polite");
+    expect(hint).toHaveTextContent(/3 of 3 chosen/i);
+    expect(
+      screen.getByRole("group", { name: /what appeals to you/i }),
+    ).toHaveAccessibleDescription(/3 of 3 chosen/i);
+  });
+
+  it("goes back to the plain hint when a slot is freed", async () => {
+    setup(MANY);
+    await interested();
+    await fill();
+    await userEvent.click(screen.getByLabelText("Statement credits"));
+    expect(document.getElementById("feedback-features-hint")).toHaveTextContent(
+      /pick up to 3/i,
+    );
+  });
+
+  it("describes the holder group too", async () => {
+    setup(MANY);
+    await holder();
+    await fill();
+    expect(
+      screen.getByRole("group", { name: /which parts earn their keep/i }),
+    ).toHaveAccessibleDescription(/3 of 3 chosen/i);
   });
 });
