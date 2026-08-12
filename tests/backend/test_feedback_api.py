@@ -19,6 +19,7 @@ import backend.main as main
 from backend.db import session_scope
 from backend.db_models import LIKED_FEATURES, CardFeedback, CardFeedbackFeature
 from backend.main import app
+from backend.models import MAX_FEATURES
 
 client = TestClient(app)
 
@@ -440,6 +441,141 @@ def test_every_option_the_form_can_send_is_accepted() -> None:
             headers=BROWSER,
         )
         assert response.status_code == 201, feature
+
+
+def test_up_to_the_cap_is_accepted_and_every_pick_is_stored() -> None:
+    """The question is multi-select. Storing only the first pick would look
+    identical from the endpoint, which answers 201 either way."""
+    sid = _session_id()
+    picks = list(LIKED_FEATURES[:MAX_FEATURES])
+    response = client.post(
+        "/api/feedback",
+        json={
+            "card_id": REAL_CARD,
+            "respondent_type": "interested",
+            "features": picks,
+            "session_id": sid,
+        },
+        headers=BROWSER,
+    )
+    assert response.status_code == 201
+    assert sorted(_features(_rows(sid)[0].feedback_id)) == sorted(picks)
+
+
+def test_more_than_the_cap_is_rejected() -> None:
+    """Nothing enforced this before: the cap was raised from one to three and no
+    test noticed, because no test named a number. The frontend disables the
+    remaining options at the cap, so reaching here means a crafted payload."""
+    response = client.post(
+        "/api/feedback",
+        json={
+            "card_id": REAL_CARD,
+            "respondent_type": "interested",
+            "features": list(LIKED_FEATURES[: MAX_FEATURES + 1]),
+            "session_id": _session_id(),
+        },
+        headers=BROWSER,
+    )
+    assert response.status_code == 422
+    assert "at most" in response.text
+
+
+def test_the_same_pick_twice_is_deduped_rather_than_rejected() -> None:
+    """Sending one feature twice means it once. Deduping happens before the cap
+    is applied, so a client that repeats itself is not punished for it, and the
+    child table's unique constraint never sees the duplicate.
+
+    The ordering is load-bearing and easy to lose: Pydantic's own `max_length`
+    would run before the validator, so expressing the cap that way would 422
+    this payload instead of accepting it.
+    """
+    sid = _session_id()
+    response = client.post(
+        "/api/feedback",
+        json={
+            "card_id": REAL_CARD,
+            "respondent_type": "interested",
+            "features": ["credits", "credits"],
+            "session_id": sid,
+        },
+        headers=BROWSER,
+    )
+    assert response.status_code == 201
+    assert _features(_rows(sid)[0].feedback_id) == ["credits"]
+
+
+def test_duplicates_are_collapsed_before_the_cap_not_after() -> None:
+    """The cap counts distinct picks. A payload of cap+1 entries that dedupes to
+    cap is a client repeating itself, not someone exceeding the limit."""
+    sid = _session_id()
+    picks = list(LIKED_FEATURES[:MAX_FEATURES])
+    response = client.post(
+        "/api/feedback",
+        json={
+            "card_id": REAL_CARD,
+            "respondent_type": "interested",
+            "features": [*picks, picks[0]],
+            "session_id": sid,
+        },
+        headers=BROWSER,
+    )
+    assert response.status_code == 201
+    assert sorted(_features(_rows(sid)[0].feedback_id)) == sorted(picks)
+
+
+def test_a_holder_may_name_several_features_or_none() -> None:
+    """Optional for holders and capped the same way. Both branches answer over
+    one option set with one cap, which is what makes the two distributions
+    comparable; a different cap per branch would silently weight one of them."""
+    sid = _session_id()
+    picks = list(LIKED_FEATURES[:MAX_FEATURES])
+    assert (
+        client.post(
+            "/api/feedback",
+            json={
+                "card_id": REAL_CARD,
+                "rating": 4,
+                "features": picks,
+                "session_id": sid,
+            },
+            headers=BROWSER,
+        ).status_code
+        == 201
+    )
+    assert sorted(_features(_rows(sid)[0].feedback_id)) == sorted(picks)
+
+    bare = _session_id()
+    assert (
+        client.post(
+            "/api/feedback",
+            json={"card_id": REAL_CARD, "rating": 4, "session_id": bare},
+            headers=BROWSER,
+        ).status_code
+        == 201
+    )
+    assert _features(_rows(bare)[0].feedback_id) == []
+
+
+def test_resubmitting_replaces_every_previous_pick() -> None:
+    """The write path deletes the old child rows before inserting the new ones.
+    With more than one pick allowed, a missed delete no longer merely leaves a
+    stale answer: it unions the two submissions and can carry someone past the
+    cap they were held to."""
+    sid = _session_id()
+    for features in (list(LIKED_FEATURES[:MAX_FEATURES]), ["lounge_access"]):
+        client.post(
+            "/api/feedback",
+            json={
+                "card_id": REAL_CARD,
+                "respondent_type": "interested",
+                "features": features,
+                "session_id": sid,
+            },
+            headers=BROWSER,
+        )
+    rows = _rows(sid)
+    assert len(rows) == 1
+    assert _features(rows[0].feedback_id) == ["lounge_access"]
 
 
 def test_switching_branch_on_resubmission_clears_the_other_side() -> None:

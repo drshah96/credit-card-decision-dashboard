@@ -18,7 +18,7 @@ import re
 import typing
 
 from backend.db_models import LIKED_FEATURES, CardFeedbackFeature
-from backend.models import CardFeedbackIn
+from backend.models import MAX_FEATURES, CardFeedbackIn
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 FEEDBACK_TS = ROOT / "frontend" / "src" / "api" / "feedback.ts"
@@ -82,8 +82,33 @@ def test_all_four_copies_of_the_option_list_agree() -> None:
 
 def test_every_option_has_a_label_and_every_label_an_option() -> None:
     """A label with no option renders nothing; an option with no label renders
-    an empty radio."""
+    an empty checkbox."""
     assert sorted(_typescript_labels()) == sorted(LIKED_FEATURES)
+
+
+def test_the_pick_cap_agrees_across_the_language_boundary() -> None:
+    """The form stops offering options at its own cap and the API enforces
+    another. If the frontend's were the larger of the two, someone would fill in
+    the form, press submit and get a 422 for an answer the page invited.
+
+    Read out of the TypeScript rather than duplicated here, for the same reason
+    the option list is.
+    """
+    source = FEEDBACK_TS.read_text()
+    match = re.search(r"export const MAX_FEATURES\s*=\s*(\d+)", source)
+    assert match, "MAX_FEATURES is no longer exported from api/feedback.ts"
+    assert int(match.group(1)) == MAX_FEATURES, (
+        f"the form allows {match.group(1)} picks and the API allows "
+        f"{MAX_FEATURES}; the smaller one is the real limit and the larger one "
+        "is a 422 waiting for a visitor"
+    )
+
+
+def test_the_cap_is_not_larger_than_the_option_list() -> None:
+    """A cap above the number of options is unreachable, and would mean the
+    'pick up to N' hint on the form names a number nobody can reach. Cards offer
+    a subset of these, so this is the loosest possible version of that check."""
+    assert 1 <= MAX_FEATURES <= len(LIKED_FEATURES)
 
 
 def test_the_retired_and_renamed_values_are_gone_everywhere() -> None:

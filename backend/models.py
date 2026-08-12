@@ -383,11 +383,21 @@ class ClientErrorIn(BaseModel):
     component_stack: str | None = Field(default=None, max_length=4000)
 
 
-# How many features one submission may name. The question is single-choice
-# today; making it multi-select is this number and the form's input type, with
-# no change to the payload shape or the schema, which is why `features` is a
-# list at a cardinality of one.
-MAX_FEATURES = 1
+# How many features one submission may name. Three rather than unlimited: with
+# a mean of four options offered per card, letting someone tick every one turns
+# the answer into "what does this card have", which is already in the card JSON.
+# A cap forces a priority call while still letting a premium card's credits,
+# lounge and insurance all count.
+#
+# Both branches share it deliberately. Holders and interested respondents answer
+# the same option set so the two distributions can be compared directly, and
+# different caps would make them different measurements: a share-of-picks
+# comparison would silently weight whichever branch was allowed more.
+#
+# Mirrored by MAX_FEATURES in frontend/src/api/feedback.ts and pinned against it
+# by tests/backend/test_liked_feature_options.py. A frontend that let someone
+# pick more than the API accepts would be a 422 at submit time.
+MAX_FEATURES = 3
 
 
 class CardFeedbackIn(BaseModel):
@@ -417,11 +427,12 @@ class CardFeedbackIn(BaseModel):
     # the same rule is a CHECK constraint on the table, because this endpoint
     # is public and Pydantic is only the first of the two lines.
     rating: int | None = Field(default=None, ge=1, le=5)
-    # The feature that caught their eye, or that they rate most highly. A list
-    # capped at one rather than a scalar: the question is single-choice today
-    # and moving to multi-select should change this number and nothing else.
-    # Shipping a scalar now and a list later would break across a deploy
-    # window, which is the failure respondent_type's default exists to avoid.
+    # The features that caught their eye, or that they rate most highly. Capped
+    # at MAX_FEATURES above, and deduped before the cap is applied. Always a
+    # list, never a scalar: it was a list while the question was still
+    # single-choice, so widening it to three needed no payload change and no
+    # deploy-window break, which is the failure respondent_type's default also
+    # exists to avoid.
     features: (
         list[
             Literal[
@@ -469,8 +480,9 @@ class CardFeedbackIn(BaseModel):
             # why the cap lives here.
             self.features = list(dict.fromkeys(self.features))
             if len(self.features) > MAX_FEATURES:
+                noun = "feature" if MAX_FEATURES == 1 else "features"
                 raise ValueError(
-                    f"at most {MAX_FEATURES} feature may be chosen, got {len(self.features)}"
+                    f"at most {MAX_FEATURES} {noun} may be chosen, got {len(self.features)}"
                 )
 
         if self.respondent_type == "holder":
@@ -485,7 +497,7 @@ class CardFeedbackIn(BaseModel):
                     "but respondent_type is 'interested'"
                 )
             # Every card offers at least one option under the current gates, so
-            # requiring exactly one costs no real submission. Holders may skip
+            # requiring at least one costs no real submission. Holders may skip
             # it: they are answering four other questions already.
             if not self.features:
                 raise ValueError("features is required when respondent_type is 'interested'")

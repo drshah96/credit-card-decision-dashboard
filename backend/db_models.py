@@ -760,13 +760,18 @@ LIKED_FEATURES = (
 class CardFeedbackFeature(Base):
     """Which feature of a card a respondent picked out.
 
-    A child table at a cardinality of one, deliberately. The question is
-    single-choice and stays that way — with a mean of four options offered per
-    card, multi-select would mostly reproduce the availability distribution,
-    which is already in the card JSON. But storing it here rather than as a
-    column on the parent makes that decision reversible: flipping to
-    multi-select becomes a change to one number in the validator and no
-    migration at all.
+    Zero to `MAX_FEATURES` rows per submission, one per feature named.
+
+    This table shipped at a cardinality of one, while the question was still
+    single-choice, precisely so that widening it later would be cheap. It was:
+    going to three picks changed one number in the validator and the form's
+    input type, with no migration, no payload change and no edit to this class.
+    A column on the parent would have made the same change a rebuild of the
+    whole table.
+
+    The cap is three rather than unlimited because with a mean of four options
+    offered per card, ticking every one mostly reproduces the availability
+    distribution, which is already in the card JSON.
 
     It also keeps the option enum off `card_feedback`, which carries eight CHECK
     constraints across thirteen columns. Holding the enum there would mean a

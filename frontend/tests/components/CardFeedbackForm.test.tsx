@@ -36,7 +36,7 @@ describe("choosing a branch", () => {
   it("asks nothing else until the visitor says whether they hold the card", () => {
     setup();
     expect(screen.queryByRole("button", { name: "5 stars" })).toBeNull();
-    expect(screen.queryByText(/what appeals to you most/i)).toBeNull();
+    expect(screen.queryByText(/what appeals to you/i)).toBeNull();
     expect(screen.queryByRole("button", { name: /share your experience/i })).toBeNull();
   });
 
@@ -45,13 +45,13 @@ describe("choosing a branch", () => {
     await holder();
     expect(screen.getByRole("button", { name: "5 stars" })).toBeInTheDocument();
     expect(screen.getByRole("group", { name: /how long have you held it/i })).toBeInTheDocument();
-    expect(screen.queryByRole("group", { name: /what appeals to you most/i })).toBeNull();
+    expect(screen.queryByRole("group", { name: /what appeals to you/i })).toBeNull();
   });
 
   it("shows the interest question and not the holder ones", async () => {
     setup();
     await interested();
-    expect(screen.getByRole("group", { name: /what appeals to you most/i })).toBeInTheDocument();
+    expect(screen.getByRole("group", { name: /what appeals to you/i })).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "5 stars" })).toBeNull();
     expect(screen.queryByRole("group", { name: /how long have you held it/i })).toBeNull();
   });
@@ -63,7 +63,7 @@ describe("choosing a branch", () => {
     await holder();
     await userEvent.click(screen.getByRole("button", { name: "5 stars" }));
     await interested();
-    await userEvent.click(screen.getByLabelText("The earn rates"));
+    await userEvent.click(screen.getByLabelText("Earn rates"));
     await userEvent.click(submitButton());
     await waitFor(() => expect(postFeedback).toHaveBeenCalledOnce());
     expect(postFeedback.mock.calls[0][0].rating).toBeUndefined();
@@ -154,7 +154,7 @@ describe("the interested branch", () => {
   it("sends the feature and no holder fields", async () => {
     setup();
     await interested();
-    await userEvent.click(screen.getByLabelText("The statement credits"));
+    await userEvent.click(screen.getByLabelText("Statement credits"));
     await userEvent.type(screen.getByLabelText(/anything else/i), "The Uber credit looks useful.");
     await userEvent.click(submitButton());
     await waitFor(() => expect(postFeedback).toHaveBeenCalledOnce());
@@ -168,14 +168,14 @@ describe("the interested branch", () => {
   });
 
   it("offers only the features the card actually has", async () => {
-    // "The statement credits" on a card with none would be an answer nobody
+    // "Statement credits" on a card with none would be an answer nobody
     // could have meant, and it would land in the aggregate as a real signal.
     setup(["earn_rates", "no_annual_fee"]);
     await interested();
-    expect(screen.getByLabelText("The earn rates")).toBeInTheDocument();
+    expect(screen.getByLabelText("Earn rates")).toBeInTheDocument();
     expect(screen.getByLabelText("No annual fee")).toBeInTheDocument();
-    expect(screen.queryByLabelText("The statement credits")).toBeNull();
-    expect(screen.queryByLabelText("The lounge access")).toBeNull();
+    expect(screen.queryByLabelText("Statement credits")).toBeNull();
+    expect(screen.queryByLabelText("Lounge access")).toBeNull();
   });
 
   it("still lets someone comment on a card with no listed features", async () => {
@@ -338,11 +338,11 @@ describe("the thank-you screen", () => {
   });
 });
 
-describe("holders are asked which part earns its keep", () => {
+describe("holders are asked which parts earn their keep", () => {
   it("offers the same options to a holder, optionally", async () => {
     setup();
     await holder();
-    expect(screen.getByRole("group", { name: /which part earns its keep/i })).toBeInTheDocument();
+    expect(screen.getByRole("group", { name: /which parts earn their keep/i })).toBeInTheDocument();
     // Optional: a rating alone is still submittable.
     await userEvent.click(screen.getByRole("button", { name: "4 stars" }));
     expect(submitButton()).toBeEnabled();
@@ -352,7 +352,7 @@ describe("holders are asked which part earns its keep", () => {
     setup();
     await holder();
     await userEvent.click(screen.getByRole("button", { name: "5 stars" }));
-    await userEvent.click(screen.getByLabelText("The earn rates"));
+    await userEvent.click(screen.getByLabelText("Earn rates"));
     await userEvent.click(submitButton());
     await waitFor(() => expect(postFeedback).toHaveBeenCalledOnce());
     expect(postFeedback.mock.calls[0][0].features).toEqual(["earn_rates"]);
@@ -362,11 +362,93 @@ describe("holders are asked which part earns its keep", () => {
   it("keeps the pick when switching branch, since both branches ask it", async () => {
     setup();
     await interested();
-    await userEvent.click(screen.getByLabelText("The statement credits"));
+    await userEvent.click(screen.getByLabelText("Statement credits"));
     await holder();
     await userEvent.click(screen.getByRole("button", { name: "3 stars" }));
     await userEvent.click(submitButton());
     await waitFor(() => expect(postFeedback).toHaveBeenCalledOnce());
     expect(postFeedback.mock.calls[0][0].features).toEqual(["credits"]);
+  });
+});
+
+describe("the feature question takes several answers", () => {
+  // Deliberately longer than the cap, so there is always something left to be
+  // refused. FEATURES above is exactly MAX_FEATURES long and cannot show it.
+  const MANY: LikedFeature[] = [
+    "earn_rates",
+    "credits",
+    "redemption_rate",
+    "transfer_partners",
+    "lounge_access",
+  ];
+
+  it("sends every pick, not just the first", async () => {
+    setup(MANY);
+    await interested();
+    await userEvent.click(screen.getByLabelText("Earn rates"));
+    await userEvent.click(screen.getByLabelText("Statement credits"));
+    await userEvent.click(submitButton());
+    await waitFor(() => expect(postFeedback).toHaveBeenCalledOnce());
+    expect(postFeedback.mock.calls[0][0].features).toEqual(["earn_rates", "credits"]);
+  });
+
+  it("refuses picks past the cap by disabling them, not by silently dropping them", async () => {
+    setup(MANY);
+    await interested();
+    for (const label of ["Earn rates", "Statement credits", "Redemption value"]) {
+      await userEvent.click(screen.getByLabelText(label));
+    }
+    // The chosen ones stay clickable so the choice can be undone.
+    expect(screen.getByLabelText("Earn rates")).toBeEnabled();
+    expect(screen.getByLabelText("Transfer partners")).toBeDisabled();
+    expect(screen.getByLabelText("Lounge access")).toBeDisabled();
+
+    await userEvent.click(screen.getByLabelText("Transfer partners"));
+    await userEvent.click(submitButton());
+    await waitFor(() => expect(postFeedback).toHaveBeenCalledOnce());
+    expect(postFeedback.mock.calls[0][0].features).toEqual([
+      "earn_rates",
+      "credits",
+      "redemption_rate",
+    ]);
+  });
+
+  it("frees a slot when a pick is taken back", async () => {
+    setup(MANY);
+    await interested();
+    for (const label of ["Earn rates", "Statement credits", "Redemption value"]) {
+      await userEvent.click(screen.getByLabelText(label));
+    }
+    expect(screen.getByLabelText("Lounge access")).toBeDisabled();
+
+    await userEvent.click(screen.getByLabelText("Statement credits"));
+    expect(screen.getByLabelText("Lounge access")).toBeEnabled();
+
+    await userEvent.click(screen.getByLabelText("Lounge access"));
+    await userEvent.click(submitButton());
+    await waitFor(() => expect(postFeedback).toHaveBeenCalledOnce());
+    expect(postFeedback.mock.calls[0][0].features).toEqual([
+      "earn_rates",
+      "redemption_rate",
+      "lounge_access",
+    ]);
+  });
+
+  it("caps the holder branch the same way, since the two are compared", async () => {
+    setup(MANY);
+    await holder();
+    await userEvent.click(screen.getByRole("button", { name: "5 stars" }));
+    for (const label of ["Earn rates", "Statement credits", "Redemption value"]) {
+      await userEvent.click(screen.getByLabelText(label));
+    }
+    expect(screen.getByLabelText("Lounge access")).toBeDisabled();
+  });
+
+  it("still requires at least one of an interested respondent", async () => {
+    setup(MANY);
+    await interested();
+    expect(submitButton()).toBeDisabled();
+    await userEvent.click(screen.getByLabelText("Earn rates"));
+    expect(submitButton()).toBeEnabled();
   });
 });

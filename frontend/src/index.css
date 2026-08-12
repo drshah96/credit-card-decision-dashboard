@@ -1355,6 +1355,20 @@ body {
 .feedback-star.is-on { color: var(--gold); }
 .feedback-star:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 .feedback-options { display: flex; flex-wrap: wrap; gap: 8px; }
+/* The feature lists get a fixed three-column grid rather than the ragged wrap
+   the other questions use. Those have 2-5 short options and read fine wrapping;
+   these run to seven options of very uneven width, where wrapping put three on
+   one line and one on the next depending on which card you were looking at.
+   Equal columns also stop the chips changing width card to card. */
+.feedback-options.is-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+}
+.feedback-options.is-grid .feedback-option { justify-content: flex-start; }
+@media (max-width: 560px) {
+  .feedback-options.is-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 .feedback-option {
   display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
   padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px;
@@ -1362,6 +1376,11 @@ body {
 }
 .feedback-option:hover { border-color: var(--line-2); }
 .feedback-option:focus-within { outline: 2px solid var(--blue); outline-offset: 1px; }
+/* At the pick cap the unchosen options are disabled rather than hidden, so the
+   set of things on offer does not change shape as someone selects. */
+.feedback-option:has(input:disabled) { opacity: 0.45; cursor: not-allowed; }
+.feedback-option:has(input:disabled):hover { border-color: var(--line); }
+.feedback-hint { margin: 6px 0 0; font-size: 12px; color: var(--faint); }
 .feedback-comment {
   width: 100%; padding: 10px 12px; font: inherit; font-size: 13.5px;
   color: var(--ink); background: var(--panel-2);

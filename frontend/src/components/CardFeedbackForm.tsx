@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { postFeedback, type FeedbackPayload, type LikedFeature } from "../api/feedback";
+import { MAX_FEATURES, postFeedback, type FeedbackPayload, type LikedFeature } from "../api/feedback";
 import { LIKED_FEATURE_LABELS } from "../utils/cardFeatures";
 import { getSessionId } from "../utils/sessionTracking";
 
@@ -7,8 +7,8 @@ interface Props {
   cardId: string;
   cardName: string;
   /** The features this card actually has, from availableFeatures(). Only these
-   * are offered, so nobody can pick "the statement credits" on a card without
-   * any. Empty is handled: the interested branch then asks only for a comment. */
+   * are offered, so nobody can pick "Statement credits" on a card without any.
+   * Empty is handled: the interested branch then asks only for a comment. */
   features: LikedFeature[];
 }
 
@@ -51,7 +51,7 @@ const MAXIMIZES: { value: NonNullable<FeedbackPayload["maximizes_value"]>; label
 export function CardFeedbackForm({ cardId, cardName, features }: Props) {
   const [respondent, setRespondent] = useState<Respondent>();
   const [rating, setRating] = useState(0);
-  const [likedFeature, setLikedFeature] = useState<LikedFeature>();
+  const [likedFeatures, setLikedFeatures] = useState<LikedFeature[]>([]);
   const [maximizes, setMaximizes] = useState<FeedbackPayload["maximizes_value"]>();
   const [heldFor, setHeldFor] = useState<FeedbackPayload["held_for"]>();
   const [wouldKeep, setWouldKeep] = useState<boolean>();
@@ -71,7 +71,7 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
   useEffect(() => {
     setRespondent(undefined);
     setRating(0);
-    setLikedFeature(undefined);
+    setLikedFeatures([]);
     setMaximizes(undefined);
     setHeldFor(undefined);
     setWouldKeep(undefined);
@@ -93,15 +93,31 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
       setHeldFor(undefined);
       setWouldKeep(undefined);
     }
-    // The feature pick is deliberately NOT cleared when switching to the holder
-    // branch: both branches ask it, over the same options. Only the answers the
-    // other branch cannot accept are dropped.
+    // The feature picks are deliberately NOT cleared when switching to the
+    // holder branch: both branches ask it, over the same options and with the
+    // same cap. Only the answers the other branch cannot accept are dropped.
   }
+
+  // Toggling off is always allowed, so someone who has hit the cap can change
+  // their mind without first working out which box to clear. Only adding past
+  // the cap is refused, and the inputs that would do it are disabled, so this
+  // guard is the second line rather than the message.
+  function toggleFeature(feature: LikedFeature) {
+    setLikedFeatures((current) =>
+      current.includes(feature)
+        ? current.filter((f) => f !== feature)
+        : current.length < MAX_FEATURES
+          ? [...current, feature]
+          : current,
+    );
+  }
+
+  const atFeatureCap = likedFeatures.length >= MAX_FEATURES;
 
   const ready =
     respondent === "holder"
       ? rating > 0
-      : respondent === "interested" && (features.length === 0 || likedFeature !== undefined);
+      : respondent === "interested" && (features.length === 0 || likedFeatures.length > 0);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -118,14 +134,14 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
               maximizes_value: maximizes,
               held_for: heldFor,
               would_keep: wouldKeep,
-              features: likedFeature ? [likedFeature] : undefined,
+              features: likedFeatures.length > 0 ? likedFeatures : undefined,
               comment: comment.trim() || undefined,
               session_id: getSessionId(),
             }
           : {
               card_id: cardId,
               respondent_type: "interested",
-              features: likedFeature ? [likedFeature] : undefined,
+              features: likedFeatures.length > 0 ? likedFeatures : undefined,
               comment: comment.trim() || undefined,
               session_id: getSessionId(),
             },
@@ -250,20 +266,22 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
                   saying what drew them. Same option set, and the parent's
                   respondent_type is what tells the two apart later. Optional
                   here, because a holder is already answering four questions. */}
-              <legend>Which part earns its keep? (optional)</legend>
-              <div className="feedback-options">
+              <legend>Which parts earn their keep? (optional)</legend>
+              <div className="feedback-options is-grid">
                 {features.map((f) => (
                   <label key={f} className="feedback-option">
                     <input
-                      type="radio"
-                      name="likedFeature"
-                      checked={likedFeature === f}
-                      onChange={() => setLikedFeature(f)}
+                      type="checkbox"
+                      name="likedFeatures"
+                      checked={likedFeatures.includes(f)}
+                      disabled={atFeatureCap && !likedFeatures.includes(f)}
+                      onChange={() => toggleFeature(f)}
                     />
                     <span>{LIKED_FEATURE_LABELS[f]}</span>
                   </label>
                 ))}
               </div>
+              <p className="feedback-hint">Pick up to {MAX_FEATURES}.</p>
             </fieldset>
           )}
 
@@ -291,20 +309,22 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
 
       {respondent === "interested" && features.length > 0 && (
         <fieldset className="feedback-field">
-          <legend>What appeals to you most about it?</legend>
-          <div className="feedback-options">
+          <legend>What appeals to you about it?</legend>
+          <div className="feedback-options is-grid">
             {features.map((f) => (
               <label key={f} className="feedback-option">
                 <input
-                  type="radio"
-                  name="likedFeature"
-                  checked={likedFeature === f}
-                  onChange={() => setLikedFeature(f)}
+                  type="checkbox"
+                  name="likedFeatures"
+                  checked={likedFeatures.includes(f)}
+                  disabled={atFeatureCap && !likedFeatures.includes(f)}
+                  onChange={() => toggleFeature(f)}
                 />
                 <span>{LIKED_FEATURE_LABELS[f]}</span>
               </label>
             ))}
           </div>
+          <p className="feedback-hint">Pick up to {MAX_FEATURES}.</p>
         </fieldset>
       )}
 

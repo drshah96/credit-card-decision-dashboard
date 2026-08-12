@@ -19,15 +19,15 @@ import type { LikedFeature } from "../api/feedback";
  * available across the catalog.
  */
 export const LIKED_FEATURE_LABELS: Record<LikedFeature, string> = {
-  earn_rates: "The earn rates",
-  insurance: "The insurance and protections",
+  earn_rates: "Earn rates",
+  insurance: "Insurance and protections",
   no_annual_fee: "No annual fee",
-  credits: "The statement credits",
-  intro_apr_purchases: "The intro APR on purchases",
-  redemption_rate: "The redemption value",
-  intro_apr_balance_transfer: "The intro APR on balance transfers",
-  transfer_partners: "The transfer partners",
-  lounge_access: "The lounge access",
+  credits: "Statement credits",
+  intro_apr_purchases: "Intro APR on purchases",
+  redemption_rate: "Redemption value",
+  intro_apr_balance_transfer: "Intro APR on balance transfers",
+  transfer_partners: "Transfer partners",
+  lounge_access: "Lounge access",
 };
 
 /**
