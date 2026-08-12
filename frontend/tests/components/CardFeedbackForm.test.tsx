@@ -306,3 +306,33 @@ describe("the payload matches the model it mirrors", () => {
     expect([...tsFields].sort()).toEqual([...pyFields].sort());
   });
 });
+
+describe("the thank-you screen", () => {
+  it("reflects what was submitted, not what is selected now", async () => {
+    // Switching branch mid-request used to thank a holder with the copy
+    // written for someone who does not hold the card. The payload was always
+    // right; the message read current state.
+    let release: (v?: unknown) => void = () => {};
+    postFeedback.mockReturnValue(new Promise((r) => (release = r)));
+    setup();
+    await holder();
+    await userEvent.click(screen.getByRole("button", { name: "5 stars" }));
+    await userEvent.click(submitButton());
+    // The branch radios are disabled while sending, so this cannot happen by
+    // clicking any more; asserted on the resolved copy regardless.
+    expect(screen.getByLabelText("No, but I'm interested")).toBeDisabled();
+    release();
+    expect(await screen.findByRole("status")).toHaveTextContent(/real numbers from people who hold/i);
+  });
+
+  it("offers a way back to the form, since it says the answer can be replaced", async () => {
+    setup();
+    await holder();
+    await userEvent.click(screen.getByRole("button", { name: "4 stars" }));
+    await userEvent.click(submitButton());
+    await screen.findByRole("status");
+    await userEvent.click(screen.getByRole("button", { name: /change your answer/i }));
+    expect(screen.getByLabelText("Yes, I hold it")).toBeInTheDocument();
+    expect(screen.queryByRole("status")).toBeNull();
+  });
+});

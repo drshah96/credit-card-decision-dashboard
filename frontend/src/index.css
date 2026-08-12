@@ -1381,3 +1381,10 @@ body {
 .feedback-done { max-width: 560px; }
 .feedback-done-title { margin: 0 0 6px; font-size: 15px; font-weight: 700; color: var(--ink); }
 .feedback-done-body { margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+.feedback-again {
+  align-self: flex-start; margin-top: 10px; padding: 7px 14px; cursor: pointer;
+  font-size: 13px; font-weight: 600; color: var(--ink);
+  background: var(--panel-2); border: 1px solid var(--line); border-radius: 999px;
+}
+.feedback-again:hover { border-color: var(--line-2); }
+.feedback-again:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }

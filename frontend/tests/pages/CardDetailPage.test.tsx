@@ -1901,7 +1901,7 @@ describe("preference signal tracking", () => {
 describe("section headings keep their divider unless their content replaces it", () => {
   it("does not suppress the divider under the feedback heading", async () => {
     renderPage();
-    const heading = await screen.findByRole("heading", { name: "Do you hold this card?" });
+    const heading = await screen.findByRole("heading", { name: "Tell us about this card" });
     const head = heading.closest(".block-head");
     expect(head).not.toBeNull();
     expect(head!.className).not.toContain("no-divider");

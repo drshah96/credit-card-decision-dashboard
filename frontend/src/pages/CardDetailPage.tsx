@@ -1400,7 +1400,7 @@ function CardDetail({ card }: { card: Card }) {
       {/* Last, deliberately. Someone is only in a position to say whether they
           capture this card's value after reading what the page claims it is
           worth, so the ask sits after the argument rather than interrupting it. */}
-      <Block label="Your turn" title="Do you hold this card?">
+      <Block label="Your turn" title="Tell us about this card">
         <CardFeedbackForm cardId={card.id} cardName={card.name} features={availableFeatures(card)} />
       </Block>
     </div>

@@ -58,6 +58,11 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
   const [comment, setComment] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "done">("idle");
   const [error, setError] = useState<string>();
+  // What was actually submitted, not what is currently selected. Switching
+  // branch mid-request would otherwise thank a holder with the copy written
+  // for someone who does not hold the card. The payload itself was always
+  // correct, captured in the closure; only the message was wrong.
+  const [submitted, setSubmitted] = useState<Respondent>();
 
   // Belt and braces with the key={card.id} on CardDetail in CardDetailPage.
   // Navigating card to card stays on the same route, so without one of these
@@ -73,6 +78,7 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
     setComment("");
     setState("idle");
     setError(undefined);
+    setSubmitted(undefined);
   }, [cardId]);
 
   // Switching branch clears the other one's answers. The payload would be
@@ -122,6 +128,7 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
               session_id: getSessionId(),
             },
       );
+      setSubmitted(respondent);
       setState("done");
     } catch (err) {
       setError(err instanceof Error ? err.message : "That didn't save.");
@@ -134,11 +141,16 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
       <div className="feedback-done" role="status">
         <p className="feedback-done-title">Thank you.</p>
         <p className="feedback-done-body">
-          {respondent === "holder"
+          {submitted === "holder"
             ? "Real numbers from people who hold the card are worth more than any estimate."
-            : "Knowing what drew you to this card tells us which parts of it are worth explaining better."}{" "}
-          If you want to change your answer, submit again and it replaces this one.
+            : "Knowing what drew you to this card tells us which parts of it are worth explaining better."}
         </p>
+        {/* The claim that submitting again replaces the first answer is true —
+            the endpoint upserts on (session_id, card_slug) — but it used to be
+            made with no way back to the form short of reloading the page. */}
+        <button type="button" className="feedback-again" onClick={() => setState("idle")}>
+          Change your answer
+        </button>
       </div>
     );
   }
@@ -164,6 +176,7 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
                 type="radio"
                 name="respondent"
                 checked={respondent === o.value}
+                disabled={state === "sending"}
                 onChange={() => chooseRespondent(o.value)}
               />
               <span>{o.label}</span>
