@@ -8,11 +8,40 @@
 
 const BASE_URL = import.meta.env.VITE_API_URL ?? "/api";
 
-/** Mirrors CardFeedbackIn in backend/models.py. Kept in sync by hand. */
+/** The features a card can be liked for. Mirrors the CHECK constraint on
+ * card_feedback_features.feature. */
+export type LikedFeature =
+  | "earn_rates"
+  | "insurance"
+  | "no_annual_fee"
+  | "credits"
+  | "intro_apr_purchases"
+  | "redemption_rate"
+  | "intro_apr_balance_transfer"
+  | "transfer_partners"
+  | "lounge_access"
+  | "status_perks";
+
+/** How many features one submission may name. Mirrors MAX_FEATURES in
+ * backend/models.py, and pinned against it by
+ * tests/backend/test_liked_feature_options.py: a form that let someone pick
+ * more than the API accepts would be a 422 at submit time, after they had
+ * already written their answer. */
+export const MAX_FEATURES = 3;
+
+/** Mirrors CardFeedbackIn in backend/models.py. Kept in sync by hand;
+ * tests/components/CardFeedbackForm.test.tsx pins the field names against it. */
 export interface FeedbackPayload {
   card_id: string;
-  /** 1-5. The only required answer. */
-  rating: number;
+  /** Which branch of the form this answers. The two are mutually exclusive,
+   * enforced by the API and again by CHECK constraints on the table. */
+  respondent_type: "holder" | "interested";
+  /** 1-5. Required of holders, forbidden of everyone else. */
+  rating?: number;
+  /** Up to MAX_FEATURES, deduped and capped again server-side. Required of
+   * interested respondents when the card offers any option, optional for
+   * holders. */
+  features?: LikedFeature[];
   maximizes_value?: "yes" | "partly" | "no";
   /** A bucket, not a month count: the form asks for a bucket. */
   held_for?: "under_6m" | "6_to_12m" | "1_to_2y" | "2_to_5y" | "over_5y";

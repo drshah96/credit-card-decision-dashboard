@@ -1,6 +1,6 @@
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 
 class Verdict(BaseModel):
@@ -383,6 +383,30 @@ class ClientErrorIn(BaseModel):
     component_stack: str | None = Field(default=None, max_length=4000)
 
 
+# How many features one submission may name. Three rather than unlimited: with
+# a mean of four options offered per card, letting someone tick every one turns
+# the answer into "what does this card have", which is already in the card JSON.
+# A cap forces a priority call while still letting a premium card's credits,
+# lounge and insurance all count.
+#
+# Both branches share the cap deliberately, so a share-of-picks comparison does
+# not silently weight whichever branch was allowed more.
+#
+# They do NOT share the whole option domain, and anything comparing them has to
+# know it. The form withholds the two intro-APR options from holders, because an
+# intro period is over long before someone can say whether it earns its keep —
+# see NOT_ASKED_OF_HOLDERS in frontend/src/utils/cardFeatures.ts. Those two can
+# therefore only ever come from an interested respondent, while every other
+# option can come from both. A `GROUP BY feature` that does not also group by
+# respondent_type puts a single-branch count beside two-branch counts and ranks
+# them against each other.
+#
+# Mirrored by MAX_FEATURES in frontend/src/api/feedback.ts and pinned against it
+# by tests/backend/test_liked_feature_options.py. A frontend that let someone
+# pick more than the API accepts would be a 422 at submit time.
+MAX_FEATURES = 3
+
+
 class CardFeedbackIn(BaseModel):
     """One visitor's experience of a card they hold, posted from the card
     detail page. Same posture as EventIn and ClientErrorIn above: public,
@@ -402,7 +426,37 @@ class CardFeedbackIn(BaseModel):
     render time, never interpolated into HTML here."""
 
     card_id: str = Field(min_length=1, max_length=64)
-    rating: int = Field(ge=1, le=5)
+    # Which branch of the form this is. Defaults to "holder" so a browser
+    # still running the previous bundle during a deploy keeps working: every
+    # submission that existed before this field was a holder's.
+    respondent_type: Literal["holder", "interested"] = "holder"
+    # Required of holders, forbidden of everyone else. See the validator below;
+    # the same rule is a CHECK constraint on the table, because this endpoint
+    # is public and Pydantic is only the first of the two lines.
+    rating: int | None = Field(default=None, ge=1, le=5)
+    # The features that caught their eye, or that they rate most highly. Capped
+    # at MAX_FEATURES above, and deduped before the cap is applied. Always a
+    # list, never a scalar: it was a list while the question was still
+    # single-choice, so widening it to three needed no payload change and no
+    # deploy-window break, which is the failure respondent_type's default also
+    # exists to avoid.
+    features: (
+        list[
+            Literal[
+                "earn_rates",
+                "insurance",
+                "no_annual_fee",
+                "credits",
+                "intro_apr_purchases",
+                "redemption_rate",
+                "intro_apr_balance_transfer",
+                "transfer_partners",
+                "lounge_access",
+                "status_perks",
+            ]
+        ]
+        | None
+    ) = None
     maximizes_value: Literal["yes", "partly", "no"] | None = None
     # A bucket, matching the form. An integer month count would invent
     # precision the visitor never gave and discard which bucket they picked.
@@ -410,3 +464,49 @@ class CardFeedbackIn(BaseModel):
     would_keep: bool | None = None
     comment: str | None = Field(default=None, max_length=1000)
     session_id: str | None = Field(default=None, max_length=64)
+
+    @model_validator(mode="after")
+    def _branches_are_exclusive(self) -> "CardFeedbackIn":
+        """A holder rates the card; someone interested names what drew them to
+        it. Neither can answer the other's questions.
+
+        Rejected here rather than quietly dropped, because a submission that
+        answers the wrong branch means the client and this model disagree about
+        the form, and silently discarding half of it would hide that.
+        """
+        holder_only = {
+            "rating": self.rating,
+            "held_for": self.held_for,
+            "would_keep": self.would_keep,
+            "maximizes_value": self.maximizes_value,
+        }
+        if self.features:
+            # Deduped before the cap is applied, not after. A client sending the
+            # same pick twice means the same thing once, and the child table's
+            # unique constraint would otherwise turn it into a 500. Pydantic's
+            # own max_length would have rejected it before this ran, which is
+            # why the cap lives here.
+            self.features = list(dict.fromkeys(self.features))
+            if len(self.features) > MAX_FEATURES:
+                noun = "feature" if MAX_FEATURES == 1 else "features"
+                raise ValueError(
+                    f"at most {MAX_FEATURES} {noun} may be chosen, got {len(self.features)}"
+                )
+
+        if self.respondent_type == "holder":
+            if self.rating is None:
+                raise ValueError("rating is required when respondent_type is 'holder'")
+        else:
+            answered = sorted(k for k, v in holder_only.items() if v is not None)
+            if answered:
+                verb = "applies" if len(answered) == 1 else "apply"
+                raise ValueError(
+                    f"{', '.join(answered)} {verb} only to holders, "
+                    "but respondent_type is 'interested'"
+                )
+            # Every card offers at least one option under the current gates, so
+            # requiring at least one costs no real submission. Holders may skip
+            # it: they are answering four other questions already.
+            if not self.features:
+                raise ValueError("features is required when respondent_type is 'interested'")
+        return self

@@ -17,8 +17,9 @@ from fastapi.testclient import TestClient
 
 import backend.main as main
 from backend.db import session_scope
-from backend.db_models import CardFeedback
+from backend.db_models import LIKED_FEATURES, CardFeedback, CardFeedbackFeature
 from backend.main import app
+from backend.models import MAX_FEATURES
 
 client = TestClient(app)
 
@@ -44,6 +45,13 @@ REAL_CARD = "amex-platinum"
 
 def _session_id() -> str:
     return f"test-{uuid4()}"
+
+
+def _features(feedback_id: int) -> list[str]:
+    with session_scope() as session:
+        return sorted(
+            f.feature for f in session.query(CardFeedbackFeature).filter_by(feedback_id=feedback_id)
+        )
 
 
 def _rows(session_id: str) -> list[CardFeedback]:
@@ -317,3 +325,281 @@ def test_spending_the_feedback_budget_does_not_block_analytics() -> None:
         headers=BROWSER,
     )
     assert event.status_code == 200
+
+
+# ─── Interested respondents ──────────────────────────────────────────────────
+# The second branch of the form: someone who does not hold the card but is
+# interested, naming the feature that drew them. Before this, that visitor had
+# nothing to submit and left no trace.
+
+
+def test_an_interested_respondent_is_stored_without_holder_fields() -> None:
+    sid = _session_id()
+    response = client.post(
+        "/api/feedback",
+        json={
+            "card_id": REAL_CARD,
+            "respondent_type": "interested",
+            "features": ["credits"],
+            "comment": "The Uber credit looks useful.",
+            "session_id": sid,
+        },
+        headers=BROWSER,
+    )
+    assert response.status_code == 201
+    row = _rows(sid)[0]
+    assert row.respondent_type == "interested"
+    assert _features(row.feedback_id) == ["credits"]
+    assert row.rating is None
+    assert row.held_for is None
+    assert row.would_keep is None
+    assert row.maximizes_value is None
+
+
+def test_a_submission_without_a_respondent_type_is_treated_as_a_holder() -> None:
+    """A browser still running the previous bundle during a deploy posts no
+    respondent_type. Every submission that existed before the column did was a
+    holder's, so that is what it defaults to rather than a 422."""
+    sid = _session_id()
+    response = client.post(
+        "/api/feedback",
+        json={"card_id": REAL_CARD, "rating": 4, "session_id": sid},
+        headers=BROWSER,
+    )
+    assert response.status_code == 201
+    assert _rows(sid)[0].respondent_type == "holder"
+
+
+def test_the_two_branches_cannot_be_mixed() -> None:
+    """Rejected rather than quietly stripped: a payload answering both branches
+    means the client and the model disagree about the form, and silently
+    dropping half of it would hide that."""
+    mixed = [
+        ("holder with no rating", {"respondent_type": "holder"}),
+        (
+            "interested with a rating",
+            {"respondent_type": "interested", "rating": 4, "features": ["credits"]},
+        ),
+        (
+            "interested with held_for",
+            {"respondent_type": "interested", "features": ["credits"], "held_for": "1_to_2y"},
+        ),
+        (
+            "interested with would_keep",
+            {"respondent_type": "interested", "features": ["credits"], "would_keep": True},
+        ),
+        (
+            # The fourth holder-only field, and the one most likely to be
+            # forgotten when this list is extended.
+            "interested with maximizes_value",
+            {
+                "respondent_type": "interested",
+                "features": ["credits"],
+                "maximizes_value": "partly",
+            },
+        ),
+        ("interested naming nothing", {"respondent_type": "interested"}),
+    ]
+    for label, payload in mixed:
+        response = client.post(
+            "/api/feedback", json={"card_id": REAL_CARD, **payload}, headers=BROWSER
+        )
+        assert response.status_code == 422, label
+
+
+def test_an_unknown_liked_feature_is_rejected() -> None:
+    """These strings live in three places: the form, the Pydantic Literal and a
+    DB CHECK. A typo in any one is a 422 in production."""
+    response = client.post(
+        "/api/feedback",
+        json={"card_id": REAL_CARD, "respondent_type": "interested", "features": ["vibes"]},
+        headers=BROWSER,
+    )
+    assert response.status_code == 422
+
+
+def test_every_option_the_form_can_send_is_accepted() -> None:
+    """The other direction from the CHECK constraint: a value the form offers
+    that the API rejects would be a dead option nobody can pick.
+
+    Iterates the canonical tuple rather than a hand-typed copy.
+    test_liked_feature_options.py is what proves that tuple agrees with the
+    TypeScript union, the Pydantic Literal and the CHECK.
+    """
+    for feature in LIKED_FEATURES:
+        # Eight submissions exceeds the 6-per-hour budget, which is the limiter
+        # doing its job. Cleared per iteration so this measures what it claims.
+        main._feedback_rate_limit_hits.clear()
+        response = client.post(
+            "/api/feedback",
+            json={
+                "card_id": REAL_CARD,
+                "respondent_type": "interested",
+                "features": [feature],
+                "session_id": _session_id(),
+            },
+            headers=BROWSER,
+        )
+        assert response.status_code == 201, feature
+
+
+def test_up_to_the_cap_is_accepted_and_every_pick_is_stored() -> None:
+    """The question is multi-select. Storing only the first pick would look
+    identical from the endpoint, which answers 201 either way."""
+    sid = _session_id()
+    picks = list(LIKED_FEATURES[:MAX_FEATURES])
+    response = client.post(
+        "/api/feedback",
+        json={
+            "card_id": REAL_CARD,
+            "respondent_type": "interested",
+            "features": picks,
+            "session_id": sid,
+        },
+        headers=BROWSER,
+    )
+    assert response.status_code == 201
+    assert sorted(_features(_rows(sid)[0].feedback_id)) == sorted(picks)
+
+
+def test_more_than_the_cap_is_rejected() -> None:
+    """Nothing enforced this before: the cap was raised from one to three and no
+    test noticed, because no test named a number. The frontend disables the
+    remaining options at the cap, so reaching here means a crafted payload."""
+    response = client.post(
+        "/api/feedback",
+        json={
+            "card_id": REAL_CARD,
+            "respondent_type": "interested",
+            "features": list(LIKED_FEATURES[: MAX_FEATURES + 1]),
+            "session_id": _session_id(),
+        },
+        headers=BROWSER,
+    )
+    assert response.status_code == 422
+    assert "at most" in response.text
+
+
+def test_the_same_pick_twice_is_deduped_rather_than_rejected() -> None:
+    """Sending one feature twice means it once. Deduping happens before the cap
+    is applied, so a client that repeats itself is not punished for it, and the
+    child table's unique constraint never sees the duplicate.
+
+    The ordering is load-bearing and easy to lose: Pydantic's own `max_length`
+    would run before the validator, so expressing the cap that way would 422
+    this payload instead of accepting it.
+    """
+    sid = _session_id()
+    response = client.post(
+        "/api/feedback",
+        json={
+            "card_id": REAL_CARD,
+            "respondent_type": "interested",
+            "features": ["credits", "credits"],
+            "session_id": sid,
+        },
+        headers=BROWSER,
+    )
+    assert response.status_code == 201
+    assert _features(_rows(sid)[0].feedback_id) == ["credits"]
+
+
+def test_duplicates_are_collapsed_before_the_cap_not_after() -> None:
+    """The cap counts distinct picks. A payload of cap+1 entries that dedupes to
+    cap is a client repeating itself, not someone exceeding the limit."""
+    sid = _session_id()
+    picks = list(LIKED_FEATURES[:MAX_FEATURES])
+    response = client.post(
+        "/api/feedback",
+        json={
+            "card_id": REAL_CARD,
+            "respondent_type": "interested",
+            "features": [*picks, picks[0]],
+            "session_id": sid,
+        },
+        headers=BROWSER,
+    )
+    assert response.status_code == 201
+    assert sorted(_features(_rows(sid)[0].feedback_id)) == sorted(picks)
+
+
+def test_a_holder_may_name_several_features_or_none() -> None:
+    """Optional for holders and capped the same way. Both branches answer over
+    one option set with one cap, which is what makes the two distributions
+    comparable; a different cap per branch would silently weight one of them."""
+    sid = _session_id()
+    picks = list(LIKED_FEATURES[:MAX_FEATURES])
+    assert (
+        client.post(
+            "/api/feedback",
+            json={
+                "card_id": REAL_CARD,
+                "rating": 4,
+                "features": picks,
+                "session_id": sid,
+            },
+            headers=BROWSER,
+        ).status_code
+        == 201
+    )
+    assert sorted(_features(_rows(sid)[0].feedback_id)) == sorted(picks)
+
+    bare = _session_id()
+    assert (
+        client.post(
+            "/api/feedback",
+            json={"card_id": REAL_CARD, "rating": 4, "session_id": bare},
+            headers=BROWSER,
+        ).status_code
+        == 201
+    )
+    assert _features(_rows(bare)[0].feedback_id) == []
+
+
+def test_resubmitting_replaces_every_previous_pick() -> None:
+    """The write path deletes the old child rows before inserting the new ones.
+    With more than one pick allowed, a missed delete no longer merely leaves a
+    stale answer: it unions the two submissions and can carry someone past the
+    cap they were held to."""
+    sid = _session_id()
+    for features in (list(LIKED_FEATURES[:MAX_FEATURES]), ["lounge_access"]):
+        client.post(
+            "/api/feedback",
+            json={
+                "card_id": REAL_CARD,
+                "respondent_type": "interested",
+                "features": features,
+                "session_id": sid,
+            },
+            headers=BROWSER,
+        )
+    rows = _rows(sid)
+    assert len(rows) == 1
+    assert _features(rows[0].feedback_id) == ["lounge_access"]
+
+
+def test_switching_branch_on_resubmission_clears_the_other_side() -> None:
+    """Someone who rates the card, then corrects themselves to 'interested',
+    must not leave a stale rating behind on the row that replaces it."""
+    sid = _session_id()
+    client.post(
+        "/api/feedback",
+        json={"card_id": REAL_CARD, "rating": 5, "held_for": "1_to_2y", "session_id": sid},
+        headers=BROWSER,
+    )
+    client.post(
+        "/api/feedback",
+        json={
+            "card_id": REAL_CARD,
+            "respondent_type": "interested",
+            "features": ["earn_rates"],
+            "session_id": sid,
+        },
+        headers=BROWSER,
+    )
+    rows = _rows(sid)
+    assert len(rows) == 1
+    assert rows[0].respondent_type == "interested"
+    assert rows[0].rating is None
+    assert rows[0].held_for is None
+    assert _features(rows[0].feedback_id) == ["earn_rates"]
