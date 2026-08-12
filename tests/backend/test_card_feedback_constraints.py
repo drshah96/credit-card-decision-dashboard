@@ -25,7 +25,7 @@ import pytest
 from sqlalchemy import inspect
 
 from backend.db import engine
-from backend.db_models import CardFeedback, CardFeedbackFeature
+from backend.db_models import LIKED_FEATURES, CardFeedback, CardFeedbackFeature
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
@@ -248,3 +248,145 @@ def test_the_indexes_survived_the_migration_rebuild() -> None:
         "ix_card_feedback_session_id",
         "ix_card_feedback_submitted_at",
     } <= names
+
+
+CHILD_TABLE = "card_feedback_features"
+
+
+@pytest.fixture(scope="module")
+def migrated_child_ddl(tmp_path_factory: pytest.TempPathFactory) -> str:
+    """The child table's CREATE TABLE as the migrations actually produce it.
+
+    Separate from `migrated_ddl` above and for the same reason that one exists.
+    `test_liked_feature_options.py` compares the option list against
+    `CardFeedbackFeature.__table__`, which is the ORM comparing itself to
+    itself: it proves the Python objects agree, not that the database enforces
+    them. `alembic check` cannot close the gap either, because it does not
+    compare CHECK constraints at all.
+    """
+    db = tmp_path_factory.mktemp("migrated-child") / "schema.sqlite"
+    result = subprocess.run(
+        [sys.executable, "-m", "alembic", "upgrade", "head"],
+        cwd=REPO_ROOT,
+        env={**os.environ, "DATABASE_URL": f"sqlite:///{db}"},
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, f"alembic upgrade head failed:\n{result.stderr}"
+    with sqlite3.connect(db) as conn:
+        row = conn.execute(
+            "SELECT sql FROM sqlite_master WHERE type='table' AND name=?", (CHILD_TABLE,)
+        ).fetchone()
+    assert row, "the migrations did not create card_feedback_features"
+    return row[0]
+
+
+def test_the_migrated_feature_check_lists_exactly_the_canonical_options(
+    migrated_child_ddl: str,
+) -> None:
+    """The option list lives in the ORM, the Pydantic Literal, a TypeScript
+    union, the form's labels and this migration. The first four are pinned
+    against each other; this is the only thing checking the fifth.
+
+    Adding an option to LIKED_FEATURES without adding it to the migration's
+    CHECK gives a database that rejects an option the form offers, and every
+    other test passes because they all read the ORM.
+    """
+    in_db = re.findall(r"'(\w+)'", migrated_child_ddl)
+    assert sorted(in_db) == sorted(LIKED_FEATURES), (
+        "the CHECK constraint the migration creates does not match LIKED_FEATURES"
+    )
+
+
+def test_the_child_table_keeps_its_unique_constraint_through_the_migration(
+    migrated_child_ddl: str,
+) -> None:
+    """It is what makes the resubmission delete-and-reinsert safe, and it is
+    also the index standing in for one on feedback_id."""
+    assert "uq_card_feedback_features_row" in migrated_child_ddl
+
+
+def _downgrade(db, allow_loss: bool) -> subprocess.CompletedProcess:
+    env = {**os.environ, "DATABASE_URL": f"sqlite:///{db}"}
+    if allow_loss:
+        env["ALEMBIC_ALLOW_FEEDBACK_DATA_LOSS"] = "1"
+    else:
+        env.pop("ALEMBIC_ALLOW_FEEDBACK_DATA_LOSS", None)
+    return subprocess.run(
+        [sys.executable, "-m", "alembic", "downgrade", "93fb9fe16594"],
+        cwd=REPO_ROOT,
+        env=env,
+        capture_output=True,
+        text=True,
+    )
+
+
+@pytest.fixture
+def populated_db(tmp_path):
+    """A migrated database holding one holder row that named a feature.
+
+    The holder case specifically: an interested row is obviously unrepresentable
+    by the old schema, but a holder row survives the downgrade while the answer
+    it gave to the feature question cannot, which is the loss that is easy to
+    miss.
+    """
+    db = tmp_path / "downgrade.sqlite"
+    up = subprocess.run(
+        [sys.executable, "-m", "alembic", "upgrade", "head"],
+        cwd=REPO_ROOT,
+        env={**os.environ, "DATABASE_URL": f"sqlite:///{db}"},
+        capture_output=True,
+        text=True,
+    )
+    assert up.returncode == 0, up.stderr
+    with sqlite3.connect(db) as conn:
+        conn.execute(
+            "INSERT INTO card_feedback (card_slug, respondent_type, rating, review_status) "
+            "VALUES ('amex-platinum', 'holder', 5, 'pending')"
+        )
+        conn.execute(
+            "INSERT INTO card_feedback_features (feedback_id, feature) VALUES (1, 'earn_rates')"
+        )
+        conn.commit()
+    return db
+
+
+def test_downgrade_refuses_to_discard_a_holders_feature_pick(populated_db) -> None:
+    """The holder's own row survives a downgrade, so counting only interested
+    rows would let this through silently. Nothing exercised downgrade at all
+    before this test, which is how that went unnoticed."""
+    result = _downgrade(populated_db, allow_loss=False)
+    assert result.returncode != 0, "downgrade destroyed a holder's feature pick without asking"
+    assert "feature picks made by holders" in result.stderr
+
+    # And it really did refuse: the row is still there.
+    with sqlite3.connect(populated_db) as conn:
+        assert conn.execute("SELECT count(*) FROM card_feedback_features").fetchone()[0] == 1
+
+
+def test_downgrade_proceeds_once_the_loss_is_accepted(populated_db) -> None:
+    result = _downgrade(populated_db, allow_loss=True)
+    assert result.returncode == 0, result.stderr
+    with sqlite3.connect(populated_db) as conn:
+        tables = {r[0] for r in conn.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        assert CHILD_TABLE not in tables
+        cols = {r[1] for r in conn.execute("PRAGMA table_info(card_feedback)")}
+        assert "respondent_type" not in cols
+        # The holder row itself survives; only its feature pick was lost.
+        assert conn.execute("SELECT count(*) FROM card_feedback").fetchone()[0] == 1
+
+
+def test_downgrade_of_an_empty_database_needs_no_override(tmp_path) -> None:
+    """With nothing to lose the guard must not fire, or every developer
+    resetting a dev database has to set an environment variable to do it."""
+    db = tmp_path / "empty.sqlite"
+    up = subprocess.run(
+        [sys.executable, "-m", "alembic", "upgrade", "head"],
+        cwd=REPO_ROOT,
+        env={**os.environ, "DATABASE_URL": f"sqlite:///{db}"},
+        capture_output=True,
+        text=True,
+    )
+    assert up.returncode == 0, up.stderr
+    result = _downgrade(db, allow_loss=False)
+    assert result.returncode == 0, result.stderr

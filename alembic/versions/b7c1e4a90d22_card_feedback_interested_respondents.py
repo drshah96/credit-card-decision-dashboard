@@ -197,32 +197,57 @@ def upgrade() -> None:
 def downgrade() -> None:
     """Reverse it.
 
+    Two different rows are destroyed here, and both are counted before anything
+    is dropped.
+
     Interested rows violate the restored NOT NULL on rating, so they have to
     go. There is no honest conversion: turning one into a holder row would mean
     inventing a rating, and an invented rating lands in the per-card average.
 
-    So it refuses rather than deletes. Nothing runs downgrade automatically —
+    Feature picks go too, and not only the interested ones. `features` is
+    optional for holders but real, so a holder row survives this downgrade
+    while the answer they gave to one of its questions does not — the previous
+    schema has nowhere to put it. Counting only the interested rows would let
+    that loss through silently, which is the failure this guard exists to
+    prevent, so both are counted and either one is enough to stop.
+
+    It refuses rather than deletes. Nothing runs downgrade automatically —
     render.yaml runs `alembic upgrade head` only — so an operator is always
     present and a hard stop costs them a minute, against rows that are the only
     copy of what a visitor wrote.
     """
+    # Counted before anything is destroyed, so the guard is not deciding
+    # whether to raise about a table it has already dropped. A raise inside a
+    # migration would roll the DDL back on both backends, but ordering the
+    # check first means that is a backstop rather than the mechanism.
+    bind = op.get_bind()
+    interested = bind.execute(
+        sa.text("SELECT count(*) FROM card_feedback WHERE respondent_type = 'interested'")
+    ).scalar_one()
+    holder_features = bind.execute(
+        sa.text(
+            "SELECT count(*) FROM card_feedback_features f "
+            "JOIN card_feedback p ON p.feedback_id = f.feedback_id "
+            "WHERE p.respondent_type = 'holder'"
+        )
+    ).scalar_one()
+
+    if (interested or holder_features) and os.environ.get(
+        "ALEMBIC_ALLOW_FEEDBACK_DATA_LOSS"
+    ) != "1":
+        raise RuntimeError(
+            f"{interested} interested-respondent rows and {holder_features} feature "
+            "picks made by holders cannot be represented by the previous schema and "
+            "would be deleted. The holders' own rows survive; only the answer they "
+            "gave to that one question is lost. All of it is the only copy of what "
+            "those visitors wrote: there is no export and no analytics duplicate. "
+            "Re-run with ALEMBIC_ALLOW_FEEDBACK_DATA_LOSS=1 to accept that."
+        )
+
     # Children first, explicitly. ON DELETE CASCADE does not fire during SQLite
     # migrations: alembic/env.py builds its own engine and never sees
     # backend/db.py's PRAGMA foreign_keys=ON listener, so the FK is inert here.
     op.drop_table("card_feedback_features")
-
-    interested = (
-        op.get_bind()
-        .execute(sa.text("SELECT count(*) FROM card_feedback WHERE respondent_type = 'interested'"))
-        .scalar_one()
-    )
-    if interested and os.environ.get("ALEMBIC_ALLOW_FEEDBACK_DATA_LOSS") != "1":
-        raise RuntimeError(
-            f"{interested} interested-respondent rows cannot be represented by the "
-            "previous schema and would be deleted. They are the only copy of what "
-            "those visitors wrote: there is no export and no analytics duplicate. "
-            "Re-run with ALEMBIC_ALLOW_FEEDBACK_DATA_LOSS=1 to accept that."
-        )
     op.execute("DELETE FROM card_feedback WHERE respondent_type = 'interested'")
 
     with op.batch_alter_table(
