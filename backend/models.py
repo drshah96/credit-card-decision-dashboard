@@ -479,8 +479,9 @@ class CardFeedbackIn(BaseModel):
         else:
             answered = sorted(k for k, v in holder_only.items() if v is not None)
             if answered:
+                verb = "applies" if len(answered) == 1 else "apply"
                 raise ValueError(
-                    f"{', '.join(answered)} apply only to holders, "
+                    f"{', '.join(answered)} {verb} only to holders, "
                     "but respondent_type is 'interested'"
                 )
             # Every card offers at least one option under the current gates, so

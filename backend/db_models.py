@@ -768,11 +768,12 @@ class CardFeedbackFeature(Base):
     multi-select becomes a change to one number in the validator and no
     migration at all.
 
-    It also keeps the option enum off `card_feedback`, which carries ten CHECK
-    constraints. Changing the option set on a column there means a full
-    `copy_from` rebuild of a fourteen-column table; here it is a small, legible
-    rebuild of three columns and one CHECK. The option set is the part of this
-    feature most likely to change.
+    It also keeps the option enum off `card_feedback`, which carries eight CHECK
+    constraints across thirteen columns. Holding the enum there would mean a
+    fourteenth column and two more constraints, and every change to the option
+    set would then be a full `copy_from` rebuild of all of it; here it is a
+    small, legible rebuild of three columns and one CHECK. The option set is the
+    part of this feature most likely to change.
 
     Deliberately absent:
 
