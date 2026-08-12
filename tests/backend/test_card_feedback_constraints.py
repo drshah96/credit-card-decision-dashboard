@@ -397,3 +397,50 @@ def test_downgrade_of_an_empty_database_needs_no_override(tmp_path) -> None:
     assert up.returncode == 0, up.stderr
     result = _downgrade(db, allow_loss=False)
     assert result.returncode == 0, result.stderr
+
+
+VIEW = "v_card_feedback_features"
+
+
+def test_the_view_exists_and_carries_respondent_type(migrated_db) -> None:
+    """The raw child table cannot be read correctly without a join, and the
+    consumer is hand-written SQL in a console rather than code anyone reviews.
+    The view is what makes the correct join the default thing to select from."""
+    with sqlite3.connect(migrated_db) as conn:
+        row = conn.execute(
+            "SELECT sql FROM sqlite_master WHERE type='view' AND name=?", (VIEW,)
+        ).fetchone()
+        assert row, "the migrations did not create the feature view"
+        cols = {r[1] for r in conn.execute(f"PRAGMA table_info('{VIEW}')")}
+    # respondent_type is the whole point: without it a GROUP BY over this view
+    # is the same wrong number as one over the raw table.
+    assert {"feature", "respondent_type", "card_slug", "feedback_id"} <= cols
+
+
+def test_the_view_joins_rather_than_duplicating(migrated_db, tmp_path) -> None:
+    """One row per pick, carrying its parent's branch. A join that fanned out
+    would inflate every count read through it."""
+    db = tmp_path / "view.sqlite"
+    db.write_bytes(migrated_db.read_bytes())
+    with sqlite3.connect(db) as conn:
+        conn.execute(
+            "INSERT INTO card_feedback (card_slug, respondent_type, rating, review_status) "
+            "VALUES ('amex-platinum', 'holder', 5, 'pending')"
+        )
+        conn.execute(
+            "INSERT INTO card_feedback (card_slug, respondent_type, review_status) "
+            "VALUES ('amex-platinum', 'interested', 'pending')"
+        )
+        conn.executemany(
+            "INSERT INTO card_feedback_features (feedback_id, feature) VALUES (?, ?)",
+            [(1, "earn_rates"), (1, "credits"), (2, "earn_rates")],
+        )
+        conn.commit()
+        rows = conn.execute(
+            f"SELECT respondent_type, feature FROM {VIEW} ORDER BY feedback_id, feature"
+        ).fetchall()
+    assert rows == [
+        ("holder", "credits"),
+        ("holder", "earn_rates"),
+        ("interested", "earn_rates"),
+    ]

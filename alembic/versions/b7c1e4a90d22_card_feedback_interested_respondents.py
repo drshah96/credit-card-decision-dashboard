@@ -193,6 +193,28 @@ def upgrade() -> None:
         sa.UniqueConstraint("feedback_id", "feature", name="uq_card_feedback_features_row"),
     )
 
+    # The documented way to read feature answers, because the raw table cannot
+    # be read correctly without a join and nothing stops you trying.
+    #
+    # card_feedback_features carries no respondent_type, deliberately: it is on
+    # the parent and a second copy is a drift surface. The cost is that
+    # `SELECT feature, count(*) ... GROUP BY feature` returns a plausible number
+    # that is wrong twice over. Holders answer the question optionally and
+    # interested respondents must answer it, so the two contribute at different
+    # rates; and the form withholds the intro-APR options from holders, so those
+    # two can only come from one branch while the rest come from both. A pooled
+    # count therefore ranks a single-branch numerator against two-branch ones.
+    #
+    # Documentation loses that argument to SELECT * every time. A view makes the
+    # correct join the obvious thing to query instead of a rule to remember.
+    op.execute(
+        "CREATE VIEW v_card_feedback_features AS "
+        "SELECT f.feedback_feature_id, f.feedback_id, f.feature, "
+        "p.card_slug, p.respondent_type, p.review_status, p.submitted_at "
+        "FROM card_feedback_features f "
+        "JOIN card_feedback p ON p.feedback_id = f.feedback_id"
+    )
+
 
 def downgrade() -> None:
     """Reverse it.
@@ -244,7 +266,12 @@ def downgrade() -> None:
             "Re-run with ALEMBIC_ALLOW_FEEDBACK_DATA_LOSS=1 to accept that."
         )
 
-    # Children first, explicitly. ON DELETE CASCADE does not fire during SQLite
+    # The view first: Postgres refuses to drop a table a view depends on, so
+    # leaving this until after drop_table would fail there and pass on SQLite,
+    # which does not check.
+    op.execute("DROP VIEW IF EXISTS v_card_feedback_features")
+
+    # Children next, explicitly. ON DELETE CASCADE does not fire during SQLite
     # migrations: alembic/env.py builds its own engine and never sees
     # backend/db.py's PRAGMA foreign_keys=ON listener, so the FK is inert here.
     op.drop_table("card_feedback_features")
