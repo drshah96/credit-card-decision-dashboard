@@ -39,7 +39,14 @@
     {
       "emoji": "⛽",
       "multiplier": "2%",
-      "category": "Gas stations and restaurants, on up to $1,000 combined per quarter",
+      "category": "Gas stations: first $1,000/quarter combined with restaurants, then 1%",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🍽️",
+      "multiplier": "2%",
+      "category": "Restaurants: first $1,000/quarter combined with gas stations, then 1%",
       "highlight": true,
       "is_base": false
     },
