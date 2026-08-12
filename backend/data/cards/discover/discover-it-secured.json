@@ -20,7 +20,7 @@
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
   "late_payment_fee": "None the first time you pay late, up to $41 after that",
-  "returned_payment_fee": null,
+  "returned_payment_fee": "Up to $30",
   "returned_check_fee": null,
   "welcome_bonus": {
     "bonus": "Cashback Match, which doubles every dollar of cash back you earn in your first year",
