@@ -69,7 +69,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 5% rate is capped at $1,500 of spending each quarter, which works out to $75 of cash back, and it only pays if you remember to activate the categories. Miss the activation and the quarter earns the 1% base instead. That activation step is the single biggest reason people underuse this card. Discover's own rewards calendar page has been erroring out since at least early August 2026, so the categories below come from the consensus of major card trackers rather than the issuer: Q1 was groceries, warehouse clubs and streaming, Q2 restaurants and home improvement, and Q3 (the current quarter) is gas stations and EV charging, transportation and flights, and drugstores. Q4 hasn't been announced. Activate before you spend, since the 5% never applies retroactively. The real headline is Cashback Match: everything above is doubled for the first 12 months, so a first year of maxed-out quarters plus ordinary base spend lands closer to an effective 10% and 2% than the printed rates suggest.",
+  "earn_note": "The 5% is capped at $1,500 a quarter, or $75 back, and only pays if you activate the categories first. Forget, and the quarter earns 1%. Discover's category calendar has been offline since August 2026, so treat any list you find as unconfirmed. Cashback Match doubles year one.",
   "points": {
     "currency": "Cashback Bonus",
     "redemption_options": [
