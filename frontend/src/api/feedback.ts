@@ -19,7 +19,8 @@ export type LikedFeature =
   | "redemption_rate"
   | "intro_apr_balance_transfer"
   | "transfer_partners"
-  | "lounge_access";
+  | "lounge_access"
+  | "status_perks";
 
 /** How many features one submission may name. Mirrors MAX_FEATURES in
  * backend/models.py, and pinned against it by

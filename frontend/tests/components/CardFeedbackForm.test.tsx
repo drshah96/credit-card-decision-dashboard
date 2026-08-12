@@ -590,3 +590,60 @@ describe("the pick cap is announced, not only shown", () => {
     ).toHaveAccessibleDescription(/3 of 3 chosen/i);
   });
 });
+
+describe("the holder branch is asked about fewer things", () => {
+  // Both intro APRs plus two options both branches share.
+  const WITH_INTRO: LikedFeature[] = [
+    "earn_rates",
+    "intro_apr_purchases",
+    "intro_apr_balance_transfer",
+    "credits",
+  ];
+
+  it("does not offer a holder an intro APR, which has expired by the time they answer", async () => {
+    setup(WITH_INTRO);
+    await holder();
+    expect(screen.queryByLabelText("Intro APR on purchases")).toBeNull();
+    expect(
+      screen.queryByLabelText("Intro APR on balance transfers"),
+    ).toBeNull();
+    // The shared options are untouched, so the branches stay comparable there.
+    expect(screen.getByLabelText("Earn rates")).toBeInTheDocument();
+    expect(screen.getByLabelText("Statement credits")).toBeInTheDocument();
+  });
+
+  it("still offers them to someone interested, who is deciding whether to apply", async () => {
+    setup(WITH_INTRO);
+    await interested();
+    expect(screen.getByLabelText("Intro APR on purchases")).toBeInTheDocument();
+    expect(
+      screen.getByLabelText("Intro APR on balance transfers"),
+    ).toBeInTheDocument();
+  });
+
+  it("drops an intro-APR pick when the visitor switches to holding the card", async () => {
+    // Otherwise the submission answers a question the holder branch never
+    // asked, and lands in the aggregate as though a holder had chosen it.
+    setup(WITH_INTRO);
+    await interested();
+    await userEvent.click(screen.getByLabelText("Intro APR on purchases"));
+    await userEvent.click(screen.getByLabelText("Earn rates"));
+
+    await holder();
+    await userEvent.click(screen.getByRole("button", { name: "5 stars" }));
+    await userEvent.click(submitButton());
+    await waitFor(() => expect(postFeedback).toHaveBeenCalledOnce());
+    expect(postFeedback.mock.calls[0][0].features).toEqual(["earn_rates"]);
+  });
+
+  it("hides the whole question from a holder whose card offers only intro APRs", async () => {
+    setup(["intro_apr_purchases", "intro_apr_balance_transfer"]);
+    await holder();
+    expect(
+      screen.queryByRole("group", { name: /which parts earn their keep/i }),
+    ).toBeNull();
+    // A rating alone is still submittable, since the question was optional.
+    await userEvent.click(screen.getByRole("button", { name: "4 stars" }));
+    expect(submitButton()).toBeEnabled();
+  });
+});

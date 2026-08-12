@@ -1,7 +1,12 @@
 import { describe, it, expect } from "vitest";
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import { availableFeatures, LIKED_FEATURE_LABELS } from "@/utils/cardFeatures";
+import {
+  availableFeatures,
+  featuresForRespondent,
+  LIKED_FEATURE_LABELS,
+  NOT_ASKED_OF_HOLDERS,
+} from "@/utils/cardFeatures";
 import type { Card } from "@/types/cards";
 
 // availableFeatures decides which options the feedback form offers, from the
@@ -19,8 +24,9 @@ function card(id: string): Card {
         const raw = JSON.parse(readFileSync(join(DIR, dir.name, f), "utf-8"));
         // has_lounge_access is derived by the API, not stored, so mirror the
         // server's rule here rather than inventing a value.
-        const lounge = (raw.status_perks ?? []).some((p: { name?: string; note?: string }) =>
-          `${p.name ?? ""} ${p.note ?? ""}`.toLowerCase().includes("lounge"),
+        const lounge = (raw.status_perks ?? []).some(
+          (p: { name?: string; note?: string }) =>
+            `${p.name ?? ""} ${p.note ?? ""}`.toLowerCase().includes("lounge"),
         );
         return { ...raw, has_lounge_access: lounge } as Card;
       }
@@ -67,9 +73,18 @@ describe("availableFeatures against real cards", () => {
     // A point worth exactly 1.0 is cash back, so "the redemption value" cannot
     // be what distinguishes the card.
     const cpp = (c: Card) =>
-      Math.max(0, ...(c.points?.redemption_options ?? []).filter((o) => o.best).map((o) => o.cpp ?? 0));
-    const offered = allCards().filter((c) => availableFeatures(c).includes("redemption_rate"));
-    const withheld = allCards().filter((c) => !availableFeatures(c).includes("redemption_rate"));
+      Math.max(
+        0,
+        ...(c.points?.redemption_options ?? [])
+          .filter((o) => o.best)
+          .map((o) => o.cpp ?? 0),
+      );
+    const offered = allCards().filter((c) =>
+      availableFeatures(c).includes("redemption_rate"),
+    );
+    const withheld = allCards().filter(
+      (c) => !availableFeatures(c).includes("redemption_rate"),
+    );
     expect(offered.length).toBeGreaterThan(20);
     for (const c of offered) expect(cpp(c)).toBeGreaterThan(1.0);
     for (const c of withheld) expect(cpp(c)).toBeLessThanOrEqual(1.0);
@@ -78,7 +93,10 @@ describe("availableFeatures against real cards", () => {
   it("labels the two intro APRs distinctly, since 33 cards carry both", () => {
     const both = allCards().filter((c) => {
       const f = availableFeatures(c);
-      return f.includes("intro_apr_purchases") && f.includes("intro_apr_balance_transfer");
+      return (
+        f.includes("intro_apr_purchases") &&
+        f.includes("intro_apr_balance_transfer")
+      );
     });
     expect(both.length).toBeGreaterThan(20);
     expect(LIKED_FEATURE_LABELS.intro_apr_purchases).not.toBe(
@@ -86,7 +104,8 @@ describe("availableFeatures against real cards", () => {
     );
     // "0%" is false on five cards (three Bilt at 10%, two Discover student at
     // 10.99%), so neither label claims a rate.
-    for (const label of Object.values(LIKED_FEATURE_LABELS)) expect(label).not.toContain("0%");
+    for (const label of Object.values(LIKED_FEATURE_LABELS))
+      expect(label).not.toContain("0%");
   });
 
   it("offers only labelled features, and every label is reachable", () => {
@@ -104,7 +123,71 @@ describe("availableFeatures against real cards", () => {
   });
 
   it("gives every card at least one option, so the question is never empty", () => {
-    const empty = allCards().filter((c) => availableFeatures(c).length === 0).map((c) => c.id);
+    const empty = allCards()
+      .filter((c) => availableFeatures(c).length === 0)
+      .map((c) => c.id);
     expect(empty).toEqual([]);
+  });
+});
+
+describe("status & perks", () => {
+  it("offers it on a card whose perks are elite status rather than a lounge", () => {
+    // Marriott Bonvoy Silver Elite, no lounge anywhere on the card.
+    const f = availableFeatures(card("chase-marriott-bonvoy-boundless"));
+    expect(f).toContain("status_perks");
+    expect(f).not.toContain("lounge_access");
+  });
+
+  it("withholds it when every perk is the lounge, so the two never split one answer", () => {
+    // Lounge access is itself a status perk and renders under the same tab. If
+    // this card offered both, a respondent meaning "the lounges" could pick
+    // either and the aggregate would show two different answers.
+    const f = availableFeatures(card("amex-hilton-honors-aspire"));
+    expect(f).toContain("lounge_access");
+    expect(f).not.toContain("status_perks");
+  });
+
+  it("offers both when the card has a lounge and other perks besides", () => {
+    const f = availableFeatures(card("chase-sapphire-reserve"));
+    expect(f).toContain("lounge_access");
+    expect(f).toContain("status_perks");
+  });
+
+  it("offers neither on a card with no status perks at all", () => {
+    const f = availableFeatures(card("chase-sapphire-preferred"));
+    expect(f).not.toContain("status_perks");
+    expect(f).not.toContain("lounge_access");
+  });
+});
+
+describe("featuresForRespondent", () => {
+  it("does not ask a holder about an intro APR, which has expired by then", () => {
+    // The longest intro period in the catalog is 21 months and held_for runs to
+    // "over 5 years", so this is asking about something the card no longer has.
+    const all = availableFeatures(card("amex-blue-cash-everyday"));
+    expect(all).toContain("intro_apr_purchases");
+    expect(all).toContain("intro_apr_balance_transfer");
+
+    const asked = featuresForRespondent(all, "holder");
+    expect(asked).not.toContain("intro_apr_purchases");
+    expect(asked).not.toContain("intro_apr_balance_transfer");
+  });
+
+  it("still asks someone interested, for whom an intro APR is a real reason to apply", () => {
+    const all = availableFeatures(card("amex-blue-cash-everyday"));
+    expect(featuresForRespondent(all, "interested")).toEqual(all);
+  });
+
+  it("changes nothing else, so the branches stay comparable on every shared option", () => {
+    for (const c of allCards()) {
+      const all = availableFeatures(c);
+      const holder = featuresForRespondent(all, "holder");
+      const dropped = all.filter((f) => !holder.includes(f));
+      expect(dropped.every((f) => NOT_ASKED_OF_HOLDERS.includes(f))).toBe(true);
+      // Order is preserved; the form renders in this order.
+      expect(holder).toEqual(
+        all.filter((f) => !NOT_ASKED_OF_HOLDERS.includes(f)),
+      );
+    }
   });
 });

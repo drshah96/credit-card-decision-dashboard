@@ -5,7 +5,10 @@ import {
   type FeedbackPayload,
   type LikedFeature,
 } from "../api/feedback";
-import { LIKED_FEATURE_LABELS } from "../utils/cardFeatures";
+import {
+  LIKED_FEATURE_LABELS,
+  featuresForRespondent,
+} from "../utils/cardFeatures";
 import { getSessionId } from "../utils/sessionTracking";
 
 interface Props {
@@ -105,9 +108,12 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
       setHeldFor(undefined);
       setWouldKeep(undefined);
     }
-    // The feature picks are deliberately NOT cleared when switching to the
-    // holder branch: both branches ask it, over the same options and with the
-    // same cap. Only the answers the other branch cannot accept are dropped.
+    // The feature picks survive the switch, because both branches ask the
+    // question over the same options and with the same cap. The exception is
+    // the handful the holder branch does not offer: keeping an intro-APR pick
+    // here would submit an answer to a question this branch never asked, and
+    // it would sit in the aggregate as if a holder had chosen it.
+    setLikedFeatures((current) => featuresForRespondent(current, next));
   }
 
   // Toggling off is always allowed, so someone who has hit the cap can change
@@ -125,6 +131,9 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
   }
 
   const atFeatureCap = likedFeatures.length >= MAX_FEATURES;
+
+  // Fewer than the interested branch sees; see NOT_ASKED_OF_HOLDERS.
+  const holderFeatures = featuresForRespondent(features, "holder");
 
   // One id, because the two feature fieldsets are mutually exclusive: the form
   // renders the holder branch or the interested branch, never both.
@@ -293,7 +302,7 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
             </div>
           </fieldset>
 
-          {features.length > 0 && (
+          {holderFeatures.length > 0 && (
             <fieldset
               className="feedback-field"
               aria-describedby={FEATURE_HINT_ID}
@@ -305,7 +314,7 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
                   here, because a holder is already answering four questions. */}
               <legend>Which parts earn their keep? (optional)</legend>
               <div className="feedback-options is-grid">
-                {features.map((f) => (
+                {holderFeatures.map((f) => (
                   <label key={f} className="feedback-option">
                     <input
                       type="checkbox"

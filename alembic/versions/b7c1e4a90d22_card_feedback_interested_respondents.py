@@ -183,7 +183,7 @@ def upgrade() -> None:
         sa.CheckConstraint(
             "feature IN ('earn_rates','insurance','no_annual_fee','credits',"
             "'intro_apr_purchases','redemption_rate','intro_apr_balance_transfer',"
-            "'transfer_partners','lounge_access')",
+            "'transfer_partners','lounge_access','status_perks')",
             name="ck_card_feedback_features_feature",
         ),
         sa.ForeignKeyConstraint(["feedback_id"], ["card_feedback.feedback_id"], ondelete="CASCADE"),

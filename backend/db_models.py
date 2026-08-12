@@ -740,7 +740,7 @@ class CardFeedback(Base):
     reviewed_at: Mapped[datetime | None] = mapped_column(default=None)
 
 
-# The nine features a card can be liked for. Declared once here and pinned
+# The ten features a card can be liked for. Declared once here and pinned
 # against the Pydantic Literal, the TypeScript union and the form's labels by
 # tests/backend/test_liked_feature_options.py — the list previously existed in
 # five places with nothing comparing them.
@@ -754,6 +754,11 @@ LIKED_FEATURES = (
     "intro_apr_balance_transfer",
     "transfer_partners",
     "lounge_access",
+    # Gated on a status perk that is not a lounge, so it never means the same
+    # thing as lounge_access. Lounge access is itself a status perk and renders
+    # under the same tab, so without that exclusion the two options would split
+    # one answer on the 12 cards carrying both.
+    "status_perks",
 )
 
 

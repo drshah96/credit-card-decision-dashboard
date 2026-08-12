@@ -445,6 +445,7 @@ class CardFeedbackIn(BaseModel):
                 "intro_apr_balance_transfer",
                 "transfer_partners",
                 "lounge_access",
+                "status_perks",
             ]
         ]
         | None
