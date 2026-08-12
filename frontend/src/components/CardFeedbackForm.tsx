@@ -92,9 +92,10 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
       setMaximizes(undefined);
       setHeldFor(undefined);
       setWouldKeep(undefined);
-    } else {
-      setLikedFeature(undefined);
     }
+    // The feature pick is deliberately NOT cleared when switching to the holder
+    // branch: both branches ask it, over the same options. Only the answers the
+    // other branch cannot accept are dropped.
   }
 
   const ready =
@@ -117,13 +118,14 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
               maximizes_value: maximizes,
               held_for: heldFor,
               would_keep: wouldKeep,
+              features: likedFeature ? [likedFeature] : undefined,
               comment: comment.trim() || undefined,
               session_id: getSessionId(),
             }
           : {
               card_id: cardId,
               respondent_type: "interested",
-              liked_feature: likedFeature,
+              features: likedFeature ? [likedFeature] : undefined,
               comment: comment.trim() || undefined,
               session_id: getSessionId(),
             },
@@ -240,6 +242,30 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
               ))}
             </div>
           </fieldset>
+
+          {features.length > 0 && (
+            <fieldset className="feedback-field">
+              {/* Different wording from the interested branch on purpose. A
+                  holder is saying what actually delivers; someone interested is
+                  saying what drew them. Same option set, and the parent's
+                  respondent_type is what tells the two apart later. Optional
+                  here, because a holder is already answering four questions. */}
+              <legend>Which part earns its keep? (optional)</legend>
+              <div className="feedback-options">
+                {features.map((f) => (
+                  <label key={f} className="feedback-option">
+                    <input
+                      type="radio"
+                      name="likedFeature"
+                      checked={likedFeature === f}
+                      onChange={() => setLikedFeature(f)}
+                    />
+                    <span>{LIKED_FEATURE_LABELS[f]}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+          )}
 
           <fieldset className="feedback-field">
             <legend>Would you keep it?</legend>

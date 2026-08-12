@@ -429,7 +429,7 @@ def submit_feedback(feedback: CardFeedbackIn, request: Request) -> dict:
         card_slug=feedback.card_id,
         respondent_type=feedback.respondent_type,
         rating=feedback.rating,
-        liked_feature=feedback.liked_feature,
+        features=feedback.features,
         maximizes_value=feedback.maximizes_value,
         held_for=feedback.held_for,
         would_keep=feedback.would_keep,

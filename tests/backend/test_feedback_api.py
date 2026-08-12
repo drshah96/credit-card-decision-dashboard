@@ -17,7 +17,7 @@ from fastapi.testclient import TestClient
 
 import backend.main as main
 from backend.db import session_scope
-from backend.db_models import CardFeedback
+from backend.db_models import LIKED_FEATURES, CardFeedback, CardFeedbackFeature
 from backend.main import app
 
 client = TestClient(app)
@@ -44,6 +44,13 @@ REAL_CARD = "amex-platinum"
 
 def _session_id() -> str:
     return f"test-{uuid4()}"
+
+
+def _features(feedback_id: int) -> list[str]:
+    with session_scope() as session:
+        return sorted(
+            f.feature for f in session.query(CardFeedbackFeature).filter_by(feedback_id=feedback_id)
+        )
 
 
 def _rows(session_id: str) -> list[CardFeedback]:
@@ -332,7 +339,7 @@ def test_an_interested_respondent_is_stored_without_holder_fields() -> None:
         json={
             "card_id": REAL_CARD,
             "respondent_type": "interested",
-            "liked_feature": "credits",
+            "features": ["credits"],
             "comment": "The Uber credit looks useful.",
             "session_id": sid,
         },
@@ -341,7 +348,7 @@ def test_an_interested_respondent_is_stored_without_holder_fields() -> None:
     assert response.status_code == 201
     row = _rows(sid)[0]
     assert row.respondent_type == "interested"
-    assert row.liked_feature == "credits"
+    assert _features(row.feedback_id) == ["credits"]
     assert row.rating is None
     assert row.held_for is None
     assert row.would_keep is None
@@ -369,20 +376,16 @@ def test_the_two_branches_cannot_be_mixed() -> None:
     mixed = [
         ("holder with no rating", {"respondent_type": "holder"}),
         (
-            "holder naming a feature",
-            {"respondent_type": "holder", "rating": 4, "liked_feature": "credits"},
-        ),
-        (
             "interested with a rating",
-            {"respondent_type": "interested", "rating": 4, "liked_feature": "credits"},
+            {"respondent_type": "interested", "rating": 4, "features": ["credits"]},
         ),
         (
             "interested with held_for",
-            {"respondent_type": "interested", "liked_feature": "credits", "held_for": "1_to_2y"},
+            {"respondent_type": "interested", "features": ["credits"], "held_for": "1_to_2y"},
         ),
         (
             "interested with would_keep",
-            {"respondent_type": "interested", "liked_feature": "credits", "would_keep": True},
+            {"respondent_type": "interested", "features": ["credits"], "would_keep": True},
         ),
         (
             # The fourth holder-only field, and the one most likely to be
@@ -390,7 +393,7 @@ def test_the_two_branches_cannot_be_mixed() -> None:
             "interested with maximizes_value",
             {
                 "respondent_type": "interested",
-                "liked_feature": "credits",
+                "features": ["credits"],
                 "maximizes_value": "partly",
             },
         ),
@@ -408,36 +411,30 @@ def test_an_unknown_liked_feature_is_rejected() -> None:
     DB CHECK. A typo in any one is a 422 in production."""
     response = client.post(
         "/api/feedback",
-        json={"card_id": REAL_CARD, "respondent_type": "interested", "liked_feature": "vibes"},
+        json={"card_id": REAL_CARD, "respondent_type": "interested", "features": ["vibes"]},
         headers=BROWSER,
     )
     assert response.status_code == 422
 
 
-def test_every_liked_feature_the_form_can_send_is_accepted() -> None:
-    """The other direction: a value the form offers that the API or the CHECK
-    constraint rejects would be a dead option nobody could submit."""
-    for feature in (
-        "earn_rates",
-        "credits",
-        "welcome_bonus",
-        "lounge_access",
-        "insurance",
-        "no_annual_fee",
-        "intro_apr",
-        "transfer_partners",
-    ):
-        # Eight submissions exceeds the 6-per-hour budget, which is the
-        # limiter doing its job. Cleared per iteration so this test measures
-        # what it claims to and not the rate limiter, which
-        # test_the_rate_limit_actually_bites covers on purpose.
+def test_every_option_the_form_can_send_is_accepted() -> None:
+    """The other direction from the CHECK constraint: a value the form offers
+    that the API rejects would be a dead option nobody can pick.
+
+    Iterates the canonical tuple rather than a hand-typed copy.
+    test_liked_feature_options.py is what proves that tuple agrees with the
+    TypeScript union, the Pydantic Literal and the CHECK.
+    """
+    for feature in LIKED_FEATURES:
+        # Eight submissions exceeds the 6-per-hour budget, which is the limiter
+        # doing its job. Cleared per iteration so this measures what it claims.
         main._feedback_rate_limit_hits.clear()
         response = client.post(
             "/api/feedback",
             json={
                 "card_id": REAL_CARD,
                 "respondent_type": "interested",
-                "liked_feature": feature,
+                "features": [feature],
                 "session_id": _session_id(),
             },
             headers=BROWSER,
@@ -459,7 +456,7 @@ def test_switching_branch_on_resubmission_clears_the_other_side() -> None:
         json={
             "card_id": REAL_CARD,
             "respondent_type": "interested",
-            "liked_feature": "earn_rates",
+            "features": ["earn_rates"],
             "session_id": sid,
         },
         headers=BROWSER,
@@ -469,4 +466,4 @@ def test_switching_branch_on_resubmission_clears_the_other_side() -> None:
     assert rows[0].respondent_type == "interested"
     assert rows[0].rating is None
     assert rows[0].held_for is None
-    assert rows[0].liked_feature == "earn_rates"
+    assert _features(rows[0].feedback_id) == ["earn_rates"]

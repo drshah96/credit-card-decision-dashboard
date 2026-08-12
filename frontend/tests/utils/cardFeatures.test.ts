@@ -57,12 +57,36 @@ describe("availableFeatures against real cards", () => {
     expect(f).not.toContain("lounge_access");
   });
 
-  it("never offers the welcome bonus, which the page does not render", () => {
+  it("has no welcome bonus option at all", () => {
     // The block is disabled on CardDetailPage, so nobody could have seen one.
-    // The enum still allows the value; this is the gate that stops it.
-    const withBonus = allCards().filter((c) => c.welcome_bonus);
-    expect(withBonus.length).toBeGreaterThan(50);
-    for (const c of withBonus) expect(availableFeatures(c)).not.toContain("welcome_bonus");
+    // It is gone from the option set entirely now, not merely ungated.
+    expect(Object.keys(LIKED_FEATURE_LABELS)).not.toContain("welcome_bonus");
+  });
+
+  it("offers the redemption value only above a cent, where it means something", () => {
+    // A point worth exactly 1.0 is cash back, so "the redemption value" cannot
+    // be what distinguishes the card.
+    const cpp = (c: Card) =>
+      Math.max(0, ...(c.points?.redemption_options ?? []).filter((o) => o.best).map((o) => o.cpp ?? 0));
+    const offered = allCards().filter((c) => availableFeatures(c).includes("redemption_rate"));
+    const withheld = allCards().filter((c) => !availableFeatures(c).includes("redemption_rate"));
+    expect(offered.length).toBeGreaterThan(20);
+    for (const c of offered) expect(cpp(c)).toBeGreaterThan(1.0);
+    for (const c of withheld) expect(cpp(c)).toBeLessThanOrEqual(1.0);
+  });
+
+  it("labels the two intro APRs distinctly, since 33 cards carry both", () => {
+    const both = allCards().filter((c) => {
+      const f = availableFeatures(c);
+      return f.includes("intro_apr_purchases") && f.includes("intro_apr_balance_transfer");
+    });
+    expect(both.length).toBeGreaterThan(20);
+    expect(LIKED_FEATURE_LABELS.intro_apr_purchases).not.toBe(
+      LIKED_FEATURE_LABELS.intro_apr_balance_transfer,
+    );
+    // "0%" is false on five cards (three Bilt at 10%, two Discover student at
+    // 10.99%), so neither label claims a rate.
+    for (const label of Object.values(LIKED_FEATURE_LABELS)) expect(label).not.toContain("0%");
   });
 
   it("offers only labelled features, and every label is reachable", () => {

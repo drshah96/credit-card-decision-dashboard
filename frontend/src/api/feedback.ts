@@ -12,13 +12,14 @@ const BASE_URL = import.meta.env.VITE_API_URL ?? "/api";
  * card_feedback.liked_feature. */
 export type LikedFeature =
   | "earn_rates"
-  | "credits"
-  | "welcome_bonus"
-  | "lounge_access"
   | "insurance"
   | "no_annual_fee"
-  | "intro_apr"
-  | "transfer_partners";
+  | "credits"
+  | "intro_apr_purchases"
+  | "redemption_rate"
+  | "intro_apr_balance_transfer"
+  | "transfer_partners"
+  | "lounge_access";
 
 /** Mirrors CardFeedbackIn in backend/models.py. Kept in sync by hand;
  * tests/components/CardFeedbackForm.test.tsx pins the field names against it. */
@@ -29,8 +30,10 @@ export interface FeedbackPayload {
   respondent_type: "holder" | "interested";
   /** 1-5. Required of holders, forbidden of everyone else. */
   rating?: number;
-  /** Required of interested respondents, forbidden of holders. */
-  liked_feature?: LikedFeature;
+  /** A list capped at one server-side. Single-choice today; making it
+   * multi-select changes MAX_FEATURES in backend/models.py and this form's
+   * input type, and nothing about the payload shape or the schema. */
+  features?: LikedFeature[];
   maximizes_value?: "yes" | "partly" | "no";
   /** A bucket, not a month count: the form asks for a bucket. */
   held_for?: "under_6m" | "6_to_12m" | "1_to_2y" | "2_to_5y" | "over_5y";

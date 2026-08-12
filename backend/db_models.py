@@ -674,12 +674,6 @@ class CardFeedback(Base):
             "respondent_type IN ('holder','interested')",
             name="ck_card_feedback_respondent_type",
         ),
-        CheckConstraint(
-            "liked_feature IS NULL OR liked_feature IN "
-            "('earn_rates','credits','welcome_bonus','lounge_access','insurance',"
-            "'no_annual_fee','intro_apr','transfer_partners')",
-            name="ck_card_feedback_liked_feature",
-        ),
         # The two branches are mutually exclusive, enforced here rather than
         # trusted from the endpoint. Someone who does not hold the card cannot
         # rate it, say how long they have held it, or say whether they would
@@ -694,10 +688,6 @@ class CardFeedback(Base):
             "rating IS NULL AND held_for IS NULL AND would_keep IS NULL "
             "AND maximizes_value IS NULL)",
             name="ck_card_feedback_interested_has_no_holder_fields",
-        ),
-        CheckConstraint(
-            "liked_feature IS NULL OR respondent_type = 'interested'",
-            name="ck_card_feedback_liked_feature_is_interest_only",
         ),
         CheckConstraint(
             "maximizes_value IS NULL OR maximizes_value IN ('yes','partly','no')",
@@ -726,10 +716,6 @@ class CardFeedback(Base):
     # constraints above. Nullable at the column level because a person who does
     # not hold the card is not withholding a rating, they have nothing to rate.
     rating: Mapped[int | None] = mapped_column(default=None)
-    # Interested respondents only: the feature that caught their eye. The form
-    # offers only the options a given card actually has, so "credits" is never
-    # offered on a card with none.
-    liked_feature: Mapped[str | None] = mapped_column(default=None)
     # The question this feature exists to answer: does the holder actually
     # capture what the card advertises? "partly" is a real answer, not a
     # fence-sitter, and is expected to be the common one.
@@ -752,3 +738,71 @@ class CardFeedback(Base):
     # solves the same problem one class up with pending/approved/rejected.
     review_status: Mapped[str] = mapped_column(server_default="pending", default="pending")
     reviewed_at: Mapped[datetime | None] = mapped_column(default=None)
+
+
+# The nine features a card can be liked for. Declared once here and pinned
+# against the Pydantic Literal, the TypeScript union and the form's labels by
+# tests/backend/test_liked_feature_options.py — the list previously existed in
+# five places with nothing comparing them.
+LIKED_FEATURES = (
+    "earn_rates",
+    "insurance",
+    "no_annual_fee",
+    "credits",
+    "intro_apr_purchases",
+    "redemption_rate",
+    "intro_apr_balance_transfer",
+    "transfer_partners",
+    "lounge_access",
+)
+
+
+class CardFeedbackFeature(Base):
+    """Which feature of a card a respondent picked out.
+
+    A child table at a cardinality of one, deliberately. The question is
+    single-choice and stays that way — with a mean of four options offered per
+    card, multi-select would mostly reproduce the availability distribution,
+    which is already in the card JSON. But storing it here rather than as a
+    column on the parent makes that decision reversible: flipping to
+    multi-select becomes a change to one number in the validator and no
+    migration at all.
+
+    It also keeps the option enum off `card_feedback`, which carries ten CHECK
+    constraints. Changing the option set on a column there means a full
+    `copy_from` rebuild of a fourteen-column table; here it is a small, legible
+    rebuild of three columns and one CHECK. The option set is the part of this
+    feature most likely to change.
+
+    Deliberately absent:
+
+    - `sort_order`. Nothing is ranked. `credits` and `insurance` carry one
+      because their array position is meaningful; a set of picks has no order.
+    - `card_slug`. It is on the parent. A second copy is a drift surface for
+      nothing.
+    - A standalone index on `feedback_id`. The composite unique constraint
+      leads with it and serves the join on both backends. There is a migration
+      in this repo that adds indexes to foreign key columns, so this is the
+      kind of omission someone reflexively 'fixes'.
+
+    `ON DELETE CASCADE` is a safety net rather than a mechanism: nothing
+    deletes feedback rows, since rejecting sets `review_status`. Note it does
+    not fire during SQLite migrations, because alembic/env.py builds its own
+    engine and never sees backend/db.py's `PRAGMA foreign_keys=ON` listener, so
+    a migration that removes parents must remove children itself.
+    """
+
+    __tablename__ = "card_feedback_features"
+    __table_args__ = (
+        UniqueConstraint("feedback_id", "feature", name="uq_card_feedback_features_row"),
+        CheckConstraint(
+            "feature IN (" + ",".join(f"'{f}'" for f in LIKED_FEATURES) + ")",
+            name="ck_card_feedback_features_feature",
+        ),
+    )
+
+    feedback_feature_id: Mapped[int] = mapped_column(primary_key=True)
+    feedback_id: Mapped[int] = mapped_column(
+        ForeignKey("card_feedback.feedback_id", ondelete="CASCADE")
+    )
+    feature: Mapped[str]

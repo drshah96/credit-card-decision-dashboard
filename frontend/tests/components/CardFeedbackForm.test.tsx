@@ -24,7 +24,7 @@ beforeEach(() => {
   postFeedback.mockResolvedValue(undefined);
 });
 
-const FEATURES: LikedFeature[] = ["earn_rates", "credits", "welcome_bonus"];
+const FEATURES: LikedFeature[] = ["earn_rates", "credits", "redemption_rate"];
 const setup = (features = FEATURES) =>
   render(<CardFeedbackForm cardId="amex-platinum" cardName="Platinum Card" features={features} />);
 
@@ -66,7 +66,7 @@ describe("choosing a branch", () => {
     await userEvent.click(screen.getByLabelText("The earn rates"));
     await userEvent.click(submitButton());
     await waitFor(() => expect(postFeedback).toHaveBeenCalledOnce());
-    expect(postFeedback.mock.calls[0][0]).not.toHaveProperty("rating");
+    expect(postFeedback.mock.calls[0][0].rating).toBeUndefined();
     expect(postFeedback.mock.calls[0][0].respondent_type).toBe("interested");
   });
 });
@@ -93,6 +93,7 @@ describe("the holder branch", () => {
       maximizes_value: undefined,
       held_for: undefined,
       would_keep: undefined,
+      features: undefined,
       comment: undefined,
       session_id: "test-session",
     });
@@ -160,7 +161,7 @@ describe("the interested branch", () => {
     expect(postFeedback).toHaveBeenCalledWith({
       card_id: "amex-platinum",
       respondent_type: "interested",
-      liked_feature: "credits",
+      features: ["credits"],
       comment: "The Uber credit looks useful.",
       session_id: "test-session",
     });
@@ -184,7 +185,7 @@ describe("the interested branch", () => {
     await userEvent.type(screen.getByLabelText(/anything else/i), "Curious about it.");
     await userEvent.click(submitButton());
     await waitFor(() => expect(postFeedback).toHaveBeenCalledOnce());
-    expect(postFeedback.mock.calls[0][0].liked_feature).toBeUndefined();
+    expect(postFeedback.mock.calls[0][0].features).toBeUndefined();
   });
 });
 
@@ -334,5 +335,38 @@ describe("the thank-you screen", () => {
     await userEvent.click(screen.getByRole("button", { name: /change your answer/i }));
     expect(screen.getByLabelText("Yes, I hold it")).toBeInTheDocument();
     expect(screen.queryByRole("status")).toBeNull();
+  });
+});
+
+describe("holders are asked which part earns its keep", () => {
+  it("offers the same options to a holder, optionally", async () => {
+    setup();
+    await holder();
+    expect(screen.getByRole("group", { name: /which part earns its keep/i })).toBeInTheDocument();
+    // Optional: a rating alone is still submittable.
+    await userEvent.click(screen.getByRole("button", { name: "4 stars" }));
+    expect(submitButton()).toBeEnabled();
+  });
+
+  it("sends a holder's pick in the same field as an interested one", async () => {
+    setup();
+    await holder();
+    await userEvent.click(screen.getByRole("button", { name: "5 stars" }));
+    await userEvent.click(screen.getByLabelText("The earn rates"));
+    await userEvent.click(submitButton());
+    await waitFor(() => expect(postFeedback).toHaveBeenCalledOnce());
+    expect(postFeedback.mock.calls[0][0].features).toEqual(["earn_rates"]);
+    expect(postFeedback.mock.calls[0][0].respondent_type).toBe("holder");
+  });
+
+  it("keeps the pick when switching branch, since both branches ask it", async () => {
+    setup();
+    await interested();
+    await userEvent.click(screen.getByLabelText("The statement credits"));
+    await holder();
+    await userEvent.click(screen.getByRole("button", { name: "3 stars" }));
+    await userEvent.click(submitButton());
+    await waitFor(() => expect(postFeedback).toHaveBeenCalledOnce());
+    expect(postFeedback.mock.calls[0][0].features).toEqual(["credits"]);
   });
 });

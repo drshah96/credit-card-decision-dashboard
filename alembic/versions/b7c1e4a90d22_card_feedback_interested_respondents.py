@@ -1,6 +1,6 @@
 """card feedback: interested respondents
 
-Revision ID: 17bf796f577f
+Revision ID: b7c1e4a90d22
 Revises: 93fb9fe16594
 Create Date: 2026-08-12
 
@@ -27,7 +27,7 @@ from typing import Sequence, Union
 import sqlalchemy as sa
 from alembic import op
 
-revision: str = "17bf796f577f"
+revision: str = "b7c1e4a90d22"
 down_revision: Union[str, Sequence[str], None] = "93fb9fe16594"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -35,12 +35,6 @@ depends_on: Union[str, Sequence[str], None] = None
 
 NEW_CHECKS = [
     ("ck_card_feedback_respondent_type", "respondent_type IN ('holder','interested')"),
-    (
-        "ck_card_feedback_liked_feature",
-        "liked_feature IS NULL OR liked_feature IN "
-        "('earn_rates','credits','welcome_bonus','lounge_access','insurance',"
-        "'no_annual_fee','intro_apr','transfer_partners')",
-    ),
     (
         "ck_card_feedback_holder_has_rating",
         "respondent_type <> 'holder' OR rating IS NOT NULL",
@@ -50,10 +44,6 @@ NEW_CHECKS = [
         "respondent_type <> 'interested' OR ("
         "rating IS NULL AND held_for IS NULL AND would_keep IS NULL "
         "AND maximizes_value IS NULL)",
-    ),
-    (
-        "ck_card_feedback_liked_feature_is_interest_only",
-        "liked_feature IS NULL OR respondent_type = 'interested'",
     ),
 ]
 
@@ -93,7 +83,6 @@ def _table(rating_nullable: bool, with_new_columns: bool, with_new_checks: bool)
     if with_new_columns:
         columns += [
             sa.Column("respondent_type", sa.String(), server_default="holder", nullable=False),
-            sa.Column("liked_feature", sa.String(), nullable=True),
         ]
     constraints = [
         sa.CheckConstraint(
@@ -171,7 +160,6 @@ def upgrade() -> None:
         "card_feedback",
         sa.Column("respondent_type", sa.String(), server_default="holder", nullable=False),
     )
-    op.add_column("card_feedback", sa.Column("liked_feature", sa.String(), nullable=True))
 
     with op.batch_alter_table(
         "card_feedback",
@@ -187,6 +175,24 @@ def upgrade() -> None:
 
     _recreate_indexes()
 
+    op.create_table(
+        "card_feedback_features",
+        sa.Column("feedback_feature_id", sa.Integer(), nullable=False),
+        sa.Column("feedback_id", sa.Integer(), nullable=False),
+        sa.Column("feature", sa.String(), nullable=False),
+        sa.CheckConstraint(
+            "feature IN ('earn_rates','insurance','no_annual_fee','credits',"
+            "'intro_apr_purchases','redemption_rate','intro_apr_balance_transfer',"
+            "'transfer_partners','lounge_access')",
+            name="ck_card_feedback_features_feature",
+        ),
+        sa.ForeignKeyConstraint(["feedback_id"], ["card_feedback.feedback_id"], ondelete="CASCADE"),
+        sa.PrimaryKeyConstraint("feedback_feature_id"),
+        # Leads with feedback_id, so it serves the join too. No separate index
+        # on feedback_id; see the model docstring for why that is deliberate.
+        sa.UniqueConstraint("feedback_id", "feature", name="uq_card_feedback_features_row"),
+    )
+
 
 def downgrade() -> None:
     """Reverse it.
@@ -200,6 +206,11 @@ def downgrade() -> None:
     present and a hard stop costs them a minute, against rows that are the only
     copy of what a visitor wrote.
     """
+    # Children first, explicitly. ON DELETE CASCADE does not fire during SQLite
+    # migrations: alembic/env.py builds its own engine and never sees
+    # backend/db.py's PRAGMA foreign_keys=ON listener, so the FK is inert here.
+    op.drop_table("card_feedback_features")
+
     interested = (
         op.get_bind()
         .execute(sa.text("SELECT count(*) FROM card_feedback WHERE respondent_type = 'interested'"))
@@ -223,7 +234,6 @@ def downgrade() -> None:
         batch.drop_constraint("ck_card_feedback_rating_range", type_="check")
         batch.create_check_constraint("ck_card_feedback_rating_range", "rating BETWEEN 1 AND 5")
         batch.alter_column("rating", existing_type=sa.Integer(), nullable=False)
-        batch.drop_column("liked_feature")
         batch.drop_column("respondent_type")
 
     _recreate_indexes()

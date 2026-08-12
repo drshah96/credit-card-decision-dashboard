@@ -383,6 +383,13 @@ class ClientErrorIn(BaseModel):
     component_stack: str | None = Field(default=None, max_length=4000)
 
 
+# How many features one submission may name. The question is single-choice
+# today; making it multi-select is this number and the form's input type, with
+# no change to the payload shape or the schema, which is why `features` is a
+# list at a cardinality of one.
+MAX_FEATURES = 1
+
+
 class CardFeedbackIn(BaseModel):
     """One visitor's experience of a card they hold, posted from the card
     detail page. Same posture as EventIn and ClientErrorIn above: public,
@@ -410,18 +417,24 @@ class CardFeedbackIn(BaseModel):
     # the same rule is a CHECK constraint on the table, because this endpoint
     # is public and Pydantic is only the first of the two lines.
     rating: int | None = Field(default=None, ge=1, le=5)
-    # Interested respondents only: the feature that caught their eye. The form
-    # offers only the ones a given card actually has.
-    liked_feature: (
-        Literal[
-            "earn_rates",
-            "credits",
-            "welcome_bonus",
-            "lounge_access",
-            "insurance",
-            "no_annual_fee",
-            "intro_apr",
-            "transfer_partners",
+    # The feature that caught their eye, or that they rate most highly. A list
+    # capped at one rather than a scalar: the question is single-choice today
+    # and moving to multi-select should change this number and nothing else.
+    # Shipping a scalar now and a list later would break across a deploy
+    # window, which is the failure respondent_type's default exists to avoid.
+    features: (
+        list[
+            Literal[
+                "earn_rates",
+                "insurance",
+                "no_annual_fee",
+                "credits",
+                "intro_apr_purchases",
+                "redemption_rate",
+                "intro_apr_balance_transfer",
+                "transfer_partners",
+                "lounge_access",
+            ]
         ]
         | None
     ) = None
@@ -448,11 +461,21 @@ class CardFeedbackIn(BaseModel):
             "would_keep": self.would_keep,
             "maximizes_value": self.maximizes_value,
         }
+        if self.features:
+            # Deduped before the cap is applied, not after. A client sending the
+            # same pick twice means the same thing once, and the child table's
+            # unique constraint would otherwise turn it into a 500. Pydantic's
+            # own max_length would have rejected it before this ran, which is
+            # why the cap lives here.
+            self.features = list(dict.fromkeys(self.features))
+            if len(self.features) > MAX_FEATURES:
+                raise ValueError(
+                    f"at most {MAX_FEATURES} feature may be chosen, got {len(self.features)}"
+                )
+
         if self.respondent_type == "holder":
             if self.rating is None:
                 raise ValueError("rating is required when respondent_type is 'holder'")
-            if self.liked_feature is not None:
-                raise ValueError("liked_feature applies only to interested respondents")
         else:
             answered = sorted(k for k, v in holder_only.items() if v is not None)
             if answered:
@@ -460,6 +483,9 @@ class CardFeedbackIn(BaseModel):
                     f"{', '.join(answered)} apply only to holders, "
                     "but respondent_type is 'interested'"
                 )
-            if self.liked_feature is None:
-                raise ValueError("liked_feature is required when respondent_type is 'interested'")
+            # Every card offers at least one option under the current gates, so
+            # requiring exactly one costs no real submission. Holders may skip
+            # it: they are answering four other questions already.
+            if not self.features:
+                raise ValueError("features is required when respondent_type is 'interested'")
         return self

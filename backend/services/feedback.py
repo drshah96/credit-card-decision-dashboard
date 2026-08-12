@@ -11,14 +11,14 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
 from backend.db import session_scope
-from backend.db_models import CardFeedback
+from backend.db_models import CardFeedback, CardFeedbackFeature
 
 
 def record_card_feedback(
     card_slug: str,
     respondent_type: str = "holder",
     rating: int | None = None,
-    liked_feature: str | None = None,
+    features: list[str] | None = None,
     maximizes_value: str | None = None,
     held_for: str | None = None,
     would_keep: bool | None = None,
@@ -42,7 +42,6 @@ def record_card_feedback(
     values = dict(
         respondent_type=respondent_type,
         rating=rating,
-        liked_feature=liked_feature,
         maximizes_value=maximizes_value,
         held_for=held_for,
         would_keep=would_keep,
@@ -71,6 +70,11 @@ def record_card_feedback(
                 setattr(existing, field, value)
             existing.review_status = "pending"
             existing.reviewed_at = None
+            # Replaced, not added to. Without the delete a resubmission would
+            # leave the previous pick attached, so someone who changed their
+            # mind would end up having named two features.
+            session.query(CardFeedbackFeature).filter_by(feedback_id=existing.feedback_id).delete()
+            _add_features(session, existing.feedback_id, features)
             session.flush()
             return existing.feedback_id
 
@@ -100,5 +104,22 @@ def record_card_feedback(
             )
             if winner is None:
                 raise
+            # The winner's children are left alone. A race here is one person
+            # double-submitting the same form state, so the row that won
+            # already carries these exact answers.
             return winner.feedback_id
+
+        _add_features(session, feedback.feedback_id, features)
+        session.flush()
         return feedback.feedback_id
+
+
+def _add_features(session, feedback_id: int, features: list[str] | None) -> None:
+    """Attach the chosen features to a feedback row.
+
+    Inside the caller's session_scope on purpose: a submission and its picks
+    are one fact, and a partial write would leave a row claiming someone named
+    nothing when they did.
+    """
+    for feature in features or []:
+        session.add(CardFeedbackFeature(feedback_id=feedback_id, feature=feature))
