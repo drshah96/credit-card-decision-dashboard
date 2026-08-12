@@ -48,7 +48,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Unusually for a secured card, the rewards are not a watered down version of the real thing: this earns the same 5% rotating categories and 1% base as Discover's flagship cash back card, and Cashback Match doubles all of it in year one. Most secured cards pay nothing at all. The 5% still needs activating each quarter, and it never applies retroactively. Discover's own rewards calendar page has been erroring out since at least early August 2026, so the current-quarter categories come from the consensus of major card trackers rather than the issuer: Q3 2026 is gas stations and EV charging, transportation and flights, and drugstores. Bear in mind the point of a card like this is the payment history it builds, not the rewards, and at a 28.99% APR carrying a balance would wipe out the earnings several times over.",
+  "earn_note": "Unusually for a secured card the rewards are real: the same 5% rotating categories and 1% base as the flagship, doubled in year one. The 5% still needs activating, and Discover's category calendar has been offline since August 2026. The point here is payment history, not rewards.",
   "points": {
     "currency": "Cashback Bonus",
     "redemption_options": [

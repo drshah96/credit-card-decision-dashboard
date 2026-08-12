@@ -48,20 +48,6 @@
       "is_base": false
     },
     {
-      "emoji": "🏨",
-      "multiplier": "5%",
-      "category": "Hotels, vacation rentals & rental cars, via Capital One Travel",
-      "highlight": false,
-      "is_base": false
-    },
-    {
-      "emoji": "🎟️",
-      "multiplier": "5%",
-      "category": "Capital One Entertainment ticket purchases",
-      "highlight": false,
-      "is_base": false
-    },
-    {
       "emoji": "💳",
       "multiplier": "1%",
       "category": "Everything else",
@@ -69,7 +55,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 5% rate is capped at $1,500 of spending each quarter, which works out to $75 of cash back, and it only pays if you remember to activate the categories. Miss the activation and the quarter earns the 1% base instead. That activation step is the single biggest reason people underuse this card. Discover's own rewards calendar page has been erroring out since at least early August 2026, so the categories below come from the consensus of major card trackers rather than the issuer: Q1 was groceries, warehouse clubs and streaming, Q2 restaurants and home improvement, and Q3 (the current quarter) is gas stations and EV charging, transportation and flights, and drugstores. Q4 hasn't been announced. Activate before you spend, since the 5% never applies retroactively. The real headline is Cashback Match: everything above is doubled for the first 12 months, so a first year of maxed-out quarters plus ordinary base spend lands closer to an effective 10% and 2% than the printed rates suggest.",
+  "earn_note": "The 5% is capped at $1,500 a quarter, or $75 back, and only pays if you activate the categories first. Forget, and the quarter earns 1%. Discover's category calendar has been offline since August 2026, so treat any list you find as unconfirmed. Cashback Match doubles year one.",
   "points": {
     "currency": "Cashback Bonus",
     "redemption_options": [
@@ -181,11 +167,17 @@
     "note": "Free to add, and in the first year it is genuinely worth doing: an authorized user's spending is matched right along with yours, so household spend concentrated here doubles too."
   },
   "timeline": [
+{
+        "date": "2026-2027",
+        "type": "future",
+        "badge": "Upcoming",
+        "text": "When your own account moves to Capital One, three earning routes switch on that Discover never had: 5% on hotels, rental cars, vacation rentals and activities booked through Capital One Travel, 5% on tickets and events through Capital One Entertainment, and Capital One Offers for online shopping. Migration runs in waves into 2027, so these are not live for most cardholders yet, and Discover's own product pages do not list them."
+    },
     {
       "date": "July 2026",
       "type": "neutral",
       "badge": "Migration",
-      "text": "Capital One begins moving Discover card accounts onto its own platform on July 27, in waves running through 2027. Account numbers, existing earn rates, rewards balances, APRs and the Discover network branding all stay put. Migrated accounts also pick up three Capital One earning routes the Discover lineup never had: 5% on hotels, vacation rentals and rental cars booked through Capital One Travel, 5% on Capital One Entertainment tickets, and Capital One Offers for online shopping. These only start once your own account moves, not on the July 27 kickoff date. Rewards redemption changes though: the gift card minimum rises from $5 to $25, rewards can no longer be applied to a minimum payment, Pay with Rewards through Apple Pay goes away, and automatic statement credit has to be re-enrolled on Capital One's site."
+      "text": "Capital One begins moving Discover card accounts onto its own platform on July 27, in waves running through 2027. Account numbers, existing earn rates, rewards balances, APRs and the Discover network branding all stay put, and migrated accounts also pick up the new Capital One earning routes. Redemption changes though: the gift card minimum rises from $5 to $25, and Pay with Rewards through Apple Pay goes away."
     },
     {
       "date": "May 2025",
