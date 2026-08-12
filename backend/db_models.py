@@ -667,7 +667,28 @@ class CardFeedback(Base):
         # submissions. And session_id is client-minted, so this is a duplicate
         # guard, never an abuse control — that job belongs to the rate limiter.
         UniqueConstraint("session_id", "card_slug", name="uq_card_feedback_session_card"),
-        CheckConstraint("rating BETWEEN 1 AND 5", name="ck_card_feedback_rating_range"),
+        CheckConstraint(
+            "rating IS NULL OR rating BETWEEN 1 AND 5", name="ck_card_feedback_rating_range"
+        ),
+        CheckConstraint(
+            "respondent_type IN ('holder','interested')",
+            name="ck_card_feedback_respondent_type",
+        ),
+        # The two branches are mutually exclusive, enforced here rather than
+        # trusted from the endpoint. Someone who does not hold the card cannot
+        # rate it, say how long they have held it, or say whether they would
+        # keep it — and someone who does hold it is answering from experience
+        # rather than naming the feature that caught their eye.
+        CheckConstraint(
+            "respondent_type <> 'holder' OR rating IS NOT NULL",
+            name="ck_card_feedback_holder_has_rating",
+        ),
+        CheckConstraint(
+            "respondent_type <> 'interested' OR ("
+            "rating IS NULL AND held_for IS NULL AND would_keep IS NULL "
+            "AND maximizes_value IS NULL)",
+            name="ck_card_feedback_interested_has_no_holder_fields",
+        ),
         CheckConstraint(
             "maximizes_value IS NULL OR maximizes_value IN ('yes','partly','no')",
             name="ck_card_feedback_maximizes_value",
@@ -688,9 +709,13 @@ class CardFeedback(Base):
     # Indexed because every question worth asking starts with "for this card":
     # average rating, and what share of holders capture the value.
     card_slug: Mapped[str] = mapped_column(index=True)
-    # The only required answer. Every extra required field costs submissions,
-    # and a rating alone is already usable.
-    rating: Mapped[int]
+    # Which question set this row answers. Defaults to 'holder' because every
+    # row that existed before this column did was one.
+    respondent_type: Mapped[str] = mapped_column(server_default="holder", default="holder")
+    # Required of holders and forbidden of everyone else, per the conditional
+    # constraints above. Nullable at the column level because a person who does
+    # not hold the card is not withholding a rating, they have nothing to rate.
+    rating: Mapped[int | None] = mapped_column(default=None)
     # The question this feature exists to answer: does the holder actually
     # capture what the card advertises? "partly" is a real answer, not a
     # fence-sitter, and is expected to be the common one.
@@ -713,3 +738,89 @@ class CardFeedback(Base):
     # solves the same problem one class up with pending/approved/rejected.
     review_status: Mapped[str] = mapped_column(server_default="pending", default="pending")
     reviewed_at: Mapped[datetime | None] = mapped_column(default=None)
+
+
+# The ten features a card can be liked for. Declared once here and pinned
+# against the Pydantic Literal, the TypeScript union and the form's labels by
+# tests/backend/test_liked_feature_options.py — the list previously existed in
+# five places with nothing comparing them.
+LIKED_FEATURES = (
+    "earn_rates",
+    "insurance",
+    "no_annual_fee",
+    "credits",
+    "intro_apr_purchases",
+    "redemption_rate",
+    "intro_apr_balance_transfer",
+    "transfer_partners",
+    "lounge_access",
+    # Gated on a status perk that is not a lounge, so it never means the same
+    # thing as lounge_access. Lounge access is itself a status perk and renders
+    # under the same tab, so without that exclusion the two options would split
+    # one answer on the 12 cards carrying both.
+    "status_perks",
+)
+
+
+class CardFeedbackFeature(Base):
+    """Which feature of a card a respondent picked out.
+
+    Zero to `MAX_FEATURES` rows per submission, one per feature named.
+
+    This table shipped at a cardinality of one, while the question was still
+    single-choice, precisely so that widening it later would be cheap. It was:
+    going to three picks changed one number in the validator and the form's
+    input type, with no migration, no payload change and no edit to this class.
+    A column on the parent would have made the same change a rebuild of the
+    whole table.
+
+    The cap is three rather than unlimited because with a mean of four options
+    offered per card, ticking every one mostly reproduces the availability
+    distribution, which is already in the card JSON.
+
+    It also keeps the option enum off `card_feedback`, which carries eight CHECK
+    constraints across thirteen columns. Holding the enum there would mean a
+    fourteenth column and two more constraints, and every change to the option
+    set would then be a full `copy_from` rebuild of all of it; here it is a
+    small, legible rebuild of three columns and one CHECK. The option set is the
+    part of this feature most likely to change.
+
+    Deliberately absent:
+
+    - `sort_order`. Nothing is ranked. `credits` and `insurance` carry one
+      because their array position is meaningful; a set of picks has no order.
+    - `card_slug`. It is on the parent. A second copy is a drift surface for
+      nothing.
+    - A standalone index on `feedback_id`. The composite unique constraint
+      leads with it and serves the join on both backends. There is a migration
+      in this repo that adds indexes to foreign key columns, so this is the
+      kind of omission someone reflexively 'fixes'.
+    - A `relationship()`, on either side. The write path sets `feedback_id`
+      explicitly. This is the one arrangement where the ORM's cascade and the
+      database's `ondelete` cannot disagree, because only one of them exists.
+      Adding one later is the trap: SQLAlchemy's default on parent delete is to
+      NULL the child's foreign key, and `feedback_id` is NOT NULL, so a
+      `relationship()` without `cascade="all, delete-orphan"` and
+      `passive_deletes=True` turns a delete into an IntegrityError.
+
+    `ON DELETE CASCADE` is a safety net rather than a mechanism: nothing
+    deletes feedback rows, since rejecting sets `review_status`. Note it does
+    not fire during SQLite migrations, because alembic/env.py builds its own
+    engine and never sees backend/db.py's `PRAGMA foreign_keys=ON` listener, so
+    a migration that removes parents must remove children itself.
+    """
+
+    __tablename__ = "card_feedback_features"
+    __table_args__ = (
+        UniqueConstraint("feedback_id", "feature", name="uq_card_feedback_features_row"),
+        CheckConstraint(
+            "feature IN (" + ",".join(f"'{f}'" for f in LIKED_FEATURES) + ")",
+            name="ck_card_feedback_features_feature",
+        ),
+    )
+
+    feedback_feature_id: Mapped[int] = mapped_column(primary_key=True)
+    feedback_id: Mapped[int] = mapped_column(
+        ForeignKey("card_feedback.feedback_id", ondelete="CASCADE")
+    )
+    feature: Mapped[str]

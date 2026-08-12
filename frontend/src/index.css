@@ -1338,8 +1338,15 @@ body {
 /* ── Card feedback form ──────────────────────────────────────────────────────
    Asks a cardholder whether they actually capture the value this page
    estimates. Sits last on the card page, after the argument it is checking. */
-.feedback-form { display: flex; flex-direction: column; gap: 18px; max-width: 560px; }
-.feedback-intro { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.5; }
+/* 672 rather than 560 so the three-column feature grid fits its longest row on
+   one line. Measured, not guessed: over every possible combination of the nine
+   options, the widest row is "Insurance & protections" + "Intro APR on
+   purchases" + "Intro APR on balance transfers" at 640px. Below that the last
+   chip wraps to two lines and stretches its whole row taller than the others.
+   The extra 32px is headroom, since a row landing exactly on the limit would
+   wrap again on any font or label change. Prose keeps its measure below. */
+.feedback-form { display: flex; flex-direction: column; gap: 18px; max-width: 672px; }
+.feedback-intro { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.5; max-width: 560px; }
 .feedback-field { border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
 .feedback-field legend, .feedback-label { padding: 0; font-size: 13.5px; font-weight: 600; color: var(--ink); }
 .feedback-stars { display: flex; gap: 4px; }
@@ -1355,6 +1362,26 @@ body {
 .feedback-star.is-on { color: var(--gold); }
 .feedback-star:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 .feedback-options { display: flex; flex-wrap: wrap; gap: 8px; }
+/* The feature lists get a fixed three-column grid rather than the ragged wrap
+   the other questions use. Those have 2-5 short options and read fine wrapping;
+   these run to seven options of very uneven width, where wrapping put three on
+   one line and one on the next depending on which card you were looking at.
+   Equal columns also stop the chips changing width card to card. */
+/* Columns sized to content, not equal thirds. Equal thirds gave every column
+   187px, which is 12px short of "Insurance & protections", so that one chip
+   wrapped to two lines and stretched its whole row taller than the next.
+   Content-sized columns stay aligned, still fit three per row, and leave the
+   longest label about 25px of headroom inside the form's 560px. */
+.feedback-options.is-grid {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: start;
+  align-items: stretch;
+}
+.feedback-options.is-grid .feedback-option { justify-content: flex-start; }
+@media (max-width: 560px) {
+  .feedback-options.is-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 .feedback-option {
   display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
   padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px;
@@ -1362,6 +1389,11 @@ body {
 }
 .feedback-option:hover { border-color: var(--line-2); }
 .feedback-option:focus-within { outline: 2px solid var(--blue); outline-offset: 1px; }
+/* At the pick cap the unchosen options are disabled rather than hidden, so the
+   set of things on offer does not change shape as someone selects. */
+.feedback-option:has(input:disabled) { opacity: 0.45; cursor: not-allowed; }
+.feedback-option:has(input:disabled):hover { border-color: var(--line); }
+.feedback-hint { margin: 6px 0 0; font-size: 12px; color: var(--faint); }
 .feedback-comment {
   width: 100%; padding: 10px 12px; font: inherit; font-size: 13.5px;
   color: var(--ink); background: var(--panel-2);
@@ -1381,3 +1413,10 @@ body {
 .feedback-done { max-width: 560px; }
 .feedback-done-title { margin: 0 0 6px; font-size: 15px; font-weight: 700; color: var(--ink); }
 .feedback-done-body { margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+.feedback-again {
+  align-self: flex-start; margin-top: 10px; padding: 7px 14px; cursor: pointer;
+  font-size: 13px; font-weight: 600; color: var(--ink);
+  background: var(--panel-2); border: 1px solid var(--line); border-radius: 999px;
+}
+.feedback-again:hover { border-color: var(--line-2); }
+.feedback-again:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
