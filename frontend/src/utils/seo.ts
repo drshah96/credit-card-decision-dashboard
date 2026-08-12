@@ -101,9 +101,9 @@ export function useSeo({ title, description, path, noindex }: SeoInput): void {
       upsertMeta("name", "twitter:description", description);
     }
     if (path) {
-      // Trailing-slash form: the URL Render serves without a redirect. See
-      // canonicalUrl. Pointing canonical at the redirecting form would make
-      // every card page's canonical a URL that 301s somewhere else.
+      // The same helper the prerendered pages and the sitemap use, so the
+      // runtime tag cannot drift from either. See canonicalUrl for why the
+      // published form carries no trailing slash.
       const url = canonicalUrl(path);
       upsertCanonical(url);
       upsertMeta("property", "og:url", url);

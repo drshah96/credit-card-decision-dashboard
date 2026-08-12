@@ -1,12 +1,16 @@
 import { describe, it, expect } from "vitest";
 import { matchPath } from "react-router-dom";
 
-// render.yaml now redirects /cards/x to /cards/x/, so the trailing-slash form
-// is what a visitor's browser actually holds after following a shared link.
-// If React Router did not match it, the redirect would fix a blank page for
-// unknown ids by breaking every real card page instead — a strictly worse
-// trade. Pinned rather than assumed.
-describe("the router matches the trailing-slash form the server redirects to", () => {
+// The router must match a card path with or without a trailing slash.
+//
+// render.yaml rewrites rather than redirects today, so nothing sends a visitor
+// to the slash form on purpose. This is pinned anyway because the slash form
+// still arrives from outside: a shared link someone typed with one, a crawler
+// normalising, a referrer that added it. And because the redirect approach was
+// tried once and will be considered again (backlog #20) — if the router
+// stopped matching, that attempt would fix a blank page for unknown ids by
+// breaking all 109 real card pages instead, which is worse than the bug.
+describe("the router matches a card path with or without a trailing slash", () => {
   it.each([
     ["/cards/:id", "/cards/amex-platinum/", "amex-platinum"],
     ["/issuer/:issuerSlug", "/issuer/chase/", "chase"],
