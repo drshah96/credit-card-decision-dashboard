@@ -51,7 +51,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The same rewards engine as the main cash back card, which is unusual for a student product. The 5% covers $1,500 a quarter and only counts if you activate, and Discover's category calendar has been offline since August 2026. Year one pays twice: a $100 bonus, then Cashback Match.",
+  "earn_note": "5% rotating categories and a 1% base, which is unusual for a student product. The 5% covers $1,500 a quarter and only counts if you activate, and Discover's category calendar has been offline since August 2026. Year one pays twice: a $100 bonus, then Cashback Match.",
   "points": {
     "currency": "Cashback Bonus",
     "redemption_options": [
@@ -167,11 +167,11 @@
     "note": "Free to add. Bear in mind you stay responsible for everything an authorized user charges, which matters more than usual on a card whose main job is building your credit history."
   },
   "timeline": [
-{
-        "date": "2026-2027",
-        "type": "future",
-        "badge": "Upcoming",
-        "text": "When your own account moves to Capital One, three earning routes switch on that Discover never had: 5% on hotels, rental cars, vacation rentals and activities booked through Capital One Travel, 5% on tickets and events through Capital One Entertainment, and Capital One Offers for online shopping. Migration runs in waves into 2027, so these are not live for most cardholders yet, and Discover's own product pages do not list them."
+    {
+      "date": "2026-2027",
+      "type": "future",
+      "badge": "Upcoming",
+      "text": "When your own account moves to Capital One, three earning routes switch on that Discover never had: 5% on hotels, rental cars, vacation rentals and activities booked through Capital One Travel, 5% on tickets and events through Capital One Entertainment, and Capital One Offers for online shopping. These are not live for most cardholders yet, and Discover's own product pages do not list them."
     },
     {
       "date": "July 2026",
