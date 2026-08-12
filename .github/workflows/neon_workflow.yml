@@ -8,8 +8,25 @@ on:
       - synchronize
       - closed
 
+# Keyed on the pull request number, not on github.ref.
+#
+# github.ref collides across pull requests, and the collision is silent and
+# destructive: when two PRs are merged within seconds of each other, the second
+# close event lands in the same concurrency group as the first and GitHub
+# cancels the queued run. The cancelled run is the one that deletes the PR's
+# Neon branch, so the branch is orphaned and nothing reports it.
+#
+# That is not hypothetical. Four preview branches survived their merged PRs
+# this way: pr-155 and pr-163 (merged ~2 hours apart, each cancelled by a
+# neighbour) and pr-187 and pr-188, merged three seconds apart on 2026-08-08.
+# They were found by hand in the Neon console days later, and re-running the
+# cancelled jobs one at a time deleted them.
+#
+# Per-PR grouping keeps the useful behaviour — a new push superseding an
+# in-flight run for the same PR — without letting unrelated PRs cancel each
+# other's cleanup.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-pr-${{ github.event.number }}
 
 jobs:
   setup:
