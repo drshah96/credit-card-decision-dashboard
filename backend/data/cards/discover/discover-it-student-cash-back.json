@@ -44,20 +44,6 @@
       "is_base": false
     },
     {
-      "emoji": "🏨",
-      "multiplier": "5%",
-      "category": "Hotels, vacation rentals & rental cars, via Capital One Travel",
-      "highlight": false,
-      "is_base": false
-    },
-    {
-      "emoji": "🎟️",
-      "multiplier": "5%",
-      "category": "Capital One Entertainment ticket purchases",
-      "highlight": false,
-      "is_base": false
-    },
-    {
       "emoji": "💳",
       "multiplier": "1%",
       "category": "Everything else",
@@ -65,7 +51,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Same rewards engine as Discover's main cash back card, which is unusual for a student product: most student cards pay a flat 1% and leave it there. The 5% covers rotating quarterly categories on up to $1,500 of spending, worth $75 a quarter, and it only counts if you activate each quarter. Forget, and the quarter earns 1%. Discover's own rewards calendar is offline as of August 2026, so treat any 2026 category list you find elsewhere as unconfirmed. On top of that, year one pays twice: the $100 bonus for spending $300 in three months is easy to hit on ordinary spending, and Cashback Match then doubles everything else you earn.",
+  "earn_note": "The same rewards engine as the main cash back card, which is unusual for a student product. The 5% covers $1,500 a quarter and only counts if you activate, and Discover's category calendar has been offline since August 2026. Year one pays twice: a $100 bonus, then Cashback Match.",
   "points": {
     "currency": "Cashback Bonus",
     "redemption_options": [
@@ -181,11 +167,17 @@
     "note": "Free to add. Bear in mind you stay responsible for everything an authorized user charges, which matters more than usual on a card whose main job is building your credit history."
   },
   "timeline": [
+{
+        "date": "2026-2027",
+        "type": "future",
+        "badge": "Upcoming",
+        "text": "When your own account moves to Capital One, three earning routes switch on that Discover never had: 5% on hotels, rental cars, vacation rentals and activities booked through Capital One Travel, 5% on tickets and events through Capital One Entertainment, and Capital One Offers for online shopping. Migration runs in waves into 2027, so these are not live for most cardholders yet, and Discover's own product pages do not list them."
+    },
     {
       "date": "July 2026",
       "type": "neutral",
       "badge": "Migration",
-      "text": "Capital One begins moving Discover card accounts onto its own platform on July 27, in waves running through 2027. Existing earn rates, rewards balances, APRs and the Discover network branding stay put. Migrated accounts also pick up three Capital One earning routes the Discover lineup never had: 5% on hotels, vacation rentals and rental cars booked through Capital One Travel, 5% on Capital One Entertainment tickets, and Capital One Offers for online shopping. These only start once your own account moves, not on the July 27 kickoff date. The gift card redemption minimum rises from $5 to $25, rewards can no longer be applied to a minimum payment, and Pay with Rewards through Apple Pay goes away."
+      "text": "Capital One begins moving Discover card accounts onto its own platform on July 27, in waves running through 2027. Account numbers, existing earn rates, rewards balances, APRs and the Discover network branding all stay put, and migrated accounts also pick up the new Capital One earning routes. Redemption changes though: the gift card minimum rises from $5 to $25, and Pay with Rewards through Apple Pay goes away."
     },
     {
       "date": "May 2025",

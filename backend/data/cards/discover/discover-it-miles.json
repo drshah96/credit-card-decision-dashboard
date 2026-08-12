@@ -40,20 +40,6 @@
   },
   "earn_rates": [
     {
-      "emoji": "🏨",
-      "multiplier": "5x",
-      "category": "Hotels, vacation rentals & rental cars, via Capital One Travel",
-      "highlight": false,
-      "is_base": false
-    },
-    {
-      "emoji": "🎟️",
-      "multiplier": "5x",
-      "category": "Capital One Entertainment ticket purchases",
-      "highlight": false,
-      "is_base": false
-    },
-    {
       "emoji": "✈️",
       "multiplier": "1.5x",
       "category": "Travel and every other purchase, unlimited",
@@ -61,7 +47,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "One rate on everything, no categories to track and no caps to run into. Discover Match doubles the first 12 months, so year one effectively earns 3x before settling to 1.5x. Worth understanding what the word miles is doing here: these are not airline miles and there are no transfer partners, so 1.5x at a penny a mile is 1.5% back in a travel-flavoured wrapper.",
+  "earn_note": "One rate on everything, no categories and no caps. Cashback Match doubles the first 12 months, so year one effectively earns 3x. Worth knowing what miles means here: there are no airline partners, so 1.5x at a penny each is 1.5% back in travel wrapping.",
   "points": {
     "currency": "Discover Miles",
     "redemption_options": [
@@ -188,11 +174,17 @@
     "note": "Free to add, and worth doing in year one, since an authorized user's spending gets matched alongside yours."
   },
   "timeline": [
+{
+        "date": "2026-2027",
+        "type": "future",
+        "badge": "Upcoming",
+        "text": "When your own account moves to Capital One, three earning routes switch on that Discover never had: 5% on hotels, rental cars, vacation rentals and activities booked through Capital One Travel, 5% on tickets and events through Capital One Entertainment, and Capital One Offers for online shopping. Migration runs in waves into 2027, so these are not live for most cardholders yet, and Discover's own product pages do not list them."
+    },
     {
       "date": "July 2026",
       "type": "neutral",
       "badge": "Migration",
-      "text": "Capital One begins moving Discover card accounts onto its own platform on July 27, in waves running through 2027. Existing earn rates, rewards balances, APRs and the Discover network branding stay put. Migrated accounts also pick up three Capital One earning routes the Discover lineup never had: 5% on hotels, vacation rentals and rental cars booked through Capital One Travel, 5% on Capital One Entertainment tickets, and Capital One Offers for online shopping. These only start once your own account moves, not on the July 27 kickoff date. Miles cardholders gain gift card redemption, which they did not previously have, while the gift card minimum across the lineup rises from $5 to $25, rewards can no longer be applied to a minimum payment, and Pay with Rewards through Apple Pay goes away."
+      "text": "Capital One begins moving Discover card accounts onto its own platform on July 27, in waves running through 2027. Account numbers, existing earn rates, rewards balances, APRs and the Discover network branding all stay put, and migrated accounts also pick up the new Capital One earning routes. Redemption changes though: the gift card minimum rises from $5 to $25, and Pay with Rewards through Apple Pay goes away."
     },
     {
       "date": "May 2025",

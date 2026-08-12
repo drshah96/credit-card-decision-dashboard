@@ -39,22 +39,15 @@
     {
       "emoji": "⛽",
       "multiplier": "2%",
-      "category": "Gas stations and restaurants, on up to $1,000 combined per quarter",
+      "category": "Gas stations: first $1,000/quarter combined with restaurants, then 1%",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "🏨",
-      "multiplier": "5%",
-      "category": "Hotels, vacation rentals & rental cars, via Capital One Travel",
-      "highlight": false,
-      "is_base": false
-    },
-    {
-      "emoji": "🎟️",
-      "multiplier": "5%",
-      "category": "Capital One Entertainment ticket purchases",
-      "highlight": false,
+      "emoji": "🍽️",
+      "multiplier": "2%",
+      "category": "Restaurants: first $1,000/quarter combined with gas stations, then 1%",
+      "highlight": true,
       "is_base": false
     },
     {
@@ -65,7 +58,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Everything applies automatically, with no quarterly activation to remember, which is the entire reason to pick this over Discover's rotating-category student card. The cost of that simplicity is real though: gas and restaurants share one $1,000 quarterly cap, so the bonus rate adds at most $10 a quarter over the base, and this version carries no $100 welcome bonus. Cashback Match still doubles year one. Two details in the fine print worth knowing: some public EV charging stations count as gas, while pumps attached to supermarkets, supercentres and wholesale clubs often do not, because the category is decided by the merchant's own code rather than what you actually bought.",
+  "earn_note": "Nothing needs activating, which is the reason to pick this over the rotating-category student card. The cost is a low ceiling: gas and restaurants share one $1,000 quarterly cap, worth at most $10 a quarter over the base, and there is no $100 bonus. Cashback Match doubles year one.",
   "points": {
     "currency": "Cashback Bonus",
     "redemption_options": [
@@ -181,11 +174,17 @@
     "note": "Free to add, though the shared $1,000 quarterly cap fills faster with two people on it, and you remain responsible for everything they charge."
   },
   "timeline": [
+{
+        "date": "2026-2027",
+        "type": "future",
+        "badge": "Upcoming",
+        "text": "When your own account moves to Capital One, three earning routes switch on that Discover never had: 5% on hotels, rental cars, vacation rentals and activities booked through Capital One Travel, 5% on tickets and events through Capital One Entertainment, and Capital One Offers for online shopping. Migration runs in waves into 2027, so these are not live for most cardholders yet, and Discover's own product pages do not list them."
+    },
     {
       "date": "July 2026",
       "type": "neutral",
       "badge": "Migration",
-      "text": "Capital One begins moving Discover card accounts onto its own platform on July 27, in waves running through 2027. Existing earn rates, rewards balances, APRs and the Discover network branding stay put. Migrated accounts also pick up three Capital One earning routes the Discover lineup never had: 5% on hotels, vacation rentals and rental cars booked through Capital One Travel, 5% on Capital One Entertainment tickets, and Capital One Offers for online shopping. These only start once your own account moves, not on the July 27 kickoff date. The gift card redemption minimum rises from $5 to $25, rewards can no longer be applied to a minimum payment, and Pay with Rewards through Apple Pay goes away."
+      "text": "Capital One begins moving Discover card accounts onto its own platform on July 27, in waves running through 2027. Account numbers, existing earn rates, rewards balances, APRs and the Discover network branding all stay put, and migrated accounts also pick up the new Capital One earning routes. Redemption changes though: the gift card minimum rises from $5 to $25, and Pay with Rewards through Apple Pay goes away."
     },
     {
       "date": "May 2025",
