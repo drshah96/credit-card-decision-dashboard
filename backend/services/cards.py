@@ -241,7 +241,22 @@ def _to_card_summary(c: CardModel, is_secured_variant_of: str | None = None) -> 
             )
             for r in c.earn_rates
         ],
-        best_cpp=max((o.cents_per_point for o in c.redemption_options), default=0.0),
+        # The option the author flagged as best, not the highest number on the
+        # card. Every card's redemption_options are rungs, and on airline cards
+        # they run "Statement / low-end", "Average redemption" (flagged), then
+        # "Premium-cabin sweet spots" (not flagged, and much higher). Taking the
+        # max ranked those cards on the sweet spot: Delta at 2.2 cents against
+        # the 1.15 the author wrote, United at 2.5 against 1.3.
+        #
+        # Top Picks ranks on multiplier x best_cpp, so this site's own ranking
+        # engine was doing the thing the site exists to argue against, valuing
+        # cards at their advertised ceiling rather than what a typical person
+        # gets. 16 of 109 cards were affected and every one was inflated.
+        #
+        # Two cards flag two options; max among the flagged is right there, and
+        # happens to leave both unchanged. 13 cards have no redemption options
+        # at all and keep 0.0, as before.
+        best_cpp=max((o.cents_per_point for o in c.redemption_options if o.is_best), default=0.0),
         secured_variant_id=c.secured_variant_id,
         is_secured_variant_of=is_secured_variant_of,
         points_pool_id=c.points_pool_id,
