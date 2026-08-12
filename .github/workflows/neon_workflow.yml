@@ -41,9 +41,15 @@ jobs:
 
   create_neon_branch:
     name: Create Neon Branch
+    # Pointed at the real step id. These referenced `create_neon_branch_encode`,
+    # a step that does not exist in this workflow — a leftover from the template
+    # this was generated from — so both job outputs were always the empty
+    # string. Nothing consumed them, so nothing failed; a later job that did
+    # would have received an empty DATABASE_URL and connected to the local
+    # default instead of the preview branch.
     outputs:
-      db_url: ${{ steps.create_neon_branch_encode.outputs.db_url }}
-      db_url_with_pooler: ${{ steps.create_neon_branch_encode.outputs.db_url_with_pooler }}
+      db_url: ${{ steps.create_neon_branch.outputs.db_url }}
+      db_url_with_pooler: ${{ steps.create_neon_branch.outputs.db_url_with_pooler }}
     needs: setup
     if: |
       github.event_name == 'pull_request' && (
@@ -63,6 +69,55 @@ jobs:
           branch_name: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
           api_key: ${{ secrets.NEON_API_KEY }}
           expires_at: ${{ env.EXPIRES_AT }}
+
+      # Everything below is why the branch is created at all.
+      #
+      # A Neon branch is a copy-on-write clone of production, so it starts at
+      # production's current schema and revision. Applying this PR's migrations
+      # to it runs exactly the step production runs on its next deploy, against
+      # real Postgres, before the merge rather than after.
+      #
+      # That gap is not theoretical. The dev database is SQLite, and Alembic
+      # autogenerate renders defaults for whichever backend it is pointed at,
+      # so `server_default=sa.text('0')` for a boolean is valid locally and
+      # rejected by Postgres. On 2026-08-11 exactly that reached `main` and was
+      # caught by reading the generated file, not by any check. This is the
+      # check.
+      - name: Check out the pull request
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.11.28"
+
+      - name: Set up Python 3.13
+        run: uv python install 3.13
+
+      # The same command render.yaml builds with, so a dependency problem
+      # surfaces here in the shape it would take in production.
+      - name: Install dependencies
+        run: uv sync --frozen --no-group dev
+
+      # The unpooled URL, deliberately. The pooler is PgBouncer in transaction
+      # mode, where Alembic's DDL and version-table locking do not reliably
+      # hold across statements. Neither URL is ever echoed: both carry a
+      # username and password.
+      - name: Apply this PR's migrations to the preview branch
+        env:
+          DATABASE_URL: ${{ steps.create_neon_branch.outputs.db_url }}
+        run: uv run alembic upgrade head
+
+      # Catches the other half: a model changed with no migration written for
+      # it. Nothing fails on that today — the test suite builds its schema from
+      # ORM metadata with create_all, so tests pass against a table production
+      # will not have, and the first request 500s. `alembic check` compares the
+      # models against the database just migrated and fails if autogenerate
+      # would still produce operations.
+      - name: Check the models and the migrations agree
+        env:
+          DATABASE_URL: ${{ steps.create_neon_branch.outputs.db_url }}
+        run: uv run alembic check
 
 # The step above creates a new Neon branch.
 # You may want to do something with the new branch, such as run migrations, run tests
