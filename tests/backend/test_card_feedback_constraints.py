@@ -25,7 +25,7 @@ import pytest
 from sqlalchemy import inspect
 
 from backend.db import engine
-from backend.db_models import CardFeedback
+from backend.db_models import CardFeedback, CardFeedbackFeature
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
@@ -39,7 +39,6 @@ SHARED_OR_BOOKKEEPING = {
     "submitted_at",
     "card_slug",
     "respondent_type",
-    "liked_feature",
     "comment",
     "session_id",
     "device_type",
@@ -173,6 +172,69 @@ def test_the_classification_covers_every_column() -> None:
         if c not in SHARED_OR_BOOKKEEPING and not re.search(rf"\b{c}\b", condition)
     )
     assert unclassified == []
+
+
+# Written out because the docstring writes them out. Only the values this
+# codebase could plausibly reach are here; an unmapped word fails loudly below
+# rather than silently skipping the comparison.
+WORD_NUMBERS = {
+    "seven": 7,
+    "eight": 8,
+    "nine": 9,
+    "ten": 10,
+    "eleven": 11,
+    "twelve": 12,
+    "thirteen": 13,
+    "fourteen": 14,
+    "fifteen": 15,
+    "sixteen": 16,
+}
+
+COUNTS_SENTENCE = re.compile(r"(\w+) CHECK\s+constraints across (\w+) columns")
+
+
+def test_the_child_table_docstring_cites_the_real_constraint_and_column_counts(
+    migrated_ddl: str,
+) -> None:
+    """`CardFeedbackFeature`'s docstring argues for the child table by citing how
+    much `card_feedback` costs to rebuild, in constraints and columns. Those
+    numbers are the reason the table exists, so they get quoted forward into
+    review comments and ADRs, and nothing else notices when a later migration
+    makes them wrong.
+
+    This already happened once. The docstring cited ten constraints across
+    fourteen columns, which were the numbers for the rejected design, the table
+    as it would have been with a `liked_feature` column on it. The shipped table
+    has eight and thirteen.
+
+    Reads the numbers out of the docstring rather than repeating them, so this
+    test cannot drift from the prose it is pinning. Adding a constraint or a
+    column to `card_feedback` now fails here until the docstring is updated to
+    match.
+    """
+    doc = CardFeedbackFeature.__doc__ or ""
+    match = COUNTS_SENTENCE.search(doc)
+    assert match, (
+        "CardFeedbackFeature's docstring no longer states its counts as "
+        "'<n> CHECK constraints across <n> columns'. Either restore the phrasing "
+        "or update COUNTS_SENTENCE, but do not drop the numbers: they are the "
+        "argument for the child table existing."
+    )
+
+    claimed_checks, claimed_columns = (WORD_NUMBERS.get(w.lower()) for w in match.groups())
+    assert claimed_checks and claimed_columns, (
+        f"unmapped number word in {match.group(0)!r}; add it to WORD_NUMBERS"
+    )
+
+    actual_checks = len(_database_checks(migrated_ddl))
+    actual_columns = len(CardFeedback.__table__.columns)
+    assert (claimed_checks, claimed_columns) == (actual_checks, actual_columns), (
+        f"CardFeedbackFeature's docstring claims card_feedback carries "
+        f"{claimed_checks} CHECK constraints across {claimed_columns} columns, but it "
+        f"carries {actual_checks} across {actual_columns}. Update the docstring, and "
+        "the counterfactual in the sentence after it, which is one column and two "
+        "constraints above these."
+    )
 
 
 def test_the_indexes_survived_the_migration_rebuild() -> None:
