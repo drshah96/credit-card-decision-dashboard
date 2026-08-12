@@ -54,20 +54,6 @@
       "is_base": false
     },
     {
-      "emoji": "🏨",
-      "multiplier": "5%",
-      "category": "Hotels, vacation rentals & rental cars, via Capital One Travel",
-      "highlight": false,
-      "is_base": false
-    },
-    {
-      "emoji": "🎟️",
-      "multiplier": "5%",
-      "category": "Capital One Entertainment ticket purchases",
-      "highlight": false,
-      "is_base": false
-    },
-    {
       "emoji": "💳",
       "multiplier": "1%",
       "category": "Everything else",
@@ -187,6 +173,12 @@
     "note": "Free to add, though the shared $1,000 quarterly cap means extra users mostly help you hit the ceiling faster rather than earn more at the bonus rate."
   },
   "timeline": [
+{
+        "date": "2026-2027",
+        "type": "future",
+        "badge": "Upcoming",
+        "text": "When your own account moves to Capital One, three earning routes switch on that Discover never had: 5% on hotels, rental cars, vacation rentals and activities booked through Capital One Travel, 5% on tickets and events through Capital One Entertainment, and Capital One Offers for online shopping. Migration runs in waves into 2027, so these are not live for most cardholders yet, and Discover's own product pages do not list them."
+    },
     {
       "date": "July 2026",
       "type": "neutral",
