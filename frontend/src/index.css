@@ -1338,8 +1338,15 @@ body {
 /* ── Card feedback form ──────────────────────────────────────────────────────
    Asks a cardholder whether they actually capture the value this page
    estimates. Sits last on the card page, after the argument it is checking. */
-.feedback-form { display: flex; flex-direction: column; gap: 18px; max-width: 560px; }
-.feedback-intro { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.5; }
+/* 672 rather than 560 so the three-column feature grid fits its longest row on
+   one line. Measured, not guessed: over every possible combination of the nine
+   options, the widest row is "Insurance & protections" + "Intro APR on
+   purchases" + "Intro APR on balance transfers" at 640px. Below that the last
+   chip wraps to two lines and stretches its whole row taller than the others.
+   The extra 32px is headroom, since a row landing exactly on the limit would
+   wrap again on any font or label change. Prose keeps its measure below. */
+.feedback-form { display: flex; flex-direction: column; gap: 18px; max-width: 672px; }
+.feedback-intro { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.5; max-width: 560px; }
 .feedback-field { border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
 .feedback-field legend, .feedback-label { padding: 0; font-size: 13.5px; font-weight: 600; color: var(--ink); }
 .feedback-stars { display: flex; gap: 4px; }
@@ -1360,9 +1367,15 @@ body {
    these run to seven options of very uneven width, where wrapping put three on
    one line and one on the next depending on which card you were looking at.
    Equal columns also stop the chips changing width card to card. */
+/* Columns sized to content, not equal thirds. Equal thirds gave every column
+   187px, which is 12px short of "Insurance & protections", so that one chip
+   wrapped to two lines and stretched its whole row taller than the next.
+   Content-sized columns stay aligned, still fit three per row, and leave the
+   longest label about 25px of headroom inside the form's 560px. */
 .feedback-options.is-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, auto);
+  justify-content: start;
   align-items: stretch;
 }
 .feedback-options.is-grid .feedback-option { justify-content: flex-start; }

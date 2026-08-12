@@ -20,7 +20,7 @@ import type { LikedFeature } from "../api/feedback";
  */
 export const LIKED_FEATURE_LABELS: Record<LikedFeature, string> = {
   earn_rates: "Earn rates",
-  insurance: "Insurance and protections",
+  insurance: "Insurance & protections",
   no_annual_fee: "No annual fee",
   credits: "Statement credits",
   intro_apr_purchases: "Intro APR on purchases",
