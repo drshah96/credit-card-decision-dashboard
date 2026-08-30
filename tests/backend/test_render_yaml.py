@@ -33,6 +33,13 @@ def _static_service() -> dict:
     return services[0]
 
 
+def _api_service() -> dict:
+    config = yaml.safe_load(RENDER_YAML.read_text())
+    services = [s for s in config["services"] if s.get("name") == "thewalletaudit-api"]
+    assert len(services) == 1, "expected exactly one api web service"
+    return services[0]
+
+
 ROUTES: list[dict] = _static_service()["routes"]
 
 
@@ -102,3 +109,16 @@ def test_the_dynamic_shapes_are_routed() -> None:
     sources = {r["source"] for r in ROUTES}
     assert "/cards/:id" in sources
     assert "/issuer/:slug" in sources
+
+
+def test_render_health_check_is_the_liveness_endpoint_not_the_deep_one() -> None:
+    """Render restarts a service whose healthCheckPath keeps failing. /health
+    opens a database connection and answers 503 when the database is
+    unreachable, so pointing Render at it couples this service's uptime to
+    Neon's: a database outage would restart a web process that was serving
+    every non-database route fine.
+
+    /healthz answers the question Render is actually asking. This is a
+    one-word change to flip back and nothing else in the repo would notice,
+    which is exactly why it is pinned here."""
+    assert _api_service()["healthCheckPath"] == "/healthz"
