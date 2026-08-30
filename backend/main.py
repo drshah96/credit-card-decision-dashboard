@@ -63,7 +63,12 @@ app.add_middleware(GZipMiddleware, minimum_size=1024)
 def root() -> dict:
     """Points humans hitting the bare API domain at something useful; the
     actual frontend lives on a separate service and calls /api/* directly."""
-    return {"name": "The Wallet Audit API", "docs": "/docs", "health": "/health"}
+    return {
+        "name": "The Wallet Audit API",
+        "docs": "/docs",
+        "health": "/health",
+        "liveness": "/healthz",
+    }
 
 
 # robots.txt for the API host. `api.thewalletaudit.com` is a separate origin
@@ -100,14 +105,44 @@ def robots() -> str:
     return ROBOTS_TXT
 
 
+@app.get("/healthz")
+def healthz() -> dict:
+    """Liveness: is this process up and serving? Deliberately touches nothing
+    else, so it answers in milliseconds whatever state the database is in.
+
+    Separate from /health (readiness, below) because the two have different
+    callers who want different answers. A keep-warm ping and Render's own
+    health check are both asking "is the web service awake", and neither
+    should be answered with a database round trip:
+
+      - Render restarts a service whose healthCheckPath keeps failing.
+        Pointing it at a database-dependent check couples the API's uptime
+        to Neon's, so a database outage escalates into a restart loop of a
+        process that was serving fine.
+      - Every database-touching ping resets Neon's scale-to-zero idle timer.
+        Pinging a readiness check every 5 minutes holds the compute awake
+        for the entire waking-hours window and bills for it, which is the
+        opposite of what a free-tier-shaped deployment wants.
+
+    Uptime monitoring still needs the deeper answer, so /health stays as-is
+    and the keep-warm workflow calls it on a slower cadence than this one.
+    """
+    return {"status": "ok"}
+
+
 @app.get("/health")
 def health() -> dict:
-    """Health check for Render and other uptime monitors — actually verifies
-    the database connection works, not just that this process is alive. A
-    process-only check (the old version of this endpoint) would report "ok"
-    even with a fully dead DB connection pool, e.g. after Neon's free-tier
+    """Readiness: can this process actually serve a request that reads data?
+    Verifies the database connection works, not just that the process is
+    alive. A process-only check (the old version of this endpoint) would
+    report "ok" even with a fully dead DB connection pool, e.g. after Neon's
     compute auto-suspends from being idle — see backend/db.py's
-    pool_pre_ping for the other half of this fix."""
+    pool_pre_ping for the other half of that fix, and its connect_timeout
+    for what stops this handler hanging instead of answering 503 when the
+    database is unreachable rather than merely asleep.
+
+    Render's own health check points at /healthz, not here, so a database
+    outage doesn't get a healthy process restarted out from under itself."""
     try:
         with engine.connect() as conn:
             conn.execute(text("SELECT 1"))

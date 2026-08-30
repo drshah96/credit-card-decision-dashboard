@@ -26,7 +26,15 @@ services:
       uv run alembic upgrade head &&
       uv run python -m backend.scripts.seed_catalog &&
       uv run uvicorn backend.main:app --host 0.0.0.0 --port $PORT
-    healthCheckPath: /health
+    # /healthz, not /health: the two differ on purpose. /health is the deep
+    # readiness check and answers 503 when the database is unreachable, which
+    # is what an uptime monitor wants but not what Render should act on —
+    # Render restarts a service whose health check keeps failing, so pointing
+    # it at the deep check couples this service's uptime to Neon's and turns
+    # a database outage into a restart loop of a process that was serving
+    # fine. /healthz answers the question Render is actually asking: is the
+    # web process up. See backend/main.py for both endpoints.
+    healthCheckPath: /healthz
     # Custom domain — verified, DNS (Cloudflare, proxied CNAME to
     # thewalletaudit-api.onrender.com) is live and the cert is issued. SSL/TLS
     # mode on Cloudflare is "Full" — needed for the proxy to trust Render's

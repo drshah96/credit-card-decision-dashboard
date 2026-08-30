@@ -190,7 +190,8 @@ uv run python -m backend.scripts.drafts promote 1
 
 | Method | Path | Description |
 |--------|------|-------------|
-| `GET` | `/health` | Health check |
+| `GET` | `/healthz` | Liveness — is the process up. Touches no database; Render's health check uses this |
+| `GET` | `/health` | Readiness — also verifies the database is reachable, 503 if not |
 | `GET` | `/api/cards` | List all cards (summary) |
 | `GET` | `/api/cards/detail?ids=…` | Full detail for many cards in one request |
 | `GET` | `/api/cards/{card_id}` | Full detail for one card |
