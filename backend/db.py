@@ -24,7 +24,24 @@ DATABASE_URL = _normalize_database_url(
     os.environ.get("DATABASE_URL", f"sqlite:///{_DEFAULT_SQLITE_PATH}")
 )
 
-_connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
+if DATABASE_URL.startswith("sqlite"):
+    _connect_args: dict = {"check_same_thread": False}
+else:
+    # connect_timeout caps how long libpq will sit on a TCP connect before
+    # giving up. Without it the default is "wait indefinitely", which is not
+    # a hypothetical: when Neon suspended this project's compute for an
+    # unpaid invoice (2026-08-22 to 2026-08-27), connections to the Neon
+    # endpoint neither succeeded nor were refused — they just hung. /health
+    # inherited that hang and stopped answering at all, so the keep-warm
+    # ping died on its own 90s curl timeout (exit 28) instead of getting the
+    # fast 503 the endpoint is written to return, and Render's health check
+    # hung the same way.
+    #
+    # 10s, not 2-3s: a genuinely cold Neon compute has to wake before it can
+    # accept the connection, and a timeout tight enough to trip on a normal
+    # wake-up would turn routine scale-to-zero into a fake outage.
+    _connect_args = {"connect_timeout": 10}
+
 # pool_pre_ping + pool_recycle: Neon's free tier auto-suspends its compute
 # after a few minutes idle and can drop connections outright while
 # suspended. Without pre_ping, SQLAlchemy hands a pooled connection back to

@@ -1,51 +1,150 @@
 name: Keep backend warm during waking hours
 
-# Pings the backend's /health endpoint every 5 minutes during roughly
-# 7am-11pm ET to prevent Render's free-tier spin-down (15 min idle) during
-# that window — this project's URL goes out on job applications, and a
-# recruiter hitting a ~60s cold start looks like a broken site. Deliberately
-# NOT 24/7: that would consume nearly the entire monthly free instance-hour
-# allowance for this one service. Outside this window the backend still
-# sleeps normally, so a visit then pays the full cold-start cost.
+# Keeps the Render backend from spinning down (free tier, 15 minutes idle)
+# during roughly 7am-11pm ET. This project's URL goes out on job
+# applications, and a recruiter hitting a ~60s cold start looks like a broken
+# site. Deliberately NOT 24/7: outside this window the backend sleeps
+# normally, so a visit then pays the full cold-start cost.
 #
-# 5 minutes, not 10: verified live that GitHub Actions' schedule trigger can
-# skip multiple consecutive ticks under platform load (observed a ~26-minute
-# gap between two "successful" runs against a configured 10-minute cadence,
-# which let the backend actually cold-start once mid-window). Tightening to
-# 5 minutes (GitHub's minimum interval) didn't meaningfully help either —
-# a second live check found only one tick fired in the next ~50 minutes.
-# This points to platform-level throttling of scheduled workflows, not
-# something fixable by tuning the interval further. An external uptime-ping
-# service (not GitHub Actions) is now the primary mechanism; this workflow
-# stays on as a free secondary/backup layer, not the main line of defense.
+# ── Why this pings in a loop instead of once per scheduled run ──────────────
 #
-# Pings the raw onrender.com origin URL, NOT api.thewalletaudit.com. The
-# custom domain sits behind our own Cloudflare zone, which has Bot Fight
-# Mode enabled (zone-wide, no per-path exceptions on the free plan) — it
-# challenges GitHub Actions' runner traffic with a JS challenge a bare curl
-# can never pass. The onrender.com URL sits behind Render's own platform
-# infrastructure instead, unaffected by our zone's bot settings, and wakes
-# the exact same backend instance. Real visitors (recruiters etc.) always
-# use api.thewalletaudit.com and get full Bot Fight Mode protection as
-# normal — only this internal keep-alive ping uses the direct origin URL.
+# It used to be one curl per run on a "*/5" schedule, and the schedule was the
+# problem. GitHub throttles scheduled workflows under platform load, and the
+# skipped ticks are silent: every run that does fire reports success, so the
+# workflow looks healthy while the backend cold-starts in the gaps. Measured
+# on 2026-08-30 against that "every 5 minutes" schedule, actual spacing ran
+# 8-25 minutes, and the runs landing after the two widest gaps (13:59 -> 14:17
+# and 14:59 -> 15:16, both over Render's 15-minute idle limit) took 1m16s and
+# 1m18s against a ~0.3s warm baseline. Those two runs are cold starts, passing
+# green.
 #
-# Cron is always UTC. The hour range below (11-23,0-3) is 7am-11pm EDT
-# (UTC-4) and will drift by an hour once DST ends (~November) until it
-# resumes (~March) — acceptable drift for a "wide window" goal, not worth
-# the complexity of a DST-aware schedule.
+# Tightening the cron cannot fix that, because the cron is what is being
+# throttled — a previous attempt at exactly that is in this file's history.
+# So the interval moved inside the job, where nothing throttles it: one run
+# holds a runner for ~55 minutes and pings on its own clock. The schedule now
+# only has to start a run, not keep time.
+#
+# The schedule is every 30 minutes against a ~55 minute loop, so runs overlap
+# by design and a throttled or dropped tick is covered by the run already in
+# flight. Redundant pings are harmless; a gap is not. This repo is public, so
+# Actions minutes are free and unmetered.
+#
+# An external uptime-ping service (cron-job.org) is still the primary
+# mechanism. This workflow is the backup layer, and the two have failed at
+# different times — the point of keeping both is that they are independent.
+#
+# ── Why it pings /healthz, and /health only occasionally ────────────────────
+#
+# /healthz is liveness: it answers without touching the database. /health is
+# readiness: it opens a database connection, and every call resets Neon's
+# scale-to-zero idle timer. Pinging /health every 5 minutes would hold Neon's
+# compute awake for the entire waking-hours window and bill for it, which is a
+# real cost on a paid plan and buys nothing — the ~60s problem this workflow
+# exists to prevent is Render's cold start, not Neon's sub-second wake.
+#
+# But a liveness-only ping cannot see a database outage, and that blind spot
+# has already cost this project: Neon suspended the compute for an unpaid
+# invoice from 2026-08-22 to 2026-08-27 and the failing /health pings are how
+# it was noticed at all. So the deep check still runs, just on a ~30 minute
+# cadence instead of a 5 minute one. Long enough to let Neon idle back down
+# between checks, short enough to catch a real outage the same morning.
+#
+# ── Why the raw onrender.com origin, not api.thewalletaudit.com ─────────────
+#
+# The custom domain sits behind our own Cloudflare zone, which has Bot Fight
+# Mode enabled (zone-wide, no per-path exceptions on the free plan) and
+# challenges GitHub runner traffic with a JS challenge a bare curl can never
+# pass. The onrender.com URL sits behind Render's own infrastructure instead,
+# unaffected by our zone's bot settings, and wakes the same instance. Real
+# visitors always use api.thewalletaudit.com and get full protection.
+#
+# Cron is always UTC. The hour range below (11-23,0-3) is 7am-11pm EDT (UTC-4)
+# and will drift by an hour once DST ends (~November) until it resumes
+# (~March) — acceptable drift for a "wide window" goal.
 on:
   schedule:
-    - cron: "4-59/5 11-23,0-3 * * *"
+    - cron: "0,30 11-23,0-3 * * *"
   workflow_dispatch:
+
+# No concurrency group on purpose: the overlap between consecutive runs is the
+# redundancy this design depends on. Cancelling the in-flight run when the next
+# tick starts would reintroduce exactly the gap the loop is here to close.
 
 jobs:
   ping:
     runs-on: ubuntu-latest
+    # Above the ~55 minute loop so a hung curl is killed by its own --max-time
+    # rather than by the job timeout, which would report as a generic failure.
+    timeout-minutes: 65
     steps:
-      - name: Ping /health
-        # 90s, not 30s: if this ping is itself the one that catches the
-        # backend cold, it needs to survive Render's ~60s wake-up, not
-        # time out and fail before the backend even finishes booting
-        # (observed live: curl exit 28, timeout, on a run that landed
-        # during a cold window).
-        run: curl -sf --max-time 90 https://thewalletaudit-api.onrender.com/health
+      - name: Ping /healthz every 5 minutes, /health every 30
+        run: |
+          set -uo pipefail
+
+          ORIGIN="https://thewalletaudit-api.onrender.com"
+          PINGS=11            # 11 pings, 10 gaps of 5 minutes = ~50 minutes
+          INTERVAL=300
+          DEEP_EVERY=6        # every 6th ping is a deep check, so ~30 minutes
+
+          consecutive_liveness_failures=0
+          worst_liveness_streak=0
+          deep_failures=0
+          deep_checks=0
+
+          for i in $(seq 0 $((PINGS - 1))); do
+            now=$(date -u +%H:%M:%S)
+
+            # 90s: if this ping is the one that catches Render cold, it has to
+            # outlast the ~60s wake-up rather than time out before the backend
+            # has finished booting. /healthz touches no database, so a slow
+            # response here means Render is waking, never that Neon is down.
+            if elapsed=$(curl -sf --max-time 90 -o /dev/null -w '%{time_total}' "$ORIGIN/healthz"); then
+              echo "$now  liveness ok (${elapsed}s)"
+              consecutive_liveness_failures=0
+            else
+              status=$?
+              consecutive_liveness_failures=$((consecutive_liveness_failures + 1))
+              if [ "$consecutive_liveness_failures" -gt "$worst_liveness_streak" ]; then
+                worst_liveness_streak=$consecutive_liveness_failures
+              fi
+              echo "::warning::$now  liveness FAILED (curl exit $status, consecutive: $consecutive_liveness_failures)"
+            fi
+
+            if [ $((i % DEEP_EVERY)) -eq 0 ]; then
+              deep_checks=$((deep_checks + 1))
+              # 30s, not 90s: backend/db.py sets a 10s connect_timeout, so an
+              # unreachable database now produces a fast 503 instead of the
+              # indefinite hang that used to eat the full curl budget.
+              if curl -sf --max-time 30 -o /dev/null "$ORIGIN/health"; then
+                echo "$now  readiness ok (database reachable)"
+              else
+                status=$?
+                deep_failures=$((deep_failures + 1))
+                echo "::warning::$now  readiness FAILED (curl exit $status) — database may be unreachable"
+              fi
+            fi
+
+            if [ "$i" -lt $((PINGS - 1)) ]; then
+              sleep "$INTERVAL"
+            fi
+          done
+
+          echo "---"
+          echo "liveness pings: $PINGS, worst consecutive failure streak: $worst_liveness_streak"
+          echo "readiness checks: $deep_checks, failures: $deep_failures"
+
+          # Fail on a sustained outage, not on a single blip. One failed ping
+          # is usually a runner network hiccup or a redeploy restarting the
+          # service, and alerting on those trains you to ignore the alert.
+          # Three in a row is 15 minutes of unreachable backend, and any failed
+          # deep check means the database itself did not answer.
+          exit_code=0
+          if [ "$worst_liveness_streak" -ge 3 ]; then
+            echo "::error::Backend unreachable for $worst_liveness_streak consecutive pings (~$((worst_liveness_streak * 5)) minutes)."
+            exit_code=1
+          fi
+          if [ "$deep_failures" -gt 0 ]; then
+            echo "::error::$deep_failures of $deep_checks readiness checks failed — /health could not reach the database. Check the Neon project is active and the invoice is paid."
+            exit_code=1
+          fi
+          exit $exit_code
