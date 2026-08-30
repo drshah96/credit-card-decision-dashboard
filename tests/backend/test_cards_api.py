@@ -520,6 +520,33 @@ def test_verdict_text_fits_two_lines() -> None:
     assert long_verdicts == []
 
 
+def test_healthz_endpoint() -> None:
+    response = client.get("/healthz")
+    assert response.status_code == 200
+    assert response.json() == {"status": "ok"}
+
+
+def test_healthz_stays_up_when_the_database_is_unreachable(monkeypatch) -> None:
+    """The whole reason /healthz exists separately from /health. Render's
+    healthCheckPath points here, and Render restarts a service whose health
+    check keeps failing — so if this endpoint ever grew a database dependency,
+    a Neon outage would start restarting a web process that was serving fine.
+
+    Uses the same broken-engine swap as the /health test below, and asserts
+    the opposite outcome: /health must notice the outage, /healthz must not
+    care. Both assertions matter, and they must not drift into agreement."""
+    import backend.main as main_module
+
+    class _BrokenEngine:
+        def connect(self):
+            raise Exception("simulated DB outage")
+
+    monkeypatch.setattr(main_module, "engine", _BrokenEngine())
+
+    assert client.get("/healthz").status_code == 200
+    assert client.get("/health").status_code == 503
+
+
 def test_health_endpoint() -> None:
     response = client.get("/health")
     assert response.status_code == 200
