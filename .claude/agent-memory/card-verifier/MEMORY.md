@@ -1,0 +1,3 @@
+- [Amex source route](reference_amex_source_route.md) — Amex product pages fetch empty; use the application terms page, and expect insurance limits to be unreachable.
+- [Hilton transfer ratios](reference_hilton_transfer_ratios.md) — Hilton publishes no public ratio table, so those fields are unverifiable in principle; Marriott does publish one.
+- [Chase source route](reference_chase_source_route.md) — use the card-specific LGC pricing table; the generic COL agreement gives wrong APRs for named cards.
