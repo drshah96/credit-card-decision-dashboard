@@ -220,16 +220,6 @@
   "rental_note": "MasterRental is secondary in the US (pays after your personal auto policy) but becomes primary on international rentals. If you rent domestically often, pair this with a card that offers primary coverage everywhere.",
   "status_perks": [
     {
-      "name": "Marriott Bonvoy Gold Elite",
-      "strength": 3,
-      "note": "Complimentary, no minimum spend: room upgrades when available, late checkout, bonus points on paid stays."
-    },
-    {
-      "name": "Hilton Honors Gold",
-      "strength": 3,
-      "note": "Complimentary, no minimum spend: space-available upgrades, 5th night free on award stays, bonus points."
-    },
-    {
       "name": "Admirals Club access",
       "strength": 4,
       "note": "4 single-visit Admirals Club passes per calendar year (~50 lounges), a genuinely rare perk outside of an AA co-brand card, but capped at 4 visits, not unlimited membership."
@@ -276,7 +266,7 @@
             "included": false
           },
           {
-            "text": "No separate Marriott/Hilton status: only the primary cardholder is enrolled",
+            "text": "No separate Admirals Club passes: those are tied to the primary cardholder",
             "included": false
           }
         ]
