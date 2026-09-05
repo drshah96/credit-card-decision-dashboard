@@ -58,20 +58,6 @@
       "is_base": false
     },
     {
-      "emoji": "🏨",
-      "multiplier": "5%",
-      "category": "Hotels, vacation rentals & rental cars, via Capital One Travel",
-      "highlight": true,
-      "is_base": false
-    },
-    {
-      "emoji": "🎟️",
-      "multiplier": "8%",
-      "category": "Capital One Entertainment ticket purchases",
-      "highlight": false,
-      "is_base": false
-    },
-    {
       "emoji": "💳",
       "multiplier": "1%",
       "category": "Everything else",
@@ -79,7 +65,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Same category rates as the no-fee Savor card; the only differences are this one charges $39/yr, skips the sign-up bonus, and targets fair credit (FICO roughly 580-669) rather than excellent credit. It exists as an approval path, not a better rewards card.",
+  "earn_note": "The 3% categories match the no-fee Savor card, but Savor also earns 5% on Capital One Travel bookings and this one does not. It charges $39/yr, skips the sign-up bonus, and targets fair credit rather than excellent credit. It exists as an approval path, not a better rewards card.",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
@@ -107,18 +93,33 @@
     },
     {
       "coverage": "Extended warranty",
-      "detail": "+1 yr on warranties ≤3 yrs · max $1,000/claim",
-      "level": "mid"
+      "detail": "+1 yr on ≤2-yr warranties · $10k/claim · $50k per cardholder",
+      "level": "good"
     },
     {
       "coverage": "Purchase protection",
-      "detail": "Not included",
-      "level": "none"
+      "detail": "$1,000/claim · $25,000 per 12 months · 90 days",
+      "level": "mid"
     },
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "Not included",
-      "level": "none"
+      "detail": "$1,500 per insured person on non-refundable common carrier tickets",
+      "level": "mid"
+    },
+    {
+      "coverage": "Price protection",
+      "detail": "$250/item · $1,000/yr · 120 days",
+      "level": "mid"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "Up to $1M · common carrier",
+      "level": "good"
+    },
+    {
+      "coverage": "Baggage delay/loss",
+      "detail": "Delay $100/day up to $300 · lost luggage up to $3,000/trip",
+      "level": "mid"
     },
     {
       "coverage": "Trip delay",
@@ -136,8 +137,8 @@
       "level": "none"
     }
   ],
-  "protection_note": "Identical thin protection to the no-fee Savor: secondary rental coverage and a modest $1,000-per-claim extended warranty, no purchase protection or trip coverage. You get no extra protection for the $39 fee.",
-  "rental_note": "Secondary CDW only: decline the rental counter's own waiver and pay in full with this card to activate it, but your personal auto policy pays first.",
+  "protection_note": "Better covered than it looks. Capital One's Discover network guide names SavorOne and grants purchase security, extended warranty, price protection, trip cancellation and interruption, travel accident, baggage delay and lost luggage cover. The protection is the same as the no-fee Savor gets, so the $39 does not buy extra cover.",
+  "rental_note": "Decline the rental counter's own waiver and pay in full with this card. Coverage is secondary at home, but primary when you rent outside your country of residence.",
   "status_perks": [],
   "services": [
     {
