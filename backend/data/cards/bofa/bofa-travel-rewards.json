@@ -41,14 +41,21 @@
   },
   "earn_rates": [
     {
+      "emoji": "✈️",
+      "multiplier": "3×",
+      "category": "Travel booked through BofA Travel",
+      "highlight": true,
+      "is_base": false
+    },
+    {
       "emoji": "💳",
       "multiplier": "1.5×",
       "category": "Everything, everywhere",
-      "highlight": true,
+      "highlight": false,
       "is_base": true
     }
   ],
-  "earn_note": "A genuinely flat rate with no categories or caps. Points redeem as a statement credit against any travel purchase (flights, hotels, vacation rentals, baggage fees) and also against dining, including takeout. Enrolled BofA Rewards members get a 10–75% bonus on top of the 1.5x rate depending on combined deposit/investment balance.",
+  "earn_note": "Close to flat: 1.5x everywhere with no caps, plus 3x on travel booked through BofA Travel. Points redeem as a statement credit against any travel purchase (flights, hotels, vacation rentals, baggage fees) and also against dining, including takeout. Enrolled BofA Rewards members get a 10–75% bonus on top of the 1.5x rate depending on combined deposit/investment balance.",
   "points": {
     "currency": "Bank of America Rewards",
     "redemption_options": [

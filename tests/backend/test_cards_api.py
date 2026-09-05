@@ -1079,8 +1079,10 @@ def test_us_bank_variable_apr_and_fee_fields_are_detail_only_not_on_summary() ->
 
 # BofA batch (2026-08-02): all 10 cards researched. BofA's balance-transfer
 # fee uses the same intro/standard two-tier shape as Chase's Freedom Flex/
-# Unlimited (3% within the first 60 days, 5% after), confirmed across every
-# card in the lineup with an intro offer. See
+# Unlimited (3% within the first 60 days, 5% after). The Sep 2026 refresh found
+# this is NOT uniform across the lineup: BankAmericard has no 3% intro tier, and
+# BofA's index page states a flat 5% for it. So the intro-APR offer and the
+# two-tier transfer fee are separate facts and are asserted separately. See
 # [[project_apr_balance_transfer_fx_fee_audit]].
 @pytest.mark.parametrize(
     "card_id,intro_months",
@@ -1095,7 +1097,26 @@ def test_bofa_cards_with_a_real_intro_apr_offer(card_id: str, intro_months: int)
     detail = client.get(f"/api/cards/{card_id}").json()
     assert detail["intro_apr_purchases"] == {"rate": "0%", "months": intro_months}
     assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": intro_months}
+
+
+@pytest.mark.parametrize(
+    "card_id",
+    [
+        "bofa-unlimited-cash-rewards",
+        "bofa-customized-cash-rewards",
+        "bofa-travel-rewards",
+    ],
+)
+def test_bofa_cards_with_a_two_tier_intro_balance_transfer_fee(card_id: str) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
     assert detail["balance_transfer_fee"] == "3% for the first 60 days of account opening; 5% after"
+
+
+def test_bofa_bankamericard_has_a_flat_transfer_fee_despite_its_intro_apr() -> None:
+    # The exception to the rule above, and an easy one to get wrong: the card has
+    # the lineup's longest intro APR (21 cycles) and no intro transfer fee at all.
+    detail = client.get("/api/cards/bofa-bankamericard").json()
+    assert detail["balance_transfer_fee"] == "5% of the amount of each transaction"
 
 
 def test_bofa_travel_rewards_has_no_foreign_transaction_fee_unlike_cash_cards() -> None:
@@ -1110,15 +1131,17 @@ def test_bofa_travel_rewards_has_no_foreign_transaction_fee_unlike_cash_cards() 
 
 
 def test_bofa_premium_rewards_cards_have_no_intro_offer_and_flat_bt_fees() -> None:
-    # Premium/Elite skip the intro-APR structure entirely and use flat
-    # percentage BT fees (5% / 4%) instead of the two-tier intro/standard
-    # shape the no-annual-fee cards use.
+    # Premium/Elite skip the intro-APR structure entirely and quote their transfer
+    # fee off the agreement's fee table rather than off an intro offer. The Sep
+    # 2026 refresh corrected both against that table: Premium is a 4% to 5% range,
+    # and Elite is a flat 5% (it had been stored as 4%, the only such value in the
+    # ten-card BofA folder).
     detail = client.get("/api/cards/bofa-premium-rewards").json()
     assert detail["intro_apr_purchases"] is None
-    assert detail["balance_transfer_fee"] == "5% of the amount of each transaction"
+    assert detail["balance_transfer_fee"] == "4% to 5% of the amount of each transaction"
     elite_detail = client.get("/api/cards/bofa-premium-rewards-elite").json()
     assert elite_detail["intro_apr_purchases"] is None
-    assert elite_detail["balance_transfer_fee"] == "4% of the amount of each transaction"
+    assert elite_detail["balance_transfer_fee"] == "5% of the amount of each transaction"
 
 
 def test_bofa_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:

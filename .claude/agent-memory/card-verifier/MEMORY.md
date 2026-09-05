@@ -2,3 +2,5 @@
 - [Hilton transfer ratios](reference_hilton_transfer_ratios.md) — Hilton publishes no public ratio table, so those fields are unverifiable in principle; Marriott does publish one.
 - [Chase source route](reference_chase_source_route.md) — use the card-specific LGC pricing table; the generic COL agreement gives wrong APRs for named cards.
 - [Citi source route](reference_citi_source_route.md) — Citi fetches return 200 with every number blank; report Citi numerics unverified unless read by a JS-executing browser.
+- [Capital One source route](reference_capital_one_source_route.md) — disclosure modal has no URL so only annual fee and purchase APR are fetchable; the per-network Guide to Benefits PDFs are the rich source and do prove absence.
+- [BofA source route](reference_bofa_source_route.md) — product pages 200 with an "unavailable" body; use the card index plus the public sample agreement PDFs.
