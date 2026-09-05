@@ -110,8 +110,8 @@
       "level": "mid"
     }
   ],
-  "protection_note": "Thin by design: this is a no-fee cash-back card, not a travel card. No trip delay, trip cancellation, baggage, or rental car coverage, and no extended warranty (that's reserved for the paid Blue Cash Preferred tier).",
-  "rental_note": "No rental car coverage at all; use a different card for rentals.",
+  "protection_note": "Thin by design: this is a no-fee cash-back card, not a travel card. No trip delay, trip cancellation, or baggage coverage, and no extended warranty (that's reserved for the paid Blue Cash Preferred tier).",
+  "rental_note": "Car Rental Loss and Damage Insurance is included, underwritten by AMEX Assurance. Reserve and pay for the whole rental with the card and decline the counter waiver.",
   "status_perks": [],
   "services": [
   ],

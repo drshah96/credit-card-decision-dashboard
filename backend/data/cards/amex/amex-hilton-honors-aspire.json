@@ -138,7 +138,7 @@
       "id": "clear",
       "name": "CLEAR Plus",
       "subtitle": "airport security",
-      "max_annual": 209,
+      "max_annual": 219,
       "default_value": 0,
       "tier": "easy",
       "removed": false,
@@ -164,12 +164,12 @@
     {
       "id": "free-night",
       "name": "Annual Free Night Reward",
-      "subtitle": "no point cap · after card renewal",
+      "subtitle": "no point cap · up to 3 a year",
       "max_annual": 250,
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "One free night reward from Hilton Honors in your first year of card membership and every year on renewal, with no stated point-value ceiling.",
+      "description": "One free night reward from Hilton Honors in your first year of card membership and every year on renewal, with no stated point-value ceiling. Spend $30,000 in a calendar year for a second, and another $30,000 on top of that for a third.",
       "tips": [
         "Unlike Marriott's capped free night, this one has no published point ceiling, but real-world value still depends entirely on which property you redeem it at.",
         "$250 here is a conservative estimate, not a guarantee for any specific hotel."
@@ -179,7 +179,7 @@
   "insurance": [
     {
       "coverage": "Rental car CDW",
-      "detail": "Primary outside the US up to $75,000; secondary worldwide, 30 days (excl. Australia, Italy, New Zealand)",
+      "detail": "Secondary, 30 days (excl. Australia, Italy, New Zealand)",
       "level": "mid"
     },
     {
@@ -194,7 +194,7 @@
     },
     {
       "coverage": "Baggage Insurance Plan",
-      "detail": "$3,000 combined ($2,000 checked / $1,000 carry-on)",
+      "detail": "$3,000 combined ($2,000 checked / $1,000 high-risk items such as jewelry and electronics)",
       "level": "mid"
     },
     {
@@ -204,7 +204,7 @@
     }
   ],
   "protection_note": "Solid but not top-tier: trip cancellation and rental coverage are comparable to other premium Amex cards, but this card no longer carries airport lounge access, which used to be part of its pitch.",
-  "rental_note": "Rental coverage is primary outside the US but only secondary domestically; put US rentals on a card with primary US coverage if you rent often.",
+  "rental_note": "Secondary coverage, so it pays after your own auto policy. Amex sells primary cover separately as Premium Car Rental Protection. Not available in Australia, Italy or New Zealand.",
   "status_perks": [
     {
       "name": "Hilton Honors Diamond Status",

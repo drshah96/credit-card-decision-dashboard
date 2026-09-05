@@ -130,7 +130,7 @@
   "credits": [
     {
       "id": "hilton-credit",
-      "name": "Hilton Resort/Purchase Credit",
+      "name": "$200 Hilton Credit",
       "subtitle": "$50/quarter",
       "max_annual": 200,
       "default_value": 0,

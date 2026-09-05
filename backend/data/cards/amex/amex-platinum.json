@@ -48,13 +48,6 @@
       "is_base": false
     },
     {
-      "emoji": "🛍️",
-      "multiplier": "2×",
-      "category": "Big purchases, $5,000+ (up to $2M/yr)",
-      "highlight": false,
-      "is_base": false
-    },
-    {
       "emoji": "💳",
       "multiplier": "1×",
       "category": "Everything else",
@@ -163,11 +156,11 @@
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "Semi-annual credit on prepaid FHR / Hotel Collection stays via Amex Travel. FHR spans ~1,700+ luxury properties with guaranteed perks: breakfast for two, room upgrade, noon check-in, 4pm checkout, and a $100 property credit.",
+      "description": "Semi-annual credit on prepaid Fine Hotels + Resorts and Hotel Collection stays via Amex Travel. Amex puts the combined network at more than 3,100 hotels, with guaranteed perks: breakfast for two, room upgrade, noon check-in, 4pm checkout, and a $100 property credit. The Hotel Collection half needs a two-night minimum.",
       "tips": [
         "FHR works on ONE-night stays: book a single night to trigger both the $300 credit AND the $100 property credit.",
         "Semi-annual is the catch: you must spend in both H1 and H2.",
-        "The network runs ~1,700 properties."
+        "Amex puts the combined FHR and Hotel Collection network at more than 3,100 hotels."
       ]
     },
     {
@@ -340,7 +333,7 @@
     {
       "name": "Global Lounge Collection",
       "strength": 5,
-      "note": "Best in class. 1,550+ lounges: Centurion, Priority Pass, Plaza Premium, plus 10 Delta Sky Club visits/yr on Delta flights. From Jul 8, 2026, Centurion entry is within 5 hrs of departure and guests must be on your flight. Lufthansa Business and Senator lounges leave the collection on Oct 1, 2026."
+      "note": "Best in class. 1,550+ lounges: Centurion, Priority Pass, Plaza Premium, plus 10 Delta Sky Club visits/yr on Delta flights. The Centurion arrival window is 3 hrs, or 5 hrs if you are connecting. From Jul 8, 2026 you get one complimentary guest instead of two, and the guest has to be on your flight. Lufthansa Business and Senator lounges leave the collection on Oct 1, 2026."
     }
   ],
   "services": [
@@ -431,6 +424,12 @@
   },
   "timeline": [
     {
+      "date": "Sep 15, 2026",
+      "type": "future",
+      "badge": "Upcoming",
+      "text": "Pay with Points ends at NYC Taxi and at Saks Fifth Avenue, closing the last Membership Rewards tie to Saks a couple of months after the statement credit went."
+    },
+    {
       "date": "Oct 1, 2026",
       "type": "future",
       "badge": "Upcoming",
@@ -446,7 +445,7 @@
       "date": "Jul 8, 2026",
       "type": "cut",
       "badge": "Cut",
-      "text": "Centurion Lounge access tightened: entry within 5 hours of departure only, and guests must be on the same flight."
+      "text": "Centurion Lounge guest rules tightened: one complimentary guest instead of two, and the guest has to be booked on your flight. The three-hour arrival window is unchanged, but on a layover you can now enter within five hours of the connecting flight."
     },
     {
       "date": "Jul 1, 2026",
@@ -482,7 +481,7 @@
       "date": "Sep 2025",
       "type": "add",
       "badge": "Refresh",
-      "text": "Major refresh: fee $695 → $895; added Resy $400, Lululemon $300, Oura $200, Uber One $120, hotel credit to $600, and 2× on $5,000+ purchases."
+      "text": "Major refresh: fee $695 → $895; added Resy $400, Lululemon $300, Oura $200, Uber One $120, and raised the hotel credit to $600."
     },
     {
       "date": "2021",
