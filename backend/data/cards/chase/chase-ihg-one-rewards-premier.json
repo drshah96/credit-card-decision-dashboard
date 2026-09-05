@@ -380,6 +380,11 @@
   ],
   "insurance": [
     {
+      "coverage": "Rental car CDW",
+      "detail": "$60,000 · secondary in the US, primary abroad",
+      "level": "good"
+    },
+    {
       "coverage": "Trip cancel/interrupt",
       "detail": "$5,000/person \u00b7 $10,000/trip",
       "level": "good"
@@ -400,8 +405,8 @@
       "level": "mid"
     }
   ],
-  "protection_note": "Solid mid-tier protections bundled with Mastercard World Elite: trip cancellation coverage is present, but Chase's own itemized benefits list for this card doesn't include rental car coverage, unlike some of its other Mastercard World Elite cards. Nothing here beats a premium travel card's limits.",
-  "rental_note": "No rental car coverage on this card; Chase's own itemized benefits list for it doesn't include auto rental coverage. Use a different card for rentals.",
+  "protection_note": "Solid mid-tier protections bundled with Mastercard World Elite: trip cancellation and auto rental coverage are both present, alongside travel accident and extended warranty cover. Nothing here beats a premium travel card's limits.",
+  "rental_note": "Auto Rental Coverage is included: decline the counter waiver, pay for the whole rental with the card, and it reimburses theft and collision damage. Secondary to your own policy in the US.",
   "status_perks": [
     {
       "name": "IHG One Rewards Platinum Elite Status",

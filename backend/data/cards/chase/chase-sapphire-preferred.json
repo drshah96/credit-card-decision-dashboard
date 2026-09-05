@@ -8,7 +8,7 @@
   "points_program": "Ultimate Rewards",
   "accent_color": "#4A6FA5",
   "annual_fee": 95,
-  "effective_cost": "Low: the $100 hotel credit alone covers most of the fee",
+  "effective_cost": "Low: the $100 hotel credit more than covers the $95 fee",
   "official_url": "https://creditcards.chase.com/rewards-credit-cards/sapphire/preferred",
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
@@ -80,7 +80,7 @@
     {
       "emoji": "\u2708\ufe0f",
       "multiplier": "2\u00d7",
-      "category": "Other travel, booked direct",
+      "category": "Other travel, outside Chase Travel",
       "highlight": false,
       "is_base": false
     },
@@ -113,7 +113,7 @@
       }
     ],
     "per_100k": "$2,000+",
-    "note": "CSP lost its old 25% Chase Travel redemption bonus in the Jun 2025 overhaul and, unlike the Reserve, wasn't given a strong Points Boost to replace it (capped around 1.5\u00a2 on hotels, 1.75\u00a2 on select premium-cabin flights). Transferring to airline/hotel partners is the best play for this card."
+    "note": "CSP lost its old 25% Chase Travel redemption bonus in the Jun 2025 overhaul and, unlike the Reserve, wasn't given a strong Points Boost to replace it (capped around 1.5x on top-booked hotels and flights with select airlines, against the Reserve's 2x). Transferring to airline/hotel partners is the best play for this card."
   },
   "transfer_partners": {
     "airline_count": 10,
@@ -235,7 +235,7 @@
       "description": "A complimentary 12-month Apple TV subscription (not Apple Music, unlike the Reserve's version) if activated by December 31, 2026. If you already have a paid Apple One subscription in your name, activating this benefit gets you a $7.50/mo discount on it instead, for 12 months.",
       "tips": [
         "One-time, limited-time offer, not an ongoing annual credit like the Reserve's Apple TV+/Music benefit.",
-        "Already pay for standalone Apple TV (not Apple One)? Cancel the paid plan for the free year, but remember to resume payment after it ends.",
+        "Already pay for standalone Apple TV (not Apple One)? Do not cancel it. Chase suspends the paid subscription automatically and resumes it at the then-current price when the free year ends; cancelling forfeits that.",
         "Already have Apple One? You get the $7.50/mo discount automatically once you activate on Chase.com or the app with the same Apple Account, not the free standalone subscription."
       ]
     },
@@ -247,7 +247,7 @@
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "Complimentary DashPass membership for 12 months ($0 delivery fees), plus a $10/month statement credit on non-restaurant (grocery/retail) DoorDash orders through Dec 2027.",
+      "description": "Complimentary DashPass membership for 12 months ($0 delivery fees), plus $10 off at checkout each calendar month on one qualifying non-restaurant (grocery/retail) DoorDash order through Dec 2027.",
       "tips": [
         "Activate DashPass through the Chase app before the deadline; it doesn't turn on automatically.",
         "The $10/mo grocery credit is use-it-or-lose-it each month.",

@@ -23,7 +23,7 @@
   "returned_payment_fee": "Up to $40",
   "returned_check_fee": null,
   "welcome_bonus": {
-    "bonus": "45,000 points, plus up to 30,000 more",
+    "bonus": "30,000 points, plus up to 30,000 more",
     "requirement": "the 45,000 requires spending $5,000 in the first 3 months; the extra up to 30,000 comes from earning 2x (instead of 1x) on up to $15,000 of otherwise-1x spend in the first 6 months",
     "estimated_value": "$810 for the guaranteed 45,000, per this card's best redemption cpp"
   },
@@ -265,7 +265,7 @@
       "id": "dashpass",
       "name": "DoorDash DashPass + Credit",
       "subtitle": "12-mo complimentary + $10/mo non-restaurant \u00b7 thru 2027",
-      "max_annual": 160,
+      "max_annual": 120,
       "default_value": 0,
       "tier": "niche",
       "removed": false,
@@ -304,11 +304,11 @@
     },
     {
       "coverage": "Trip delay",
-      "detail": "Not stated in card terms; no dedicated trip delay benefit found",
-      "level": "none"
+      "detail": "$500/ticket · after 12 hrs or an overnight stay",
+      "level": "mid"
     }
   ],
-  "protection_note": "Respectable mid-tier protections for a $95 fee: trip cancellation, baggage, and rental car coverage are all present. Purchase protection tops out at just $500/item, and there's no dedicated trip delay benefit (separate from baggage delay), both well below premium travel cards.",
+  "protection_note": "Respectable mid-tier protections for a $95 fee: trip cancellation, baggage, trip delay and rental car coverage are all present. Purchase protection tops out at just $500/item, below premium travel cards.",
   "rental_note": "Rental coverage is secondary in the US and covers theft/collision only, not liability. Decline the counter's CDW to use it, but put rentals on a card with primary coverage if you rent often.",
   "status_perks": [
     {
