@@ -13,14 +13,14 @@
   "foreign_transaction_fee": false,
   "variable_apr": "19.49%, 25.49%, or 28.49% (based on creditworthiness)",
   "balance_transfer_apr": "19.49%, 25.49%, or 28.49% (based on creditworthiness)",
-  "balance_transfer_fee": "$5 or 5% of each transfer, whichever is greater",
+  "balance_transfer_fee": "Introductory fee of $5 or 3% of each transfer, whichever is greater, for 120 days from account opening; up to $5 or 5% after",
   "foreign_transaction_fee_rate": null,
   "cash_advance_apr": "29.49%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
   "late_payment_fee": "Up to $40",
-  "returned_payment_fee": null,
+  "returned_payment_fee": "Up to $40",
   "returned_check_fee": null,
   "welcome_bonus": {
     "bonus": "60,000 points",
@@ -57,7 +57,7 @@
     {
       "emoji": "🚗",
       "multiplier": "3×",
-      "category": "Other travel: car rentals, cruises, transit",
+      "category": "Other travel: campgrounds, timeshares, cruises, travel agencies, car rentals",
       "highlight": true,
       "is_base": false
     },
@@ -69,7 +69,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 5x hotel and 4x airline rates are uncapped and among the highest flat rates on a $95-fee card. 'Other travel' (car rentals, cruises, transit) earns the 3x rate alongside restaurants, not the airline or hotel rate.",
+  "earn_note": "The 5x hotel and 4x airline rates are uncapped and among the highest flat rates on a $95-fee card. 'Other travel' (campgrounds, timeshares, cruises, travel agencies, car rentals) earns the 3x rate alongside restaurants, not the airline or hotel rate.",
   "points": {
     "currency": "Wells Fargo Rewards",
     "redemption_options": [
@@ -202,7 +202,7 @@
     },
     {
       "coverage": "Rental car CDW",
-      "detail": "Secondary coverage only, applies after your personal auto insurance",
+      "detail": "$50,000 · secondary in the US, primary abroad, 15 days US / 31 days abroad",
       "level": "mid"
     },
     {
@@ -221,8 +221,8 @@
       "level": "none"
     }
   ],
-  "protection_note": "A real travel insurance suite for a $95 card: trip cancellation up to $15,000, travel accident up to $1,000,000, and baggage coverage all stand out. Cell phone protection is also the richest in the Autograph lineup. No purchase protection or extended warranty are advertised, and rental coverage is secondary only, so those gaps carry over from the no-fee Autograph.",
-  "rental_note": "Secondary coverage only, meaning it pays after your personal auto policy for whatever's left. Charge the full rental cost to the card and decline the counter's optional CDW to activate it.",
+  "protection_note": "A real travel insurance suite for a $95 card: trip cancellation up to $15,000, travel accident up to $1,000,000, and baggage coverage all stand out. Cell phone protection is also the richest in the Autograph lineup. No purchase protection or extended warranty are advertised, and rental coverage is secondary at home though primary abroad, so the purchase and warranty gaps carry over from the no-fee Autograph.",
+  "rental_note": "Up to $50,000. Secondary in the US, so it pays after your own auto policy, but primary outside the US. Charge the full rental cost to the card and decline the counter's optional CDW to activate it.",
   "status_perks": [],
   "services": [
     {

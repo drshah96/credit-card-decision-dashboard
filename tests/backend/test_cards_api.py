@@ -1197,15 +1197,18 @@ def test_bilt_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> No
 # 28.49%"), not a min-max range — stored verbatim like Citi's BJ's/REI tiers
 # and Capital One's tiered cards, not force-converted to a range. See
 # [[project_apr_balance_transfer_fx_fee_audit]].
-def test_wells_fargo_autograph_has_asymmetric_intro_periods_and_distinct_bt_apr() -> None:
-    # 12mo purchases / 18mo balance transfers, AND a balance-transfer APR
-    # range genuinely different from the tiered purchase APR — two
-    # independent axes of divergence on the same card.
+def test_wells_fargo_autograph_has_no_balance_transfer_intro_offer() -> None:
+    # Sep 2026 refresh: this card has a 12-month purchase intro APR and NO
+    # balance-transfer intro APR at all (Wells Fargo's own terms carry no
+    # promotional BT row). balance_transfer_apr matches the same tiered
+    # purchase-APR string, not a separate range; an earlier version of this
+    # test asserted a fabricated 18-month BT intro and a range that was
+    # simply the purchase APR shifted down by one point at both ends.
     detail = client.get("/api/cards/wells-fargo-autograph").json()
     assert detail["intro_apr_purchases"] == {"rate": "0%", "months": 12}
-    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": 18}
+    assert detail["intro_apr_balance_transfers"] is None
     assert detail["variable_apr"] == "18.49%, 24.49%, or 28.49% (based on creditworthiness)"
-    assert detail["balance_transfer_apr"] == "17.49%-27.49%"
+    assert detail["balance_transfer_apr"] == "18.49%, 24.49%, or 28.49% (based on creditworthiness)"
 
 
 @pytest.mark.parametrize(
@@ -1225,7 +1228,13 @@ def test_wells_fargo_autograph_journey_has_no_intro_offer_and_a_flat_bt_fee() ->
     detail = client.get("/api/cards/wells-fargo-autograph-journey").json()
     assert detail["intro_apr_purchases"] is None
     assert detail["intro_apr_balance_transfers"] is None
-    assert detail["balance_transfer_fee"] == "$5 or 5% of each transfer, whichever is greater"
+    # Sep 2026 refresh: Wells Fargo's own terms carry a 3%-for-120-days intro
+    # tier on this card's transfer fee, the same shape as Active Cash. The
+    # file previously stored only the go-to 5% and omitted the intro tier.
+    assert detail["balance_transfer_fee"] == (
+        "Introductory fee of $5 or 3% of each transfer, whichever is greater, "
+        "for 120 days from account opening; up to $5 or 5% after"
+    )
 
 
 def test_wells_fargo_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
