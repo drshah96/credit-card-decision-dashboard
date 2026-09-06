@@ -22,7 +22,7 @@
   "balance_transfer_apr": "17.74%-27.99%",
   "balance_transfer_fee": "5% of each transfer amount, $5 minimum",
   "foreign_transaction_fee_rate": "3%",
-  "cash_advance_apr": "29.49%-30.49%",
+  "cash_advance_apr": "30.49%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": "A monthly fee up to 1.60% of the original principal amount, for U.S. Bank ExtendPay Plan or Loan balances",
@@ -30,7 +30,7 @@
   "returned_payment_fee": "Up to $41",
   "returned_check_fee": null,
   "welcome_bonus": {
-    "bonus": "$250 cash back",
+    "bonus": "$200 cash back",
     "requirement": "after you spend $1,000 in eligible purchases within the first 90 days of account opening",
     "estimated_value": null
   },
@@ -85,7 +85,7 @@
       }
     ],
     "per_100k": "$1,000",
-    "note": "Flat 1¢ per dollar no matter how you redeem, so this figure never moves. The real value lever isn't redemption, it's the earn rate: max out both $2,000/quarter 5% category caps and the blended rate on $8,000/year of category spend plus 1% elsewhere lands well above a flat 2% card."
+    "note": "Flat 1¢ per dollar no matter how you redeem, so this figure never moves. The real value lever isn't redemption, it's the earn rate: max out the single $2,000/quarter cap shared across both 5% picks, and the blended rate on $8,000/year of category spend plus 1% elsewhere lands well above a flat 2% card."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -126,8 +126,8 @@
   "status_perks": [],
   "services": [
     {
-      "name": "$250 welcome bonus",
-      "detail": "One-time $250 cash bonus after $1,000 in eligible purchases within the first 90 days."
+      "name": "$200 welcome bonus",
+      "detail": "One-time $200 cash bonus after $1,000 in eligible purchases within the first 90 days."
     },
     {
       "name": "U.S. Bank ExtendPay Plan",
