@@ -4,3 +4,5 @@
 - [Citi source route](reference_citi_source_route.md) — Citi fetches return 200 with every number blank; report Citi numerics unverified unless read by a JS-executing browser.
 - [Capital One source route](reference_capital_one_source_route.md) — disclosure modal has no URL so only annual fee and purchase APR are fetchable; the per-network Guide to Benefits PDFs are the rich source and do prove absence.
 - [BofA source route](reference_bofa_source_route.md) — product pages 200 with an "unavailable" body; use the card index plus the public sample agreement PDFs.
+- [U.S. Bank source route](reference_us_bank_source_route.md) — the Pricing and Terms link is in page markup, not visible copy; ask for every hyperlink, then query it in narrow passes.
+- [Wells Fargo source route](reference_wells_fargo_source_route.md) — everything is plain HTML, but the product page lists fewer benefits than the Guide to Benefits; verify insurance against the Guide.
