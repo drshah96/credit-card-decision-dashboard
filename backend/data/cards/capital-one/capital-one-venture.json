@@ -95,7 +95,7 @@
         "ratio": "1:1"
       },
       {
-        "name": "British Airways Executive Club",
+        "name": "British Airways Club",
         "type": "airline",
         "ratio": "1:1"
       },
@@ -234,8 +234,8 @@
     },
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "Not included on the standard (Visa Signature/Discover) version",
-      "level": "none"
+      "detail": "$1,500 per insured person on non-refundable common carrier tickets",
+      "level": "mid"
     },
     {
       "coverage": "Trip delay",
@@ -244,7 +244,7 @@
     },
     {
       "coverage": "Baggage delay/loss",
-      "detail": "$1,500/incident · 2 claims/yr",
+      "detail": "Delay $100/day up to $300 · lost luggage up to $3,000/trip",
       "level": "mid"
     },
     {
@@ -264,16 +264,16 @@
     },
     {
       "coverage": "Purchase protection",
-      "detail": "$10k/item · $50k/yr · 90 days",
-      "level": "strong"
+      "detail": "$1,000/claim · $25,000 per 12 months · 90 days",
+      "level": "mid"
     },
     {
       "coverage": "Extended warranty",
-      "detail": "+1 yr on ≤3-yr warranties · $10k/claim · $50k/yr",
+      "detail": "+1 yr on ≤2-yr warranties · $10k/claim · $50k per cardholder",
       "level": "good"
     }
   ],
-  "protection_note": "Purchase protection and extended warranty are surprisingly strong, identical caps to the Venture X. But travel insurance is thin: no trip cancellation/interruption, no trip delay, no emergency medical, and no cell-phone protection, all of which the Venture X includes.",
+  "protection_note": "The move to the Discover network brought real travel cover: trip cancellation and interruption at $1,500 per person, baggage delay, lost luggage and $1M of travel accident insurance. Still no trip delay, no emergency medical and no cell-phone protection, all of which the Venture X includes.",
   "rental_note": "Secondary CDW inside the US only (primary abroad), the opposite of the Venture X's always-primary $75k coverage. If you rent domestically often, pair this with a primary-coverage card or buy the rental counter's waiver.",
   "status_perks": [
     {

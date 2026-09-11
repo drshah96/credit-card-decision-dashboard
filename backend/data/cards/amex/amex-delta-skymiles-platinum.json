@@ -23,9 +23,9 @@
   "returned_payment_fee": "Up to $40",
   "returned_check_fee": null,
   "welcome_bonus": {
-    "bonus": "As high as 90,000 miles",
-    "requirement": "after you spend $3,000 in purchases in the first 6 months of Card Membership; welcome offers vary and you may not be eligible for an offer",
-    "estimated_value": "$1,035"
+    "bonus": "As high as 90,000 miles plus a $300 statement credit",
+    "requirement": "after you spend $4,000 in purchases in the first 6 months of Card Membership; welcome offers vary and you may not be eligible for an offer",
+    "estimated_value": "$1,035 for the miles, plus the $300 credit as cash"
   },
   "verdict": {
     "status": "situational",
@@ -50,7 +50,7 @@
     {
       "emoji": "🍽️",
       "multiplier": "2×",
-      "category": "U.S. restaurants, incl. takeout & delivery",
+      "category": "Restaurants worldwide, plus U.S. takeout & delivery",
       "highlight": false,
       "is_base": false
     },
@@ -121,7 +121,7 @@
       "default_value": 0,
       "tier": "easy",
       "removed": false,
-      "description": "Monthly U.S. rideshare credit with Uber, Lyft, Curb, Revel, or Alto.",
+      "description": "Monthly U.S. rideshare credit with Uber, Lyft, Curb or Alto.",
       "tips": [
         "Enroll, then one qualifying ride a month recovers the full $120."
       ]
@@ -148,7 +148,7 @@
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "Each year after renewal, one round-trip Main Cabin companion ticket to the U.S., Caribbean, or Central America; companion pays only taxes/fees ($22–$250).",
+      "description": "Each year after renewal, one round-trip Main Cabin companion ticket to the U.S., Caribbean, or Central America; companion pays only taxes and fees, capped at $80 on round-trip domestic itineraries and $250 on round-trip international ones.",
       "tips": [
         "One qualifying round trip erases the $350 fee. Best on expensive routes; value the slider by the fare you'd save.",
         "Book fare classes L, U, T, X or V; the cheapest basic buckets sometimes don't qualify."
@@ -177,8 +177,8 @@
     },
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "Yes (via Amex)",
-      "level": "good"
+      "detail": "Not offered on this card",
+      "level": "none"
     },
     {
       "coverage": "Trip delay",
@@ -192,8 +192,8 @@
     },
     {
       "coverage": "Emergency evacuation",
-      "detail": "Via Premium Global Assist",
-      "level": "good"
+      "detail": "Not offered; this card carries the standard Global Assist Hotline, which refers rather than pays",
+      "level": "none"
     },
     {
       "coverage": "Cell phone",
@@ -211,7 +211,7 @@
       "level": "good"
     }
   ],
-  "protection_note": "Thinner than the others: note the weaker $300/12-hour trip delay (vs. $500/6 hrs elsewhere) and secondary rental. It does keep Amex cell-phone protection and Premium Global Assist (incl. no-cost emergency evacuation coordination). For trips you want fully insured, reach for a card with real trip-cancellation limits.",
+  "protection_note": "Thinner than the others: the $300/12-hour trip delay is weaker than the $500/6 hrs elsewhere, the rental cover is secondary, and there is no trip cancellation or interruption insurance at all. Global Assist here is the standard hotline, which makes referrals rather than paying for an evacuation. It does keep Amex cell-phone protection. For trips you want fully insured, reach for a card with real trip-cancellation limits.",
   "rental_note": "Secondary only: it pays after your own auto policy. If you carry a card with free primary coverage, that's the better one to put rentals on.",
   "status_perks": [
     {
@@ -245,7 +245,7 @@
     },
     {
       "name": "Global Dining Access by Resy & no FX fees",
-      "detail": "The Resy credit runs through Global Dining Access; plus zero foreign transaction fees and Premium Global Assist."
+      "detail": "The Resy credit runs through Global Dining Access; plus zero foreign transaction fees and the Global Assist Hotline."
     }
   ],
   "additional_cards": {
@@ -286,7 +286,7 @@
       "date": "Jun 2026",
       "type": "add",
       "badge": "Refresh",
-      "text": "No fee increase; added a free second checked bag (domestic), a $120 rideshare credit and a $120 Resy credit, raised Delta Stays to $150, and made the companion certificate work on Delta Vacations."
+      "text": "No fee increase. Delta's announcement for this tier covers a free second checked bag on domestic flights and the companion certificate working on the flight portion of a Delta Vacations package. The rideshare, Resy and Delta Stays credits are all live on the card, but Delta did not date them to this refresh."
     },
     {
       "date": "2024",

@@ -1,12 +1,12 @@
 {
   "id": "citi-aadvantage-executive",
-  "name": "AAdvantage Executive",
+  "name": "AAdvantage Executive World Legend",
   "issuer": "Citi",
-  "network": "WORLD ELITE MASTERCARD",
+  "network": "WORLD LEGEND MASTERCARD",
   "points_program": "AAdvantage",
   "accent_color": "#7A0C1E",
   "annual_fee": 595,
-  "effective_cost": "High sticker fee, but a standalone Admirals Club membership runs $850+/yr on its own, so this can be a net saver if you actually use the lounges",
+  "effective_cost": "High sticker fee, but Citi values the included Admirals Club membership at up to $1,400 a year, so this can be a net saver if you actually use the lounges",
   "official_url": "https://www.citi.com/credit-cards/citi-aadvantage-executive-world-elite-mastercard",
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
@@ -35,7 +35,7 @@
   "earn_rates": [
     {
       "emoji": "🏨",
-      "multiplier": "10×",
+      "multiplier": "12×",
       "category": "Hotels & car rentals, via AAdvantage portals",
       "highlight": true,
       "is_base": false
@@ -114,14 +114,40 @@
     {
       "id": "lyft",
       "name": "Lyft Credit",
-      "subtitle": "$10/mo · up to $120/yr",
-      "max_annual": 120,
+      "subtitle": "$15/mo · up to $180/yr",
+      "max_annual": 180,
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "Up to $10 back per month on Lyft rides, after 3 qualifying rides in the month.",
+      "description": "Up to $15 back per month on Lyft rides, after 3 qualifying rides in the month.",
       "tips": [
-        "Requires 3 Lyft rides in a month before the $10 credit triggers; an occasional Lyft user may not clear it most months."
+        "Requires 3 Lyft rides in a month before the $15 credit triggers; an occasional Lyft user may not clear it most months."
+      ]
+    },
+    {
+      "id": "aa-vacations",
+      "name": "American Airlines Vacations Credit",
+      "subtitle": "$500 · calendar year",
+      "max_annual": 500,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Up to $500 in statement credits each calendar year on American Airlines Vacations packages.",
+      "tips": [
+        "Only pays on a packaged AA Vacations booking, so it is worth nothing unless you were already buying flight-plus-hotel that way."
+      ]
+    },
+    {
+      "id": "inflight-admirals",
+      "name": "Inflight & Admirals Club Credit",
+      "subtitle": "$100 · calendar year",
+      "max_annual": 100,
+      "default_value": 0,
+      "tier": "easy",
+      "removed": false,
+      "description": "Up to $100 in statement credits each calendar year on inflight and Admirals Club purchases. This replaced the old uncapped 25% inflight rebate.",
+      "tips": [
+        "Capped now, where the old rebate was not. Heavy inflight spenders come out worse than they did before the refresh."
       ]
     },
     {
@@ -131,10 +157,10 @@
       "max_annual": 120,
       "default_value": 0,
       "tier": "plan",
-      "removed": false,
-      "description": "Up to $10 back per month in Grubhub statement credits.",
+      "removed": true,
+      "description": "Withdrawn in the August 2026 refresh. It paid up to $10 back per month in Grubhub statement credits.",
       "tips": [
-        "Monthly, no rollover; needs a recurring Grubhub order to capture in full."
+        "Gone as of the World Legend refresh; the American Airlines Vacations and inflight credits replaced it."
       ]
     }
   ],
@@ -171,7 +197,7 @@
     {
       "name": "Loyalty Points",
       "strength": 3,
-      "note": "1 Loyalty Point per eligible mile earned, plus bonus points at set thresholds (10,000 bonus points at 50,000 points earned in a year, another 10,000 at 90,000), a real boost toward AAdvantage status for heavy spenders."
+      "note": "1 Loyalty Point per eligible mile earned, plus a 10,000 Loyalty Point bonus at each of 50,000, 90,000, 165,000 and 240,000 Loyalty Points in a year, so 40,000 in total. A real boost toward AAdvantage status for heavy spenders."
     }
   ],
   "services": [
@@ -179,10 +205,7 @@
       "name": "Free first checked bag",
       "detail": "First checked bag free on domestic American Airlines flights for the cardholder plus up to 8 companions on the same reservation, double Platinum Select's companion count."
     },
-    {
-      "name": "25% back on inflight purchases",
-      "detail": "Uncapped statement credit rebate on food, beverage, and Wi-Fi purchased onboard American Airlines flights."
-    },
+    
     {
       "name": "No blackout dates",
       "detail": "Standard AAdvantage award redemption term across the whole card family."
@@ -197,8 +220,8 @@
         "is_free": false,
         "benefits": [
           {
-            "text": "Own Admirals Club membership and lounge access",
-            "included": true
+            "text": "Own Admirals Club membership",
+            "included": false
           },
           {
             "text": "Earns AAdvantage miles on their spend (into your account)",
@@ -215,14 +238,14 @@
         ]
       }
     ],
-    "note": "At $175/yr, an authorized user gets their own Admirals Club membership (the same lounge benefit the primary pays $595 for), a strong deal for a travel companion who also flies American regularly."
+    "note": "$175 covers up to three authorized users, and their spend earns miles into your account. It does not buy them an Admirals Club membership: lounge access runs through the primary cardmember, who can bring up to 2 guests or immediate family."
   },
   "timeline": [
     {
       "date": "Aug 23, 2026",
       "type": "cut",
-      "badge": "Fee increase (upcoming)",
-      "text": "The card is renamed the Citi / AAdvantage Executive World Legend Mastercard and the annual fee rises from $595 to $695, with a real refresh behind it. AAdvantage Hotels and Cars goes from 10x to 12x. The Loyalty Points bonus doubles from 20,000 to 40,000, restructured as 10,000 at each of four milestones (50,000, 90,000, 165,000, and 240,000 points a year) rather than two. Three credits are added or raised: up to $500/yr on American Airlines Vacations packages, up to $100/yr on inflight and Admirals Club purchases, and Lyft up from $120 to $180. Omni Hotels Champion status arrives with an annual free night after qualifying stays, plus Avis President's Club through Aug 31, 2028. Authorized users stay at $175 for up to three, then $175 each. Applying before this date locks in the current $595 fee for the first year; existing cardholders get the new fee at their next anniversary."
+      "badge": "Refresh",
+      "text": "The card is renamed the Citi / AAdvantage Executive World Legend Mastercard and the annual fee rises from $595 to $695, with a real refresh behind it. AAdvantage Hotels and Cars goes from 10x to 12x. The Loyalty Points bonus doubles from 20,000 to 40,000, restructured as 10,000 at each of four milestones (50,000, 90,000, 165,000, and 240,000 points a year) rather than two. Three credits are added or raised: up to $500/yr on American Airlines Vacations packages, up to $100/yr on inflight and Admirals Club purchases, and Lyft up from $120 to $180. Omni Hotels Champion status arrives with an annual free night after qualifying stays, plus Avis President's Club through Aug 31, 2028. Authorized users stay at $175 for up to three, then $175 each. The Grubhub credit went at the same time, and the uncapped 25% inflight rebate became the capped $100 credit. Existing cardholders get the new fee at their next anniversary."
     },
     {
       "date": "2025",

@@ -97,11 +97,11 @@
       "id": "bags",
       "name": "Free Checked Bag",
       "subtitle": "1st bag \u00b7 you + up to 8 on reservation",
-      "max_annual": 140,
+      "max_annual": 180,
       "default_value": 0,
       "tier": "easy",
       "removed": false,
-      "description": "Southwest ended free checked bags for everyone on May 28, 2025 ($35 first bag / $45 second bag on most fares). Rapid Rewards cardmembers keep their first checked bag free, for the cardholder and up to 8 companions on the same reservation.",
+      "description": "Southwest ended free checked bags for everyone on May 28, 2025, and raised the fees to $45 first bag / $55 second bag on most fares from April 9, 2026. Rapid Rewards cardmembers keep their first checked bag free, for the cardholder and up to 8 companions on the same reservation.",
       "tips": [
         "Only the first bag is free on this card. Southwest's own A-List Preferred members and Choice Extra fares get a free second bag too; this tier doesn't.",
         "It covers everyone on the reservation, not just the cardholder: a family checking one bag each on a round trip can clear a big chunk of the $149 fee in a single trip."

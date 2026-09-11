@@ -179,7 +179,7 @@
     },
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "Confirmed benefit added over the Blue Card; exact per-trip and annual dollar limits are in the Guide to Benefits, not public marketing.",
+      "detail": "Confirmed benefit, same as the Blue Card; exact per-trip and annual dollar limits are in the Guide to Benefits, not public marketing.",
       "level": "mid"
     },
     {
@@ -194,8 +194,8 @@
     },
     {
       "coverage": "Extended warranty",
-      "detail": "Confirmed benefit added over the Blue Card; exact extension length is in the Guide to Benefits, not public marketing.",
-      "level": "mid"
+      "detail": "Not published on any Bilt tier page, Blue, Obsidian or Palladium.",
+      "level": "none"
     },
     {
       "coverage": "Cell phone protection",
@@ -203,7 +203,7 @@
       "level": "mid"
     }
   ],
-  "protection_note": "Adds trip cancellation/interruption, trip delay, and extended warranty on top of the Blue Card's baseline, a meaningfully fuller travel-protection set, though exact dollar limits sit in the non-public Guide to Benefits.",
+  "protection_note": "Trip cancellation/interruption, trip delay, rental CDW and purchase/cell-phone protection all match the Blue Card. No extended warranty is published on any Bilt tier, so Obsidian's protection set is not actually fuller than Blue's, only the annual fee is higher.",
   "rental_note": "MasterRental coverage applies first, ahead of your personal auto policy, so decline the counter's CDW and pay with this card. Exact dollar limits are in the Guide to Benefits.",
   "status_perks": [],
   "services": [
@@ -242,7 +242,7 @@
       "date": "Feb 7, 2026",
       "type": "add",
       "badge": "Relaunch",
-      "text": "Bilt Card 2.0 launches as a three-tier lineup (Blue/Obsidian/Palladium), replacing the original single Bilt Mastercard and removing its 5-transaction-per-month requirement to earn on rent. Cardless takes over as issuer from Wells Fargo; the old Wells Fargo card stopped working on Feb 6."
+      "text": "Bilt Card 2.0 launches as a three-tier lineup (Blue/Obsidian/Palladium), replacing the original single Bilt Mastercard and removing its 5-transaction-per-month requirement to earn on rent. Column N.A. takes over as issuing bank from Wells Fargo; the old Wells Fargo card stopped working on Feb 6."
     }
   ]
 }

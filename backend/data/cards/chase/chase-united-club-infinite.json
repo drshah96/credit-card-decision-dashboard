@@ -153,7 +153,7 @@
       "default_value": 0,
       "tier": "niche",
       "removed": false,
-      "description": "Statement credit on up to two Avis or Budget rentals per year, alongside complimentary Avis President's Club status.",
+      "description": "$50 in United TravelBank cash on each of your first two Avis or Budget rentals per year, booked through cars.united.com, alongside complimentary Avis President's Club status.",
       "tips": [
         "Only useful if you already rent from Avis/Budget specifically."
       ]
@@ -315,8 +315,8 @@
         "is_free": false,
         "benefits": [
           {
-            "text": "Own United Club membership and lounge access",
-            "included": true
+            "text": "Own United Club membership (they can only enter as your guest)",
+            "included": false
           },
           {
             "text": "10,000 bonus miles for adding one within the first 3 months (new accounts)",
