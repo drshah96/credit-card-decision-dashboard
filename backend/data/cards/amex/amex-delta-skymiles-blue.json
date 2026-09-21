@@ -21,7 +21,7 @@
   "pay_over_time_fee": "Up to 1.33% per month of each purchase placed in a Plan It plan",
   "late_payment_fee": "Up to $40",
   "returned_payment_fee": "Up to $40",
-  "returned_check_fee": null,
+  "returned_check_fee": "$38",
   "welcome_bonus": {
     "bonus": "10,000 miles",
     "requirement": "after you spend $1,000 in eligible purchases in the first 6 months of Card Membership",
@@ -36,7 +36,7 @@
     {
       "emoji": "🍽️",
       "multiplier": "2×",
-      "category": "U.S. restaurants, incl. takeout & delivery",
+      "category": "Restaurants worldwide, plus U.S. takeout & delivery",
       "highlight": true,
       "is_base": false
     },
@@ -82,7 +82,7 @@
     "airline_count": 0,
     "hotel_count": 0,
     "highlight": "SkyMiles can't be transferred out; they're stuck in Delta's program.",
-    "recent_changes": "You can transfer INTO SkyMiles from Amex MR (1:1), Chase UR and Capital One, useful for topping up an award."
+    "recent_changes": "You can transfer INTO SkyMiles from Amex Membership Rewards, useful for topping up an award. Chase and Capital One are not Delta transfer partners."
   },
   "credits": [],
   "insurance": [

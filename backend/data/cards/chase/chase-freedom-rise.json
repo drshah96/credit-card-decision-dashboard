@@ -94,6 +94,11 @@
   ],
   "insurance": [
     {
+      "coverage": "Rental car CDW",
+      "detail": "$60,000 · secondary in the US, primary abroad",
+      "level": "good"
+    },
+    {
       "coverage": "Trip cancel/interrupt",
       "detail": "$1,500/person \u00b7 $6,000/trip",
       "level": "mid"
@@ -114,8 +119,8 @@
       "level": "good"
     }
   ],
-  "protection_note": "Thin, as expected for a starter card: the basics (purchase protection, extended warranty, modest trip cancellation) are there, but no rental car coverage and no cell phone protection.",
-  "rental_note": "No rental car coverage at all; use a different card for rentals.",
+  "protection_note": "Thin, as expected for a starter card, but not as thin as it looks: purchase protection, extended warranty, modest trip cancellation and auto rental coverage are all there. No cell phone protection.",
+  "rental_note": "Auto Rental Coverage is included at up to $60,000: secondary in the US, primary outside it, for rentals up to 31 consecutive days. Decline the counter waiver and pay for the whole rental with the card.",
   "status_perks": [],
   "services": [
     {

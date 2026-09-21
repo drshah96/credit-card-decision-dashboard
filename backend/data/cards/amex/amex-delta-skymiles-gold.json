@@ -23,8 +23,8 @@
   "returned_payment_fee": "Up to $40",
   "returned_check_fee": null,
   "welcome_bonus": {
-    "bonus": "As high as 80,000 miles",
-    "requirement": "after you spend $2,000 in purchases in the first 6 months of Card Membership; welcome offers vary and you may not be eligible for an offer",
+    "bonus": "As high as 80,000 miles plus a $250 statement credit",
+    "requirement": "after you spend $3,000 in purchases in the first 6 months of Card Membership; welcome offers vary and you may not be eligible for an offer",
     "estimated_value": "$920"
   },
   "verdict": {
@@ -43,7 +43,7 @@
     {
       "emoji": "🍽️",
       "multiplier": "2×",
-      "category": "U.S. restaurants, incl. takeout & delivery",
+      "category": "Restaurants worldwide, plus U.S. takeout & delivery",
       "highlight": false,
       "is_base": false
     },
@@ -89,7 +89,7 @@
     "airline_count": 0,
     "hotel_count": 0,
     "highlight": "SkyMiles can't be transferred out; they're stuck in Delta's program.",
-    "recent_changes": "You can transfer INTO SkyMiles from Amex MR (1:1), Chase UR and Capital One, useful for topping up an award."
+    "recent_changes": "You can transfer INTO SkyMiles from Amex Membership Rewards, useful for topping up an award. Chase and Capital One are not Delta transfer partners."
   },
   "credits": [
     {
@@ -158,8 +158,8 @@
     },
     {
       "coverage": "Trip delay",
-      "detail": "$500 · after 6 hrs",
-      "level": "good"
+      "detail": "Not offered on this card",
+      "level": "none"
     },
     {
       "coverage": "Baggage Insurance Plan",
@@ -167,7 +167,7 @@
       "level": "mid"
     }
   ],
-  "protection_note": "The clearest gap versus the Platinum and Reserve tiers: no trip cancellation/interruption insurance at all. Trip delay coverage is actually better than the Platinum's ($500/6hrs vs $300/12hrs), an odd inversion, but real.",
+  "protection_note": "The clearest gap versus the Platinum and Reserve tiers: no trip cancellation or interruption insurance, and no trip delay coverage either. Amex lists neither for this card. What is left is the baggage plan, rental car loss and damage, and the everyday purchase protections.",
   "rental_note": "Secondary only: it pays after your own auto policy. If you rent often, put rentals on a card that includes free primary coverage instead.",
   "status_perks": [],
   "services": [
@@ -197,8 +197,8 @@
             "included": true
           },
           {
-            "text": "1st free checked bag when flying Delta",
-            "included": true
+            "text": "1st free checked bag in their own right",
+            "included": false
           },
           {
             "text": "Earns SkyMiles (into your account)",
@@ -211,7 +211,7 @@
         ]
       }
     ],
-    "note": "Additional Delta Gold cards are free, and each one extends the free-checked-bag perk to that cardholder when flying Delta."
+    "note": "Additional Delta Gold cards are free. The free checked bag is the primary cardholder's benefit, not theirs: it covers up to nine people on the primary's reservation, whether or not they hold a card, so an extra card adds nothing on a separate booking."
   },
   "timeline": [
     {

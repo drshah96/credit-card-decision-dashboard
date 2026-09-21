@@ -60,7 +60,7 @@
     },
     {
       "name": "Late payment / penalty APR",
-      "detail": "Unlike Citi Simplicity, this card does carry a late fee (up to $41) and a variable penalty APR that can apply after a late payment. Citi doesn't publish the exact penalty rate on its public summary page, so check your card agreement for the precise figure."
+      "detail": "Unlike Citi Simplicity, this card does carry a late fee (up to $41) and a variable penalty APR. Citi discloses the penalty APR on its public pricing summary; it applies if you pay late or a payment is returned."
     },
     {
       "name": "Citi Flex Pay",

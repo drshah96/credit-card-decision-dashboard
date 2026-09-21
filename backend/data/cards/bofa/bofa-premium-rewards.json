@@ -6,14 +6,14 @@
   "points_program": "Bank of America Rewards",
   "accent_color": "#1B2A56",
   "annual_fee": 95,
-  "effective_cost": "Moderate: $200 in travel credits offset roughly two-thirds of the fee if you use both",
+  "effective_cost": "Low: $200 in travel credits more than covers the $95 fee if you use both",
   "official_url": "https://www.bankofamerica.com/credit-cards/products/premium-rewards-credit-card/",
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
   "variable_apr": "19.49%-27.49%",
   "balance_transfer_apr": "19.49%-27.49%",
-  "balance_transfer_fee": "5% of the amount of each transaction",
+  "balance_transfer_fee": "4% to 5% of the amount of each transaction",
   "foreign_transaction_fee_rate": null,
   "cash_advance_apr": "28.49%-29.24%",
   "penalty_apr": "Up to 29.99%, based on your creditworthiness",
@@ -24,7 +24,7 @@
   "returned_check_fee": null,
   "welcome_bonus": {
     "bonus": "60,000 points",
-    "requirement": "after you spend $4,000 in purchases within the first 90 days of account opening",
+    "requirement": "after you apply online and spend $4,000 in purchases within the first 90 days of account opening",
     "estimated_value": "$600"
   },
   "verdict": {

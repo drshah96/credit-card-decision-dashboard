@@ -13,9 +13,9 @@
   "foreign_transaction_fee": false,
   "variable_apr": "19.49%-27.49%",
   "balance_transfer_apr": "19.49%-27.49%",
-  "balance_transfer_fee": "4% of the amount of each transaction",
+  "balance_transfer_fee": "5% of the amount of each transaction",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "29.24%",
+  "cash_advance_apr": "28.49%-29.24%",
   "penalty_apr": "Up to 29.99%, based on your creditworthiness",
   "penalty_apr_trigger": "Making a late payment; applies indefinitely once triggered",
   "pay_over_time_fee": "Monthly fee up to 1.72% of the purchase amount assigned to a BofA Custom Pay Plan",
@@ -24,7 +24,7 @@
   "returned_check_fee": null,
   "welcome_bonus": {
     "bonus": "75,000 points",
-    "requirement": "after you spend $5,000 in purchases within the first 90 days of account opening",
+    "requirement": "after you spend $2,500 in purchases within the first 90 days of account opening",
     "estimated_value": "$750"
   },
   "verdict": {
@@ -184,14 +184,14 @@
   "services": [
     {
       "name": "75,000-point welcome bonus",
-      "detail": "A $750 value, after $5,000 in purchases within the first 90 days."
+      "detail": "A $750 value, after $2,500 in purchases within the first 90 days."
     },
     {
       "name": "24/7 full-service concierge",
       "detail": "Book travel, dinner reservations, and event tickets through a dedicated concierge line."
     },
     {
-      "name": "Visa Signature Luxury Hotel Collection",
+      "name": "Visa Infinite Luxury Hotel Collection",
       "detail": "Room upgrades, late checkout, and other perks when booking through the Visa Signature Luxury Hotel Collection."
     },
     {
@@ -226,7 +226,7 @@
   },
   "timeline": [
     {
-      "date": "May 27, 2026",
+      "date": "May 26, 2026",
       "type": "neutral",
       "badge": "Program change",
       "text": "Preferred Rewards became BofA Rewards. The tiers were renamed (Gold and Platinum folded into Preferred Plus, Platinum Honors became Preferred Honors, Diamond became Premier) and existing members moved over automatically. The 25–75% card bonus survived the change and a 10% Member tier was added below it, so nobody earning a bonus before is earning less now. Preferred Honors and Premier also picked up subscription reimbursement worth up to $96 and $180 a year."

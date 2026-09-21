@@ -361,12 +361,12 @@
     },
     {
       "coverage": "Rental car CDW",
-      "detail": "Not offered on this card",
-      "level": "none"
+      "detail": "$60,000 · secondary in the US, primary abroad",
+      "level": "good"
     }
   ],
   "protection_note": "No trip cancellation/interruption and no rental car coverage, a real step down for a card with an annual fee. What's here (baggage, trip delay, purchase protection) is capped low ($500/item purchase protection, $500/traveler trip delay after a 12-hour trigger).",
-  "rental_note": "No rental car coverage of any kind is stated for this card; use a different card for rentals.",
+  "rental_note": "Auto Rental Coverage is included at up to $60,000: secondary in the US, primary outside it, for rentals up to 31 consecutive days. Decline the counter waiver and pay for the whole rental with the card.",
   "status_perks": [
     {
       "name": "Marriott Bonvoy Silver Elite Status",

@@ -29,7 +29,7 @@
   "returned_payment_fee": null,
   "returned_check_fee": null,
   "welcome_bonus": {
-    "bonus": "$250 cash bonus",
+    "bonus": "$200 cash bonus",
     "requirement": "after you spend $500 in purchases in the first 3 months from account opening",
     "estimated_value": null
   },

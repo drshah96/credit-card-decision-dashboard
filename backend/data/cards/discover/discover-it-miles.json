@@ -17,9 +17,9 @@
     "months": 15
   },
   "foreign_transaction_fee": false,
-  "variable_apr": "17.49%, 21.49%, 24.49% or 26.49%, based on creditworthiness",
-  "balance_transfer_apr": "17.49%, 21.49%, 24.49% or 26.49%, based on creditworthiness",
-  "balance_transfer_fee": "Intro fee of 3% for transfers posting by November 10, 2026 under the intro APR offer, then 5% of each transfer",
+  "variable_apr": "17.49% to 26.49%, based on creditworthiness",
+  "balance_transfer_apr": "17.49% to 26.49%, based on creditworthiness",
+  "balance_transfer_fee": "5% on transfers posted at a promotional APR, none at the standard Transfer APR",
   "foreign_transaction_fee_rate": null,
   "cash_advance_apr": "28.49%",
   "penalty_apr": null,
@@ -52,23 +52,23 @@
     "currency": "Discover Miles",
     "redemption_options": [
       {
-        "method": "Partner gift cards, which carry at least 5% added value",
-        "cpp": 1.05,
-        "best": true
-      },
-      {
         "method": "Statement credit against a travel purchase",
         "cpp": 1.0,
-        "best": false
+        "best": true
       },
       {
         "method": "Deposit to a bank account, in any amount",
         "cpp": 1.0,
+        "best": true
+      },
+      {
+        "method": "Pay with PayPal at select merchants",
+        "cpp": 1.0,
         "best": false
       }
     ],
-    "per_100k": "$1,050",
-    "note": "The thing that genuinely sets this apart: cash is worth exactly as much as travel. Discover says so twice on its own page, that miles \"keep the same value\" however you redeem, and 100 miles is $1 either way. Most travel cards quietly cut cash redemptions to half a cent, which is how a 1.5x card turns into 0.75% back if you ever stop booking flights. That does not happen here, so there is no penalty for taking the money. Travel redemptions work as a statement credit against a purchase you already made, covering airfare, hotels, rideshares, gas and restaurants, rather than a booking portal you have to shop inside. Gift cards became available to Miles cardholders with the move to Capital One and carry the same guaranteed 5% minimum added value as the rest of the lineup, which makes them the best standing option, though Discover's own Miles page still lists only the cash and travel routes. Discover also prints its own hedge that redemption rates may vary and are subject to change."
+    "per_100k": "$1,000",
+    "note": "The thing that genuinely sets this apart: cash is worth exactly as much as travel. Discover says so twice on its own page, that miles \"keep the same value\" however you redeem, and 100 miles is $1 either way. Most travel cards quietly cut cash redemptions to half a cent, which is how a 1.5x card turns into 0.75% back if you ever stop booking flights. That does not happen here, so there is no penalty for taking the money. Travel redemptions work as a statement credit against a purchase you already made, covering airfare, hotels, rideshares, gas and restaurants, rather than a booking portal you have to shop inside. You can also pay with PayPal at select merchants using miles. Discover's Miles page lists only these three routes, no gift cards, unlike the rest of the Discover lineup. Discover also prints its own hedge that redemption rates may vary and are subject to change."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -128,16 +128,16 @@
       "detail": "You are never held responsible for unauthorized purchases. No enrollment needed."
     },
     {
-      "name": "Free FICO score",
-      "detail": "Your FICO score from TransUnion on your statement and in the app, with the factors moving it. Discover offers this to non-cardholders too, so it is not really exclusive."
+      "name": "CreditWise",
+      "detail": "Your FICO Score 8 from TransUnion on your statement and in the app, with the factors moving it. Discover offers this to non-cardholders too, so it is not really exclusive."
     },
     {
       "name": "Social Security number alerts",
-      "detail": "Daily dark web scans for your SSN plus new-account alerts on your credit report. Requires enrollment, and only the primary cardmember can sign up."
+      "detail": "Daily dark web scans for your SSN plus new-account alerts on your credit report. Requires enrollment."
     },
     {
-      "name": "Freeze It",
-      "detail": "Freeze the account from the app or website to block new purchases and cash advances if you misplace the card."
+      "name": "Card Lock",
+      "detail": "Lock the card from the app to block new purchases and cash advances if you misplace it."
     },
     {
       "name": "24/7 US-based customer service",
@@ -187,10 +187,16 @@
       "text": "Capital One begins moving Discover card accounts onto its own platform on July 27, in waves running through 2027. Account numbers, existing earn rates, rewards balances, APRs and the Discover network branding all stay put, and migrated accounts also pick up the new Capital One earning routes. Redemption changes though: the gift card minimum rises from $5 to $25, and Pay with Rewards through Apple Pay goes away."
     },
     {
+      "date": "June 2026",
+      "type": "neutral",
+      "badge": "New agreement",
+      "text": "The Discover cardmember agreement is replaced by a Capital One one, effective June 30. New accounts run under the Credit Card Agreement for Discover by Capital One, N.A., and applications now open on capitalone.com. Discover no longer publishes a per-card rates and fees document; the one that replaced it covers every Discover product at once."
+    },
+    {
       "date": "May 2025",
       "type": "neutral",
       "badge": "Acquisition",
-      "text": "Capital One completes its acquisition of Discover Financial Services. Discover Bank later merges into Capital One, N.A., though the cards keep Discover branding and terms."
+      "text": "Capital One completes its acquisition of Discover Financial Services. Discover Bank later merges into Capital One, N.A. The cards keep Discover branding, but the governing terms move to Capital One's own agreement in June 2026."
     },
     {
       "date": "October 2018",
