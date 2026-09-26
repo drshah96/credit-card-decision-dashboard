@@ -20,9 +20,16 @@ export function Footer() {
         informational purposes only and isn't financial advice.
         {/* Separate from TERMS_AS_OF above on purpose: that line is the freshness
             disclaimer about the offers, this one is the audit trail. Readers asking
-            "when did someone actually check this?" want a date, not a month. */}
+            "when did someone actually check this?" want a date, not a month.
+
+            Two sentences rather than one, because a single sentence spending both
+            values claimed every card in the catalogue had been re-verified on that
+            date. CARDS_AUDITED is pinned to the card-file count, so adding a card
+            silently backdated its verification. The count and the date are true
+            independently; together they were not. */}
         <div style={{ marginTop: 10 }}>
-          All {CARDS_AUDITED} cards last re-verified against issuer sources on {LAST_AUDITED}.
+          All {CARDS_AUDITED} cards here are sourced from the issuer's own terms. The last full
+          issuer-by-issuer re-check finished {LAST_AUDITED}.
         </div>
         {/* Framed as "spotted something wrong" rather than a generic "contact us":
             the corrections this invites are the ones worth having on a site whose

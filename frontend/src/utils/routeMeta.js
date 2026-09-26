@@ -14,7 +14,7 @@ export const SITE_URL = "https://thewalletaudit.com";
  * months behind the clock, turning silent staleness into a red build that
  * demands either a data re-verification or a conscious bump.
  */
-export const TERMS_AS_OF = "August 2026";
+export const TERMS_AS_OF = "September 2026";
 
 /**
  * The date the full issuer-by-issuer re-verification last ran, as opposed to
@@ -24,14 +24,19 @@ export const TERMS_AS_OF = "August 2026";
  * actually been re-checked against official sources, not on incidental edits
  * to a single card.
  */
-export const LAST_AUDITED = "August 7, 2026";
+export const LAST_AUDITED = "September 6, 2026";
 
 /**
- * How many cards that audit covered. Hardcoded because the Footer renders in
+ * How many cards are in the catalogue. Hardcoded because the Footer renders in
  * the app shell with no card data in scope, and fetching the catalogue just to
  * print a number in a disclaimer isn't worth a network dependency. A test
- * counts the card JSON files and fails if this drifts, so adding a card turns
- * the build red rather than quietly making the footer lie.
+ * counts the card JSON files and fails if this drifts.
+ *
+ * It deliberately does not mean "how many cards the last audit covered". The
+ * footer used to spend this number and LAST_AUDITED in one sentence, which made
+ * adding a card assert that the new card had been re-verified on a date that
+ * predated it. The two are separate claims in the copy now, so this can track
+ * the file count honestly.
  */
 export const CARDS_AUDITED = 109;
 export const SITE_NAME = "The Wallet Audit";

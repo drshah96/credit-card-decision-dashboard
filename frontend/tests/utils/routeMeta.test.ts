@@ -124,9 +124,16 @@ describe("TERMS_AS_OF", () => {
 
 describe("LAST_AUDITED / CARDS_AUDITED", () => {
   // The footer's audit-trail line names a date and a card count. Both are
-  // hand-maintained, and a wrong count is worse than no count: it asserts
-  // coverage the audit never had. These lock both to reality the same way
-  // TERMS_AS_OF is locked to the clock.
+  // hand-maintained, so these lock them to reality the same way TERMS_AS_OF is
+  // locked to the clock.
+  //
+  // The count is pinned to the card-file count, which is only honest because
+  // the footer states the count and the date as separate claims. While they
+  // shared one sentence, this pin actively caused the lie it looks like it
+  // prevents: adding a card raised the count, and the sentence then asserted
+  // the new card had been re-verified on a date that predated it. If that copy
+  // is ever recombined, this pin has to become "cards the audit covered" and
+  // stop deriving from the file count.
   const countCardFiles = () =>
     readdirSync(CARDS_DIR, { withFileTypes: true })
       .filter((issuer) => issuer.isDirectory() && issuer.name !== "staging")
