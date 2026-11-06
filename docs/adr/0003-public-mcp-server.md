@@ -1512,6 +1512,18 @@ bonus" on `bofa-premium-rewards`, plus some credit descriptions and timeline ent
   there. Removing them is a separate content job: under A3 `services` is a verified fact, so editing
   a row resets that card's date until it is re-checked.
 
+**A19. Keep-warm runs around the clock (O10).** The service stays awake at all hours, using up to
+744 of the 750 free hours, so a caller never meets an overnight cold start. Exhausting the hours
+suspends every free service for the rest of the month, so watch usage on Render's dashboard.
+
+- The `/mcp` probe runs at all hours. `/health` still skips 04:00-10:59 UTC, because it wakes Neon
+  and the cold-start problem is Render's, so this adds no overnight Neon compute. A database outage
+  in those hours is noticed at 11:00 UTC, as it was before.
+
+**A20. The site's copy now matches the data.** This settles what A12 left open. `default_value`
+stays $0 on almost every credit, and the Methodology page, the crawlable page text, the feedback form
+and the README now say credits count at what you say you'd use.
+
 **Defaults taken while owner decisions are open.** Each can change before release:
 
 - **Hosting:** free tier, as in D1.
@@ -1857,8 +1869,8 @@ reviewed before any network surface exists.
 - **O9.** Done 2026-11-06. Before `fix/footer-audit-dates` merges, change "full
   issuer-by-issuer re-check" so it does not cover the 23 unchecked cobrand cards, for
   example "86 of 109 cards".
-- **O10.** Decide whether keep-warm should run around the clock: 744 h against
-  750 h, versus overnight cold starts for callers.
+- **O10.** Done 2026-11-06 (D13-A19). Decide whether keep-warm should run around the clock:
+  744 h against 750 h, versus overnight cold starts for callers.
 - **O11.** Never run `drafts promote` against the production `DATABASE_URL`
   (D3).
 
@@ -1868,7 +1880,8 @@ reviewed before any network surface exists.
   runners wait for step 9 (assumption 1), and AWS is untested.
 - **The client-IP header assumption** (assumption 2) affects only the
   failed-auth limiter, and step 9 tests it.
-- **Overnight cold starts** against clients that keep the 60 s default.
+- **Cold starts** against clients that keep the 60 s default, now only if keep-warm fails or
+  the free hours run out (D13-A19).
 - **Shared fate with the site's API** under abuse, bounded by D8.
 - **Parity guarantees agreement, not correctness.** A deliberate TS rule
   change, regenerated with `-u`, makes both sides wrong consistently.
