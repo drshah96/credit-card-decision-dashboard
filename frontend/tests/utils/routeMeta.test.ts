@@ -5,6 +5,7 @@ import {
   allRouteMeta,
   cardRouteMeta,
   CARDS_AUDITED,
+  CARDS_LAST_AUDITED,
   issuerRouteMeta,
   LAST_AUDITED,
   maxCreditValue,
@@ -146,6 +147,11 @@ describe("LAST_AUDITED / CARDS_AUDITED", () => {
 
   it("counts every card in the catalogue", () => {
     expect(CARDS_AUDITED).toBe(countCardFiles());
+  });
+
+  it("never claims the re-check covered more cards than exist", () => {
+    expect(CARDS_LAST_AUDITED).toBeGreaterThan(0);
+    expect(CARDS_LAST_AUDITED).toBeLessThanOrEqual(countCardFiles());
   });
 
   it("is a parseable date that is not in the future", () => {

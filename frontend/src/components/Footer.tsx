@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { CARDS_AUDITED, LAST_AUDITED, TERMS_AS_OF } from "../utils/routeMeta";
+import { CARDS_AUDITED, CARDS_LAST_AUDITED, LAST_AUDITED, TERMS_AS_OF } from "../utils/routeMeta";
 
 export function Footer() {
   return (
@@ -28,8 +28,9 @@ export function Footer() {
             silently backdated its verification. The count and the date are true
             independently; together they were not. */}
         <div style={{ marginTop: 10 }}>
-          All {CARDS_AUDITED} cards here are sourced from the issuer's own terms. The last full
-          issuer-by-issuer re-check finished {LAST_AUDITED}.
+          All {CARDS_AUDITED} cards here are sourced from the issuer's own terms. The last
+          issuer-by-issuer re-check finished {LAST_AUDITED} and covered {CARDS_LAST_AUDITED} of
+          them.
         </div>
         {/* Framed as "spotted something wrong" rather than a generic "contact us":
             the corrections this invites are the ones worth having on a site whose

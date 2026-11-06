@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { Footer } from "@/components/Footer";
+import { CARDS_LAST_AUDITED, LAST_AUDITED } from "@/utils/routeMeta";
 
 describe("Footer", () => {
   it("links to the methodology page", () => {
@@ -29,5 +30,17 @@ describe("Footer", () => {
       "href",
       "mailto:hello@thewalletaudit.com",
     );
+  });
+
+  // A pass that skipped cards must say so, because the MCP server reports those cards as unverified.
+  it("says how many cards the last re-check covered, and never calls it full", () => {
+    const { container } = render(
+      <MemoryRouter>
+        <Footer />
+      </MemoryRouter>,
+    );
+    const text = container.textContent ?? "";
+    expect(text).toContain(`finished ${LAST_AUDITED} and covered ${CARDS_LAST_AUDITED} of them`);
+    expect(text).not.toMatch(/full\s+issuer-by-issuer/i);
   });
 });

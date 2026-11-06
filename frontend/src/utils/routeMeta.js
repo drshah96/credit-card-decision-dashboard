@@ -17,14 +17,17 @@ export const SITE_URL = "https://thewalletaudit.com";
 export const TERMS_AS_OF = "September 2026";
 
 /**
- * The date the full issuer-by-issuer re-verification last ran, as opposed to
+ * The date the last issuer-by-issuer re-verification finished, as opposed to
  * TERMS_AS_OF's month-level claim about the offers themselves. Kept separate
  * because the two answer different questions: TERMS_AS_OF is the freshness
  * disclaimer, this is the audit trail. Bump it only when every issuer has
  * actually been re-checked against official sources, not on incidental edits
- * to a single card.
+ * to a single card. Update CARDS_LAST_AUDITED with it.
  */
 export const LAST_AUDITED = "September 6, 2026";
+
+/** How many cards that re-check really covered. The September pass skipped the 23 cobrand cards. */
+export const CARDS_LAST_AUDITED = 86;
 
 /**
  * How many cards are in the catalogue. Hardcoded because the Footer renders in
