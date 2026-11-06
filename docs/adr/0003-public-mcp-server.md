@@ -1,5 +1,5 @@
 # 0003 — Public, key-authenticated MCP server
-Status: proposed
+Status: accepted
 Date: 2026-11-06
 
 ## Context
@@ -258,7 +258,7 @@ scratchpad, not committed):**
   Cloudflare edge, but Render's, not our zone.
 - Keep-warm runs against the raw origin from GitHub-hosted runners succeeded on
   2026-11-06 (`gh run list`).
-- `mcp.thewalletaudit.com` has no DNS record today.
+- `mcp.thewalletaudit.com` had no DNS record when this was written. It now does (D13-A13).
 
 ### What I am assuming, and what each assumption gates
 
@@ -278,6 +278,7 @@ scratchpad, not committed):**
 3. **Render issues a certificate for a grey-cloud custom domain.**
    - Precedent: the frontend root is DNS-only and served on Render's
      certificate, per `render.yaml`'s domain comments.
+   - Confirmed on 2026-11-06: Render issued the certificate for this hostname.
 4. **Saving an env var in the Render dashboard redeploys the service within
    minutes.** This gates the revocation latency in Decision 7. The owner
    measures it once.
@@ -304,7 +305,8 @@ scratchpad, not committed):**
   - That pass skipped all 23 cobrand cards.
   - Once this server reports those 23 as `not_verified`, site and MCP will
     contradict each other.
-  - Owner action O9.
+  - Fixed by owner action O9: the merged copy says the re-check covered 86 of the 109
+    cards. It reaches the live site with the next release to `main`.
 - **The site's tie order depends on the browser locale.** `localeCompare`
   without a locale uses the user's default collation, and ties reach it on
   real data. Every locale tested agrees on today's names. The parity pin in
@@ -317,6 +319,9 @@ scratchpad, not committed):**
 ---
 
 ## Decision
+
+D13 overrides anything earlier that it conflicts with, including field names and server
+wording in D5. For exact served text, the code and the surface snapshot are authoritative.
 
 Ship a Python MCP server inside the existing API process, on a new DNS-only
 hostname `mcp.thewalletaudit.com`, behind a guard we own. It serves five
@@ -1451,9 +1456,10 @@ holds. Publishing "realistic" here would be false, and field names are one-way.
 - **What the card changes.** Outbound bandwidth over the plan's 5 GB is then billed at
   $0.15/GB instead of suspending services, and no spend limit is documented for it. Build
   minutes are billed too, but those can take a spend limit. Watch usage on the Billing page.
-- **Reachability so far.** `GET /healthz` on the hostname returned 200 from Google Cloud
-  Shell with no challenge, for curl, python-httpx and node user agents. POST, AWS and
-  GitHub-hosted runners are not yet tested.
+- **Reachability so far.** From Google Cloud Shell, with curl, python-httpx and node user
+  agents, `GET /healthz` on the hostname returned 200 and `POST /mcp` returned 404. Both reached
+  `uvicorn` with no challenge. The 404 is expected because MCP is not deployed yet, so this
+  proves the path, not the endpoint. AWS and GitHub-hosted runners are not yet tested.
 
 **A14. No `checksPass` deploys, and no calendar test in CI.**
 
@@ -1467,6 +1473,44 @@ holds. Publishing "realistic" here would be false, and field names are one-way.
   `checksPass` would only repeat a check that already passed.
 - **`TERMS_AS_OF` age left CI.** A date passing 75 days failed the required `frontend` check
   with no code change. `terms-freshness.yml` now opens an issue weekly instead.
+
+**A15. Rankings use a best case, so the wording says so.** `best_cpp` is the value of the
+redemption option flagged as best, and the methodology page calls it the "best realistic
+outcome, not a guarantee". Served text now says "best realistic cents per point". The same
+reasoning as A12 applies: without "best", a best case reads as a typical result. Version 1.0.0
+had not been published, so its digest was updated in place.
+
+**A16. Keys sent in a URL stayed out of our logs but not uvicorn's.** A pre-release check against
+a real server found that `POST /mcp?key=...` got its 401, and uvicorn's access log then recorded
+the full URL. `TestClient` never runs that log, so the log-scan test could not see it.
+
+- A filter on `uvicorn.access` now drops the query on `/mcp` and masks anything shaped like a key
+  on other routes. `test_access_log.py` pins this against a real uvicorn server.
+- This covers only logs this process writes. Render's and Cloudflare's own request logs are outside
+  it, so a key sent in a URL should still be treated as exposed and be rotated.
+- The access log's client address field is unchanged, so D7's "never an IP" holds for the
+  `backend.mcp_server` logger only.
+
+**A17. Corrections from a pre-release code review.**
+
+- **Busy before quota.** D8's steps 6 and 7 swap. A 503 did no work, so it no longer spends the
+  key's quota, and a client retrying as told cannot talk itself into a 429.
+- **Blank searches.** A `find_cards` query with nothing left after normalizing, such as spaces or
+  `®`, matches no cards. It used to match all 109 and report them as results.
+- **Logging survives odd input.** A non-string tool name is logged as `<unknown>` and no longer
+  raises after the response. `client` is null unless both name and version are strings.
+- **Reading card files.** Staging is judged relative to the cards folder, so a parent folder named
+  `staging` cannot empty the digests and mark every card `not_verified`. Files are read as UTF-8.
+
+**A18. "Sign-up offers are not served" was too broad.** D5 withholds the `welcome_bonus` field, and
+that still holds. But free text also carries offers: `services` rows such as "60,000-point welcome
+bonus" on `bofa-premium-rewards`, plus some credit descriptions and timeline entries.
+
+- Served text now says the field is not served, and that free text may mention an offer that may
+  be out of date.
+- The card data is unchanged. The site's card page shows `services` too, so these rows are live
+  there. Removing them is a separate content job: under A3 `services` is a verified fact, so editing
+  a row resets that card's date until it is re-checked.
 
 **Defaults taken while owner decisions are open.** Each can change before release:
 
@@ -1569,8 +1613,8 @@ route changes, and no indexed URL moves. The new host serves the existing
    `card-author.md`.
 7. **Owner.** DNS, domain, `MCP_API_KEYS` with a smoke key, and the
    `MCP_SMOKE_KEY` repository secret.
-8. **Merge and release** to `main` through the normal path. Render deploys
-   after checks.
+8. **Merge and release** to `main` through the normal path. Branch protection requires
+   `backend` and `frontend` before the merge, and Render deploys what lands on `main` (D13-A14).
 9. **Run `mcp-smoke`.** Record its results in `backend/README.md`. If
    `mcp.thewalletaudit.com` is challenged, stop: assumption 1 failed, and the
    hostname decision reopens before any key goes to someone else.
@@ -1795,9 +1839,9 @@ reviewed before any network surface exists.
 
 ### Owner actions
 
-- **O1.** In Cloudflare DNS, add a CNAME from `mcp` to
+- **O1.** Done 2026-11-06. In Cloudflare DNS, add a CNAME from `mcp` to
   `thewalletaudit-api.onrender.com`, with proxy status set to DNS only.
-- **O2.** In Render, add `mcp.thewalletaudit.com` to `thewalletaudit-api`
+- **O2.** Done 2026-11-06. In Render, add `mcp.thewalletaudit.com` to `thewalletaudit-api`
   (Blueprint sync or the dashboard) and wait for the certificate.
 - **O3.** In Render, set `MCP_API_KEYS`. Confirm an env-var save redeploys, and
   time a revocation once.
@@ -1810,9 +1854,9 @@ reviewed before any network surface exists.
   and set an expiry.
 - **O8.** Decide the key-issuance terms, and get qualified advice before any
   use by a consumer-facing product.
-- **O9.** Before `fix/footer-audit-dates` merges, change "full issuer-by-issuer
-  re-check" so it does not cover the 23 unchecked cobrand cards, for example
-  "86 of 109 cards".
+- **O9.** Done 2026-11-06. Before `fix/footer-audit-dates` merges, change "full
+  issuer-by-issuer re-check" so it does not cover the 23 unchecked cobrand cards, for
+  example "86 of 109 cards".
 - **O10.** Decide whether keep-warm should run around the clock: 744 h against
   750 h, versus overnight cold starts for callers.
 - **O11.** Never run `drafts promote` against the production `DATABASE_URL`
@@ -1820,8 +1864,8 @@ reviewed before any network surface exists.
 
 ### Open risks
 
-- **Datacenter reachability** is unproven until step 9 (assumption 1). It is
-  mitigated by design, not yet by evidence.
+- **Datacenter reachability** is proven from Google Cloud only (D13-A13). GitHub-hosted
+  runners wait for step 9 (assumption 1), and AWS is untested.
 - **The client-IP header assumption** (assumption 2) affects only the
   failed-auth limiter, and step 9 tests it.
 - **Overnight cold starts** against clients that keep the 60 s default.
