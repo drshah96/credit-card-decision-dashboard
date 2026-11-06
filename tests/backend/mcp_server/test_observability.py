@@ -7,9 +7,20 @@ from collections.abc import Iterator
 from contextlib import contextmanager
 from dataclasses import replace
 
+import pytest
+
 from backend.mcp_server.observability import RejectionAggregator, logger
 
-from .http_helpers import FAST, HEADERS, INITIALIZE, auth, call_tool, enabled_config, running
+from .http_helpers import (
+    FAST,
+    HEADERS,
+    INITIALIZE,
+    auth,
+    call_tool,
+    enabled_config,
+    rpc,
+    running,
+)
 
 IP_LIKE = re.compile(r"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b")
 
@@ -75,6 +86,39 @@ def test_client_name_is_read_from_the_newer_protocols_meta(snapshot):
     with captured() as logs, running(snapshot, config) as client:
         client.post("/mcp", json=message, headers=auth(key))
     assert logs.events("mcp_request")[0]["client"] == "example-agent/2"
+
+
+@pytest.mark.parametrize("name", [[], {}, 1, None, True, ["get_card"], {"name": "get_card"}])
+def test_a_tool_name_of_the_wrong_type_is_still_logged(snapshot, name):
+    config, key = enabled_config()
+    with captured() as logs, running(snapshot, config) as client:
+        response = client.post(
+            "/mcp", json=rpc("tools/call", {"name": name, "arguments": {}}), headers=auth(key)
+        )
+    assert response.status_code == 200
+    assert logs.events("mcp_request")[0]["tool"] == "<unknown>"
+
+
+@pytest.mark.parametrize(
+    "client_info",
+    [
+        {},
+        {"name": "agent"},
+        {"version": "1"},
+        {"name": 1, "version": 2},
+        {"name": ["agent"], "version": "1"},
+        {"name": None, "version": None},
+    ],
+)
+def test_a_client_that_does_not_identify_itself_is_logged_as_null(snapshot, client_info):
+    config, key = enabled_config()
+    message = rpc(
+        "initialize",
+        {"protocolVersion": "2025-06-18", "capabilities": {}, "clientInfo": client_info},
+    )
+    with captured() as logs, running(snapshot, config) as client:
+        client.post("/mcp", json=message, headers=auth(key))
+    assert logs.events("mcp_request")[0]["client"] is None
 
 
 def test_rejections_are_aggregated_not_logged_per_request(snapshot):

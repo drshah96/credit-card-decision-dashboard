@@ -216,6 +216,13 @@ class McpEndpoint:
 
     async def _serve(self, live, record, scope, receive, send, request_id, headers) -> None:
         started = self.clock()
+        # Capacity comes first: a busy refusal did no work, so it must not spend the key's quota.
+        if live.in_flight >= live.limits.max_in_flight:
+            await _respond(
+                send, 503, _jsonrpc_error("The server is busy."), [(b"retry-after", b"1")]
+            )
+            _log_request(request_id, record, None, headers, 503, "busy", started, self, 0, 0)
+            return
         retry_after = self._charge_key(live, record)
         if retry_after is not None:
             await _respond(
@@ -227,12 +234,6 @@ class McpEndpoint:
             _log_request(
                 request_id, record, None, headers, 429, "rate_limited", started, self, 0, 0
             )
-            return
-        if live.in_flight >= live.limits.max_in_flight:
-            await _respond(
-                send, 503, _jsonrpc_error("The server is busy."), [(b"retry-after", b"1")]
-            )
-            _log_request(request_id, record, None, headers, 503, "busy", started, self, 0, 0)
             return
 
         live.in_flight += 1
@@ -460,7 +461,10 @@ def _client_name(params: dict) -> str | None:
         info = meta.get(_CLIENT_INFO_META_KEY)
     if not isinstance(info, dict):
         return None
-    client = f"{info.get('name')}/{info.get('version')}"
+    name, version = info.get("name"), info.get("version")
+    if not (isinstance(name, str) and isinstance(version, str)):
+        return None
+    client = f"{name}/{version}"
     return client if _CLIENT_TEXT.match(client) else None
 
 
@@ -491,7 +495,7 @@ def _safe_request_fields(parsed: dict | None, headers: dict) -> dict:
     fields["client"] = _client_name(params)
     if method == "tools/call":
         name = params.get("name")
-        fields["tool"] = name if name in _KNOWN_TOOLS else "<unknown>"
+        fields["tool"] = name if isinstance(name, str) and name in _KNOWN_TOOLS else "<unknown>"
         arguments = params.get("arguments")
         if isinstance(arguments, dict):
             ids = arguments.get("card_ids")

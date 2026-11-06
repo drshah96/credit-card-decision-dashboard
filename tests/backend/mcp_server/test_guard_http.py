@@ -359,6 +359,35 @@ async def test_the_in_flight_limit_answers_503(snapshot, monkeypatch):
     assert dict(second.messages[0]["headers"])[b"retry-after"] == b"1"
 
 
+async def test_a_busy_refusal_does_not_spend_the_keys_quota(snapshot, monkeypatch):
+    config, key = enabled_config(replace(FAST, max_in_flight=1), per_minute=2)
+    _enable(monkeypatch, config, snapshot)
+    body = json.dumps(INITIALIZE).encode()
+    entered = anyio.Event()
+    release = anyio.Event()
+
+    async def slow_app(scope, receive, send):
+        entered.set()
+        await release.wait()
+
+    async def receive():
+        return {"type": "http.request", "body": body, "more_body": False}
+
+    refused = [_Sink() for _ in range(3)]
+    async with mcp_endpoint.run():
+        mcp_endpoint._live.app = slow_app
+        async with anyio.create_task_group() as tasks:
+            tasks.start_soon(mcp_endpoint, _scope(key), receive, _Sink())
+            await entered.wait()
+            for sink in refused:
+                await mcp_endpoint(_scope(key), receive, sink)
+            release.set()
+        window = mcp_endpoint._live.key_windows[key.split("_")[1]]
+        assert window.minute_count == 1
+        assert window.day_count == 1
+    assert [sink.status for sink in refused] == [503, 503, 503]
+
+
 async def test_the_official_client_completes_list_and_call(snapshot, monkeypatch):
     config, key = enabled_config()
     _enable(monkeypatch, config, snapshot)

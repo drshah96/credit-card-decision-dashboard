@@ -254,6 +254,18 @@ async def test_search_ignores_trademark_marks_and_case(snapshot):
     assert [c["card_id"] for c in marked["cards"]] == ["chase-sapphire-reserve"]
 
 
+@pytest.mark.parametrize("query", ["   ", "\u00ae", "\u2122 \u2120"])
+async def test_a_search_with_nothing_to_look_for_matches_no_cards(snapshot, query):
+    async with connect(snapshot) as client:
+        found = structured(
+            await client.call_tool("find_cards", {"query": query, "issuer": "Chase"})
+        )
+    assert found["total_matches"] == 0
+    assert found["cards"] == []
+    assert found["next_offset"] is None
+    assert found["query"]["query"] == query
+
+
 async def test_wallet_mode_pools_and_hides_twins(snapshot):
     async with connect(snapshot) as client:
         wallet = structured(

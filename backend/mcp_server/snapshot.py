@@ -19,6 +19,7 @@ from backend.mcp_server.ranking import (
 from backend.mcp_server.schemas import Meta
 from backend.models import Card, CardSummary
 from backend.refresh.state import VerificationState, facts_digest, load_all
+from backend.scripts.seed_catalog import is_staged
 from backend.services.cards import get_card_summaries, get_cards
 
 CARDS_DIR = Path(__file__).resolve().parent.parent / "data" / "cards"
@@ -42,11 +43,12 @@ class CatalogSnapshot:
     digest: str
 
 
-def _read_facts_digests() -> dict[str, str]:
+def _read_facts_digests(cards_dir: Path = CARDS_DIR) -> dict[str, str]:
     digests = {}
-    for path in CARDS_DIR.glob("**/*.json"):
-        if "staging" not in path.parts:
-            card = json.loads(path.read_text())
+    for path in cards_dir.glob("**/*.json"):
+        # Relative, so a parent folder named staging cannot hide the whole catalog.
+        if not is_staged(str(path.relative_to(cards_dir))):
+            card = json.loads(path.read_text(encoding="utf-8"))
             digests[card["id"]] = facts_digest(card)
     return digests
 

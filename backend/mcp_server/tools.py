@@ -166,10 +166,13 @@ def create_server(load_snapshot: Callable[[], CatalogSnapshot]) -> MCPServer:
     ) -> Annotated[CallToolResult, schemas.FindCardsResult]:
         snapshot = _snapshot(ctx)
         tokens = normalize_search_text(query).split() if query else []
+        # A query of only spaces or trademark signs has nothing to look for, so nothing matches.
+        nothing_to_match = query is not None and not tokens
         matches = [
             card_id
             for card_id in snapshot.ids_by_name
-            if (issuer is None or snapshot.cards[card_id].issuer == issuer)
+            if not nothing_to_match
+            and (issuer is None or snapshot.cards[card_id].issuer == issuer)
             and all(token in snapshot.search_text[card_id] for token in tokens)
         ]
         page = matches[offset : offset + limit]
