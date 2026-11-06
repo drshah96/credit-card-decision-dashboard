@@ -27,7 +27,9 @@ RATE_FIELDS = (
     "returned_check_fee",
 )
 WITHHELD_REASON = (
-    "Sign-up offers change faster than this catalog is re-verified, so they are not served."
+    "Sign-up offers change faster than this catalog is re-verified, so this field is not served. "
+    "Free text such as services may still mention an offer, which may be out of date: confirm it "
+    "with the issuer."
 )
 SECTIONS = (
     "credit_tips",

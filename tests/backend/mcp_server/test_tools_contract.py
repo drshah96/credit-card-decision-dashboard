@@ -143,6 +143,7 @@ async def test_get_card_reports_omitted_sections_and_withholds_the_bonus(snapsho
     assert "timeline" not in data["card"]
     assert "timeline" in data["omitted_sections"]
     assert data["withheld"][0]["field"] == "welcome_bonus"
+    assert "Free text" in data["withheld"][0]["reason"]
     assert "welcome_bonus" not in data["card"]
     expanded = structured(full)
     assert expanded["query"]["sections"] == ["timeline"]

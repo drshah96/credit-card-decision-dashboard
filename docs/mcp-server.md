@@ -93,13 +93,15 @@ absent. An empty `insurance` list means nothing is recorded.
 the credit is worthless. Pass `credit_overrides` to `estimate_value` with real expected use,
 and read `credits_at_zero` to see how many credits are still counted at $0.
 
-**Rankings.** The ranking uses the earn multiplier times the card's realistic cents per point,
-and never reads affiliate status. It ignores spending caps, activation requirements and sign-up
-offers. Passing `card_ids` ranks only those cards and applies points pooling between cards that
-share a points account.
+**Rankings.** The ranking uses the earn multiplier times the card's best realistic cents per
+point, which is not a guarantee that every dollar redeems at that rate. It never reads affiliate
+status. It ignores spending caps, activation requirements and sign-up offers. Passing `card_ids`
+ranks only those cards and applies points pooling between cards that share a points account.
 
 **Editorial content.** Verdicts and credit tiers are The Wallet Audit's own opinions, not issuer
-terms. Sign-up offers are not served, because they change faster than the catalog is re-verified.
+terms. The `welcome_bonus` field is not served, because offers change faster than the catalog is
+re-verified. Free text such as services and credit descriptions may still mention an offer, which
+may be out of date, so confirm any offer with the issuer.
 
 ## Limits and errors
 

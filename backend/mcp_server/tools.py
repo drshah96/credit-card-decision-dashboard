@@ -49,8 +49,8 @@ _ANNOTATIONS = dict(
 _CATEGORY_BY_KEY = {c.key: c for c in CATEGORIES}
 
 RANK_METHOD = schemas.RankMethod(
-    formula="Earn multiplier times the card's realistic cents per point. Percent rates are used "
-    "as stated unless pooling boosted them.",
+    formula="Earn multiplier times the card's best realistic cents per point. Percent rates are "
+    "used as stated unless pooling boosted them.",
     tie_break="Equal values to 4 decimals go to the lower annual fee, then the name.",
     limitations="Ignores spending caps, activation requirements and sign-up offers.",
 )
@@ -282,8 +282,8 @@ def create_server(load_snapshot: Callable[[], CatalogSnapshot]) -> MCPServer:
         title="Rank cards by category",
         description=(
             "Rank cards for a spending category by effective return per dollar: the earn "
-            "multiplier times the card's realistic cents per point (percent rates are used as "
-            "stated). With card_ids, ranks only those cards and applies points pooling between "
+            "multiplier times the card's best realistic cents per point (percent rates are used "
+            "as stated). With card_ids, ranks only those cards and applies points pooling between "
             "cards that share a points account, as the site's My Cards view does; without it, "
             "ranks the whole catalog with no pooling. Ties go to the lower annual fee, then name. "
             "If fewer than 3 cards have a real bonus, the remaining top slots are filled with "
