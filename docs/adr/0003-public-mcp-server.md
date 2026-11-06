@@ -116,7 +116,8 @@ range `0eb156e^1..0eb156e^2`. Plus the installed source of `mcp==2.3.0`.
   - `test_readme_facts.py` reads every root-README table row matching
     `^\| ([A-Za-z .]+) \| (\d+) \|$` as an issuer count. A new root-README table
     with rows like `| Rate limit | 60 |` would break it.
-  - On a push to `main`, only `CI` (jobs `backend`, `frontend`) runs.
+  - On a push to `main`, only `CI` (jobs `backend`, `frontend`) runs. Scheduled
+    keep-warm runs also attach to `main`'s latest commit (see D13-A14).
   - Branch protection on `main` requires `backend` and `frontend` (GitHub API).
   - **`development` is not protected** (GitHub API: "Branch not protected").
 - **Refresh evidence.** The Sep 2026 refresh is seven commits on `development`,
@@ -1292,9 +1293,9 @@ can never become the code checking itself. Through the in-memory `Client`:
 
 **Deploy gating.**
 
-- `autoDeployTrigger: checksPass` on both services in `render.yaml`, so Render
-  deploys only commits whose CI (`backend`, `frontend`) passed.
-- `main` already requires both checks (verified).
+- `main`'s branch protection is the gate. `backend` and `frontend` must pass on an
+  up-to-date branch before any merge, and this applies to admins (verified).
+- Render deploys what lands on `main`. `checksPass` was rejected; see D13-A14.
 - Protecting `development` is owner action O6.
 
 **LLM-in-the-loop evals are not the gate.** They are nondeterministic and cost
@@ -1309,10 +1310,8 @@ money. The runbook's manual pre-release checklist covers them.
 - `domains` gains `mcp.thewalletaudit.com`;
 - `envVars` gains `MCP_API_KEYS` (`sync: false`) and
   `MCP_ALLOWED_HOSTS: mcp.thewalletaudit.com,thewalletaudit-api.onrender.com`;
-- `autoDeployTrigger: checksPass`.
 
-The static service also gains `autoDeployTrigger: checksPass`. No change to
-keep-warm, `healthCheckPath` or the start command.
+No change to `healthCheckPath` or the start command. Keep-warm gains the D13-A7 probe.
 
 **Docs:**
 
@@ -1455,6 +1454,19 @@ holds. Publishing "realistic" here would be false, and field names are one-way.
 - **Reachability so far.** `GET /healthz` on the hostname returned 200 from Google Cloud
   Shell with no challenge, for curl, python-httpx and node user agents. POST, AWS and
   GitHub-hosted runners are not yet tested.
+
+**A14. No `checksPass` deploys, and no calendar test in CI.**
+
+- **`checksPass` is not used.** D11 assumed only CI checks sit on a `main` commit. In fact
+  `main`'s latest commit carries 100 or more keep-warm `ping` check runs, some still running.
+  Render waits for checks and skips the deploy if any fail, and its docs do not say how
+  scheduled runs count. So deploys could stall behind 50-minute runs, and a keep-warm failure
+  during an outage could block the fix.
+- **The gate is branch protection.** It requires `backend` and `frontend` on an up-to-date
+  branch, covers admins and blocks force pushes (read from the GitHub API on 2026-11-06), so
+  `checksPass` would only repeat a check that already passed.
+- **`TERMS_AS_OF` age left CI.** A date passing 75 days failed the required `frontend` check
+  with no code change. `terms-freshness.yml` now opens an issue weekly instead.
 
 **Defaults taken while owner decisions are open.** Each can change before release:
 
@@ -1789,8 +1801,7 @@ reviewed before any network surface exists.
   (Blueprint sync or the dashboard) and wait for the certificate.
 - **O3.** In Render, set `MCP_API_KEYS`. Confirm an env-var save redeploys, and
   time a revocation once.
-- **O4.** Confirm `autoDeployTrigger: checksPass` took effect on both services
-  ("After CI Checks Pass" in the dashboard).
+- **O4.** Removed. `checksPass` is not used (D13-A14).
 - **O5.** Mint a dedicated smoke key, add the `MCP_SMOKE_KEY` repository
   secret, and run `mcp-smoke` after the first deploy.
 - **O6.** Consider requiring `backend` and `frontend` on `development`. It is

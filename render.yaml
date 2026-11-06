@@ -21,8 +21,6 @@ services:
     name: thewalletaudit-api
     runtime: python
     plan: free
-    # Deploy only commits whose CI passed, because the MCP contract is public.
-    autoDeployTrigger: checksPass
     buildCommand: pip install uv && uv sync --frozen --no-group dev
     startCommand: >-
       uv run alembic upgrade head &&
@@ -77,7 +75,6 @@ services:
   - type: web
     name: thewalletaudit
     runtime: static
-    autoDeployTrigger: checksPass
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
     # PR previews, scoped to this service only.

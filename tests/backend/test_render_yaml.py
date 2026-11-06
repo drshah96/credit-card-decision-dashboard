@@ -137,6 +137,8 @@ def test_mcp_is_wired_on_the_api_service() -> None:
     ]
 
 
-def test_both_services_deploy_only_after_checks_pass() -> None:
-    assert _api_service()["autoDeployTrigger"] == "checksPass"
-    assert _static_service()["autoDeployTrigger"] == "checksPass"
+def test_deploys_are_not_gated_on_every_github_check() -> None:
+    # Scheduled keep-warm runs attach to main's latest commit, so they could stall or block deploys.
+    # main's branch protection is the gate: backend and frontend must pass before any merge.
+    assert "autoDeployTrigger" not in _api_service()
+    assert "autoDeployTrigger" not in _static_service()
