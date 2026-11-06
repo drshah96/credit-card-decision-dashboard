@@ -312,6 +312,26 @@ async def test_a_slow_sdk_gets_504_and_frees_its_slot(snapshot, monkeypatch):
         assert mcp_endpoint._live.in_flight == 0
 
 
+async def test_an_sdk_crash_is_a_clean_500_that_leaks_nothing(snapshot, monkeypatch):
+    config, key = enabled_config()
+    _enable(monkeypatch, config, snapshot)
+    body = json.dumps(INITIALIZE).encode()
+
+    async def broken_app(scope, receive, send):
+        raise RuntimeError("postgres://user:hunter2@host/db")
+
+    async def receive():
+        return {"type": "http.request", "body": body, "more_body": False}
+
+    async with mcp_endpoint.run():
+        mcp_endpoint._live.app = broken_app
+        sink = _Sink()
+        await mcp_endpoint(_scope(key), receive, sink)
+        assert mcp_endpoint._live.in_flight == 0
+    assert sink.status == 500
+    assert b"hunter2" not in sink.messages[1]["body"]
+
+
 async def test_the_in_flight_limit_answers_503(snapshot, monkeypatch):
     config, key = enabled_config(replace(FAST, max_in_flight=1))
     _enable(monkeypatch, config, snapshot)

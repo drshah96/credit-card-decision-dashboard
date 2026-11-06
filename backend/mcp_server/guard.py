@@ -37,6 +37,7 @@ _KNOWN_TOOLS = frozenset(
     {"find_cards", "get_card", "compare_cards", "rank_by_category", "estimate_value"}
 )
 _KNOWN_CATEGORIES_MAX = 32
+_CLIENT_INFO_META_KEY = "io.modelcontextprotocol/clientInfo"
 
 
 @dataclass
@@ -294,7 +295,15 @@ class McpEndpoint:
             await send(message)
 
         with anyio.move_on_after(live.limits.sdk_deadline_seconds) as deadline:
-            await live.app(inner_scope, replay, capture)
+            try:
+                await live.app(inner_scope, replay, capture)
+            except Exception as exc:
+                # Only the type is logged: an exception message can quote request data.
+                observability.emit(logging.ERROR, event="mcp_sdk_error", error=type(exc).__name__)
+                if not response_started:
+                    await _respond(send, 500, _jsonrpc_error("Internal server error."))
+                    return 500, "internal_error", 0
+                return status, "internal_error", size
         if deadline.cancelled_caught:
             if response_started:
                 return status, "timeout_after_start", size
@@ -442,6 +451,18 @@ def _classify(status: int, body: bytes) -> str:
     return "invalid_arguments" if "validation error" in text else "internal_error"
 
 
+def _client_name(params: dict) -> str | None:
+    # Older protocols send clientInfo on initialize, newer ones in each request's _meta.
+    meta = params.get("_meta")
+    info = params.get("clientInfo")
+    if info is None and isinstance(meta, dict):
+        info = meta.get(_CLIENT_INFO_META_KEY)
+    if not isinstance(info, dict):
+        return None
+    client = f"{info.get('name')}/{info.get('version')}"
+    return client if _CLIENT_TEXT.match(client) else None
+
+
 def _safe_request_fields(parsed: dict | None, headers: dict) -> dict:
     fields = {
         "rpc_method": None,
@@ -466,10 +487,7 @@ def _safe_request_fields(parsed: dict | None, headers: dict) -> dict:
         declared = params.get("protocolVersion")
         if isinstance(declared, str) and _PROTOCOL.match(declared):
             fields["protocol_version"] = declared
-        info = params.get("clientInfo")
-        if isinstance(info, dict):
-            client = f"{info.get('name')}/{info.get('version')}"
-            fields["client"] = client if _CLIENT_TEXT.match(client) else None
+    fields["client"] = _client_name(params)
     if method == "tools/call":
         name = params.get("name")
         fields["tool"] = name if name in _KNOWN_TOOLS else "<unknown>"

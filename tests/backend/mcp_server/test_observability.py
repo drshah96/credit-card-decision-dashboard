@@ -66,6 +66,17 @@ def test_each_authenticated_request_logs_one_complete_line(snapshot):
     assert unknown_tool["tool"] == "<unknown>"
 
 
+def test_client_name_is_read_from_the_newer_protocols_meta(snapshot):
+    config, key = enabled_config()
+    message = call_tool("get_card", {"card_id": "amex-gold"})
+    message["params"]["_meta"] = {
+        "io.modelcontextprotocol/clientInfo": {"name": "partner-agent", "version": "2"}
+    }
+    with captured() as logs, running(snapshot, config) as client:
+        client.post("/mcp", json=message, headers=auth(key))
+    assert logs.events("mcp_request")[0]["client"] == "partner-agent/2"
+
+
 def test_rejections_are_aggregated_not_logged_per_request(snapshot):
     config, _ = enabled_config()
     with captured() as logs, running(snapshot, config) as client:
