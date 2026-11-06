@@ -1,0 +1,14 @@
+{
+  "card_id": "us-bank-secured",
+  "last_verified_ok_at": "2026-09-06",
+  "verification": {
+    "evidence": "git:405c511480a05952bfbb77ab6b9ca4d8da2765c7",
+    "evidence_scope": "card",
+    "facts_sha256": "b20490262fc96ec907ff6b0d1849674dc1a66d9f8dfd77363fffeb66a2c32337",
+    "documents": [],
+    "not_checked": [
+      "insurance"
+    ],
+    "note": "Checked against U.S. Bank product pages and Pricing and Terms. U.S. Bank publishes no Guide to Benefits, so a missing insurance benefit cannot be confirmed as absent."
+  }
+}

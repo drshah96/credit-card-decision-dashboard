@@ -1,0 +1,14 @@
+{
+  "card_id": "us-bank-split",
+  "last_verified_ok_at": "2026-09-06",
+  "verification": {
+    "evidence": "git:367edbe845e12795543058e04cf394f269bc1f23",
+    "evidence_scope": "card",
+    "facts_sha256": "c72b4ffacaee8e2a7fd6b3e52af68fe35f4add1b49ccde4766e89b2f5f29631e",
+    "documents": [],
+    "not_checked": [
+      "insurance"
+    ],
+    "note": "Checked against U.S. Bank product pages and Pricing and Terms. U.S. Bank publishes no Guide to Benefits, so a missing insurance benefit cannot be confirmed as absent."
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "card_id": "amex-hilton-honors-aspire",
+  "last_verified_ok_at": "2026-09-05",
+  "verification": {
+    "evidence": "git:99058a0186dd0d6c093f2a5f8d48fa51769420c8",
+    "evidence_scope": "card",
+    "facts_sha256": "435a5fef618a7a23d96762dc480c11c3d6b1d7901823296f56da0f342c53e1a4",
+    "documents": [],
+    "not_checked": [
+      "insurance_limits"
+    ],
+    "note": "Checked field by field against Amex application terms, cardmember agreements and benefit policy pages. Insurance dollar limits are only published behind a cardmember login and were not checked."
+  }
+}

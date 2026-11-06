@@ -1,0 +1,14 @@
+{
+  "card_id": "us-bank-altitude-go",
+  "last_verified_ok_at": "2026-09-06",
+  "verification": {
+    "evidence": "git:367edbe845e12795543058e04cf394f269bc1f23",
+    "evidence_scope": "card",
+    "facts_sha256": "aa61ce73970e0e0f4e025209182e6a8c7459612357ac8be71c34cca682a8ff85",
+    "documents": [],
+    "not_checked": [
+      "insurance"
+    ],
+    "note": "Checked against U.S. Bank product pages and Pricing and Terms. U.S. Bank publishes no Guide to Benefits, so a missing insurance benefit cannot be confirmed as absent."
+  }
+}

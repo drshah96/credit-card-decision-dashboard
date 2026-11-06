@@ -1,0 +1,14 @@
+{
+  "card_id": "capital-one-quicksilver-secured",
+  "last_verified_ok_at": "2026-09-05",
+  "verification": {
+    "evidence": "git:cf1ab028b88caa89ff1bf32ca2b0564d170d2ee8",
+    "evidence_scope": "card",
+    "facts_sha256": "7b2bf45c5a81aa802d84f14d506467a7ee16534826a30dccc6587ad81cd01b21",
+    "documents": [],
+    "not_checked": [
+      "rates_and_fees"
+    ],
+    "note": "Checked against Capital One product pages and Guide to Benefits PDFs. Only the annual fee and purchase APR were reachable; other APRs and fees were not checked."
+  }
+}

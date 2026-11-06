@@ -1,0 +1,14 @@
+{
+  "card_id": "citi-aadvantage-executive",
+  "last_verified_ok_at": "2026-09-05",
+  "verification": {
+    "evidence": "git:54f0d72c12208c45f24898d3617a26a0296cb024",
+    "evidence_scope": "card",
+    "facts_sha256": "cc839afe0a7d7a77a73f54e6ac1e03909af75214b625b1de6ed21683781e5a1f",
+    "documents": [],
+    "not_checked": [
+      "rates_and_fees"
+    ],
+    "note": "Benefits were checked against Citi's own pages. Citi fills in rate and fee numbers in the browser, so most APRs and fees could not be confirmed in this pass."
+  }
+}

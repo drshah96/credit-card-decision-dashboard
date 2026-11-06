@@ -1,0 +1,16 @@
+{
+  "card_id": "chase-freedom-unlimited",
+  "last_verified_ok_at": "2026-09-05",
+  "verification": {
+    "evidence": "git:1de0ac5abec4103d96dcc381078ca3ee1d2c3efe",
+    "evidence_scope": "issuer_pass",
+    "facts_sha256": "e8ec99a6db9467a7db33ad5f4ef03e8ca12d30b925b23e78298d294c5e0e8471",
+    "documents": [],
+    "not_checked": [
+      "transfer_partners",
+      "insurance_limits",
+      "additional_cards"
+    ],
+    "note": "Checked against Chase pricing and terms tables, rewards program agreements and Guide to Benefits PDFs. Transfer partners, insurance limits and authorized-user rules were largely not checked."
+  }
+}

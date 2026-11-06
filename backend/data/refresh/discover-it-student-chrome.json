@@ -1,0 +1,12 @@
+{
+  "card_id": "discover-it-student-chrome",
+  "last_verified_ok_at": "2026-09-06",
+  "verification": {
+    "evidence": "git:405c511480a05952bfbb77ab6b9ca4d8da2765c7",
+    "evidence_scope": "card",
+    "facts_sha256": "b6643f8dd455fa596f8040d8b55beb0fb55a4e3e2c5222173d225be55aa7d428",
+    "documents": [],
+    "not_checked": [],
+    "note": "Checked against the single Capital One cardmember agreement that has covered the Discover line since 30 June 2026, and Discover's own pages."
+  }
+}

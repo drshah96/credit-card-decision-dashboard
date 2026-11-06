@@ -1,0 +1,14 @@
+{
+  "card_id": "bilt-obsidian",
+  "last_verified_ok_at": "2026-09-06",
+  "verification": {
+    "evidence": "git:405c511480a05952bfbb77ab6b9ca4d8da2765c7",
+    "evidence_scope": "card",
+    "facts_sha256": "0dc00d045541da3f242654e78fb17fbde52850e456aecb73820e0ae4fb44413a",
+    "documents": [],
+    "not_checked": [
+      "rates_and_fees"
+    ],
+    "note": "Benefits were checked against Bilt's card pages. Bilt loads its pricing footnotes in the browser, so APRs and fees were not confirmed in this pass."
+  }
+}

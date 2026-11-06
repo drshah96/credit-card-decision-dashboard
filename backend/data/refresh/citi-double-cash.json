@@ -1,0 +1,14 @@
+{
+  "card_id": "citi-double-cash",
+  "last_verified_ok_at": "2026-09-05",
+  "verification": {
+    "evidence": "git:54f0d72c12208c45f24898d3617a26a0296cb024",
+    "evidence_scope": "issuer_pass",
+    "facts_sha256": "e51f458f9ba7e7f5efef9bb888b34d3a9a05b5cc8b1528e7fd3dedebc8e0290d",
+    "documents": [],
+    "not_checked": [
+      "rates_and_fees"
+    ],
+    "note": "Benefits were checked against Citi's own pages. Citi fills in rate and fee numbers in the browser, so most APRs and fees could not be confirmed in this pass."
+  }
+}

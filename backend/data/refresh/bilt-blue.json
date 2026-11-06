@@ -1,0 +1,14 @@
+{
+  "card_id": "bilt-blue",
+  "last_verified_ok_at": "2026-09-06",
+  "verification": {
+    "evidence": "git:405c511480a05952bfbb77ab6b9ca4d8da2765c7",
+    "evidence_scope": "card",
+    "facts_sha256": "5c7834903122a95cbb78bfc75f4f0e388776d7b99360c411fbf877082b1f0d8d",
+    "documents": [],
+    "not_checked": [
+      "rates_and_fees"
+    ],
+    "note": "Benefits were checked against Bilt's card pages. Bilt loads its pricing footnotes in the browser, so APRs and fees were not confirmed in this pass."
+  }
+}

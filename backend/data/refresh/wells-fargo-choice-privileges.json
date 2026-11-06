@@ -1,0 +1,14 @@
+{
+  "card_id": "wells-fargo-choice-privileges",
+  "last_verified_ok_at": "2026-09-06",
+  "verification": {
+    "evidence": "git:405c511480a05952bfbb77ab6b9ca4d8da2765c7",
+    "evidence_scope": "card",
+    "facts_sha256": "b5d469a68f2122a080e37e3e832dbb6deca85b80cf33e75fe8831d152a4f7f71",
+    "documents": [],
+    "not_checked": [
+      "redemption"
+    ],
+    "note": "Checked against Wells Fargo product pages and its Guide to Benefits. The rewards program terms could not be fetched, so redemption values were not checked."
+  }
+}

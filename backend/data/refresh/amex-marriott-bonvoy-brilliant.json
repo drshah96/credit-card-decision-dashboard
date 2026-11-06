@@ -1,0 +1,14 @@
+{
+  "card_id": "amex-marriott-bonvoy-brilliant",
+  "last_verified_ok_at": "2026-09-05",
+  "verification": {
+    "evidence": "git:99058a0186dd0d6c093f2a5f8d48fa51769420c8",
+    "evidence_scope": "card",
+    "facts_sha256": "91244305c5a5c53caffce8394b9dc299174cc1114246e9e8b2adbfe03665d5b1",
+    "documents": [],
+    "not_checked": [
+      "insurance_limits"
+    ],
+    "note": "Checked field by field against Amex application terms, cardmember agreements and benefit policy pages. Insurance dollar limits are only published behind a cardmember login and were not checked."
+  }
+}

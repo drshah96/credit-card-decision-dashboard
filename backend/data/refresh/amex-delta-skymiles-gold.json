@@ -1,0 +1,14 @@
+{
+  "card_id": "amex-delta-skymiles-gold",
+  "last_verified_ok_at": "2026-09-05",
+  "verification": {
+    "evidence": "git:99058a0186dd0d6c093f2a5f8d48fa51769420c8",
+    "evidence_scope": "card",
+    "facts_sha256": "e42b6db77c1758094c4c338c3dcfe2ea687d8ce50bcbf67b41f7740f1e4afee5",
+    "documents": [],
+    "not_checked": [
+      "insurance_limits"
+    ],
+    "note": "Checked field by field against Amex application terms, cardmember agreements and benefit policy pages. Insurance dollar limits are only published behind a cardmember login and were not checked."
+  }
+}

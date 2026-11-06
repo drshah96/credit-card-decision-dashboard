@@ -1,0 +1,14 @@
+{
+  "card_id": "bofa-premium-rewards-elite",
+  "last_verified_ok_at": "2026-09-05",
+  "verification": {
+    "evidence": "git:89bc4442b6227d64c9b9c346e0b988ec2598116c",
+    "evidence_scope": "card",
+    "facts_sha256": "92a00ac94c7e54656ff4d2f0184e4f1d643d098820bcfc934de739bcb6e833f4",
+    "documents": [],
+    "not_checked": [
+      "insurance"
+    ],
+    "note": "Checked against Bank of America's card index and public sample cardmember agreements. Bank of America publishes no Guide to Benefits, so insurance was not checked."
+  }
+}

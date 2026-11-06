@@ -1,0 +1,14 @@
+{
+  "card_id": "amex-hilton-honors-surpass",
+  "last_verified_ok_at": "2026-09-05",
+  "verification": {
+    "evidence": "git:99058a0186dd0d6c093f2a5f8d48fa51769420c8",
+    "evidence_scope": "card",
+    "facts_sha256": "7f3bdc805ccc11089a3962156bdef50bfdbcd49ec1b4810f6e0399742df7788b",
+    "documents": [],
+    "not_checked": [
+      "insurance_limits"
+    ],
+    "note": "Checked field by field against Amex application terms, cardmember agreements and benefit policy pages. Insurance dollar limits are only published behind a cardmember login and were not checked."
+  }
+}

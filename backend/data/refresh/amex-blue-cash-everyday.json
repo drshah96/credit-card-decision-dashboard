@@ -1,0 +1,14 @@
+{
+  "card_id": "amex-blue-cash-everyday",
+  "last_verified_ok_at": "2026-09-05",
+  "verification": {
+    "evidence": "git:99058a0186dd0d6c093f2a5f8d48fa51769420c8",
+    "evidence_scope": "card",
+    "facts_sha256": "ca2065549d8a2e46345fbe52d5cd895842c9b3cef2b5d683dc8142d72bad350e",
+    "documents": [],
+    "not_checked": [
+      "insurance_limits"
+    ],
+    "note": "Checked field by field against Amex application terms, cardmember agreements and benefit policy pages. Insurance dollar limits are only published behind a cardmember login and were not checked."
+  }
+}

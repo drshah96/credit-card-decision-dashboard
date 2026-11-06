@@ -1,0 +1,14 @@
+{
+  "card_id": "us-bank-smartly",
+  "last_verified_ok_at": "2026-09-06",
+  "verification": {
+    "evidence": "git:367edbe845e12795543058e04cf394f269bc1f23",
+    "evidence_scope": "card",
+    "facts_sha256": "cecad0ce0b47d4135d4dc05a155d89395e35d70b1f08743d43dbbbb0a58ab03f",
+    "documents": [],
+    "not_checked": [
+      "insurance"
+    ],
+    "note": "Checked against U.S. Bank product pages and Pricing and Terms. U.S. Bank publishes no Guide to Benefits, so a missing insurance benefit cannot be confirmed as absent."
+  }
+}

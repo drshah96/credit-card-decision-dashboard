@@ -1,0 +1,14 @@
+{
+  "card_id": "citi-diamond-preferred",
+  "last_verified_ok_at": "2026-09-05",
+  "verification": {
+    "evidence": "git:54f0d72c12208c45f24898d3617a26a0296cb024",
+    "evidence_scope": "card",
+    "facts_sha256": "9e8ed5a8f1946684937e07b461e29bc1ecc4561f2cce73cd598ef2a2a4ac14a7",
+    "documents": [],
+    "not_checked": [
+      "rates_and_fees"
+    ],
+    "note": "Benefits were checked against Citi's own pages. Citi fills in rate and fee numbers in the browser, so most APRs and fees could not be confirmed in this pass."
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "card_id": "bofa-travel-rewards-secured",
+  "last_verified_ok_at": "2026-09-05",
+  "verification": {
+    "evidence": "git:89bc4442b6227d64c9b9c346e0b988ec2598116c",
+    "evidence_scope": "card",
+    "facts_sha256": "a3f18149230b2f35859edfdd6ef3db7425f56739abd9a2cf846df38ae2a5864e",
+    "documents": [],
+    "not_checked": [
+      "insurance"
+    ],
+    "note": "Checked against Bank of America's card index and public sample cardmember agreements. Bank of America publishes no Guide to Benefits, so insurance was not checked."
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "card_id": "citi-simplicity",
+  "last_verified_ok_at": "2026-09-05",
+  "verification": {
+    "evidence": "git:54f0d72c12208c45f24898d3617a26a0296cb024",
+    "evidence_scope": "card",
+    "facts_sha256": "858d5fc52d8fa3c9ec865f35cd623a41f93f9c48e7c94445347ff2255143db0e",
+    "documents": [],
+    "not_checked": [
+      "rates_and_fees"
+    ],
+    "note": "Benefits were checked against Citi's own pages. Citi fills in rate and fee numbers in the browser, so most APRs and fees could not be confirmed in this pass."
+  }
+}

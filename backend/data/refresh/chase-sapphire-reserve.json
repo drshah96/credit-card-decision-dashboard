@@ -1,0 +1,16 @@
+{
+  "card_id": "chase-sapphire-reserve",
+  "last_verified_ok_at": "2026-09-05",
+  "verification": {
+    "evidence": "git:1de0ac5abec4103d96dcc381078ca3ee1d2c3efe",
+    "evidence_scope": "issuer_pass",
+    "facts_sha256": "0a224d3b88f2a00c7e3cb70e0de3ba20fc32bbe553e0578226393abca6b70ace",
+    "documents": [],
+    "not_checked": [
+      "transfer_partners",
+      "insurance_limits",
+      "additional_cards"
+    ],
+    "note": "Checked against Chase pricing and terms tables, rewards program agreements and Guide to Benefits PDFs. Transfer partners, insurance limits and authorized-user rules were largely not checked."
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "card_id": "bilt-palladium",
+  "last_verified_ok_at": "2026-09-06",
+  "verification": {
+    "evidence": "git:405c511480a05952bfbb77ab6b9ca4d8da2765c7",
+    "evidence_scope": "card",
+    "facts_sha256": "a59e0742767eed1d4a6423b38ac8d7370b70a6da3938c13a6a20f95a86524185",
+    "documents": [],
+    "not_checked": [
+      "rates_and_fees"
+    ],
+    "note": "Benefits were checked against Bilt's card pages. Bilt loads its pricing footnotes in the browser, so APRs and fees were not confirmed in this pass."
+  }
+}

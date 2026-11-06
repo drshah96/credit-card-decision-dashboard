@@ -1,0 +1,14 @@
+{
+  "card_id": "capital-one-savor",
+  "last_verified_ok_at": "2026-09-05",
+  "verification": {
+    "evidence": "git:cf1ab028b88caa89ff1bf32ca2b0564d170d2ee8",
+    "evidence_scope": "card",
+    "facts_sha256": "4dc0af45eeae34a8fa04a7a3f143691b08535f830dcdac588da957b952ac433b",
+    "documents": [],
+    "not_checked": [
+      "rates_and_fees"
+    ],
+    "note": "Checked against Capital One product pages and Guide to Benefits PDFs. Only the annual fee and purchase APR were reachable; other APRs and fees were not checked."
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "card_id": "capital-one-venture-x",
+  "last_verified_ok_at": "2026-09-05",
+  "verification": {
+    "evidence": "git:cf1ab028b88caa89ff1bf32ca2b0564d170d2ee8",
+    "evidence_scope": "card",
+    "facts_sha256": "ebdd4f0030ab2b2aa39da23e07e25130b73e30cdb9afbc7a55793540e18ff716",
+    "documents": [],
+    "not_checked": [
+      "rates_and_fees"
+    ],
+    "note": "Checked against Capital One product pages and Guide to Benefits PDFs. Only the annual fee and purchase APR were reachable; other APRs and fees were not checked."
+  }
+}

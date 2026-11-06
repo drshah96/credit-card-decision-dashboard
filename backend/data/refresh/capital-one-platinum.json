@@ -1,0 +1,14 @@
+{
+  "card_id": "capital-one-platinum",
+  "last_verified_ok_at": "2026-09-05",
+  "verification": {
+    "evidence": "git:cf1ab028b88caa89ff1bf32ca2b0564d170d2ee8",
+    "evidence_scope": "issuer_pass",
+    "facts_sha256": "072544ceeaf7f1f86fe3be062153aa7573b494529c991c09707eb6949ada63bc",
+    "documents": [],
+    "not_checked": [
+      "rates_and_fees"
+    ],
+    "note": "Checked against Capital One product pages and Guide to Benefits PDFs. Only the annual fee and purchase APR were reachable; other APRs and fees were not checked."
+  }
+}

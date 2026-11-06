@@ -1,0 +1,14 @@
+{
+  "card_id": "wells-fargo-active-cash",
+  "last_verified_ok_at": "2026-09-06",
+  "verification": {
+    "evidence": "git:367edbe845e12795543058e04cf394f269bc1f23",
+    "evidence_scope": "card",
+    "facts_sha256": "491ee56c21eabe30af5099b61f9154427152efd519987ccb04679d0122eb63a8",
+    "documents": [],
+    "not_checked": [
+      "redemption"
+    ],
+    "note": "Checked against Wells Fargo product pages and its Guide to Benefits. The rewards program terms could not be fetched, so redemption values were not checked."
+  }
+}
