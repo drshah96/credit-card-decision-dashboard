@@ -127,6 +127,8 @@ Then stop and report:
 - Tier assignments with reasoning
 - Anything you were uncertain about and the specific question a reviewer should
   resolve
+- A reminder that promoting the card needs `backend/data/refresh/<slug>.json` with
+  null dates. You do not write that file, and authoring a card is not verifying it.
 
 ## Memory
 

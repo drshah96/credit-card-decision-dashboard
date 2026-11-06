@@ -195,6 +195,7 @@ uv run python -m backend.scripts.drafts promote 1
 | `GET` | `/api/cards` | List all cards (summary) |
 | `GET` | `/api/cards/detail?ids=…` | Full detail for many cards in one request |
 | `GET` | `/api/cards/{card_id}` | Full detail for one card |
+| `POST` | `https://mcp.thewalletaudit.com/mcp` | MCP endpoint for AI agents, by API key. See [docs/mcp-server.md](docs/mcp-server.md) |
 
 ## Project structure
 

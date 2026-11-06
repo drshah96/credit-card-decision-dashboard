@@ -298,6 +298,62 @@ rates, etc.) rather than duplicating them.
    ```bash
    git mv backend/data/cards/staging/<slug>.json backend/data/cards/<issuer>/<slug>.json
    ```
+7. Add its verification file with null dates, and regenerate the ranking fixture.
+   See [MCP server](#mcp-server). Authoring a card is not verifying it, so never
+   copy another card's date. A test fails if the file is missing.
+
+## MCP server
+
+A public MCP endpoint for AI agents, at `POST https://mcp.thewalletaudit.com/mcp`,
+by API key. It runs inside this API process. [ADR 0003](../docs/adr/0003-public-mcp-server.md)
+has the design, and [docs/mcp-server.md](../docs/mcp-server.md) is what partners read.
+
+**Keys.** Mint in a real terminal, because the command refuses to run without one:
+
+```bash
+uv run python -m backend.scripts.mcp_keys mint --label "partner eval" --contact "ops@example.com"
+```
+
+Store the key in a password manager. Append the printed record to the JSON array in
+Render, Environment, `MCP_API_KEYS`, then save and deploy. Confirm the `mcp_started`
+log line shows the new key count. To validate a value before saving it:
+`uv run python -m backend.scripts.mcp_keys check < candidate.json`.
+
+- **Revoke:** delete the record, then save and deploy.
+- **Rotate:** add the new record, hand over the new key, then remove the old record.
+
+**When a card's facts change.** Each file in `backend/data/refresh/` stores a hash of
+the facts it verified, and CI fails when they differ. Either record the new check
+(`evidence`, today's date, `facts_sha256`) or set `last_verified_ok_at` and
+`verification` to null. Never update only the hash, because that claims a check nobody
+did. Editorial fields such as `verdict` and credit `tips` are outside the hash.
+
+**When ranking inputs or rules change.** Regenerate, then read the `expected.json`
+diff, which shows how every ranking moved:
+
+```bash
+UPDATE_RANKING_FIXTURE=1 uv run pytest tests/backend/mcp_server/test_ranking_parity.py
+(cd frontend && npx vitest run tests/utils/rankingParity.test.ts -u)
+uv run pytest tests/backend/mcp_server/test_ranking_parity.py
+```
+
+**When the tool contract changes.** Run `UPDATE_MCP_SURFACE=1 uv run pytest -s
+tests/backend/mcp_server/test_tool_surface.py`, bump `CONTRACT_VERSION`, and add the
+printed digest to `PUBLISHED_SURFACES` in `backend/mcp_server/contract.py`. Additions
+are minor. Removing, renaming, tightening or changing a meaning is major, and ships as
+new tool names with the old ones kept for a 90-day deprecation window.
+
+**Monitoring.** Keep-warm sends a keyless `POST /mcp` and expects 401. The `mcp-smoke`
+workflow runs on demand with the `MCP_SMOKE_KEY` secret and records challenge headers on
+all three hostnames. Logs are JSON lines: `mcp_started`, `mcp_disabled`, `mcp_request`
+and `mcp_rejections`.
+
+**Known limit.** Tool calls make no database queries, but the start command runs
+migrations and the seed first, so a Neon outage stops MCP at its next boot.
+
+**Never** run `drafts promote` against the production `DATABASE_URL`. The site would see
+the write at once, the MCP snapshot would not until the next boot, and that boot's seed
+would deactivate the card unless its file has been deployed.
 
 ## Migrations
 

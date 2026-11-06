@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 from backend.mcp_server import contract
+from backend.mcp_server.config import Limits
 from backend.mcp_server.tools import create_server
 
 from .conftest import connect
@@ -123,3 +124,17 @@ def test_issuer_literal_matches_the_catalog_both_ways(snapshot):
 
 def test_server_can_be_built_repeatedly(snapshot):
     assert create_server(lambda: snapshot) is not create_server(lambda: snapshot)
+
+
+def test_partner_docs_match_the_contract():
+    docs = (Path(__file__).parents[3] / "docs" / "mcp-server.md").read_text()
+    limits = Limits()
+    assert "\u2014" not in docs
+    for tool in ("find_cards", "get_card", "compare_cards", "rank_by_category", "estimate_value"):
+        assert f"`{tool}`" in docs
+    for status in ("verified", "partially_verified", "not_verified", "unconfirmed", "not_recorded"):
+        assert status in docs
+    assert f"{limits.per_minute} per minute, {limits.per_day:,} per day" in docs
+    assert f"Concurrent requests per server | {limits.max_in_flight} |" in docs
+    assert f"{limits.max_body_bytes // 1024} KB" in docs
+    assert f"{int(limits.sdk_deadline_seconds)} seconds" in docs
