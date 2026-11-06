@@ -77,7 +77,7 @@ jobs:
     # rather than by the job timeout, which would report as a generic failure.
     timeout-minutes: 65
     steps:
-      - name: Ping /healthz every 5 minutes, /health every 30
+      - name: Ping /healthz every 5 minutes, /health and /mcp every 30
         run: |
           set -uo pipefail
 
@@ -90,6 +90,7 @@ jobs:
           worst_liveness_streak=0
           deep_failures=0
           deep_checks=0
+          mcp_failures=0
 
           for i in $(seq 0 $((PINGS - 1))); do
             now=$(date -u +%H:%M:%S)
@@ -122,6 +123,17 @@ jobs:
                 deep_failures=$((deep_failures + 1))
                 echo "::warning::$now  readiness FAILED (curl exit $status) — database may be unreachable"
               fi
+
+              # Keyless on purpose: a working MCP endpoint answers 401 without touching
+              # the database, and anything else means it is disabled or gone.
+              mcp_status=$(curl -s --max-time 30 -o /dev/null -w '%{http_code}' -X POST \
+                -H 'content-type: application/json' -d '{}' "$ORIGIN/mcp")
+              if [ "$mcp_status" = "401" ]; then
+                echo "$now  mcp ok (401 without a key)"
+              else
+                mcp_failures=$((mcp_failures + 1))
+                echo "::warning::$now  mcp probe got HTTP $mcp_status, expected 401"
+              fi
             fi
 
             if [ "$i" -lt $((PINGS - 1)) ]; then
@@ -132,6 +144,7 @@ jobs:
           echo "---"
           echo "liveness pings: $PINGS, worst consecutive failure streak: $worst_liveness_streak"
           echo "readiness checks: $deep_checks, failures: $deep_failures"
+          echo "mcp probes: $deep_checks, failures: $mcp_failures"
 
           # Fail on a sustained outage, not on a single blip. One failed ping
           # is usually a runner network hiccup or a redeploy restarting the
@@ -145,6 +158,11 @@ jobs:
           fi
           if [ "$deep_failures" -gt 0 ]; then
             echo "::error::$deep_failures of $deep_checks readiness checks failed — /health could not reach the database. Check the Neon project is active and the invoice is paid."
+            exit_code=1
+          fi
+          # Two in a run, not one: a deploy restarting the service can fail a single probe.
+          if [ "$mcp_failures" -ge 2 ]; then
+            echo "::error::$mcp_failures of $deep_checks MCP probes did not get 401. Check the mcp_disabled log line in Render and that MCP_API_KEYS is set."
             exit_code=1
           fi
           exit $exit_code
