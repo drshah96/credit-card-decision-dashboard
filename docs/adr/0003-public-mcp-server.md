@@ -1429,6 +1429,20 @@ optional `contact`, so key holders can be told about changes.
 **A11. Partner documentation.** `docs/mcp-server.md` covers connection, tools,
 limits and how to read provenance.
 
+**A12. Credit defaults are not estimates (found during implementation).** 149 of
+151 active credits have `default_value: 0`, so D5's `realistic_credit_value` would
+tell agents Amex Gold is realistically worth $0 in credits. The methodology page and
+README call these hand-estimated realistic defaults, which is not what the content
+holds. Publishing "realistic" here would be false, and field names are one-way.
+
+- `realistic_credit_value` and `realistic_net` become `applied_credit_value` and
+  `applied_net`. The site's arithmetic is unchanged.
+- `effortless_credit_value` is not served. It is the same empty data, and adding it
+  later is cheap where removing it is not.
+- `credits_at_zero` counts credits sitting at $0 with no usage given. Tool
+  descriptions tell agents to pass real usage.
+- The content and the site's copy disagree. That is a separate owner decision.
+
 **Defaults taken while owner decisions are open.** Each can change before release:
 
 - **Hosting:** free tier, as in D1.
