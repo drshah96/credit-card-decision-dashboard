@@ -35,7 +35,7 @@ export interface TopPickCategory {
 // through any of them) rather than silently only crediting Other Travel.
 const GENERIC_TRAVEL_PORTAL = "travel (portal|purchases)|travel center";
 
-const CATEGORY_MATCHERS: Record<string, RegExp> = {
+export const CATEGORY_MATCHERS: Record<string, RegExp> = {
   dining: /restaurant|dining|caf[eé]|\bbars?\b|food delivery|doordash|grubhub|takeout|fast food/i,
   groceries: /grocery|groceries|supermarket|whole foods/i,
   "gas-ev": /\bgas\b|gasoline|\bfuel\b|ev charging/i,
@@ -209,7 +209,7 @@ export const TOP_PICK_CATEGORIES: TopPickCategory[] = [
 // the text. Without this, the club's brand name alone would let an
 // unrelated (and often higher) gas/travel rate outrank the card's actual
 // in-club rate.
-const WHOLESALE_EXCLUDES = ["gas-ev", "flights", "hotels", "car-rentals", "other-travel"];
+export const WHOLESALE_EXCLUDES = ["gas-ev", "flights", "hotels", "car-rentals", "other-travel"];
 
 // A rate scoped to ONE specific airline/hotel/rideshare brand (not a
 // booking-channel restriction like "via Amex Travel", which still applies
@@ -223,7 +223,7 @@ const SINGLE_AIRLINE_BRAND = /\bunited\b|\bdelta\b|\bsouthwest\b|american airlin
 const SINGLE_HOTEL_BRAND = /\bhilton\b|\bmarriott\b|\bihg\b|\bhyatt\b|choice hotels|choice privileges/i;
 const SINGLE_RIDESHARE_BRAND = /\blyft\b|\buber\b/i;
 
-const BRAND_EXCLUDES: Record<string, RegExp> = {
+export const BRAND_EXCLUDES: Record<string, RegExp> = {
   flights: SINGLE_AIRLINE_BRAND,
   hotels: SINGLE_HOTEL_BRAND,
   transit: SINGLE_RIDESHARE_BRAND,
@@ -250,7 +250,7 @@ function matchesCategory(
 // outrank a genuine "6×"/"6%" rate it isn't actually comparable to. Points-
 // per-dollar formats ("2 pts/$1") are fine to rank as-is — that IS a real
 // multiplier — this only excludes the cents-per-gallon discount format.
-const CENTS_PER_GALLON = /¢\s*\/\s*gal/i;
+export const CENTS_PER_GALLON = /¢\s*\/\s*gal/i;
 
 function isRankableMultiplier(multiplier: string): boolean {
   return !CENTS_PER_GALLON.test(multiplier);
@@ -409,22 +409,43 @@ export interface ComputeTopPicksOptions {
   applyPointsPooling?: boolean;
 }
 
-/** Ranks the whole catalog into the top 3 cards per category by *effective*
- * earn rate — raw multiplier weighted by the card's best cents-per-point
- * value (best_cpp; 1.0 for flat cash back), so a 6x points card isn't
- * automatically ranked above a 3x card whose points are worth 4x as much.
- * Categories with fewer than 3 cards carrying an actual bonus have their
- * remaining slot(s) backfilled with the next-best flat/catch-all rate among
- * the rest (marked `isFallback`) rather than left blank — see the inline
- * comment below for why those never outrank a real bonus regardless of
- * value. Known limitation: still doesn't account for spending caps or
- * activation requirements on a given rate, and best_cpp is one number per
- * card (the best realistic redemption across the board), not category-
- * specific. */
-export function computeTopPicks(
-  cards: CardSummary[],
-  options: ComputeTopPicksOptions = {},
-): TopPickRow[] {
+/** Every real-bonus entry for one category, sorted, with fallbacks appended up
+ * to 3 total. Takes the already-deduped cards and pool-adjusted cpp map so a
+ * full computeTopPicks pass computes them once, not once per category. */
+function rankWithin(
+  deduped: CardSummary[],
+  categoryKey: string,
+  effectiveCppById: Map<string, number>,
+): TopPickEntry[] {
+  const entries: TopPickEntry[] = [];
+  for (const card of deduped) {
+    const best = bestRateForCategory(card, categoryKey);
+    if (best) entries.push(toEntry(card, best, false, effectiveCppById.get(card.id)!));
+  }
+  entries.sort(byValueDescThenFeeAscThenName);
+
+  // Fewer than 3 cards have an actual bonus for this category (common for
+  // the narrower ones — Rent or Mortgage, Fitness & Gyms, ...) — rather
+  // than just leave the remaining slot(s) blank, fill them with the next-
+  // best flat/catch-all rate among the cards that don't already have a
+  // real bonus here, so there's still a concrete answer to "what should I
+  // use instead." Not done for the Catch-All row itself — every card's
+  // own catch-all rate is already exactly what that row already ranks by.
+  if (entries.length < 3 && categoryKey !== "catch-all") {
+    const alreadyUsed = new Set(entries.map((e) => e.card.id));
+    const fallbacks: TopPickEntry[] = [];
+    for (const card of deduped) {
+      if (alreadyUsed.has(card.id)) continue;
+      const catchAll = catchAllRateFor(card);
+      if (catchAll) fallbacks.push(toEntry(card, catchAll, true, effectiveCppById.get(card.id)!));
+    }
+    fallbacks.sort(byValueDescThenFeeAscThenName);
+    entries.push(...fallbacks.slice(0, 3 - entries.length));
+  }
+  return entries;
+}
+
+function prepareRanking(cards: CardSummary[], options: ComputeTopPicksOptions) {
   const { applyPointsPooling = false } = options;
   // A secured card with byte-identical earn rates to its unsecured twin
   // (CardSummary.secured_variant_id, set only on the unsecured card) is the
@@ -440,33 +461,39 @@ export function computeTopPicks(
   const effectiveCppById = new Map<string, number>(
     deduped.map((card) => [card.id, effectiveCppFor(card, deduped, applyPointsPooling)]),
   );
+  return { deduped, effectiveCppById };
+}
+
+/** One category's full ranking, past the top 3 that computeTopPicks shows.
+ * The MCP server's Python port is pinned to this: see
+ * tests/fixtures/ranking_parity and frontend/tests/utils/rankingParity.test.ts. */
+export function rankCategory(
+  cards: CardSummary[],
+  categoryKey: string,
+  options: ComputeTopPicksOptions = {},
+): TopPickEntry[] {
+  const { deduped, effectiveCppById } = prepareRanking(cards, options);
+  return rankWithin(deduped, categoryKey, effectiveCppById);
+}
+
+/** Ranks the whole catalog into the top 3 cards per category by *effective*
+ * earn rate — raw multiplier weighted by the card's best cents-per-point
+ * value (best_cpp; 1.0 for flat cash back), so a 6x points card isn't
+ * automatically ranked above a 3x card whose points are worth 4x as much.
+ * Categories with fewer than 3 cards carrying an actual bonus have their
+ * remaining slot(s) backfilled with the next-best flat/catch-all rate among
+ * the rest (marked `isFallback`) rather than left blank — see rankWithin for
+ * why those never outrank a real bonus regardless of value. Known limitation:
+ * still doesn't account for spending caps or activation requirements on a
+ * given rate, and best_cpp is one number per card (the best realistic
+ * redemption across the board), not category-specific. */
+export function computeTopPicks(
+  cards: CardSummary[],
+  options: ComputeTopPicksOptions = {},
+): TopPickRow[] {
+  const { deduped, effectiveCppById } = prepareRanking(cards, options);
   return TOP_PICK_CATEGORIES.map((category) => {
-    const entries: TopPickEntry[] = [];
-    for (const card of deduped) {
-      const best = bestRateForCategory(card, category.key);
-      if (best) entries.push(toEntry(card, best, false, effectiveCppById.get(card.id)!));
-    }
-    entries.sort(byValueDescThenFeeAscThenName);
-
-    // Fewer than 3 cards have an actual bonus for this category (common for
-    // the narrower ones — Rent or Mortgage, Fitness & Gyms, ...) — rather
-    // than just leave the remaining slot(s) blank, fill them with the next-
-    // best flat/catch-all rate among the cards that don't already have a
-    // real bonus here, so there's still a concrete answer to "what should I
-    // use instead." Not done for the Catch-All row itself — every card's
-    // own catch-all rate is already exactly what that row already ranks by.
-    if (entries.length < 3 && category.key !== "catch-all") {
-      const alreadyUsed = new Set(entries.map((e) => e.card.id));
-      const fallbacks: TopPickEntry[] = [];
-      for (const card of deduped) {
-        if (alreadyUsed.has(card.id)) continue;
-        const catchAll = catchAllRateFor(card);
-        if (catchAll) fallbacks.push(toEntry(card, catchAll, true, effectiveCppById.get(card.id)!));
-      }
-      fallbacks.sort(byValueDescThenFeeAscThenName);
-      entries.push(...fallbacks.slice(0, 3 - entries.length));
-    }
-
+    const entries = rankWithin(deduped, category.key, effectiveCppById);
     return {
       ...category,
       topChoice: entries[0],
