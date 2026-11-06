@@ -783,10 +783,10 @@ market-bearing:
 def market_of(path: str) -> str:
     """Pure path predicate, like is_staged. Reads the registry once, never a card file."""
     stem = Path(path).stem
-    for code in SUFFIXED_MARKET_CODES:      # from markets.json
+    for code in SUFFIXED_MARKET_CODES:  # from markets.json
         if stem.endswith(f"-{code.lower()}"):
             return code
-    return UNSUFFIXED_MARKET               # the single market with slug_suffix false
+    return UNSUFFIXED_MARKET  # the single market with slug_suffix false
 ```
 
 No per-file I/O, no nesting change, and it composes into the existing list
@@ -937,10 +937,16 @@ existing nine are.
 data, and in one statement rather than three.**
 
 ```python
-op.add_column("cards", sa.Column(
-    "market_code", sa.String(), nullable=False, server_default="US",
-    # see the caveat below before copying this line
-))
+op.add_column(
+    "cards",
+    sa.Column(
+        "market_code",
+        sa.String(),
+        nullable=False,
+        server_default="US",
+        # see the caveat below before copying this line
+    ),
+)
 op.create_index(op.f("ix_cards_market_code"), "cards", ["market_code"])
 ```
 
