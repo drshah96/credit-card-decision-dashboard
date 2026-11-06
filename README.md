@@ -7,8 +7,8 @@ its real value are rarely the same number.
 Live at **[thewalletaudit.com](https://thewalletaudit.com)**.
 
 Most card comparison sites are paid per application. This one isn't, and that
-shapes the whole thing: statement credits are valued at what a normal person
-would realistically use rather than at their headline number, points are given
+shapes the whole thing: statement credits count at what you say you'd actually
+use rather than at their headline number, points are given
 one honest cents-per-point figure instead of an inflated one, and a card with no
 purchase protection says so plainly rather than padding the list.
 
@@ -55,18 +55,20 @@ So every credit is sorted into one of three tiers:
 | **Niche** | Only worth anything if it happens to fit your life | A rideshare credit in a city you don't visit |
 
 Each credit carries two numbers: `max_annual`, the advertised ceiling, and
-`default_value`, a realistic starting estimate of what a typical person captures.
-The card detail page seeds every slider from `default_value`, then lets you drag
+`default_value`, where its slider starts. That is $0 on almost every credit,
+because what you'd capture depends on your own situation, so a card's total starts
+low until you set your usage. The card detail page seeds every slider from
+`default_value`, then lets you drag
 each one to your own number and move credits between tiers, because a credit
 that's effortless for you may be niche for someone else. Your adjustments persist
 locally per card.
 
-Two derived totals appear on listing pages:
+Two derived totals come with each card's summary:
 
 - `total_max_credits` — the sum of every active credit's `max_annual`. The
   issuer's marketing number.
 - `total_easy_credits` — the sum of `default_value` for **Effortless** credits
-  only. The floor: what you'd get without planning anything.
+  only. With almost every default at $0, this is $0 on nearly every card.
 
 Credits the issuer has discontinued are marked `removed` and excluded from both.
 

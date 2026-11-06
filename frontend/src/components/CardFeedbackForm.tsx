@@ -226,7 +226,7 @@ export function CardFeedbackForm({ cardId, cardName, features }: Props) {
   return (
     <form className="feedback-form" onSubmit={submit}>
       <p className="feedback-intro">
-        The site estimates what a typical person gets out of the {cardName}.
+        The site gives its own take on the {cardName}.
         Tell us how that matches your own experience, or what brought you here.
       </p>
 
