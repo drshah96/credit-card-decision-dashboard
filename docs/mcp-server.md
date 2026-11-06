@@ -4,8 +4,9 @@ Verified data on US consumer credit cards, for AI agents. It uses the Model Cont
 Protocol over Streamable HTTP.
 
 - **Endpoint:** `POST https://mcp.thewalletaudit.com/mcp`
-- **Auth:** `Authorization: Bearer <key>`. Keys are issued by hand. Never put a key in a URL:
-  it is refused, and URLs can be recorded by proxies and hosting logs.
+- **Auth:** `Authorization: Bearer <key>`. Keys are issued by hand: to request one, message
+  [Dhruvin Shah on LinkedIn](https://www.linkedin.com/in/dhruvinshah1996/). Never put a key in a
+  URL: it is refused, and URLs can be recorded by proxies and hosting logs.
 - **Contract version:** see `meta.contract_version` on any response.
 
 This is informational data, not financial advice. Confirm current terms with the issuer
