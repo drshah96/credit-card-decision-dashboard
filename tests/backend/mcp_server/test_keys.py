@@ -15,7 +15,7 @@ TODAY = date(2026, 11, 6)
 
 
 def _store(expires=None, today=TODAY):
-    key, record = mint_key("partner", expires, today=today)
+    key, record = mint_key("reviewer", expires, today=today)
     return key, record, KeyStore([record])
 
 

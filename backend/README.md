@@ -306,12 +306,12 @@ rates, etc.) rather than duplicating them.
 
 A public MCP endpoint for AI agents, at `POST https://mcp.thewalletaudit.com/mcp`,
 by API key. It runs inside this API process. [ADR 0003](../docs/adr/0003-public-mcp-server.md)
-has the design, and [docs/mcp-server.md](../docs/mcp-server.md) is what partners read.
+has the design, and [docs/mcp-server.md](../docs/mcp-server.md) is what integrators read.
 
 **Keys.** Mint in a real terminal, because the command refuses to run without one:
 
 ```bash
-uv run python -m backend.scripts.mcp_keys mint --label "partner eval" --contact "ops@example.com"
+uv run python -m backend.scripts.mcp_keys mint --label "first reviewer" --contact "ops@example.com"
 ```
 
 Store the key in a password manager. Append the printed record to the JSON array in

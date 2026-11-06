@@ -2,7 +2,7 @@ name: MCP smoke test
 
 # Run by hand after deploys. Records what datacenter traffic actually gets on each hostname,
 # which tests ADR 0003's assumptions 1 and 2. GitHub runners are Azure, so AWS and GCP stay
-# unproven by this job: test those from the partner's own environment too.
+# unproven by this job: test those from the caller's own environment too.
 on:
   workflow_dispatch:
 
@@ -57,7 +57,7 @@ jobs:
           report_headers
 
           if [ "$failed" -ne 0 ]; then
-            echo "::error::mcp.thewalletaudit.com or the raw origin failed. Do not issue partner keys."
+            echo "::error::mcp.thewalletaudit.com or the raw origin failed. Do not issue any keys."
             exit 1
           fi
 

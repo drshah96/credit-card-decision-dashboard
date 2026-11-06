@@ -4,9 +4,9 @@ Date: 2026-11-06
 
 ## Context
 
-Third-party AI agents, starting with one evaluation partner's shopping agents,
-need to call into The Wallet Audit for verified card data instead of scraping
-the site. The owner asked for an MCP (Model Context Protocol) server offering
+Third-party AI agents, such as shopping agents, should be able to call The Wallet
+Audit for verified card data instead of scraping the site. No third party depends
+on this today. The owner asked for an MCP (Model Context Protocol) server offering
 `get_card`, `compare_cards`, `rank_by_category` and `estimate_value`. Every
 answer must carry the issuer source and a "last verified" date. Access must be
 by key, and the server must run on Render next to the site.
@@ -384,7 +384,7 @@ assumption 2 depends on.
 
 - **Process placement is cheap.** The MCP is one package; moving it to its own
   service later is a deploy change behind the same hostname.
-- **The hostname is expensive.** Partners paste it into configs, so choose
+- **The hostname is expensive.** Integrators paste it into configs, so choose
   once.
 - **The proxy toggle is cheap.** It can be orange-clouded later if the zone
   ever gets per-path bot exceptions.
@@ -1030,7 +1030,7 @@ base64url alphabet contains `_`.
 `KeyRecord`:
 
 ```json
-[{"id": "3f9a1c2e", "sha256": "<64 hex of sha256(full key)>", "label": "partner evaluation",
+[{"id": "3f9a1c2e", "sha256": "<64 hex of sha256(full key)>", "label": "first reviewer",
   "created": "2026-11-06", "expires": "2027-02-04", "per_minute": null, "per_day": null}]
 ```
 
@@ -1047,7 +1047,7 @@ boot.
 - **Nothing non-rebuildable lands in a database** the repo treats as a derived
   read model.
 - **A Neon project migration**, which this repo has done before, cannot
-  silently lock every partner out.
+  silently lock every key holder out.
 - **The cost:** revocation and rotation take a redeploy (minutes, assumption 4)
   rather than an `UPDATE`.
 - At a handful of hand-issued keys, minutes is acceptable.
@@ -1112,7 +1112,7 @@ and a false metadata document the day someone sets `resource_server_url`.
 - keys accepted in parallel for one deprecation window;
 - `key_id` mapped to `client_id`, so limits and logs carry over.
 
-The trigger is the first partner platform that only connects to
+The trigger is the first client platform we need that only connects to
 OAuth-protected MCP servers, or self-serve issuance.
 
 **What is logged:** `key_id` after successful verification. Never the key, the
@@ -1121,7 +1121,7 @@ OAuth-protected MCP servers, or self-serve issuance.
 **Reversibility.**
 
 - **Storage and verification are cheap.**
-- **The key format is moderately expensive.** It lives in partners' configs, so
+- **The key format is moderately expensive.** It lives in integrators' configs, so
   changing it means reissuing.
 
 ### D8. Hostile input and load
@@ -1413,10 +1413,10 @@ disables MCP rather than stopping the site from booting.
 readiness cadence and fails the run on anything but 401. This costs no Neon query
 and detects a disabled endpoint, which `/healthz` cannot see.
 
-**A8. Neon boot dependency, accepted for the evaluation.** Tool calls do not touch
+**A8. Neon boot dependency, accepted for now.** Tool calls do not touch
 the database, but the start command runs `alembic` and the seed before `uvicorn`,
 so a Neon outage stops MCP at the next boot. That happened from 2026-08-22 to
-2026-08-27. Revisit before any distribution beyond the evaluation.
+2026-08-27. Revisit before anyone relies on this server in production.
 
 **A9. Disclaimer.** `meta.disclaimer` states that this is informational data, not
 financial advice, and to confirm terms with the issuer. A `terms_url` is added as a
@@ -1426,7 +1426,7 @@ minor version once a terms page exists (O8).
 200 per minute globally. A deprecation window is 90 days. `KeyRecord` gains an
 optional `contact`, so key holders can be told about changes.
 
-**A11. Partner documentation.** `docs/mcp-server.md` covers connection, tools,
+**A11. Integrator documentation.** `docs/mcp-server.md` covers connection, tools,
 limits and how to read provenance.
 
 **A12. Credit defaults are not estimates (found during implementation).** 149 of
@@ -1442,6 +1442,19 @@ holds. Publishing "realistic" here would be false, and field names are one-way.
 - `credits_at_zero` counts credits sitting at $0 with no usage given. Tool
   descriptions tell agents to pass real usage.
 - The content and the site's copy disagree. That is a separate owner decision.
+
+**A13. Setup facts found during rollout.**
+
+- **Order.** Render's docs add the domain in Render first, then the DNS record. That
+  reverses O1 and O2.
+- **Cost.** The Hobby plan includes 2 custom domains and this is the third, at $0.25 a
+  month. That requires a card on the workspace.
+- **What the card changes.** Outbound bandwidth over the plan's 5 GB is then billed at
+  $0.15/GB instead of suspending services, and no spend limit is documented for it. Build
+  minutes are billed too, but those can take a spend limit. Watch usage on the Billing page.
+- **Reachability so far.** `GET /healthz` on the hostname returned 200 from Google Cloud
+  Shell with no challenge, for curl, python-httpx and node user agents. POST, AWS and
+  GitHub-hosted runners are not yet tested.
 
 **Defaults taken while owner decisions are open.** Each can change before release:
 
@@ -1472,9 +1485,9 @@ holds. Publishing "realistic" here would be false, and field names are one-way.
     client if it uses it.
 - **Terms and regulatory posture are a gate, not code.** Settle the terms under
   which keys are issued (attribution, caching, redistribution) before issuing
-  any key outside a known evaluation.
+  any key to a consumer-facing product.
   - Whether redistributing rate and fee data to third-party agents that present
-    it to consumers creates obligations, for The Wallet Audit or the partner,
+    it to consumers creates obligations, for The Wallet Audit or the integrator,
     needs qualified advice.
   - That advice is due before any paid or self-serve distribution. This ADR does
     not estimate the answer (O8).
@@ -1548,8 +1561,8 @@ route changes, and no indexed URL moves. The new host serves the existing
    after checks.
 9. **Run `mcp-smoke`.** Record its results in `backend/README.md`. If
    `mcp.thewalletaudit.com` is challenged, stop: assumption 1 failed, and the
-   hostname decision reopens before any key goes to a partner.
-10. **First partner.** Mint the partner key with an expiry, and connect it once
+   hostname decision reopens before any key goes to someone else.
+10. **First external key.** Mint a key with an expiry for the first outside user, and connect it once
     from Claude Code with `timeout: 120000`.
 
 ## Alternatives rejected
@@ -1562,7 +1575,7 @@ paid instance, or if MCP failures must be isolated from the site.
 per path on the free plan, and agents run in datacenters. Revisit if the zone
 gains per-path bot exceptions; then the record can be orange-clouded too.
 
-**Publishing the raw `onrender.com` URL.** It ties partners to a Render service
+**Publishing the raw `onrender.com` URL.** It ties integrators to a Render service
 name. It is kept only as an undocumented fallback. It is not revisitable while
 a branded name costs nothing.
 
@@ -1622,7 +1635,7 @@ facts. Not revisitable for facts.
 a recorded-answer harness that is deterministic.
 
 **A site UI or self-serve key portal.** Blocked on O8. Revisit after the
-evaluation partner, and after the advice.
+first outside users, and after the advice.
 
 ---
 
@@ -1785,12 +1798,12 @@ reviewed before any network surface exists.
 - **O7.** Mint keys only in a real terminal, deliver them over a secure channel,
   and set an expiry.
 - **O8.** Decide the key-issuance terms, and get qualified advice before any
-  distribution beyond a known evaluation.
+  use by a consumer-facing product.
 - **O9.** Before `fix/footer-audit-dates` merges, change "full issuer-by-issuer
   re-check" so it does not cover the 23 unchecked cobrand cards, for example
   "86 of 109 cards".
 - **O10.** Decide whether keep-warm should run around the clock: 744 h against
-  750 h, versus overnight cold starts for partners.
+  750 h, versus overnight cold starts for callers.
 - **O11.** Never run `drafts promote` against the production `DATABASE_URL`
   (D3).
 

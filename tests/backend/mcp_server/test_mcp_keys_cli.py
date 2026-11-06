@@ -26,7 +26,7 @@ def test_mint_refuses_without_a_tty(monkeypatch, capsys):
 
 def test_minted_record_verifies_the_printed_key(monkeypatch, capsys):
     monkeypatch.setattr("sys.stdin", _Stdin(tty=True))
-    assert mcp_keys.main(["mint", "--label", "partner", "--expires", "2999-01-01"]) == 0
+    assert mcp_keys.main(["mint", "--label", "reviewer", "--expires", "2999-01-01"]) == 0
     lines = [line.strip() for line in capsys.readouterr().out.splitlines()]
     key = next(line for line in lines if line.startswith("twa_"))
     record = KeyRecord.model_validate(json.loads(next(ln for ln in lines if ln.startswith("{"))))
@@ -35,7 +35,7 @@ def test_minted_record_verifies_the_printed_key(monkeypatch, capsys):
 
 
 def test_check_validates_and_never_prints_hashes(monkeypatch, capsys):
-    _, record = mint_key("partner", None)
+    _, record = mint_key("reviewer", None)
     raw = json.dumps([record.model_dump(mode="json")])
     monkeypatch.setattr("sys.stdin", _Stdin(raw))
     assert mcp_keys.main(["check"]) == 0

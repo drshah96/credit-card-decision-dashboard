@@ -1,6 +1,6 @@
 """Mint and check MCP API keys.
 
-    uv run python -m backend.scripts.mcp_keys mint --label "partner eval" [--expires YYYY-MM-DD]
+    uv run python -m backend.scripts.mcp_keys mint --label "first reviewer" [--expires YYYY-MM-DD]
     uv run python -m backend.scripts.mcp_keys check < candidate.json
 
 mint refuses without a terminal, so a live key never lands in an agent's transcript. It prints
