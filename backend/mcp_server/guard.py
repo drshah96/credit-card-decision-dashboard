@@ -82,6 +82,7 @@ class McpEndpoint:
     @asynccontextmanager
     async def run(self) -> AsyncIterator[None]:
         """Enter once per app lifespan. Any failure here disables MCP, never the site."""
+        observability.scrub_access_log()
         config = self.config_loader()
         if not config.enabled:
             observability.emit(event="mcp_disabled", reason=config.reason)
