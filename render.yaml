@@ -21,6 +21,8 @@ services:
     name: thewalletaudit-api
     runtime: python
     plan: free
+    # Deploy only commits whose CI passed, because the MCP contract is public.
+    autoDeployTrigger: checksPass
     buildCommand: pip install uv && uv sync --frozen --no-group dev
     startCommand: >-
       uv run alembic upgrade head &&
@@ -39,8 +41,11 @@ services:
     # thewalletaudit-api.onrender.com) is live and the cert is issued. SSL/TLS
     # mode on Cloudflare is "Full" — needed for the proxy to trust Render's
     # own cert instead of erroring or downgrading to plaintext.
+    # mcp. is DNS-only (grey cloud) in Cloudflare, unlike api.: the zone's Bot Fight
+    # Mode challenges datacenter traffic and has no per-path skip. See ADR 0003 D1.
     domains:
       - api.thewalletaudit.com
+      - mcp.thewalletaudit.com
     envVars:
       - key: PYTHON_VERSION
         value: "3.13"
@@ -62,11 +67,17 @@ services:
       # VITE_API_URL below).
       - key: ALLOWED_ORIGINS
         value: https://thewalletaudit.com,https://thewalletaudit.onrender.com
+      # Hashed key records. Set in the dashboard; see backend/README.md's MCP section.
+      - key: MCP_API_KEYS
+        sync: false
+      - key: MCP_ALLOWED_HOSTS
+        value: mcp.thewalletaudit.com,thewalletaudit-api.onrender.com
 
   # Vite/React frontend, built as a static site.
   - type: web
     name: thewalletaudit
     runtime: static
+    autoDeployTrigger: checksPass
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
     # PR previews, scoped to this service only.

@@ -122,3 +122,21 @@ def test_render_health_check_is_the_liveness_endpoint_not_the_deep_one() -> None
     one-word change to flip back and nothing else in the repo would notice,
     which is exactly why it is pinned here."""
     assert _api_service()["healthCheckPath"] == "/healthz"
+
+
+def test_mcp_is_wired_on_the_api_service() -> None:
+    api = _api_service()
+    assert "mcp.thewalletaudit.com" in api["domains"]
+    env = {e["key"]: e for e in api["envVars"]}
+    # A committed value here would publish key hashes.
+    assert env["MCP_API_KEYS"] == {"key": "MCP_API_KEYS", "sync": False}
+    # api. stays out, so /mcp on the proxied host answers 421 rather than half-working.
+    assert env["MCP_ALLOWED_HOSTS"]["value"].split(",") == [
+        "mcp.thewalletaudit.com",
+        "thewalletaudit-api.onrender.com",
+    ]
+
+
+def test_both_services_deploy_only_after_checks_pass() -> None:
+    assert _api_service()["autoDeployTrigger"] == "checksPass"
+    assert _static_service()["autoDeployTrigger"] == "checksPass"
