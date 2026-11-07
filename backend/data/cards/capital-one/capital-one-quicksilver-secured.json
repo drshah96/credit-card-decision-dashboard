@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "28.99%",
-  "balance_transfer_apr": "28.99%",
+  "variable_apr": "29.24%",
+  "balance_transfer_apr": "29.24%",
   "balance_transfer_fee": "$0 at the standard Transfer APR, or 4% at any promotional APR Capital One may offer",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.99%",
+  "cash_advance_apr": "29.24%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
@@ -37,6 +37,13 @@
       "is_base": false
     },
     {
+      "emoji": "🎟️",
+      "multiplier": "5%",
+      "category": "Capital One Entertainment ticket purchases",
+      "highlight": false,
+      "is_base": false
+    },
+    {
       "emoji": "💳",
       "multiplier": "1.5%",
       "category": "Everything else",
@@ -44,12 +51,12 @@
       "is_base": true
     }
   ],
-  "earn_note": "Unlike the non-rewards Platinum Secured, this card earns the exact same unlimited 1.5% flat cash back as the unsecured Quicksilver, plus 5% on Capital One Travel hotel/rental-car bookings. The security deposit buys approval, not a worse rewards rate. No sign-up bonus and no 0% intro APR, unlike the unsecured Quicksilver.",
+  "earn_note": "Unlike the non-rewards Platinum Secured, this card earns the exact same unlimited 1.5% flat cash back as the unsecured Quicksilver, plus 5% on Capital One Travel bookings and Capital One Entertainment purchases. The security deposit buys approval, not a worse rewards rate. No 0% intro APR, unlike the unsecured Quicksilver.",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
       {
-        "method": "Statement credit, check, direct deposit, or gift cards",
+        "method": "Statement credit, check, or gift cards",
         "cpp": 1.0,
         "best": true
       }
@@ -99,7 +106,7 @@
     },
     {
       "name": "APR",
-      "detail": "28.99% variable on purchases and cash advances; no introductory 0% period."
+      "detail": "29.24% variable on purchases and cash advances; no introductory 0% period."
     }
   ],
   "additional_cards": {

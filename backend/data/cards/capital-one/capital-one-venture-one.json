@@ -17,11 +17,11 @@
     "months": 15
   },
   "foreign_transaction_fee": false,
-  "variable_apr": "18.49%, 24.49%, or 28.49%, based on creditworthiness",
-  "balance_transfer_apr": "18.49%, 24.49%, or 28.49%, based on creditworthiness",
+  "variable_apr": "18.74%-28.74%, based on creditworthiness",
+  "balance_transfer_apr": "18.74%-28.74%, based on creditworthiness",
   "balance_transfer_fee": "$0 at the standard Transfer APR; 3% during the 0% intro period, or 4% at any other promotional APR Capital One may offer",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%",
+  "cash_advance_apr": "28.74%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
@@ -44,6 +44,13 @@
       "multiplier": "5×",
       "category": "Hotels, vacation rentals, rental cars & activities, via Capital One Travel",
       "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🎟️",
+      "multiplier": "5×",
+      "category": "Capital One Entertainment purchases",
+      "highlight": false,
       "is_base": false
     },
     {
@@ -70,13 +77,13 @@
       }
     ],
     "per_100k": "$1,850+",
-    "note": "The only truly no-fee card in Capital One's lineup with full transfer-partner access. Quicksilver and other no-fee Capital One cards are pure cash back capped at 1¢."
+    "note": "A no-annual-fee way into Capital One's full transfer-partner list. Quicksilver and other no-fee Capital One cash-back cards earn cash back only."
   },
   "transfer_partners": {
-    "airline_count": 18,
+    "airline_count": 19,
     "hotel_count": 4,
-    "highlight": "Same 18 airline + 4 hotel partner chart as Venture and Venture X, at the same ratios. Capital One doesn't restrict transfer access by card tier.",
-    "recent_changes": "JAL Mileage Bank, Qatar Airways Privilege Club, and I Prefer Hotel Rewards added Sept 2025, shared across the whole Capital One Miles lineup.",
+    "highlight": "Same 19 airline + 4 hotel partner chart as Venture and Venture X, at the same ratios. Capital One doesn't restrict transfer access by card tier.",
+    "recent_changes": "Copa was added in Nov 2026. JAL Mileage Bank, Qatar Airways Privilege Club, and I Prefer Hotel Rewards were added Sept 2025. All are shared across the whole Capital One Miles lineup.",
     "partners": [
       {
         "name": "Aeromexico Rewards",
@@ -102,6 +109,12 @@
         "name": "Cathay Pacific Asia Miles",
         "type": "airline",
         "ratio": "1:1"
+      },
+      {
+        "name": "Copa",
+        "type": "airline",
+        "ratio": "2:1.5",
+        "notes": "Below Capital One's typical 1:1 rate."
       },
       {
         "name": "Etihad Guest",
@@ -200,7 +213,7 @@
   "insurance": [
     {
       "coverage": "Rental car CDW",
-      "detail": "Secondary only: pays after your personal auto insurance",
+      "detail": "Secondary at home · primary outside your country of residence",
       "level": "mid"
     },
     {
@@ -237,10 +250,20 @@
       "coverage": "Extended warranty",
       "detail": "+1 yr on ≤2-yr warranties · $10k/claim · $50k per cardholder",
       "level": "good"
+    },
+    {
+      "coverage": "Price protection",
+      "detail": "$250/item · $1,000/yr · 120 days",
+      "level": "mid"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "$1M · common carrier, accidental death/dismemberment",
+      "level": "good"
     }
   ],
-  "protection_note": "This is Capital One's most stripped-down travel card: only secondary rental CDW is clearly confirmed. Purchase protection and extended warranty aren't advertised the way they are for the standard Venture card; verify against your Cardholder Benefits Guide and use a card with confirmed purchase protection for big-ticket items.",
-  "rental_note": "Secondary only: your personal auto insurance pays first, and this covers the gap (deductible, loss-of-use, towing) if you decline the rental counter's own CDW.",
+  "protection_note": "Capital One's Discover network guide names VentureOne and grants the same cover as Venture: purchase security, extended warranty, price protection, trip cancellation and interruption, travel accident, baggage delay and lost luggage. No trip delay, emergency medical or cell phone cover.",
+  "rental_note": "Your personal auto insurance pays first at home, and this covers the gap (deductible, loss-of-use, towing) if you decline the rental counter's own CDW. Coverage is primary when you rent outside your country of residence.",
   "status_perks": [
     {
       "name": "Hertz Five Star",
@@ -284,6 +307,12 @@
     "note": "Free to add, and since this card has no lounge access or premium perks to gate, there's little downside to adding trusted users."
   },
   "timeline": [
+    {
+      "date": "Nov 2, 2026",
+      "type": "add",
+      "badge": "Add",
+      "text": "Copa added as a transfer partner at 2:1.5, taking the airline list to 19."
+    },
     {
       "date": "Early 2026",
       "type": "neutral",

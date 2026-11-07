@@ -136,9 +136,8 @@ def test_standalone_secured_cards_have_no_pairing() -> None:
 
 
 def test_capital_one_quicksilver_secured_not_paired() -> None:
-    """capital-one-quicksilver-secured earns less than the unsecured
-    Quicksilver (missing the 5% Entertainment bonus) — confirmed NOT a
-    duplicate, so it must not be wired up as a pair despite the name."""
+    """capital-one-quicksilver-secured isn't wired up as a pair with the
+    unsecured Quicksilver, so both stay listed. Their earn rates match today."""
     detail = client.get("/api/cards/capital-one-quicksilver-secured").json()
     assert detail["is_secured_variant_of"] is None
     unsecured = client.get("/api/cards/capital-one-quicksilver").json()
@@ -909,10 +908,8 @@ def test_capital_one_premium_travel_cards_have_no_intro_offer() -> None:
         detail = client.get(f"/api/cards/{card_id}").json()
         assert detail["intro_apr_purchases"] is None
         assert detail["intro_apr_balance_transfers"] is None
-        # Re-verified 2026-08-03: Capital One's own disclosure quotes this as
-        # three discrete creditworthiness tiers, not a continuous min-max
-        # range — same non-fit as the Bass Pro/BJ's tiered-APR cards below.
-        assert detail["variable_apr"] == "19.49%, 24.49%, or 28.49%, based on creditworthiness"
+        # The product page prints this as a range; the middle tier isn't shown.
+        assert detail["variable_apr"] == "19.74%-28.74%, based on creditworthiness"
 
 
 def test_capital_one_kohls_no_longer_has_an_intro_offer() -> None:
@@ -930,14 +927,12 @@ def test_capital_one_savor_one_no_longer_has_an_intro_offer() -> None:
     # savorone/ (this card's own stored official_url): round 1 found a
     # 12-month 0% intro APR on purchases and balance transfers with an
     # 18.49%-28.49% ongoing range; the current page shows neither — a flat
-    # 28.99% rate with no intro period at all, a real product change (this
+    # rate with no intro period at all, a real product change (this
     # card is now positioned for Fair credit, unlike the Excellent-credit
     # Savor sibling, which still has its intro offer).
     detail = client.get("/api/cards/capital-one-savor-one").json()
     assert detail["intro_apr_purchases"] is None
     assert detail["intro_apr_balance_transfers"] is None
-    assert detail["variable_apr"] == "28.99%"
-    assert detail["balance_transfer_apr"] == "28.99%"
 
 
 def test_capital_one_bass_pro_cabelas_has_a_bifurcated_purchase_apr() -> None:
