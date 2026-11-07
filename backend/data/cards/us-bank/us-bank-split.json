@@ -70,7 +70,7 @@
       "level": "none"
     }
   ],
-  "protection_note": "No purchase-protection or extended-warranty guide published for this card; it's positioned purely as a payment-plan product, not a benefits card.",
+  "protection_note": "U.S. Bank's launch announcement says the card carries built-in Mastercard World travel, entertainment, shopping and protection benefits, but it doesn't list them, and no Guide to Benefits is publicly reachable. Check your actual guide after approval.",
   "rental_note": "No auto rental coverage documented publicly for this card.",
   "status_perks": [],
   "services": [
@@ -80,7 +80,7 @@
     },
     {
       "name": "6- or 12-month extension",
-      "detail": "Extend any Plan to 6 or 12 months, still interest-free, for a small fixed monthly Plan Fee disclosed at the time of extension."
+      "detail": "Extend a Plan on a purchase of $100 or more to 6 or 12 months, still interest-free, for a small fixed monthly Plan Fee disclosed at the time of extension."
     },
     {
       "name": "Plan management",
@@ -110,7 +110,13 @@
   },
   "timeline": [
     {
-      "date": "2026",
+      "date": "Nov 2026",
+      "type": "neutral",
+      "badge": "Listing change",
+      "text": "U.S. Bank no longer lists the Split World Mastercard on its credit card pages, and the old product page now shows the general card list. U.S. Bank hasn't said whether the card is closed to new applicants."
+    },
+    {
+      "date": "Nov 5, 2025",
       "type": "add",
       "badge": "Launch",
       "text": "U.S. Bank launches the Split World Mastercard, its first card built entirely around automatic installment-plan purchases rather than a traditional rewards or revolving-balance structure."
