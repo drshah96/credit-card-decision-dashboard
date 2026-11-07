@@ -11,17 +11,17 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.49%-28.49%",
+  "variable_apr": "19.74%-28.74%",
   "balance_transfer_apr": null,
   "balance_transfer_fee": null,
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.74%",
+  "cash_advance_apr": "28.99%",
   "penalty_apr": "29.99%",
   "penalty_apr_trigger": "Missing at least the Minimum Payment Due, or a returned payment; applies for at least 6 months and is reviewed every 6 months after that",
   "pay_over_time_fee": "Up to 1.33% per month of each purchase placed in a Plan It plan",
   "late_payment_fee": "Up to $40",
   "returned_payment_fee": "Up to $40",
-  "returned_check_fee": null,
+  "returned_check_fee": "$38",
   "welcome_bonus": {
     "bonus": "50,000 miles plus two round-trip Delta Comfort flight certificates",
     "requirement": "after you spend $10,000 in purchases in the first 6 months of Card Membership; the offer runs to November 4, 2026 and welcome offers vary",
@@ -53,7 +53,7 @@
     "currency": "Delta SkyMiles",
     "redemption_options": [
       {
-        "method": "Statement / low-end",
+        "method": "Pay with Miles (Delta flights)",
         "cpp": 1.0,
         "best": false
       },
@@ -99,7 +99,7 @@
       "default_value": 0,
       "tier": "easy",
       "removed": false,
-      "description": "Up to $20/month in statement credits at U.S. Resy restaurants via Global Dining Access.",
+      "description": "Up to $20/month in statement credits at U.S. Resy restaurants marked eligible on Resy.com when you pay, and at purchases made directly on Tock since Sep 15, 2026.",
       "tips": [
         "Double the Gold/Platinum tiers' Resy credit, worth checking if you already dine at Resy restaurants monthly."
       ]
@@ -133,12 +133,12 @@
     {
       "id": "global-entry",
       "name": "Global Entry / TSA PreCheck Credit",
-      "subtitle": "$120 GE every 4 yrs / $85 TSA every 4.5",
+      "subtitle": "$120 GE / $85 TSA · every 4 yrs",
       "max_annual": 30,
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "Statement credit for a Global Entry ($120) application fee once every 4 years, or a TSA PreCheck ($85) fee once every 4.5 years. Shown here amortized to an annual figure.",
+      "description": "Statement credit for a Global Entry ($120) or TSA PreCheck ($85) application fee, one credit across the account every 4 years. Shown here amortized to an annual figure.",
       "tips": [
         "Apply for Global Entry, not just TSA PreCheck; it includes TSA PreCheck and covers the same credit."
       ]
@@ -151,7 +151,7 @@
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "Each year after renewal, one round-trip companion ticket in Delta First, Delta Comfort or Delta Main, with the purchase of an eligible published fare. Delta One seats are not eligible, and travel has to start in the US, Puerto Rico or the US Virgin Islands and stay within the US, Mexico, the Caribbean or Central America. Companion pays only taxes and fees.",
+      "description": "Each year after renewal, one round-trip companion ticket in Delta First, Delta Premium Select, Delta Comfort or Delta Main, with the purchase of an eligible published fare. Delta One seats are not eligible, and travel has to start in the US, Puerto Rico or the US Virgin Islands and stay within the US, Mexico, the Caribbean or Central America. Companion pays only taxes and fees.",
       "tips": [
         "The Reserve's companion cert works in First Class, unlike the Platinum's Main-Cabin-only version. The value swing is huge on routes where First is expensive.",
         "$600 here is a conservative estimate; a premium-cabin redemption on a long route can be worth far more."
@@ -178,10 +178,36 @@
       "coverage": "Baggage Insurance Plan",
       "detail": "$1,250 carry-on / $500 checked",
       "level": "mid"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "$800 · $50 deductible · 2 claims per 12 months",
+      "level": "good"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "Included; see your Guide to Benefits for limits",
+      "level": "mid"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Included; see your Guide to Benefits for limits",
+      "level": "mid"
+    },
+    {
+      "coverage": "Return protection",
+      "detail": "Included; see your Guide to Benefits for limits",
+      "level": "mid"
+    },
+    {
+      "coverage": "Emergency evacuation",
+      "detail": "Premium Global Assist: emergency transport at no cost if approved",
+      "level": "good"
     }
   ],
-  "protection_note": "Meaningfully better than the Gold and Platinum tiers on trip delay window (6 hrs) and rental coverage (primary outside the US). Still capped at 2 trip-delay claims/yr like every other Amex travel card.",
+  "protection_note": "Better than the Gold and Platinum tiers: a 6-hour trip delay window against 12 hours on Platinum and none on Gold, plus trip cancellation and interruption insurance. Rental coverage is secondary, same as the other Delta cards. Still capped at 2 trip-delay claims per 12 months.",
   "rental_note": "Secondary coverage, so it pays after your own auto policy. Amex sells primary cover separately as Premium Car Rental Protection. Not available in Australia, Italy or New Zealand.",
+  "lounge_access": "included",
   "status_perks": [
     {
       "name": "Delta Sky Club Access",
@@ -191,7 +217,7 @@
     {
       "name": "Centurion Lounge Access",
       "strength": 3,
-      "note": "Complimentary access when you book your Delta flight with this card, narrower than the Amex Platinum's blanket Centurion access."
+      "note": "Complimentary access on the same day as a Delta-marketed or Delta-operated flight booked on a U.S. issued American Express Card, narrower than the Amex Platinum's blanket Centurion access."
     },
     {
       "name": "Medallion head start",
@@ -218,32 +244,36 @@
             "included": false
           },
           {
-            "text": "1st free checked bag + priority boarding when flying Delta",
-            "included": true
+            "text": "No free checked bag or priority boarding of their own: both belong to the primary cardholder",
+            "included": false
           },
           {
-            "text": "Own Global Entry / TSA PreCheck credit",
-            "included": true
+            "text": "No Global Entry / TSA PreCheck credit of their own: one credit across the account every 4 years",
+            "included": false
           },
           {
             "text": "Earns SkyMiles (into your account)",
             "included": true
           },
           {
-            "text": "Shares the account's Sky Club visits and companion cert, no separate set",
+            "text": "Own 15 Sky Club visits a year on their own card",
+            "included": true
+          },
+          {
+            "text": "No companion certificate of their own: it goes to the primary cardholder",
             "included": false
           }
         ]
       }
     ],
-    "note": "Additional Reserve cards cost $175 each. The no-fee line applies to additional Delta Platinum cards, not these. Sky Club visits and the companion certificate stay tied to the primary account."
+    "note": "Additional Reserve cards cost $175 each. The no-fee line applies to additional Delta Platinum cards, not these. Each one gets its own 15 Sky Club visits a year; the companion certificate stays with the primary cardholder."
   },
   "timeline": [
     {
-      "date": "Aug 27, 2026",
-      "type": "neutral",
-      "badge": "New welcome offer",
-      "text": "The welcome offer became 50,000 miles plus two round-trip Delta Comfort certificates after $10,000 of spend in six months. Delta lists it as running through November 4, 2026."
+      "date": "Sep 15, 2026",
+      "type": "add",
+      "badge": "Tock added",
+      "text": "The Resy credit started counting purchases made directly on Tock at U.S. restaurants."
     },
     {
       "date": "Jun 4, 2026",

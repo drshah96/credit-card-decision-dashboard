@@ -11,17 +11,17 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.49%-28.49%",
+  "variable_apr": "19.74%-28.74%",
   "balance_transfer_apr": null,
   "balance_transfer_fee": null,
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.74%",
+  "cash_advance_apr": "28.99%",
   "penalty_apr": "29.99%",
   "penalty_apr_trigger": "Missing at least the Minimum Payment Due, or a returned payment; applies for at least 6 months and is reviewed every 6 months after that",
   "pay_over_time_fee": "Up to 1.33% per month of each purchase placed in a Plan It plan",
   "late_payment_fee": "Up to $40",
   "returned_payment_fee": "Up to $40",
-  "returned_check_fee": null,
+  "returned_check_fee": "$38",
   "welcome_bonus": {
     "bonus": "As high as 90,000 miles plus a $300 statement credit",
     "requirement": "after you spend $4,000 in purchases in the first 6 months of Card Membership; welcome offers vary and you may not be eligible for an offer",
@@ -74,7 +74,7 @@
     "currency": "Delta SkyMiles",
     "redemption_options": [
       {
-        "method": "Statement / low-end",
+        "method": "Pay with Miles (Delta flights)",
         "cpp": 1.0,
         "best": false
       },
@@ -134,7 +134,7 @@
       "default_value": 0,
       "tier": "easy",
       "removed": false,
-      "description": "Up to $10/month at 10,000+ U.S. Resy restaurants (via Global Dining Access by Resy), added in the 2026 refresh.",
+      "description": "Up to $10/month at U.S. Resy restaurants marked eligible on Resy.com when you pay, and at purchases made directly on Tock since Sep 15, 2026.",
       "tips": [
         "Stacks with your Amex Platinum's $400 Resy credit: two cards paying you at the same restaurants.",
         "Monthly, no rollover; one Resy meal a month captures it."
@@ -148,7 +148,7 @@
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "Each year after renewal, one round-trip Main Cabin companion ticket to the U.S., Caribbean, or Central America; companion pays only taxes and fees, capped at $80 on round-trip domestic itineraries and $250 on round-trip international ones.",
+      "description": "Each year after renewal, one round-trip Main Cabin companion ticket within the U.S., Mexico, the Caribbean, or Central America; companion pays only taxes and fees, capped at $80 on round-trip domestic itineraries and $250 on round-trip international ones.",
       "tips": [
         "One qualifying round trip erases the $350 fee. Best on expensive routes; value the slider by the fare you'd save.",
         "Book fare classes L, U, T, X or V; the cheapest basic buckets sometimes don't qualify."
@@ -166,6 +166,19 @@
       "tips": [
         "Resets on the calendar year, not renewal, so a new cardholder can use it twice on one annual fee.",
         "Use it on a Delta Stays booking you'd make anyway."
+      ]
+    },
+    {
+      "id": "global-entry",
+      "name": "Global Entry / TSA PreCheck Credit",
+      "subtitle": "$120 GE / $85 TSA · every 4 yrs",
+      "max_annual": 30,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Statement credit for a Global Entry ($120) or TSA PreCheck ($85) application fee, one credit across the account every 4 years. Shown here amortized to an annual figure.",
+      "tips": [
+        "Apply for Global Entry, not just TSA PreCheck; it includes TSA PreCheck and covers the same credit."
       ]
     }
   ],
@@ -187,8 +200,8 @@
     },
     {
       "coverage": "Baggage Insurance Plan",
-      "detail": "Lost/damaged/stolen (Amex)",
-      "level": "good"
+      "detail": "$1,250 carry-on / $500 checked",
+      "level": "mid"
     },
     {
       "coverage": "Emergency evacuation",
@@ -202,8 +215,8 @@
     },
     {
       "coverage": "Purchase protection",
-      "detail": "Yes",
-      "level": "good"
+      "detail": "$1,000/claim · $50,000/yr · 90 days",
+      "level": "mid"
     },
     {
       "coverage": "Extended warranty",
@@ -213,6 +226,7 @@
   ],
   "protection_note": "Thinner than the others: the $300/12-hour trip delay is weaker than the $500/6 hrs elsewhere, the rental cover is secondary, and there is no trip cancellation or interruption insurance at all. Global Assist here is the standard hotline, which makes referrals rather than paying for an evacuation. It does keep Amex cell-phone protection. For trips you want fully insured, reach for a card with real trip-cancellation limits.",
   "rental_note": "Secondary only: it pays after your own auto policy. If you carry a card with free primary coverage, that's the better one to put rentals on.",
+  "lounge_access": "none",
   "status_perks": [
     {
       "name": "Medallion head start",
@@ -244,8 +258,8 @@
       "detail": "$2,500 MQD head start, $1 MQD per $20 spent, and 15% off award flights booked with miles."
     },
     {
-      "name": "Global Dining Access by Resy & no FX fees",
-      "detail": "The Resy credit runs through Global Dining Access; plus zero foreign transaction fees and the Global Assist Hotline."
+      "name": "Resy credit & no FX fees",
+      "detail": "The Resy credit pays at eligible U.S. Resy restaurants; plus zero foreign transaction fees and the Global Assist Hotline."
     }
   ],
   "additional_cards": {
@@ -261,12 +275,12 @@
             "included": true
           },
           {
-            "text": "1st free checked bag + priority boarding when flying Delta",
-            "included": true
+            "text": "No free checked bag or priority boarding of their own: both belong to the primary cardholder",
+            "included": false
           },
           {
-            "text": "Own Global Entry / TSA PreCheck credit",
-            "included": true
+            "text": "No Global Entry / TSA PreCheck credit of their own: one credit across the account every 4 years",
+            "included": false
           },
           {
             "text": "Earns SkyMiles (into your account)",
@@ -279,9 +293,15 @@
         ]
       }
     ],
-    "note": "Additional Delta Platinum cards are free, and each one extends the free-checked-bag + priority-boarding perk, so a travel companion on the account effectively gets their own free bag when you all fly Delta together."
+    "note": "Additional Delta Platinum cards are free. The free checked bag and priority boarding stay with the primary cardholder: the bag waiver covers up to nine people on the primary's reservation, whether or not they hold a card, so an extra card adds nothing on a separate booking."
   },
   "timeline": [
+    {
+      "date": "Sep 15, 2026",
+      "type": "add",
+      "badge": "Tock added",
+      "text": "The Resy credit started counting purchases made directly on Tock at U.S. restaurants."
+    },
     {
       "date": "Jun 2026",
       "type": "add",

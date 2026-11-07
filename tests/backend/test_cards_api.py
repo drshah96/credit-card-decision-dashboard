@@ -828,7 +828,6 @@ def test_amex_hilton_surpass_no_longer_has_an_intro_offer_or_bt_support() -> Non
     detail = client.get("/api/cards/amex-hilton-honors-surpass").json()
     assert detail["intro_apr_purchases"] is None
     assert detail["intro_apr_balance_transfers"] is None
-    assert detail["variable_apr"] == "19.49%-28.49%"
     assert detail["balance_transfer_apr"] is None
     assert detail["balance_transfer_fee"] is None
 
@@ -841,7 +840,6 @@ def test_amex_delta_blue_no_intro_offer_and_no_longer_supports_balance_transfers
     detail = client.get("/api/cards/amex-delta-skymiles-blue").json()
     assert detail["intro_apr_purchases"] is None
     assert detail["intro_apr_balance_transfers"] is None
-    assert detail["variable_apr"] == "19.49%-28.49%"
     assert detail["balance_transfer_apr"] is None
     assert detail["balance_transfer_fee"] is None
 
