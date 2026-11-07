@@ -1,8 +1,11 @@
-"""mint refuses without a terminal, so a live key cannot land in an agent's transcript."""
+"""mint refuses without a terminal on both ends, so a live key can't be captured by accident."""
 
 import io
 import json
+import sys
 from datetime import date
+
+import pytest
 
 from backend.mcp_server.keys import KeyRecord, KeyStore, mint_key
 from backend.scripts import mcp_keys
@@ -17,15 +20,25 @@ class _Stdin(io.StringIO):
         return self._tty
 
 
-def test_mint_refuses_without_a_tty(monkeypatch, capsys):
-    monkeypatch.setattr("sys.stdin", _Stdin())
+def _set_terminals(monkeypatch, stdin: bool, stdout: bool) -> None:
+    monkeypatch.setattr("sys.stdin", _Stdin(tty=stdin))
+    monkeypatch.setattr(sys.stdout, "isatty", lambda: stdout)
+
+
+@pytest.mark.parametrize(
+    ("stdin", "stdout"),
+    [(False, True), (True, False), (False, False)],
+    ids=["piped_input", "captured_output", "neither"],
+)
+def test_mint_refuses_without_a_terminal_on_both_ends(monkeypatch, capsys, stdin, stdout):
+    _set_terminals(monkeypatch, stdin, stdout)
     assert mcp_keys.main(["mint", "--label", "x"]) == 2
     captured = capsys.readouterr()
     assert "twa_" not in captured.out + captured.err
 
 
 def test_minted_record_verifies_the_printed_key(monkeypatch, capsys):
-    monkeypatch.setattr("sys.stdin", _Stdin(tty=True))
+    _set_terminals(monkeypatch, stdin=True, stdout=True)
     assert mcp_keys.main(["mint", "--label", "reviewer", "--expires", "2999-01-01"]) == 0
     lines = [line.strip() for line in capsys.readouterr().out.splitlines()]
     key = next(line for line in lines if line.startswith("twa_"))

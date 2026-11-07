@@ -3,8 +3,9 @@
     uv run python -m backend.scripts.mcp_keys mint --label "first reviewer" [--expires YYYY-MM-DD]
     uv run python -m backend.scripts.mcp_keys check < candidate.json
 
-mint refuses without a terminal, so a live key never lands in an agent's transcript. It prints
-the key once and the record to append to MCP_API_KEYS, and writes nothing.
+mint refuses unless both its input and its output are a terminal, so a live key doesn't end up in
+a pipe, a file or an agent's transcript. It prints the key once and the record to append to
+MCP_API_KEYS, and writes nothing.
 """
 
 import argparse
@@ -16,8 +17,11 @@ from backend.mcp_server.keys import default_expiry, mint_key, parse_records
 
 
 def _mint(args: argparse.Namespace) -> int:
-    if not sys.stdin.isatty():
-        print("error: mint needs a real terminal. Run it yourself, not in a pipe.", file=sys.stderr)
+    if not (sys.stdin.isatty() and sys.stdout.isatty()):
+        print(
+            "error: mint needs a real terminal. Run it yourself, without a pipe or redirect.",
+            file=sys.stderr,
+        )
         return 2
     if args.no_expiry:
         expires = None
