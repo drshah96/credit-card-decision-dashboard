@@ -33,6 +33,8 @@ _PROTOCOL = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 _DAY_SECONDS = 86_400.0
 _MINUTE_SECONDS = 60.0
 _CAPTURE_BYTES = 262_144
+# 202 is how the SDK accepts a notification, which has no response body.
+_SUCCESS_STATUSES = frozenset({200, 202})
 _KNOWN_TOOLS = frozenset(
     {"find_cards", "get_card", "compare_cards", "rank_by_category", "estimate_value"}
 )
@@ -253,7 +255,9 @@ class McpEndpoint:
                 )
                 return
             parsed = _parse_for_logging(body)
-            status, outcome, response_bytes = await self._call_sdk(live, scope, body, receive, send)
+            status, outcome, response_bytes = await self._call_sdk(
+                live, scope, body, parsed, receive, send
+            )
             _log_request(
                 request_id,
                 record,
@@ -269,7 +273,7 @@ class McpEndpoint:
         finally:
             live.in_flight -= 1
 
-    async def _call_sdk(self, live, scope, body, receive, send) -> tuple[int, str, int]:
+    async def _call_sdk(self, live, scope, body, parsed, receive, send) -> tuple[int, str, int]:
         inner_scope = {**scope, "path": "/mcp", "raw_path": b"/mcp", "root_path": ""}
         replayed = False
         status = 500
@@ -311,7 +315,7 @@ class McpEndpoint:
                 return status, "timeout_after_start", size
             await _respond(send, 504, _jsonrpc_error("The request timed out."))
             return 504, "timeout", 0
-        return status, _classify(status, bytes(captured)), size
+        return status, _classify(status, bytes(captured), parsed), size
 
     def _charge_key(self, live: _Live, record: KeyRecord) -> int | None:
         """Seconds until the key may retry when over a limit, else None after counting it."""
@@ -431,8 +435,16 @@ async def _respond(send, status: int, body: bytes, extra_headers=()) -> None:
     await send({"type": "http.response.body", "body": body})
 
 
-def _classify(status: int, body: bytes) -> str:
-    if status != 200:
+def _calls_unknown_tool(parsed: dict | None) -> bool:
+    if parsed is None or parsed.get("method") != "tools/call":
+        return False
+    params = parsed.get("params")
+    name = params.get("name") if isinstance(params, dict) else None
+    return isinstance(name, str) and name not in _KNOWN_TOOLS
+
+
+def _classify(status: int, body: bytes, parsed: dict | None) -> str:
+    if status not in _SUCCESS_STATUSES:
         return "internal_error" if status >= 500 else f"http_{status}"
     try:
         payload = from_json(body)
@@ -450,6 +462,8 @@ def _classify(status: int, body: bytes) -> str:
     text = str(content[0].get("text", ""))
     if text.startswith("["):
         return f"tool_error:{text[1 : text.find(']')]}"
+    if _calls_unknown_tool(parsed):
+        return "unknown_tool"
     return "invalid_arguments" if "validation error" in text else "internal_error"
 
 

@@ -9,6 +9,7 @@ import pytest
 
 from backend.mcp_server import contract
 from backend.mcp_server.config import Limits
+from backend.mcp_server.guard import _KNOWN_TOOLS
 from backend.mcp_server.tools import create_server
 
 from .conftest import connect
@@ -98,6 +99,7 @@ async def test_every_tool_declares_its_annotations_and_output_schema(snapshot):
         "rank_by_category",
         "estimate_value",
     ]
+    assert {t["name"] for t in surface["tools"]} == _KNOWN_TOOLS
     for tool in surface["tools"]:
         for hint, value in ANNOTATIONS.items():
             assert tool["annotations"][hint] is value, tool["name"]

@@ -1537,6 +1537,11 @@ cards recording `false` have no check, or a check that left `rates_and_fees` unc
 schema and docs no longer call it confirmed. The value stays recorded, because every tool that
 serves it also serves the provenance showing the gap.
 
+**A23. Outcomes tell client mistakes from server faults.** This extends D9's list. A notification
+the SDK accepts with a 202 logs as `ok`. A `tools/call` naming a tool the server doesn't have logs
+as `unknown_tool`, decided from the request and not from SDK wording. Any other 4xx logs as
+`http_<status>`. `internal_error` now only means a server fault.
+
 **Defaults taken while owner decisions are open.** Each can change before release:
 
 - **Hosting:** free tier, as in D1.

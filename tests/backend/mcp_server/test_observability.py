@@ -75,6 +75,33 @@ def test_each_authenticated_request_logs_one_complete_line(snapshot):
     assert unknown_card["outcome"] == "tool_error:unknown_card_id"
     assert invalid["outcome"] == "invalid_arguments"
     assert unknown_tool["tool"] == "<unknown>"
+    assert unknown_tool["outcome"] == "unknown_tool"
+
+
+def test_an_accepted_notification_logs_as_ok(snapshot):
+    config, key = enabled_config()
+    notification = {"jsonrpc": "2.0", "method": "notifications/initialized"}
+    with captured() as logs, running(snapshot, config) as client:
+        assert client.post("/mcp", json=notification, headers=auth(key)).status_code == 202
+    line = logs.events("mcp_request")[-1]
+    assert line["rpc_method"] == "notifications/initialized"
+    assert line["http_status"] == 202
+    assert line["outcome"] == "ok"
+
+
+def test_a_crash_inside_a_known_tool_still_logs_as_internal_error(snapshot, monkeypatch):
+    def crash(*_args, **_kwargs):
+        raise RuntimeError("boom")
+
+    monkeypatch.setattr("backend.mcp_server.tools.projections.card_detail", crash)
+    config, key = enabled_config()
+    message = call_tool("get_card", {"card_id": "amex-gold"})
+    with captured() as logs, running(snapshot, config) as client:
+        response = client.post("/mcp", json=message, headers=auth(key))
+    assert response.json()["result"]["isError"] is True
+    line = logs.events("mcp_request")[-1]
+    assert line["tool"] == "get_card"
+    assert line["outcome"] == "internal_error"
 
 
 def test_client_name_is_read_from_the_newer_protocols_meta(snapshot):
