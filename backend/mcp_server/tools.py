@@ -34,14 +34,7 @@ Issuer = Literal[
     "U.S. Bank",
     "Wells Fargo",
 ]
-Section = Literal[
-    "credit_tips",
-    "timeline",
-    "transfer_partner_list",
-    "services",
-    "additional_cards",
-    "removed_credits",
-]
+Section = Literal[projections.SECTIONS]
 
 _ANNOTATIONS = dict(
     read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False
@@ -225,7 +218,7 @@ def create_server(load_snapshot: Callable[[], CatalogSnapshot]) -> MCPServer:
     async def get_card(
         ctx: Context,
         card_id: CardId,
-        sections: Annotated[list[Section], Field(max_length=6)] = [],  # noqa: B006
+        sections: Annotated[list[Section], Field(max_length=len(projections.SECTIONS))] = [],  # noqa: B006
     ) -> Annotated[CallToolResult, schemas.GetCardResult]:
         snapshot = _snapshot(ctx)
         error = _check_card_ids(snapshot, [card_id])
