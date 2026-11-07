@@ -1208,8 +1208,8 @@ def test_wells_fargo_autograph_has_no_balance_transfer_intro_offer() -> None:
     detail = client.get("/api/cards/wells-fargo-autograph").json()
     assert detail["intro_apr_purchases"] == {"rate": "0%", "months": 12}
     assert detail["intro_apr_balance_transfers"] is None
-    assert detail["variable_apr"] == "18.49%, 24.49%, or 28.49% (based on creditworthiness)"
-    assert detail["balance_transfer_apr"] == "18.49%, 24.49%, or 28.49% (based on creditworthiness)"
+    assert detail["variable_apr"] == "18.74%, 24.74%, or 28.74% (based on creditworthiness)"
+    assert detail["balance_transfer_apr"] == "18.74%, 24.74%, or 28.74% (based on creditworthiness)"
 
 
 @pytest.mark.parametrize(

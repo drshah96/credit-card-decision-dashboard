@@ -14,11 +14,11 @@
   },
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "18.49%, 24.49%, or 28.49% (based on creditworthiness)",
-  "balance_transfer_apr": "18.49%, 24.49%, or 28.49% (based on creditworthiness)",
+  "variable_apr": "18.74%, 24.74%, or 28.74% (based on creditworthiness)",
+  "balance_transfer_apr": "18.74%, 24.74%, or 28.74% (based on creditworthiness)",
   "balance_transfer_fee": "3% of each transfer (minimum $5) within the first 120 days of account opening; up to 5% (minimum $5) after",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "29.49%",
+  "cash_advance_apr": "29.74%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
@@ -39,14 +39,14 @@
     {
       "emoji": "🍽️",
       "multiplier": "3×",
-      "category": "Restaurants: dining, takeout, delivery, catering",
+      "category": "Restaurants: eating places, fast food, drinking places, catering; excludes third-party delivery services",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "✈️",
       "multiplier": "3×",
-      "category": "Travel: airfare, hotels, car rentals, cruises",
+      "category": "Travel: airlines, hotels, car rentals, cruises, timeshares, campgrounds, travel agencies",
       "highlight": true,
       "is_base": false
     },
@@ -60,7 +60,7 @@
     {
       "emoji": "🚇",
       "multiplier": "3×",
-      "category": "Transit: subways, rideshares, parking, tolls",
+      "category": "Transit: passenger rail, taxis, limousines, ferries, parking, tolls",
       "highlight": false,
       "is_base": false
     },
@@ -86,7 +86,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 3x list is unusually broad for a no-fee card, covering six everyday categories at once with no spending cap. Points don't expire as long as the account stays open and in good standing.",
+  "earn_note": "The 3x list is unusually broad for a no-fee card, covering six everyday categories at once with no spending cap. Points don't expire as long as the account stays open.",
   "points": {
     "currency": "Wells Fargo Rewards",
     "redemption_options": [
@@ -146,7 +146,7 @@
         "ratio": "1:1"
       },
       {
-        "name": "Cathay Pacific",
+        "name": "Cathay Pacific Asia Miles",
         "type": "airline",
         "ratio": "1:1",
         "notes": "Added Apr 2026."
@@ -185,7 +185,7 @@
   "insurance": [
     {
       "coverage": "Cell phone protection",
-      "detail": "Up to $600 per claim against damage or theft when you pay your monthly cell phone bill with this card, minus a $25 deductible, max 2 claims per 12 months",
+      "detail": "Up to $600 per claim against damage, theft, or involuntary separation when you pay your monthly cell phone bill with this card, minus a $25 deductible, max 2 claims per 12 months",
       "level": "good"
     },
     {
@@ -214,25 +214,22 @@
       "level": "none"
     }
   ],
-  "protection_note": "Cell phone protection is solid for a no-fee card. There's no trip cancellation, purchase protection, or extended warranty here; those show up starting at the Autograph Journey tier.",
+  "protection_note": "Cell phone protection is solid for a no-fee card. There's no trip cancellation, purchase protection, or extended warranty here. Autograph Journey adds trip cancellation, but neither card has purchase protection or extended warranty.",
   "rental_note": "Up to $50,000. Secondary in the US, so it pays after your own auto policy, but primary outside the US. Charge the full rental cost to the card and decline the counter's optional CDW to activate it.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
-    {
-      "name": "20,000-point welcome bonus",
-      "detail": "20,000 bonus points (about $200) after spending $1,000 in purchases within the first 3 months."
-    },
     {
       "name": "Visa Signature Concierge and Luxury Hotel Collection",
       "detail": "24/7 concierge for reservations and event tickets, plus perks at select luxury hotel properties."
     },
     {
       "name": "Roadside Dispatch",
-      "detail": "24/7 towing and roadside assistance, billed to the card at time of dispatch, no membership fee."
+      "detail": "24/7 pay-per-use towing and roadside assistance with no membership. The service call fee is confirmed when you request help, and you pay the provider for towing past 5 miles."
     },
     {
       "name": "My Wells Fargo Deals",
-      "detail": "Personalized merchant offers that earn extra cash back or points as an account credit."
+      "detail": "Personalized merchant offers that earn cash back as an account credit."
     }
   ],
   "additional_cards": {
@@ -258,7 +255,19 @@
   },
   "timeline": [
     {
-      "date": "Jan 2023",
+      "date": "Apr 2026",
+      "type": "add",
+      "badge": "Partner",
+      "text": "Wyndham Rewards joins at 1:2 and Cathay Pacific Asia Miles at 1:1, both in April."
+    },
+    {
+      "date": "Nov 2025",
+      "type": "add",
+      "badge": "Partner",
+      "text": "JetBlue TrueBlue joins Wells Fargo's points transfer program at 1:1."
+    },
+    {
+      "date": "Jul 2022",
       "type": "add",
       "badge": "Launch",
       "text": "Wells Fargo launches Autograph as a no-annual-fee points card with a wide 3x category list, its first real entry into the points-earning travel card space alongside Active Cash's cash back."

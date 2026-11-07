@@ -17,11 +17,11 @@
     "months": 12
   },
   "foreign_transaction_fee": true,
-  "variable_apr": "18.49%, 24.49%, or 28.49% (based on creditworthiness)",
-  "balance_transfer_apr": "18.49%, 24.49%, or 28.49% (based on creditworthiness)",
+  "variable_apr": "18.74%, 24.74%, or 28.74% (based on creditworthiness)",
+  "balance_transfer_apr": "18.74%, 24.74%, or 28.74% (based on creditworthiness)",
   "balance_transfer_fee": "3% of each transfer (minimum $5) within the first 120 days of account opening; up to 5% (minimum $5) after",
   "foreign_transaction_fee_rate": "3%",
-  "cash_advance_apr": "29.49%",
+  "cash_advance_apr": "29.74%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
@@ -70,6 +70,11 @@
         "method": "Redeem for a past purchase (minimum $1)",
         "cpp": 1.0,
         "best": false
+      },
+      {
+        "method": "Book travel through the Wells Fargo Rewards portal",
+        "cpp": 1.0,
+        "best": false
       }
     ],
     "per_100k": "$1,000",
@@ -85,7 +90,7 @@
   "insurance": [
     {
       "coverage": "Cell phone protection",
-      "detail": "Up to $600 per claim against damage or theft when you pay your monthly cell phone bill with this card, minus a $25 deductible, max 2 claims per 12 months",
+      "detail": "Up to $600 per claim against damage, theft, or involuntary separation when you pay your monthly cell phone bill with this card, minus a $25 deductible, max 2 claims per 12 months",
       "level": "good"
     },
     {
@@ -116,23 +121,20 @@
   ],
   "protection_note": "Cell phone protection is a real, above-average benefit for a no-fee card. Beyond that, coverage is thin: no purchase protection, extended warranty, or trip insurance are advertised, and rental car coverage is secondary at home, though it goes primary abroad.",
   "rental_note": "Up to $50,000, secondary in the US so it pays after your own auto policy, but primary when you rent abroad. Rentals are capped at 15 consecutive days at home and 31 away. Charge the full rental cost to the card and decline the counter's optional CDW to activate it.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
-    {
-      "name": "$100 welcome bonus",
-      "detail": "One-time $100 cash rewards bonus after spending $500 in purchases within the first 3 months."
-    },
     {
       "name": "Visa Signature Concierge",
       "detail": "24/7 complimentary concierge for reservations, event tickets, and travel planning."
     },
     {
       "name": "Roadside Dispatch",
-      "detail": "24/7 towing and roadside assistance, billed to the card at time of dispatch, no membership fee."
+      "detail": "24/7 pay-per-use towing and roadside assistance with no membership. The service call fee is confirmed when you request help, and you pay the provider for towing past 5 miles."
     },
     {
       "name": "Credit Close-Up",
-      "detail": "Free monthly FICO score updates and credit report insights through the Wells Fargo app."
+      "detail": "Free monthly FICO score updates and credit insights for Wells Fargo Online customers who enroll."
     }
   ],
   "additional_cards": {
@@ -158,7 +160,7 @@
   },
   "timeline": [
     {
-      "date": "May 2021",
+      "date": "Jul 2021",
       "type": "add",
       "badge": "Launch",
       "text": "Wells Fargo launches Active Cash as its flagship flat-rate cash back card, replacing the Propel as the bank's main no-annual-fee rewards product."

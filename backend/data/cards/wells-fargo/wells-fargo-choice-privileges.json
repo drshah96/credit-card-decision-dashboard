@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.74%, 24.49%, or 28.49%, based on your creditworthiness",
-  "balance_transfer_apr": "19.74%, 24.49%, or 28.49%, based on your creditworthiness",
+  "variable_apr": "19.99%, 24.74%, or 28.74%, based on your creditworthiness",
+  "balance_transfer_apr": "19.99%, 24.74%, or 28.74%, based on your creditworthiness",
   "balance_transfer_fee": "$5 or 5% of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "29.49%",
+  "cash_advance_apr": "29.74%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
@@ -23,9 +23,9 @@
   "returned_payment_fee": null,
   "returned_check_fee": null,
   "welcome_bonus": {
-    "bonus": "60,000 points",
+    "bonus": "40,000 points",
     "requirement": "after you spend $1,000 in purchases within the first 3 months of account opening",
-    "estimated_value": "$360"
+    "estimated_value": "$240"
   },
   "verdict": {
     "status": "situational",
@@ -76,7 +76,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 3x everyday category list (gas, groceries, home improvement, phone plans) is unusually generous for a no-fee hotel co-brand card, on top of the 5x hotel rate. Bonus points don't apply to cash advances, balance transfers, fees, interest, or gambling transactions.",
+  "earn_note": "The 3x everyday category list (gas, groceries, home improvement, phone plans) is unusually generous for a no-fee hotel co-brand card, on top of the 5x hotel rate. Purchases made through mobile or digital wallets, third-party payment accounts, online marketplaces, or mobile card readers may not earn bonus points. Bonus points don't apply to cash advances, balance transfers, fees, interest, or gambling transactions.",
   "points": {
     "currency": "Choice Privileges Points",
     "redemption_options": [
@@ -114,7 +114,7 @@
     },
     {
       "coverage": "Cell phone protection",
-      "detail": "Up to $800 per claim against damage or theft when you pay your monthly cell phone bill with this card, minus a $25 deductible, max 2 claims per 12 months",
+      "detail": "Up to $800 per claim against damage, theft, or involuntary separation when you pay your monthly cell phone bill with this card, minus a $25 deductible, max 2 claims per 12 months",
       "level": "good"
     },
     {
@@ -145,6 +145,7 @@
   ],
   "protection_note": "Cell phone protection, a $50,000 rental waiver, trip cancellation and interruption, lost baggage, travel accident and ID theft protection are all real. No purchase protection or extended warranty are advertised; Mastercard World Elite's baseline security and concierge services still apply.",
   "rental_note": "$50,000, secondary in the US so it pays after your own auto policy, but primary abroad. Excludes Israel, Jamaica, the Republic of Ireland and Northern Ireland.",
+  "lounge_access": "none",
   "status_perks": [
     {
       "name": "Gold Elite status, Choice Privileges",
@@ -153,10 +154,6 @@
     }
   ],
   "services": [
-    {
-      "name": "60,000-point welcome bonus",
-      "detail": "60,000 bonus points after spending $1,000 in purchases within the first 3 months, worth up to 7 reward nights at select Choice Hotels properties."
-    },
     {
       "name": "Milestone Rewards",
       "detail": "Bonus points or gift cards for hitting spending thresholds throughout the year."
