@@ -333,7 +333,7 @@
     {
       "name": "Global Lounge Collection",
       "strength": 5,
-      "note": "Best in class. 1,550+ lounges: Centurion, Priority Pass, Plaza Premium, plus 10 Delta Sky Club visits/yr on Delta flights. The Centurion arrival window is 3 hrs, or 5 hrs if you are connecting. From Jul 8, 2026 you get one complimentary guest instead of two, and the guest has to be on your flight. Lufthansa Business and Senator lounges leave the collection on Oct 1, 2026."
+      "note": "Best in class. 1,550+ lounges: Centurion, Priority Pass, Plaza Premium, plus 10 Delta Sky Club visits/yr on Delta flights. The Centurion arrival window is 3 hrs, or 5 hrs if you are connecting. Guests cost $50 each ($30 for ages 2 to 17) and must be on your flight, unless $75,000 of spend in a calendar year earns free access for up to two. Lufthansa Business and Senator lounges leave the collection on Oct 1, 2026."
     }
   ],
   "services": [
@@ -445,7 +445,7 @@
       "date": "Jul 8, 2026",
       "type": "cut",
       "badge": "Cut",
-      "text": "Centurion Lounge guest rules tightened: one complimentary guest instead of two, and the guest has to be booked on your flight. The three-hour arrival window is unchanged, but on a layover you can now enter within five hours of the connecting flight."
+      "text": "Centurion Lounge guest rules tightened: guests have to be booked on your flight. The three-hour arrival window is unchanged, but on a layover you can now enter within five hours of the connecting flight."
     },
     {
       "date": "Jul 1, 2026",
