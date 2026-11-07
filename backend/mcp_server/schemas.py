@@ -210,7 +210,13 @@ class RatesAndFees(_Out):
     intro_apr_balance_transfers: Fact[IntroAprValue]
     balance_transfer_fee: Fact[str]
     foreign_transaction_fee: Annotated[
-        Fact[bool], Field(description="recorded false is a confirmed no fee.")
+        Fact[bool],
+        Field(
+            description=(
+                "false means the catalog records no fee. Treat it as unconfirmed when the card "
+                "is not_verified or not_checked lists rates_and_fees."
+            )
+        ),
     ]
     foreign_transaction_fee_rate: Fact[str]
     cash_advance_apr: Fact[str]

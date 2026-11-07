@@ -1170,7 +1170,7 @@
        },
        "foreign_transaction_fee": {
         "$ref": "#/$defs/Fact_bool_",
-        "description": "recorded false is a confirmed no fee."
+        "description": "false means the catalog records no fee. Treat it as unconfirmed when the card is not_verified or not_checked lists rates_and_fees."
        },
        "foreign_transaction_fee_rate": {
         "$ref": "#/$defs/Fact_str_"

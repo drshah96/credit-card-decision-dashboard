@@ -4,7 +4,7 @@ CONTRACT_VERSION = "1.0.0"
 
 # Maps each published version to the SHA-256 of its canonical tools/list surface.
 PUBLISHED_SURFACES: dict[str, str] = {
-    "1.0.0": "dd9358a29fc49366a743f1249fefe8d81f4f8ad4610d6bee405b012be5b66943",
+    "1.0.0": "1028bb6352abca51317bbbce28df3191b09515b0a01cc35e2734a8729178e58c",
 }
 
 SERVER_NAME = "thewalletaudit"

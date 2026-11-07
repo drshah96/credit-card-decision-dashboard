@@ -1531,6 +1531,12 @@ word reads as false. Agents read `status_perks` in `get_card` until a checked `l
 ships with the next catalog refresh as contract 1.1.0. Version 1.0.0 had never been released, so
 its surface was corrected in place.
 
+**A22. A recorded `false` is not a checked one.** D5 calls `foreign_transaction_fee: false` a
+positive "none". That describes what the content says, not that anyone checked it: 33 of the 73
+cards recording `false` have no check, or a check that left `rates_and_fees` unconfirmed. The
+schema and docs no longer call it confirmed. The value stays recorded, because every tool that
+serves it also serves the provenance showing the gap.
+
 **Defaults taken while owner decisions are open.** Each can change before release:
 
 - **Hosting:** free tier, as in D1.

@@ -84,8 +84,10 @@ All five are read-only and cost no database queries.
 - `issuer_url` is where to find current terms. It is not proof of what was verified.
 
 **Missing values.** Rate and fee fields are `{status, value}`. `not_recorded` means the catalog
-has no value, not that the fee is zero. A recorded `foreign_transaction_fee: false` is a
-confirmed no fee.
+has no value, not that the fee is zero. `recorded` means the catalog holds a value, not that it
+was checked, so read it with the card's provenance. A recorded `foreign_transaction_fee: false`
+means the catalog records no fee. Treat it as unconfirmed when the card is `not_verified` or
+`not_checked` lists `rates_and_fees`.
 
 **Insurance.** `unconfirmed` means the catalog cannot say whether the card has that coverage.
 `none` is only used when the check covered insurance and the record states the coverage is
