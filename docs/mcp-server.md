@@ -91,6 +91,10 @@ confirmed no fee.
 `none` is only used when the check covered insurance and the record states the coverage is
 absent. An empty `insurance` list means nothing is recorded.
 
+**Lounge access.** There is no dedicated field yet. Read `status_perks` in `get_card`: a note may
+say lounge access is absent or paid per visit, and a card with no lounge perk listed may still
+have access. `compare_cards` and `find_cards` do not report it.
+
 **Credit values.** Most credits have a default of $0, which means no use is assumed, not that
 the credit is worthless. Pass `credit_overrides` to `estimate_value` with real expected use,
 and read `credits_at_zero` to see how many credits are still counted at $0.

@@ -314,7 +314,6 @@ class CardDetail(_Out):
     ]
     protection_note: str
     rental_note: str
-    has_lounge_access: bool
     status_perks: list[StatusPerk]
     transfer_partners: TransferPartnersInfo
     related: Related
@@ -372,7 +371,6 @@ class CompareEntry(_Out):
     best_cpp: float
     points_program: str
     earn_rates: list[EarnRate]
-    has_lounge_access: bool
     foreign_transaction_fee: Fact[bool]
     intro_apr_purchases: Fact[IntroAprValue]
     intro_apr_balance_transfers: Fact[IntroAprValue]

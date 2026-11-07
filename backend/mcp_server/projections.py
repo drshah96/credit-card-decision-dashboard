@@ -184,7 +184,6 @@ def card_detail(
         ],
         protection_note=card.protection_note,
         rental_note=card.rental_note,
-        has_lounge_access=card.has_lounge_access,
         status_perks=[
             schemas.StatusPerk(name=p.name, strength=p.strength, note=p.note)
             for p in card.status_perks
@@ -271,7 +270,6 @@ def compare_entry(
         best_cpp=best_cpp,
         points_program=card.points_program,
         earn_rates=[earn_rate(r) for r in card.earn_rates],
-        has_lounge_access=card.has_lounge_access,
         foreign_transaction_fee=fact(card.foreign_transaction_fee),
         intro_apr_purchases=_intro(card.intro_apr_purchases),
         intro_apr_balance_transfers=_intro(card.intro_apr_balance_transfers),

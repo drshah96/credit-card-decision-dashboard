@@ -1524,6 +1524,13 @@ suspends every free service for the rest of the month, so watch usage on Render'
 stays $0 on almost every credit, and the Methodology page, the crawlable page text, the feedback form
 and the README now say credits count at what you say you'd use.
 
+**A21. `has_lounge_access` is not served.** This overrides D5's `get_card` and `compare_cards`
+outputs. The site derives the flag by finding the word "lounge" in a perk's name or note, and that
+is wrong on 10 of 109 cards: "None on its own" reads as true, and a Priority Pass note without the
+word reads as false. Agents read `status_perks` in `get_card` until a checked `lounge_access` field
+ships with the next catalog refresh as contract 1.1.0. Version 1.0.0 had never been released, so
+its surface was corrected in place.
+
 **Defaults taken while owner decisions are open.** Each can change before release:
 
 - **Hosting:** free tier, as in D1.

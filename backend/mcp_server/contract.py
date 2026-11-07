@@ -4,7 +4,7 @@ CONTRACT_VERSION = "1.0.0"
 
 # Maps each published version to the SHA-256 of its canonical tools/list surface.
 PUBLISHED_SURFACES: dict[str, str] = {
-    "1.0.0": "e57b655fa3c65a3617ed0eed39972029e0d2c2700a543f8fb72f61be577b218a",
+    "1.0.0": "dd9358a29fc49366a743f1249fefe8d81f4f8ad4610d6bee405b012be5b66943",
 }
 
 SERVER_NAME = "thewalletaudit"
@@ -35,5 +35,7 @@ INSTRUCTIONS = (
     "use the earn multiplier times the card's best realistic cents per point and never consider "
     "affiliate status. The welcome_bonus field is not served. Free text such as services and "
     "credit descriptions may still mention a sign-up offer, which may be out of date, so "
-    "confirm any offer with the issuer. Use find_cards to get card ids."
+    "confirm any offer with the issuer. Lounge access has no dedicated field: read status_perks "
+    "in get_card, where a note may say lounge access is absent or paid per visit, and a card "
+    "with no lounge perk listed may still have access. Use find_cards to get card ids."
 )
