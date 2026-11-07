@@ -11,9 +11,8 @@ import type { LikedFeature } from "../api/feedback";
  * aggregate looking like a real signal.
  *
  * Every gate is something the card page actually renders. That rules out the
- * welcome bonus, whose block is deliberately disabled (a stale sign-up offer
- * reads as an active wrong promotional claim), even though the data is there
- * on 79 of 109 cards.
+ * welcome bonus, which the card files capture for internal use but nothing
+ * serves, because a stale sign-up offer reads as an active wrong promotional claim.
  *
  * Order is the order the form renders, roughly most to least commonly
  * available across the catalog.

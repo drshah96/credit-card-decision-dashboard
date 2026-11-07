@@ -5,6 +5,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from backend.main import app
+from backend.models import Card
 from backend.services.cards import _has_lounge_access
 
 client = TestClient(app)
@@ -1279,20 +1280,24 @@ def test_round_3_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
         assert field not in summary
 
 
-def test_welcome_bonus_shape_when_present() -> None:
-    """Whichever card ends up with an audited welcome bonus, the field is a
-    {bonus, requirement, estimated_value} object with the right value types,
-    not a bare string."""
+CARDS_DIR = Path(__file__).parent.parent.parent / "backend" / "data" / "cards"
+
+
+def test_welcome_bonus_is_captured_but_never_served() -> None:
+    """Offers can change daily or weekly, so the card files keep them for internal
+    use and no API response may carry them."""
+    raw = json.loads((CARDS_DIR / "amex" / "amex-gold.json").read_text())
+    assert raw["welcome_bonus"]
+    assert Card(**raw).welcome_bonus is not None
+    assert "welcome_bonus" not in Card(**raw).model_dump()
+
     all_ids = [c["id"] for c in client.get("/api/cards").json()]
-    cards = client.get("/api/cards/detail", params={"ids": ",".join(all_ids)}).json()
-    audited = [c for c in cards if c["welcome_bonus"] is not None]
-    if not audited:
-        pytest.skip("no card has an audited welcome_bonus yet")
-    sample = audited[0]["welcome_bonus"]
-    assert set(sample.keys()) == {"bonus", "requirement", "estimated_value"}
-    assert isinstance(sample["bonus"], str)
-    assert isinstance(sample["requirement"], str)
-    assert sample["estimated_value"] is None or isinstance(sample["estimated_value"], str)
+    for response in (
+        client.get("/api/cards"),
+        client.get("/api/cards/detail", params={"ids": ",".join(all_ids)}),
+        client.get("/api/cards/amex-gold"),
+    ):
+        assert "welcome_bonus" not in response.text
 
 
 def test_catalog_response_is_gzipped() -> None:

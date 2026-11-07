@@ -238,9 +238,10 @@ class Card(BaseModel):
     late_payment_fee: str | None = None
     returned_payment_fee: str | None = None
     returned_check_fee: str | None = None
-    # The current sign-up offer — see WelcomeBonus. Detail-only, same as the
-    # round-3 fields above; None = not yet audited.
-    welcome_bonus: WelcomeBonus | None = None
+    # The current sign-up offer, captured for internal use only. Offers can change
+    # daily or weekly, so it's never served: excluded here so no API response can
+    # carry it, and not on the site or the MCP server. None = not yet audited.
+    welcome_bonus: WelcomeBonus | None = Field(default=None, exclude=True)
 
 
 class EarnCategorySummary(BaseModel):
