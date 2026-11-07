@@ -1140,13 +1140,11 @@ def test_bofa_travel_rewards_has_no_foreign_transaction_fee_unlike_cash_cards() 
 
 def test_bofa_premium_rewards_cards_have_no_intro_offer_and_flat_bt_fees() -> None:
     # Premium/Elite skip the intro-APR structure entirely and quote their transfer
-    # fee off the agreement's fee table rather than off an intro offer. The Sep
-    # 2026 refresh corrected both against that table: Premium is a 4% to 5% range,
-    # and Elite is a flat 5% (it had been stored as 4%, the only such value in the
-    # ten-card BofA folder).
+    # fee off the terms' fee table rather than off an intro offer. Both are a flat
+    # 5%, read from each card's offer terms on Nov 7, 2026.
     detail = client.get("/api/cards/bofa-premium-rewards").json()
     assert detail["intro_apr_purchases"] is None
-    assert detail["balance_transfer_fee"] == "4% to 5% of the amount of each transaction"
+    assert detail["balance_transfer_fee"] == "5% of the amount of each transaction"
     elite_detail = client.get("/api/cards/bofa-premium-rewards-elite").json()
     assert elite_detail["intro_apr_purchases"] is None
     assert elite_detail["balance_transfer_fee"] == "5% of the amount of each transaction"

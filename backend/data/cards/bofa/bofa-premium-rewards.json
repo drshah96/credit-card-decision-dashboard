@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.49%-27.49%",
-  "balance_transfer_apr": "19.49%-27.49%",
-  "balance_transfer_fee": "4% to 5% of the amount of each transaction",
+  "variable_apr": "19.74%-27.74%",
+  "balance_transfer_apr": "19.74%-27.74%",
+  "balance_transfer_fee": "5% of the amount of each transaction",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%-29.24%",
+  "cash_advance_apr": "29.49%",
   "penalty_apr": "Up to 29.99%, based on your creditworthiness",
   "penalty_apr_trigger": "Making a late payment; applies indefinitely once triggered",
   "pay_over_time_fee": "Monthly fee up to 1.72% of the purchase amount assigned to a BofA Custom Pay Plan",
@@ -65,7 +65,7 @@
         "best": true
       },
       {
-        "method": "Statement credit against travel purchases, or gift cards",
+        "method": "Statement credit, travel booked through BofA Travel, or gift cards",
         "cpp": 1.0,
         "best": false
       }
@@ -76,7 +76,7 @@
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners: points redeem directly for cash, travel statement credit, or gift cards at a flat rate.",
+    "highlight": "No transfer partners: points redeem directly for cash, travel booked through BofA Travel, or gift cards at a flat rate.",
     "recent_changes": "Not applicable."
   },
   "credits": [
@@ -110,43 +110,43 @@
   "insurance": [
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
+      "detail": "Up to $2,500 for non-refundable passenger fares",
       "level": "mid"
     },
     {
       "coverage": "Trip delay",
-      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
+      "detail": "$500 per ticket · after 12 hrs",
       "level": "mid"
     },
     {
       "coverage": "Baggage delay",
-      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
-      "level": "mid"
+      "detail": "$100/day · up to 5 days · after 6 hrs",
+      "level": "good"
     },
     {
       "coverage": "Lost luggage",
-      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
+      "detail": "Covered for loss or theft by a common carrier: no dollar limit published",
       "level": "mid"
     },
     {
       "coverage": "Emergency evacuation",
-      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
+      "detail": "Covered: no dollar limit published",
       "level": "mid"
     },
     {
       "coverage": "Rental car CDW",
-      "detail": "Covered: exact terms are in the Guide to Benefits, not public marketing",
+      "detail": "Secondary: pays in excess of other insurance, no dollar limit published",
       "level": "mid"
     },
     {
       "coverage": "Purchase protection",
-      "detail": "Covered (Purchase Security): exact limits are in the Guide to Benefits, not public marketing",
-      "level": "mid"
+      "detail": "$10k/claim · 90 days",
+      "level": "good"
     },
     {
       "coverage": "Extended warranty",
-      "detail": "Covered (Warranty Manager Service): exact limits are in the Guide to Benefits, not public marketing",
-      "level": "mid"
+      "detail": "Doubles the manufacturer's warranty, up to +1 year",
+      "level": "good"
     },
     {
       "coverage": "Zero liability",
@@ -154,14 +154,11 @@
       "level": "good"
     }
   ],
-  "protection_note": "Bank of America confirms this card includes a real travel-insurance and purchase-protection suite (trip delay/cancellation/interruption, baggage delay, lost luggage, emergency evacuation, Return Protection, and Purchase Security), but doesn't publish exact dollar limits or day thresholds on the product page the way Amex/Chase do. Check your Guide to Benefits after approval for the real numbers.",
-  "rental_note": "Auto Rental Collision Damage Waiver is included, plus 24/7 Roadside Dispatch, but exact coverage terms (primary vs. secondary, dollar limits, excluded vehicles) aren't published publicly.",
+  "protection_note": "Bank of America publishes these limits on its Premium Benefits page. Purchase Security covers theft or damage within 90 days of purchase, up to $10,000 per claim. Return Protection pays up to $250 per item and $1,000 a year within 90 days when a retailer won't take an item back. Warranty Manager doubles the manufacturer's warranty, up to one extra year. No dollar limit is published for lost luggage or emergency evacuation.",
+  "rental_note": "Auto Rental Collision Damage Waiver is secondary: it pays in excess of your other insurance, and you must decline the rental agency's waiver. No dollar limit is published. 24/7 Roadside Dispatch is included as a referral service.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
-    {
-      "name": "60,000-point welcome bonus",
-      "detail": "A $600 value, after $4,000 in purchases within the first 90 days."
-    },
     {
       "name": "Visa Signature Luxury Hotel Collection",
       "detail": "Room upgrades, late checkout, and other perks when booking through the Visa Signature Luxury Hotel Collection."
@@ -202,10 +199,10 @@
   },
   "timeline": [
     {
-      "date": "May 27, 2026",
+      "date": "May 26, 2026",
       "type": "neutral",
       "badge": "Program change",
-      "text": "Preferred Rewards became BofA Rewards. The tiers were renamed (Gold and Platinum folded into Preferred Plus, Platinum Honors became Preferred Honors, Diamond became Premier) and existing members moved over automatically. The 25–75% card bonus survived the change and a 10% Member tier was added below it, so nobody earning a bonus before is earning less now. Preferred Honors and Premier also picked up subscription reimbursement worth up to $96 and $180 a year."
+      "text": "Preferred Rewards became BofA Rewards. The tiers were renamed, existing members moved over automatically, and a 10% Member tier was added. The card bonus is now 10% Member, 25% Preferred Plus, 50% Preferred Honors and 75% Premier. Cards earning a Preferred Rewards bonus before May 1, 2026 keep that bonus for at least six months. Preferred Honors and Premier also picked up subscription credits worth up to $96 and $180 a year."
     }
   ]
 }

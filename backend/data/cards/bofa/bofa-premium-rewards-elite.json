@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.49%-27.49%",
-  "balance_transfer_apr": "19.49%-27.49%",
+  "variable_apr": "19.74%-27.74%",
+  "balance_transfer_apr": "19.74%-27.74%",
   "balance_transfer_fee": "5% of the amount of each transaction",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%-29.24%",
+  "cash_advance_apr": "29.49%",
   "penalty_apr": "Up to 29.99%, based on your creditworthiness",
   "penalty_apr_trigger": "Making a late payment; applies indefinitely once triggered",
   "pay_over_time_fee": "Monthly fee up to 1.72% of the purchase amount assigned to a BofA Custom Pay Plan",
@@ -24,7 +24,7 @@
   "returned_check_fee": null,
   "welcome_bonus": {
     "bonus": "75,000 points",
-    "requirement": "after you spend $2,500 in purchases within the first 90 days of account opening",
+    "requirement": "after you spend $5,000 in purchases within the first 90 days of account opening",
     "estimated_value": "$750"
   },
   "verdict": {
@@ -65,23 +65,23 @@
         "best": true
       },
       {
-        "method": "Airfare at a 20% points discount",
+        "method": "Airfare through BofA Travel at a 20% points discount",
         "cpp": 1.25,
         "best": true
       },
       {
-        "method": "Statement credit against travel purchases, or gift cards",
+        "method": "Statement credit, gift cards, or travel and concierge services",
         "cpp": 1.0,
         "best": false
       }
     ],
-    "per_100k": "$1,800–$2,500",
+    "per_100k": "$1,000–$1,250",
     "note": "The 20% airfare discount when redeeming points is the best play here; it's the only redemption path on this card that beats a flat 1¢/point. Otherwise value tops out around 1¢/point, since there's no transfer-partner program."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners: points redeem directly for cash, a 20%-discounted airfare purchase, travel statement credit, or gift cards.",
+    "highlight": "No transfer partners: points redeem directly for cash, 20%-discounted airfare through BofA Travel, other travel, or gift cards.",
     "recent_changes": "Not applicable."
   },
   "credits": [
@@ -128,43 +128,48 @@
   "insurance": [
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
+      "detail": "Reimburses the common carrier fare: no dollar limit published",
       "level": "mid"
     },
     {
       "coverage": "Trip delay",
-      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
-      "level": "mid"
+      "detail": "$500 per ticket · after 6 hrs or an overnight stay",
+      "level": "good"
     },
     {
       "coverage": "Baggage delay",
-      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
+      "detail": "Covered in excess of other insurance: no dollar limit published",
       "level": "mid"
     },
     {
       "coverage": "Lost luggage",
-      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
+      "detail": "Up to $3,000 per trip",
       "level": "mid"
     },
     {
       "coverage": "Emergency evacuation",
-      "detail": "Covered: exact dollar limits are in the Guide to Benefits, not public marketing",
-      "level": "mid"
+      "detail": "Up to $100,000",
+      "level": "good"
     },
     {
       "coverage": "Rental car CDW",
-      "detail": "Covered: exact terms are in the Guide to Benefits, not public marketing",
-      "level": "mid"
+      "detail": "Primary · up to $75k",
+      "level": "strong"
     },
     {
       "coverage": "Purchase protection",
-      "detail": "Covered (Purchase Security): exact limits are in the Guide to Benefits, not public marketing",
-      "level": "mid"
+      "detail": "$10k · 90 days",
+      "level": "good"
     },
     {
       "coverage": "Extended warranty",
-      "detail": "Covered (Warranty Manager Service): exact limits are in the Guide to Benefits, not public marketing",
-      "level": "mid"
+      "detail": "+1 year on warranties of 3 years or less",
+      "level": "good"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "Up to $1M when the entire fare is on the card",
+      "level": "good"
     },
     {
       "coverage": "Zero liability",
@@ -172,27 +177,24 @@
       "level": "good"
     }
   ],
-  "protection_note": "Same confirmed travel-insurance and purchase-protection categories as the regular Premium Rewards card (trip delay/cancellation/interruption, baggage, lost luggage, emergency evacuation, Return Protection, Purchase Security). Bank of America doesn't publish whether Elite gets higher dollar limits, so treat these as at least as good as the $95 card's, not confirmed better.",
-  "rental_note": "Auto Rental Collision Damage Waiver is included, plus 24/7 Roadside Dispatch; exact coverage terms aren't published publicly.",
+  "protection_note": "Bank of America's Elite benefits page lists trip delay, trip cancellation and interruption, baggage delay, lost luggage, emergency evacuation up to $100,000 and travel accident insurance up to $1,000,000. It doesn't list purchase coverage. Its older Elite benefits guide lists Purchase Security up to $10,000 within 90 days, Return Protection up to $300 per item and $1,000 a year, and a one-year warranty extension, so check your Guide to Benefits before relying on those three.",
+  "rental_note": "Auto Rental Collision Damage Waiver is primary, up to $75,000 for collision or theft and up to the actual cash value of most rental cars. 24/7 Roadside Dispatch is included as a referral service.",
+  "lounge_access": "included",
   "status_perks": [
     {
       "name": "Priority Pass Select",
       "strength": 5,
-      "note": "Up to 4 complimentary Priority Pass Select memberships: enough to cover a primary cardholder plus 3 authorized users, or one person's repeated guest visits, without buying extra memberships."
+      "note": "Up to 4 complimentary Priority Pass Select memberships. Bank of America limits enrollment to four people for the life of the account and can't swap a member out. Members and their guests get complimentary visits, though some lounges limit guest entry."
     }
   ],
   "services": [
-    {
-      "name": "75,000-point welcome bonus",
-      "detail": "A $750 value, after $2,500 in purchases within the first 90 days."
-    },
     {
       "name": "24/7 full-service concierge",
       "detail": "Book travel, dinner reservations, and event tickets through a dedicated concierge line."
     },
     {
       "name": "Visa Infinite Luxury Hotel Collection",
-      "detail": "Room upgrades, late checkout, and other perks when booking through the Visa Signature Luxury Hotel Collection."
+      "detail": "Late checkout, free daily breakfast for two, automatic upgrades and more at premium hotels. Some benefits depend on availability."
     },
     {
       "name": "BofA Rewards bonus",
@@ -229,7 +231,7 @@
       "date": "May 26, 2026",
       "type": "neutral",
       "badge": "Program change",
-      "text": "Preferred Rewards became BofA Rewards. The tiers were renamed (Gold and Platinum folded into Preferred Plus, Platinum Honors became Preferred Honors, Diamond became Premier) and existing members moved over automatically. The 25–75% card bonus survived the change and a 10% Member tier was added below it, so nobody earning a bonus before is earning less now. Preferred Honors and Premier also picked up subscription reimbursement worth up to $96 and $180 a year."
+      "text": "Preferred Rewards became BofA Rewards. The tiers were renamed, existing members moved over automatically, and a 10% Member tier was added. The card bonus is now 10% Member, 25% Preferred Plus, 50% Preferred Honors and 75% Premier. Cards earning a Preferred Rewards bonus before May 1, 2026 keep that bonus for at least six months. Preferred Honors and Premier also picked up subscription credits worth up to $96 and $180 a year."
     }
   ]
 }
