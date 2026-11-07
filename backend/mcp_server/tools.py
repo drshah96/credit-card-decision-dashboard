@@ -101,6 +101,9 @@ def _check_card_ids(snapshot: CatalogSnapshot, card_ids: list[str]) -> CallToolR
 
 
 def _effective_cents(value: float) -> float:
+    # Raises on a non-finite value, on purpose. js_round would pass it through, and -Infinity is
+    # not valid JSON, so a clean tool error is better. test_matcher_input_invariants keeps every
+    # committed rate finite.
     return math.floor(value * 10000 + 0.5) / 10000
 
 

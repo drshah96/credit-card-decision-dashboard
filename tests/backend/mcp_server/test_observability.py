@@ -2,6 +2,7 @@
 
 import json
 import logging
+import math
 import re
 from collections.abc import Iterator
 from contextlib import contextmanager
@@ -102,6 +103,22 @@ def test_a_crash_inside_a_known_tool_still_logs_as_internal_error(snapshot, monk
     line = logs.events("mcp_request")[-1]
     assert line["tool"] == "get_card"
     assert line["outcome"] == "internal_error"
+
+
+@pytest.mark.parametrize("parsed", [-math.inf, math.nan], ids=["infinite", "nan"])
+def test_a_non_finite_rate_is_a_clean_error_and_never_reaches_the_response(
+    snapshot, monkeypatch, parsed
+):
+    monkeypatch.setattr("backend.mcp_server.ranking.parse_multiplier_value", lambda _rate: parsed)
+    config, key = enabled_config()
+    message = call_tool(
+        "rank_by_category", {"category": "dining", "card_ids": ["amex-gold"], "limit": 1}
+    )
+    with captured() as logs, running(snapshot, config) as client:
+        response = client.post("/mcp", json=message, headers=auth(key))
+    assert response.json()["result"]["isError"] is True
+    assert "Infinity" not in response.text and "NaN" not in response.text
+    assert logs.events("mcp_request")[-1]["outcome"] == "internal_error"
 
 
 def test_client_name_is_read_from_the_newer_protocols_meta(snapshot):
