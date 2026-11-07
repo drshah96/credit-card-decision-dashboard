@@ -1,14 +1,5 @@
 {
   "card_id": "amex-platinum",
-  "last_verified_ok_at": "2026-09-05",
-  "verification": {
-    "evidence": "git:99058a0186dd0d6c093f2a5f8d48fa51769420c8",
-    "evidence_scope": "card",
-    "facts_sha256": "fd7d7966cf375b6065bb6cd511febeee5e98da28771098b1c20fa8e2e976ebc5",
-    "documents": [],
-    "not_checked": [
-      "insurance_limits"
-    ],
-    "note": "Checked field by field against Amex application terms, cardmember agreements and benefit policy pages. Insurance dollar limits are only published behind a cardmember login and were not checked."
-  }
+  "last_verified_ok_at": null,
+  "verification": null
 }

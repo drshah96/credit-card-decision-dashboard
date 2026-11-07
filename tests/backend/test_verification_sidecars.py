@@ -206,8 +206,8 @@ def test_ledger_shape_matches_the_recorded_refresh():
     assert len(BACKFILL) == 7
     assert sum(len(ids) for _, ids in BACKFILL.values()) == 86
     verified = {cid for cid, s in _sidecars().items() if s["verification"]}
-    assert len(verified) == 86
-    assert len(_sidecars()) - len(verified) == 23
+    assert len(verified) == 85
+    assert len(_sidecars()) - len(verified) == 24
 
 
 def test_a_backfilled_date_cannot_be_borrowed():
@@ -219,7 +219,7 @@ def test_a_backfilled_date_cannot_be_borrowed():
             when, ids = BACKFILL[record["evidence"].removeprefix("git:")]
             assert card_id in ids, f"{card_id} cites evidence that does not cover it"
             assert sidecar["last_verified_ok_at"] == when
-    assert checked == 86, "the ledger must match the sidecars, or this test proves nothing"
+    assert checked == 85, "the ledger must match the sidecars, or this test proves nothing"
 
 
 def test_a_backfilled_date_is_superseded_only_by_a_later_one():
