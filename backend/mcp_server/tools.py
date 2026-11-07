@@ -247,8 +247,9 @@ def create_server(load_snapshot: Callable[[], CatalogSnapshot]) -> MCPServer:
         title="Compare cards",
         description=(
             "Compare 2 to 4 cards side by side: annual fee, applied and advertised credit "
-            "value, earn rates, best cents per point, foreign transaction fee, intro APRs and "
-            "insurance levels, each with provenance. Cards are returned in the order given."
+            "value, earn rates, best cents per point, lounge access, foreign transaction fee, "
+            "intro APRs and insurance levels, each with provenance. Cards are returned in the "
+            "order given."
         ),
         annotations=ToolAnnotations(title="Compare cards", **_ANNOTATIONS),
     )

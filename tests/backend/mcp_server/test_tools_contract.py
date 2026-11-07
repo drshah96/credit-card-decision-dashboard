@@ -5,6 +5,9 @@ import json
 import jsonschema
 import pytest
 
+from backend.mcp_server import projections
+from backend.refresh.state import VerificationState
+
 from .conftest import connect, structured, text_of
 
 CALLS = [
@@ -289,3 +292,33 @@ async def test_rank_entries_carry_no_affiliate_field(snapshot):
     async with connect(snapshot) as client:
         data = structured(await client.call_tool("rank_by_category", {"category": "dining"}))
     assert "is_affiliate_link" not in json.dumps(data)
+
+
+@pytest.mark.parametrize(
+    ("stored", "not_checked", "served"),
+    [
+        ("included", ["perks"], "included"),
+        ("passes", [], "passes"),
+        ("paid", [], "paid"),
+        ("none", [], "none"),
+        ("none", ["perks"], "unconfirmed"),
+        (None, [], "unconfirmed"),
+    ],
+)
+def test_lounge_access_never_serves_a_none_nobody_checked(stored, not_checked, served):
+    record = {
+        "evidence": "git:" + "0" * 40,
+        "evidence_scope": "card",
+        "facts_sha256": "0" * 64,
+        "documents": [],
+        "not_checked": not_checked,
+        "note": "test",
+    }
+    state = VerificationState(card_id="x", last_verified_ok_at="2026-09-05", verification=record)
+    assert projections.served_lounge_access(stored, state) == served
+
+
+def test_lounge_access_none_on_a_card_with_no_check_is_unconfirmed():
+    state = VerificationState(card_id="x", last_verified_ok_at=None, verification=None)
+    assert projections.served_lounge_access("none", state) == "unconfirmed"
+    assert projections.served_lounge_access("included", state) == "included"

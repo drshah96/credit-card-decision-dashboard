@@ -1537,6 +1537,11 @@ cards recording `false` have no check, or a check that left `rates_and_fees` unc
 schema and docs no longer call it confirmed. The value stays recorded, because every tool that
 serves it also serves the provenance showing the gap.
 
+**A24. `lounge_access` replaces A21's removal.** Cards now carry an authored `lounge_access`, and
+`get_card` and `compare_cards` serve it, or `unconfirmed` where nothing is recorded or a stored
+`none` has no perks check. The site's `has_lounge_access` derives from it, true for `included` and
+`passes`. Version 1.0.0 is still unreleased, so its surface was corrected in place again.
+
 **A23. Outcomes tell client mistakes from server faults.** This extends D9's list. A notification
 the SDK accepts with a 202 logs as `ok`. A `tools/call` naming a tool the server doesn't have logs
 as `unknown_tool`, decided from the request and not from SDK wording. Any other 4xx logs as

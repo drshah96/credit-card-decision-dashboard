@@ -117,6 +117,17 @@ class ValueTotals(_Out):
     ]
 
 
+LoungeAccess = Annotated[
+    Literal["included", "passes", "paid", "none", "unconfirmed"],
+    Field(
+        description=(
+            "Airport lounges only. included: access comes with the card; see status_perks for "
+            "visit caps and guests. passes: a few single-visit passes a year. paid: entry only by "
+            "paying per visit. none: the check found no access. unconfirmed: the catalog cannot "
+            "say whether the card has access."
+        )
+    ),
+]
 InsuranceLevel = Annotated[
     Literal["strong", "good", "mid", "none", "unconfirmed"],
     Field(description="unconfirmed: the catalog cannot say whether the card has this coverage."),
@@ -320,6 +331,7 @@ class CardDetail(_Out):
     ]
     protection_note: str
     rental_note: str
+    lounge_access: LoungeAccess
     status_perks: list[StatusPerk]
     transfer_partners: TransferPartnersInfo
     related: Related
@@ -377,6 +389,7 @@ class CompareEntry(_Out):
     best_cpp: float
     points_program: str
     earn_rates: list[EarnRate]
+    lounge_access: LoungeAccess
     foreign_transaction_fee: Fact[bool]
     intro_apr_purchases: Fact[IntroAprValue]
     intro_apr_balance_transfers: Fact[IntroAprValue]

@@ -58,6 +58,16 @@ def _active(card: dict) -> list[dict]:
     return [c for c in card["credits"] if not c.get("removed", False)]
 
 
+def _expected_lounge_access(raw: dict, sidecar: dict) -> str:
+    level = raw.get("lounge_access")
+    if level is None:
+        return "unconfirmed"
+    record = sidecar["verification"]
+    if level == "none" and (record is None or "perks" in record["not_checked"]):
+        return "unconfirmed"
+    return level
+
+
 def _expected_status(sidecar: dict) -> str:
     if sidecar["verification"] is None:
         return "not_verified"
@@ -114,6 +124,7 @@ async def test_get_card_equals_every_raw_file(snapshot):
                 assert sources[0] == {"kind": "product_page", "url": raw["official_url"]}
             else:
                 assert sources == []
+            assert served["lounge_access"] == _expected_lounge_access(raw, sidecar)
             assert data["provenance"]["verified_on"] == sidecar["last_verified_ok_at"]
             assert data["provenance"]["verification_status"] == _expected_status(sidecar)
             assert [i["level"] for i in served["insurance"]] == [
@@ -220,6 +231,8 @@ async def test_compare_equals_raw_over_every_card(snapshot):
                 )
                 fee = card.get("foreign_transaction_fee")
                 assert entry["foreign_transaction_fee"]["value"] == fee
+                sidecar = _raw_sidecar(entry["card_id"])
+                assert entry["lounge_access"] == _expected_lounge_access(card, sidecar)
 
 
 async def test_find_cards_finds_every_card_and_enumerates_every_issuer(snapshot):

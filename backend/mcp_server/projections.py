@@ -103,6 +103,20 @@ def served_insurance_level(level: str, detail: str, state: VerificationState) ->
     return "none" if checked and not _SILENT_DETAIL.match(detail.strip()) else "unconfirmed"
 
 
+def served_lounge_access(level: str | None, state: VerificationState) -> str:
+    """A stored none is served as none only when a check covered perks."""
+    if level is None:
+        return "unconfirmed"
+    if level != "none":
+        return level
+    record = state.verification
+    return (
+        "none"
+        if record is not None and SectionKey.PERKS not in record.not_checked
+        else "unconfirmed"
+    )
+
+
 def totals_out(totals: ValueTotals) -> schemas.ValueTotals:
     return schemas.ValueTotals(
         applied_credit_value=totals.applied_credit_value,
@@ -184,6 +198,7 @@ def card_detail(
         ],
         protection_note=card.protection_note,
         rental_note=card.rental_note,
+        lounge_access=served_lounge_access(card.lounge_access, state),
         status_perks=[
             schemas.StatusPerk(name=p.name, strength=p.strength, note=p.note)
             for p in card.status_perks
@@ -270,6 +285,7 @@ def compare_entry(
         best_cpp=best_cpp,
         points_program=card.points_program,
         earn_rates=[earn_rate(r) for r in card.earn_rates],
+        lounge_access=served_lounge_access(card.lounge_access, state),
         foreign_transaction_fee=fact(card.foreign_transaction_fee),
         intro_apr_purchases=_intro(card.intro_apr_purchases),
         intro_apr_balance_transfers=_intro(card.intro_apr_balance_transfers),

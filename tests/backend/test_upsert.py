@@ -570,6 +570,14 @@ def test_upsert_points_pool_id_round_trips(session):
     assert card.points_pool_id == "test-pool"
 
 
+def test_upsert_lounge_access_round_trips_and_defaults_to_none(session):
+    audited = upsert_card(session, make_card_data({"id": "with-lounge", "lounge_access": "passes"}))
+    unaudited = upsert_card(session, make_card_data({"id": "no-lounge"}))
+    session.flush()
+    assert audited.lounge_access == "passes"
+    assert unaudited.lounge_access is None
+
+
 def test_upsert_points_pool_id_defaults_to_none(session):
     card = upsert_card(session, make_card_data())
     session.commit()

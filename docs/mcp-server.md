@@ -93,9 +93,10 @@ means the catalog records no fee. Treat it as unconfirmed when the card is `not_
 `none` is only used when the check covered insurance and the record states the coverage is
 absent. An empty `insurance` list means nothing is recorded.
 
-**Lounge access.** There is no dedicated field yet. Read `status_perks` in `get_card`: a note may
-say lounge access is absent or paid per visit, and a card with no lounge perk listed may still
-have access. `compare_cards` and `find_cards` do not report it.
+**Lounge access.** `get_card` and `compare_cards` return `lounge_access`, for airport lounges only.
+`included` means access comes with the card, with any visit caps and guest rules in `status_perks`.
+`passes` means a few single-visit passes a year, and `paid` means entry only by paying per visit.
+`none` is only used when a check covered perks. `unconfirmed` means the catalog cannot say.
 
 **Credit values.** Most credits have a default of $0, which means no use is assumed, not that
 the credit is worthless. Pass `credit_overrides` to `estimate_value` with real expected use,

@@ -3,7 +3,7 @@
   "name": "thewalletaudit",
   "title": "The Wallet Audit",
   "version": "1.0.0",
-  "instructions": "Data on US consumer credit cards, hand-sourced from issuer terms by The Wallet Audit. Money is whole US dollars. A field with status not_recorded has no value in the catalog: that does not mean the card lacks the feature. An insurance level of unconfirmed means the same, and so does an empty insurance list. Every card carries provenance: the issuer page, the date the card was last checked against issuer documents, a review_due_on date after which that check should not be relied on, and not_checked, the areas that check could not confirm. partially_verified means not_checked is not empty, so values in those areas are unconfirmed. not_verified means no recorded check. Verdicts and credit tiers are editorial estimates. A credit default of 0 means no use is assumed, not that the credit is worthless, so call estimate_value with real usage before weighing credits. Rankings use the earn multiplier times the card's best realistic cents per point and never consider affiliate status. The welcome_bonus field is not served. Free text such as services and credit descriptions may still mention a sign-up offer, which may be out of date, so confirm any offer with the issuer. Lounge access has no dedicated field: read status_perks in get_card, where a note may say lounge access is absent or paid per visit, and a card with no lounge perk listed may still have access. Use find_cards to get card ids.",
+  "instructions": "Data on US consumer credit cards, hand-sourced from issuer terms by The Wallet Audit. Money is whole US dollars. A field with status not_recorded has no value in the catalog: that does not mean the card lacks the feature. An insurance level of unconfirmed means the same, and so does an empty insurance list. Every card carries provenance: the issuer page, the date the card was last checked against issuer documents, a review_due_on date after which that check should not be relied on, and not_checked, the areas that check could not confirm. partially_verified means not_checked is not empty, so values in those areas are unconfirmed. not_verified means no recorded check. Verdicts and credit tiers are editorial estimates. A credit default of 0 means no use is assumed, not that the credit is worthless, so call estimate_value with real usage before weighing credits. Rankings use the earn multiplier times the card's best realistic cents per point and never consider affiliate status. The welcome_bonus field is not served. Free text such as services and credit descriptions may still mention a sign-up offer, which may be out of date, so confirm any offer with the issuer. A lounge_access of unconfirmed means the catalog cannot say whether the card has access. Use find_cards to get card ids.",
   "website_url": "https://thewalletaudit.com"
  },
  "tools": [
@@ -537,6 +537,18 @@
         "title": "Rental Note",
         "type": "string"
        },
+       "lounge_access": {
+        "description": "Airport lounges only. included: access comes with the card; see status_perks for visit caps and guests. passes: a few single-visit passes a year. paid: entry only by paying per visit. none: the check found no access. unconfirmed: the catalog cannot say whether the card has access.",
+        "enum": [
+         "included",
+         "passes",
+         "paid",
+         "none",
+         "unconfirmed"
+        ],
+        "title": "Lounge Access",
+        "type": "string"
+       },
        "status_perks": {
         "items": {
          "$ref": "#/$defs/StatusPerk"
@@ -630,6 +642,7 @@
        "insurance",
        "protection_note",
        "rental_note",
+       "lounge_access",
        "status_perks",
        "transfer_partners",
        "related",
@@ -1610,7 +1623,7 @@
   {
    "name": "compare_cards",
    "title": "Compare cards",
-   "description": "Compare 2 to 4 cards side by side: annual fee, applied and advertised credit value, earn rates, best cents per point, foreign transaction fee, intro APRs and insurance levels, each with provenance. Cards are returned in the order given.",
+   "description": "Compare 2 to 4 cards side by side: annual fee, applied and advertised credit value, earn rates, best cents per point, lounge access, foreign transaction fee, intro APRs and insurance levels, each with provenance. Cards are returned in the order given.",
    "inputSchema": {
     "type": "object",
     "properties": {
@@ -1690,6 +1703,18 @@
         "title": "Earn Rates",
         "type": "array"
        },
+       "lounge_access": {
+        "description": "Airport lounges only. included: access comes with the card; see status_perks for visit caps and guests. passes: a few single-visit passes a year. paid: entry only by paying per visit. none: the check found no access. unconfirmed: the catalog cannot say whether the card has access.",
+        "enum": [
+         "included",
+         "passes",
+         "paid",
+         "none",
+         "unconfirmed"
+        ],
+        "title": "Lounge Access",
+        "type": "string"
+       },
        "foreign_transaction_fee": {
         "$ref": "#/$defs/Fact_bool_"
        },
@@ -1725,6 +1750,7 @@
        "best_cpp",
        "points_program",
        "earn_rates",
+       "lounge_access",
        "foreign_transaction_fee",
        "intro_apr_purchases",
        "intro_apr_balance_transfers",

@@ -91,6 +91,9 @@ class CardModel(Base):
         CheckConstraint(
             "verdict_status IN ('keep','situational','reconsider')", name="ck_card_verdict_status"
         ),
+        CheckConstraint(
+            "lounge_access IN ('included','passes','paid','none')", name="ck_card_lounge_access"
+        ),
     )
 
     card_id: Mapped[int] = mapped_column(primary_key=True)
@@ -137,6 +140,8 @@ class CardModel(Base):
     # unlike secured_variant_id: every card sharing a pool id is a peer, so
     # multiple rows carrying the same value is the whole point, not a bug.
     points_pool_id: Mapped[str | None] = mapped_column(default=None)
+    # See backend/models.py Card.lounge_access. Null means not yet audited.
+    lounge_access: Mapped[str | None] = mapped_column(default=None)
     # True only for the card whose OWN account is what a pooled balance gets
     # redeemed through (e.g. Sapphire Preferred/Reserve, Strata Premier/
     # Elite) — false for a "feeder" card that only reaches full value once

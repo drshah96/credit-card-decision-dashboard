@@ -87,9 +87,8 @@ interface CardBase {
    * Drives the "No Foreign Transaction Fee" Category chip (only matches
    * when this is explicitly `false`, not merely falsy/null). */
   foreign_transaction_fee: boolean | null;
-  /** Derived server-side from status_perks (any perk mentioning "lounge") —
-   * unlike the three fields above, this doesn't need per-card research, so
-   * there's no "not yet audited" state, just true/false. */
+  /** Derived server-side from the card's authored lounge_access: true when the
+   * card itself gets you into airport lounges free. */
   has_lounge_access: boolean;
 }
 

@@ -73,6 +73,9 @@ worse, one that validates with a number a hundred times too large.
 - **Lookup values** — issuer, network, loyalty programme names — must match the
   exact strings existing cards use. "American Express", not "Amex" or "AmEx".
   Grep the catalog before inventing a spelling.
+- **`lounge_access`** is what the card gets you at airport lounges: `included`,
+  `passes`, `paid` or `none`. Leave it out if the issuer's terms don't settle it,
+  and don't infer `none` from a card saying nothing. Hotel lounges don't count.
 - **`transfer_partners.partners[]`** only gets per-partner entries where you
   have a verified per-partner source with name and ratio. Otherwise populate
   `transfer_partners.airline_count` and `.hotel_count` and leave the array
