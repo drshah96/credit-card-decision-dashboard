@@ -1,6 +1,6 @@
 {
   "id": "chase-ihg-one-rewards-traveler",
-  "name": "IHG One Rewards Traveler Credit Card",
+  "name": "IHG One Rewards Credit Card",
   "issuer": "Chase",
   "network": "MASTERCARD WORLD ELITE",
   "points_program": "IHG One Rewards",
@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.24%-27.74%",
-  "balance_transfer_apr": "19.24%-27.74%",
+  "variable_apr": "19.49%-27.99%",
+  "balance_transfer_apr": "19.49%-27.99%",
   "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%",
+  "cash_advance_apr": "28.74%",
   "penalty_apr": "Up to 29.99%",
   "penalty_apr_trigger": "Failing to make a Minimum Payment when due, or making a payment that's returned unpaid; can remain in effect indefinitely",
   "pay_over_time_fee": "Up to 1.72% per month of the amount selected to pay over time, via Chase Pay Over Time",
@@ -50,14 +50,28 @@
     {
       "emoji": "\ud83d\udca1",
       "multiplier": "3\u00d7",
-      "category": "Utilities",
+      "category": "Utilities, through Dec 31, 2026 (then 2\u00d7)",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "\ud83d\udcfa",
       "multiplier": "3\u00d7",
-      "category": "Select streaming services",
+      "category": "Select streaming services, through Dec 31, 2026 (then 2\u00d7)",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛒",
+      "multiplier": "3\u00d7",
+      "category": "Grocery stores",
+      "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "📡",
+      "multiplier": "3\u00d7",
+      "category": "Internet, cable & phone, through Dec 31, 2026 (then 2\u00d7)",
       "highlight": true,
       "is_base": false
     },
@@ -76,7 +90,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "2\u00d7 on general spend is unusually strong for a no-fee card, and the 3\u00d7 bucket (dining, utilities, streaming, gas) is broad enough to hit most months. The Premier card earns faster at IHG hotels (10\u00d7 vs 5\u00d7) and on travel broadly (5\u00d7 vs 3\u00d7), but this card asks nothing back for it.",
+  "earn_note": "2\u00d7 on general spend is unusually strong for a no-fee card, and the 3\u00d7 bucket (dining, gas, groceries) is broad enough to hit most months. Utilities, internet, cable, phone and select streaming also earn 3\u00d7 through Dec 31, 2026, then drop to 2\u00d7. The Premier card earns faster at IHG hotels (10\u00d7 vs 5\u00d7) and on dining, groceries and gas (5\u00d7 vs 3\u00d7), but this card asks nothing back for it.",
   "points": {
     "currency": "IHG One Rewards",
     "redemption_options": [
@@ -86,7 +100,7 @@
         "best": true
       },
       {
-        "method": "Transfer to airline miles (~5:1, ~34 partners)",
+        "method": "Transfer to airline miles (~5:1, ~37 partners)",
         "cpp": 0.13,
         "best": false
       }
@@ -293,20 +307,20 @@
     {
       "id": "spend-bonus",
       "name": "Annual Spend Bonus",
-      "subtitle": "10,000 pts \u00b7 after $10,000/yr spend",
+      "subtitle": "10,000 pts · after $15,000/yr spend",
       "max_annual": 60,
       "default_value": 0,
       "tier": "niche",
       "removed": false,
-      "description": "10,000 bonus IHG One Rewards points each calendar year you spend at least $10,000 on the card.",
+      "description": "10,000 bonus IHG One Rewards points each calendar year you spend at least $15,000 on the card.",
       "tips": [
-        "Only count this if you're already going to hit $10,000/yr; the points aren't worth chasing the spend on their own."
+        "Only count this if you're already going to hit $15,000/yr; the points aren't worth chasing the spend on their own."
       ]
     },
     {
       "id": "instacart",
       "name": "Instacart Credit",
-      "subtitle": "$10/mo \u00b7 up to $120/yr \u00b7 + 3-mo Instacart+",
+      "subtitle": "$10/mo · up to $120/yr · + 3-mo Instacart+",
       "max_annual": 120,
       "default_value": 0,
       "tier": "niche",
@@ -320,12 +334,12 @@
     {
       "id": "dashpass",
       "name": "DoorDash DashPass + Credit",
-      "subtitle": "12-mo complimentary + $10/qtr non-restaurant \u00b7 thru 2027",
-      "max_annual": 160,
+      "subtitle": "12-mo complimentary + $10/mo non-restaurant",
+      "max_annual": 120,
       "default_value": 0,
       "tier": "niche",
       "removed": false,
-      "description": "One year of complimentary DashPass membership (DoorDash and Caviar) plus up to $10 off quarterly on non-restaurant DoorDash orders, both active through December 31, 2027.",
+      "description": "One year of complimentary DashPass membership (DoorDash and Caviar) plus $10 off per month on non-restaurant DoorDash orders for DashPass activated from Sep 1, 2026 (quarterly before that). This figure counts the discount, not the membership.",
       "tips": [
         "Requires activation and payment with this card at checkout to earn the quarterly credit."
       ]
@@ -338,7 +352,7 @@
       "default_value": 0,
       "tier": "niche",
       "removed": false,
-      "description": "On any reward-night stay of 4 or more consecutive nights at the same property, the 4th night is free (unlimited redemptions per year).",
+      "description": "On any reward-night stay of 4 or more consecutive nights at the same property, the 4th night is free (unlimited redemptions per year). Starting in 2027, it needs $5,000 in purchases in a calendar year to unlock.",
       "tips": [
         "Only pays off on award stays already 4+ nights long; not a general-purpose credit.",
         "$100 here is a rough single-stay estimate."
@@ -353,12 +367,12 @@
     },
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "$5,000/traveler \u00b7 $10,000/trip",
+      "detail": "$5,000/traveler · $10,000/trip",
       "level": "good"
     },
     {
       "coverage": "Baggage delay",
-      "detail": "$100/day \u00b7 up to 3 days \u00b7 after 6 hrs",
+      "detail": "$100/day · up to 3 days · after 6 hrs",
       "level": "mid"
     },
     {
@@ -368,17 +382,28 @@
     },
     {
       "coverage": "Purchase protection",
-      "detail": "$500/item \u00b7 120 days (90 days for NY residents)",
+      "detail": "$500/item · 120 days (90 days for NY residents)",
       "level": "mid"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "+1 year on eligible warranties",
+      "level": "good"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "$500,000 · common carrier / $100,000 · 24-hour",
+      "level": "good"
     }
   ],
-  "protection_note": "Unusually complete protections for a $0 card, a direct result of the 2025 upgrade to Mastercard World Elite: trip cancellation is here, but Chase's own itemized benefits list for this card doesn't include rental car coverage. Limits still trail the paid Premier and any premium travel card.",
+  "protection_note": "Unusually complete protections for a $0 card: trip cancellation and auto rental coverage are both here, alongside baggage delay, lost luggage, purchase protection, extended warranty and travel accident insurance. The limits match the paid Premier's and trail any premium travel card.",
   "rental_note": "Auto Rental Coverage is included: decline the counter waiver, pay for the whole rental with the card, and it reimburses theft and collision damage. Secondary to your own policy in the US.",
+  "lounge_access": "none",
   "status_perks": [
     {
       "name": "IHG One Rewards Silver Elite Status",
       "strength": 1,
-      "note": "Complimentary with the card for as long as you hold it: a light welcome amenity and modest bonus points. Gold Elite unlocks after $20,000 in card spend in a calendar year, lasting through December 31 of the following year."
+      "note": "Complimentary with the card for as long as you hold it: a light welcome amenity and modest bonus points. Gold Elite unlocks after $15,000 in card spend in a calendar year, lasting through December 31 of the following year."
     }
   ],
   "services": [
@@ -388,7 +413,7 @@
     },
     {
       "name": "Points purchase discount",
-      "detail": "20% off when buying IHG One Rewards points directly with this card."
+      "detail": "At least 30% off when buying IHG One Rewards points directly with this card."
     },
     {
       "name": "Early access to IHG Reward Night sales",
@@ -404,7 +429,7 @@
         "is_free": true,
         "benefits": [
           {
-            "text": "Free to add, plus a 10,000-point bonus for adding one within 3 months of account opening",
+            "text": "Free to add",
             "included": true
           },
           {
@@ -418,9 +443,21 @@
         ]
       }
     ],
-    "note": "Authorized users are free, and adding one within the first 3 months earns an extra 10,000-point bonus on top of the welcome offer."
+    "note": "Authorized users are free to add."
   },
   "timeline": [
+    {
+      "date": "Oct 1, 2026",
+      "type": "neutral",
+      "badge": "Refresh",
+      "text": "Renamed the IHG One Rewards Credit Card. Groceries join the 3\u00d7 bucket, while utilities, internet, cable, phone and streaming drop to 2\u00d7 after Dec 31, 2026. From 2027 the 4th Reward Night Free requires $5,000 in annual spend."
+    },
+    {
+      "date": "Sep 1, 2026",
+      "type": "add",
+      "badge": "Upgrade",
+      "text": "The $10 DoorDash non-restaurant promo moves from quarterly to monthly for DashPass activated on or after this date."
+    },
     {
       "date": "Jul 24, 2025",
       "type": "add",

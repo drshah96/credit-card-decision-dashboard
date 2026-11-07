@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.24%-27.74%",
-  "balance_transfer_apr": "19.24%-27.74%",
+  "variable_apr": "19.49%-27.99%",
+  "balance_transfer_apr": "19.49%-27.99%",
   "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%",
+  "cash_advance_apr": "28.74%",
   "penalty_apr": "Up to 29.99%",
   "penalty_apr_trigger": "Failing to make a Minimum Payment when due, or making a payment that's returned unpaid; can remain in effect indefinitely",
   "pay_over_time_fee": "Up to 1.72% per month of the amount selected to pay over time, via Chase Pay Over Time",
@@ -161,6 +161,7 @@
   ],
   "protection_note": "Identical protections to Plus and Priority: Chase doesn't scale insurance with the fee on this family. No trip cancellation/interruption coverage at any tier; the $500,000 travel accident policy and baggage delay/loss coverage are what you get regardless of which of the three you carry.",
   "rental_note": "Secondary for domestic rentals (pays after your own auto policy), primary only outside the US, capped at $60,000 and 31 consecutive days. Decline the counter's CDW and pay with the card, but don't rely on it as your only coverage for a US rental.",
+  "lounge_access": "none",
   "status_perks": [
     {
       "name": "Companion Pass progress",
@@ -193,11 +194,11 @@
     },
     {
       "name": "Inflight purchase credit",
-      "detail": "25% back as a statement credit on Southwest inflight food, drinks and Wi-Fi purchases."
+      "detail": "25% back as a statement credit on Southwest inflight drinks and Wi-Fi purchases."
     },
     {
       "name": "Partner perks (through 2027)",
-      "detail": "3-month complimentary Instacart+ trial (see the Instacart credit above), 12-month complimentary DashPass (activate by Dec 31, 2027), and 3\u00d7 Rapid Rewards points on Lyft rides through Dec 2027, ahead of Plus's 2\u00d7, behind Priority's 5\u00d7."
+      "detail": "3-month complimentary Instacart+ trial (see the Instacart credit above), 12-month complimentary DashPass with $10 off one non-restaurant order each month (activate by Dec 31, 2027), and 3\u00d7 Rapid Rewards points on Lyft rides through Dec 2027, ahead of Plus's 2\u00d7, behind Priority's 5\u00d7."
     },
     {
       "name": "Roadside assistance",
@@ -238,6 +239,12 @@
     "note": "Authorized users are free on all three Southwest personal cards. The free checked bag and Group 5 boarding apply to whoever is booked on the same reservation as the cardholder (up to 8 people). You don't need to add someone as an authorized user for them to get it, just book them on your itinerary."
   },
   "timeline": [
+    {
+      "date": "Sep 1, 2026",
+      "type": "add",
+      "badge": "Upgrade",
+      "text": "The $10 DoorDash non-restaurant promo moves from quarterly to monthly for DashPass activated on or after this date."
+    },
     {
       "date": "May 28, 2025",
       "type": "neutral",

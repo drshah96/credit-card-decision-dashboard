@@ -410,7 +410,7 @@ def test_annual_fees_are_correct() -> None:
     assert fees["chase-world-of-hyatt"] == 95
     assert fees["chase-marriott-bonvoy-boundless"] == 95
     assert fees["chase-marriott-bonvoy-bold"] == 0
-    assert fees["chase-ihg-one-rewards-premier"] == 99
+    assert fees["chase-ihg-one-rewards-premier"] == 150
     assert fees["chase-ihg-one-rewards-traveler"] == 0
     assert fees["chase-disney-premier"] == 49
     assert fees["chase-amazon-prime-visa"] == 0
@@ -639,7 +639,7 @@ def test_intro_apr_shape_when_present() -> None:
     "card_id,purchases_months,bt_months,fx_fee",
     [
         ("chase-freedom-unlimited", 15, 15, True),
-        ("chase-freedom-flex", 15, 15, True),
+        ("chase-freedom-flex", 15, 15, False),
     ],
 )
 def test_chase_cards_with_a_real_intro_apr_offer(
@@ -720,20 +720,20 @@ def test_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
     "card_id,variable_apr,balance_transfer_apr",
     [
         # Confirmed identical purchase/BT ranges.
-        ("chase-freedom-unlimited", "18.24%-27.74%", "18.24%-27.74%"),
-        ("chase-freedom-flex", "18.24%-27.74%", "18.24%-27.74%"),
-        ("chase-amazon-prime-visa", "18.74%-27.49%", "18.74%-27.49%"),
+        ("chase-freedom-unlimited", "18.49%-27.99%", "18.49%-27.99%"),
+        ("chase-freedom-flex", "18.49%-27.99%", "18.49%-27.99%"),
+        ("chase-amazon-prime-visa", "18.99%-27.74%", "18.99%-27.74%"),
         # Re-verified 2026-08-03 against Chase's current Pricing & Terms pages:
         # every one of these previously had a genuinely distinct BT APR range
         # (the whole reason this field isn't just derived from variable_apr) —
-        # Prime Rate has since dropped to 6.75% and Chase re-grouped Purchase/
+        # Prime Rate has since moved and Chase re-grouped Purchase/
         # My Chase Loan/Balance Transfer APR under one range for all of them.
         # Kept as their own group since a future audit could easily find this
         # has reverted, unlike the cards above which were never distinct.
-        ("chase-sapphire-reserve", "19.49%-27.99%", "19.49%-27.99%"),
-        ("chase-ihg-one-rewards-premier", "19.24%-27.74%", "19.24%-27.74%"),
-        ("chase-marriott-bonvoy-boundless", "19.24%-27.74%", "19.24%-27.74%"),
-        ("chase-united-club-infinite", "19.74%-28.24%", "19.74%-28.24%"),
+        ("chase-sapphire-reserve", "19.74%-28.24%", "19.74%-28.24%"),
+        ("chase-ihg-one-rewards-premier", "19.49%-27.99%", "19.49%-27.99%"),
+        ("chase-marriott-bonvoy-boundless", "19.49%-27.99%", "19.49%-27.99%"),
+        ("chase-united-club-infinite", "19.99%-28.49%", "19.99%-28.49%"),
     ],
 )
 def test_chase_variable_and_balance_transfer_apr(
@@ -759,11 +759,11 @@ def test_chase_foreign_transaction_fee_rate_matches_the_boolean() -> None:
     # Cards confirmed to charge 3% match `foreign_transaction_fee: true`;
     # cards confirmed fee-free have a null rate, not "0%" — there's nothing
     # to quote from a Pricing & Terms table that doesn't list the fee.
-    for card_id in ("chase-freedom-flex", "chase-freedom-unlimited", "chase-disney-premier"):
+    for card_id in ("chase-freedom-unlimited", "chase-disney-premier"):
         detail = client.get(f"/api/cards/{card_id}").json()
         assert detail["foreign_transaction_fee"] is True
         assert detail["foreign_transaction_fee_rate"] == "3%"
-    for card_id in ("chase-sapphire-reserve", "chase-amazon-prime-visa"):
+    for card_id in ("chase-sapphire-reserve", "chase-amazon-prime-visa", "chase-freedom-flex"):
         detail = client.get(f"/api/cards/{card_id}").json()
         assert detail["foreign_transaction_fee"] is False
         assert detail["foreign_transaction_fee_rate"] is None

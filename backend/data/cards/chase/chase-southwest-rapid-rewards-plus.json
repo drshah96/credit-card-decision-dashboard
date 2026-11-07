@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.24%-27.74%",
-  "balance_transfer_apr": "19.24%-27.74%",
+  "variable_apr": "19.49%-27.99%",
+  "balance_transfer_apr": "19.49%-27.99%",
   "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%",
+  "cash_advance_apr": "28.74%",
   "penalty_apr": "Up to 29.99%",
   "penalty_apr_trigger": "Failing to make a Minimum Payment when due, or making a payment that's returned unpaid; can remain in effect indefinitely",
   "pay_over_time_fee": "Up to 1.72% per month of the amount selected to pay over time, via Chase Pay Over Time",
@@ -62,7 +62,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The weakest earn structure in the Southwest lineup: same 1\u00d7 base as Premier and Priority, with no dining or travel-portal bonus at all. This card earns its keep through the free bag, Companion Pass boost, and low fee, not through how it earns points. Gas and grocery spend combine toward a single $5,000/yr cap before dropping to 1\u00d7.",
+  "earn_note": "The weakest earn structure in the Southwest lineup: same 1\u00d7 base as Premier and Priority, with no dining or travel-portal bonus at all. This card earns its keep through the free bag, Companion Pass boost, and low fee, not through how it earns points. Gas and grocery spend combine toward a single $5,000/yr cap before dropping to 1\u00d7. Balance transfers also earn 1 point per $1 on the first $10,000 transferred within 90 days of account opening.",
   "points": {
     "currency": "Rapid Rewards",
     "redemption_options": [
@@ -106,6 +106,19 @@
         "Only the first bag is free on this card. Southwest's own A-List Preferred members and Choice Extra fares get a free second bag too; this tier doesn't.",
         "It covers everyone on the reservation, not just the cardholder: a family checking one bag each on a round trip can clear a big chunk of the $99 fee in a single trip."
       ]
+    },
+    {
+      "id": "instacart",
+      "name": "Instacart Credit",
+      "subtitle": "$10/mo \u00b7 through 2027 promo",
+      "max_annual": 120,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Up to $10/month in Instacart credit, up to $120 a year through Dec 31, 2027, with an active Instacart+ membership.",
+      "tips": [
+        "$0 to you if you don't already grocery-shop through Instacart."
+      ]
     }
   ],
   "insurance": [
@@ -136,7 +149,7 @@
     },
     {
       "coverage": "Purchase protection",
-      "detail": "$500/claim \u00b7 $50,000/account \u00b7 120 days",
+      "detail": "$500/item \u00b7 $50,000/account \u00b7 120 days (NY: 90 days)",
       "level": "mid"
     },
     {
@@ -147,6 +160,7 @@
   ],
   "protection_note": "Thin, typical of an entry-level co-brand: no trip cancellation/interruption coverage at any Southwest tier, and rental car coverage is secondary domestically (primary only outside the US). The $500,000 common-carrier travel accident policy and baggage delay/loss coverage are the real safety net here.",
   "rental_note": "Secondary for domestic rentals (pays after your own auto policy), primary only outside the US, capped at $60,000 and 31 consecutive days. Decline the counter's CDW and pay with the card, but don't rely on it as your only coverage for a US rental.",
+  "lounge_access": "none",
   "status_perks": [
     {
       "name": "Companion Pass progress",
@@ -179,11 +193,11 @@
     },
     {
       "name": "Inflight purchase credit",
-      "detail": "25% back as a statement credit on Southwest inflight food, drinks and Wi-Fi purchases."
+      "detail": "25% back as a statement credit on Southwest inflight drinks and Wi-Fi purchases."
     },
     {
       "name": "Partner perks (through 2027)",
-      "detail": "3-month complimentary Instacart+ trial and 12-month complimentary DashPass (activate by Dec 31, 2027); 2\u00d7 Rapid Rewards points on Lyft rides through Dec 2027."
+      "detail": "3-month complimentary Instacart+ trial and a $10 monthly Instacart credit (activate by Dec 31, 2027), 12-month complimentary DashPass with $10 off one non-restaurant order each month (activate by Dec 31, 2027), and 2\u00d7 Rapid Rewards points on Lyft rides through Dec 2027."
     },
     {
       "name": "Roadside assistance",
@@ -224,6 +238,12 @@
     "note": "Authorized users are free on all three Southwest personal cards. The free checked bag and Group 5 boarding apply to whoever is booked on the same reservation as the cardholder (up to 8 people). You don't need to add someone as an authorized user for them to get it, just book them on your itinerary."
   },
   "timeline": [
+    {
+      "date": "Sep 1, 2026",
+      "type": "add",
+      "badge": "Upgrade",
+      "text": "The $10 DoorDash non-restaurant promo moves from quarterly to monthly for DashPass activated on or after this date."
+    },
     {
       "date": "May 28, 2025",
       "type": "neutral",

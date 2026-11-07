@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": true,
-  "variable_apr": "28.99%",
-  "balance_transfer_apr": "28.99%",
+  "variable_apr": "29.24%",
+  "balance_transfer_apr": "29.24%",
   "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": "3%",
-  "cash_advance_apr": "28.99%",
+  "cash_advance_apr": "29.24%",
   "penalty_apr": "Up to 29.99%",
   "penalty_apr_trigger": "Failing to make a Minimum Payment when due, or making a payment that's returned unpaid; can remain in effect indefinitely",
   "pay_over_time_fee": "Up to 1.72% per month of the amount selected to pay over time, via Chase Pay Over Time",
@@ -60,7 +60,7 @@
   "insurance": [
     {
       "coverage": "Rental car CDW",
-      "detail": "Secondary only",
+      "detail": "$60,000 \u00b7 secondary in the US, primary abroad",
       "level": "mid"
     },
     {
@@ -74,8 +74,9 @@
       "level": "good"
     }
   ],
-  "protection_note": "Modest, as expected for a starter card: purchase protection, extended warranty, and secondary rental car coverage exist, but no trip cancellation, baggage, or cell phone coverage.",
-  "rental_note": "Secondary coverage only: it pays after your personal auto insurance, covering what's left. Use a card with primary coverage for rentals when possible.",
+  "protection_note": "Modest, as expected for a starter card: purchase protection, extended warranty, and rental car coverage (secondary in the US, primary abroad) exist, but no trip cancellation, baggage, or cell phone coverage.",
+  "rental_note": "Secondary in the US: it pays after your personal auto insurance, covering what's left. Primary outside the US, up to $60,000 and 31 consecutive days. Use a card with primary US coverage for rentals when possible.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {
@@ -87,8 +88,8 @@
       "detail": "Dispatch service for roadside emergencies; fees billed to your card at time of dispatch."
     },
     {
-      "name": "Foreign transaction fee likely applies",
-      "detail": "Not listed among Chase's no-foreign-transaction-fee cards; treat it as carrying the standard fee abroad."
+      "name": "Foreign transaction fee",
+      "detail": "3% of each transaction in US dollars."
     }
   ],
   "additional_cards": {
