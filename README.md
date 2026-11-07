@@ -132,10 +132,11 @@ the schema and the add → review → promote flow.
 | Bilt | 3 |
 
 Card data records APRs, intro offers, balance transfer and cash advance terms,
-penalty and late fees, foreign transaction fees, welcome bonuses, insurance,
-status perks and a dated history of issuer changes. Sourced per card from the
-issuer's own terms, not from aggregators, which during a product transition are
-routinely months out of date.
+penalty and late fees, foreign transaction fees, insurance, status perks and a
+dated history of issuer changes. Sourced per card from the issuer's own terms,
+not from aggregators, which during a product transition are routinely months out
+of date. Welcome bonuses are recorded in the card files but not served, because
+they can change daily or weekly.
 
 ---
 
