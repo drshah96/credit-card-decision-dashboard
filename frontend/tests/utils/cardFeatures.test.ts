@@ -24,10 +24,7 @@ function card(id: string): Card {
         const raw = JSON.parse(readFileSync(join(DIR, dir.name, f), "utf-8"));
         // has_lounge_access is derived by the API, not stored, so mirror the
         // server's rule here rather than inventing a value.
-        const lounge = (raw.status_perks ?? []).some(
-          (p: { name?: string; note?: string }) =>
-            `${p.name ?? ""} ${p.note ?? ""}`.toLowerCase().includes("lounge"),
-        );
+        const lounge = ["included", "passes"].includes(raw.lounge_access);
         return { ...raw, has_lounge_access: lounge } as Card;
       }
     }
@@ -142,13 +139,19 @@ describe("status & perks", () => {
     // Lounge access is itself a status perk and renders under the same tab. If
     // this card offered both, a respondent meaning "the lounges" could pick
     // either and the aggregate would show two different answers.
-    const f = availableFeatures(card("amex-hilton-honors-aspire"));
+    const f = availableFeatures({ ...card("bofa-premium-rewards-elite"), has_lounge_access: true });
     expect(f).toContain("lounge_access");
     expect(f).not.toContain("status_perks");
   });
 
+  it("offers it when a note only mentions a lounge, as hotel status notes do", () => {
+    const f = availableFeatures(card("amex-hilton-honors-aspire"));
+    expect(f).toContain("status_perks");
+    expect(f).not.toContain("lounge_access");
+  });
+
   it("offers both when the card has a lounge and other perks besides", () => {
-    const f = availableFeatures(card("chase-sapphire-reserve"));
+    const f = availableFeatures({ ...card("chase-sapphire-reserve"), has_lounge_access: true });
     expect(f).toContain("lounge_access");
     expect(f).toContain("status_perks");
   });

@@ -50,10 +50,9 @@ _DETAIL_OPTIONS = (
 # Summary load — only what CardSummary actually needs: the scalar card fields,
 # the three lookup names, credits (to total up easy/max credit values),
 # earn_rates (category labels only, for spend-category filter chips),
-# redemption_options (cents-per-point only, for best_cpp), and status_perks
-# (just to derive has_lounge_access — cheap, a handful of short rows per
-# card, unlike insurance/timeline/services/etc. which GET /api/cards still
-# deliberately skips since nothing summary-level reads them).
+# and redemption_options (cents-per-point only, for best_cpp). Insurance,
+# timeline, services, status_perks and the rest are deliberately skipped, since
+# nothing summary-level reads them.
 _SUMMARY_OPTIONS = (
     joinedload(CardModel.issuer),
     joinedload(CardModel.network),
@@ -61,15 +60,13 @@ _SUMMARY_OPTIONS = (
     selectinload(CardModel.credits).selectinload(CreditModel.tier),
     selectinload(CardModel.earn_rates),
     selectinload(CardModel.redemption_options),
-    selectinload(CardModel.status_perks),
 )
 
 
-def _has_lounge_access(status_perks) -> bool:
-    """Same condition frontend/src/utils/cardTaxonomy.ts's now-removed
-    detailTags() used to check client-side — moved server-side so it's a
-    summary-level field instead of requiring a full Card detail fetch."""
-    return any("lounge" in p.name.lower() or "lounge" in p.note.lower() for p in status_perks)
+def _has_lounge_access(lounge_access: str | None) -> bool:
+    """True when the card itself gets you in free. Paid entry doesn't count, and
+    neither does a card we haven't audited."""
+    return lounge_access in ("included", "passes")
 
 
 def _intro_apr(rate: str | None, months: int | None) -> IntroApr | None:
@@ -197,7 +194,8 @@ def _to_card(c: CardModel, is_secured_variant_of: str | None = None) -> Card:
             c.intro_apr_balance_transfers_rate, c.intro_apr_balance_transfers_months
         ),
         foreign_transaction_fee=c.foreign_transaction_fee,
-        has_lounge_access=_has_lounge_access(c.status_perks),
+        lounge_access=c.lounge_access,
+        has_lounge_access=_has_lounge_access(c.lounge_access),
         variable_apr=c.variable_apr,
         balance_transfer_apr=c.balance_transfer_apr,
         balance_transfer_fee=c.balance_transfer_fee,
@@ -267,7 +265,7 @@ def _to_card_summary(c: CardModel, is_secured_variant_of: str | None = None) -> 
             c.intro_apr_balance_transfers_rate, c.intro_apr_balance_transfers_months
         ),
         foreign_transaction_fee=c.foreign_transaction_fee,
-        has_lounge_access=_has_lounge_access(c.status_perks),
+        has_lounge_access=_has_lounge_access(c.lounge_access),
     )
 
 

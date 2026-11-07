@@ -5,6 +5,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from backend.main import app
+from backend.services.cards import _has_lounge_access
 
 client = TestClient(app)
 
@@ -604,6 +605,14 @@ def test_has_lounge_access_true_for_a_known_lounge_card() -> None:
 def test_has_lounge_access_false_for_a_card_with_no_such_perk() -> None:
     detail = client.get("/api/cards/chase-freedom-unlimited").json()
     assert detail["has_lounge_access"] is False
+
+
+@pytest.mark.parametrize(
+    ("level", "expected"),
+    [("included", True), ("passes", True), ("paid", False), ("none", False), (None, False)],
+)
+def test_only_free_entry_counts_as_lounge_access(level, expected) -> None:
+    assert _has_lounge_access(level) is expected
 
 
 def test_intro_apr_shape_when_present() -> None:
