@@ -1540,7 +1540,8 @@ serves it also serves the provenance showing the gap.
 **A23. Outcomes tell client mistakes from server faults.** This extends D9's list. A notification
 the SDK accepts with a 202 logs as `ok`. A `tools/call` naming a tool the server doesn't have logs
 as `unknown_tool`, decided from the request and not from SDK wording. Any other 4xx logs as
-`http_<status>`. `internal_error` now only means a server fault.
+`http_<status>`. `internal_error` now only means a server fault. A client that drops the connection
+while sending its body logs as `disconnected` with a null `http_status`, and its quota stays charged.
 
 **Defaults taken while owner decisions are open.** Each can change before release:
 

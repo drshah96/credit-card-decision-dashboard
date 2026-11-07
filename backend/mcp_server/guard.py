@@ -242,6 +242,11 @@ class McpEndpoint:
         try:
             body = await _read_body(receive, live.limits)
             if body is _DISCONNECTED:
+                # No response was sent, so there is no status. The quota stays charged: the
+                # request held a slot, and refunding it would make dropped requests free.
+                _log_request(
+                    request_id, record, None, headers, None, "disconnected", started, self, 0, 0
+                )
                 return
             if body is _TOO_LARGE or body is _TIMED_OUT:
                 status, outcome, text = (

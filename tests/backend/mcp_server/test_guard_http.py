@@ -15,6 +15,7 @@ from backend.mcp_server.config import McpConfig
 from backend.mcp_server.keys import KeyStore
 
 from .http_helpers import FAST, HEADERS, INITIALIZE, auth, call_tool, enabled_config, running
+from .test_observability import captured
 
 
 def test_auth_failures_use_our_shape_and_advertise_no_oauth(snapshot):
@@ -291,6 +292,25 @@ async def test_a_slow_body_gets_408(snapshot, monkeypatch):
         sink = _Sink()
         await mcp_endpoint(_scope(key), _never_finishes, sink)
     assert sink.status == 408
+
+
+async def test_a_disconnect_mid_body_is_logged_and_frees_its_slot(snapshot, monkeypatch):
+    config, key = enabled_config()
+    _enable(monkeypatch, config, snapshot)
+
+    async def receive():
+        return {"type": "http.disconnect"}
+
+    with captured() as logs:
+        async with mcp_endpoint.run():
+            sink = _Sink()
+            await mcp_endpoint(_scope(key), receive, sink)
+            assert sink.messages == []
+            assert mcp_endpoint._live.in_flight == 0
+    line = logs.events("mcp_request")[-1]
+    assert line["outcome"] == "disconnected"
+    assert line["http_status"] is None
+    assert line["key_id"] == key.split("_")[1]
 
 
 async def test_a_slow_sdk_gets_504_and_frees_its_slot(snapshot, monkeypatch):
