@@ -13,7 +13,8 @@ from backend.models import CardSummary
 
 GENERIC_TRAVEL_PORTAL = "travel (portal|purchases)|travel center"
 
-# JS \b, \d and \s without the u flag are ASCII-only, hence re.ASCII.
+# JS \b and \d are ASCII-only, hence re.ASCII. JS \s is not: it also matches Unicode spaces and
+# U+FEFF, so test_matcher_input_invariants keeps those out of the text these regexes read.
 _FLAGS = re.IGNORECASE | re.ASCII
 
 MATCHER_SOURCES: dict[str, str] = {

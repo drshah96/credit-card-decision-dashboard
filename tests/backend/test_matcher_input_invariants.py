@@ -32,6 +32,8 @@ def test_no_non_ascii_letters_or_whitespace_reach_the_regexes():
                 kind = unicodedata.category(char)
                 assert not kind.startswith("L"), f"{card_id}: letter {char!r} in {text!r}"
                 assert not kind.startswith("Z"), f"{card_id}: space {char!r} in {text!r}"
+                # JS \s also matches U+FEFF, the one such character outside category Z.
+                assert char != "﻿", f"{card_id}: U+FEFF in {text!r}"
 
 
 def test_every_rankable_multiplier_parses_to_a_finite_number():
