@@ -12,10 +12,10 @@
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
   "variable_apr": "19.74%-28.74%, based on creditworthiness",
-  "balance_transfer_apr": "19.49%, 24.49%, or 28.49%, based on creditworthiness",
+  "balance_transfer_apr": "19.74%-28.74%, based on creditworthiness",
   "balance_transfer_fee": "$0 at the standard Transfer APR, or 4% at any promotional APR Capital One may offer",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%",
+  "cash_advance_apr": "28.74%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
@@ -89,7 +89,7 @@
     "airline_count": 19,
     "hotel_count": 4,
     "highlight": "19 airline partners (up from 18) and 4 hotel partners (Choice, Wyndham, I Prefer, Accor Live Limitless). Best sweet spots: Turkish (Star Alliance short-hauls, exclusive partner), Flying Blue, Virgin Red, JAL.",
-    "recent_changes": "The gap: no Hyatt and no U.S. legacy airline partner. But the 1¢ eraser floor means miles are never worthless. Hotel side grew from 3 to 4 partners with Accor Live Limitless.",
+    "recent_changes": "Copa was added in Nov 2026. The gap: no Hyatt and no U.S. legacy airline partner. But the 1¢ eraser floor means miles are never worthless. Hotel side grew from 3 to 4 partners with Accor Live Limitless.",
     "partners": [
       {
         "name": "Aeromexico Rewards",

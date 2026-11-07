@@ -114,7 +114,7 @@
       }
     ],
     "per_100k": "$1,250 to $2,200+",
-    "note": "Same transfer-partner ceiling as every Bilt Card: 2.2¢/point per The Points Guy on well-chosen transfers, and 1.25¢/point in the Bilt Travel Portal. Bilt publishes no fixed rate for statement credits or rent; it shows the value when you redeem."
+    "note": "Same transfer-partner ceiling as every Bilt Card: 2.2¢/point per The Points Guy on well-chosen transfers, and 1.25¢/point in the Bilt Travel Portal. Bilt publishes no fixed rate for statement credits or rent; it shows the value when you redeem, so the 1¢ here is our estimate."
   },
   "transfer_partners": {
     "airline_count": 19,

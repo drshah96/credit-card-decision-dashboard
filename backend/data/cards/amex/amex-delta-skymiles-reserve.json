@@ -101,7 +101,7 @@
       "removed": false,
       "description": "Up to $20/month in statement credits at U.S. Resy restaurants marked eligible on Resy.com when you pay, and at purchases made directly on Tock since Sep 15, 2026.",
       "tips": [
-        "Double the Gold/Platinum tiers' Resy credit, worth checking if you already dine at Resy restaurants monthly."
+        "Worth checking if you already dine at Resy restaurants monthly."
       ]
     },
     {
@@ -240,7 +240,7 @@
         "is_free": false,
         "benefits": [
           {
-            "text": "$175 each, not free: only additional Delta Platinum cards carry no fee",
+            "text": "$175 each, not free",
             "included": false
           },
           {

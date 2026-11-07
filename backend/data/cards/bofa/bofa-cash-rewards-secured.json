@@ -22,7 +22,11 @@
   "late_payment_fee": "Up to $41",
   "returned_payment_fee": null,
   "returned_check_fee": null,
-  "welcome_bonus": null,
+  "welcome_bonus": {
+    "bonus": "6% in the choice category",
+    "requirement": "on purchases in the first 365 days",
+    "estimated_value": null
+  },
   "verdict": {
     "status": "situational",
     "text": "Same 3%/2% structure as Customized Cash Rewards, good for rebuilding",
@@ -51,7 +55,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Same earn structure as the unsecured Customized Cash Rewards: 3% in your choice category and 2% at grocery stores and wholesale clubs on the first $2,500 in combined purchases each quarter, then 1%. A first-year bonus makes the choice category 6% on purchases in the first 365 days. Check bankofamerica.com/BofARewards before counting on the BofA Rewards bonus: Bank of America keeps a list of ineligible cards there.",
+  "earn_note": "Same earn structure as the unsecured Customized Cash Rewards: 3% in your choice category and 2% at grocery stores and wholesale clubs on the first $2,500 in combined purchases each quarter, then 1%. Check bankofamerica.com/BofARewards before counting on the BofA Rewards bonus: Bank of America keeps a list of ineligible cards there.",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [

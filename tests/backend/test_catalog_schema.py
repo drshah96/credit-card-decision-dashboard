@@ -118,8 +118,8 @@ def test_a_lounge_perk_needs_a_checked_lounge_access(path: Path) -> None:
 # written there would be shown and would go stale.
 OFFER_WORDING = re.compile(
     r"welcome (bonus|offer)|sign-?up (bonus|offer)|cashback match|discover match"
-    r"|new cardholders? (gets?|earns?) (an? )?[$\d]|bonus miles for adding"
-    r"|new-account discount|first-day offer",
+    r"|new[- ]card(holder|member)s? (also )?(gets?|earns?) (an? )?[$\d]|bonus miles for adding"
+    r"|new-account discount|first-day offer|first-year (cash back )?bonus|new-cardholder bonus",
     re.IGNORECASE,
 )
 

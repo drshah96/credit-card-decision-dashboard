@@ -289,7 +289,7 @@
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "Statement credit for a Global Entry ($120) or TSA PreCheck ($85) application fee, one credit across the account every 4 years. Shown here amortized to an annual figure.",
+      "description": "Statement credit for a Global Entry ($120) or TSA PreCheck ($85) application fee every 4 years. Each Additional Card is eligible for its own credit when the fee is charged to that card. Shown here amortized to an annual figure.",
       "tips": [
         "Apply for Global Entry, not just TSA PreCheck; it includes TSA PreCheck and covers the same credit."
       ]
@@ -360,7 +360,7 @@
       "level": "mid"
     }
   ],
-  "protection_note": "Amex does cover emergency medical evacuation/transport at no cost (uncapped) when coordinated through Premium Global Assist. It carries a Baggage Insurance Plan for lost/damaged/stolen bags (secondary); only baggage delay is missing. Purchase protection runs $10k per claim and $50k per year over 90 days.",
+  "protection_note": "Amex does cover emergency medical evacuation/transport at no cost, if approved, when coordinated through Premium Global Assist. It carries a Baggage Insurance Plan for lost/damaged/stolen bags (secondary); only baggage delay is missing. Purchase protection runs $10k per claim and $50k per year over 90 days.",
   "rental_note": "The Amex Platinum's complimentary coverage is secondary and does not include liability. Its Premium Car Rental Protection gives primary coverage but it's a separate paid product charged as one flat fee per rental. Easiest move: charge rentals to a card that already includes free primary coverage.",
   "lounge_access": "included",
   "status_perks": [
@@ -474,6 +474,12 @@
       "text": "Fine Hotels + Resorts bookings need a two-night minimum to count toward the $600 hotel credit, so the one-night trick stops working."
     },
     {
+      "date": "Oct 1, 2026",
+      "type": "cut",
+      "badge": "Cut",
+      "text": "Lufthansa lounge access ended. Amex says eligible Platinum members no longer have access to any Lufthansa lounge. Centurion and Priority Pass access are unaffected."
+    },
+    {
       "date": "Sep 15, 2026",
       "type": "add",
       "badge": "Tock added",
@@ -484,12 +490,6 @@
       "type": "cut",
       "badge": "Cut",
       "text": "Pay with Points ended at NYC Taxi and at Saks Fifth Avenue, closing the last Membership Rewards tie to Saks a couple of months after the statement credit went."
-    },
-    {
-      "date": "Oct 1, 2026",
-      "type": "cut",
-      "badge": "Cut",
-      "text": "Lufthansa lounge access ended. Amex says eligible Platinum members no longer have access to any Lufthansa lounge. Centurion and Priority Pass access are unaffected."
     },
     {
       "date": "Aug 1, 2026",

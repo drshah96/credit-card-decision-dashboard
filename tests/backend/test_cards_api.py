@@ -593,9 +593,8 @@ def test_summary_apr_and_fx_fields_match_full_detail(card_id: str) -> None:
 
 
 def test_has_lounge_access_true_for_a_known_lounge_card() -> None:
-    """amex-platinum has real Centurion Lounge access in its status_perks —
-    confirms has_lounge_access is actually derived from that data, not
-    hardcoded false."""
+    """amex-platinum has lounge_access "included", confirming has_lounge_access
+    is actually derived from that field, not hardcoded false."""
     detail = client.get("/api/cards/amex-platinum").json()
     summary = next(c for c in client.get("/api/cards").json() if c["id"] == "amex-platinum")
     assert detail["has_lounge_access"] is True

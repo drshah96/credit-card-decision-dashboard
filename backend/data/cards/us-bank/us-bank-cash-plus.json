@@ -82,11 +82,6 @@
         "method": "Statement credit",
         "cpp": 1.0,
         "best": false
-      },
-      {
-        "method": "Rewards card or merchant gift cards",
-        "cpp": 0.0,
-        "best": false
       }
     ],
     "per_100k": "$1,000",

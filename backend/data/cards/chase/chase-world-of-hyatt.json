@@ -264,7 +264,7 @@
     {
       "id": "dashpass",
       "name": "DoorDash DashPass + Credit",
-      "subtitle": "12-mo complimentary + $10/mo non-restaurant · thru 2027",
+      "subtitle": "12-mo complimentary + $10/mo non-restaurant",
       "max_annual": 120,
       "default_value": 0,
       "tier": "niche",

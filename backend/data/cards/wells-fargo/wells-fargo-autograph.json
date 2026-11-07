@@ -267,16 +267,16 @@
       "text": "JetBlue TrueBlue joins Wells Fargo's points transfer program at 1:1."
     },
     {
-      "date": "Jul 2022",
-      "type": "add",
-      "badge": "Launch",
-      "text": "Wells Fargo launches Autograph as a no-annual-fee points card with a wide 3x category list, its first real entry into the points-earning travel card space alongside Active Cash's cash back."
-    },
-    {
       "date": "Sep 2024",
       "type": "neutral",
       "badge": "Refresh",
       "text": "Wells Fargo drops the 'Signature' suffix and refreshes the card's benefits, aligning it with the newly launched Autograph Journey as a two-tier Autograph lineup."
+    },
+    {
+      "date": "Jul 2022",
+      "type": "add",
+      "badge": "Launch",
+      "text": "Wells Fargo launches Autograph as a no-annual-fee points card with a wide 3x category list, its first real entry into the points-earning travel card space alongside Active Cash's cash back."
     }
   ]
 }
