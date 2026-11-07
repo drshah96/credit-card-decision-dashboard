@@ -302,10 +302,6 @@
             "included": true
           },
           {
-            "text": "10,000 bonus miles for adding one within the first 3 months (new accounts)",
-            "included": true
-          },
-          {
             "text": "Earns MileagePlus miles (into the primary account)",
             "included": true
           },
@@ -320,7 +316,7 @@
         ]
       }
     ],
-    "note": "Adding an authorized user is free and was worth 10,000 bonus miles during the current offer, but it doesn't add its own set of lounge passes or PQP; the free-bag perk only applies when the AU is actually traveling with the primary cardholder."
+    "note": "Adding an authorized user is free, but it doesn't add its own set of lounge passes or PQP; the free-bag perk only applies when the AU is actually traveling with the primary cardholder."
   },
   "timeline": [
     {

@@ -55,7 +55,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Unlike Macy's, Bloomingdale's, or Wayfair, L.L.Bean has issued this as a single open-loop Mastercard from the start; no separate closed-loop, store-only L.L.Bean card was found. New cardholders get 20% off their first L.L.Bean purchase upon approval. Each Bean Buck equals $1 in savings at L.L.Bean, and Bean Bucks don't expire as long as the account stays open and active.",
+  "earn_note": "Unlike Macy's, Bloomingdale's, or Wayfair, L.L.Bean has issued this as a single open-loop Mastercard from the start; no separate closed-loop, store-only L.L.Bean card was found. Each Bean Buck equals $1 in savings at L.L.Bean, and Bean Bucks don't expire as long as the account stays open and active.",
   "points": {
     "currency": "Bean Bucks",
     "redemption_options": [

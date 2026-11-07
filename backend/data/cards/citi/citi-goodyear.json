@@ -33,7 +33,7 @@
     "short_tag": "Tire Financing"
   },
   "earn_rates": [],
-  "earn_note": "This card has no cash-back or points program. Its value proposition is deferred-interest financing (\"no interest if paid in full within 6 months\" on purchases of $250+) plus periodic rebates on tire purchases and welcome offers (e.g., $50 back on a first purchase of $250+). Unlike Citi's Best Buy or Wayfair co-brands, no open-loop Visa/Mastercard version of this card exists; it's a single, closed-loop product usable only at Goodyear's roughly 17,000 locations and about 11,500 participating Exxon and Mobil fuel stations.",
+  "earn_note": "This card has no cash-back or points program. Its value proposition is deferred-interest financing (\"no interest if paid in full within 6 months\" on purchases of $250+) plus periodic rebates on tire purchases. Unlike Citi's Best Buy or Wayfair co-brands, no open-loop Visa/Mastercard version of this card exists; it's a single, closed-loop product usable only at Goodyear's roughly 17,000 locations and about 11,500 participating Exxon and Mobil fuel stations.",
   "points": {
     "currency": "No rewards program",
     "redemption_options": [],
@@ -86,10 +86,6 @@
     {
       "name": "Deferred-interest financing",
       "detail": "No interest if paid in full within 6 months on purchases of $250 or more; interest accrues retroactively from the purchase date if the balance isn't cleared by the deadline."
-    },
-    {
-      "name": "Welcome offer",
-      "detail": "$50 back on a first purchase of $250+ (offer terms and expiration vary; confirmed valid through 12/31/2026 as of research)."
     },
     {
       "name": "Usable at partner fuel stations",

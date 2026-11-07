@@ -62,7 +62,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "This is the open-loop Mastercard version of Wayfair's card: it earns outside the Wayfair family of brands, unlike the closed-loop, store-only Wayfair Credit Card, which earns the same 7%/5% at Wayfair brands but nothing elsewhere. Reward Dollars are capped at a maximum $2,500 redeemable per month across participating Wayfair sites. New cardholders get $40 off a first qualifying order of $250+. Citi has issued this program since 2020, after it moved from Comenity Bank.",
+  "earn_note": "This is the open-loop Mastercard version of Wayfair's card: it earns outside the Wayfair family of brands, unlike the closed-loop, store-only Wayfair Credit Card, which earns the same 7%/5% at Wayfair brands but nothing elsewhere. Reward Dollars are capped at a maximum $2,500 redeemable per month across participating Wayfair sites. Citi has issued this program since 2020, after it moved from Comenity Bank.",
   "points": {
     "currency": "Wayfair Reward Dollars",
     "redemption_options": [

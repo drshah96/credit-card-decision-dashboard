@@ -16,7 +16,9 @@ is true independently of how any fixture happens to seed the database.
 """
 
 import json
+import re
 from pathlib import Path
+from typing import Iterator
 
 import pytest
 from pydantic import BaseModel, ValidationError
@@ -92,3 +94,50 @@ def test_the_unknown_key_walk_actually_detects_something() -> None:
     assert unknown_keys(Card, {**sample, "credits": [{**sample["credits"][0], "nope": 1}]}) == [
         "credits[0].nope"
     ]
+
+
+# A perk name that mentions a lounge is the word match the site used to trust,
+# and it was wrong on 10 cards. Such a card must carry a checked lounge_access
+# instead. REI is a retail co-brand outside the November 2026 re-check, so its
+# LoungeKey perk has not been audited yet.
+LOUNGE_PERK = re.compile(r"lounge|priority pass|sky club|united club|admirals", re.IGNORECASE)
+LOUNGE_NOT_YET_AUDITED = {"capital-one-rei-co-op"}
+
+
+@pytest.mark.parametrize("path", FILES, ids=ids(FILES))
+def test_a_lounge_perk_needs_a_checked_lounge_access(path: Path) -> None:
+    card = json.loads(path.read_text())
+    if card["id"] in LOUNGE_NOT_YET_AUDITED:
+        return
+    perks = [p["name"] for p in card["status_perks"] if LOUNGE_PERK.search(p["name"])]
+    assert not perks or "lounge_access" in card, f"{card['id']}: {perks}"
+
+
+# Sign-up offers change daily or weekly, so they stay in welcome_bonus, which the
+# API never serves. Everything else in a card file reaches users, so an offer
+# written there would be shown and would go stale.
+OFFER_WORDING = re.compile(
+    r"welcome (bonus|offer)|sign-?up (bonus|offer)|cashback match|discover match"
+    r"|new cardholders? (gets?|earns?) (an? )?[$\d]|bonus miles for adding"
+    r"|new-account discount|first-day offer",
+    re.IGNORECASE,
+)
+
+
+def _served_strings(value: object) -> Iterator[str]:
+    if isinstance(value, str):
+        yield value
+    elif isinstance(value, list):
+        for item in value:
+            yield from _served_strings(item)
+    elif isinstance(value, dict):
+        for key, item in value.items():
+            if key != "welcome_bonus":
+                yield from _served_strings(item)
+
+
+@pytest.mark.parametrize("path", FILES, ids=ids(FILES))
+def test_sign_up_offers_stay_out_of_served_text(path: Path) -> None:
+    card = json.loads(path.read_text())
+    found = [s for s in _served_strings(card) if OFFER_WORDING.search(s)]
+    assert not found, f"{card['id']} shows an offer outside welcome_bonus: {found}"
