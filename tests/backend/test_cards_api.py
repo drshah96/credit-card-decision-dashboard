@@ -437,7 +437,7 @@ def test_annual_fees_are_correct() -> None:
     assert fees["citi-simplicity"] == 0
     assert fees["citi-secured"] == 0
     assert fees["citi-aadvantage-platinum-select"] == 99
-    assert fees["citi-aadvantage-executive"] == 595
+    assert fees["citi-aadvantage-executive"] == 695
     assert fees["citi-aadvantage-mileup"] == 0
     assert fees["citi-aadvantage-globe"] == 350
     assert fees["citi-costco-anywhere-visa"] == 0
@@ -987,11 +987,11 @@ def test_citi_cards_with_asymmetric_intro_apr_durations(
     assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": bt_months}
 
 
-def test_citi_aadvantage_mileup_has_bt_intro_but_no_purchase_intro() -> None:
-    # The inverse asymmetry: an intro offer on balance transfers only.
+def test_citi_aadvantage_mileup_has_no_intro_offer() -> None:
+    # Neither Citi's fact sheet nor AA's terms show one, read Nov 7, 2026.
     detail = client.get("/api/cards/citi-aadvantage-mileup").json()
     assert detail["intro_apr_purchases"] is None
-    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": 15}
+    assert detail["intro_apr_balance_transfers"] is None
 
 
 def test_citi_two_cards_left_genuinely_unconfirmed_foreign_transaction_fee() -> None:
