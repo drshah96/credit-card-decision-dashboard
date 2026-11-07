@@ -12,17 +12,17 @@
     "rate": "0%",
     "months": 6
   },
-  "intro_apr_balance_transfers": {"rate": "10.99%", "months": 6},
+  "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "16.49%, 19.49%, 23.49% or 25.49%, based on creditworthiness",
-  "balance_transfer_apr": "16.49%, 19.49%, 23.49% or 25.49%, based on creditworthiness",
+  "variable_apr": "16.74% to 25.74%, based on creditworthiness",
+  "balance_transfer_apr": "16.74% to 25.74%, based on creditworthiness",
   "balance_transfer_fee": "5% on transfers posted at a promotional APR, none at the standard Transfer APR",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%-28.99%",
+  "cash_advance_apr": "28.74%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
-  "late_payment_fee": "None the first time you pay late, up to $41 after that",
+  "late_payment_fee": "Up to $41",
   "returned_payment_fee": "Up to $30",
   "returned_check_fee": null,
   "welcome_bonus": {
@@ -32,14 +32,14 @@
   },
   "verdict": {
     "status": "keep",
-    "text": "Real rewards, no credit history needed, and a first year that pays double",
+    "text": "Real rewards, and no credit history needed",
     "short_tag": "Student 5%"
   },
   "earn_rates": [
     {
       "emoji": "🔄",
       "multiplier": "5%",
-      "category": "Rotating quarterly categories, on up to $1,500 per quarter, once you activate",
+      "category": "Rotating quarterly categories, up to the quarterly maximum, once you activate",
       "highlight": true,
       "is_base": false
     },
@@ -51,7 +51,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "5% rotating categories and a 1% base, which is unusual for a student product. The 5% covers $1,500 a quarter and only counts if you activate, and Discover's category calendar has been offline since August 2026. Year one pays twice: a $100 bonus, then Cashback Match.",
+  "earn_note": "5% rotating categories and a 1% base, which is unusual for a student product. The 5% runs up to a quarterly maximum the student page gives no dollar figure for and only counts if you activate, and Discover's category calendar has been offline since August 2026.",
   "points": {
     "currency": "Cashback Bonus",
     "redemption_options": [
@@ -108,8 +108,9 @@
       "level": "none"
     }
   ],
-  "protection_note": "Nothing here, and that is true of every Discover card since the February 2018 cuts, with price protection following that October. The live application terms confirm it: asked whether any other fees or protections apply beyond what is disclosed, Discover answers no. Worth knowing if you are buying a laptop for the semester, since a card with purchase protection or an extended warranty would cover it and this one will not.",
+  "protection_note": "Nothing here, and that is true of every Discover card since the February 2018 cuts, with price protection following that October. The current cardmember agreement carries no benefit terms at all. Worth knowing if you are buying a laptop for the semester, since a card with purchase protection or an extended warranty would cover it and this one will not.",
   "rental_note": "No rental car coverage, primary or secondary. Renting a car on a student card is rare, but if you do, this card offers nothing at the counter and you would be relying on your own policy or buying the waiver.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {
@@ -126,15 +127,15 @@
     },
     {
       "name": "Social Security number alerts",
-      "detail": "Daily dark web scans for your SSN plus new-account alerts on your credit report. Requires enrollment, and only the primary cardmember can sign up."
+      "detail": "Get an alert if your Social Security number is found on the dark web, plus credit monitoring alerts on select changes to your TransUnion and Experian reports. It runs through CreditWise, which needs enrollment and is open to anyone over 18 with a valid SSN that matches a TransUnion profile."
     },
     {
       "name": "Card Lock",
-      "detail": "Lock the card from the app or website to block new purchases and cash advances if you misplace it."
+      "detail": "Lock the card in the mobile app if it is misplaced, lost or stolen. Some activity continues while it is locked, including returns, credits, payments, interest, balance transfers and other account fees. Usually only the primary cardholder or an account manager can lock or unlock it."
     },
     {
-      "name": "Nothing changes when you graduate",
-      "detail": "Discover confirms the account keeps the same terms, rewards and features after you finish college. There is no conversion to a different product and nothing you need to do, contrary to what several comparison sites claim."
+      "name": "When you graduate",
+      "detail": "Discover asks you to update your income, housing, email and address, which may make you eligible for a credit line increase. The current student pages do not describe a conversion to another product."
     }
   ],
   "additional_cards": {
@@ -154,10 +155,6 @@
             "included": true
           },
           {
-            "text": "Counts toward your Cashback Match in year one",
-            "included": true
-          },
-          {
             "text": "Any purchase protection or travel coverage",
             "included": false
           }
@@ -171,7 +168,7 @@
       "date": "2026-2027",
       "type": "future",
       "badge": "Upcoming",
-      "text": "When your own account moves to Capital One, new earning routes switch on that Discover never had: 5% on hotels and rental cars booked through Capital One Travel, and Capital One Offers for online shopping. Capital One Entertainment tickets are reported to earn 5% too, though neither issuer documents it. These are not live for most cardholders yet, and Discover's own product pages do not list them."
+      "text": "When your own account moves to Capital One, new earning routes switch on that Discover never had: 5% on hotels and rental cars booked through Capital One Travel, 5% on tickets and events through Capital One Entertainment, and up to 15% through Capital One Offers. Miles cards earn the same rates in miles. These only apply once your account has moved, and Discover's own product pages do not list them."
     },
     {
       "date": "July 2026",
@@ -183,7 +180,7 @@
       "date": "June 2026",
       "type": "neutral",
       "badge": "New agreement",
-      "text": "The Discover cardmember agreement is replaced by a Capital One one, effective June 30. New accounts run under the Credit Card Agreement for Discover by Capital One, N.A., and applications now open on capitalone.com. Discover no longer publishes a per-card rates and fees document; the one that replaced it covers every Discover product at once."
+      "text": "The Discover cardmember agreement is replaced by a Capital One one, effective June 30. New accounts run under the Credit Card Agreement for Discover by Capital One, N.A., and applications now open on capitalone.com. Discover no longer publishes a per-card rates and fees document. One agreement now covers the Discover line, and a separate one covers the Secured card."
     },
     {
       "date": "May 2025",

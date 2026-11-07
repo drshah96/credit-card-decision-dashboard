@@ -12,17 +12,17 @@
     "rate": "0%",
     "months": 6
   },
-  "intro_apr_balance_transfers": {"rate": "10.99%", "months": 6},
+  "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "16.49%, 19.49%, 23.49% or 25.49%, based on creditworthiness",
-  "balance_transfer_apr": "16.49%, 19.49%, 23.49% or 25.49%, based on creditworthiness",
+  "variable_apr": "16.74% to 25.74%, based on creditworthiness",
+  "balance_transfer_apr": "16.74% to 25.74%, based on creditworthiness",
   "balance_transfer_fee": "5% on transfers posted at a promotional APR, none at the standard Transfer APR",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%-28.99%",
+  "cash_advance_apr": "28.74%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
-  "late_payment_fee": "None the first time you pay late, up to $41 after that",
+  "late_payment_fee": "Up to $41",
   "returned_payment_fee": "Up to $30",
   "returned_check_fee": null,
   "welcome_bonus": {
@@ -32,7 +32,7 @@
   },
   "verdict": {
     "status": "situational",
-    "text": "No activation to remember, but a low ceiling and no welcome bonus",
+    "text": "No activation to remember, but a low ceiling",
     "short_tag": "Student Gas & Dining"
   },
   "earn_rates": [
@@ -58,7 +58,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Nothing needs activating and there are no categories to track. The cost is a low ceiling: gas and restaurants share one $1,000 quarterly cap, worth at most $10 a quarter over the base, and there is no $100 bonus. Cashback Match doubles year one.",
+  "earn_note": "Nothing needs activating and there are no categories to track. The cost is a low ceiling: gas and restaurants share one $1,000 quarterly cap, worth at most $10 a quarter over the base.",
   "points": {
     "currency": "Cashback Bonus",
     "redemption_options": [
@@ -115,8 +115,9 @@
       "level": "none"
     }
   ],
-  "protection_note": "Nothing here, which holds across every Discover card since the February 2018 cuts and the removal of price protection that October. The live application terms say as much directly, answering no when asked whether anything applies beyond what is disclosed. If you want a card that would replace a phone or a laptop when it breaks, this is not it.",
+  "protection_note": "Nothing here, which holds across every Discover card since the February 2018 cuts and the removal of price protection that October. The current cardmember agreement carries no benefit terms at all. If you want a card that would replace a phone or a laptop when it breaks, this is not it.",
   "rental_note": "No rental car coverage, primary or secondary. Nothing at the counter backs you up, so you would be relying on your own auto policy or buying the waiver.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {
@@ -133,15 +134,15 @@
     },
     {
       "name": "Social Security number alerts",
-      "detail": "Daily dark web scans for your SSN plus new-account alerts on your credit report. Requires enrollment, and only the primary cardmember can sign up."
+      "detail": "Get an alert if your Social Security number is found on the dark web, plus credit monitoring alerts on select changes to your TransUnion and Experian reports. It runs through CreditWise, which needs enrollment and is open to anyone over 18 with a valid SSN that matches a TransUnion profile."
     },
     {
       "name": "Card Lock",
-      "detail": "Lock the card from the app or website to block new purchases and cash advances if you misplace it."
+      "detail": "Lock the card in the mobile app if it is misplaced, lost or stolen. Some activity continues while it is locked, including returns, credits, payments, interest, balance transfers and other account fees. Usually only the primary cardholder or an account manager can lock or unlock it."
     },
     {
-      "name": "Nothing changes when you graduate",
-      "detail": "Discover confirms the account keeps the same terms, rewards and features after you finish college. There is no conversion to a different product and nothing you need to do, contrary to what several comparison sites claim."
+      "name": "When you graduate",
+      "detail": "Discover asks you to update your income, housing, email and address, which may make you eligible for a credit line increase. The current student pages do not describe a conversion to another product."
     }
   ],
   "additional_cards": {
@@ -161,10 +162,6 @@
             "included": true
           },
           {
-            "text": "Counts toward your Cashback Match in year one",
-            "included": true
-          },
-          {
             "text": "Any purchase protection or travel coverage",
             "included": false
           }
@@ -178,7 +175,7 @@
       "date": "2026-2027",
       "type": "future",
       "badge": "Upcoming",
-      "text": "When your own account moves to Capital One, new earning routes switch on that Discover never had: 5% on hotels and rental cars booked through Capital One Travel, and Capital One Offers for online shopping. Capital One Entertainment tickets are reported to earn 5% too, though neither issuer documents it. These are not live for most cardholders yet, and Discover's own product pages do not list them."
+      "text": "When your own account moves to Capital One, new earning routes switch on that Discover never had: 5% on hotels and rental cars booked through Capital One Travel, 5% on tickets and events through Capital One Entertainment, and up to 15% through Capital One Offers. Miles cards earn the same rates in miles. These only apply once your account has moved, and Discover's own product pages do not list them."
     },
     {
       "date": "July 2026",
@@ -190,7 +187,7 @@
       "date": "June 2026",
       "type": "neutral",
       "badge": "New agreement",
-      "text": "The Discover cardmember agreement is replaced by a Capital One one, effective June 30. New accounts run under the Credit Card Agreement for Discover by Capital One, N.A., and applications now open on capitalone.com. Discover no longer publishes a per-card rates and fees document; the one that replaced it covers every Discover product at once."
+      "text": "The Discover cardmember agreement is replaced by a Capital One one, effective June 30. New accounts run under the Credit Card Agreement for Discover by Capital One, N.A., and applications now open on capitalone.com. Discover no longer publishes a per-card rates and fees document. One agreement now covers the Discover line, and a separate one covers the Secured card."
     },
     {
       "date": "May 2025",
