@@ -81,8 +81,8 @@ worse, one that validates with a number a hundred times too large.
 
 ## Credit tiers and default_value
 
-These are the judgment calls that feed `total_easy_credits` and the "your take"
-calculator, so reason explicitly rather than guessing:
+The tier is a judgment call that decides how the site groups a card's credits, so
+reason explicitly rather than guessing:
 
 - **Effortless** — auto-applies, or covers something the cardholder would
   unavoidably buy anyway.
@@ -90,11 +90,14 @@ calculator, so reason explicitly rather than guessing:
   is the realistic outcome.
 - **Niche** — worth something only if it happens to fit the person's life.
 
-`max_annual` is the advertised ceiling. `default_value` is what a typical person
-actually captures, and for anything instalment-based or category-restricted it
-should be meaningfully below the ceiling. Both are whole dollars. Before setting
-`default_value`, grep the catalog for a structurally similar credit and match
-its treatment — consistency across cards matters more than precision on any one.
+`max_annual` is the advertised ceiling. `default_value` is where the credit's slider
+starts on the site, and it is not an estimate of typical use. Set it to `0`, because
+what someone captures depends on their own situation. Almost every credit in the
+catalog is at `0`. If you think a credit needs anything else, say why in your report.
+Both are whole dollars.
+
+Before assigning a tier, grep the catalog for a structurally similar credit and match
+its treatment. Consistency across cards matters more than precision on any one.
 
 State your reasoning for every tier assignment in your report.
 
