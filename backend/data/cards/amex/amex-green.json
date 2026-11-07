@@ -1,6 +1,6 @@
 {
   "id": "amex-green",
-  "name": "American Express® Green Card",
+  "name": "American Express® Classic Green Card",
   "issuer": "American Express",
   "network": "AMERICAN EXPRESS",
   "points_program": "Membership Rewards",
@@ -20,12 +20,8 @@
   "pay_over_time_fee": "Up to 1.33% per month of each purchase placed in a Plan It plan",
   "late_payment_fee": "Up to $40",
   "returned_payment_fee": "Up to $40",
-  "returned_check_fee": null,
-  "welcome_bonus": {
-    "bonus": "40,000 Membership Rewards points",
-    "requirement": "after you spend $3,000 in purchases in the first 6 months of Card Membership",
-    "estimated_value": "$800"
-  },
+  "returned_check_fee": "$38",
+  "welcome_bonus": null,
   "verdict": {
     "status": "keep",
     "text": "Low-commitment MR earner if you use transit + the CLEAR credit",
@@ -271,9 +267,9 @@
   "timeline": [
     {
       "date": "Aug 20, 2026",
-      "type": "future",
-      "badge": "Upcoming",
-      "text": "As of late July 2026, Amex pulled the Green Card's application page ahead of a planned rename to the \"American Express Classic Green Card\" on Aug 20, 2026. Amex says benefits, fee, and rewards are unchanged. It's not discontinued: existing cardholders keep the card as-is, and it remains available to eligible Amex cardholders as a product change from Platinum or Gold, just not open to brand-new applicants."
+      "type": "neutral",
+      "badge": "Renamed",
+      "text": "The card became the American Express Classic Green Card, per the cardmember agreement Amex published that day. The $150 fee, the 3× categories and the CLEAR Plus credit all carried over unchanged. Amex had already pulled the application page, so it is closed to new applicants: existing cardholders keep the card as-is, and it is still reachable as a product change from Platinum or Gold."
     }
   ]
 }

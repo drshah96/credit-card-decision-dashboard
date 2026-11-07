@@ -21,7 +21,7 @@
   "pay_over_time_fee": "Up to 1.33% per month of each purchase placed in a Plan It plan",
   "late_payment_fee": "Up to $40",
   "returned_payment_fee": "Up to $40",
-  "returned_check_fee": null,
+  "returned_check_fee": "$38",
   "welcome_bonus": {
     "bonus": "As high as 100,000 Membership Rewards points",
     "requirement": "after you spend $8,000 in purchases in the first 6 months of Card Membership; welcome offers vary and you may not be eligible for an offer",
@@ -76,7 +76,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 4× restaurant/supermarket caps ($50k and $25k/yr) are generous enough that most households never hit them. Hotel and flight bonus rates only apply booked through Amex Travel (hotels) or direct with the airline (flights).",
+  "earn_note": "The 4× restaurant/supermarket caps ($50k and $25k/yr) are generous enough that most households never hit them. The hotel bonus rate needs an Amex Travel booking; flights earn 3× booked either through Amex Travel or direct with the airline.",
   "points": {
     "currency": "Membership Rewards",
     "redemption_options": [
@@ -135,7 +135,7 @@
       "default_value": 0,
       "tier": "easy",
       "removed": false,
-      "description": "Up to $10/month in statement credits at Grubhub, The Cheesecake Factory, Five Guys, Wonder and other participating partners.",
+      "description": "Up to $10/month in statement credits at Grubhub (including Seamless), Buffalo Wild Wings, Five Guys, The Cheesecake Factory and Wonder. Amex publishes that list as a closed set, not as examples.",
       "tips": [
         "Enrollment required in the Amex app before credits start posting."
       ]
@@ -185,12 +185,12 @@
     {
       "id": "hotel",
       "name": "The Hotel Collection Credit",
-      "subtitle": "$100 · per eligible booking",
+      "subtitle": "$100 · per stay of 2+ nights",
       "max_annual": 100,
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "$100 credit toward eligible charges at 1,300+ Hotel Collection properties booked via Amex Travel, no cap on number of qualifying stays per year.",
+      "description": "$100 credit toward eligible charges at 1,300+ Hotel Collection properties booked via Amex Travel. Needs a stay of two consecutive nights or more, and it pays per room per stay with no cap on qualifying stays per year.",
       "tips": [
         "Stacks with the 5× points rate on the same prepaid hotel booking."
       ]

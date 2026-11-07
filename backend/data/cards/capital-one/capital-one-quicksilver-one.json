@@ -37,13 +37,6 @@
       "is_base": false
     },
     {
-      "emoji": "🎟️",
-      "multiplier": "5%",
-      "category": "Capital One Entertainment purchases",
-      "highlight": true,
-      "is_base": false
-    },
-    {
       "emoji": "💳",
       "multiplier": "1.5%",
       "category": "Everything else",
@@ -51,7 +44,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Capital One's own comparison page confirms QuicksilverOne earns exactly what the no-fee Quicksilver earns: 1.5% flat plus the same 5% Capital One Travel and Entertainment categories. The entire premium here is credit access (approvals down to fair credit), not a richer rewards rate; there's no sign-up bonus and no intro APR. Like Quicksilver, some accounts are being migrated to the Discover network starting May 2026 with an added 3% at grocery stores and gas stations (opt-out available, affected old cards stopped working July 9, 2026).",
+  "earn_note": "QuicksilverOne earns what the no-fee Quicksilver earns: 1.5% flat plus 5% on Capital One Travel bookings. Neither card is on Capital One's eligible-card list for bonus Capital One Entertainment earning. The entire premium here is credit access (approvals down to fair credit), not a richer rewards rate; there's no sign-up bonus and no intro APR. Like Quicksilver, some accounts are being migrated to the Discover network starting May 2026 with an added 3% at grocery stores and gas stations (opt-out available, affected old cards stopped working July 9, 2026).",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
@@ -79,7 +72,7 @@
     },
     {
       "coverage": "Extended warranty",
-      "detail": "Doubles eligible manufacturer warranties of ≤1 yr, up to 24 months total",
+      "detail": "Doubles warranties of ≤24 months, adding up to 24 further months",
       "level": "good"
     },
     {
@@ -104,7 +97,7 @@
     }
   ],
   "protection_note": "Capital One's materials don't call out any protection differences from the no-fee Quicksilver, so treat this as the same standard suite: purchase protection, doubled extended warranty, and price protection, but no trip cancellation, baggage, or medical coverage.",
-  "rental_note": "Secondary auto rental collision/theft coverage, up to 31 days, pays out after your personal auto policy. Decline the counter's CDW/LDW and charge the entire rental to this card to activate it; excludes luxury/exotic vehicles and business or peer-to-peer rentals.",
+  "rental_note": "Secondary auto rental collision/theft coverage, up to 31 days, pays out after your personal auto policy. Decline the counter's CDW/LDW and charge the entire rental to this card to activate it; excludes trucks, vans, off-road and sport utility trucks, motorbikes and anything with fewer than four wheels, plus commercial or for-hire use.",
   "status_perks": [
     {
       "name": "Hertz Five Star status",
@@ -119,7 +112,7 @@
     },
     {
       "name": "Automatic credit line review",
-      "detail": "Capital One automatically considers cardholders for a higher credit line after 6 months of on-time payments, the main reason to hold this card at all."
+      "detail": "Capital One automatically considers cardholders for a higher credit line in as little as 6 months, the main reason to hold this card at all."
     },
     {
       "name": "Complimentary concierge",

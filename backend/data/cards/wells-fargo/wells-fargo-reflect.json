@@ -62,8 +62,8 @@
     },
     {
       "coverage": "Rental car CDW",
-      "detail": "Not published for this card",
-      "level": "none"
+      "detail": "$50,000 · secondary in the US, primary abroad",
+      "level": "mid"
     },
     {
       "coverage": "Purchase protection",
@@ -81,8 +81,8 @@
       "level": "none"
     }
   ],
-  "protection_note": "Cell phone protection is the one real benefit here, and it matches the Active Cash Card's terms. Nothing else is advertised: no purchase protection, extended warranty, rental car coverage, or trip insurance.",
-  "rental_note": "No auto rental coverage is publicly documented for this card.",
+  "protection_note": "Cell phone protection and a $50,000 auto rental waiver, both matching the Active Cash Card's terms. Beyond those two, nothing: no purchase protection, no extended warranty and no trip insurance.",
+  "rental_note": "Up to $50,000, secondary in the US so it pays after your own auto policy, but primary when you rent abroad. Rentals are capped at 15 consecutive days at home and 31 away. Wells Fargo's product page does not mention this; its Guide to Benefits does.",
   "status_perks": [],
   "services": [
     {

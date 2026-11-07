@@ -21,7 +21,7 @@
   "balance_transfer_apr": "18.24%-28.24%",
   "balance_transfer_fee": "5% of each transfer amount, $5 minimum",
   "foreign_transaction_fee_rate": "3%",
-  "cash_advance_apr": "29.49%-30.49%",
+  "cash_advance_apr": "30.49%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": "A monthly fee up to 1.60% of the original principal amount, for U.S. Bank ExtendPay Plan or Loan balances",
@@ -53,13 +53,18 @@
         "best": true
       },
       {
-        "method": "Statement credit, rewards card, or merchant gift cards",
+        "method": "Statement credit",
         "cpp": 1.0,
+        "best": false
+      },
+      {
+        "method": "Rewards card, merchant gift cards or travel",
+        "cpp": 0.0,
         "best": false
       }
     ],
     "per_100k": "$1,000",
-    "note": "The advertised cash-back rates only apply when redeemed as a deposit into an eligible U.S. Bank account. Other redemption paths (statement credit, gift cards) may pay out at a reduced rate. Points expire after 12 consecutive statement cycles with no reward, purchase, or balance activity."
+    "note": "The advertised cash-back rates apply when redeemed as a deposit into an eligible U.S. Bank account or as a statement credit. Gift cards and travel may pay out at a reduced rate, which U.S. Bank does not publish. Points expire after 12 consecutive statement cycles with no reward, purchase, or balance activity."
   },
   "transfer_partners": {
     "airline_count": 0,

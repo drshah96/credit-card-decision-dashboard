@@ -126,16 +126,16 @@
       "detail": "You are never held responsible for unauthorized purchases. No enrollment needed."
     },
     {
-      "name": "Free FICO score",
-      "detail": "Your FICO score from TransUnion on your statement and in the app, with the factors moving it. Genuinely useful on a credit-building card, since it lets you watch the thing you are trying to move."
+      "name": "CreditWise",
+      "detail": "Your FICO Score 8 from TransUnion on your statement and in the app, with the factors moving it. Genuinely useful on a credit-building card, since it lets you watch the thing you are trying to move."
     },
     {
       "name": "Social Security number alerts",
-      "detail": "Daily dark web scans for your SSN plus new-account alerts on your credit report. Requires enrollment, and only the primary cardmember can sign up."
+      "detail": "Daily dark web scans for your SSN plus new-account alerts on your credit report. Requires enrollment."
     },
     {
-      "name": "Freeze It",
-      "detail": "Freeze the account from the app or website to block new purchases and cash advances if you misplace the card."
+      "name": "Card Lock",
+      "detail": "Lock the card from the app to block new purchases and cash advances if you misplace it."
     },
     {
       "name": "24/7 US-based customer service",
@@ -188,7 +188,7 @@
       "date": "May 2025",
       "type": "neutral",
       "badge": "Acquisition",
-      "text": "Capital One completes its acquisition of Discover Financial Services. Discover Bank later merges into Capital One, N.A., though the cards keep Discover branding and terms."
+      "text": "Capital One completes its acquisition of Discover Financial Services. Discover Bank later merges into Capital One, N.A. The cards keep Discover branding, but the governing terms move to Capital One's own agreement in June 2026."
     },
     {
       "date": "February 2018",

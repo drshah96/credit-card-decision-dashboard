@@ -11,8 +11,8 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.99%, 25.74%, or 28.74% (based on creditworthiness)",
-  "balance_transfer_apr": "19.99%, 25.74%, or 28.74% (based on creditworthiness)",
+  "variable_apr": "19.74%, 25.49%, or 28.49%, based on your creditworthiness",
+  "balance_transfer_apr": "19.74%, 25.49%, or 28.49%, based on your creditworthiness",
   "balance_transfer_fee": "$5 or 5% of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
   "cash_advance_apr": "29.49%",
@@ -112,6 +112,21 @@
   ],
   "insurance": [
     {
+      "coverage": "Travel accident insurance",
+      "detail": "$1,000,000, when the full common carrier fare is charged to the card",
+      "level": "good"
+    },
+    {
+      "coverage": "Lost baggage",
+      "detail": "$3,000 per trip ($2,000 per bag for New York residents)",
+      "level": "good"
+    },
+    {
+      "coverage": "Identity theft protection",
+      "detail": "Mastercard ID Theft Protection, enrollment required, no cost",
+      "level": "good"
+    },
+    {
       "coverage": "Cell phone protection",
       "detail": "Up to $800 per claim against damage or theft when you pay your monthly cell phone bill with this card, minus a $25 deductible, max 2 claims per 12 months",
       "level": "good"
@@ -123,8 +138,8 @@
     },
     {
       "coverage": "Rental car CDW",
-      "detail": "Not published for this card",
-      "level": "none"
+      "detail": "$50,000 max, no deductible, secondary in the US, primary abroad (excl. Israel, Jamaica, Ireland and Northern Ireland)",
+      "level": "mid"
     },
     {
       "coverage": "Purchase protection",
@@ -138,12 +153,12 @@
     },
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "Not published for this card",
-      "level": "none"
+      "detail": "$5,000 per traveler per trip, $20,000 per account per 12 months",
+      "level": "mid"
     }
   ],
-  "protection_note": "Cell phone protection matches the free Choice Privileges card, and this tier adds the Global Entry/TSA PreCheck credit. No purchase protection, extended warranty, rental car coverage, or trip insurance are advertised.",
-  "rental_note": "No auto rental coverage is publicly documented for this card.",
+  "protection_note": "Cell phone protection, a $50,000 rental waiver, trip cancellation and interruption, lost baggage, travel accident and ID theft protection all match the free Choice Privileges card, and this tier adds the Global Entry/TSA PreCheck credit. No purchase protection or extended warranty are advertised.",
+  "rental_note": "$50,000, secondary in the US so it pays after your own auto policy, but primary abroad. Excludes Israel, Jamaica, the Republic of Ireland and Northern Ireland.",
   "status_perks": [
     {
       "name": "Platinum Elite status, Choice Privileges",

@@ -23,9 +23,9 @@
   "returned_payment_fee": "Up to $40",
   "returned_check_fee": null,
   "welcome_bonus": {
-    "bonus": "Up to 150,000 points",
-    "requirement": "100,000 points after $6,000 in purchases in the first 6 months, plus another 50,000 after an additional $2,000 in purchases in the same 6 months",
-    "estimated_value": "$1,200"
+    "bonus": "150,000 points plus a $250 statement credit",
+    "requirement": "after $6,000 in purchases in the first 6 months of Card Membership; Amex lists the offer as ending September 30, 2026",
+    "estimated_value": "$1,200 for the points, plus the $250 credit as cash"
   },
   "verdict": {
     "status": "situational",
@@ -92,7 +92,7 @@
     "recent_changes": "Korean Air SKYPASS ended its Marriott transfer partnership in June 2024; some third-party trackers still list it as active, but it is not.",
     "partners": [
       {
-        "name": "Aegean Airlines Miles+Bonus",
+        "name": "AEGEAN Miles+Bonus",
         "type": "airline",
         "ratio": "3:1"
       },
@@ -122,7 +122,7 @@
         "ratio": "3:1"
       },
       {
-        "name": "Air New Zealand Airpoints",
+        "name": "Air New Zealand AirPoint",
         "type": "airline",
         "ratio": "200:1",
         "notes": "Converts into Airpoints Dollars (NZD), not miles, so the ratio is far worse than the standard 3:1 chart."
@@ -139,11 +139,6 @@
         "ratio": "3:1"
       },
       {
-        "name": "Asiana Airlines Asiana Club",
-        "type": "airline",
-        "ratio": "3:1"
-      },
-      {
         "name": "Atmos Rewards (Alaska Airlines / Hawaiian Airlines)",
         "type": "airline",
         "ratio": "3:1"
@@ -155,12 +150,12 @@
         "notes": "Does not earn the 5,000-mile transfer bonus other partners get."
       },
       {
-        "name": "British Airways Executive Club",
+        "name": "The British Airways Club",
         "type": "airline",
         "ratio": "3:1"
       },
       {
-        "name": "Cathay Pacific Asia Miles",
+        "name": "Cathay Pacific Cathay",
         "type": "airline",
         "ratio": "3:1"
       },
@@ -186,6 +181,11 @@
         "ratio": "3:1"
       },
       {
+        "name": "Ethiopian Airlines ShebaMiles",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
         "name": "Etihad Guest",
         "type": "airline",
         "ratio": "3:1"
@@ -206,17 +206,17 @@
         "ratio": "3:1"
       },
       {
-        "name": "InterMiles",
-        "type": "airline",
-        "ratio": "3:1"
-      },
-      {
         "name": "Japan Airlines JAL Mileage Bank",
         "type": "airline",
         "ratio": "3:1"
       },
       {
-        "name": "LATAM Pass",
+        "name": "LATAM Airlines LATAM Pass",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "LATAM Pass Brazil",
         "type": "airline",
         "ratio": "3:1"
       },

@@ -29,7 +29,7 @@
   "returned_payment_fee": null,
   "returned_check_fee": null,
   "welcome_bonus": {
-    "bonus": "$200 cash rewards",
+    "bonus": "$100 cash rewards",
     "requirement": "after you spend $500 in purchases within the first 3 months of account opening",
     "estimated_value": null
   },
@@ -90,7 +90,7 @@
     },
     {
       "coverage": "Rental car CDW",
-      "detail": "Secondary coverage only, applies after your personal auto insurance",
+      "detail": "$50,000 · secondary in the US, primary abroad",
       "level": "mid"
     },
     {
@@ -114,13 +114,13 @@
       "level": "none"
     }
   ],
-  "protection_note": "Cell phone protection is a real, above-average benefit for a no-fee card. Beyond that, coverage is thin: no purchase protection, extended warranty, or trip insurance are advertised, and rental car coverage is secondary only.",
-  "rental_note": "Secondary coverage only, meaning it pays after your personal auto policy for whatever's left. Charge the full rental cost to the card and decline the counter's optional CDW to activate it.",
+  "protection_note": "Cell phone protection is a real, above-average benefit for a no-fee card. Beyond that, coverage is thin: no purchase protection, extended warranty, or trip insurance are advertised, and rental car coverage is secondary at home, though it goes primary abroad.",
+  "rental_note": "Up to $50,000, secondary in the US so it pays after your own auto policy, but primary when you rent abroad. Rentals are capped at 15 consecutive days at home and 31 away. Charge the full rental cost to the card and decline the counter's optional CDW to activate it.",
   "status_perks": [],
   "services": [
     {
-      "name": "$200 welcome bonus",
-      "detail": "One-time $200 cash rewards bonus after spending $500 in purchases within the first 3 months."
+      "name": "$100 welcome bonus",
+      "detail": "One-time $100 cash rewards bonus after spending $500 in purchases within the first 3 months."
     },
     {
       "name": "Visa Signature Concierge",

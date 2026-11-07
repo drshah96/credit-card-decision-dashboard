@@ -20,7 +20,7 @@
   "foreign_transaction_fee": true,
   "variable_apr": "14.99%-25.99%",
   "balance_transfer_apr": "14.99%-25.99%",
-  "balance_transfer_fee": "3% for the first 60 days of account opening; 5% after",
+  "balance_transfer_fee": "5% of the amount of each transaction",
   "foreign_transaction_fee_rate": "3%",
   "cash_advance_apr": "28.49%-29.24%",
   "penalty_apr": null,
@@ -83,7 +83,7 @@
   "services": [
     {
       "name": "Balance transfer fee",
-      "detail": "5% of each transfer amount, with no reduced introductory rate on transfers for this card."
+      "detail": "5% of each transfer amount. The 0% intro rate only applies to transfers made in the first 60 days of opening the account."
     },
     {
       "name": "No penalty APR",

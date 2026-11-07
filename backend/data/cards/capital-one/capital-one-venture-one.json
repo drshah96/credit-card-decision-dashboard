@@ -94,7 +94,7 @@
         "ratio": "1:1"
       },
       {
-        "name": "British Airways Executive Club",
+        "name": "British Airways Club",
         "type": "airline",
         "ratio": "1:1"
       },
@@ -205,8 +205,8 @@
     },
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "Not included",
-      "level": "none"
+      "detail": "$1,500 per insured person on non-refundable common carrier tickets",
+      "level": "mid"
     },
     {
       "coverage": "Trip delay",
@@ -215,8 +215,8 @@
     },
     {
       "coverage": "Baggage delay/loss",
-      "detail": "Not advertised as a standalone benefit",
-      "level": "none"
+      "detail": "Delay $100/day up to $300 · lost luggage up to $3,000/trip",
+      "level": "mid"
     },
     {
       "coverage": "Emergency medical",
@@ -230,13 +230,13 @@
     },
     {
       "coverage": "Purchase protection",
-      "detail": "Not listed on the current cardholder page; confirm against your Cardholder Benefits Guide before relying on it",
-      "level": "none"
+      "detail": "$1,000/claim · $25,000 per 12 months · 90 days",
+      "level": "mid"
     },
     {
       "coverage": "Extended warranty",
-      "detail": "Not listed on the current cardholder page; confirm against your Cardholder Benefits Guide before relying on it",
-      "level": "none"
+      "detail": "+1 yr on ≤2-yr warranties · $10k/claim · $50k per cardholder",
+      "level": "good"
     }
   ],
   "protection_note": "This is Capital One's most stripped-down travel card: only secondary rental CDW is clearly confirmed. Purchase protection and extended warranty aren't advertised the way they are for the standard Venture card; verify against your Cardholder Benefits Guide and use a card with confirmed purchase protection for big-ticket items.",

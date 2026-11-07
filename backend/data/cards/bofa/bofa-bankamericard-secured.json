@@ -8,18 +8,12 @@
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee, but earns nothing and requires a refundable $200–$5,000 deposit",
   "official_url": "https://www.bankofamerica.com/credit-cards/products/secured-credit-card/",
-  "intro_apr_purchases": {
-    "rate": "0%",
-    "months": 21
-  },
-  "intro_apr_balance_transfers": {
-    "rate": "0%",
-    "months": 21
-  },
+  "intro_apr_purchases": null,
+  "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": true,
-  "variable_apr": "14.99%-25.99%",
-  "balance_transfer_apr": "14.99%-25.99%",
-  "balance_transfer_fee": "3% for the first 60 days of account opening; 5% after",
+  "variable_apr": "24.49%-25.99%",
+  "balance_transfer_apr": "24.49%-25.99%",
+  "balance_transfer_fee": "4% to 5% of the amount of each transaction",
   "foreign_transaction_fee_rate": "3%",
   "cash_advance_apr": "28.49%-29.24%",
   "penalty_apr": null,
@@ -86,7 +80,7 @@
     },
     {
       "name": "Standard APR",
-      "detail": "25.99% variable. Secured card products aren't eligible for an introductory APR or a new-account bonus offer of any kind."
+      "detail": "24.49% to 25.99% variable. Secured card products aren't eligible for an introductory APR or a new-account bonus offer of any kind."
     },
     {
       "name": "Deposit review for return",

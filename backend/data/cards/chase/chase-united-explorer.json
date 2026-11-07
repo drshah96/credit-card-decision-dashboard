@@ -109,8 +109,8 @@
       "removed": false,
       "description": "First checked bag free on United-operated flights for the primary cardholder and one companion on the same reservation.",
       "tips": [
-        "~$35 each way; one round trip for two people covers most of the annual fee on its own.",
-        "You don't need to buy the ticket with this card, just have it in your wallet and be a Cardmember on the reservation."
+        "Chase values it at up to $50 for the first bag each way; one round trip for two people covers most of the annual fee on its own.",
+        "You do have to buy the ticket with this card and put your MileagePlus number on the reservation. Paying another way forfeits the bag."
       ]
     },
     {
@@ -121,7 +121,7 @@
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "Statement credit toward United purchases after you spend $10,000 on the card within a calendar year.",
+      "description": "$100 in United TravelBank cash after you spend $10,000 on the card within a calendar year. It is United flight scrip, not a statement credit.",
       "tips": [
         "Only worth counting on if you're already spending $10k/yr on this card for other reasons."
       ]
@@ -160,7 +160,7 @@
       "default_value": 0,
       "tier": "niche",
       "removed": false,
-      "description": "Statement credit on up to two Avis or Budget rentals per year.",
+      "description": "$25 in United TravelBank cash, up to $50 per anniversary year, on your 1st and 2nd Avis or Budget rental booked through cars.united.com and paid with this card.",
       "tips": [
         "Only useful if you already rent from Avis/Budget specifically."
       ]

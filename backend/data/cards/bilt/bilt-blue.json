@@ -160,16 +160,21 @@
     },
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "Not included on the Blue Card; this benefit starts at the Obsidian tier",
-      "level": "none"
+      "detail": "Confirmed benefit; exact per-trip and annual dollar limits are in the Guide to Benefits, not public marketing.",
+      "level": "mid"
+    },
+    {
+      "coverage": "Trip delay",
+      "detail": "Trip Delay Reimbursement is a confirmed benefit; exact per-day and annual limits are in the Guide to Benefits, not public marketing.",
+      "level": "mid"
     },
     {
       "coverage": "Extended warranty",
-      "detail": "Not included on the Blue Card; this benefit starts at the Obsidian tier",
+      "detail": "Not published on any Bilt tier page, Blue, Obsidian or Palladium.",
       "level": "none"
     }
   ],
-  "protection_note": "A real primary rental CDW and confirmed purchase/cell-phone protections for a $0-fee card, but no trip cancellation, trip delay, or extended warranty coverage; those start at Obsidian.",
+  "protection_note": "A real primary rental CDW, trip cancellation/interruption, trip delay and confirmed purchase/cell-phone protections, all for a $0-fee card. No extended warranty is published on any Bilt tier.",
   "rental_note": "MasterRental coverage applies first, ahead of your personal auto policy, so decline the counter's CDW and pay with this card. Exact dollar limits are in the Guide to Benefits.",
   "status_perks": [],
   "services": [
@@ -208,7 +213,7 @@
       "date": "Feb 7, 2026",
       "type": "add",
       "badge": "Relaunch",
-      "text": "Bilt Card 2.0 launches as a three-tier lineup (Blue/Obsidian/Palladium), replacing the original single Bilt Mastercard and removing its 5-transaction-per-month requirement to earn on rent. Cardless takes over as issuer from Wells Fargo; the old Wells Fargo card stopped working on Feb 6."
+      "text": "Bilt Card 2.0 launches as a three-tier lineup (Blue/Obsidian/Palladium), replacing the original single Bilt Mastercard and removing its 5-transaction-per-month requirement to earn on rent. Column N.A. takes over as issuing bank from Wells Fargo; the old Wells Fargo card stopped working on Feb 6."
     }
   ]
 }

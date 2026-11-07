@@ -23,9 +23,9 @@
   "returned_payment_fee": "Up to $40",
   "returned_check_fee": null,
   "welcome_bonus": {
-    "bonus": "As high as 100,000 miles",
-    "requirement": "after you spend $5,000 in purchases in the first 6 months of Card Membership; welcome offers vary and you may not be eligible for an offer",
-    "estimated_value": "$1,150"
+    "bonus": "50,000 miles plus two round-trip Delta Comfort flight certificates",
+    "requirement": "after you spend $10,000 in purchases in the first 6 months of Card Membership; the offer runs to November 4, 2026 and welcome offers vary",
+    "estimated_value": "$575 for the miles, plus whatever the two certificates are worth to you"
   },
   "verdict": {
     "status": "situational",
@@ -75,7 +75,7 @@
     "airline_count": 0,
     "hotel_count": 0,
     "highlight": "SkyMiles can't be transferred out; they're stuck in Delta's program.",
-    "recent_changes": "You can transfer INTO SkyMiles from Amex MR (1:1), Chase UR and Capital One, useful for topping up an award."
+    "recent_changes": "You can transfer INTO SkyMiles from Amex Membership Rewards, useful for topping up an award. Chase and Capital One are not Delta transfer partners."
   },
   "credits": [
     {
@@ -133,12 +133,12 @@
     {
       "id": "global-entry",
       "name": "Global Entry / TSA PreCheck Credit",
-      "subtitle": "$120 GE or $85 TSA · every 4 years",
+      "subtitle": "$120 GE every 4 yrs / $85 TSA every 4.5",
       "max_annual": 30,
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "Statement credit for a Global Entry ($120) or TSA PreCheck ($85) application fee, once every 4 years. Shown here amortized to an annual figure.",
+      "description": "Statement credit for a Global Entry ($120) application fee once every 4 years, or a TSA PreCheck ($85) fee once every 4.5 years. Shown here amortized to an annual figure.",
       "tips": [
         "Apply for Global Entry, not just TSA PreCheck; it includes TSA PreCheck and covers the same credit."
       ]
@@ -146,12 +146,12 @@
     {
       "id": "companion",
       "name": "Companion Certificate",
-      "subtitle": "any cabin, incl. First Class · annual",
+      "subtitle": "Delta One excluded · annual",
       "max_annual": 600,
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "Each year after renewal, one round-trip companion ticket valid in any cabin (including Delta First, Premium Select, or Comfort+) with the purchase of an eligible published fare. Companion pays only taxes/fees.",
+      "description": "Each year after renewal, one round-trip companion ticket in Delta First, Delta Comfort or Delta Main, with the purchase of an eligible published fare. Delta One seats are not eligible, and travel has to start in the US, Puerto Rico or the US Virgin Islands and stay within the US, Mexico, the Caribbean or Central America. Companion pays only taxes and fees.",
       "tips": [
         "The Reserve's companion cert works in First Class, unlike the Platinum's Main-Cabin-only version. The value swing is huge on routes where First is expensive.",
         "$600 here is a conservative estimate; a premium-cabin redemption on a long route can be worth far more."
@@ -161,7 +161,7 @@
   "insurance": [
     {
       "coverage": "Rental car CDW",
-      "detail": "Primary outside the US up to $75,000; secondary in the US",
+      "detail": "Secondary",
       "level": "mid"
     },
     {
@@ -176,12 +176,12 @@
     },
     {
       "coverage": "Baggage Insurance Plan",
-      "detail": "$3,000 combined",
+      "detail": "$1,250 carry-on / $500 checked",
       "level": "mid"
     }
   ],
   "protection_note": "Meaningfully better than the Gold and Platinum tiers on trip delay window (6 hrs) and rental coverage (primary outside the US). Still capped at 2 trip-delay claims/yr like every other Amex travel card.",
-  "rental_note": "Primary coverage only outside the US; domestic rentals still fall back to secondary. For US rentals, a card that gives free primary coverage everywhere is the stronger choice.",
+  "rental_note": "Secondary coverage, so it pays after your own auto policy. Amex sells primary cover separately as Premium Car Rental Protection. Not available in Australia, Italy or New Zealand.",
   "status_perks": [
     {
       "name": "Delta Sky Club Access",
@@ -210,12 +210,12 @@
     "options": [
       {
         "name": "Additional Card",
-        "fee": "$0",
-        "is_free": true,
+        "fee": "$175",
+        "is_free": false,
         "benefits": [
           {
-            "text": "Free to add: no annual fee for additional Reserve cards",
-            "included": true
+            "text": "$175 each, not free: only additional Delta Platinum cards carry no fee",
+            "included": false
           },
           {
             "text": "1st free checked bag + priority boarding when flying Delta",
@@ -236,7 +236,26 @@
         ]
       }
     ],
-    "note": "Additional Reserve cards are free, and each one gets its own free-bag and priority-boarding perk, but Sky Club visits and the companion certificate are tied to the primary account."
+    "note": "Additional Reserve cards cost $175 each. The no-fee line applies to additional Delta Platinum cards, not these. Sky Club visits and the companion certificate stay tied to the primary account."
   },
-  "timeline": []
+  "timeline": [
+    {
+      "date": "Aug 27, 2026",
+      "type": "neutral",
+      "badge": "New welcome offer",
+      "text": "The welcome offer became 50,000 miles plus two round-trip Delta Comfort certificates after $10,000 of spend in six months. Delta lists it as running through November 4, 2026."
+    },
+    {
+      "date": "Jun 4, 2026",
+      "type": "add",
+      "badge": "Second bag free",
+      "text": "Delta added a free second checked bag on domestic Delta-operated flights, with no increase to the annual fee."
+    },
+    {
+      "date": "Jun 4, 2026",
+      "type": "add",
+      "badge": "Companion cert",
+      "text": "The companion certificate can now go toward the eligible flight portion of a Delta Vacations package."
+    }
+  ]
 }

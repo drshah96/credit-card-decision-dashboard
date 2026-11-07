@@ -259,7 +259,11 @@
             "included": true
           },
           {
-            "text": "No separate Priority Pass, Bilt Cash, or hotel credit of their own",
+            "text": "Own Priority Pass membership",
+            "included": true
+          },
+          {
+            "text": "No separate Bilt Cash or hotel credit of their own",
             "included": false
           }
         ]
@@ -272,7 +276,7 @@
       "date": "Feb 7, 2026",
       "type": "add",
       "badge": "Relaunch",
-      "text": "Bilt Card 2.0 launches as a three-tier lineup (Blue/Obsidian/Palladium), replacing the original single Bilt Mastercard and removing its 5-transaction-per-month requirement to earn on rent. Cardless takes over as issuer from Wells Fargo; the old Wells Fargo card stopped working on Feb 6."
+      "text": "Bilt Card 2.0 launches as a three-tier lineup (Blue/Obsidian/Palladium), replacing the original single Bilt Mastercard and removing its 5-transaction-per-month requirement to earn on rent. Column N.A. takes over as issuing bank from Wells Fargo; the old Wells Fargo card stopped working on Feb 6."
     }
   ]
 }

@@ -48,6 +48,13 @@
       "is_base": false
     },
     {
+      "emoji": "🎟️",
+      "multiplier": "5×",
+      "category": "Capital One Entertainment purchases",
+      "highlight": true,
+      "is_base": false
+    },
+    {
       "emoji": "🌐",
       "multiplier": "2×",
       "category": "Everything else, no categories",
@@ -100,7 +107,7 @@
         "ratio": "1:1"
       },
       {
-        "name": "British Airways Executive Club",
+        "name": "British Airways Club",
         "type": "airline",
         "ratio": "1:1"
       },
@@ -231,6 +238,19 @@
       ]
     },
     {
+      "id": "global-entry",
+      "name": "Global Entry or TSA PreCheck Credit",
+      "subtitle": "$120 · every 4 years",
+      "max_annual": 30,
+      "default_value": 30,
+      "tier": "easy",
+      "removed": false,
+      "description": "Statement credit of up to $120 for a Global Entry or TSA PreCheck application fee, one per account every 4 years. Shown here amortized to an annual figure.",
+      "tips": [
+        "One credit per account every four years, so an authorized user cannot claim a second one in the same window."
+      ]
+    },
+    {
       "id": "premier",
       "name": "Premier Collection",
       "subtitle": "luxury hotels · $100/stay",
@@ -278,7 +298,7 @@
     },
     {
       "coverage": "Purchase protection",
-      "detail": "$10k/claim · $50k/yr",
+      "detail": "$10k/claim · $50k per cardholder",
       "level": "strong"
     },
     {

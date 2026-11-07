@@ -123,8 +123,13 @@
   "credits": [],
   "insurance": [
     {
+      "coverage": "Car rental loss & damage",
+      "detail": "Up to $50,000 per rental agreement, 30 days max, not available to New York State residents",
+      "level": "mid"
+    },
+    {
       "coverage": "Extended warranty",
-      "detail": "+1 year on warranties of 5 years or less (US purchases)",
+      "detail": "+1 year on warranties of 5 years or less",
       "level": "good"
     },
     {
@@ -133,13 +138,18 @@
       "level": "mid"
     }
   ],
-  "protection_note": "No travel insurance of any kind: no trip delay, trip cancellation, baggage, or rental car coverage. This is a free card built purely for earning Hilton points, not for protecting trips.",
-  "rental_note": "No rental car coverage at all; use a different card for rentals.",
+  "protection_note": "Almost no travel insurance: no trip delay, trip cancellation or baggage coverage. Car rental loss and damage is the exception. This is a free card built for earning Hilton points, not for protecting trips.",
+  "rental_note": "Car Rental Loss and Damage Insurance covers up to $50,000 per rental agreement for up to 30 consecutive days. Not available to New York State residents.",
   "status_perks": [
+    {
+      "name": "Hilton Honors Gold via spend",
+      "strength": 3,
+      "note": "Spend $20,000 on the card in a calendar year and Hilton upgrades you to Gold, which is where the free breakfast and room upgrades start."
+    },
     {
       "name": "Hilton Honors Silver Status",
       "strength": 2,
-      "note": "Complimentary with the card: 20% bonus points on stays and a free 5th night on award bookings of 4+ nights. The lightest Hilton status tier."
+      "note": "Complimentary with the card: 20% bonus points on stays and a free 5th night on award bookings of 5 consecutive nights, standard room, paid entirely in points. The lightest Hilton status tier."
     }
   ],
   "services": [

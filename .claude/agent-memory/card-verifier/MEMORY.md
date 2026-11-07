@@ -1,0 +1,10 @@
+- [Amex source route](reference_amex_source_route.md) — Amex product pages fetch empty; use the application terms page, and expect insurance limits to be unreachable.
+- [Hilton transfer ratios](reference_hilton_transfer_ratios.md) — Hilton publishes no public ratio table, so those fields are unverifiable in principle; Marriott does publish one.
+- [Chase source route](reference_chase_source_route.md) — use the card-specific LGC pricing table; the generic COL agreement gives wrong APRs for named cards.
+- [Citi source route](reference_citi_source_route.md) — Citi fetches return 200 with every number blank; report Citi numerics unverified unless read by a JS-executing browser.
+- [Capital One source route](reference_capital_one_source_route.md) — disclosure modal has no URL so only annual fee and purchase APR are fetchable; the per-network Guide to Benefits PDFs are the rich source and do prove absence.
+- [BofA source route](reference_bofa_source_route.md) — product pages 200 with an "unavailable" body; use the card index plus the public sample agreement PDFs.
+- [U.S. Bank source route](reference_us_bank_source_route.md) — the Pricing and Terms link is in page markup, not visible copy; ask for every hyperlink, then query it in narrow passes.
+- [Wells Fargo source route](reference_wells_fargo_source_route.md) — everything is plain HTML, but the product page lists fewer benefits than the Guide to Benefits; verify insurance against the Guide.
+- [Discover source route](reference_discover_source_route.md) — Discover has no per-card pricing doc anymore; one Capital One agreement covers the whole line, and Freeze It / FICO+SSN alerts were renamed.
+- [Bilt source route](reference_bilt_source_route.md) — footnote block with all pricing is client-side; issuing bank is Column N.A., not Cardless; all three tiers publish the same five protections.
