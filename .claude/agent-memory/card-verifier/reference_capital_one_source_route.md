@@ -59,3 +59,7 @@ a 0% intro APR; the SavorOne page stated none of the four.
 agreement lookup, `/credit-cards/no-foreign-transaction-fee/`,
 `/credit-cards/platinum-mastercard/`, and the help-centre fee pages. The CFPB
 agreement database is form-driven and its issuer path guesses 404.
+
+**Rate route, found 2026-11-07:** `capitalone.com/credit-cards/lp/credit-card-agreements/`
+lists quarterly agreement PDFs. They give line-wide ranges with no product names, so
+they bound a card's APR but do not confirm it.

@@ -11,17 +11,17 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.49%-28.49%",
+  "variable_apr": "19.74%-28.74%",
   "balance_transfer_apr": null,
   "balance_transfer_fee": null,
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.74%",
+  "cash_advance_apr": "28.99%",
   "penalty_apr": "29.99%",
   "penalty_apr_trigger": "Missing at least the Minimum Payment Due, or a returned payment; applies for at least 6 months and is reviewed every 6 months after that",
   "pay_over_time_fee": "Up to 1.33% per month of each purchase placed in a Plan It plan",
   "late_payment_fee": "Up to $40",
   "returned_payment_fee": "Up to $40",
-  "returned_check_fee": null,
+  "returned_check_fee": "$38",
   "welcome_bonus": {
     "bonus": "150,000 Hilton Honors points",
     "requirement": "after you spend $6,000 in purchases in the first 6 months of Card Membership",
@@ -69,7 +69,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "14× only applies to Hilton-direct hotel bookings; third-party OTAs earn nothing. The 7× tier is broad enough (flights, some car rentals, US dining) to matter for everyday spend.",
+  "earn_note": "14× only applies to purchases made directly with a Hilton property and booked through a Hilton channel. A third-party travel site earns the 3× base rate at most. The 7× tier is broad enough (flights, some car rentals, US dining) to matter for everyday spend.",
   "points": {
     "currency": "Hilton Honors",
     "redemption_options": [
@@ -169,7 +169,7 @@
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "One free night reward from Hilton Honors in your first year of card membership and every year on renewal, with no stated point-value ceiling. Spend $30,000 in a calendar year for a second, and another $30,000 on top of that for a third.",
+      "description": "One free night reward from Hilton Honors each year of card membership, with no stated point-value ceiling. Spend $30,000 in a calendar year for a second, and another $30,000 on top of that for a third.",
       "tips": [
         "Unlike Marriott's capped free night, this one has no published point ceiling, but real-world value still depends entirely on which property you redeem it at.",
         "$250 here is a conservative estimate, not a guarantee for any specific hotel."
@@ -201,10 +201,31 @@
       "coverage": "Purchase protection",
       "detail": "$10,000/claim",
       "level": "good"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "$800 · $50 deductible · 2 claims per 12 months",
+      "level": "good"
+    },
+    {
+      "coverage": "Return protection",
+      "detail": "$300/item · $1,000/yr · within 90 days, when the merchant won't take it back",
+      "level": "mid"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "+1 year on warranties of 5 years or less · $10,000/item · $50,000/yr",
+      "level": "good"
+    },
+    {
+      "coverage": "Emergency evacuation",
+      "detail": "Premium Global Assist: emergency transport at no cost if approved",
+      "level": "good"
     }
   ],
   "protection_note": "Solid but not top-tier: trip cancellation and rental coverage are comparable to other premium Amex cards, but this card no longer carries airport lounge access, which used to be part of its pitch.",
   "rental_note": "Secondary coverage, so it pays after your own auto policy. Amex sells primary cover separately as Premium Car Rental Protection. Not available in Australia, Italy or New Zealand.",
+  "lounge_access": "none",
   "status_perks": [
     {
       "name": "Hilton Honors Diamond Status",
@@ -212,7 +233,12 @@
       "note": "Complimentary with the card: 100% bonus points on stays, space-available room upgrades, premium Wi-Fi, and executive lounge access at select properties. Diamond stopped being the top published tier on Jan 1, 2026, when Hilton added Diamond Reserve above it; that one takes 80 nights and $18,000 of spend and no card confers it."
     }
   ],
-  "services": [],
+  "services": [
+    {
+      "name": "$100 Waldorf Astoria and Conrad property credit",
+      "detail": "A property credit of up to $100 on stays of two nights or more at Waldorf Astoria and Conrad properties."
+    }
+  ],
   "additional_cards": {
     "title": "Additional Cards",
     "options": [

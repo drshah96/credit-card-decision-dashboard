@@ -17,17 +17,17 @@
     "months": 12
   },
   "foreign_transaction_fee": true,
-  "variable_apr": "19.49%-28.49%",
-  "balance_transfer_apr": "19.49%-28.49%",
+  "variable_apr": "19.74%-28.74%",
+  "balance_transfer_apr": "19.74%-28.74%",
   "balance_transfer_fee": "Either $5 or 3% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": "2.7%",
-  "cash_advance_apr": "28.74%",
+  "cash_advance_apr": "28.99%",
   "penalty_apr": "29.99%",
   "penalty_apr_trigger": "Missing at least the Minimum Payment Due, or a returned payment; applies for at least 6 months and is reviewed every 6 months after that",
   "pay_over_time_fee": "0% during the first 12 months from account opening, then up to 1.33% per month of each purchase or amount moved into a Plan It plan",
   "late_payment_fee": "Up to $40",
   "returned_payment_fee": "Up to $40",
-  "returned_check_fee": null,
+  "returned_check_fee": "$38",
   "welcome_bonus": {
     "bonus": "As high as $300 cash back",
     "requirement": "after you spend $3,000 in purchases in the first 6 months of Card Membership; welcome offers vary and you may not be eligible for an offer",
@@ -86,7 +86,7 @@
       }
     ],
     "per_100k": "$1,000",
-    "note": "Not a points program: cash back here is always worth exactly 1¢, redeemed as a statement credit. No transfer partners, no premium redemption to chase."
+    "note": "Not a points program: cash back here is worth face value, redeemed as a statement credit, at Amazon.com checkout, or as a deposit to an Amex High Yield Savings account. No transfer partners, no premium redemption to chase."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -123,12 +123,13 @@
     },
     {
       "coverage": "Return protection",
-      "detail": "Reimburses undamaged items merchants won't take back, within 90 days",
+      "detail": "$300/item · $1,000/yr · within 90 days, when the merchant won't take it back",
       "level": "mid"
     }
   ],
   "protection_note": "This is a cash-back card, not a travel card: no trip delay and no trip cancellation coverage. What it does have (extended warranty, return protection, car rental loss and damage) is a step up from the fee-free Blue Cash Everyday.",
   "rental_note": "Car Rental Loss and Damage Insurance is included as secondary coverage. It does not apply in Australia, Italy or New Zealand.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
   ],

@@ -1,6 +1,9 @@
 import type { Card } from "../types/cards";
 import type { LikedFeature } from "../api/feedback";
 
+/** A status perk that is airport lounge access, read from the perk's name. */
+const LOUNGE_PERK_NAME = /lounge|priority pass|sky club|united club|admirals/i;
+
 /**
  * Which features a card actually has, for the question the feedback form asks
  * about what appeals most.
@@ -11,9 +14,8 @@ import type { LikedFeature } from "../api/feedback";
  * aggregate looking like a real signal.
  *
  * Every gate is something the card page actually renders. That rules out the
- * welcome bonus, whose block is deliberately disabled (a stale sign-up offer
- * reads as an active wrong promotional claim), even though the data is there
- * on 79 of 109 cards.
+ * welcome bonus, which the card files capture for internal use but nothing
+ * serves, because a stale sign-up offer reads as an active wrong promotional claim.
  *
  * Order is the order the form renders, roughly most to least commonly
  * available across the catalog.
@@ -89,21 +91,17 @@ export function availableFeatures(card: Card): LikedFeature[] {
     redemption_rate: bestFlagged > CASH_BACK_CPP,
     intro_apr_balance_transfer: Boolean(card.intro_apr_balance_transfers),
     transfer_partners: (card.transfer_partners?.partners ?? []).length > 0,
-    // The API already derives this and the page already carries it. Deriving it
-    // again from status_perks would be a hand-mirror of _has_lounge_access in
-    // backend/services/cards.py, agreeing today and pinned by nothing.
+    // The API derives this from the card's authored lounge_access.
     lounge_access: card.has_lounge_access,
     // Any perk that is not a lounge. Lounge access is itself a status perk and
     // renders under the same tab, so without the exclusion this and
     // lounge_access would split one answer on the cards carrying both.
     //
-    // The "lounge" test is spelled out here rather than reusing
-    // has_lounge_access, because that flag answers "does this card have lounge
-    // access" and this needs "is there anything here besides lounge access" —
-    // a card can carry the flag and still have four other perks worth naming.
+    // This reads the perk's name, not its note, because a note can mention a
+    // lounge without being about one: Hilton Diamond's hotel lounges, or Hertz
+    // status on a card whose note says it has no lounge access.
     status_perks: (card.status_perks ?? []).some(
-      (p) =>
-        !`${p.name ?? ""} ${p.note ?? ""}`.toLowerCase().includes("lounge"),
+      (p) => !LOUNGE_PERK_NAME.test(p.name ?? ""),
     ),
   };
   return (Object.keys(LIKED_FEATURE_LABELS) as LikedFeature[]).filter(

@@ -40,7 +40,7 @@
     "currency": "No rewards program",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
-    "note": "No points or cash-back program of any kind. 0% intro APR for 12 months on purchases and 21 months on balance transfers from account opening (transfers must post within the first 4 months), then a 17.49%–28.24% variable ongoing APR based on creditworthiness."
+    "note": "No points or cash-back program of any kind. 0% intro APR on purchases and balance transfers from account opening (transfers must post within the first 4 months), then a 17.49%–28.24% variable ongoing APR based on creditworthiness."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -52,6 +52,7 @@
   "insurance": [],
   "protection_note": "Bare-bones by design, same as Diamond Preferred. Citi's page for this card doesn't advertise purchase protection, extended warranty, or travel insurance. What is explicitly guaranteed instead is the payment-forgiveness structure: no late fees and no penalty APR, ever, regardless of missed payments.",
   "rental_note": "No rental car coverage advertised; use a different card for rentals.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {

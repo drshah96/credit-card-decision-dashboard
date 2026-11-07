@@ -13,11 +13,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.49%-27.99%",
-  "balance_transfer_apr": "19.49%-27.99%",
+  "variable_apr": "19.74%-28.24%",
+  "balance_transfer_apr": "19.74%-28.24%",
   "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%",
+  "cash_advance_apr": "28.74%",
   "penalty_apr": "Up to 29.99%",
   "penalty_apr_trigger": "Failing to make a Minimum Payment when due, or making a payment that's returned unpaid; can remain in effect indefinitely",
   "pay_over_time_fee": "Up to 1.72% per month of the amount selected to pay over time, via Chase Pay Over Time",
@@ -37,48 +37,55 @@
   "earn_rates": [
     {
       "emoji": "\ud83c\udf10",
-      "multiplier": "8\u00d7",
+      "multiplier": "8×",
       "category": "Chase Travel portal",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "\u2708\ufe0f",
-      "multiplier": "4\u00d7",
+      "multiplier": "4×",
       "category": "Flights, booked direct",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "\ud83c\udfe8",
-      "multiplier": "4\u00d7",
+      "multiplier": "4×",
       "category": "Hotels, booked direct",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "\ud83c\udf7d\ufe0f",
-      "multiplier": "3\u00d7",
+      "multiplier": "3×",
       "category": "Dining, worldwide",
       "highlight": true,
       "is_base": false
     },
     {
       "emoji": "\ud83d\ude97",
-      "multiplier": "5\u00d7",
+      "multiplier": "5×",
       "category": "Lyft (through Sep 2027)",
       "highlight": false,
       "is_base": false
     },
     {
+      "emoji": "🚴",
+      "multiplier": "10×",
+      "category": "Peloton equipment & accessories (through Dec 2027, up to $5,000 in purchases)",
+      "highlight": false,
+      "is_base": false
+    },
+    {
       "emoji": "\ud83d\udcb3",
-      "multiplier": "1\u00d7",
+      "multiplier": "1×",
       "category": "Everything else",
       "highlight": false,
       "is_base": true
     }
   ],
-  "earn_note": "Strong bonus categories (dining and direct travel), but the 1\u00d7 base is weak for uncategorized spend, so a flat-rate earner covers that better.",
+  "earn_note": "Strong bonus categories (dining and direct travel), but the 1× base is weak for uncategorized spend, so a flat-rate earner covers that better.",
   "points": {
     "currency": "Ultimate Rewards",
     "redemption_options": [
@@ -99,7 +106,7 @@
       }
     ],
     "per_100k": "$2,050+",
-    "note": "Legacy points earned before Oct 26, 2025 keep a 1.5\u00a2 floor until Oct 26, 2027; burn those first. Otherwise, transfer for the most value."
+    "note": "Cardmembers who applied before Jun 23, 2025 can redeem points earned before Oct 26, 2025 at 1.5\u00a2 on Chase Travel until Oct 26, 2027; burn those first. Otherwise, transfer for the most value."
   },
   "transfer_partners": {
     "airline_count": 10,
@@ -200,22 +207,21 @@
       "id": "apple",
       "name": "Apple TV+ & Apple Music",
       "subtitle": "through Jun 2027",
-      "max_annual": 288,
+      "max_annual": 324,
       "default_value": 0,
       "tier": "easy",
       "removed": false,
-      "description": "Complimentary Apple TV+ AND Apple Music, two separate services (~$288/yr combined per Chase). If you already have a paid Apple One subscription in your name, each benefit applies as its own $7.50/mo discount on that subscription instead of separate complimentary access, so $15/mo ($180/yr) total since Reserve includes both.",
+      "description": "Complimentary Apple TV and Apple Music, worth $324 a year per Chase, through June 22, 2027. Activate by that date. If you already have a paid Apple One subscription, you get an $8/mo discount on it instead. Chase allows one complimentary Apple TV subscription or Apple One discount per Apple Account.",
       "tips": [
-        "Activate each service individually through Chase's app; they don't turn on together.",
-        "Already have Apple One? Activating both the Apple TV+ and Apple Music benefits on Chase.com or the app (same Apple Account as your Apple One billing) gets you two separate $7.50/mo discounts, $15/mo total, no need to cancel anything.",
-        "Only paying for Apple TV+ or Apple Music separately (not the full One bundle)? Cancel that and activate the complimentary standalone version through Chase instead, for full value rather than just the Apple One discount.",
+        "Activate through Chase's app; it doesn't turn on by itself.",
+        "Already have Apple One? Activate on Chase.com or the app with the same Apple Account as your Apple One billing to get the $8/mo discount; there's no need to cancel anything.",
         "Android/Spotify household? Set the slider toward $0."
       ]
     },
     {
       "id": "edit",
       "name": "The Edit Hotel Credit",
-      "subtitle": "$250 \u00d7 2 \u00b7 2-night min",
+      "subtitle": "$250 × 2 · 2-night min",
       "max_annual": 500,
       "default_value": 0,
       "tier": "plan",
@@ -230,7 +236,7 @@
     {
       "id": "chase-travel-hotels",
       "name": "Chase Travel Hotels Credit",
-      "subtitle": "$250 \u00b7 2-night min \u00b7 thru 12/31/26",
+      "subtitle": "$250 · 2-night min · thru 12/31/26",
       "max_annual": 250,
       "default_value": 0,
       "tier": "plan",
@@ -244,7 +250,7 @@
     {
       "id": "dining",
       "name": "Dining Credit",
-      "subtitle": "$150 \u00d7 2 \u00b7 Exclusive Tables",
+      "subtitle": "$150 × 2 · Exclusive Tables",
       "max_annual": 300,
       "default_value": 0,
       "tier": "easy",
@@ -259,7 +265,7 @@
     {
       "id": "stubhub",
       "name": "StubHub / viagogo",
-      "subtitle": "$150 \u00d7 2 \u00b7 enroll",
+      "subtitle": "$150 × 2 · enroll",
       "max_annual": 300,
       "default_value": 0,
       "tier": "niche",
@@ -271,27 +277,14 @@
       ]
     },
     {
-      "id": "dashpass",
-      "name": "DoorDash DashPass",
-      "subtitle": "$0 delivery fees · 12 mo",
-      "max_annual": 120,
-      "default_value": 0,
-      "tier": "niche",
-      "removed": false,
-      "description": "Complimentary 12-month DashPass membership ($0 delivery fees, reduced service fees), a $120 value per Chase, if activated by Dec 31, 2027.",
-      "tips": [
-        "Activate DashPass by the deadline; it auto-covers delivery fees for the membership period."
-      ]
-    },
-    {
       "id": "doordash-promos",
       "name": "DoorDash Promos",
-      "subtitle": "$25/mo · thru 12/31/27",
-      "max_annual": 300,
+      "subtitle": "$35/mo · thru 12/31/29",
+      "max_annual": 420,
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "DashPass members get up to $25/mo in DoorDash promos: a $5/mo credit on restaurant orders plus two $10/mo promos on groceries, retail, and more, through Dec 31, 2027.",
+      "description": "DashPass members get up to $35/mo in DoorDash promos: a $15/mo promo on any qualifying order plus two $10/mo promos on groceries, daily essentials, and more, through Dec 31, 2029.",
       "tips": [
         "Use-it-or-lose-it monthly; a grocery or restaurant DoorDash order each month captures it."
       ]
@@ -312,7 +305,7 @@
     {
       "id": "global-entry",
       "name": "Global Entry / TSA PreCheck / NEXUS Credit",
-      "subtitle": "$120 \u00b7 every 4 years",
+      "subtitle": "$120 · every 4 years",
       "max_annual": 30,
       "default_value": 0,
       "tier": "plan",
@@ -326,12 +319,12 @@
     {
       "id": "peloton",
       "name": "Peloton",
-      "subtitle": "$10/mo + 10\u00d7 gear",
+      "subtitle": "$10/mo + 10× gear",
       "max_annual": 120,
       "default_value": 0,
       "tier": "niche",
       "removed": false,
-      "description": "Monthly credit toward a Peloton membership, plus 10\u00d7 on equipment (up to 50k pts).",
+      "description": "Monthly credit toward a Peloton membership, plus 10× on equipment (up to 50k pts).",
       "tips": [
         "Only meaningful if you're a subscriber."
       ]
@@ -340,22 +333,22 @@
   "insurance": [
     {
       "coverage": "Rental car CDW",
-      "detail": "Primary \u00b7 $75k (free)",
+      "detail": "Primary · $75k (free)",
       "level": "strong"
     },
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "$10,000 / person",
+      "detail": "$10,000/person · $20,000/trip · $40,000/12-mo",
       "level": "strong"
     },
     {
       "coverage": "Trip delay",
-      "detail": "$500 \u00b7 after 6 hrs",
+      "detail": "$500/person · after 6 hrs or an overnight stay",
       "level": "good"
     },
     {
       "coverage": "Baggage delay",
-      "detail": "$100/day \u00b7 up to 5 days",
+      "detail": "$100/day · up to 5 days",
       "level": "good"
     },
     {
@@ -370,17 +363,33 @@
     },
     {
       "coverage": "Purchase protection",
-      "detail": "$10k/claim \u00b7 120 days",
+      "detail": "$10,000/item · $50,000/yr · 120 days (NY: 90 days)",
       "level": "strong"
     },
     {
       "coverage": "Extended warranty",
       "detail": "+1 year",
       "level": "good"
+    },
+    {
+      "coverage": "Lost luggage",
+      "detail": "$3,000/person (NY: $2,000/bag, $10,000/trip)",
+      "level": "good"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "$1,000,000 · common carrier / $100,000 · 24-hour",
+      "level": "strong"
+    },
+    {
+      "coverage": "Return protection",
+      "detail": "$500/item · $1,000/12-mo · 90 days",
+      "level": "good"
     }
   ],
   "protection_note": "Primary rental, real trip-cancellation limits, baggage delay, and emergency evacuation with a dollar limit. The one glaring gap: no cell-phone protection.",
   "rental_note": "The CSR includes free primary coverage (up to $75k), paying first, before your own auto policy. Decline the counter's CDW and pay with the card.",
+  "lounge_access": "included",
   "status_perks": [
     {
       "name": "IHG One Rewards Platinum",
@@ -395,7 +404,7 @@
     {
       "name": "Lounge access",
       "strength": 4,
-      "note": "Chase Sapphire Lounges + Priority Pass: Priority Pass includes 2 guests free. From Aug 15, 2026 the Sapphire Lounges shut out Priority Pass and LoungeKey members who got their membership from a non-Chase card, which should cut the queues. Reserve access is untouched, and the connecting-flight arrival window widens from 3 hours to 5."
+      "note": "Chase Sapphire Lounges + Priority Pass: Priority Pass includes 2 guests free. Since Aug 15, 2026 the Sapphire Lounges have shut out Priority Pass and LoungeKey members who got their membership from a non-Chase card, which should have cut the queues. Reserve access is untouched, and the connecting-flight arrival window widens from 3 hours to 5."
     }
   ],
   "services": [
@@ -422,6 +431,10 @@
     {
       "name": "Visa Infinite travel & roadside",
       "detail": "Travel & emergency assistance services and roadside dispatch, plus no foreign transaction fees."
+    },
+    {
+      "name": "DoorDash DashPass",
+      "detail": "Complimentary 12-month DashPass membership ($0 delivery fees, reduced service fees), a $120 value per Chase, if activated by Dec 31, 2029."
     }
   ],
   "additional_cards": {
@@ -467,8 +480,8 @@
     {
       "date": "Aug 15, 2026",
       "type": "add",
-      "badge": "Upcoming",
-      "text": "Chase Sapphire Lounges stop admitting Priority Pass and LoungeKey members whose membership came from a non-Chase card, so the lounges get less crowded for Reserve holders. The connecting-flight arrival window also stretches from 3 hours to 5. Nothing changes for Reserve access itself."
+      "badge": "Change",
+      "text": "Chase Sapphire Lounges stopped admitting Priority Pass and LoungeKey members whose membership came from a non-Chase card, so the lounges should be less crowded for Reserve holders. The connecting-flight arrival window also stretched from 3 hours to 5. Nothing changed for Reserve access itself."
     },
     {
       "date": "Jul 2026",

@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": true,
-  "variable_apr": "18.24%-27.74%",
-  "balance_transfer_apr": "18.24%-27.74%",
+  "variable_apr": "18.49%-27.99%",
+  "balance_transfer_apr": "18.49%-27.99%",
   "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": "3%",
-  "cash_advance_apr": "28.49%",
+  "cash_advance_apr": "28.74%",
   "penalty_apr": "Up to 29.99%",
   "penalty_apr_trigger": "Failing to make a Minimum Payment when due, or making a payment that's returned unpaid; can remain in effect indefinitely",
   "pay_over_time_fee": "Up to 1.72% per month of the amount selected to pay over time, via Chase Pay Over Time",
@@ -104,7 +104,7 @@
       "default_value": 0,
       "tier": "niche",
       "removed": false,
-      "description": "Complimentary 12-month DashPass membership ($0 delivery fees, lower service fees), plus up to $10 off per quarter on non-restaurant orders through Dec 2027.",
+      "description": "Complimentary 12-month DashPass membership ($0 delivery fees, lower service fees), plus $10 off per month on non-restaurant orders for DashPass activated from Sep 1, 2026 (quarterly before that).",
       "tips": [
         "Activate it; otherwise it's pure unused value.",
         "After 12 months it auto-renews at DashPass's then-current monthly rate unless you cancel. Set a reminder."
@@ -136,10 +136,16 @@
       "coverage": "Travel accident insurance",
       "detail": "$500,000 \u00b7 common carrier",
       "level": "good"
+    },
+    {
+      "coverage": "Lost luggage",
+      "detail": "$3,000 per traveler (NY: $2,000/bag, $10,000/trip)",
+      "level": "mid"
     }
   ],
-  "protection_note": "A standard Visa Signature protection suite: purchase protection, extended warranty, baggage delay, rental car coverage, and travel accident insurance are all included, per Chase's Visa Signature/Visa Platinum Guide to Benefits. There's still no trip cancellation/interruption or cell phone protection.",
+  "protection_note": "A standard Visa Signature protection suite: purchase protection, extended warranty, baggage delay, lost luggage, rental car coverage, and travel accident insurance are all included, per Chase's Visa Signature/Visa Platinum Guide to Benefits. There's still no trip cancellation/interruption or cell phone protection.",
   "rental_note": "Secondary coverage for theft and collision domestically (primary outside the US), up to $60,000, on rentals of 31 days or less. Decline the counter's CDW and pay with this card.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {
@@ -152,7 +158,7 @@
     },
     {
       "name": "0% APR on Disney vacation packages",
-      "detail": "6-month 0% promotional APR on qualifying Disney vacation package purchases, reverting to the standard variable APR (18.24%\u201329.99%) after the promo period."
+      "detail": "6-month 0% promotional APR on qualifying Disney vacation package purchases, reverting to the standard variable APR (18.49%-27.99%) after the promo period."
     },
     {
       "name": "Roadside assistance",
@@ -190,16 +196,16 @@
   },
   "timeline": [
     {
+      "date": "Sep 1, 2026",
+      "type": "add",
+      "badge": "Upgrade",
+      "text": "The $10 DoorDash non-restaurant promo moves from quarterly to monthly for DashPass activated on or after this date."
+    },
+    {
       "date": "Feb 3, 2026",
       "type": "neutral",
       "badge": "Lineup change",
       "text": "Chase & Disney launched the Disney\u00ae Inspire Visa\u00ae Card ($149 AF) above Premier, aimed at frequent park/cruise visitors. Premier now sits as the mid-tier option between the no-fee Disney Visa and Inspire."
-    },
-    {
-      "date": "2026",
-      "type": "neutral",
-      "badge": "Offer change",
-      "text": "Welcome offer restructured from a $400 statement credit (after $1,000 spend) to a $200 Disney Gift Card eGift on approval plus a $100 statement credit after $500 spend: same $300 total, lower spend requirement, but split into a gift card instead of a full statement credit."
     }
   ]
 }

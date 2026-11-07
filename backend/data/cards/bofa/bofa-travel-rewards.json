@@ -18,11 +18,11 @@
     "months": 15
   },
   "foreign_transaction_fee": false,
-  "variable_apr": "17.49%-27.49%",
-  "balance_transfer_apr": "17.49%-27.49%",
+  "variable_apr": "17.74%-27.74%",
+  "balance_transfer_apr": "17.74%-27.74%",
   "balance_transfer_fee": "3% for the first 60 days of account opening; 5% after",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%-29.24%",
+  "cash_advance_apr": "29.49%",
   "penalty_apr": "Up to 29.99%, based on your creditworthiness",
   "penalty_apr_trigger": "Making a late payment; applies indefinitely once triggered",
   "pay_over_time_fee": "Monthly fee up to 1.72% of the purchase amount assigned to a BofA Custom Pay Plan",
@@ -55,7 +55,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Close to flat: 1.5x everywhere with no caps, plus 3x on travel booked through BofA Travel. Points redeem as a statement credit against any travel purchase (flights, hotels, vacation rentals, baggage fees) and also against dining, including takeout. Enrolled BofA Rewards members get a 10–75% bonus on top of the 1.5x rate depending on combined deposit/investment balance.",
+  "earn_note": "Close to flat: 1.5x everywhere with no caps, plus 3x on travel booked through BofA Travel. Points redeem as a statement credit against any travel purchase (flights, hotels, vacation rentals, baggage fees) and also against dining, including takeout. Enrolled BofA Rewards members get a 10–75% bonus on top of these rates depending on combined deposit/investment balance.",
   "points": {
     "currency": "Bank of America Rewards",
     "redemption_options": [
@@ -65,13 +65,13 @@
         "best": true
       },
       {
-        "method": "Deposit to a Bank of America checking or savings account, or gift cards",
-        "cpp": 1.0,
+        "method": "Cash: deposit to a Bank of America checking or savings account, Merrill credit, or a check",
+        "cpp": 0.6,
         "best": false
       }
     ],
     "per_100k": "$1,000",
-    "note": "Value tops out around 1¢/point regardless of redemption method. There's no transfer-partner ecosystem behind this program, just a flat, no-fuss statement-credit redemption."
+    "note": "Travel and dining statement credits are worth 1¢ a point. Cash is worth 0.6¢ a point and gift card value varies, so use points for travel or dining. Travel credits start at 2,500 points and cover qualifying purchases from the past 12 months. There's no transfer-partner program."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -109,12 +109,9 @@
   ],
   "protection_note": "Bank of America's purchase/travel protection suite (Return Protection, Purchase Security, Auto Rental CDW, trip insurance) is only advertised on the Premium Rewards cards; it isn't published for this card.",
   "rental_note": "No auto rental coverage documented publicly for this card as of this writing.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
-    {
-      "name": "25,000-point welcome bonus",
-      "detail": "After $1,000 in purchases within the first 90 days, a $250 value toward travel or dining."
-    },
     {
       "name": "Intro balance transfer fee",
       "detail": "3% for the first 60 days the account is open, then 5% on all future transfers."
@@ -147,10 +144,10 @@
   },
   "timeline": [
     {
-      "date": "May 27, 2026",
+      "date": "May 26, 2026",
       "type": "neutral",
       "badge": "Program change",
-      "text": "Preferred Rewards became BofA Rewards. The tiers were renamed (Gold and Platinum folded into Preferred Plus, Platinum Honors became Preferred Honors, Diamond became Premier) and existing members moved over automatically. The 25–75% card bonus survived the change and a 10% Member tier was added below it, so nobody earning a bonus before is earning less now. Preferred Honors and Premier also picked up subscription reimbursement worth up to $96 and $180 a year."
+      "text": "Preferred Rewards became BofA Rewards. The tiers were renamed, existing members moved over automatically, and a 10% Member tier was added. The card bonus is now 10% Member, 25% Preferred Plus, 50% Preferred Honors and 75% Premier. Cards earning a Preferred Rewards bonus before May 1, 2026 keep that bonus for at least six months. Preferred Honors and Premier also picked up subscription credits worth up to $96 and $180 a year."
     }
   ]
 }

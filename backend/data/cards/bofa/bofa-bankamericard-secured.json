@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": true,
-  "variable_apr": "24.49%-25.99%",
-  "balance_transfer_apr": "24.49%-25.99%",
-  "balance_transfer_fee": "4% to 5% of the amount of each transaction",
+  "variable_apr": "26.24%",
+  "balance_transfer_apr": "26.24%",
+  "balance_transfer_fee": "5% of the amount of each transaction",
   "foreign_transaction_fee_rate": "3%",
-  "cash_advance_apr": "28.49%-29.24%",
+  "cash_advance_apr": "29.49%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": "Monthly fee up to 1.72% of the purchase amount assigned to a BofA Custom Pay Plan",
@@ -29,7 +29,7 @@
     "short_tag": "No Rewards"
   },
   "earn_rates": [],
-  "earn_note": "This is the secured version of BankAmericard, and it inherits the same no-rewards structure. But secured card products also aren't eligible for BankAmericard's signature 0% intro APR offer, so there's no APR-focused reason to pick this over the unsecured card either. There's no earn-rate or APR reason to choose this over Cash Rewards Secured or Unlimited Cash Rewards Secured, which cost the same to open.",
+  "earn_note": "This is the secured version of BankAmericard, and it earns no rewards. Secured cards aren't eligible for BankAmericard's 0% intro APR. It does have a lower APR than the other secured BofA cards (26.24% against 27.74%) and no penalty APR. If you'd pay in full each month, Cash Rewards Secured or Unlimited Cash Rewards Secured cost the same to open and earn rewards.",
   "points": {
     "currency": "No rewards program",
     "redemption_options": [],
@@ -72,15 +72,16 @@
   ],
   "protection_note": "No purchase-protection or extended-warranty guide published for this card.",
   "rental_note": "No auto rental coverage documented publicly for this card.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {
       "name": "Refundable security deposit",
-      "detail": "$200–$5,000 sets your credit limit dollar-for-dollar."
+      "detail": "$200 to $5,000. Your maximum credit limit is based on your deposit, your income and your ability to pay."
     },
     {
       "name": "Standard APR",
-      "detail": "24.49% to 25.99% variable. Secured card products aren't eligible for an introductory APR or a new-account bonus offer of any kind."
+      "detail": "26.24% variable. Secured card products aren't eligible for an introductory APR."
     },
     {
       "name": "Deposit review for return",

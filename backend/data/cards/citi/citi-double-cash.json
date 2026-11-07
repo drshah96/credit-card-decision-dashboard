@@ -68,13 +68,13 @@
       }
     ],
     "per_100k": "$1,000",
-    "note": "As of a 2024 program change, Double Cash earns ThankYou Points rather than a separate 'cash back' currency, but on its own it's still capped at a flat 1¢/point for cash, gift cards, or Amazon, with no transfer partners. The nuance: this card's points can be pooled with a Strata Premier or Strata Elite account (link them in Citi's online banking) to become transferable at 1:1 to airline/hotel partners, turning otherwise-capped cash-back points into travel currency. On its own, Double Cash is a pure 2% cash-back card in every way that matters."
+    "note": "Double Cash earns ThankYou Points rather than a separate 'cash back' currency, and has since at least March 2022, but on its own it's still capped at a flat 1¢/point for cash, gift cards, or Amazon, with no transfer partners. The nuance: this card's points can be pooled with a Strata Premier or Strata Elite account (link them in Citi's online banking) to become transferable at 1:1 to airline/hotel partners, turning otherwise-capped cash-back points into travel currency. On its own, Double Cash is a pure 2% cash-back card in every way that matters."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
     "highlight": "No transfer partners on this account alone. Double Cash's ThankYou Points are cash-and-merchandise-only unless pooled with a linked Strata Premier or Strata Elite account, which unlocks the full 22-partner list at 1:1 for the combined balance.",
-    "recent_changes": "Double Cash moved from a distinct 'cash back' ledger to the ThankYou Points ledger in 2024, enabling the pooling/transfer trick above for the first time; previously its rewards couldn't become travel points at all."
+    "recent_changes": "Double Cash was on the ThankYou Points ledger by March 2022, which is what makes the pooling/transfer trick above possible."
   },
   "credits": [],
   "insurance": [
@@ -101,6 +101,7 @@
   ],
   "protection_note": "Minimal by design: this is a cash-back card, not a travel card. Citi stripped purchase protection and rental coverage from Double Cash in 2019 and hasn't brought them back; the one thing it does have is a decent 24-month extended warranty, which most no-fee cards don't bother with.",
   "rental_note": "No rental car coverage at all; use a different card for rentals.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {
@@ -141,10 +142,10 @@
       "text": "Citi ended person-to-person ThankYou point sharing, the most generous policy of its kind in the industry: you could send points to anyone, with no household requirement. May 16 was the last day to send or receive. Points already shared stay valid 90 days from the share date, so the last of them expire around Aug 15, 2026. Combining points between cards held in your own name is untouched, so pooling a Double Cash into a Strata Premier or Strata Elite still works."
     },
     {
-      "date": "2024",
+      "date": "2022",
       "type": "neutral",
       "badge": "Program change",
-      "text": "Double Cash's rewards were moved onto the ThankYou Points ledger instead of a separate cash-back currency. Day-to-day value didn't change (still 1¢/point cash-out), but it made this card poolable with a Strata Premier or Strata Elite account for 1:1 airline/hotel transfers, a capability it never had before."
+      "text": "By March 2022, Double Cash's rewards were on the ThankYou Points ledger instead of a separate cash-back currency. Day-to-day value didn't change (still 1¢/point cash-out), but it made this card poolable with a Strata Premier or Strata Elite account for 1:1 airline/hotel transfers."
     },
     {
       "date": "2019",

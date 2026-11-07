@@ -11,17 +11,17 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.49%-28.49%",
+  "variable_apr": "19.74%-28.74%",
   "balance_transfer_apr": null,
   "balance_transfer_fee": null,
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.74%",
+  "cash_advance_apr": "28.99%",
   "penalty_apr": "29.99%",
   "penalty_apr_trigger": "Missing at least the Minimum Payment Due, or a returned payment; applies for at least 6 months and is reviewed every 6 months after that",
   "pay_over_time_fee": "Up to 1.33% per month of each purchase placed in a Plan It plan",
   "late_payment_fee": "Up to $40",
   "returned_payment_fee": "Up to $40",
-  "returned_check_fee": null,
+  "returned_check_fee": "$38",
   "welcome_bonus": {
     "bonus": "80,000 Hilton Honors points",
     "requirement": "after you spend $2,000 in purchases in the first 6 months of Card Membership",
@@ -140,6 +140,7 @@
   ],
   "protection_note": "Almost no travel insurance: no trip delay, trip cancellation or baggage coverage. Car rental loss and damage is the exception. This is a free card built for earning Hilton points, not for protecting trips.",
   "rental_note": "Car Rental Loss and Damage Insurance covers up to $50,000 per rental agreement for up to 30 consecutive days. Not available to New York State residents.",
+  "lounge_access": "none",
   "status_perks": [
     {
       "name": "Hilton Honors Gold via spend",

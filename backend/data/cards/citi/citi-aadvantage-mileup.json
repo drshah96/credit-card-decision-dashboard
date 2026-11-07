@@ -9,16 +9,13 @@
   "effective_cost": "Free, with no annual fee, but thin earning and no free checked bag",
   "official_url": "https://www.citi.com/credit-cards/aadvantage-mile-up-credit-card",
   "intro_apr_purchases": null,
-  "intro_apr_balance_transfers": {
-    "rate": "0%",
-    "months": 15
-  },
+  "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": true,
-  "variable_apr": "19.49%-29.49%",
-  "balance_transfer_apr": "19.49%-29.49%",
+  "variable_apr": "19.74%-29.74%",
+  "balance_transfer_apr": "19.74%-29.74%",
   "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": "3%",
-  "cash_advance_apr": "29.74%",
+  "cash_advance_apr": "29.99%",
   "penalty_apr": "Up to 29.99%",
   "penalty_apr_trigger": "Making a late payment or a payment that's returned",
   "pay_over_time_fee": "Up to 1.72% per month, for Citi Flex Plan balances subject to a Plan Fee",
@@ -84,13 +81,14 @@
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "AAdvantage miles aren't a transferable bank-points currency. There's no way to move them out to another loyalty program, and (unlike United MileagePlus) no bank card lets you transfer points in either.",
+    "highlight": "AAdvantage miles aren't a transferable bank-points currency, so there's no way to move them out to another loyalty program. Points can move in, though: Citi ThankYou Points transfer to American Airlines AAdvantage from the Strata cards.",
     "recent_changes": "Citi became the sole issuer of AAdvantage-branded consumer credit cards as Barclays exited the co-brand partnership (announced Dec 2024, Barclays stopped issuing new AAdvantage cards Sept 30, 2025); Barclays AAdvantage cardholders began transitioning to equivalent Citi-issued cards starting April 2026, with some legacy Barclays benefits temporarily carried over."
   },
   "credits": [],
   "insurance": [],
-  "protection_note": "Minimal by design: the no-fee tier of the AAdvantage lineup. Citi doesn't advertise trip delay, baggage, purchase protection, or rental car insurance for MileUp; that suite of protections starts appearing on the paid Executive card.",
+  "protection_note": "Minimal by design: the no-fee tier of the AAdvantage lineup. Citi doesn't advertise trip delay, baggage, purchase protection, or rental car insurance for MileUp; that suite of protections starts appearing on the paid Globe and Executive cards.",
   "rental_note": "No rental car coverage advertised; use a different card for rentals.",
+  "lounge_access": "none",
   "status_perks": [
     {
       "name": "Loyalty Points",

@@ -17,17 +17,17 @@
     "months": 15
   },
   "foreign_transaction_fee": true,
-  "variable_apr": "19.49%-28.49%",
-  "balance_transfer_apr": "19.49%-28.49%",
+  "variable_apr": "19.74%-28.74%",
+  "balance_transfer_apr": "19.74%-28.74%",
   "balance_transfer_fee": "Either $5 or 3% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": "2.7%",
-  "cash_advance_apr": "28.74%",
+  "cash_advance_apr": "28.99%",
   "penalty_apr": "29.99%",
   "penalty_apr_trigger": "Missing at least the Minimum Payment Due, or a returned payment; applies for at least 6 months and is reviewed every 6 months after that",
   "pay_over_time_fee": "0% during the first 15 months from account opening, then up to 1.33% per month of each purchase or amount moved into a Plan It plan",
   "late_payment_fee": "Up to $40",
   "returned_payment_fee": "Up to $40",
-  "returned_check_fee": null,
+  "returned_check_fee": "$38",
   "welcome_bonus": {
     "bonus": "As high as $200 cash back",
     "requirement": "after you spend $2,000 in purchases in the first 6 months of Card Membership; welcome offers vary and you may not be eligible for an offer",
@@ -79,7 +79,7 @@
       }
     ],
     "per_100k": "$1,000",
-    "note": "Not a points program: cash back here is always worth exactly 1¢, redeemed as a statement credit. No transfer partners, no premium redemption to chase."
+    "note": "Not a points program: cash back here is worth face value, redeemed as a statement credit, at Amazon.com checkout, or as a deposit to an Amex High Yield Savings account. No transfer partners, no premium redemption to chase."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -101,6 +101,19 @@
         "Only worth it if you already subscribe to one of these services; otherwise it's $0 to you.",
         "The purchase has to run through the U.S. Disney+, Hulu, or ESPN sites and be set to auto-renew. Billing through Apple or Roku won't trigger it."
       ]
+    },
+    {
+      "id": "home-chef",
+      "name": "Home Chef Credit",
+      "subtitle": "$15/mo · enroll",
+      "max_annual": 180,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Up to $15 a month in statement credits at Home Chef, up to $180 a calendar year. Enrollment required.",
+      "tips": [
+        "Only worth it if you already buy Home Chef meal kits; otherwise it's $0 to you."
+      ]
     }
   ],
   "insurance": [
@@ -112,6 +125,7 @@
   ],
   "protection_note": "Thin by design: this is a no-fee cash-back card, not a travel card. No trip delay, trip cancellation, or baggage coverage, and no extended warranty (that's reserved for the paid Blue Cash Preferred tier).",
   "rental_note": "Car Rental Loss and Damage Insurance is included, underwritten by AMEX Assurance. Reserve and pay for the whole rental with the card and decline the counter waiver.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
   ],

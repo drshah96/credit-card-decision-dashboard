@@ -11,17 +11,17 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.49%-28.49%",
+  "variable_apr": "19.74%-28.74%",
   "balance_transfer_apr": null,
   "balance_transfer_fee": null,
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.74%",
+  "cash_advance_apr": "28.99%",
   "penalty_apr": "29.99%",
   "penalty_apr_trigger": "Missing at least the Minimum Payment Due, or a returned payment; applies for at least 6 months and is reviewed every 6 months after that",
   "pay_over_time_fee": "Up to 1.33% per month of each purchase placed in a Plan It plan",
   "late_payment_fee": "Up to $40",
   "returned_payment_fee": "Up to $40",
-  "returned_check_fee": null,
+  "returned_check_fee": "$38",
   "welcome_bonus": {
     "bonus": "As high as 80,000 miles plus a $250 statement credit",
     "requirement": "after you spend $3,000 in purchases in the first 6 months of Card Membership; welcome offers vary and you may not be eligible for an offer",
@@ -67,7 +67,7 @@
     "currency": "Delta SkyMiles",
     "redemption_options": [
       {
-        "method": "Statement / low-end",
+        "method": "Pay with Miles (Delta flights)",
         "cpp": 1.0,
         "best": false
       },
@@ -113,7 +113,7 @@
       "default_value": 0,
       "tier": "easy",
       "removed": false,
-      "description": "Monthly U.S. rideshare credit with select providers, but it only starts after your first card renewal, not from day one.",
+      "description": "Monthly U.S. rideshare credit with select providers. It starts 12 months after account opening, or right away if you move to this card from Delta Platinum or Reserve.",
       "tips": [
         "Doesn't kick in until your card has renewed once; new cardholders get nothing from this in year one."
       ]
@@ -139,7 +139,7 @@
       "default_value": 0,
       "tier": "niche",
       "removed": false,
-      "description": "A $200 statement credit toward a future Delta flight purchase, but only after you spend $10,000 on the card in a calendar year.",
+      "description": "A $200 Delta eCredit, only after you spend $10,000 on the card in a calendar year. It expires one year after it's issued.",
       "tips": [
         "The $10,000 spend threshold is real money on a low-fee card; don't count this credit unless you're already going to hit that spend."
       ]
@@ -165,10 +165,21 @@
       "coverage": "Baggage Insurance Plan",
       "detail": "$1,250 carry-on / $500 checked",
       "level": "mid"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "+1 year on warranties of 5 years or less · $10,000/item · $50,000/yr",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "$1,000/claim · $50,000/yr · 90 days",
+      "level": "mid"
     }
   ],
   "protection_note": "The clearest gap versus the Platinum and Reserve tiers: no trip cancellation or interruption insurance, and no trip delay coverage either. Amex lists neither for this card. What is left is the baggage plan, rental car loss and damage, and the everyday purchase protections.",
   "rental_note": "Secondary only: it pays after your own auto policy. If you rent often, put rentals on a card that includes free primary coverage instead.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {
@@ -177,7 +188,7 @@
     },
     {
       "name": "In-flight purchase credit",
-      "detail": "20% back as a statement credit on Delta in-flight purchases (food, drinks, Wi-Fi)."
+      "detail": "20% back as a statement credit on eligible pre-purchased meals and in-flight food and beverages on Delta-operated flights. Wi-Fi doesn't count."
     },
     {
       "name": "Award travel discount",

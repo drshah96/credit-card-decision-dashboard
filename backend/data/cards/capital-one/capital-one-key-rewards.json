@@ -22,7 +22,11 @@
   "late_payment_fee": "Up to $40",
   "returned_payment_fee": null,
   "returned_check_fee": null,
-  "welcome_bonus": null,
+  "welcome_bonus": {
+    "bonus": "10% back at the family of brands",
+    "requirement": "for the first 30 days as a new cardmember, then the standing 5%",
+    "estimated_value": null
+  },
   "verdict": {
     "status": "situational",
     "text": "Only worth it if you shop Williams-Sonoma, Pottery Barn, or West Elm",
@@ -58,7 +62,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "New cardmembers get 10% back at the family of brands for the first 30 days, dropping to a standing 5% after that. Rewards purchased on 0% promotional financing plans (12 equal payments, $750+) don't earn any rewards at all; pick one or the other on a big purchase, not both. Rate applies identically across all eight brands regardless of which one's name is on your card; there's no per-store bonus.",
+  "earn_note": "Rewards purchased on 0% promotional financing plans (12 equal payments, $750+) don't earn any rewards at all; pick one or the other on a big purchase, not both. Rate applies identically across all eight brands regardless of which one's name is on your card; there's no per-store bonus.",
   "points": {
     "currency": "Key Rewards Certificates",
     "redemption_options": [

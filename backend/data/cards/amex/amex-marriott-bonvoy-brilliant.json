@@ -11,17 +11,17 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.49%-28.49%",
+  "variable_apr": "19.74%-28.74%",
   "balance_transfer_apr": null,
   "balance_transfer_fee": null,
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.74%",
+  "cash_advance_apr": "28.99%",
   "penalty_apr": "29.99%",
   "penalty_apr_trigger": "Missing at least the Minimum Payment Due, or a returned payment; applies for at least 6 months and is reviewed every 6 months after that",
   "pay_over_time_fee": "Up to 1.33% per month of each purchase placed in a Plan It plan",
   "late_payment_fee": "Up to $40",
   "returned_payment_fee": "Up to $40",
-  "returned_check_fee": null,
+  "returned_check_fee": "$38",
   "welcome_bonus": {
     "bonus": "150,000 points plus a $250 statement credit",
     "requirement": "after $6,000 in purchases in the first 6 months of Card Membership; Amex lists the offer as ending September 30, 2026",
@@ -122,10 +122,10 @@
         "ratio": "3:1"
       },
       {
-        "name": "Air New Zealand AirPoint",
+        "name": "Air New Zealand Koru",
         "type": "airline",
         "ratio": "200:1",
-        "notes": "Converts into Airpoints Dollars (NZD), not miles, so the ratio is far worse than the standard 3:1 chart."
+        "notes": "Transfers at 200:1, far worse than the standard 3:1 chart. Marriott gives it a 75-mile bonus in place of the usual 5,000."
       },
       {
         "name": "American Airlines AAdvantage",
@@ -356,17 +356,38 @@
     },
     {
       "coverage": "Baggage Insurance Plan",
-      "detail": "$3,000 combined ($2,000 checked / $1,000 carry-on) · $500 sub-limit on electronics/jewelry/watches",
+      "detail": "$3,000 combined ($2,000 checked) · $1,000 on high-risk items such as jewelry and electronics",
       "level": "mid"
     },
     {
       "coverage": "Purchase protection",
       "detail": "$10,000/claim · $50,000/yr · 90 days",
       "level": "strong"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "+1 year on warranties of 5 years or less · $10,000/item · $50,000/yr",
+      "level": "good"
+    },
+    {
+      "coverage": "Cell phone",
+      "detail": "$800 · $50 deductible · 2 claims per 12 months",
+      "level": "good"
+    },
+    {
+      "coverage": "Return protection",
+      "detail": "$300/item · $1,000/yr · within 90 days, when the merchant won't take it back",
+      "level": "mid"
+    },
+    {
+      "coverage": "Emergency evacuation",
+      "detail": "Premium Global Assist: emergency transport at no cost if approved",
+      "level": "good"
     }
   ],
-  "protection_note": "Trip cancellation coverage matches Amex's most premium travel cards ($10k/trip), but trip delay is thinner ($500 vs $500-plus on some cards, capped at 2 claims/yr). This card leans on hotel loyalty perks, not being the strongest travel-protection card in your wallet.",
+  "protection_note": "Trip cancellation covers $10,000 per trip and $20,000 per 12 months, matching Amex's most premium travel cards. Trip delay pays after 6 hours and is capped at 2 claims per 12 months. This card leans on hotel loyalty perks, not being the strongest travel-protection card in your wallet.",
   "rental_note": "Rental coverage is secondary and excludes liability; put the rental on a card with primary coverage if you rent often, and use this one for the points instead.",
+  "lounge_access": "included",
   "status_perks": [
     {
       "name": "Marriott Bonvoy Platinum Elite Status",
@@ -385,11 +406,11 @@
     "options": [
       {
         "name": "Additional Bonvoy Brilliant Card",
-        "fee": "$0 (first 3)",
+        "fee": "$0",
         "is_free": true,
         "benefits": [
           {
-            "text": "Free for up to 3 additional cards",
+            "text": "Free to add: no annual fee for additional cards",
             "included": true
           },
           {
@@ -403,7 +424,7 @@
         ]
       }
     ],
-    "note": "Additional cards are free for the first three, a cheap way to pool household spend toward the 6× hotel rate and the annual free night."
+    "note": "Additional cards are free, a cheap way to pool household spend toward the 6× hotel rate."
   },
   "timeline": []
 }

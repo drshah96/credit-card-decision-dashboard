@@ -13,11 +13,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "20.24%-28.24%",
-  "balance_transfer_apr": "20.24%-28.24%",
+  "variable_apr": "19.74%-27.74%",
+  "balance_transfer_apr": "19.74%-27.74%",
   "balance_transfer_fee": "5% of each transfer, $5 minimum",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "29.49%",
+  "cash_advance_apr": "29.99%",
   "penalty_apr": "Up to 29.99%",
   "penalty_apr_trigger": "Making a late payment or a payment that's returned",
   "pay_over_time_fee": "Up to 1.72% per month, for Citi Flex Plan balances subject to a Plan Fee",
@@ -78,7 +78,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 3x tier is unusually broad for a $95 card: flights, dining, groceries, and gas/EV charging all qualify, no rotation or activation needed. EV charging was added as part of the May 2025 Strata rebrand, alongside extending the 10x rate to car rentals and attractions (not just hotels) booked on cititravel.com.",
+  "earn_note": "The 3x tier is unusually broad for a $95 card: flights, dining, groceries, and gas/EV charging all qualify, no rotation or activation needed. EV charging was added as part of the May 2024 Strata rebrand, alongside extending the 10x rate to car rentals and attractions (not just hotels) booked on cititravel.com.",
   "points": {
     "currency": "ThankYou Points",
     "redemption_options": [
@@ -104,7 +104,7 @@
   "transfer_partners": {
     "airline_count": 15,
     "hotel_count": 5,
-    "highlight": "20 total partners at a full 1:1 ratio (Emirates Skywards is the exception, at roughly 1:0.8): American Airlines, JetBlue, Air France-KLM Flying Blue, Virgin Atlantic/Virgin Red, Turkish Airlines, Cathay Pacific, Singapore Airlines, Avianca LifeMiles, plus Choice Privileges, Wyndham Rewards, Accor Live Limitless, and Preferred Hotels & Resorts (I Prefer).",
+    "highlight": "20 partners, most at 1:1. The exceptions are Emirates Skywards at 1:0.8, Accor at 1:0.5, Leaders Club at 1:0.2, Choice at 1:1.5 and I Prefer at 1:2. They include American Airlines, JetBlue, Air France-KLM Flying Blue, Virgin Atlantic/Virgin Red, Turkish Airlines, Cathay Pacific, Singapore Airlines, Avianca LifeMiles, plus Choice Privileges, Wyndham Rewards, Accor Live Limitless, and Preferred Hotels & Resorts (I Prefer).",
     "recent_changes": "Preferred Hotels & Resorts (I Prefer) joined as a hotel transfer partner in late October 2024, and American Airlines AAdvantage returned as a permanent partner in July 2025 after a multi-year absence. Aeromexico Rewards was dropped as a transfer partner in January 2026.",
     "partners": [
       { "name": "American Airlines AAdvantage", "type": "airline", "ratio": "1:1" },
@@ -182,8 +182,9 @@
       "level": "none"
     }
   ],
-  "protection_note": "Decent trip coverage for a $95 card: Citi reintroduced trip cancellation/interruption, trip delay, and baggage coverage in the May 2025 refresh after years without them. The gaps are real, though: no purchase protection, no extended warranty, no cell phone protection, and rental coverage is secondary only. Citi hasn't published exact trip cancellation caps the way Chase does; treat it as solid-but-unquantified until Citi's Guide to Benefits is checked at claim time.",
+  "protection_note": "Decent trip coverage for a $95 card: Citi reintroduced trip cancellation/interruption, trip delay, and baggage coverage in the May 2024 refresh after years without them. The gaps are real, though: no purchase protection, no extended warranty, no cell phone protection, and rental coverage is secondary only. Citi hasn't published exact trip cancellation caps the way Chase does; treat it as solid-but-unquantified until Citi's Guide to Benefits is checked at claim time.",
   "rental_note": "MasterRental coverage is secondary: it pays after your personal auto policy, covering the gap (deductible, etc). For primary coverage, use a card that includes it instead.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {

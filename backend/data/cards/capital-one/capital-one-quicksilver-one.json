@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "28.99%",
-  "balance_transfer_apr": "28.99%",
+  "variable_apr": "29.24%",
+  "balance_transfer_apr": "29.24%",
   "balance_transfer_fee": "$0 at the standard Transfer APR, or 4% at any promotional APR Capital One may offer",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.99%",
+  "cash_advance_apr": "29.24%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
@@ -37,6 +37,13 @@
       "is_base": false
     },
     {
+      "emoji": "🎟️",
+      "multiplier": "5%",
+      "category": "Capital One Entertainment ticket purchases",
+      "highlight": false,
+      "is_base": false
+    },
+    {
       "emoji": "💳",
       "multiplier": "1.5%",
       "category": "Everything else",
@@ -44,12 +51,12 @@
       "is_base": true
     }
   ],
-  "earn_note": "QuicksilverOne earns what the no-fee Quicksilver earns: 1.5% flat plus 5% on Capital One Travel bookings. Neither card is on Capital One's eligible-card list for bonus Capital One Entertainment earning. The entire premium here is credit access (approvals down to fair credit), not a richer rewards rate; there's no sign-up bonus and no intro APR. Like Quicksilver, some accounts are being migrated to the Discover network starting May 2026 with an added 3% at grocery stores and gas stations (opt-out available, affected old cards stopped working July 9, 2026).",
+  "earn_note": "QuicksilverOne earns what the no-fee Quicksilver earns: 1.5% flat plus 5% on Capital One Travel and Capital One Entertainment bookings. The entire premium here is credit access (approvals down to fair credit), not a richer rewards rate; there's no intro APR.",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
       {
-        "method": "Statement credit, check, direct deposit, or gift cards",
+        "method": "Statement credit, check, or gift cards",
         "cpp": 1.0,
         "best": true
       }
@@ -94,21 +101,25 @@
       "coverage": "Cell phone",
       "detail": "Not covered",
       "level": "none"
-    }
-  ],
-  "protection_note": "Capital One's materials don't call out any protection differences from the no-fee Quicksilver, so treat this as the same standard suite: purchase protection, doubled extended warranty, and price protection, but no trip cancellation, baggage, or medical coverage.",
-  "rental_note": "Secondary auto rental collision/theft coverage, up to 31 days, pays out after your personal auto policy. Decline the counter's CDW/LDW and charge the entire rental to this card to activate it; excludes trucks, vans, off-road and sport utility trucks, motorbikes and anything with fewer than four wheels, plus commercial or for-hire use.",
-  "status_perks": [
+    },
     {
-      "name": "Hertz Five Star status",
-      "strength": 2,
-      "note": "Skip-the-counter access and a wider vehicle selection at select Hertz locations."
+      "coverage": "Trip cancel/interrupt",
+      "detail": "$1,500 per insured person on non-refundable common carrier tickets",
+      "level": "mid"
+    },
+    {
+      "coverage": "Baggage delay/loss",
+      "detail": "Delay $100/day up to $300 · lost luggage $1,500/incident (Mastercard) or $3,000/trip (Discover)",
+      "level": "mid"
     }
   ],
+  "protection_note": "Capital One's materials don't call out any protection differences from the no-fee Quicksilver. Expect purchase protection, extended warranty, price protection, trip cancellation and interruption up to $1,500 per person, baggage delay and lost luggage cover, and no trip delay, emergency medical or cell phone cover. Limits differ between the Mastercard and Discover versions, so check your own Guide to Benefits.",
+  "rental_note": "Secondary auto rental collision/theft coverage, up to 31 days, pays out after your personal auto policy. Decline the counter's CDW/LDW and charge the entire rental to this card to activate it; excludes trucks, vans, off-road and sport utility trucks, motorbikes and anything with fewer than four wheels, plus commercial or for-hire use.",
+  "status_perks": [],
   "services": [
     {
       "name": "No intro APR",
-      "detail": "Unlike Quicksilver, there's no 0% introductory period. A variable 28.99% APR applies to purchases, balance transfers, and cash advances from day one."
+      "detail": "Unlike Quicksilver, there's no 0% introductory period. A variable 29.24% APR applies to purchases, balance transfers, and cash advances from day one."
     },
     {
       "name": "Automatic credit line review",
@@ -149,7 +160,7 @@
       "date": "May 2026",
       "type": "add",
       "badge": "Network shift",
-      "text": "Capital One begins mailing Discover-network replacement cards to select Quicksilver and QuicksilverOne accounts, adding an unlimited 3% cash back category at grocery stores and gas stations. Affected old Mastercards stopped working July 9, 2026; the change is opt-out, not universal, and the $39 annual fee is unchanged."
+      "text": "Reported by third parties, with no Capital One document found: select Quicksilver and QuicksilverOne accounts moving to the Discover network, adding 3% at grocery stores and gas stations."
     },
     {
       "date": "May 2025",

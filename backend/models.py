@@ -196,10 +196,14 @@ class Card(BaseModel):
     intro_apr_balance_transfers: IntroApr | None = None
     # True = card charges a foreign transaction fee. None = not yet audited.
     foreign_transaction_fee: bool | None = None
-    # Derived from status_perks (any perk whose name/note mentions "lounge")
-    # rather than stored directly — unlike the three fields above, this one
-    # doesn't need per-card research, so there's no "not yet audited" state.
-    # Also duplicated on CardSummary below for the same reason as those three.
+    # What the card gets you at airport lounges, sourced from the issuer's terms.
+    # included: access comes with the card, and any visit cap is in the perk note.
+    # passes: a few single-visit passes a year. paid: entry only by paying per
+    # visit. none: the issuer's terms show no access. None means not yet audited,
+    # which is not the same as none. Hotel lounges don't count.
+    lounge_access: Literal["included", "passes", "paid", "none"] | None = None
+    # Derived from lounge_access: true when the card itself gets you in free.
+    # Duplicated on CardSummary below for the same reason as the three fields above.
     has_lounge_access: bool = False
     # The ongoing (post-intro, or from day one if there's no intro offer)
     # rate ranges and fees, quoted verbatim from the issuer's own Pricing &
@@ -234,9 +238,10 @@ class Card(BaseModel):
     late_payment_fee: str | None = None
     returned_payment_fee: str | None = None
     returned_check_fee: str | None = None
-    # The current sign-up offer — see WelcomeBonus. Detail-only, same as the
-    # round-3 fields above; None = not yet audited.
-    welcome_bonus: WelcomeBonus | None = None
+    # The current sign-up offer, captured for internal use only. Offers can change
+    # daily or weekly, so it's never served: excluded here so no API response can
+    # carry it, and not on the site or the MCP server. None = not yet audited.
+    welcome_bonus: WelcomeBonus | None = Field(default=None, exclude=True)
 
 
 class EarnCategorySummary(BaseModel):

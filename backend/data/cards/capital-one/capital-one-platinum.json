@@ -12,11 +12,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "28.99%",
-  "balance_transfer_apr": "28.99%",
+  "variable_apr": "29.24%",
+  "balance_transfer_apr": "29.24%",
   "balance_transfer_fee": "$0 at the standard Transfer APR, or 4% at any promotional APR Capital One may offer",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.99%",
+  "cash_advance_apr": "29.24%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
@@ -47,11 +47,12 @@
   "insurance": [],
   "protection_note": "Bare-bones by design, more so than Capital One's own Quicksilver family. Capital One's official Platinum materials don't advertise purchase protection, extended warranty, price protection, or travel accident insurance the way the Quicksilver benefits pages do. Treat this card as carrying no meaningful purchase or travel protections rather than assuming standard Mastercard perks carry over; independent sources disagree on this point, so confirm your specific Guide to Benefits before relying on it.",
   "rental_note": "No rental car coverage is advertised for this card; use a different card for rentals.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {
       "name": "No annual fee",
-      "detail": "$0/year, with a variable 28.99% APR on purchases and cash advances and no introductory 0% period."
+      "detail": "$0/year, with a variable 29.24% APR on purchases and cash advances and no introductory 0% period."
     },
     {
       "name": "Automatic credit line review",
