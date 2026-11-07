@@ -1168,17 +1168,14 @@ def test_bilt_cards_have_a_nonzero_ten_percent_intro_apr(card_id: str) -> None:
     detail = client.get(f"/api/cards/{card_id}").json()
     assert detail["intro_apr_purchases"] == {"rate": "10%", "months": 12}
     assert detail["intro_apr_balance_transfers"] is None
-    assert detail["variable_apr"] == "26.74%-34.74%"
+    assert detail["variable_apr"] == "26.99%-34.99%"
     assert detail["foreign_transaction_fee"] is False
 
 
-def test_bilt_palladium_has_a_distinct_tiered_bt_fee_from_blue_and_obsidian() -> None:
-    palladium = client.get("/api/cards/bilt-palladium").json()
-    assert "60 days" not in palladium["balance_transfer_fee"]
-    assert "4 months" in palladium["balance_transfer_fee"]
-    for card_id in ("bilt-blue", "bilt-obsidian"):
-        detail = client.get(f"/api/cards/{card_id}").json()
-        assert detail["balance_transfer_fee"] == "The greater of 5% or $5"
+@pytest.mark.parametrize("card_id", ["bilt-blue", "bilt-obsidian", "bilt-palladium"])
+def test_bilt_cards_share_one_bt_fee(card_id: str) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["balance_transfer_fee"] == "The greater of 5% or $5"
 
 
 def test_bilt_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:

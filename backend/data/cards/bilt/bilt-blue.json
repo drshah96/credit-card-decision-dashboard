@@ -14,11 +14,11 @@
   },
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "26.74%-34.74%",
-  "balance_transfer_apr": "26.74%-34.74%",
+  "variable_apr": "26.99%-34.99%",
+  "balance_transfer_apr": "26.99%-34.99%",
   "balance_transfer_fee": "The greater of 5% or $5",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": null,
+  "cash_advance_apr": "31.99%-34.99%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
@@ -79,7 +79,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "*Housing Rewards isn't a flat rate. It scales with your everyday spend: selecting 'Housing-only rewards' earns up to 1.25x on rent or mortgage, based on how much of that payment your card spend covers in the same billing cycle (25% of the payment = 0.5x, 100%+ = 1.25x; below 25% still earns a flat 250 points). Terms and conditions apply. There's no 5-transaction monthly minimum, unlike the original Bilt Card. The restaurant bonus varies by location and is shown in the Bilt app at checkout, and up to 4x is just the ceiling, not a flat rate. New cardholders get $100 in Bilt Cash on account opening, with no spending requirement.",
+  "earn_note": "*Housing Rewards isn't a flat rate. It scales with your everyday spend: up to 1.25x on rent or mortgage, based on how much of that payment your card spend covers in the same billing cycle (25% of the payment = 0.5x, 50% = 0.75x, 75% = 1x, 100%+ = 1.25x; below 25% still earns a flat 250 points if you make a housing payment). Terms and conditions apply. There's no 5-transaction monthly minimum, unlike the original Bilt Card. Accounts opened before January 1, 2027 can instead pick the Flexible Bilt Cash option: 4% back in Bilt Cash on everyday spend, with up to 1x on housing unlocked at $3 of Bilt Cash per 100 points. That option ends at the first card anniversary on or after January 1, 2027 unless you make a Legacy Election. The restaurant bonus varies by location and is shown in the Bilt app at checkout, and up to 4x is just the ceiling, not a flat rate.",
   "points": {
     "currency": "Bilt Points",
     "redemption_options": [
@@ -90,23 +90,23 @@
       },
       {
         "method": "Book travel directly through the Bilt Travel Portal",
-        "cpp": 1.5,
+        "cpp": 1.25,
         "best": false
       },
       {
-        "method": "Statement credit, rent/mortgage credit, or Lyft rides",
+        "method": "Statement credit, rent credit, or Lyft rides",
         "cpp": 1.0,
         "best": false
       }
     ],
-    "per_100k": "$1,500–$2,200+",
-    "note": "The Points Guy values Bilt Points at 2.2¢ each, among the highest of any bank currency, but that ceiling only applies to well-chosen airline/hotel transfers. Cash-equivalent redemptions (statement credit, rent credit) are a flat 1¢/point."
+    "per_100k": "$1,250 to $2,200+",
+    "note": "The Points Guy values Bilt Points at 2.2¢ each, a figure Bilt quotes on its own card page, but that ceiling only applies to well-chosen airline and hotel transfers. Points are worth 1.25¢ in the Bilt Travel Portal. Bilt publishes no fixed rate for statement credits or rent; it shows the value when you redeem."
   },
   "transfer_partners": {
     "airline_count": 19,
     "hotel_count": 7,
-    "highlight": "19 airline and 7 hotel partners, almost all at 1:1 (Accor Live Limitless is 3:2): Hyatt, Marriott, Hilton, IHG, Wyndham, and I Prefer on the hotel side; United, Air France/KLM, Emirates, Cathay Pacific, and Southwest among the airlines.",
-    "recent_changes": "Wyndham Rewards and I Prefer Hotel Rewards (Preferred Hotels & Resorts, 700+ independent properties) were both added as transfer partners in 2026. Separately, from Aug 5, 2026 Bilt members who hold a Qatar Airways Privilege Club card earn 3 Avios per $1 of rent paid through Bilt, up to $50,000/yr, instead of Bilt Points. That is a competing way to use Bilt for rent, not a change to this card.",
+    "highlight": "19 airline and 7 hotel partners, plus Amtrak at 2:1. Almost all are 1:1 (Accor Live Limitless is 3:2, I Prefer is 1:2): Hyatt, Marriott, Hilton, IHG, Wyndham, and I Prefer on the hotel side; United, JetBlue, Air France/KLM, Emirates, Cathay Pacific, and Southwest among the airlines.",
+    "recent_changes": "JetBlue TrueBlue was added at 1:1 on October 20, 2026, and Amtrak Guest Rewards at 2 Bilt Points to 1 Amtrak point on September 23, 2026, after Wyndham Rewards (March 25, 2026) and I Prefer Hotel Rewards (June 22, 2026). Spirit is no longer on Bilt's partner list. Separately, from Aug 5, 2026 Bilt members who hold a Qatar Airways Privilege Club card earn 3 Avios per $1 of rent paid through Bilt, up to $50,000/yr, instead of Bilt Points. That is a competing way to use Bilt for rent, not a change to this card.",
     "partners": [
       { "name": "Aer Lingus AerClub", "type": "airline", "ratio": "1:1" },
       { "name": "Air Canada Aeroplan", "type": "airline", "ratio": "1:1" },
@@ -119,9 +119,9 @@
       { "name": "Etihad Guest", "type": "airline", "ratio": "1:1" },
       { "name": "Iberia Plus", "type": "airline", "ratio": "1:1" },
       { "name": "Japan Airlines Mileage Bank", "type": "airline", "ratio": "1:1" },
+      { "name": "JetBlue TrueBlue", "type": "airline", "ratio": "1:1" },
       { "name": "Qatar Airways Privilege Club", "type": "airline", "ratio": "1:1" },
       { "name": "Southwest Rapid Rewards", "type": "airline", "ratio": "1:1" },
-      { "name": "Spirit Free Spirit", "type": "airline", "ratio": "1:1" },
       { "name": "TAP Air Portugal Miles&Go", "type": "airline", "ratio": "1:1" },
       { "name": "Turkish Airlines Miles&Smiles", "type": "airline", "ratio": "1:1" },
       { "name": "United MileagePlus", "type": "airline", "ratio": "1:1" },
@@ -130,7 +130,7 @@
       { "name": "Accor Live Limitless (ALL)", "type": "hotel", "ratio": "3:2", "notes": "1,000 Bilt points convert to about 667 Accor points, the one below-1:1 airline/hotel ratio in the program." },
       { "name": "Hilton Honors", "type": "hotel", "ratio": "1:1" },
       { "name": "IHG One Rewards", "type": "hotel", "ratio": "1:1" },
-      { "name": "Marriott Bonvoy", "type": "hotel", "ratio": "1:1", "notes": "Transferring 20,000+ points in a single transaction adds a 5,000-point bonus (25,000 Bonvoy points total)." },
+      { "name": "Marriott Bonvoy", "type": "hotel", "ratio": "1:1", "notes": "Every 20,000 points converted in a single transaction adds 5,000 Bonvoy points, so 20,000 becomes 25,000." },
       { "name": "Preferred Hotels & Resorts I Prefer", "type": "hotel", "ratio": "1:2", "notes": "Favorable reverse ratio: 1,000 Bilt points become 2,000 I Prefer points. Added as a transfer partner in June 2026." },
       { "name": "World of Hyatt", "type": "hotel", "ratio": "1:1" },
       { "name": "Wyndham Rewards", "type": "hotel", "ratio": "1:1" }
@@ -145,37 +145,38 @@
     },
     {
       "coverage": "Rental car CDW",
-      "detail": "MasterRental coverage applies first, before your personal auto insurance, so no personal claim is needed. Exact per-rental and annual limits are in the Guide to Benefits, not public marketing.",
-      "level": "good"
+      "detail": "Secondary: it pays after your personal auto policy and any other collectible insurance, and counts as primary only if you have no other insurance or yours does not cover you abroad. Rentals up to 31 days, worldwide. Pays the lesser of repair cost or the vehicle's wholesale value or invoice less salvage and depreciation, plus up to $500 per incident for loss of use.",
+      "level": "mid"
     },
     {
       "coverage": "Purchase protection",
-      "detail": "Purchase Assurance is a confirmed benefit; exact per-item and annual dollar limits are in the Guide to Benefits, not public marketing.",
+      "detail": "Items damaged or stolen within 90 days of purchase, up to $1,000 per loss and $50,000 per account per 12 months. Secondary to other coverage.",
       "level": "mid"
     },
     {
       "coverage": "Cell phone protection",
-      "detail": "Cellular Wireless Telephone Protection is a confirmed benefit for phones on a bill paid with this card; exact deductible and annual limits are in the Guide to Benefits, not public marketing.",
+      "detail": "Theft or damage when the monthly bill is paid with this card, up to $800 per claim and $1,000 per 12 months, 2 claims a year, with a $50 deductible. Lost phones and most cosmetic damage are excluded.",
       "level": "mid"
     },
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "Confirmed benefit; exact per-trip and annual dollar limits are in the Guide to Benefits, not public marketing.",
-      "level": "mid"
+      "detail": "Not included on the Blue Card.",
+      "level": "none"
     },
     {
       "coverage": "Trip delay",
-      "detail": "Trip Delay Reimbursement is a confirmed benefit; exact per-day and annual limits are in the Guide to Benefits, not public marketing.",
-      "level": "mid"
+      "detail": "Not included on the Blue Card.",
+      "level": "none"
     },
     {
       "coverage": "Extended warranty",
-      "detail": "Not published on any Bilt tier page, Blue, Obsidian or Palladium.",
+      "detail": "Not included on the Blue Card. It starts at Obsidian.",
       "level": "none"
     }
   ],
-  "protection_note": "A real primary rental CDW, trip cancellation/interruption, trip delay and confirmed purchase/cell-phone protections, all for a $0-fee card. No extended warranty is published on any Bilt tier.",
-  "rental_note": "MasterRental coverage applies first, ahead of your personal auto policy, so decline the counter's CDW and pay with this card. Exact dollar limits are in the Guide to Benefits.",
+  "protection_note": "Secondary rental CDW, purchase assurance and cell phone protection on a $0-fee card. No trip cancellation, trip delay, extended warranty or luggage coverage. Those start at Obsidian.",
+  "rental_note": "MasterRental is secondary, so it pays after your personal auto policy, and it is primary only if you have no other insurance or yours does not cover you abroad. Decline the counter's CDW and pay for the whole rental with this card. Trucks, full-size vans, motorcycles and antique vehicles are excluded.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {
@@ -196,12 +197,8 @@
             "included": true
           },
           {
-            "text": "Earns Bilt Points on their spend (into your account)",
+            "text": "Earns Bilt Points on their spend, credited to your account or theirs, your choice",
             "included": true
-          },
-          {
-            "text": "No separate rewards or Bilt Cash of their own",
-            "included": false
           }
         ]
       }
@@ -209,6 +206,30 @@
     "note": "Free on the Blue Card. The $50/$95 Authorized User fee only kicks in on the Obsidian and Palladium tiers."
   },
   "timeline": [
+    {
+      "date": "2027",
+      "type": "future",
+      "badge": "Upcoming",
+      "text": "From your first card anniversary on or after January 1, 2027, the Flexible Bilt Cash option ends, along with its 4% back in Bilt Cash on everyday spend, unless you make a Legacy Election first."
+    },
+    {
+      "date": "Oct 20, 2026",
+      "type": "add",
+      "badge": "New partner",
+      "text": "JetBlue TrueBlue joins as a 1:1 transfer partner."
+    },
+    {
+      "date": "Sep 23, 2026",
+      "type": "add",
+      "badge": "New partner",
+      "text": "Amtrak Guest Rewards joins as Bilt's first rail partner, at 2 Bilt Points to 1 Amtrak point."
+    },
+    {
+      "date": "2026",
+      "type": "cut",
+      "badge": "Partner removed",
+      "text": "Spirit drops off Bilt's transfer partner list."
+    },
     {
       "date": "Feb 7, 2026",
       "type": "add",
