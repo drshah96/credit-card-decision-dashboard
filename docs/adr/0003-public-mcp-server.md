@@ -1548,6 +1548,14 @@ as `unknown_tool`, decided from the request and not from SDK wording. Any other 
 `http_<status>`. `internal_error` now only means a server fault. A client that drops the connection
 while sending its body logs as `disconnected` with a null `http_status`, and its quota stays charged.
 
+**A25. The November 2026 refresh supersedes A18's caveat.** The refresh (PR #268) took sign-up
+offers out of all served free text, keeping current ones in `welcome_bonus`, and
+`test_sign_up_offers_stay_out_of_served_text` now fails CI if one comes back. Served text no longer
+says free text may mention an offer. It still makes no promise that none does: a few first-year
+terms, such as a first-year fee waiver, remain as card terms. The same refresh re-checked 89 cards
+on 2026-11-07. Each record cites the commit that last changed the card's facts, so no record is
+`issuer_pass` any more. Version 1.0.0 is still unreleased, so its surface was corrected in place.
+
 **Defaults taken while owner decisions are open.** Each can change before release:
 
 - **Hosting:** free tier, as in D1.
@@ -1555,8 +1563,9 @@ while sending its body logs as `disconnected` with a null `http_status`, and its
 - **`verified_only` filter:** deferred. It is a new optional input, so a minor
   version can add it.
 - **Re-verification of the 5 unverified cards in top-3 slots and the 10
-  `issuer_pass` cards:** deferred. A later verification supersedes these records
-  under pin 3.
+  `issuer_pass` cards:** the November 2026 refresh (A25) re-checked the
+  `issuer_pass` cards. It left out retail co-brands, so the cards still unverified
+  in top-3 slots are all retail: Costco, Wayfair, Key Rewards and both BJ's cards.
 
 ### Product and business-model calls this makes
 

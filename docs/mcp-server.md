@@ -109,8 +109,7 @@ ranks only those cards and applies points pooling between cards that share a poi
 
 **Editorial content.** Verdicts and credit tiers are The Wallet Audit's own opinions, not issuer
 terms. The `welcome_bonus` field is not served, because offers change faster than the catalog is
-re-verified. Free text such as services and credit descriptions may still mention an offer, which
-may be out of date, so confirm any offer with the issuer.
+re-verified.
 
 ## Limits and errors
 

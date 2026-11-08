@@ -4,7 +4,7 @@ CONTRACT_VERSION = "1.0.0"
 
 # Maps each published version to the SHA-256 of its canonical tools/list surface.
 PUBLISHED_SURFACES: dict[str, str] = {
-    "1.0.0": "1be687bb2946df0a64000b260852a8d0269bd9b62b1e5e9fccb44b5480191f3d",
+    "1.0.0": "398e7c443579925550100c028c6bfc6bb1aae4f889e1a2f508b53f007eec8ff0",
 }
 
 SERVER_NAME = "thewalletaudit"
@@ -33,8 +33,6 @@ INSTRUCTIONS = (
     "editorial estimates. A credit default of 0 means no use is assumed, not that the credit "
     "is worthless, so call estimate_value with real usage before weighing credits. Rankings "
     "use the earn multiplier times the card's best realistic cents per point and never consider "
-    "affiliate status. The welcome_bonus field is not served. Free text such as services and "
-    "credit descriptions may still mention a sign-up offer, which may be out of date, so "
-    "confirm any offer with the issuer. A lounge_access of unconfirmed means the catalog cannot "
-    "say whether the card has access. Use find_cards to get card ids."
+    "affiliate status. The welcome_bonus field is not served. A lounge_access of unconfirmed "
+    "means the catalog cannot say whether the card has access. Use find_cards to get card ids."
 )
