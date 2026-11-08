@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.49%-28.49%",
+  "variable_apr": "19.74%-28.74%",
   "balance_transfer_apr": null,
   "balance_transfer_fee": null,
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.74%",
+  "cash_advance_apr": "28.99%",
   "penalty_apr": "29.99%",
   "penalty_apr_trigger": "Missing at least the Minimum Payment Due, or a returned payment; applies for at least 6 months and is reviewed every 6 months after that",
   "pay_over_time_fee": "Up to 1.33% per month of each purchase placed in a Plan It plan",
@@ -43,14 +43,14 @@
     {
       "emoji": "🍽️",
       "multiplier": "4×",
-      "category": "Restaurants worldwide",
+      "category": "Restaurants worldwide (first $15,000/yr of a shared cap, then 2×)",
       "highlight": false,
       "is_base": false
     },
     {
       "emoji": "🛒",
       "multiplier": "4×",
-      "category": "U.S. supermarkets",
+      "category": "U.S. supermarkets (first $15,000/yr of a shared cap, then 2×)",
       "highlight": false,
       "is_base": false
     },
@@ -62,7 +62,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Unlike the Brilliant, dining and groceries share one combined $15,000/yr cap rather than separate ones, easier to blow through if you use both categories heavily.",
+  "earn_note": "Restaurants and U.S. supermarkets share one combined $15,000/yr cap at 4×, then drop to the 2× base rate, so it's easy to blow through if you use both heavily. The Brilliant has no supermarket bonus at all.",
   "points": {
     "currency": "Marriott Bonvoy",
     "redemption_options": [
@@ -122,10 +122,10 @@
         "ratio": "3:1"
       },
       {
-        "name": "Air New Zealand AirPoint",
+        "name": "Air New Zealand Koru",
         "type": "airline",
         "ratio": "200:1",
-        "notes": "Converts into Airpoints Dollars (NZD), not miles, so the ratio is far worse than the standard 3:1 chart."
+        "notes": "Transfers at 200:1, far worse than the standard 3:1 chart. Marriott gives it a 75-mile bonus in place of the usual 5,000."
       },
       {
         "name": "American Airlines AAdvantage",
@@ -328,6 +328,7 @@
   ],
   "protection_note": "No trip cancellation/interruption coverage, and the 12-hour trip delay trigger is weaker than the Brilliant's 6-hour window. This card's protections sit closer to a no-fee card than a $250-fee one.",
   "rental_note": "Secondary and capped lower than the Brilliant's rental coverage; put rentals on a card with primary coverage if you rent often.",
+  "lounge_access": "none",
   "status_perks": [
     {
       "name": "Marriott Bonvoy Gold Elite Status",

@@ -18,15 +18,15 @@
     "months": 15
   },
   "foreign_transaction_fee": false,
-  "variable_apr": "17.49% to 26.49%, based on creditworthiness",
-  "balance_transfer_apr": "17.49% to 26.49%, based on creditworthiness",
-  "balance_transfer_fee": "5% on transfers posted at a promotional APR, none at the standard Transfer APR",
+  "variable_apr": "18.74% to 28.74%, based on creditworthiness",
+  "balance_transfer_apr": "18.74% to 28.74%, based on creditworthiness",
+  "balance_transfer_fee": "3% on amounts transferred within the first 15 months; 5% on transfers posted at a promotional APR offered later",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%-28.99%",
+  "cash_advance_apr": "28.74%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
-  "late_payment_fee": "None the first time you pay late, up to $41 after that",
+  "late_payment_fee": "Up to $41",
   "returned_payment_fee": "Up to $30",
   "returned_check_fee": null,
   "welcome_bonus": {
@@ -36,7 +36,7 @@
   },
   "verdict": {
     "status": "keep",
-    "text": "Year one pays double, if you remember to activate the categories",
+    "text": "The 5% categories pay well, if you remember to activate them",
     "short_tag": "Rotating 5%"
   },
   "earn_rates": [
@@ -55,7 +55,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 5% has a quarterly maximum Discover no longer states a dollar figure for, and only pays if you activate the categories first. Forget, and the quarter earns 1%. Discover's category calendar has been offline since August 2026, so treat any list you find, including a cap, as unconfirmed. Cashback Match doubles year one.",
+  "earn_note": "The 5% runs up to a quarterly maximum and only pays if you activate first. Forget, and the quarter earns 1%. The product page gives no dollar figure, but Capital One's migration FAQ says $1,500 a quarter for Discover it Cash Back. Discover's category calendar has been offline since August 2026, so treat any category list you find as unconfirmed.",
   "points": {
     "currency": "Cashback Bonus",
     "redemption_options": [
@@ -114,6 +114,7 @@
   ],
   "protection_note": "There is nothing here, and that is the honest answer rather than a gap in our research. Discover dropped purchase protection, extended warranty, return guarantee, auto rental coverage and travel accident insurance at the end of February 2018, then price protection that October, and the current cardmember agreement contains no benefit terms of any kind. That makes Discover unusual among big US issuers: even most no-fee cards from Chase, Capital One and Citi still carry a purchase protection or extended warranty row. What Discover does spend its money on is fraud and identity work instead, which is real but covers a different risk than a cracked phone screen or a stolen laptop.",
   "rental_note": "No rental car coverage at all, primary or secondary. If you decline the counter's collision waiver with this card, nothing backs you up, so either buy the waiver, rely on your own auto policy, or pay for the rental with a card that actually covers it.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {
@@ -126,15 +127,15 @@
     },
     {
       "name": "Social Security number alerts",
-      "detail": "Daily dark web scans for your SSN plus new-account alerts on your credit report. Requires enrollment, and only the primary cardmember can sign up."
+      "detail": "Get an alert if your Social Security number is found on the dark web, plus credit monitoring alerts on select changes to your TransUnion and Experian reports. It runs through CreditWise, which needs enrollment and is open to anyone over 18 with a valid SSN that matches a TransUnion profile."
     },
     {
       "name": "Card Lock",
-      "detail": "Lock the card from the app or website to block new purchases and cash advances if you misplace it."
+      "detail": "Lock the card in the mobile app if it is misplaced, lost or stolen. Some activity continues while it is locked, including returns, credits, payments, interest, balance transfers and other account fees. Usually only the primary cardholder or an account manager can lock or unlock it."
     },
     {
-      "name": "24/7 US-based customer service",
-      "detail": "Live agents at any hour, without a menu tree to fight through first."
+      "name": "24/7 customer service",
+      "detail": "You can reach a live agent any time, though some specialized agents may not be available around the clock."
     }
   ],
   "additional_cards": {
@@ -154,24 +155,20 @@
             "included": true
           },
           {
-            "text": "Counts toward your Cashback Match in year one",
-            "included": true
-          },
-          {
             "text": "Any purchase protection or travel coverage",
             "included": false
           }
         ]
       }
     ],
-    "note": "Free to add, and in the first year it is genuinely worth doing: an authorized user's spending is matched right along with yours, so household spend concentrated here doubles too."
+    "note": "Free to add, though you stay responsible for everything an authorized user charges."
   },
   "timeline": [
     {
       "date": "2026-2027",
       "type": "future",
       "badge": "Upcoming",
-      "text": "When your own account moves to Capital One, new earning routes switch on that Discover never had: 5% on hotels and rental cars booked through Capital One Travel, and Capital One Offers for online shopping. Capital One Entertainment tickets are reported to earn 5% too, though neither issuer documents it. These are not live for most cardholders yet, and Discover's own product pages do not list them."
+      "text": "When your own account moves to Capital One, new earning routes switch on that Discover never had: 5% on hotels and rental cars booked through Capital One Travel, 5% on tickets and events through Capital One Entertainment, and up to 15% through Capital One Offers. Miles cards earn the same rates in miles. These only apply once your account has moved, and Discover's own product pages do not list them."
     },
     {
       "date": "July 2026",
@@ -183,7 +180,7 @@
       "date": "June 2026",
       "type": "neutral",
       "badge": "New agreement",
-      "text": "The Discover cardmember agreement is replaced by a Capital One one, effective June 30. New accounts run under the Credit Card Agreement for Discover by Capital One, N.A., and applications now open on capitalone.com. Discover no longer publishes a per-card rates and fees document; the one that replaced it covers every Discover product at once."
+      "text": "The Discover cardmember agreement is replaced by a Capital One agreement, effective June 30. New accounts run under the Credit Card Agreement for Discover by Capital One, N.A., and applications now open on capitalone.com. Discover no longer publishes a per-card rates and fees document. One agreement now covers the Discover line, and a separate one covers the Secured card."
     },
     {
       "date": "May 2025",

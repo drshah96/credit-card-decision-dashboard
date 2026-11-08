@@ -67,7 +67,6 @@ function makeCard(overrides: Partial<Card> = {}): Card {
     late_payment_fee: null,
     returned_payment_fee: null,
     returned_check_fee: null,
-    welcome_bonus: null,
     earn_rates: [
       { emoji: "✈️", multiplier: "5×", category: "Flights", highlight: true, is_base: false },
     ],

@@ -57,3 +57,6 @@ application flow, and `/credit-cards/terms-and-conditions/?campaignid=...` 404s.
 **Per-card benefit documents are unreachable.** `/credit-cards/credit-card-benefits/`
 404s and no eligible-card list exists anywhere fetchable, so BofA `insurance[]`
 entries stay unverified and absence never proves a card lacks a coverage.
+
+**Offer terms route, found 2026-11-07:**
+`secure.bankofamerica.com/apply-now-services/credit-cards/rest/get-disclosures/v1/usa/show-in-browser?cId={campaignid}&poCd={code}&locale=en_US&isMobile=true`

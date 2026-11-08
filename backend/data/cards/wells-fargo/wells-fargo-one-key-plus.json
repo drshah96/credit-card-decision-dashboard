@@ -7,15 +7,15 @@
   "accent_color": "#4B1F80",
   "annual_fee": 99,
   "effective_cost": "Moderate: the $100 anniversary bonus alone covers the $99 fee if you'll use it",
-  "official_url": "https://creditcards.wellsfargo.com/one-key-plus-credit-card/",
+  "official_url": "https://www.wellsfargo.com/credit-cards/terms/onekeyplus/?product_code=CC&subproduct_code=OF&sub_channel=WEB&vendor_code=WF",
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "18.49%, 23.49%, or 28.49% (based on creditworthiness)",
-  "balance_transfer_apr": "18.49%, 23.49%, or 28.49% (based on creditworthiness)",
+  "variable_apr": "18.74%, 23.74%, or 28.74% (based on creditworthiness)",
+  "balance_transfer_apr": "18.74%, 23.74%, or 28.74% (based on creditworthiness)",
   "balance_transfer_fee": "$5 or 5% of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%",
+  "cash_advance_apr": "28.74%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": "$0 for eligible Expedia Purchase Plans",
@@ -97,7 +97,7 @@
       "default_value": 100,
       "tier": "easy",
       "removed": false,
-      "description": "$100 in OneKeyCash automatically credited to the account every cardmember anniversary, no spending requirement.",
+      "description": "$100 in OneKeyCash awarded each account anniversary with no spending requirement, as long as the account is open, not past due, and not in default. It expires 12 months after it's awarded.",
       "tips": [
         "Automatic, so it's the one credit on this card that doesn't need any action to collect."
       ]
@@ -119,7 +119,7 @@
   "insurance": [
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "Reimbursement for covered cancellations or interruptions on common carrier fares; exact per-trip limit not published on the card's marketing page",
+      "detail": "$5,000 per traveler per trip, $20,000 per account per 12 months, secondary coverage, common carrier fares only",
       "level": "mid"
     },
     {
@@ -129,12 +129,12 @@
     },
     {
       "coverage": "Rental car CDW",
-      "detail": "Up to $50,000, secondary coverage that applies after your personal auto insurance",
-      "level": "good"
+      "detail": "Up to $50,000, primary in the US (secondary for New York residents) and primary abroad, up to 31 consecutive days. Excludes Israel, Jamaica, the Republic of Ireland and Northern Ireland",
+      "level": "strong"
     },
     {
       "coverage": "Cell phone protection",
-      "detail": "Up to $1,000 per claim against damage or theft when you pay your monthly cell phone bill with this card, minus a $25 deductible, max 2 claims per 12 months",
+      "detail": "Up to $1,000 per claim against damage, theft, or involuntary separation when you pay your monthly cell phone bill with this card, minus a $25 deductible, max 2 claims per 12 months",
       "level": "strong"
     },
     {
@@ -151,10 +151,16 @@
       "coverage": "Extended warranty",
       "detail": "Not published for this card",
       "level": "none"
+    },
+    {
+      "coverage": "Identity theft protection",
+      "detail": "Mastercard ID Theft Protection, enrollment required, no cost",
+      "level": "good"
     }
   ],
   "protection_note": "The same strong travel insurance suite as the free One Key card (trip cancellation, travel accident, cell phone protection), plus the Global Entry/TSA PreCheck credit this tier adds. Purchase protection and extended warranty still aren't advertised.",
-  "rental_note": "Secondary coverage up to $50,000, meaning it pays after your personal auto policy for whatever's left, up to that limit. Charge the full rental cost to the card and decline the counter's optional CDW to activate it.",
+  "rental_note": "Up to $50,000 and primary in the US and abroad, so it pays before your personal auto policy. New York residents are the exception: in the US it only covers what their other policies don't. Rentals are capped at 31 consecutive days. Charge the full rental cost to the card and decline the counter's optional CDW to activate it.",
+  "lounge_access": "none",
   "status_perks": [
     {
       "name": "Gold tier, One Key membership",
@@ -162,12 +168,7 @@
       "note": "Automatic Gold status gives 20% or more in savings on 10,000+ VIP Access hotels booked through Expedia, Hotels.com, or Vrbo. Platinum tier unlocks after $30,000 in annual card spending."
     }
   ],
-  "services": [
-    {
-      "name": "$350 welcome bonus",
-      "detail": "$350 in OneKeyCash after spending $3,000 in purchases within the first 3 months."
-    }
-  ],
+  "services": [],
   "additional_cards": {
     "title": "Authorized users",
     "options": [

@@ -68,7 +68,6 @@ function makeCard(overrides: Partial<Card> = {}): Card {
     late_payment_fee: null,
     returned_payment_fee: null,
     returned_check_fee: null,
-    welcome_bonus: null,
     earn_rates: [],
     earn_note: "",
     points: { currency: summary.points_program, redemption_options: [], per_100k: "", note: "" },

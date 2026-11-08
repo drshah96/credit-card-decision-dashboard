@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.49%-29.49%",
-  "balance_transfer_apr": "19.49%-29.49%",
+  "variable_apr": "19.74%-29.74%",
+  "balance_transfer_apr": "19.74%-29.74%",
   "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "29.74%",
+  "cash_advance_apr": "29.99%",
   "penalty_apr": "Up to 29.99%",
   "penalty_apr_trigger": "Making a late payment or a payment that's returned",
   "pay_over_time_fee": "Up to 1.72% per month, for Citi Flex Plan balances subject to a Plan Fee",
@@ -88,7 +88,7 @@
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "AAdvantage miles aren't a transferable bank-points currency. There's no way to move them out to another loyalty program, and (unlike United MileagePlus) no bank card lets you transfer points in either.",
+    "highlight": "AAdvantage miles aren't a transferable bank-points currency, so there's no way to move them out to another loyalty program. Points can move in, though: Citi ThankYou Points transfer to American Airlines AAdvantage from the Strata cards.",
     "recent_changes": "Citi became the sole issuer of AAdvantage-branded consumer credit cards as Barclays exited the co-brand partnership (announced Dec 2024, Barclays stopped issuing new AAdvantage cards Sept 30, 2025); Barclays AAdvantage cardholders began transitioning to equivalent Citi-issued cards starting April 2026, with some legacy Barclays benefits temporarily carried over."
   },
   "credits": [
@@ -104,11 +104,25 @@
       "tips": [
         "High spend bar; only relevant if you're already putting $20k/yr on this card for other reasons."
       ]
+    },
+    {
+      "id": "turo",
+      "name": "Turo Credit",
+      "subtitle": "$30 per trip · up to $180/yr",
+      "max_annual": 180,
+      "default_value": 0,
+      "tier": "niche",
+      "removed": false,
+      "description": "Statement credits of up to $30 per eligible Turo trip, up to $180 a year.",
+      "tips": [
+        "$0 to you if you don't rent through Turo."
+      ]
     }
   ],
   "insurance": [],
   "protection_note": "Citi's public marketing pages for this card don't disclose any travel insurance or purchase-protection benefits (no trip delay, trip cancellation, baggage, or purchase protection called out), a step down from the paid Executive card, which does advertise a real travel-insurance suite. Treat this tier as carrying none of that coverage unless your Guide to Benefits says otherwise.",
   "rental_note": "No rental car coverage advertised for this tier. The Executive card adds worldwide rental car insurance; Platinum Select does not.",
+  "lounge_access": "none",
   "status_perks": [
     {
       "name": "Loyalty Points",
@@ -123,7 +137,7 @@
     },
     {
       "name": "Preferred boarding",
-      "detail": "Priority boarding group on American Airlines flights for the cardholder and up to 4 companions traveling on the same reservation."
+      "detail": "Boards in Group 5, after Priority boarding and before the rest of economy, for the cardholder and up to 4 companions on the same reservation."
     },
     {
       "name": "25% back on inflight purchases",
@@ -155,8 +169,8 @@
             "included": true
           },
           {
-            "text": "Shares the free-bag and preferred-boarding benefit only when traveling with the primary cardholder on the same reservation",
-            "included": true
+            "text": "No free bag or preferred boarding of their own; they get them only as one of the 4 companions on the primary cardholder's reservation",
+            "included": false
           },
           {
             "text": "No separate Loyalty Points allotment of their own",
@@ -165,9 +179,15 @@
         ]
       }
     ],
-    "note": "Free to add. The free-bag and preferred-boarding perks extend to an authorized user only when they're actually traveling with the primary cardholder on the same reservation."
+    "note": "Free to add. Authorized users don't get the free bag or preferred boarding on their own; they get them only as one of the primary cardholder's 4 companions on the same reservation."
   },
   "timeline": [
+    {
+      "date": "Jan 24, 2027",
+      "type": "future",
+      "badge": "Upcoming",
+      "text": "Announced Oct 27, 2026: the annual fee rises from $99 to $150, the flight discount goes from $125 to $150, and new perks include up to $100 a year on inflight purchases, a Global Entry or TSA PreCheck credit, and a Walmart+ membership."
+    },
     {
       "date": "Apr 2026",
       "type": "neutral",

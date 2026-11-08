@@ -11,16 +11,16 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.49%, 25.49%, or 28.49% (based on creditworthiness)",
-  "balance_transfer_apr": "19.49%, 25.49%, or 28.49% (based on creditworthiness)",
+  "variable_apr": "19.74%, 25.74%, or 28.74% (based on creditworthiness)",
+  "balance_transfer_apr": "19.74%, 25.74%, or 28.74% (based on creditworthiness)",
   "balance_transfer_fee": "Introductory fee of $5 or 3% of each transfer, whichever is greater, for 120 days from account opening; up to $5 or 5% after",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "29.49%",
+  "cash_advance_apr": "29.74%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
   "late_payment_fee": "Up to $40",
-  "returned_payment_fee": "Up to $40",
+  "returned_payment_fee": null,
   "returned_check_fee": null,
   "welcome_bonus": {
     "bonus": "60,000 points",
@@ -129,7 +129,7 @@
         "ratio": "1:1"
       },
       {
-        "name": "Cathay Pacific",
+        "name": "Cathay Pacific Asia Miles",
         "type": "airline",
         "ratio": "1:1",
         "notes": "Added Apr 2026."
@@ -182,7 +182,7 @@
   "insurance": [
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "Up to $15,000 reimbursement per trip for covered cancellations or interruptions",
+      "detail": "Up to $15,000 per traveler per trip, $20,000 per account per 12 months, for covered cancellations or interruptions",
       "level": "strong"
     },
     {
@@ -223,23 +223,20 @@
   ],
   "protection_note": "A real travel insurance suite for a $95 card: trip cancellation up to $15,000, travel accident up to $1,000,000, and baggage coverage all stand out. Cell phone protection is also the richest in the Autograph lineup. No purchase protection or extended warranty are advertised, and rental coverage is secondary at home though primary abroad, so the purchase and warranty gaps carry over from the no-fee Autograph.",
   "rental_note": "Up to $50,000. Secondary in the US, so it pays after your own auto policy, but primary outside the US. Charge the full rental cost to the card and decline the counter's optional CDW to activate it.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
-    {
-      "name": "60,000-point welcome bonus",
-      "detail": "60,000 bonus points (about $600 toward travel) after spending $4,000 in purchases within the first 3 months."
-    },
     {
       "name": "Visa Signature Concierge and Luxury Hotel Collection",
       "detail": "24/7 concierge for reservations and event tickets, plus perks at select luxury hotel properties."
     },
     {
       "name": "Roadside Dispatch",
-      "detail": "24/7 towing and roadside assistance, billed to the card at time of dispatch, no membership fee."
+      "detail": "24/7 pay-per-use towing and roadside assistance with no membership. The service call fee is confirmed when you request help, and you pay the provider for towing past 5 miles."
     },
     {
       "name": "My Wells Fargo Deals",
-      "detail": "Personalized merchant offers that earn extra cash back or points as an account credit."
+      "detail": "Personalized merchant offers that earn cash back as an account credit."
     }
   ],
   "additional_cards": {
@@ -265,7 +262,19 @@
   },
   "timeline": [
     {
-      "date": "Sep 2024",
+      "date": "Apr 2026",
+      "type": "add",
+      "badge": "Partner",
+      "text": "Wyndham Rewards joins at 1:2 and Cathay Pacific Asia Miles at 1:1, both in April."
+    },
+    {
+      "date": "Nov 2025",
+      "type": "add",
+      "badge": "Partner",
+      "text": "JetBlue TrueBlue joins Wells Fargo's points transfer program at 1:1."
+    },
+    {
+      "date": "2024",
       "type": "add",
       "badge": "Launch",
       "text": "Wells Fargo launches Autograph Journey as a premium companion to Autograph, adding a $95 fee, elevated 5x hotel and 4x airline rates, and a real travel insurance suite (trip cancellation, travel accident, baggage) the no-fee card doesn't have."

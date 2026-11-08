@@ -51,7 +51,7 @@
       "is_base": false
     }
   ],
-  "earn_note": "This is a closed-loop, proprietary card. It isn't a Visa or Mastercard and can't be used anywhere except participating Exxon and Mobil branded stations. There's no earning at all outside Exxon/Mobil, no general-purpose base rate, and no signup bonus. The 5% convenience-store credit excludes fuel, lottery tickets, money orders, and gift cards, and caps at $1,200 in qualifying spend per year ($60 max credit). Discounts stack with the separate Exxon Mobil Rewards+ loyalty program.",
+  "earn_note": "This is a closed-loop, proprietary card. It isn't a Visa or Mastercard and can't be used anywhere except participating Exxon and Mobil branded stations. There's no earning at all outside Exxon/Mobil, and no general-purpose base rate. The 5% convenience-store credit excludes fuel, lottery tickets, money orders, and gift cards, and caps at $1,200 in qualifying spend per year ($60 max credit). Discounts stack with the separate Exxon Mobil Rewards+ loyalty program.",
   "points": {
     "currency": "None, instant per-gallon discount plus a capped statement credit",
     "redemption_options": [

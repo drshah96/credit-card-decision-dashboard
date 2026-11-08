@@ -1,6 +1,9 @@
 import type { Card } from "../types/cards";
 import type { LikedFeature } from "../api/feedback";
 
+/** A status perk that is airport lounge access, read from the perk's name. */
+const LOUNGE_PERK_NAME = /lounge|priority pass|sky club|united club|admirals/i;
+
 /**
  * Which features a card actually has, for the question the feedback form asks
  * about what appeals most.
@@ -11,16 +14,12 @@ import type { LikedFeature } from "../api/feedback";
  * aggregate looking like a real signal.
  *
  * Every gate is something the card page actually renders. That rules out the
- * welcome bonus, whose block is deliberately disabled (a stale sign-up offer
- * reads as an active wrong promotional claim), even though the data is there
- * on 79 of 109 cards.
+ * welcome bonus, which the card files capture for internal use but nothing
+ * serves, because a stale sign-up offer reads as an active wrong promotional claim.
  *
  * Order is the order the form renders, roughly most to least commonly
  * available across the catalog.
  */
-/** A status perk that is airport lounge access, read from the perk's name. */
-const LOUNGE_PERK_NAME = /lounge|priority pass|sky club|united club|admirals/i;
-
 export const LIKED_FEATURE_LABELS: Record<LikedFeature, string> = {
   earn_rates: "Earn rates",
   insurance: "Insurance & protections",

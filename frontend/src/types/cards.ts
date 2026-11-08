@@ -19,19 +19,6 @@ export interface IntroApr {
   months: number;
 }
 
-/** The current sign-up offer, quoted verbatim from the issuer's own current
- * terms — offers change frequently and are structured differently across
- * issuers (points vs. cash, single vs. tiered spend thresholds), so `bonus`/
- * `requirement` stay free text like `effective_cost`/`variable_apr`
- * elsewhere. `estimated_value` is this card's own best redemption cpp
- * applied to the bonus, when it's a points/miles amount — null for cash
- * offers, where the bonus amount already is the value. */
-export interface WelcomeBonus {
-  bonus: string;
-  requirement: string;
-  estimated_value: string | null;
-}
-
 interface CardBase {
   id: string;
   name: string;
@@ -254,7 +241,4 @@ export interface Card extends CardBase {
   late_payment_fee: string | null;
   returned_payment_fee: string | null;
   returned_check_fee: string | null;
-  /** The current sign-up offer — see WelcomeBonus. Detail-only, same
-   * not-yet-audited treatment as the round-3 fields above. */
-  welcome_bonus: WelcomeBonus | null;
 }

@@ -18,11 +18,11 @@
     "months": 15
   },
   "foreign_transaction_fee": true,
-  "variable_apr": "17.49%-27.49%",
-  "balance_transfer_apr": "17.49%-27.49%",
+  "variable_apr": "17.74%-27.74%",
+  "balance_transfer_apr": "17.74%-27.74%",
   "balance_transfer_fee": "3% for the first 60 days of account opening; 5% after",
   "foreign_transaction_fee_rate": "3%",
-  "cash_advance_apr": "28.49%-29.24%",
+  "cash_advance_apr": "29.49%",
   "penalty_apr": "Up to 29.99%, based on your creditworthiness",
   "penalty_apr_trigger": "Making a late payment; applies indefinitely once triggered",
   "pay_over_time_fee": "Monthly fee up to 1.72% of the purchase amount assigned to a BofA Custom Pay Plan",
@@ -30,7 +30,7 @@
   "returned_payment_fee": null,
   "returned_check_fee": null,
   "welcome_bonus": {
-    "bonus": "$200 cash back",
+    "bonus": "$200 cash back, plus 6% in the choice category for the first year",
     "requirement": "after you spend $1,000 in purchases within the first 90 days of account opening",
     "estimated_value": null
   },
@@ -62,7 +62,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 6% choice-category rate is a first-year bonus on top of the standing 3%; after year one it drops to 3%. Both the choice category and grocery/wholesale-club 2% share a single $2,500/quarter combined spending cap, after which they fall to 1%. You can change your choice category once per calendar month in online/mobile banking. Enrolled BofA Rewards members get a 10–75% bonus depending on combined deposit/investment balance (Member/Preferred Plus/Preferred Honors/Premier tiers). That bonus does not apply to the first-year cash back bonus.",
+  "earn_note": "Both the choice category and grocery/wholesale-club 2% share a single $2,500/quarter combined spending cap, after which they fall to 1%. You can change your choice category once per calendar month in online/mobile banking. Enrolled BofA Rewards members get a 10–75% bonus depending on combined deposit/investment balance (Member/Preferred Plus/Preferred Honors/Premier tiers).",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
@@ -72,7 +72,7 @@
         "best": true
       },
       {
-        "method": "Statement credit or gift cards",
+        "method": "Statement credit, Merrill account credit, check, or Amazon and PayPal purchases",
         "cpp": 1.0,
         "best": false
       }
@@ -116,12 +116,9 @@
   ],
   "protection_note": "Bank of America's purchase/travel protection suite (Return Protection, Purchase Security, Auto Rental CDW, trip insurance) is only advertised on the Premium Rewards cards; it isn't published for this card despite the shared Visa Signature network tier.",
   "rental_note": "No auto rental coverage documented publicly for this card as of this writing.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
-    {
-      "name": "$200 welcome bonus",
-      "detail": "One-time $200 cash bonus after $1,000 in purchases within the first 90 days."
-    },
     {
       "name": "Intro balance transfer fee",
       "detail": "3% for the first 60 days the account is open, then 5% on all future transfers."
@@ -154,10 +151,10 @@
   },
   "timeline": [
     {
-      "date": "May 27, 2026",
+      "date": "May 26, 2026",
       "type": "neutral",
       "badge": "Program change",
-      "text": "Preferred Rewards became BofA Rewards. The tiers were renamed (Gold and Platinum folded into Preferred Plus, Platinum Honors became Preferred Honors, Diamond became Premier) and existing members moved over automatically. The 25–75% card bonus survived the change and a 10% Member tier was added below it, so nobody earning a bonus before is earning less now. Preferred Honors and Premier also picked up subscription reimbursement worth up to $96 and $180 a year."
+      "text": "Preferred Rewards became BofA Rewards. The tiers were renamed, existing members moved over automatically, and a 10% Member tier was added. The card bonus is now 10% Member, 25% Preferred Plus, 50% Preferred Honors and 75% Premier. Cards earning a Preferred Rewards bonus before May 1, 2026 keep that bonus for at least six months. Preferred Honors and Premier also picked up subscription credits worth up to $96 and $180 a year."
     }
   ]
 }

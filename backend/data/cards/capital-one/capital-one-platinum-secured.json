@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "28.99%",
-  "balance_transfer_apr": "28.99%",
+  "variable_apr": "29.24%",
+  "balance_transfer_apr": "29.24%",
   "balance_transfer_fee": "$0 at the standard Transfer APR, or 4% at any promotional APR Capital One may offer",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.99%",
+  "cash_advance_apr": "29.24%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
@@ -46,6 +46,7 @@
   "insurance": [],
   "protection_note": "Bare-bones by design, even more so than Quicksilver Secured. Capital One's official Platinum Secured materials don't advertise purchase protection, extended warranty, price protection, or travel insurance. Treat this card as carrying no meaningful purchase or travel protections.",
   "rental_note": "No rental car coverage is advertised for this card; use a different card for rentals.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {
@@ -66,7 +67,7 @@
     },
     {
       "name": "APR",
-      "detail": "28.99% variable on purchases and cash advances, with no introductory 0% period."
+      "detail": "29.24% variable on purchases and cash advances, with no introductory 0% period."
     }
   ],
   "additional_cards": {

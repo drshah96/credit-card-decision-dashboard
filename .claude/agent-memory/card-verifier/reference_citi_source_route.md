@@ -66,3 +66,8 @@ APR is normally uniform across its consumer cards, so a card whose stored value
 differs from its siblings is worth re-checking first. On 2026-09-05
 `citi-simplicity` stored 29.74% against `citi-diamond-preferred`'s 29.99%. Treat
 that as where to look, never as what to write.
+
+**Third-party renderers, learned 2026-11-07:** a read through `r.jina.ai` counts only
+when a Citi or AA document backs it. One such read claimed "No late fee ever" on Citi
+Diamond Preferred, and screenshots of Citi's own page disproved it. Screenshots from
+a person reading `online.citi.com` do count.

@@ -1,6 +1,6 @@
 ---
 name: discover-source-route
-description: Discover no longer publishes its own cardmember agreement; new accounts run under a single Capital One agreement covering the whole product line
+description: Discover no longer publishes its own cardmember agreement; Capital One publishes one agreement for the line and one for Secured, and category pages print each card's rates
 metadata:
   type: reference
 ---
@@ -32,18 +32,30 @@ cardmember can sign up is no longer accurate. Both changes are undated by
 Discover; do not invent a date for them.
 
 **The 5% rotating-category quarterly cap has disappeared from Discover's own
-copy.** Current wording on every card is "up to the quarterly maximum" with no
-dollar figure. A stored `$1,500` cap is no longer sourced; treat it the same
-way you would any other unconfirmed legacy figure, and check it against a
-sibling card before editing only one, since the secured/unsecured pair must
-stay parity-matched on `earn_rates`.
+product pages.** Current wording is "up to the quarterly maximum". Capital One's
+migration FAQ (`capitalone.com/updates/discover/card-faqs/`) gives $1,500 a
+quarter, but names only Discover it Cash Back and Discover More. Do not carry it
+to the student or secured cards.
 
 **it Miles redemption is narrower than the rest of the line.** Discover's Miles
-page lists only cash, travel-statement-credit and PayPal; no gift-card route,
-unlike every cash-back card in the lineup. Do not carry the gift-card
-redemption option over from a sibling card.
+page lists only cash, travel-statement-credit and PayPal. Capital One says Miles
+cardholders can also redeem for gift cards once the account moves, so keep that
+as a note rather than a redemption option.
 
 Dead ends: `discover.com/credit-cards/rates-terms/` (404),
 `.../resources/cardmember-agreements/` (500), the CFPB per-issuer path (404,
 the database is JS-dropdown only), `.../cash-back/calendar.html` (404, no
 calendar exists anywhere).
+
+**Updates from 2026-11-07:**
+- Per-card rates are printed on category pages under "Rates And Fees Information",
+  such as `discover.com/credit-cards/no-annual-fee-credit-cards/`, including Secured.
+- The agreement index now has two Discover entries, general and Secured. The
+  quarter token in the URL changes each quarter (`q3-2026` at this check).
+- `capitalone.com/updates/discover/` pages are the best source for migration and
+  redemption changes.
+- `discover.com/credit-cards/member-benefits/` is live but legacy copy. It still
+  says "Freeze" and limits SSN alerts to primary cardmembers, which contradicts
+  every current card page.
+- There is no first-late-fee waiver in the current agreements. It appears only in
+  legacy Discover Bank agreements.

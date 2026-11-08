@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.24%-27.74%",
-  "balance_transfer_apr": "19.24%-27.74%",
+  "variable_apr": "19.49%-27.99%",
+  "balance_transfer_apr": "19.49%-27.99%",
   "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%",
+  "cash_advance_apr": "28.74%",
   "penalty_apr": "Up to 29.99%",
   "penalty_apr_trigger": "Failing to make a Minimum Payment when due, or making a payment that's returned unpaid; can remain in effect indefinitely",
   "pay_over_time_fee": "0% on qualifying $100-$5,000 travel purchases (Marriott stays or booked directly with an airline); up to 1.72% per month on other amounts selected to pay over time",
@@ -50,7 +50,7 @@
     {
       "emoji": "\ud83d\ude97",
       "multiplier": "2\u00d7",
-      "category": "Rideshare",
+      "category": "Rideshare, taxis & limousines",
       "highlight": true,
       "is_base": false
     },
@@ -143,10 +143,10 @@
         "ratio": "3:1"
       },
       {
-        "name": "Air New Zealand Airpoints",
+        "name": "Air New Zealand Koru",
         "type": "airline",
         "ratio": "200:1",
-        "notes": "Converts into Airpoints Dollars (NZD), not miles, so the ratio is far worse than the standard 3:1 chart."
+        "notes": "Well below the standard 3:1 chart. The transfer bonus at this ratio is 75 miles."
       },
       {
         "name": "American Airlines AAdvantage",
@@ -156,11 +156,6 @@
       },
       {
         "name": "ANA Mileage Club",
-        "type": "airline",
-        "ratio": "3:1"
-      },
-      {
-        "name": "Asiana Airlines Asiana Club",
         "type": "airline",
         "ratio": "3:1"
       },
@@ -176,12 +171,12 @@
         "notes": "Does not earn the 5,000-mile transfer bonus other partners get."
       },
       {
-        "name": "British Airways Executive Club",
+        "name": "The British Airways Club",
         "type": "airline",
         "ratio": "3:1"
       },
       {
-        "name": "Cathay Pacific Asia Miles",
+        "name": "Cathay Pacific Cathay",
         "type": "airline",
         "ratio": "3:1"
       },
@@ -223,11 +218,6 @@
       },
       {
         "name": "Iberia Plus",
-        "type": "airline",
-        "ratio": "3:1"
-      },
-      {
-        "name": "InterMiles",
         "type": "airline",
         "ratio": "3:1"
       },
@@ -301,6 +291,16 @@
         "name": "Vueling Club",
         "type": "airline",
         "ratio": "3:1"
+      },
+      {
+        "name": "Ethiopian Airlines ShebaMiles",
+        "type": "airline",
+        "ratio": "3:1"
+      },
+      {
+        "name": "LATAM Pass Brazil",
+        "type": "airline",
+        "ratio": "3:1"
       }
     ]
   },
@@ -308,7 +308,7 @@
     {
       "id": "pay-yourself-back",
       "name": "Pay Yourself Back",
-      "subtitle": "$100 per 12,500 pts \u00b7 $750/yr cap \u00b7 airfare & Marriott stays",
+      "subtitle": "$100 per 12,500 pts · $750/yr cap · airfare & Marriott stays",
       "max_annual": 750,
       "default_value": 0,
       "tier": "plan",
@@ -322,12 +322,12 @@
     {
       "id": "dashpass",
       "name": "DoorDash DashPass + Credit",
-      "subtitle": "1-yr complimentary + $10/qtr non-restaurant \u00b7 thru 2027",
-      "max_annual": 40,
+      "subtitle": "1-yr complimentary + $10/mo non-restaurant",
+      "max_annual": 120,
       "default_value": 0,
       "tier": "niche",
       "removed": false,
-      "description": "One year of complimentary DashPass membership plus up to $10 off quarterly on non-restaurant DoorDash orders, active through December 31, 2027.",
+      "description": "One year of complimentary DashPass membership plus $10 off per month on non-restaurant DoorDash orders for DashPass activated from Sep 1, 2026 (quarterly before that). This figure counts the discount, not the membership.",
       "tips": [
         "Skip this if you're not already a DoorDash user; not worth chasing on its own."
       ]
@@ -336,7 +336,7 @@
   "insurance": [
     {
       "coverage": "Baggage delay",
-      "detail": "$100/day \u00b7 up to 5 days",
+      "detail": "$100/day · up to 5 days",
       "level": "mid"
     },
     {
@@ -346,12 +346,12 @@
     },
     {
       "coverage": "Trip delay",
-      "detail": "$500/traveler \u00b7 after 12 hrs",
+      "detail": "$500/traveler · after 12 hrs",
       "level": "mid"
     },
     {
       "coverage": "Purchase protection",
-      "detail": "$500/item \u00b7 120 days",
+      "detail": "$500/item · 120 days",
       "level": "mid"
     },
     {
@@ -363,10 +363,21 @@
       "coverage": "Rental car CDW",
       "detail": "$60,000 · secondary in the US, primary abroad",
       "level": "good"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "+1 year (on warranties ≤3 years, up to 4 years total)",
+      "level": "good"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "Up to $500,000",
+      "level": "good"
     }
   ],
   "protection_note": "Nearly identical insurance to the paid Boundless card: baggage delay, lost luggage, trip delay, purchase protection and auto rental coverage are all present at the same limits, which is a pleasant surprise for $0. Neither Chase Marriott card offers trip cancellation.",
   "rental_note": "Auto Rental Coverage is included at up to $60,000: secondary in the US, primary outside it, for rentals up to 31 consecutive days. Decline the counter waiver and pay for the whole rental with the card.",
+  "lounge_access": "none",
   "status_perks": [
     {
       "name": "Marriott Bonvoy Silver Elite Status",
@@ -407,10 +418,16 @@
   },
   "timeline": [
     {
-      "date": "Jun 4, 2026",
+      "date": "Nov 2026",
       "type": "neutral",
-      "badge": "Refresh",
-      "text": "Welcome offer changed to 45,000 points after $1,000 spend in 3 months, replacing a temporary 2-Free-Night promotional offer."
+      "badge": "Partners",
+      "text": "As of this check, Marriott's airline chart no longer lists Asiana or InterMiles and now lists Ethiopian ShebaMiles and LATAM Pass Brazil, all at 3:1."
+    },
+    {
+      "date": "Sep 1, 2026",
+      "type": "add",
+      "badge": "Upgrade",
+      "text": "The $10 DoorDash non-restaurant promo moves from quarterly to monthly for DashPass activated on or after this date."
     }
   ]
 }

@@ -11,15 +11,15 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "28.99%",
-  "balance_transfer_apr": "28.99%",
+  "variable_apr": "29.24%",
+  "balance_transfer_apr": "29.24%",
   "balance_transfer_fee": "5% on transfers posted at a promotional APR, none at the standard Transfer APR",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.99%",
+  "cash_advance_apr": "29.24%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
-  "late_payment_fee": "None the first time you pay late, up to $41 after that",
+  "late_payment_fee": "Up to $41",
   "returned_payment_fee": "Up to $30",
   "returned_check_fee": null,
   "welcome_bonus": {
@@ -48,7 +48,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Unusually for a secured card the rewards are real: the same 5% rotating categories and 1% base as the flagship, doubled in year one. The 5% still needs activating, and Discover's category calendar has been offline since August 2026. The point here is payment history, not rewards.",
+  "earn_note": "Unusually for a secured card the rewards are real: the same 5% rotating categories and 1% base as the flagship. The 5% still needs activating, and Discover's category calendar has been offline since August 2026. The point here is payment history, not rewards.",
   "points": {
     "currency": "Cashback Bonus",
     "redemption_options": [
@@ -107,6 +107,7 @@
   ],
   "protection_note": "Nothing here, which is consistent across every Discover card since the February 2018 cuts and the removal of price protection that October. The current cardmember agreement carries no benefit terms at all. For a credit-building card this matters less than it would elsewhere, since the job is establishing a payment history rather than insuring purchases, but it is worth knowing that graduating to the unsecured version does not unlock protections either. There are none to unlock.",
   "rental_note": "No rental car coverage, primary or secondary. Renting a car on this card means relying on your own auto policy or buying the counter's collision waiver.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {
@@ -115,7 +116,7 @@
     },
     {
       "name": "No interest paid on the deposit",
-      "detail": "The money sits in a Security Deposit Account that is FDIC insured and stays in your name, but it earns nothing while it is held, and you cannot withdraw from it while the account is open. That is a real if small cost of the card, since the same cash in a savings account would earn."
+      "detail": "The money sits in a Security Account that is FDIC insured to the extent the law permits, with you as beneficial owner, but it earns nothing while it is held, and you cannot withdraw from it until the account is closed and paid to $0. That is a real if small cost of the card, since the same cash in a savings account would earn."
     },
     {
       "name": "Path to an unsecured card",
@@ -131,15 +132,15 @@
     },
     {
       "name": "Social Security number alerts",
-      "detail": "Daily dark web scans for your SSN plus new-account alerts on your credit report. Requires enrollment."
+      "detail": "Get an alert if your Social Security number is found on the dark web, plus credit monitoring alerts on select changes to your TransUnion and Experian reports. It runs through CreditWise, which needs enrollment and is open to anyone over 18 with a valid SSN that matches a TransUnion profile."
     },
     {
       "name": "Card Lock",
-      "detail": "Lock the card from the app to block new purchases and cash advances if you misplace it."
+      "detail": "Lock the card in the mobile app if it is misplaced, lost or stolen. Some activity continues while it is locked, including returns, credits, payments, interest, balance transfers and other account fees. Usually only the primary cardholder or an account manager can lock or unlock it."
     },
     {
-      "name": "24/7 US-based customer service",
-      "detail": "Live agents at any hour, without a menu tree to fight through first."
+      "name": "24/7 customer service",
+      "detail": "You can reach a live agent any time, though some specialized agents may not be available around the clock."
     }
   ],
   "additional_cards": {

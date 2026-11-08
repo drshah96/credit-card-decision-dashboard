@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.49%, 24.49%, or 28.49%, based on creditworthiness",
-  "balance_transfer_apr": "19.49%, 24.49%, or 28.49%, based on creditworthiness",
+  "variable_apr": "19.74%-28.74%, based on creditworthiness",
+  "balance_transfer_apr": "19.74%-28.74%, based on creditworthiness",
   "balance_transfer_fee": "$0 at the standard Transfer APR, or 4% at any promotional APR Capital One may offer",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%",
+  "cash_advance_apr": "28.74%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
@@ -23,7 +23,7 @@
   "returned_payment_fee": null,
   "returned_check_fee": null,
   "welcome_bonus": {
-    "bonus": "75,000 miles",
+    "bonus": "75,000 miles, plus $300 toward hotels and vacation rentals through Capital One Travel in your first cardholder year",
     "requirement": "after you spend $4,000 in purchases in the first 3 months from account opening",
     "estimated_value": "$1,388"
   },
@@ -74,10 +74,10 @@
     "note": "Same mile currency and transfer chart as the Venture X. A Venture mile transfers for exactly the same value as a Venture X mile, there's no lesser tier."
   },
   "transfer_partners": {
-    "airline_count": 18,
+    "airline_count": 19,
     "hotel_count": 4,
-    "highlight": "Full access to all 18 airline and 4 hotel partners. Capital One doesn't gate transfer partners behind its priciest card. Same sweet spots as Venture X: Turkish (Star Alliance short-hauls), Flying Blue, Virgin Red, JAL Mileage Bank.",
-    "recent_changes": "JAL Mileage Bank, Qatar Airways Privilege Club, and I Prefer Hotel Rewards were added Sept 2025, growing the airline list from 15 to 18.",
+    "highlight": "Full access to all 19 airline and 4 hotel partners. Capital One doesn't gate transfer partners behind its priciest card. Same sweet spots as Venture X: Turkish (Star Alliance short-hauls), Flying Blue, Virgin Red, JAL Mileage Bank.",
+    "recent_changes": "Copa was added in Nov 2026, growing the airline list from 18 to 19. JAL Mileage Bank, Qatar Airways Privilege Club, and I Prefer Hotel Rewards were added Sept 2025.",
     "partners": [
       {
         "name": "Aeromexico Rewards",
@@ -103,6 +103,12 @@
         "name": "Cathay Pacific Asia Miles",
         "type": "airline",
         "ratio": "1:1"
+      },
+      {
+        "name": "Copa",
+        "type": "airline",
+        "ratio": "2:1.5",
+        "notes": "Below Capital One's typical 1:1 rate."
       },
       {
         "name": "Etihad Guest",
@@ -271,10 +277,16 @@
       "coverage": "Extended warranty",
       "detail": "+1 yr on ≤2-yr warranties · $10k/claim · $50k per cardholder",
       "level": "good"
+    },
+    {
+      "coverage": "Price protection",
+      "detail": "$250/item · $1,000/yr · 120 days",
+      "level": "mid"
     }
   ],
-  "protection_note": "The move to the Discover network brought real travel cover: trip cancellation and interruption at $1,500 per person, baggage delay, lost luggage and $1M of travel accident insurance. Still no trip delay, no emergency medical and no cell-phone protection, all of which the Venture X includes.",
+  "protection_note": "The move to the Discover network brought real travel cover: trip cancellation and interruption at $1,500 per person, baggage delay, lost luggage and $1M of travel accident insurance. Still no trip delay or cell-phone protection, both of which the Venture X includes. Neither card has emergency medical cover.",
   "rental_note": "Secondary CDW inside the US only (primary abroad), the opposite of the Venture X's always-primary $75k coverage. If you rent domestically often, pair this with a primary-coverage card or buy the rental counter's waiver.",
+  "lounge_access": "paid",
   "status_perks": [
     {
       "name": "Hertz Five Star",
@@ -331,6 +343,12 @@
     "note": "Free to add, but since the primary card itself doesn't include lounge access, adding users doesn't change the lounge math the way it does on Venture X."
   },
   "timeline": [
+    {
+      "date": "Nov 2, 2026",
+      "type": "add",
+      "badge": "Add",
+      "text": "Copa added as a transfer partner at 2:1.5, taking the airline list to 19."
+    },
     {
       "date": "Early 2026",
       "type": "neutral",

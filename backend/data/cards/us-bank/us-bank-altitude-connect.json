@@ -17,11 +17,11 @@
     "months": 15
   },
   "foreign_transaction_fee": false,
-  "variable_apr": "17.49%-27.49%",
-  "balance_transfer_apr": "17.49%-27.49%",
+  "variable_apr": "17.74%-27.74%",
+  "balance_transfer_apr": "17.74%-27.74%",
   "balance_transfer_fee": "5% of each transfer amount, $5 minimum",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "30.49%",
+  "cash_advance_apr": "30.74%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": "A monthly fee up to 1.60% of the original principal amount, for U.S. Bank ExtendPay Plan or Loan balances",
@@ -36,7 +36,7 @@
   "verdict": {
     "status": "keep",
     "text": "Strongest no-fee travel card: Priority Pass and Global Entry credit",
-    "short_tag": "Free Lounge Access"
+    "short_tag": "4 Free Lounge Visits"
   },
   "earn_rates": [
     {
@@ -49,7 +49,7 @@
     {
       "emoji": "✈️",
       "multiplier": "4×",
-      "category": "Travel: airlines, hotels, car rentals, trains, cruises",
+      "category": "Travel: airlines, hotels, car rentals, taxis, limousines, trains, cruises",
       "highlight": true,
       "is_base": false
     },
@@ -102,15 +102,20 @@
         "method": "Merchandise, gift cards, or statement credit",
         "cpp": 1.0,
         "best": false
+      },
+      {
+        "method": "Charity donation match",
+        "cpp": 2.0,
+        "best": false
       }
     ],
     "per_100k": "$1,000",
-    "note": "Redemption tops out around 1¢/point regardless of method. There's no transfer-partner program behind these points, so the ceiling is lower than a transferable-currency card, but the earn rates and included travel perks largely make up for it on a no-fee card."
+    "note": "U.S. Bank gives points their maximum value as a deposit to an eligible U.S. Bank account or as travel. Other redemptions may be worth a different amount, and U.S. Bank matches charity redemptions 100%. There's no transfer-partner program behind these points, so the ceiling is lower than a transferable-currency card, but the earn rates and included travel perks largely make up for it on a no-fee card."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners: points redeem directly for cash, travel, merchandise, or gift cards at a flat rate.",
+    "highlight": "No transfer partners: points redeem directly for cash, travel, merchandise, or gift cards, and value depends on the method. Up to 20,000 points a year can move to another qualifying U.S. Bank Altitude Go or Altitude Connect account.",
     "recent_changes": "Not applicable."
   },
   "credits": [
@@ -136,7 +141,7 @@
     },
     {
       "coverage": "Trip delay",
-      "detail": "Via SmartDelay: register your flight at altitudeconnect.smartdelay.com",
+      "detail": "Trip Delay Reimbursement applies when you use this card to secure the trip; see Guide to Benefits for limits. SmartDelay is listed separately: register your flight at altitudeconnect.smartdelay.com",
       "level": "mid"
     },
     {
@@ -165,23 +170,20 @@
       "level": "none"
     }
   ],
-  "protection_note": "Trip cancellation/interruption and trip delay coverage are real and confirmed, but exact dollar limits live in the Guide to Benefits you receive after approval, not in U.S. Bank's public marketing. SmartDelay in particular requires you to proactively register each flight; it isn't automatic.",
+  "protection_note": "Trip cancellation/interruption and trip delay coverage are confirmed on the product page, which links the Guide to Benefits (mycardgtb.com/altitudeconnect) for dollar limits. Coverage applies only when you use this card to secure the trip. SmartDelay requires you to register your flight; it isn't automatic.",
   "rental_note": "No auto rental coverage documented publicly for this card as of this writing.",
+  "lounge_access": "passes",
   "status_perks": [
     {
       "name": "Priority Pass Select",
       "strength": 4,
-      "note": "Complimentary 12-month membership (enroll separately at prioritypass.com/usbankaltitudeconnect) for airport lounge access worldwide, including accompanying guests. Free enrollment is limited to one cardholder per account, including authorized users."
+      "note": "Complimentary 12-month Priority Pass membership with four free visits a year (enroll separately at prioritypass.com/usbankaltitudeconnect), for airport lounges worldwide. Accompanying guests can get in too. Free enrollment is limited to one cardholder per account, including authorized users."
     }
   ],
   "services": [
     {
-      "name": "20,000-point welcome bonus",
-      "detail": "After $1,000 in net purchases within the first 90 days. Not eligible if you've received a new-account bonus for this card in the last 5 years."
-    },
-    {
       "name": "GigSky global data",
-      "detail": "A complimentary 5 GB, 15-day GigSky data plan usable in 175+ countries, once per card number, claimable again on later trips as long as only one plan is active at a time. The card has to be the default payment method in the GigSky app; register at gigsky.com/visa-usb-ac. Redeemable through Nov 30, 2026, though that same end date has been rolled forward every year so far."
+      "detail": "A complimentary 5 GB, 15-day GigSky data plan usable in 175+ countries. There's no annual limit on plans, but a new one can't start until the last one's 15 days are up. The card has to be the default payment method in the GigSky app; register at gigsky.com/visa-usb-ac. Redeemable through Nov 30, 2026."
     },
     {
       "name": "U.S. Bank ExtendPay Plan",

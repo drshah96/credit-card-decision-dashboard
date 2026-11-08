@@ -11,18 +11,22 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": true,
-  "variable_apr": "27.49%",
-  "balance_transfer_apr": "27.49%",
-  "balance_transfer_fee": "4% to 5% of the amount of each transaction",
+  "variable_apr": "27.74%",
+  "balance_transfer_apr": "27.74%",
+  "balance_transfer_fee": "5% of the amount of each transaction",
   "foreign_transaction_fee_rate": "3%",
-  "cash_advance_apr": "28.49%-29.24%",
+  "cash_advance_apr": "29.49%",
   "penalty_apr": "Up to 29.99%, based on your creditworthiness",
   "penalty_apr_trigger": "Making a late payment; applies indefinitely once triggered",
   "pay_over_time_fee": "Monthly fee up to 1.72% of the purchase amount assigned to a BofA Custom Pay Plan",
   "late_payment_fee": "Up to $41",
   "returned_payment_fee": null,
   "returned_check_fee": null,
-  "welcome_bonus": null,
+  "welcome_bonus": {
+    "bonus": "6% in the choice category",
+    "requirement": "on purchases in the first 365 days",
+    "estimated_value": null
+  },
   "verdict": {
     "status": "situational",
     "text": "Same 3%/2% structure as Customized Cash Rewards, good for rebuilding",
@@ -51,7 +55,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Identical earn structure to the unsecured Customized Cash Rewards, including the shared $2,500/quarter combined cap on the choice category and grocery/wholesale-club 2%. One notable gap: secured card products are not eligible for the BofA Rewards relationship bonus that boosts the unsecured card's rates by 10–75%.",
+  "earn_note": "Same earn structure as the unsecured Customized Cash Rewards: 3% in your choice category and 2% at grocery stores and wholesale clubs on the first $2,500 in combined purchases each quarter, then 1%. Check bankofamerica.com/BofARewards before counting on the BofA Rewards bonus: Bank of America keeps a list of ineligible cards there.",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
@@ -61,7 +65,7 @@
         "best": true
       },
       {
-        "method": "Statement credit or gift cards",
+        "method": "Statement credit, Merrill account credit, check, or Amazon and PayPal purchases",
         "cpp": 1.0,
         "best": false
       }
@@ -105,11 +109,12 @@
   ],
   "protection_note": "No purchase-protection or extended-warranty guide published specifically for this card.",
   "rental_note": "No auto rental coverage documented publicly for this card.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {
       "name": "Refundable security deposit",
-      "detail": "$200–$5,000 sets your credit limit dollar-for-dollar."
+      "detail": "$200 to $5,000. Your maximum credit limit is based on your deposit, your income and your ability to pay."
     },
     {
       "name": "Deposit review for return",

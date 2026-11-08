@@ -73,7 +73,6 @@ function makeCard(overrides: Partial<Card> = {}): Card {
     late_payment_fee: null,
     returned_payment_fee: null,
     returned_check_fee: null,
-    welcome_bonus: null,
     earn_rates: [
       { emoji: "✈️", multiplier: "5×", category: "Flights", highlight: true, is_base: false },
       { emoji: "💳", multiplier: "1×", category: "Everything else", highlight: false, is_base: true },
@@ -568,66 +567,6 @@ describe("CardDetailPage", () => {
       await switchToTab("Fees");
 
       expect(screen.getByText("None")).toBeInTheDocument();
-    });
-
-    // Welcome bonus rendering is disabled: sign-up offers rotate on the
-    // issuer's own promotional calendar, much faster than APR/fee data
-    // drifts, so a stale bonus reads as an active (wrong) promotional claim
-    // rather than a dated fact — a worse failure mode for a decision-support
-    // site that isn't trying to promote applying. The data still flows
-    // through the schema/API; only the render (in CardDetailPage.tsx) is
-    // off. This test documents the prior behavior in case it's re-enabled.
-    // it("renders the welcome bonus block with real audited data", async () => {
-    //   vi.mocked(fetchCard).mockResolvedValue(
-    //     makeCard({
-    //       welcome_bonus: {
-    //         bonus: "80,000 Membership Rewards points",
-    //         requirement: "after spending $8,000 in the first 6 months",
-    //         estimated_value: "$1,600",
-    //       },
-    //     }),
-    //   );
-    //
-    //   renderPage();
-    //
-    //   await waitFor(() => {
-    //     expect(screen.getByText("Welcome bonus")).toBeInTheDocument();
-    //   });
-    //   expect(screen.getByText("80,000 Membership Rewards points")).toBeInTheDocument();
-    //   expect(
-    //     screen.getByText("after spending $8,000 in the first 6 months"),
-    //   ).toBeInTheDocument();
-    //   expect(screen.getByText("Worth an estimated $1,600")).toBeInTheDocument();
-    // });
-
-    it("never renders the welcome bonus block, even when the card has audited bonus data", async () => {
-      vi.mocked(fetchCard).mockResolvedValue(
-        makeCard({
-          welcome_bonus: {
-            bonus: "80,000 Membership Rewards points",
-            requirement: "after spending $8,000 in the first 6 months",
-            estimated_value: "$1,600",
-          },
-        }),
-      );
-
-      renderPage();
-
-      await waitFor(() => {
-        expect(screen.getByRole("heading", { name: "The Platinum Card" })).toBeInTheDocument();
-      });
-      expect(screen.queryByText("Welcome bonus")).not.toBeInTheDocument();
-    });
-
-    it("omits the welcome bonus block entirely when not yet audited", async () => {
-      vi.mocked(fetchCard).mockResolvedValue(makeCard()); // welcome_bonus: null
-
-      renderPage();
-
-      await waitFor(() => {
-        expect(screen.getByRole("heading", { name: "The Platinum Card" })).toBeInTheDocument();
-      });
-      expect(screen.queryByText("Welcome bonus")).not.toBeInTheDocument();
     });
 
     it("renders timeline events", async () => {
