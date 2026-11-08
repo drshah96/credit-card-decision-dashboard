@@ -37,7 +37,7 @@ const GENERIC_TRAVEL_PORTAL = "travel (portal|purchases)|travel center";
 
 export const CATEGORY_MATCHERS: Record<string, RegExp> = {
   dining: /restaurant|dining|caf[eé]|\bbars?\b|food delivery|doordash|grubhub|takeout|fast food/i,
-  groceries: /grocery|groceries|supermarket|whole foods/i,
+  groceries: /grocery|groceries|supermarket/i,
   "gas-ev": /\bgas\b|gasoline|\bfuel\b|ev charging/i,
   streaming: /streaming|netflix|spotify|\bhulu\b|disney\+|espn/i,
   // "General Travel" splits into 4 rows — a rate can (and often does) match
@@ -229,12 +229,33 @@ export const BRAND_EXCLUDES: Record<string, RegExp> = {
   transit: SINGLE_RIDESHARE_BRAND,
 };
 
+// A rate counts toward a category only if most purchases in that category earn
+// it. These are real rates that most purchases don't: Bilt's "Up to 6×" only at
+// Bilt partner restaurants, Citi Strata Elite's 6× only on Friday and Saturday
+// nights, the Costco Visa's 5% gas only at Costco, the Amazon Prime Visa's 5%
+// only at Amazon and Whole Foods, the Disney Premier's 5% only on Disney+, Hulu
+// and ESPN, and Sapphire Preferred's 3× only on online groceries. Ranking on
+// them would put an advertised ceiling at the top of the category, so in every
+// category the card's broadly applicable rate competes instead, as with
+// BRAND_EXCLUDES. The rates still show on the card's own page.
+//
+// Two kinds of narrower rate do count, on purpose. A travel portal rate, since
+// any flight or hotel can be booked through the portal. And a category you
+// choose yourself (U.S. Bank Cash+, BofA Customized Cash), which ranks in each
+// category it offers, because you earn it there if you choose it.
+//
+// test_matcher_input_invariants fails on a new "Up to" rate this doesn't cover,
+// or on a website-only rate in dining, groceries, gas or streaming.
+export const LIMITED_RATE =
+  /partner restaurants|citi nights|gas at costco|online groceries|amazon\.com|disneyplus\.com/i;
+
 function matchesCategory(
   rate: CardSummary["categories"][number],
   categoryKey: string,
 ): boolean {
   if (categoryKey === "catch-all") return rate.is_base;
   if (!(CATEGORY_MATCHERS[categoryKey]?.test(rate.category) ?? false)) return false;
+  if (LIMITED_RATE.test(rate.category)) return false;
   if (categoryKey === "wholesale") {
     return !WHOLESALE_EXCLUDES.some((key) => CATEGORY_MATCHERS[key].test(rate.category));
   }

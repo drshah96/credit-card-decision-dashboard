@@ -22,7 +22,7 @@ MATCHER_SOURCES: dict[str, str] = {
         r"restaurant|dining|caf[eé]|\bbars?\b|food delivery|doordash|grubhub|takeout"
         r"|fast food"
     ),
-    "groceries": r"grocery|groceries|supermarket|whole foods",
+    "groceries": r"grocery|groceries|supermarket",
     "gas-ev": r"\bgas\b|gasoline|\bfuel\b|ev charging",
     "streaming": r"streaming|netflix|spotify|\bhulu\b|disney\+|espn",
     "flights": (
@@ -60,11 +60,18 @@ BRAND_EXCLUDE_SOURCES: dict[str, str] = {
     "transit": r"\blyft\b|\buber\b",
 }
 
+# Applies in every category: a rate most purchases in the category don't earn, such as one
+# merchant network, one website or certain hours. See LIMITED_RATE in topPickCategories.ts.
+LIMITED_RATE_SOURCE = (
+    r"partner restaurants|citi nights|gas at costco|online groceries|amazon\.com|disneyplus\.com"
+)
+
 CENTS_PER_GALLON_SOURCE = r"¢\s*\/\s*gal"
 
 _MATCHERS = {key: re.compile(source, _FLAGS) for key, source in MATCHER_SOURCES.items()}
 _BRAND_EXCLUDES = {key: re.compile(source, _FLAGS) for key, source in BRAND_EXCLUDE_SOURCES.items()}
 _CENTS_PER_GALLON = re.compile(CENTS_PER_GALLON_SOURCE, _FLAGS)
+_LIMITED_RATE = re.compile(LIMITED_RATE_SOURCE, _FLAGS)
 _MULTIPLIER_TOKEN = re.compile(r"[\d.]+", re.ASCII)
 _PARSE_FLOAT_PREFIX = re.compile(r"\d+\.?\d*|\.\d+", re.ASCII)
 
@@ -272,6 +279,8 @@ def _matches_category(rate: RateInput, category_key: str) -> bool:
         return rate.is_base
     matcher = _MATCHERS.get(category_key)
     if matcher is None or not matcher.search(rate.category):
+        return False
+    if _LIMITED_RATE.search(rate.category):
         return False
     if category_key == "wholesale":
         return not any(_MATCHERS[key].search(rate.category) for key in WHOLESALE_EXCLUDES)

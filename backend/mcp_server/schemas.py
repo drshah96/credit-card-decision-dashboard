@@ -69,6 +69,15 @@ class ProvenanceRef(_Out):
     review_due_on: Annotated[
         date | None, Field(description="Do not rely on verified_on after this date.")
     ]
+    review_overdue: Annotated[
+        bool,
+        Field(
+            description=(
+                "True once today, in UTC, is past review_due_on: the check is stale, so treat "
+                "the card's values as unconfirmed."
+            )
+        ),
+    ]
 
 
 class IssuerSource(_Out):
