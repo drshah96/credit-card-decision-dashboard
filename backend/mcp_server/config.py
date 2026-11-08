@@ -1,4 +1,8 @@
-"""Environment-driven configuration. load_config never raises: bad config disables MCP only."""
+"""Environment-driven configuration. load_config never raises: bad config disables MCP only.
+
+MCP_ANONYMOUS_ACCESS=true serves requests that carry no credential, under one shared limit.
+Keys still work alongside it, each under its own limit.
+"""
 
 import os
 from collections.abc import Mapping
@@ -16,6 +20,10 @@ class Limits:
     sdk_deadline_seconds: float = 10.0
     per_minute: int = 60
     per_day: int = 2_000
+    # One shared pool for every request without a credential. Claude's connectors reach us from
+    # a few Anthropic addresses, so a per-address limit would split nothing.
+    anonymous_per_minute: int = 120
+    anonymous_per_day: int = 5_000
     max_in_flight: int = 8
     failed_auth_per_client: int = 20
     failed_auth_global: int = 200
@@ -32,6 +40,7 @@ class McpConfig:
     keys: KeyStore
     allowed_hosts: tuple[str, ...]
     limits: Limits = field(default_factory=Limits)
+    anonymous: bool = False
 
 
 def _disabled(reason: str, hosts: tuple[str, ...]) -> McpConfig:
@@ -45,14 +54,21 @@ def load_config(env: Mapping[str, str] | None = None) -> McpConfig:
         for h in env.get("MCP_ALLOWED_HOSTS", _DEFAULT_ALLOWED_HOSTS).split(",")
         if h.strip()
     )
+    switch = (env.get("MCP_ANONYMOUS_ACCESS") or "false").strip().lower()
+    if switch not in ("true", "false"):
+        return _disabled("MCP_ANONYMOUS_ACCESS must be true or false", hosts)
+    anonymous = switch == "true"
     raw = env.get("MCP_API_KEYS")
     if not raw:
+        if anonymous:
+            return McpConfig(True, None, KeyStore([]), hosts, anonymous=True)
         return _disabled("MCP_API_KEYS is not set", hosts)
     try:
         records = parse_records(raw)
     except ValueError:
-        # The validation message can echo input, so it never reaches a log.
+        # The validation message can echo input, so it never reaches a log. A broken key list
+        # disables MCP even with anonymous access on, so the mistake is noticed and fixed.
         return _disabled("MCP_API_KEYS is invalid", hosts)
-    if not records:
+    if not records and not anonymous:
         return _disabled("MCP_API_KEYS has no keys", hosts)
-    return McpConfig(enabled=True, reason=None, keys=KeyStore(records), allowed_hosts=hosts)
+    return McpConfig(True, None, KeyStore(records), hosts, anonymous=anonymous)

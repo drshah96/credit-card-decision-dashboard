@@ -1556,6 +1556,29 @@ terms, such as a first-year fee waiver, remain as card terms. The same refresh r
 on 2026-11-07. Each record cites the commit that last changed the card's facts, so no record is
 `issuer_pass` any more. Version 1.0.0 is still unreleased, so its surface was corrected in place.
 
+**A26. Requests without a key are served, under one shared limit.** This reverses D7's key-only
+gate. The trigger is the one named under "The evolution path": a client platform that won't send
+a pre-shared key. Claude's custom connectors accept only OAuth or no auth, so on a 401 they try
+OAuth registration, find no metadata and fail. Regular users can't run a local `mcp-remote`
+bridge. OAuth was not chosen, because Claude's flow is the authorization code grant with dynamic
+client registration, not the client-credentials path above, and an authorization server is
+far more new security surface than this read-only catalog needs. The same data is already public
+at `/api/cards`, so a key guarded capacity, not content.
+
+- `MCP_ANONYMOUS_ACCESS=true` serves a request with no `Authorization` header. Any value other
+  than `true` or `false` disables MCP rather than guessing. A broken `MCP_API_KEYS` still
+  disables MCP, so the mistake gets noticed.
+- Keyless requests share one pool, 120 a minute and 5,000 a day, logged as `key_id: anonymous`.
+  The pool is not split by address, because Claude's connectors arrive from a few Anthropic
+  addresses. One heavy user can exhaust it for everyone, and the switch is the remedy.
+- A key keeps its own limit. A wrong key still gets 401 with `invalid_token`, and still counts
+  against the failed-auth limiter. The 401 for a missing key now happens only with the switch off.
+- Keep-warm probes with a deliberately invalid key, so it still expects 401. `mcp-smoke` also
+  calls a tool with no key.
+- There is still no OAuth metadata, and `/.well-known/oauth-protected-resource` stays 404.
+- Unproven: whether Claude's connector sends an `Origin` header. The SDK refuses browser origins,
+  so a connector that sends one would get 403, logged as `http_403`.
+
 **Defaults taken while owner decisions are open.** Each can change before release:
 
 - **Hosting:** free tier, as in D1.

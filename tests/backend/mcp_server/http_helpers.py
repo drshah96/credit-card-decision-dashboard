@@ -23,6 +23,12 @@ def enabled_config(limits: Limits = FAST, per_minute: int | None = None) -> tupl
     return McpConfig(True, None, KeyStore([record]), ("testserver",), limits), key
 
 
+def anonymous_config(limits: Limits = FAST) -> tuple[McpConfig, str]:
+    """Anonymous access on, with one key alongside it."""
+    config, key = enabled_config(limits)
+    return replace(config, anonymous=True), key
+
+
 def rpc(method: str, params: dict | None = None, request_id: int = 1) -> dict:
     return {"jsonrpc": "2.0", "id": request_id, "method": method, "params": params or {}}
 

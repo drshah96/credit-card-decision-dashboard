@@ -124,13 +124,15 @@ jobs:
                 fi
               fi
 
-              # Keyless on purpose: a working MCP endpoint answers 401 without touching
-              # the database, and anything else means it is disabled or gone.
+              # A deliberately invalid key: a working MCP endpoint answers 401 without
+              # touching the database or the anonymous quota, and anything else means it is
+              # disabled or gone. A request with no key at all may be served anonymously.
               mcp_checks=$((mcp_checks + 1))
               mcp_status=$(curl -s --max-time 30 -o /dev/null -w '%{http_code}' -X POST \
-                -H 'content-type: application/json' -d '{}' "$ORIGIN/mcp")
+                -H 'content-type: application/json' -H 'authorization: Bearer keep-warm-probe' \
+                -d '{}' "$ORIGIN/mcp")
               if [ "$mcp_status" = "401" ]; then
-                echo "$now  mcp ok (401 without a key)"
+                echo "$now  mcp ok (401 for an invalid key)"
               else
                 mcp_failures=$((mcp_failures + 1))
                 echo "::warning::$now  mcp probe got HTTP $mcp_status, expected 401"
@@ -163,7 +165,7 @@ jobs:
           fi
           # Two in a run, not one: a deploy restarting the service can fail a single probe.
           if [ "$mcp_failures" -ge 2 ]; then
-            echo "::error::$mcp_failures of $mcp_checks MCP probes did not get 401. Check the mcp_disabled log line in Render and that MCP_API_KEYS is set."
+            echo "::error::$mcp_failures of $mcp_checks MCP probes did not get 401. Check the mcp_disabled log line in Render, and that MCP_API_KEYS or MCP_ANONYMOUS_ACCESS is set."
             exit_code=1
           fi
           exit $exit_code

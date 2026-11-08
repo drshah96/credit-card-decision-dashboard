@@ -135,6 +135,8 @@ def test_mcp_is_wired_on_the_api_service() -> None:
         "mcp.thewalletaudit.com",
         "thewalletaudit-api.onrender.com",
     ]
+    # Claude's custom connectors can't send a key, so production serves keyless requests.
+    assert env["MCP_ANONYMOUS_ACCESS"]["value"] == "true"
 
 
 def test_deploys_are_not_gated_on_every_github_check() -> None:

@@ -80,3 +80,10 @@ def test_overnight_keeps_render_awake_and_probes_mcp_without_waking_neon(tmp_pat
 def test_a_broken_mcp_endpoint_fails_the_run_at_any_hour(tmp_path, hour):
     code, _ = _run(tmp_path, hour, mcp_status="503")
     assert code == 1
+
+
+def test_the_mcp_probe_sends_an_invalid_key_so_anonymous_access_still_answers_401(tmp_path):
+    _, calls = _run(tmp_path, "14")
+    probes = [call for call in calls if call.rstrip().endswith("/mcp")]
+    assert probes
+    assert all("authorization: Bearer keep-warm-probe" in call for call in probes)

@@ -132,3 +132,30 @@ def test_parse_records_accepts_contact():
 
 def test_key_format_never_splits_on_underscore():
     assert re.fullmatch(KEY_RE.pattern, "twa_3f9a1c2e_" + "_" * 43)
+
+
+def test_anonymous_access_enables_without_keys():
+    config = load_config({"MCP_ANONYMOUS_ACCESS": " TRUE "})
+    assert config.enabled is True
+    assert config.anonymous is True
+    assert len(config.keys) == 0
+    assert load_config({"MCP_ANONYMOUS_ACCESS": "true", "MCP_API_KEYS": "[]"}).enabled is True
+
+
+def test_anonymous_access_is_off_unless_switched_on():
+    assert load_config({"MCP_API_KEYS": json.dumps([_record_json()])}).anonymous is False
+    assert load_config({"MCP_ANONYMOUS_ACCESS": "false"}).reason == "MCP_API_KEYS is not set"
+    assert load_config({"MCP_ANONYMOUS_ACCESS": ""}).reason == "MCP_API_KEYS is not set"
+
+
+def test_an_unclear_anonymous_switch_disables_rather_than_guessing():
+    for value in ("yes", "1", "on", "treu"):
+        config = load_config({"MCP_ANONYMOUS_ACCESS": value})
+        assert config.enabled is False
+        assert config.reason == "MCP_ANONYMOUS_ACCESS must be true or false"
+
+
+def test_broken_keys_disable_even_with_anonymous_access():
+    config = load_config({"MCP_ANONYMOUS_ACCESS": "true", "MCP_API_KEYS": "not json"})
+    assert config.enabled is False
+    assert config.reason == "MCP_API_KEYS is invalid"

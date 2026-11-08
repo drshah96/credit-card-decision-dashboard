@@ -16,6 +16,7 @@ from .http_helpers import (
     FAST,
     HEADERS,
     INITIALIZE,
+    anonymous_config,
     auth,
     call_tool,
     enabled_config,
@@ -62,6 +63,7 @@ def test_each_authenticated_request_logs_one_complete_line(snapshot):
     started = logs.events("mcp_started")
     assert started[0]["cards"] == 109
     assert started[0]["verified_cards"] == 89
+    assert started[0]["anonymous_access"] is False
 
     initialize, ok, unknown_card, invalid, unknown_tool = logs.events("mcp_request")
     assert initialize["rpc_method"] == "initialize"
@@ -221,3 +223,13 @@ def test_no_secret_or_ip_appears_in_any_log_line(snapshot):
 def test_the_logger_is_isolated_from_the_root_logger():
     assert logger.propagate is False
     assert logger.level == logging.INFO
+
+
+def test_an_anonymous_request_logs_as_anonymous_and_startup_says_so(snapshot):
+    config, _ = anonymous_config()
+    with captured() as logs, running(snapshot, config) as client:
+        client.post("/mcp", json=call_tool("get_card", {"card_id": "amex-gold"}), headers=HEADERS)
+    assert logs.events("mcp_started")[0]["anonymous_access"] is True
+    (request,) = logs.events("mcp_request")
+    assert request["key_id"] == "anonymous"
+    assert request["outcome"] == "ok"
