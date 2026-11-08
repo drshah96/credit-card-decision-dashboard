@@ -1579,7 +1579,8 @@ at `/api/cards`, so a key guarded capacity, not content.
 - Unproven: whether Claude's connector sends an `Origin` header. The SDK refuses browser origins,
   so a connector that sends one would get 403, logged as `http_403`.
 
-**A27. An outside review's ranking and freshness findings.**
+**A27. An outside review's ranking and freshness findings.** Four fixes, two rules kept on
+purpose, and contract 1.1.0.
 
 - **A rate counts toward a category only if most purchases in it earn it.** `LIMITED_RATE`, in
   both rankings and pinned by the parity fixture, drops rates limited to a partner network
@@ -1604,6 +1605,8 @@ at `/api/cards`, so a key guarded capacity, not content.
   built at boot and keep-warm can hold a process up for weeks, so a flag fixed at startup would
   stay false past the date. This adds a field and changes what rankings and review dates return,
   so the contract moves to 1.1.0. 1.0.0's digest stays recorded.
+- **`find_cards` puts the best match first:** an exact id, then names holding more of the query's
+  words, then shorter ids. "amex platinum" had listed the Delta Platinum card first.
 
 **Defaults taken while owner decisions are open.** Each can change before release:
 

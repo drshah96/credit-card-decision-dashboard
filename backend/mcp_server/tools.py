@@ -130,6 +130,18 @@ def _hidden_twins(inputs) -> list[str]:
     )
 
 
+def _relevance(snapshot, card_id: str, tokens: list[str]) -> tuple[bool, int, int]:
+    """Best match first: the card whose id is the query, then names holding more of its words,
+    then shorter ids, which carry fewer words the query didn't ask for. The sort is stable, so
+    ties keep the catalog's name order."""
+    name = normalize_search_text(snapshot.cards[card_id].name)
+    return (
+        card_id != "-".join(tokens),
+        -sum(token in name for token in tokens),
+        card_id.count("-"),
+    )
+
+
 def create_server(load_snapshot: Callable[[], CatalogSnapshot]) -> MCPServer:
     @asynccontextmanager
     async def lifespan(_server: MCPServer) -> AsyncIterator[dict[str, CatalogSnapshot]]:
@@ -175,6 +187,8 @@ def create_server(load_snapshot: Callable[[], CatalogSnapshot]) -> MCPServer:
             and (issuer is None or snapshot.cards[card_id].issuer == issuer)
             and all(token in snapshot.search_text[card_id] for token in tokens)
         ]
+        if tokens:
+            matches.sort(key=lambda card_id: _relevance(snapshot, card_id, tokens))
         page = matches[offset : offset + limit]
         items = []
         for card_id in page:

@@ -345,3 +345,27 @@ def test_lounge_access_none_on_a_card_with_no_check_is_unconfirmed():
     state = VerificationState(card_id="x", last_verified_ok_at=None, verification=None)
     assert projections.served_lounge_access("none", state) == "unconfirmed"
     assert projections.served_lounge_access("included", state) == "included"
+
+
+@pytest.mark.parametrize(
+    ("query", "first"),
+    [
+        ("amex platinum", "amex-platinum"),
+        ("platinum card", "amex-platinum"),
+        ("sapphire reserve", "chase-sapphire-reserve"),
+        ("venture x", "capital-one-venture-x"),
+    ],
+)
+async def test_find_cards_puts_the_best_match_first(snapshot, query, first):
+    async with connect(snapshot) as client:
+        found = structured(await client.call_tool("find_cards", {"query": query}))
+    assert found["cards"][0]["card_id"] == first
+
+
+async def test_find_cards_without_a_query_stays_in_name_order(snapshot):
+    async with connect(snapshot) as client:
+        found = structured(
+            await client.call_tool("find_cards", {"issuer": "Discover", "limit": 20})
+        )
+    names = [c["name"] for c in found["cards"]]
+    assert names == sorted(names, key=str.casefold)

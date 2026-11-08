@@ -66,7 +66,7 @@ All five are read-only and cost no database queries.
 
 | Tool | Use it to |
 |---|---|
-| `find_cards` | Search by name, issuer or program and get card ids. Start here. |
+| `find_cards` | Search by name, issuer or program and get card ids, best match first. Start here. |
 | `get_card` | Read one card's fees, rates, credits, earn rates, insurance and perks. |
 | `compare_cards` | Compare 2 to 4 cards side by side. |
 | `rank_by_category` | Rank cards for one of 18 spending categories, across the catalog or a wallet. |
