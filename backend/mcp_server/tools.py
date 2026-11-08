@@ -47,9 +47,9 @@ RANK_METHOD = schemas.RankMethod(
     tie_break="Equal values to 4 decimals go to the lower annual fee, then the name.",
     limitations="Ignores spending caps, activation requirements and sign-up offers. A rate "
     "limited to one merchant, one brand, online orders or certain hours doesn't count toward a "
-    "broad category, so the card's everyday rate competes instead. Travel portal rates count, "
-    "and a choose-your-category rate counts in each category it offers, though you pick only "
-    "one or two.",
+    "broad category, so the card's everyday rate competes instead. Travel and entertainment "
+    "portal rates count, a choose-your-category rate counts in each category it offers, though "
+    "you pick only one or two, and a single club's rate counts in Wholesale.",
 )
 VALUE_COUNTS = (
     "Statement credits and cash-like perks at the values applied, minus the annual fee. A credit "

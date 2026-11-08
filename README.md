@@ -119,10 +119,11 @@ A rate counts toward a category only if most purchases in that category earn it.
 Some bonus rates apply only at a partner network of restaurants, at certain hours,
 at one merchant or website, or only online, like Bilt's "Up to 6×" at Bilt partner
 restaurants or the Costco Visa's 5% on gas at Costco. Those still show on the card's
-page, but in the ranking the card's broadly available rate competes instead. Two
-narrower kinds do count, on purpose: travel booked through the card's own portal,
-since any flight or hotel can be booked that way, and a category you choose
-yourself, which ranks in each category it offers.
+page, but in the ranking the card's broadly available rate competes instead. Three
+narrower kinds do count, on purpose: travel or tickets bought through the card's own
+portal, since anything can be booked that way; a category you choose yourself, which
+ranks in each category it offers; and a single club's rate in Wholesale Clubs, since
+most people belong to just one.
 
 Rankings ignore monetization entirely, and a
 [regression test](frontend/tests/utils/topPickCategories.test.ts) proves the

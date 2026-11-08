@@ -53,8 +53,10 @@ describe("TOP_PICK_CATEGORIES matchers (via computeTopPicks)", () => {
     ["transit", "Local transit & commuting, incl. rideshare", "3×"],
     ["online-shopping", "U.S. online retail", "2×"],
     ["wholesale", "Costco & Costco.com purchases", "2%"],
-    ["home-improvement", "Williams Sonoma, Williams Sonoma Home, Pottery Barn", "3×"],
-    ["utilities", "Internet, cable & phone services", "3×"],
+    ["home-improvement", "Home improvement stores", "3×"],
+    ["phone-internet", "Internet, cable & phone services", "3×"],
+    ["phone-internet", "Phone plans", "3×"],
+    ["utilities", "Utilities", "3×"],
     ["rent", "Rent or mortgage (Bilt Housing Rewards)", "1×"],
     ["drugstores", "Drugstores", "3%"],
     ["entertainment", "Entertainment: movies, concerts, sporting events, amusement parks", "3%"],
@@ -215,6 +217,25 @@ describe("TOP_PICK_CATEGORIES matchers (via computeTopPicks)", () => {
     expect(rows.find((r) => r.key === "utilities")?.topChoice?.card.id).toBe("chooser");
   });
 
+  it("keeps phone-only, AT&T-only and single-store rates out of Utilities and Home Improvement", () => {
+    // From a second outside review: phone plans had counted as Utilities, ranking
+    // phone-only 5× above real utility rates, and single-store rates (Wayfair,
+    // Williams Sonoma) won Home Improvement. Each now goes where it belongs, or nowhere.
+    const card = makeSummary({
+      id: "narrow",
+      categories: [
+        rate("Phone plans", "5×"),
+        rate("AT&T products & services", "2×"),
+        rate("Wayfair, Joss & Main, AllModern, Birch Lane & Perigold", "7%"),
+        rate("Williams Sonoma, Williams Sonoma Home, Pottery Barn, West Elm", "5%"),
+      ],
+    });
+    const rows = computeTopPicks([card]);
+    expect(rows.find((r) => r.key === "utilities")?.topChoice).toBeUndefined();
+    expect(rows.find((r) => r.key === "home-improvement")?.topChoice).toBeUndefined();
+    expect(rows.find((r) => r.key === "phone-internet")?.topChoice?.multiplier).toBe("5×");
+  });
+
   it("ranks the Costco Visa on its everyday gas rate, not Costco-only gas", () => {
     const costco = makeSummary({
       id: "costco",
@@ -263,7 +284,7 @@ describe("TOP_PICK_CATEGORIES matchers (via computeTopPicks)", () => {
       categories: [rate("Gas stations, grocery stores, home improvement stores, and phone plans", "5%")],
     });
     const rows = computeTopPicks([card]);
-    for (const key of ["gas-ev", "groceries", "home-improvement", "utilities"]) {
+    for (const key of ["gas-ev", "groceries", "home-improvement", "phone-internet"]) {
       expect(rows.find((r) => r.key === key)?.topChoice?.card.id).toBe("x");
     }
   });

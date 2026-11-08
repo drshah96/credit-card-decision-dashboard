@@ -57,9 +57,13 @@ export const CATEGORY_MATCHERS: Record<string, RegExp> = {
     /transit|rideshare|\buber\b|\blyft\b|subway|\btrain\b|\btolls?\b|\btaxi\b|\bparking\b|\bbus(es)?\b|\brides?\b|\brails?\b|ground transportation/i,
   "online-shopping": /online (shopping|retail|purchases)/i,
   wholesale: /wholesale club|costco|sam'?s club|\bbj'?s\b/i,
-  "home-improvement":
-    /home improvement|hardware store|garden(ing)? (center|supply|store)|furniture|wayfair|williams sonoma|pottery barn|west elm|home depot|lowe'?s|ace hardware|rejuvenation|joss & main|allmodern|birch lane|perigold|mark & graham/i,
-  utilities: /\butilit(y|ies)\b|phone plan|internet.{0,25}phone|cable.{0,20}phone|\bat&t\b|cell phone/i,
+  // Generic store types only. A rate that names one retailer (Wayfair, Williams
+  // Sonoma, Home Depot) is a single-store rate, so it can't match here at all.
+  "home-improvement": /home improvement|hardware store|garden(ing)? (center|supply|store)|furniture/i,
+  // Bills for electric, gas and water. Phone plans and internet had counted here,
+  // which ranked phone-only rates above real utility rates; they have their own row.
+  utilities: /\butilit(y|ies)\b/i,
+  "phone-internet": /\bphone plans?\b|\bcell phones?\b|\bwireless\b|\binternet\b|\bcable\b/i,
   rent: /\brent\b|\bmortgage\b/i,
   drugstores: /drugstores?|drug stores?|\bpharmacy\b/i,
   entertainment: /entertainment|\bmovies?\b|\bconcerts?\b|amusement park/i,
@@ -100,7 +104,14 @@ export const TOP_PICK_CATEGORIES: TopPickCategory[] = [
     key: "utilities",
     label: "Utilities",
     emoji: "💡",
-    description: "Electric, gas, water, and home internet or phone bills.",
+    description: "Electric, gas and water bills.",
+    group: "Common & Daily Spending",
+  },
+  {
+    key: "phone-internet",
+    label: "Phone & Internet",
+    emoji: "📱",
+    description: "Cell phone plans, home internet and cable TV.",
     group: "Common & Daily Spending",
   },
   {
@@ -239,10 +250,11 @@ export const BRAND_EXCLUDES: Record<string, RegExp> = {
 // category the card's broadly applicable rate competes instead, as with
 // BRAND_EXCLUDES. The rates still show on the card's own page.
 //
-// Two kinds of narrower rate do count, on purpose. A travel portal rate, since
-// any flight or hotel can be booked through the portal. And a category you
-// choose yourself (U.S. Bank Cash+, BofA Customized Cash), which ranks in each
-// category it offers, because you earn it there if you choose it.
+// Three kinds of narrower rate do count, on purpose. A travel or entertainment
+// portal rate, since any flight, hotel or ticket can be bought through the
+// portal. A category you choose yourself (U.S. Bank Cash+, BofA Customized Cash),
+// which ranks in each category it offers, because you earn it there if you choose
+// it. And a single club's rate in Wholesale, since people usually belong to one.
 //
 // test_matcher_input_invariants fails on a new "Up to" rate this doesn't cover,
 // or on a website-only rate in dining, groceries, gas or streaming.

@@ -1608,6 +1608,15 @@ purpose, and contract 1.1.0.
 - **`find_cards` puts the best match first:** an exact id, then names holding more of the query's
   words, then shorter ids. "amex platinum" had listed the Delta Platinum card first.
 
+**A28. A second outside review: rates and cards most people can't use.** Contract 1.2.0.
+
+- **Utilities counts utility bills only, and phone, internet and cable get their own category,
+  `phone-internet`.** Phone plans had counted as Utilities, so two phone-only rates ranked second
+  and third. Home Improvement now matches store types only, so a rate naming one retailer
+  (Wayfair, Williams Sonoma) can't match, and AT&T's "AT&T products & services" matches nothing.
+  That is 19 categories. Kept, on the owner's call: entertainment portal rates count like travel
+  portals, and a single club's rate counts in Wholesale, since people usually belong to one.
+
 **Defaults taken while owner decisions are open.** Each can change before release:
 
 - **Hosting:** free tier, as in D1.

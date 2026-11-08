@@ -183,11 +183,13 @@ export default function MethodologyPage() {
             page.
           </P>
           <P>
-            Two kinds of narrower rate do count, on purpose. Travel booked through the card's
-            own portal counts, since any flight or hotel can be booked that way. And a
-            category you choose yourself, like the U.S. Bank Cash+ card's, counts in each
-            category it offers, because you earn it there if you choose it. You can only pick
-            one or two at a time, though, so the same card may appear in several rows.
+            Three kinds of narrower rate do count, on purpose. Travel or tickets bought
+            through the card's own portal count, since any flight, hotel or show can be booked
+            that way. A category you choose yourself, like the U.S. Bank Cash+ card's, counts
+            in each category it offers, because you earn it there if you choose it. You can
+            only pick one or two at a time, though, so the same card may appear in several
+            rows. And in Wholesale Clubs, a rate for one club counts, since most people belong
+            to just one.
           </P>
           <P>
             <strong>When a category has fewer than three cards with a real bonus</strong>, we

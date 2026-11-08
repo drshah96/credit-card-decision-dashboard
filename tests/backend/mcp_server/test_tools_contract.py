@@ -43,7 +43,7 @@ async def test_output_validates_against_its_published_schema(snapshot, tool, arg
     data = structured(result)
     jsonschema.validate(data, published[tool].output_schema)
     assert text_of(result) == json.dumps(data, separators=(",", ":"), ensure_ascii=False)
-    assert data["meta"]["contract_version"] == "1.1.0"
+    assert data["meta"]["contract_version"] == "1.2.0"
     assert data["meta"]["catalog_digest"] == snapshot.digest
     assert data["meta"]["disclaimer"]
 

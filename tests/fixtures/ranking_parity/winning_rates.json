@@ -154,8 +154,12 @@
  },
  "utilities": {
   "chase-ihg-one-rewards-traveler": "3× | Utilities, through Dec 31, 2026 (then 2×)",
+  "us-bank-cash-plus": "5% | Two categories you choose each quarter: fast food, home utilities, TV, internet and streaming, department stores, cell phone, electronics stores, sporting goods, furniture stores, movie theaters, ground transportation, gyms/fitness centers, or select clothing stores (first $2,000 combined, then 1%)",
+  "us-bank-cash-plus-secured": "5% | Two categories you choose each quarter: fast food, home utilities, TV, internet and streaming, department stores, cell phone, electronics stores, sporting goods, furniture stores, movie theaters, ground transportation, gyms/fitness centers, or select clothing stores (first $2,000 combined, then 1%)"
+ },
+ "phone-internet": {
+  "chase-ihg-one-rewards-traveler": "3× | Internet, cable & phone, through Dec 31, 2026 (then 2×)",
   "chase-marriott-bonvoy-bold": "2× | Internet, cable & phone services",
-  "citi-att-points-plus": "2× | AT&T products & services",
   "us-bank-cash-plus": "5% | Two categories you choose each quarter: fast food, home utilities, TV, internet and streaming, department stores, cell phone, electronics stores, sporting goods, furniture stores, movie theaters, ground transportation, gyms/fitness centers, or select clothing stores (first $2,000 combined, then 1%)",
   "us-bank-cash-plus-secured": "5% | Two categories you choose each quarter: fast food, home utilities, TV, internet and streaming, department stores, cell phone, electronics stores, sporting goods, furniture stores, movie theaters, ground transportation, gyms/fitness centers, or select clothing stores (first $2,000 combined, then 1%)",
   "wells-fargo-autograph": "3× | Phone plans",
@@ -354,8 +358,6 @@
  "home-improvement": {
   "bofa-cash-rewards-secured": "3% | Choice category: gas/EV, online shopping, dining, travel, drug stores, or home improvement",
   "bofa-customized-cash-rewards": "3% | Choice category: gas/EV, online shopping, dining, travel, drug stores, or home improvement",
-  "capital-one-key-rewards": "5% | Williams Sonoma, Williams Sonoma Home, Pottery Barn, Pottery Barn Kids/Teen, West Elm, Rejuvenation & Mark & Graham",
-  "citi-wayfair": "7% | Wayfair, Joss & Main, AllModern, Birch Lane & Perigold (5% instead if using promotional financing on that purchase)",
   "us-bank-cash-plus": "5% | Two categories you choose each quarter: fast food, home utilities, TV, internet and streaming, department stores, cell phone, electronics stores, sporting goods, furniture stores, movie theaters, ground transportation, gyms/fitness centers, or select clothing stores (first $2,000 combined, then 1%)",
   "us-bank-cash-plus-secured": "5% | Two categories you choose each quarter: fast food, home utilities, TV, internet and streaming, department stores, cell phone, electronics stores, sporting goods, furniture stores, movie theaters, ground transportation, gyms/fitness centers, or select clothing stores (first $2,000 combined, then 1%)",
   "wells-fargo-choice-privileges": "3× | Home improvement stores",

@@ -38,14 +38,10 @@ MATCHER_SOURCES: dict[str, str] = {
     "online-shopping": r"online (shopping|retail|purchases)",
     "wholesale": r"wholesale club|costco|sam'?s club|\bbj'?s\b",
     "home-improvement": (
-        r"home improvement|hardware store|garden(ing)? (center|supply|store)|furniture|wayfair"
-        r"|williams sonoma|pottery barn|west elm|home depot|lowe'?s|ace hardware|rejuvenation"
-        r"|joss & main|allmodern|birch lane|perigold|mark & graham"
+        r"home improvement|hardware store|garden(ing)? (center|supply|store)|furniture"
     ),
-    "utilities": (
-        r"\butilit(y|ies)\b|phone plan|internet.{0,25}phone|cable.{0,20}phone|\bat&t\b"
-        r"|cell phone"
-    ),
+    "utilities": r"\butilit(y|ies)\b",
+    "phone-internet": r"\bphone plans?\b|\bcell phones?\b|\bwireless\b|\binternet\b|\bcable\b",
     "rent": r"\brent\b|\bmortgage\b",
     "drugstores": r"drugstores?|drug stores?|\bpharmacy\b",
     "entertainment": r"entertainment|\bmovies?\b|\bconcerts?\b|amusement park",
@@ -118,11 +114,12 @@ CATEGORIES: tuple[Category, ...] = (
         "Monthly digital subscriptions for video and audio.",
         _DAILY,
     ),
+    Category("utilities", "Utilities", "💡", "Electric, gas and water bills.", _DAILY),
     Category(
-        "utilities",
-        "Utilities",
-        "💡",
-        "Electric, gas, water, and home internet or phone bills.",
+        "phone-internet",
+        "Phone & Internet",
+        "📱",
+        "Cell phone plans, home internet and cable TV.",
         _DAILY,
     ),
     Category("rent", "Rent or Mortgage", "🏠", "Rent or mortgage payments on your home.", _DAILY),

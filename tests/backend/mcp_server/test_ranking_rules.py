@@ -49,3 +49,35 @@ def _card(card_id: str) -> RankInput:
 def test_a_rate_most_purchases_dont_earn_never_counts(card_id, category, competes_on):
     best = _best_rate(_card(card_id), category)
     assert (best[1] if best else None) == competes_on
+
+
+def _competing(category: str) -> set[str]:
+    summaries = json.loads(SUMMARIES_PATH.read_text())
+    return {s["id"] for s in summaries if _best_rate(_card(s["id"]), category)}
+
+
+def test_only_utility_bills_compete_in_utilities():
+    assert _competing("utilities") == {
+        "chase-ihg-one-rewards-traveler",
+        "us-bank-cash-plus",
+        "us-bank-cash-plus-secured",
+    }
+
+
+def test_phone_and_internet_rates_compete_in_their_own_category():
+    assert _competing("phone-internet") == {
+        "chase-ihg-one-rewards-traveler",
+        "chase-marriott-bonvoy-bold",
+        "us-bank-cash-plus",
+        "us-bank-cash-plus-secured",
+        "wells-fargo-autograph",
+        "wells-fargo-choice-privileges",
+        "wells-fargo-choice-privileges-select",
+    }
+
+
+def test_single_store_and_att_rates_compete_nowhere_but_wholesale():
+    for card_id in ("citi-wayfair", "capital-one-key-rewards", "citi-att-points-plus"):
+        card = _card(card_id)
+        for category in ("home-improvement", "utilities", "phone-internet"):
+            assert _best_rate(card, category) is None, (card_id, category)

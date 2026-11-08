@@ -125,7 +125,7 @@ def test_the_fixture_actually_exercises_each_rule():
     expected = _expected()["scenarios"]
     rows = [row for scenario in expected.values() for row in scenario.values()]
     assert len(expected) >= 27
-    assert all(len(scenario) == 18 for scenario in expected.values())
+    assert all(len(scenario) == 19 for scenario in expected.values())
     assert any(any(top[4] for top in row["top"]) for row in rows), "no pooled entry"
     assert any(any(top[3] for top in row["top"]) for row in rows), "no fallback entry"
 
