@@ -113,3 +113,34 @@ async def test_review_due_on_stops_at_the_first_served_end_date(snapshot, card_i
         data = structured(await client.call_tool("get_card", {"card_id": card_id}))
     assert data["provenance"]["verified_on"] == "2026-11-07"
     assert data["provenance"]["review_due_on"] == due
+
+
+@pytest.mark.parametrize(
+    ("today", "overdue"),
+    [(date(2026, 11, 30), False), (date(2026, 12, 1), True)],
+)
+async def test_review_overdue_is_worked_out_per_request(snapshot, monkeypatch, today, overdue):
+    """The snapshot is built once at boot, and keep-warm can keep it alive for weeks, so the
+    flag must come from the date of the request, not the date the server started."""
+    from backend.mcp_server import projections
+
+    monkeypatch.setattr(projections, "today", lambda: today)
+    async with connect(snapshot) as client:
+        connect_card = structured(
+            await client.call_tool("get_card", {"card_id": "us-bank-altitude-connect"})
+        )
+        gold = structured(await client.call_tool("get_card", {"card_id": "amex-gold"}))
+        found = structured(await client.call_tool("find_cards", {"query": "altitude connect"}))
+    assert connect_card["provenance"]["review_due_on"] == "2026-11-30"
+    assert connect_card["provenance"]["review_overdue"] is overdue
+    assert found["cards"][0]["provenance"]["review_overdue"] is overdue
+    assert gold["provenance"]["review_overdue"] is False
+
+
+async def test_a_card_with_no_check_is_never_overdue(snapshot):
+    async with connect(snapshot) as client:
+        data = structured(
+            await client.call_tool("get_card", {"card_id": "citi-costco-anywhere-visa"})
+        )
+    assert data["provenance"]["review_due_on"] is None
+    assert data["provenance"]["review_overdue"] is False

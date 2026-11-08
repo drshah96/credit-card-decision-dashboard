@@ -1600,6 +1600,10 @@ at `/api/cards`, so a key guarded capacity, not content.
   `end_dates.py` reads every served string except the timeline, ignores dates before the check,
   and a test fails on dated wording it can't parse. Eight cards move earlier, the soonest U.S.
   Bank Altitude Connect on Nov 30, 2026. The cards still need updating when those terms end.
+- **`review_overdue` is worked out on every request, from today's UTC date.** The snapshot is
+  built at boot and keep-warm can hold a process up for weeks, so a flag fixed at startup would
+  stay false past the date. This adds a field and changes what rankings and review dates return,
+  so the contract moves to 1.1.0. 1.0.0's digest stays recorded.
 
 **Defaults taken while owner decisions are open.** Each can change before release:
 

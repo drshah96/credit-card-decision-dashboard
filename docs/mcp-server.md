@@ -85,6 +85,8 @@ All five are read-only and cost no database queries.
 - `verified_on` is the date of the last check.
 - `review_due_on` is the date to stop relying on that check: 180 days after it, or sooner when
   a term in the card's own data ends or changes first, such as a quarterly category.
+- `review_overdue` is true once today, in UTC, is past `review_due_on`. Treat that card's values
+  as unconfirmed until it is checked again.
 - `evidence_url` links the public record of the check.
 - `evidence_scope: issuer_pass` means an issuer-level pass covered the card, and that record
   may not mention the card individually.
