@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "18.74%-27.49%",
-  "balance_transfer_apr": "18.74%-27.49%",
+  "variable_apr": "18.99%-27.74%",
+  "balance_transfer_apr": "18.99%-27.74%",
   "balance_transfer_fee": "Either $5 or 4% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%",
+  "cash_advance_apr": "28.74%",
   "penalty_apr": "Up to 29.99%",
   "penalty_apr_trigger": "Failing to make a Minimum Payment when due, or making a payment that's returned unpaid; can remain in effect indefinitely",
   "pay_over_time_fee": "Up to 1.72% per month of the amount selected to pay over time, via Chase Pay Over Time",
@@ -43,7 +43,7 @@
     {
       "emoji": "\u2708\ufe0f",
       "multiplier": "5%",
-      "category": "Chase Travel purchases",
+      "category": "Chase Travel purchases, with Prime membership",
       "highlight": true,
       "is_base": false
     },
@@ -76,7 +76,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The headline 5% at Amazon and Whole Foods requires an active Prime membership ($139/yr or $14.99/mo, billed separately); without it, that rate drops to 3%. This is the single most important thing to know about the card: let Prime lapse and you lose a third of its value overnight, on top of losing Prime itself. No caps on any category.",
+  "earn_note": "The headline 5% at Amazon, Audible, Whole Foods and Chase Travel requires an active Prime membership ($139/yr or $14.99/mo, billed separately); without it, that rate drops to 3%. This is the single most important thing to know about the card: let Prime lapse and you lose a third of its value overnight, on top of losing Prime itself. No caps on any category.",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
@@ -124,12 +124,13 @@
     },
     {
       "coverage": "Rental car CDW",
-      "detail": "Secondary only",
+      "detail": "$60,000 \u00b7 secondary in the US, primary abroad",
       "level": "mid"
     }
   ],
   "protection_note": "A stronger-than-expected protection suite for a no-fee retail card, courtesy of its Visa Signature status: purchase protection, extended warranty, baggage delay, lost luggage, and travel accident insurance are all included. There's no trip cancellation/interruption coverage and no cell phone protection, so it's still not a substitute for a dedicated travel card.",
-  "rental_note": "Secondary auto rental collision damage waiver (standard Visa Signature benefit): decline the counter's CDW and pay with this card. Excludes exotic/luxury makes and rentals over 31 days; pays out after your personal auto policy.",
+  "rental_note": "Secondary in the US (pays after your personal auto policy), primary outside it, up to $60,000 and 31 consecutive days. Decline the counter's CDW and pay the full rental with this card. Excludes exotic vehicles and anything with an MSRP over $125,000.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {

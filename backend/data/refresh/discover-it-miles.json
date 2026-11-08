@@ -1,0 +1,12 @@
+{
+  "card_id": "discover-it-miles",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:6329b2d100ef598daab31fcd435b15e4d1cca22d",
+    "evidence_scope": "card",
+    "facts_sha256": "1b15a6abd9d4a41dd33272ccb9d616f070e05cf08dce274e7126758c2603364e",
+    "documents": [],
+    "not_checked": [],
+    "note": "Re-checked on 2026-11-07 against Discover product pages and the Capital One cardmember agreement that now covers the Discover line."
+  }
+}

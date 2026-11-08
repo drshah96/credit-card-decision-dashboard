@@ -1,0 +1,16 @@
+{
+  "card_id": "citi-double-cash",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:c4677373bcb5d7f6a590ad9c231601e72b0818ab",
+    "evidence_scope": "card",
+    "facts_sha256": "25fb8e3c4e8db5959c4cef1e1022420b32b33438d5f6fc67653f6b20f7f8678c",
+    "documents": [],
+    "not_checked": [
+      "rates_and_fees",
+      "transfer_partners",
+      "insurance_limits"
+    ],
+    "note": "Re-checked on 2026-11-07 against Citi product pages and benefit documents. Not checked: some rates and fees, transfer partners, and insurance dollar limits. Citi's current APRs could not be read from a Citi document."
+  }
+}

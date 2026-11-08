@@ -1,0 +1,15 @@
+{
+  "card_id": "capital-one-platinum-secured",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:93b8c86d046b1478ff85c14da6d4582c3938a1c9",
+    "evidence_scope": "card",
+    "facts_sha256": "e58ee16f1f63dc62390f3e935a13385f740b6b205ddc185460bf4de66c3073d6",
+    "documents": [],
+    "not_checked": [
+      "insurance",
+      "insurance_limits"
+    ],
+    "note": "Re-checked on 2026-11-07 against Capital One product pages, benefit terms and Guide to Benefits PDFs. Not checked: insurance benefits and insurance dollar limits."
+  }
+}

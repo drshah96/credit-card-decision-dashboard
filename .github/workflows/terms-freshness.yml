@@ -1,0 +1,44 @@
+name: Terms freshness reminder
+
+# Opens an issue when the footer's TERMS_AS_OF month is 75+ days old. It runs outside CI and
+# succeeds either way, because the calendar alone must never block a merge or a deploy.
+on:
+  schedule:
+    - cron: "0 14 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Measure the age of TERMS_AS_OF
+        id: terms
+        run: node frontend/scripts/check-terms-freshness.mjs >> "$GITHUB_OUTPUT"
+
+      - name: Open a reminder if it is stale and none is open
+        if: steps.terms.outputs.stale == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: "TERMS_AS_OF is out of date"
+          TERMS: ${{ steps.terms.outputs.terms_as_of }}
+          AGE: ${{ steps.terms.outputs.age_days }}
+        run: |
+          open=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq length)
+          if [ "$open" != "0" ]; then
+            echo "A reminder is already open."
+            exit 0
+          fi
+          gh issue create --title "$TITLE" --body "The site footer says card terms reflect issuer offers as of $TERMS, which is $AGE days old.
+
+          Re-check the cards against issuer sources, then update TERMS_AS_OF in frontend/src/utils/routeMeta.js. Don't change the date without a real check, because it is a public claim."

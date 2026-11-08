@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.49%, 24.49%, or 28.49%, based on creditworthiness",
-  "balance_transfer_apr": "19.49%, 24.49%, or 28.49%, based on creditworthiness",
+  "variable_apr": "19.74%-28.74%, based on creditworthiness",
+  "balance_transfer_apr": "19.74%-28.74%, based on creditworthiness",
   "balance_transfer_fee": "$0 at the standard Transfer APR, or 4% at any promotional APR Capital One may offer",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%",
+  "cash_advance_apr": "28.74%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
@@ -59,7 +59,7 @@
       "multiplier": "2×",
       "category": "Everything else, no categories",
       "highlight": true,
-      "is_base": false
+      "is_base": true
     }
   ],
   "earn_note": "The flat 2× on everything is the quiet star. It beats the 1× base that most premium travel cards fall back to, with nothing to track.",
@@ -86,10 +86,10 @@
     "note": "Guaranteed 1¢ floor as a travel eraser on any travel charge, so miles are never worth less than cash."
   },
   "transfer_partners": {
-    "airline_count": 18,
+    "airline_count": 19,
     "hotel_count": 4,
-    "highlight": "18 airline partners (up from 15) and 4 hotel partners (Choice, Wyndham, I Prefer, Accor Live Limitless). Best sweet spots: Turkish (Star Alliance short-hauls, exclusive partner), Flying Blue, Virgin Red, JAL.",
-    "recent_changes": "The gap: no Hyatt and no U.S. legacy airline partner. But the 1¢ eraser floor means miles are never worthless. Hotel side grew from 3 to 4 partners with Accor Live Limitless.",
+    "highlight": "19 airline partners (up from 18) and 4 hotel partners (Choice, Wyndham, I Prefer, Accor Live Limitless). Best sweet spots: Turkish (Star Alliance short-hauls, exclusive partner), Flying Blue, Virgin Red, JAL.",
+    "recent_changes": "Copa was added in Nov 2026. The gap: no Hyatt and no U.S. legacy airline partner. But the 1¢ eraser floor means miles are never worthless. Hotel side grew from 3 to 4 partners with Accor Live Limitless.",
     "partners": [
       {
         "name": "Aeromexico Rewards",
@@ -115,6 +115,12 @@
         "name": "Cathay Pacific Asia Miles",
         "type": "airline",
         "ratio": "1:1"
+      },
+      {
+        "name": "Copa",
+        "type": "airline",
+        "ratio": "2:1.5",
+        "notes": "Below Capital One's typical 1:1 rate."
       },
       {
         "name": "Etihad Guest",
@@ -283,8 +289,8 @@
     },
     {
       "coverage": "Baggage delay",
-      "detail": "Via lost-baggage coverage",
-      "level": "mid"
+      "detail": "Not included",
+      "level": "none"
     },
     {
       "coverage": "Emergency medical",
@@ -305,10 +311,26 @@
       "coverage": "Return protection",
       "detail": "$300/item · 90 days",
       "level": "strong"
+    },
+    {
+      "coverage": "Lost luggage",
+      "detail": "Up to $3,000 per covered trip",
+      "level": "mid"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "+1 yr on ≤3-yr warranties · $10k/claim · $50k per cardholder",
+      "level": "good"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "$1M · common carrier",
+      "level": "good"
     }
   ],
   "protection_note": "Well-rounded for the price: primary rental, cell-phone, purchase AND return protection. The catch is a low $2,000 trip-cancellation cap and no medical, so put big prepaid or international trips on a card with higher cancellation limits.",
-  "rental_note": "The Venture X gives free primary coverage (up to $75k), paying before your own policy. Decline the counter's CDW and pay with the card.",
+  "rental_note": "The Venture X gives free primary coverage on vehicles with an original MSRP up to $75k, paying before your own policy, for rentals up to 15 days in your country of residence or 31 days abroad. Decline the counter's CDW and pay with the card.",
+  "lounge_access": "included",
   "status_perks": [
     {
       "name": "Hertz President's Circle",
@@ -323,7 +345,7 @@
     {
       "name": "Lounge access",
       "strength": 3,
-      "note": "Capital One Lounges are strong and growing. From Feb 1, 2026 guests need $75k spend and authorized users cost $125 each for lounge access."
+      "note": "Capital One Lounges are strong and growing. Guests pay $45 or $25 per visit at Capital One Lounges unless $75k of spend unlocks free guests, and authorized users cost $125 each for lounge access."
     }
   ],
   "services": [
@@ -370,6 +392,12 @@
     "note": "Up to 4 authorized users are free. The only catch is the new $125-per-user lounge fee from Feb 2026; skip it for a user who won't use lounges and they still keep status + protections at no cost."
   },
   "timeline": [
+    {
+      "date": "Nov 2, 2026",
+      "type": "add",
+      "badge": "Add",
+      "text": "Copa added as a transfer partner at 2:1.5, taking the airline list to 19."
+    },
     {
       "date": "Feb 1, 2026",
       "type": "cut",

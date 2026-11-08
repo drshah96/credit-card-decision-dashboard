@@ -1,0 +1,15 @@
+{
+  "card_id": "citi-simplicity",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:5423930161a1db97ef50e7522c46ebb8422d9e89",
+    "evidence_scope": "card",
+    "facts_sha256": "f09c52fe2ec09ffd44c4343f0c0582a60fd5555726fcf402452364b190837ff8",
+    "documents": [],
+    "not_checked": [
+      "rates_and_fees",
+      "insurance_limits"
+    ],
+    "note": "Re-checked on 2026-11-07 against Citi product pages and benefit documents. Not checked: some rates and fees and insurance dollar limits. Citi's current APRs and intro period could not be read from a Citi document."
+  }
+}

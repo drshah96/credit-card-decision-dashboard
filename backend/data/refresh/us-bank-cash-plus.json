@@ -1,0 +1,16 @@
+{
+  "card_id": "us-bank-cash-plus",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:5423930161a1db97ef50e7522c46ebb8422d9e89",
+    "evidence_scope": "card",
+    "facts_sha256": "beefdc2a417135e0ba7b314da5ed1f5073a0913bf0d75b01c892de7aab957668",
+    "documents": [],
+    "not_checked": [
+      "insurance",
+      "insurance_limits",
+      "additional_cards"
+    ],
+    "note": "Re-checked on 2026-11-07 against U.S. Bank product pages and Pricing and Terms. Not checked: insurance benefits, insurance dollar limits, and authorized-user terms."
+  }
+}

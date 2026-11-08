@@ -17,11 +17,11 @@
     "months": 12
   },
   "foreign_transaction_fee": false,
-  "variable_apr": "18.49%, 24.49%, or 28.49%, based on creditworthiness",
-  "balance_transfer_apr": "18.49%, 24.49%, or 28.49%, based on creditworthiness",
+  "variable_apr": "18.74%-28.74%, based on creditworthiness",
+  "balance_transfer_apr": "18.74%-28.74%, based on creditworthiness",
   "balance_transfer_fee": "$0 at the standard Transfer APR; 3% during the 0% intro period, or 4% at any other promotional APR Capital One may offer",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%",
+  "cash_advance_apr": "28.74%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
@@ -100,35 +100,35 @@
       }
     ],
     "per_100k": "$1,000",
-    "note": "A straight cash-back currency, not miles: no transfer partners, no premium redemption to chase, always worth exactly 1¢."
+    "note": "A straight cash-back currency, not miles: no transfer partners and no premium redemption to chase. Gift card and other redemption rates can vary."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "Cash back isn't transferable. It's a flat statement credit, check, gift card, or Capital One Travel/Entertainment redemption, always at face value.",
+    "highlight": "Cash back isn't transferable. Redeem it as a statement credit or check, for gift cards, or through Capital One Travel or Entertainment.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
   "insurance": [
     {
       "coverage": "Rental car CDW",
-      "detail": "Secondary: pays after your personal auto insurance",
+      "detail": "Secondary at home · primary outside your country of residence",
       "level": "mid"
     },
     {
       "coverage": "Extended warranty",
-      "detail": "+1 yr on warranties ≤3 yrs · max $1,000/claim",
-      "level": "mid"
+      "detail": "+1 yr on ≤2-yr warranties · $10k/claim · $50k per cardholder",
+      "level": "good"
     },
     {
       "coverage": "Purchase protection",
-      "detail": "Not included",
-      "level": "none"
+      "detail": "$1,000/claim · $25,000 per 12 months · 90 days",
+      "level": "mid"
     },
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "Not included",
-      "level": "none"
+      "detail": "$1,500 per insured person on non-refundable common carrier tickets",
+      "level": "mid"
     },
     {
       "coverage": "Trip delay",
@@ -144,11 +144,33 @@
       "coverage": "Cell phone",
       "detail": "Not included",
       "level": "none"
+    },
+    {
+      "coverage": "Price protection",
+      "detail": "$250/item · $1,000/yr · 120 days",
+      "level": "mid"
+    },
+    {
+      "coverage": "Travel accident insurance",
+      "detail": "Up to $1M · common carrier",
+      "level": "good"
+    },
+    {
+      "coverage": "Baggage delay/loss",
+      "detail": "Delay $100/day up to $300 · lost luggage up to $3,000/trip",
+      "level": "mid"
     }
   ],
-  "protection_note": "Thin by design: this is a cash-back card, not a travel card. No purchase protection or trip coverage of any kind; the one real protection is a modest $1,000-per-claim extended warranty.",
-  "rental_note": "Secondary CDW only: decline the rental counter's own waiver and pay in full with this card to activate it, but your personal auto policy pays first.",
-  "status_perks": [],
+  "protection_note": "Better covered than it looks. Capital One's Discover network guide names Savor and grants purchase security, extended warranty, price protection, trip cancellation and interruption, travel accident, baggage delay and lost luggage cover. No trip delay, emergency medical or cell phone cover.",
+  "rental_note": "Decline the rental counter's own waiver and pay in full with this card. Coverage is secondary at home, but primary when you rent outside your country of residence.",
+  "lounge_access": "none",
+  "status_perks": [
+    {
+      "name": "Hertz Five Star status",
+      "strength": 2,
+      "note": "Skip-the-counter access and a wider vehicle selection at select Hertz locations."
+    }
+  ],
   "services": [
     {
       "name": "Discover network transition",
@@ -181,12 +203,6 @@
     "note": "No cost to add trusted users: an easy way to consolidate household dining/grocery spend onto the flat 3% categories."
   },
   "timeline": [
-    {
-      "date": "Jun 2026",
-      "type": "add",
-      "badge": "Boost",
-      "text": "Sign-up bonus temporarily increased to $250 (from $200) after $500 spend in 3 months, a limited-time offer, not the standing rate."
-    },
     {
       "date": "Nov 14, 2024",
       "type": "cut",

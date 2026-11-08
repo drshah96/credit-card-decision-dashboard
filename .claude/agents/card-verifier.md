@@ -34,7 +34,9 @@ without re-doing your research.
 6. Welcome bonus: amount, spend requirement, time window
 7. Intro APR terms and duration
 8. Earn rates and category definitions
-9. Insurance and coverage levels
+9. Insurance and coverage levels, and `lounge_access`: `included`, `passes`, `paid`
+   or `none`, for airport lounges only. Report `none` only if the issuer states it
+   or you read a full benefits list showing no lounge benefit, and say which.
 10. Transfer partners and ratios, where `transfer_partners.partners[]` is
     populated
 

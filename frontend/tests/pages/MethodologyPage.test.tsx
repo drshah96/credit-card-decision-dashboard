@@ -69,10 +69,10 @@ describe("MethodologyPage", () => {
     ).toBeInTheDocument();
   });
 
-  it("explains the credit calculator starts from a realistic default, not the maximum", () => {
+  it("explains that almost every credit starts at $0 until you set your own usage", () => {
     renderPage();
     expect(
-      screen.getByText(/starts with a realistic, hand-estimated default, not the maximum/i),
+      screen.getByText(/almost every credit on this site starts at \$0, not the maximum/i),
     ).toBeInTheDocument();
   });
 

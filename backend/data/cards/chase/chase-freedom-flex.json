@@ -17,12 +17,12 @@
     "rate": "0%",
     "months": 15
   },
-  "foreign_transaction_fee": true,
-  "variable_apr": "18.24%-27.74%",
-  "balance_transfer_apr": "18.24%-27.74%",
-  "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
-  "foreign_transaction_fee_rate": "3%",
-  "cash_advance_apr": "28.49%",
+  "foreign_transaction_fee": false,
+  "variable_apr": "18.49%-27.99%",
+  "balance_transfer_apr": "18.49%-27.99%",
+  "balance_transfer_fee": "Intro fee of either $5 or 3% of the amount of each transfer, whichever is greater, on transfers made within 60 days of account opening. After that, either $5 or 5% of the amount of each transfer, whichever is greater",
+  "foreign_transaction_fee_rate": null,
+  "cash_advance_apr": "28.74%",
   "penalty_apr": "Up to 29.99%",
   "penalty_apr_trigger": "Failing to make a Minimum Payment when due, or making a payment that's returned unpaid; can remain in effect indefinitely",
   "pay_over_time_fee": "0% during the 0% intro Purchase APR period, then up to 1.72% per month of the amount selected to pay over time",
@@ -43,7 +43,7 @@
     {
       "emoji": "\ud83d\udd04",
       "multiplier": "5%",
-      "category": "Quarterly rotating category. This quarter (Q3): Gas, EV charging, transit, entertainment, United Way",
+      "category": "Quarterly rotating category. This quarter (Q4): Grocery stores (excluding Walmart and Target), dining, American Red Cross",
       "highlight": true,
       "is_base": false
     },
@@ -76,7 +76,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "You need to opt in every quarter, and missing the activation window drops you back to the base 1%. Combined spend is capped at $1,500 per quarter, so the most you can get back is $75. Full 2026 calendar: Q1 was Norwegian Cruise Line and dining, Q2 was Amazon and Chase Travel, Q3 is gas stations and EV charging, public transit, select live entertainment, and United Way donations, and Q4 hasn't been announced yet. The Q3 activation deadline is Sep 14, 2026.",
+  "earn_note": "You need to opt in every quarter, and missing the activation window drops you back to the base 1%. Combined spend is capped at $1,500 per quarter, so the most you can get back is $75. Full 2026 calendar: Q1 was Norwegian Cruise Line and dining, Q2 was Amazon and Chase Travel, Q3 was gas stations and EV charging, public transit, select live entertainment, and United Way donations, and Q4 is grocery stores (excluding Walmart and Target), dining, and American Red Cross donations. The Q4 activation deadline is Dec 14, 2026. Q1 2027 is grocery stores (excluding Walmart and Target) and top streaming services.",
   "points": {
     "currency": "Ultimate Rewards (cash back)",
     "redemption_options": [
@@ -104,7 +104,7 @@
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "6 months of complimentary DashPass membership ($0 delivery fees on DoorDash/Caviar), which then auto-renews at the regular paid rate unless canceled. Separately, up to $10/quarter in statement credits on non-restaurant (grocery/retail) DoorDash orders through Dec 2027.",
+      "description": "6 months of complimentary DashPass membership ($0 delivery fees on DoorDash/Caviar), which then auto-renews at the regular paid rate unless canceled. Separately, up to $10/quarter in statement credits on non-restaurant (grocery/retail) DoorDash orders through Dec 2029.",
       "tips": [
         "Cancel DashPass before the 6-month free trial ends if you don't want to start paying for it; it auto-enrolls at the regular rate.",
         "The $10/quarter non-restaurant credit is the only ongoing recurring value here; the free DashPass trial is one-time."
@@ -114,7 +114,7 @@
   "insurance": [
     {
       "coverage": "Rental car CDW",
-      "detail": "Secondary only",
+      "detail": "$60,000 \u00b7 secondary in the US, primary abroad",
       "level": "mid"
     },
     {
@@ -124,8 +124,8 @@
     },
     {
       "coverage": "Cell phone",
-      "detail": "Through Sep 19, 2026 only: up to $800/claim, $1,000/yr, 2 claims/yr, $50 deductible. Pay your monthly wireless bill with this card to enroll. Benefit ends Sep 20, 2026.",
-      "level": "good"
+      "detail": "Not covered",
+      "level": "none"
     },
     {
       "coverage": "Purchase protection",
@@ -138,13 +138,14 @@
       "level": "good"
     }
   ],
-  "protection_note": "Chase discontinues cell phone protection on this card on Sep 20, 2026. After that date this card's protections are basically identical to the fee-free Freedom Unlimited. Trip cancellation and purchase protection are modest, and rental coverage is secondary only.",
-  "rental_note": "Secondary coverage only: it pays after your personal auto insurance, covering what's left. Use a card with primary coverage for rentals when possible.",
+  "protection_note": "Chase discontinued cell phone protection on this card on Sep 20, 2026, so its protections are now basically identical to the fee-free Freedom Unlimited. Trip cancellation and purchase protection are modest, and rental coverage is secondary in the US.",
+  "rental_note": "Secondary in the US: it pays after your personal auto insurance, covering what's left. Primary outside the US, up to $60,000 and 31 consecutive days. Use a card with primary US coverage for rentals when possible.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {
-      "name": "Foreign transaction fee, being eliminated",
-      "detail": "Chase removes this fee entirely from Sep 20, 2026, the same day cell phone protection ends. Before that date, purchases outside the US carry 3%."
+      "name": "No foreign transaction fees",
+      "detail": "Chase removed this fee on Sep 21, 2026. Purchases outside the US carry no foreign transaction fee."
     },
     {
       "name": "Lyft bonus",
@@ -152,7 +153,7 @@
     },
     {
       "name": "Chase Pay Over Time",
-      "detail": "Option to finance eligible purchases of $100+ at a fixed APR/fee instead of paying the revolving rate."
+      "detail": "Option to pay eligible purchases of $100 or more over 3 to 24 months with a fixed monthly fee and no interest."
     },
     {
       "name": "Travel & emergency assistance",
@@ -189,13 +190,13 @@
       "date": "Sep 20, 2026",
       "type": "cut",
       "badge": "Benefit cut",
-      "text": "Complimentary cell phone protection is discontinued (losses after Sep 19, 2026 aren't covered). Foreign transaction fees are removed the same day, so this is a mixed change, not a pure cut."
+      "text": "Complimentary cell phone protection is discontinued (losses after Sep 19, 2026 aren't covered). Foreign transaction fees were removed on Sep 21, 2026, so this is a mixed change, not a pure cut."
     },
     {
       "date": "Sep 30, 2027",
       "type": "future",
       "badge": "Upcoming",
-      "text": "The Lyft 2% total cash back bonus is scheduled to expire; the DoorDash $10/quarter non-restaurant credit expires Dec 31, 2027."
+      "text": "The Lyft 2% total cash back bonus is scheduled to expire; the DoorDash $10/quarter non-restaurant credit expires Dec 31, 2029."
     },
     {
       "date": "Sep 15, 2020",

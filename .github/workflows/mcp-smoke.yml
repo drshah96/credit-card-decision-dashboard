@@ -1,0 +1,90 @@
+name: MCP smoke test
+
+# Run by hand after deploys. Records what datacenter traffic actually gets on each hostname,
+# which tests ADR 0003's assumptions 1 and 2. GitHub runners are Azure, so AWS and GCP stay
+# unproven by this job: test those from the caller's own environment too.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      MCP_SMOKE_KEY: ${{ secrets.MCP_SMOKE_KEY }}
+    steps:
+      - name: Call every tool path on each hostname
+        run: |
+          set -uo pipefail
+          if [ -z "$MCP_SMOKE_KEY" ]; then
+            echo "::error::MCP_SMOKE_KEY is not set"
+            exit 1
+          fi
+
+          post() { # host, json body. Prints status; headers land in headers.txt, body in body.json.
+            curl -s --max-time 120 -D headers.txt -o body.json -w '%{http_code}' -X POST \
+              "https://$1/mcp" \
+              -H 'content-type: application/json' \
+              -H 'accept: application/json, text/event-stream' \
+              -H "authorization: Bearer $MCP_SMOKE_KEY" \
+              -d "$2"
+          }
+          report_headers() {
+            grep -i -E '^(server|cf-ray|cf-mitigated|x-request-id):' headers.txt || true
+          }
+
+          INIT='{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"mcp-smoke","version":"1"}}}'
+          LIST='{"jsonrpc":"2.0","id":2,"method":"tools/list","params":{}}'
+          CALL='{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"get_card","arguments":{"card_id":"amex-gold"}}}'
+
+          failed=0
+          for host in mcp.thewalletaudit.com thewalletaudit-api.onrender.com; do
+            for body in "$INIT" "$LIST" "$CALL"; do
+              status=$(post "$host" "$body")
+              echo "$host -> HTTP $status"
+              report_headers
+              [ "$status" = "200" ] || failed=1
+            done
+            grep -q 'amex-gold' body.json || { echo "::error::$host did not return the card"; failed=1; }
+          done
+
+          # Expected to fail: a 421 from us, or a Cloudflare challenge from the zone.
+          status=$(post api.thewalletaudit.com "$INIT")
+          echo "api.thewalletaudit.com (expected to refuse) -> HTTP $status"
+          report_headers
+
+          if [ "$failed" -ne 0 ]; then
+            echo "::error::mcp.thewalletaudit.com or the raw origin failed. Do not issue any keys."
+            exit 1
+          fi
+
+      - name: Check forged client IPs cannot escape the failed-auth limit
+        run: |
+          set -uo pipefail
+          URL=https://mcp.thewalletaudit.com/mcp
+
+          forged=$(curl -s --max-time 60 -o /dev/null -w '%{http_code}' -X POST "$URL" \
+            -H 'content-type: application/json' -H 'cf-connecting-ip: 203.0.113.50' -d '{}')
+          echo "forged CF-Connecting-IP -> HTTP $forged (expected a Cloudflare 403, not our 401)"
+
+          limited_at=0
+          for i in $(seq 1 25); do
+            status=$(curl -s --max-time 60 -o /dev/null -w '%{http_code}' -X POST "$URL" \
+              -H 'content-type: application/json' \
+              -H 'authorization: Bearer invalid' \
+              -H "true-client-ip: 198.51.100.$i" \
+              -H "x-forwarded-for: 198.51.100.$i" \
+              -d '{}')
+            if [ "$status" = "429" ]; then
+              limited_at=$i
+              break
+            fi
+          done
+          if [ "$limited_at" -eq 0 ] || [ "$limited_at" -gt 21 ]; then
+            echo "::warning::Rotating forged IPs were not limited by request 21 (got $limited_at). Assumption 2 failed: key the failed-auth limiter on the peer address only."
+          else
+            echo "limited at request $limited_at despite rotating forged IPs"
+          fi

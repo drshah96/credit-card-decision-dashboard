@@ -1,0 +1,14 @@
+{
+  "card_id": "capital-one-venture-x",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:5423930161a1db97ef50e7522c46ebb8422d9e89",
+    "evidence_scope": "card",
+    "facts_sha256": "7c9729bc6f2a679166fdc7af9fcf1ef34f0cfd13d31fccb15f28b36b39aa1ba4",
+    "documents": [],
+    "not_checked": [
+      "rates_and_fees"
+    ],
+    "note": "Re-checked on 2026-11-07 against Capital One product pages, benefit terms and Guide to Benefits PDFs. Not checked: some rates and fees. The cash advance APR is worked out from the Prime Rate change, not read."
+  }
+}

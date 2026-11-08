@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": true,
-  "variable_apr": "18.24%-27.74%",
-  "balance_transfer_apr": "18.24%-27.74%",
+  "variable_apr": "18.49%-27.99%",
+  "balance_transfer_apr": "18.49%-27.99%",
   "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": "3%",
-  "cash_advance_apr": "28.49%",
+  "cash_advance_apr": "28.74%",
   "penalty_apr": "Up to 29.99%",
   "penalty_apr_trigger": "Failing to make a Minimum Payment when due, or making a payment that's returned unpaid; can remain in effect indefinitely",
   "pay_over_time_fee": "Up to 1.72% per month of the amount selected to pay over time, via Chase Pay Over Time",
@@ -29,13 +29,6 @@
   },
   "earn_rates": [
     {
-      "emoji": "\ud83c\udf7d\ufe0f",
-      "multiplier": "3%",
-      "category": "Dining, first 6 months, up to $6,000 spent (then 1.5%)",
-      "highlight": true,
-      "is_base": false
-    },
-    {
       "emoji": "\ud83d\udcb3",
       "multiplier": "1.5%",
       "category": "Everything else",
@@ -43,7 +36,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The only starter/credit-builder card on the market with a flat 1.5% base; most competitors in this segment cap around 1%. The 3% dining intro rate is a limited-time offer for new cardholders' first 6 months, not a permanent category.",
+  "earn_note": "The only starter/credit-builder card on the market with a flat 1.5% base; most competitors in this segment cap around 1%.",
   "points": {
     "currency": "Ultimate Rewards (cash back)",
     "redemption_options": [
@@ -66,14 +59,14 @@
     {
       "id": "autopay-bonus",
       "name": "Autopay Enrollment Bonus",
-      "subtitle": "$25 one-time \u00b7 first 3 months",
+      "subtitle": "$25 one-time · first 3 months",
       "max_annual": 25,
       "default_value": 0,
       "tier": "easy",
       "removed": false,
       "description": "One-time $25 statement credit for enrolling in automatic payments within the first 3 months of account opening and staying enrolled for at least 90 days.",
       "tips": [
-        "This is a one-time new-cardholder bonus, not an annual credit; it won't recur in future years.",
+        "This is a one-time credit, not an annual one; it won't recur in future years.",
         "Autopay also protects your on-time payment history, which matters more for a starter card than almost anything else on it."
       ]
     },
@@ -85,7 +78,7 @@
       "default_value": 0,
       "tier": "plan",
       "removed": false,
-      "description": "6 months of complimentary DashPass membership ($0 delivery fees on DoorDash/Caviar). Separately, up to $10/quarter in statement credits on non-restaurant (grocery/retail) DoorDash orders through Dec 2027.",
+      "description": "6 months of complimentary DashPass membership ($0 delivery fees on DoorDash/Caviar). Separately, up to $10/quarter in statement credits on non-restaurant (grocery/retail) DoorDash orders through Dec 2029.",
       "tips": [
         "Cancel DashPass before the 6-month free trial ends if you don't want to start paying for it.",
         "The $10/quarter non-restaurant credit is the only ongoing recurring value here."
@@ -100,7 +93,7 @@
     },
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "$1,500/person \u00b7 $6,000/trip",
+      "detail": "$1,500/person · $6,000/trip",
       "level": "mid"
     },
     {
@@ -110,7 +103,7 @@
     },
     {
       "coverage": "Purchase protection",
-      "detail": "$500/item \u00b7 120 days",
+      "detail": "$500/item · 120 days",
       "level": "mid"
     },
     {
@@ -121,6 +114,7 @@
   ],
   "protection_note": "Thin, as expected for a starter card, but not as thin as it looks: purchase protection, extended warranty, modest trip cancellation and auto rental coverage are all there. No cell phone protection.",
   "rental_note": "Auto Rental Coverage is included at up to $60,000: secondary in the US, primary outside it, for rentals up to 31 consecutive days. Decline the counter waiver and pay for the whole rental with the card.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {
@@ -136,8 +130,8 @@
       "detail": "2% total cash back on Lyft rides, bikes, and scooters through Sep 30, 2027 (an extra 0.5% on top of the 1.5% base)."
     },
     {
-      "name": "Foreign transaction fee likely applies",
-      "detail": "Chase doesn't list Freedom Rise among its no-foreign-transaction-fee cards; treat it as carrying the standard ~3% fee abroad and confirm before international use."
+      "name": "Foreign transaction fee",
+      "detail": "3% of each transaction in US dollars."
     },
     {
       "name": "Automatic upgrade path to Freedom Unlimited",
@@ -151,9 +145,15 @@
   "additional_cards": {
     "title": "Additional cards",
     "options": [],
-    "note": "Chase doesn't market a distinct authorized-user program for Freedom Rise the way it does for its rewards cards; this is a single-cardholder credit-building product."
+    "note": "Chase's terms refer to authorized users on this card, but don't list a fee or separate benefits for them."
   },
   "timeline": [
+    {
+      "date": "2026",
+      "type": "cut",
+      "badge": "Cut",
+      "text": "Chase's offer page no longer shows the 3% dining rate for the first 6 months; the card earns a flat 1.5% on all purchases."
+    },
     {
       "date": "Early 2024",
       "type": "add",

@@ -5,17 +5,17 @@
   "network": "WORLD LEGEND MASTERCARD",
   "points_program": "AAdvantage",
   "accent_color": "#7A0C1E",
-  "annual_fee": 595,
+  "annual_fee": 695,
   "effective_cost": "High sticker fee, but Citi values the included Admirals Club membership at up to $1,400 a year, so this can be a net saver if you actually use the lounges",
   "official_url": "https://www.citi.com/credit-cards/citi-aadvantage-executive-world-elite-mastercard",
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.49%-29.49%",
-  "balance_transfer_apr": "19.49%-29.49%",
+  "variable_apr": "19.74%-29.74%",
+  "balance_transfer_apr": "19.74%-29.74%",
   "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "29.74%",
+  "cash_advance_apr": "29.99%",
   "penalty_apr": "Up to 29.99%",
   "penalty_apr_trigger": "Making a late payment or a payment that's returned",
   "pay_over_time_fee": "Up to 1.72% per month, for Citi Flex Plan balances subject to a Plan Fee",
@@ -55,7 +55,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "A 5x rate kicks in on AA purchases for the rest of the calendar year once you cross $150,000 in annual AA spend on the card. That threshold's realistically only relevant to very heavy flyers or small-business owners funneling large ticket volume through the card. For everyone else it's a flat 4x on AA and 1x elsewhere; the case for this card is the Admirals Club, not the earn rate.",
+  "earn_note": "A 5x rate kicks in on AA purchases for the rest of the calendar year once you cross $150,000 in total spend on the card that year. That threshold's realistically only relevant to very heavy spenders or small-business owners funneling large volume through the card. For everyone else it's 4x on AA, 12x on AAdvantage Hotels and Cars bookings, and 1x elsewhere; the case for this card is the Admirals Club, not the earn rate.",
   "points": {
     "currency": "AAdvantage Miles",
     "redemption_options": [
@@ -76,12 +76,12 @@
       }
     ],
     "per_100k": "$1,000–$1,400",
-    "note": "AAdvantage has used dynamic pricing with no published award chart since 2016, so value swings by route and date. No blackout dates on award redemptions, and miles don't expire as long as there's qualifying account activity at least once every 18 months."
+    "note": "AAdvantage has used dynamic pricing with no published award chart since 2016, so value swings by route and date. No blackout dates on award redemptions, and for primary cardmembers miles don't expire as long as the card account is open."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "AAdvantage miles aren't a transferable bank-points currency. There's no way to move them out to another loyalty program, and (unlike United MileagePlus) no bank card lets you transfer points in either.",
+    "highlight": "AAdvantage miles aren't a transferable bank-points currency, so there's no way to move them out to another loyalty program. Points can move in, though: Citi ThankYou Points transfer to American Airlines AAdvantage from the Strata cards.",
     "recent_changes": "Citi became the sole issuer of AAdvantage-branded consumer credit cards as Barclays exited the co-brand partnership (announced Dec 2024, Barclays stopped issuing new AAdvantage cards Sept 30, 2025); Barclays AAdvantage cardholders began transitioning to equivalent Citi-issued cards starting April 2026, with some legacy Barclays benefits temporarily carried over."
   },
   "credits": [
@@ -162,37 +162,51 @@
       "tips": [
         "Gone as of the World Legend refresh; the American Airlines Vacations and inflight credits replaced it."
       ]
+    },
+    {
+      "id": "inkind",
+      "name": "Dining Credits with inKind",
+      "subtitle": "$100 × 2 · Jan-Jun and Jul-Dec",
+      "max_annual": 200,
+      "default_value": 0,
+      "tier": "plan",
+      "removed": false,
+      "description": "Up to $200 a year in dining credits with inKind when you add your eligible card to the inKind app: $100 usable January through June and $100 usable July through December.",
+      "tips": [
+        "Only counts at restaurants on inKind, so check the app before relying on it."
+      ]
     }
   ],
   "insurance": [
     {
       "coverage": "Trip delay",
-      "detail": "Included, exact per-person/per-trip dollar caps aren't published in Citi's public summary materials; confirm limits in your Guide to Benefits.",
-      "level": "mid"
+      "detail": "$500 per traveler, per trip · after 6 hrs",
+      "level": "good"
     },
     {
       "coverage": "Trip cancellation/interruption",
-      "detail": "Included, exact dollar caps aren't published in Citi's public summary materials.",
+      "detail": "$5,000 per trip",
       "level": "mid"
     },
     {
-      "coverage": "Lost/delayed baggage",
-      "detail": "Included, exact dollar caps aren't published in Citi's public summary materials.",
-      "level": "mid"
+      "coverage": "Lost/damaged baggage",
+      "detail": "$3,000 per traveler, per trip ($2,000 per bag for NY residents), $10,000 per trip; checked bags only, no delay benefit listed",
+      "level": "good"
     },
     {
-      "coverage": "Rental car coverage (MasterRental)",
-      "detail": "Worldwide car rental insurance included; whether it's primary or secondary, and the exact coverage cap, aren't published in Citi's public summary materials.",
-      "level": "mid"
+      "coverage": "Rental car coverage (Worldwide Car Rental Insurance)",
+      "detail": "Up to $75,000 · 31-day cap · secondary in the US, primary outside it",
+      "level": "good"
     }
   ],
-  "protection_note": "The one AAdvantage card in this lineup with a real travel-insurance suite: trip delay, trip cancellation/interruption, lost baggage, and worldwide rental car coverage are all included, a step up from Platinum Select and MileUp, which advertise none of this. Citi's public card pages don't spell out the exact per-person/per-trip dollar limits, though, so treat the levels here as directional until you check your Guide to Benefits.",
-  "rental_note": "Worldwide car rental insurance (MasterRental Coverage) is included, but Citi doesn't publish primary-vs-secondary status or a coverage cap on its public summary pages; confirm terms in your Guide to Benefits before declining a rental company's own CDW.",
+  "protection_note": "Trip delay, trip cancellation/interruption, lost baggage, and worldwide rental car coverage are all included, a step up from Platinum Select and MileUp, which list none of this. Globe carries its own protection suite. The limits here come from Citi's Guide to Protection Benefits, effective July 23, 2023, the newest edition found.",
+  "rental_note": "Worldwide Car Rental Insurance is included: up to $75,000 per rental, up to 31 consecutive days, secondary in the US and primary outside it. Pay for the whole rental with the card or AAdvantage miles and decline the rental company's collision waiver.",
+  "lounge_access": "included",
   "status_perks": [
     {
       "name": "Admirals Club membership",
       "strength": 5,
-      "note": "Complimentary annual membership for the primary cardmember plus up to 2 guests, covering 100+ Admirals Club and partner lounges worldwide. Buying that access outright gets far more expensive on Aug 23, 2026: a standard membership goes from around $850 to $1,400 ($1,200 for Executive Platinum), the $50 renewal discount and household memberships both disappear, and the new $750 solo option covers only you, at roughly 50 Admirals Clubs, with no partner lounges. The card's own fee rises to $695 the same day, which still leaves it well under the membership it replaces."
+      "note": "Complimentary annual membership for the primary cardmember plus up to 2 guests or immediate family members, with unlimited visits to more than 100 Admirals Club lounges. Citi values it at up to $1,400 a year."
     },
     {
       "name": "Loyalty Points",
@@ -205,7 +219,6 @@
       "name": "Free first checked bag",
       "detail": "First checked bag free on domestic American Airlines flights for the cardholder plus up to 8 companions on the same reservation, double Platinum Select's companion count."
     },
-    
     {
       "name": "No blackout dates",
       "detail": "Standard AAdvantage award redemption term across the whole card family."
@@ -220,8 +233,8 @@
         "is_free": false,
         "benefits": [
           {
-            "text": "Own Admirals Club membership",
-            "included": false
+            "text": "Admirals Club access at 18 or older, with immediate family or up to 2 guests; no partner lounges or full membership privileges",
+            "included": true
           },
           {
             "text": "Earns AAdvantage miles on their spend (into your account)",
@@ -238,9 +251,15 @@
         ]
       }
     ],
-    "note": "$175 covers up to three authorized users, and their spend earns miles into your account. It does not buy them an Admirals Club membership: lounge access runs through the primary cardmember, who can bring up to 2 guests or immediate family."
+    "note": "$175 covers up to three authorized users, and their spend earns miles into your account. Authorized users 18 or older get Admirals Club access and can bring immediate family or up to 2 guests, but not full membership privileges or partner lounges."
   },
   "timeline": [
+    {
+      "date": "Oct 25, 2026",
+      "type": "add",
+      "badge": "New credit",
+      "text": "Citi added up to $200 a year in inKind dining credits, split into $100 for January through June and $100 for July through December."
+    },
     {
       "date": "Aug 23, 2026",
       "type": "cut",

@@ -1,0 +1,15 @@
+{
+  "card_id": "amex-hilton-honors-aspire",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:98940f63d267723d4fb6cc1367be132a71708728",
+    "evidence_scope": "card",
+    "facts_sha256": "23355d1ecdf971644605d972ad2ee327a34bbac16de0e5d0481e93424b7704ae",
+    "documents": [],
+    "not_checked": [
+      "redemption",
+      "transfer_partners"
+    ],
+    "note": "Re-checked on 2026-11-07 against Amex application terms, cardmember agreements and benefit pages. Not checked: redemption values and transfer partners. Some insurance limits come from excerpts of Amex benefit pages, not full reads."
+  }
+}

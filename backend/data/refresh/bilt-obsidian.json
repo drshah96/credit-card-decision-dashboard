@@ -1,0 +1,12 @@
+{
+  "card_id": "bilt-obsidian",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:5423930161a1db97ef50e7522c46ebb8422d9e89",
+    "evidence_scope": "card",
+    "facts_sha256": "8e4cc2717ea40dfb5608fddf8f132435b1758f68d54c132d546503276ec63b04",
+    "documents": [],
+    "not_checked": [],
+    "note": "Re-checked on 2026-11-07 against Bilt's pricing PDF, cardholder agreements, offer terms and Guides to Benefits. Some airline names and Accor's ratio come from excerpts of a Bilt support page that blocks direct reads, and Bilt's own partner counts disagree."
+  }
+}

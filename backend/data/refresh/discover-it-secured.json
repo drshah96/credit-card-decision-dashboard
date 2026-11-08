@@ -1,0 +1,12 @@
+{
+  "card_id": "discover-it-secured",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:6329b2d100ef598daab31fcd435b15e4d1cca22d",
+    "evidence_scope": "card",
+    "facts_sha256": "07ca4dfe533a04bc2fcb97c40a46f562c84b2c6016f8f24a358df9957c7ee196",
+    "documents": [],
+    "not_checked": [],
+    "note": "Re-checked on 2026-11-07 against Discover product pages and the Capital One cardmember agreement that now covers the Discover line."
+  }
+}

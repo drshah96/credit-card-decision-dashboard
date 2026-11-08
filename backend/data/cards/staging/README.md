@@ -19,6 +19,8 @@ Workflow:
    ```bash
    git mv backend/data/cards/staging/<slug>.json backend/data/cards/{issuer}/<slug>.json
    ```
+5. Add `backend/data/refresh/<slug>.json` with null dates, and regenerate the ranking fixture.
+   The MCP server section of `backend/README.md` has the steps.
 
 A file sitting in an issuer folder (`amex/`, `chase/`, `capital-one/`, ...) means "this card is live in
 `card_catalog.db`." A file sitting here means "drafted, not yet promoted": the test fixture in

@@ -1,0 +1,12 @@
+{
+  "card_id": "discover-it-cash-back",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:6329b2d100ef598daab31fcd435b15e4d1cca22d",
+    "evidence_scope": "card",
+    "facts_sha256": "3a111dd21d9317d1a7ca3ef6dba0f639a4e4a16a530febab72ee0b55587848bb",
+    "documents": [],
+    "not_checked": [],
+    "note": "Re-checked on 2026-11-07 against Discover product pages and the Capital One cardmember agreement that now covers the Discover line."
+  }
+}

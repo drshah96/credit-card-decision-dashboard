@@ -22,14 +22,18 @@
   "late_payment_fee": null,
   "returned_payment_fee": null,
   "returned_check_fee": null,
-  "welcome_bonus": null,
+  "welcome_bonus": {
+    "bonus": "Up to $100 off",
+    "requirement": "qualifying purchases when opening a new account; exact terms and tiers vary by promotion",
+    "estimated_value": null
+  },
   "verdict": {
     "status": "situational",
     "text": "A project-financing card, not rewards: only for a 0% Home Depot purchase",
     "short_tag": "0% Project Financing"
   },
   "earn_rates": [],
-  "earn_note": "This card has no cash-back or points program of any kind. Its entire value proposition is deferred-interest financing (\"no interest if paid in full within the promotional period\") on Home Depot purchases, plus a modest new-account discount and an extended return window. If you want rewards for home-improvement spend, a general-purpose card with a home-improvement or everyday-purchases category will out-earn this every time.",
+  "earn_note": "This card has no cash-back or points program of any kind. Its entire value proposition is deferred-interest financing (\"no interest if paid in full within the promotional period\") on Home Depot purchases, plus an extended return window. If you want rewards for home-improvement spend, a general-purpose card with a home-improvement or everyday-purchases category will out-earn this every time.",
   "points": {
     "currency": "No rewards program",
     "redemption_options": [],
@@ -82,10 +86,6 @@
     {
       "name": "Deferred-interest project financing",
       "detail": "6 months no-interest financing on purchases of $299+ if paid in full within the promo window; special promotions extend this up to 24 months at times. Missing the deadline triggers retroactive interest back to the purchase date."
-    },
-    {
-      "name": "New-account discount",
-      "detail": "Save up to $100 on qualifying purchases when opening a new account; exact terms/tiers vary by promotion."
     },
     {
       "name": "Extended return window",

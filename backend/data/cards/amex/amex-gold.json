@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.49%-28.49%",
+  "variable_apr": "19.74%-28.74%",
   "balance_transfer_apr": null,
   "balance_transfer_fee": null,
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.74%",
+  "cash_advance_apr": "28.99%",
   "penalty_apr": "29.99%",
   "penalty_apr_trigger": "Missing at least the Minimum Payment Due on a Pay Over Time balance, or a returned payment; applies for at least 6 months and is reviewed every 6 months after that",
   "pay_over_time_fee": "Up to 1.33% per month of each purchase placed in a Plan It plan",
@@ -86,7 +86,7 @@
         "best": false
       },
       {
-        "method": "Amex Travel portal",
+        "method": "Amex Travel flights",
         "cpp": 1.0,
         "best": false
       },
@@ -179,7 +179,7 @@
         "Enrollment required.",
         "No rollover between halves; an unused H1 doesn't carry into H2.",
         "Look for the Resy Credit badge on the restaurant's page first. Being bookable on Resy is no longer enough on its own.",
-        "Amex says no venues were dropped when the badge rule started, and Tock restaurants become bookable on Resy later in 2026."
+        "Amex says no venues were dropped when the badge rule started, and purchases made directly on Tock have counted since Sep 15, 2026."
       ]
     },
     {
@@ -199,12 +199,12 @@
   "insurance": [
     {
       "coverage": "Rental car CDW",
-      "detail": "Car Rental Loss & Damage Insurance, secondary in the US",
+      "detail": "Car Rental Loss & Damage Insurance, secondary, not available in Australia, Italy or New Zealand",
       "level": "mid"
     },
     {
       "coverage": "Trip delay",
-      "detail": "$300/trip",
+      "detail": "$300/trip · after 12 hrs · 2 claims/yr",
       "level": "mid"
     },
     {
@@ -216,10 +216,21 @@
       "coverage": "Emergency assistance",
       "detail": "24/7 Global Assist Hotline (coordination only; cardholder pays for services rendered)",
       "level": "mid"
+    },
+    {
+      "coverage": "Extended warranty",
+      "detail": "+1 year on warranties of 5 years or less · $10,000/item · $50,000/yr",
+      "level": "good"
+    },
+    {
+      "coverage": "Purchase protection",
+      "detail": "Included; see your Guide to Benefits for limits",
+      "level": "mid"
     }
   ],
   "protection_note": "Thin for a travel card: trip delay caps at $300/trip and rental coverage is secondary. This card isn't built to be your primary travel-protection card.",
-  "rental_note": "Rental coverage is secondary in the US. If you rent often, put the charge on a card with free primary coverage instead.",
+  "rental_note": "Rental coverage is secondary, and not available in Australia, Italy or New Zealand. If you rent often, put the charge on a card with free primary coverage instead.",
+  "lounge_access": "none",
   "status_perks": [
     {
       "name": "Hertz Five Star Status",
@@ -259,6 +270,12 @@
     "note": "Up to five Additional Cards are free, a cheap way to add earning power across a household without raising the $325 primary fee."
   },
   "timeline": [
+    {
+      "date": "Sep 15, 2026",
+      "type": "add",
+      "badge": "Tock added",
+      "text": "The Resy credit started counting purchases made directly on Tock at U.S. restaurants."
+    },
     {
       "date": "Aug 1, 2026",
       "type": "cut",

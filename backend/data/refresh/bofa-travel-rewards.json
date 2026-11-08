@@ -1,0 +1,15 @@
+{
+  "card_id": "bofa-travel-rewards",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:da76a45dae3fa3107d841f05ea4d6ff7bbc6a2de",
+    "evidence_scope": "card",
+    "facts_sha256": "0c794bbb28f977ec7549d4af4de210dcb935d4ed41f4c9ddd524726461c8fc58",
+    "documents": [],
+    "not_checked": [
+      "insurance",
+      "insurance_limits"
+    ],
+    "note": "Re-checked on 2026-11-07 against Bank of America product pages, offer disclosures and sample cardmember agreements. Not checked: insurance benefits and insurance dollar limits."
+  }
+}

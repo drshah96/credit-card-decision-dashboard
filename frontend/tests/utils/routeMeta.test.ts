@@ -15,6 +15,7 @@ import {
   TERMS_AS_OF,
 } from "@/utils/routeMeta.js";
 import { ISSUERS } from "@/utils/cardTaxonomy";
+import { MAX_AGE_DAYS, termsAgeDays } from "../../scripts/check-terms-freshness.mjs";
 
 const CARDS_DIR = join(__dirname, "..", "..", "..", "backend", "data", "cards");
 
@@ -111,15 +112,21 @@ describe("routeMeta", () => {
 });
 
 describe("TERMS_AS_OF", () => {
-  // The footer's freshness claim went stale by hand once already ("July
-  // 2026" in August). This alarm fails the build when the claim falls ~2
-  // months behind, forcing either a data re-verification or a deliberate
-  // bump — never silent drift. (issue #154)
-  it("is no more than about two months behind today", () => {
-    const parsed = new Date(`1 ${TERMS_AS_OF}`);
-    expect(Number.isNaN(parsed.getTime())).toBe(false);
-    const ageDays = (Date.now() - parsed.getTime()) / 86_400_000;
-    expect(ageDays).toBeLessThan(75);
+  // Age is checked weekly by terms-freshness.yml, not here: the calendar alone must not fail CI.
+  it("is a month and year the freshness reminder can read", () => {
+    expect(termsAgeDays(TERMS_AS_OF, new Date("2026-11-06"))).not.toBeNaN();
+  });
+
+  it("measures age from the first of the month", () => {
+    expect(termsAgeDays("September 2026", new Date("2026-09-11T12:00:00Z"))).toBe(10);
+  });
+
+  it("rejects a value that is not a month and year", () => {
+    expect(() => termsAgeDays("soon")).toThrow(/month and year/);
+  });
+
+  it("marks the reminder threshold at about two months", () => {
+    expect(MAX_AGE_DAYS).toBe(75);
   });
 });
 

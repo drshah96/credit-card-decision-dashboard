@@ -1,0 +1,14 @@
+{
+  "card_id": "wells-fargo-autograph",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:263734a0048b069d2531d32cc89a75539deb3d4a",
+    "evidence_scope": "card",
+    "facts_sha256": "6e4811737926e4f2498335ccb6983bd22a8a586bd997f5b697a2e512ef8060a2",
+    "documents": [],
+    "not_checked": [
+      "transfer_partners"
+    ],
+    "note": "Re-checked on 2026-11-07 against Wells Fargo product pages, pricing terms and the Guide to Benefits. Not checked: transfer partners."
+  }
+}

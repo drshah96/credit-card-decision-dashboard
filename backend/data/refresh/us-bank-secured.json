@@ -1,0 +1,19 @@
+{
+  "card_id": "us-bank-secured",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:40b86fa9c112c55a16d35179ed97a51b70478704",
+    "evidence_scope": "card",
+    "facts_sha256": "8954008c9cc16925238219da42720d6957bd41182300b47b6ed6477a14f4c05b",
+    "documents": [],
+    "not_checked": [
+      "earn_rates",
+      "redemption",
+      "transfer_partners",
+      "insurance",
+      "insurance_limits",
+      "additional_cards"
+    ],
+    "note": "Re-checked on 2026-11-07 against U.S. Bank product pages and Pricing and Terms. Not checked: earn rates, redemption values, transfer partners, insurance benefits, insurance dollar limits, and authorized-user terms. Only fees, rates, credits and lounge access were re-read."
+  }
+}

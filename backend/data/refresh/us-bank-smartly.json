@@ -1,0 +1,16 @@
+{
+  "card_id": "us-bank-smartly",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:5423930161a1db97ef50e7522c46ebb8422d9e89",
+    "evidence_scope": "card",
+    "facts_sha256": "eafdbd27ae9dbb79b281ceba9245738e204103bf872516ab8a3a6e01dd6632a6",
+    "documents": [],
+    "not_checked": [
+      "insurance",
+      "insurance_limits",
+      "additional_cards"
+    ],
+    "note": "Re-checked on 2026-11-07 against U.S. Bank product pages and Pricing and Terms. Not checked: insurance benefits, insurance dollar limits, and authorized-user terms. A 6% Travel Center rate appears only in older program rules, so it is left out."
+  }
+}

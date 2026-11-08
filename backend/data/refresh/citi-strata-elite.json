@@ -1,0 +1,15 @@
+{
+  "card_id": "citi-strata-elite",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:c4677373bcb5d7f6a590ad9c231601e72b0818ab",
+    "evidence_scope": "card",
+    "facts_sha256": "d3e88ac5b817d5b09e03a1d30d410768ec46f1dbfd5762312a07c8159a65159f",
+    "documents": [],
+    "not_checked": [
+      "redemption",
+      "transfer_partners"
+    ],
+    "note": "Re-checked on 2026-11-07 against Citi product pages and benefit documents. Not checked: redemption values and transfer partners. Citi fills in its rates in the browser, so they were read from Citi pages through a text renderer and matched to Citi documents. Citi lists transfer partners only behind a ThankYou login."
+  }
+}

@@ -5,6 +5,8 @@ import pytest
 from fastapi.testclient import TestClient
 
 from backend.main import app
+from backend.models import Card
+from backend.services.cards import _has_lounge_access
 
 client = TestClient(app)
 
@@ -134,9 +136,8 @@ def test_standalone_secured_cards_have_no_pairing() -> None:
 
 
 def test_capital_one_quicksilver_secured_not_paired() -> None:
-    """capital-one-quicksilver-secured earns less than the unsecured
-    Quicksilver (missing the 5% Entertainment bonus) — confirmed NOT a
-    duplicate, so it must not be wired up as a pair despite the name."""
+    """capital-one-quicksilver-secured isn't wired up as a pair with the
+    unsecured Quicksilver, so both stay listed. Their earn rates match today."""
     detail = client.get("/api/cards/capital-one-quicksilver-secured").json()
     assert detail["is_secured_variant_of"] is None
     unsecured = client.get("/api/cards/capital-one-quicksilver").json()
@@ -408,7 +409,7 @@ def test_annual_fees_are_correct() -> None:
     assert fees["chase-world-of-hyatt"] == 95
     assert fees["chase-marriott-bonvoy-boundless"] == 95
     assert fees["chase-marriott-bonvoy-bold"] == 0
-    assert fees["chase-ihg-one-rewards-premier"] == 99
+    assert fees["chase-ihg-one-rewards-premier"] == 150
     assert fees["chase-ihg-one-rewards-traveler"] == 0
     assert fees["chase-disney-premier"] == 49
     assert fees["chase-amazon-prime-visa"] == 0
@@ -436,7 +437,7 @@ def test_annual_fees_are_correct() -> None:
     assert fees["citi-simplicity"] == 0
     assert fees["citi-secured"] == 0
     assert fees["citi-aadvantage-platinum-select"] == 99
-    assert fees["citi-aadvantage-executive"] == 595
+    assert fees["citi-aadvantage-executive"] == 695
     assert fees["citi-aadvantage-mileup"] == 0
     assert fees["citi-aadvantage-globe"] == 350
     assert fees["citi-costco-anywhere-visa"] == 0
@@ -592,9 +593,8 @@ def test_summary_apr_and_fx_fields_match_full_detail(card_id: str) -> None:
 
 
 def test_has_lounge_access_true_for_a_known_lounge_card() -> None:
-    """amex-platinum has real Centurion Lounge access in its status_perks —
-    confirms has_lounge_access is actually derived from that data, not
-    hardcoded false."""
+    """amex-platinum has lounge_access "included", confirming has_lounge_access
+    is actually derived from that field, not hardcoded false."""
     detail = client.get("/api/cards/amex-platinum").json()
     summary = next(c for c in client.get("/api/cards").json() if c["id"] == "amex-platinum")
     assert detail["has_lounge_access"] is True
@@ -604,6 +604,14 @@ def test_has_lounge_access_true_for_a_known_lounge_card() -> None:
 def test_has_lounge_access_false_for_a_card_with_no_such_perk() -> None:
     detail = client.get("/api/cards/chase-freedom-unlimited").json()
     assert detail["has_lounge_access"] is False
+
+
+@pytest.mark.parametrize(
+    ("level", "expected"),
+    [("included", True), ("passes", True), ("paid", False), ("none", False), (None, False)],
+)
+def test_only_free_entry_counts_as_lounge_access(level, expected) -> None:
+    assert _has_lounge_access(level) is expected
 
 
 def test_intro_apr_shape_when_present() -> None:
@@ -629,7 +637,7 @@ def test_intro_apr_shape_when_present() -> None:
     "card_id,purchases_months,bt_months,fx_fee",
     [
         ("chase-freedom-unlimited", 15, 15, True),
-        ("chase-freedom-flex", 15, 15, True),
+        ("chase-freedom-flex", 15, 15, False),
     ],
 )
 def test_chase_cards_with_a_real_intro_apr_offer(
@@ -710,20 +718,20 @@ def test_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
     "card_id,variable_apr,balance_transfer_apr",
     [
         # Confirmed identical purchase/BT ranges.
-        ("chase-freedom-unlimited", "18.24%-27.74%", "18.24%-27.74%"),
-        ("chase-freedom-flex", "18.24%-27.74%", "18.24%-27.74%"),
-        ("chase-amazon-prime-visa", "18.74%-27.49%", "18.74%-27.49%"),
+        ("chase-freedom-unlimited", "18.49%-27.99%", "18.49%-27.99%"),
+        ("chase-freedom-flex", "18.49%-27.99%", "18.49%-27.99%"),
+        ("chase-amazon-prime-visa", "18.99%-27.74%", "18.99%-27.74%"),
         # Re-verified 2026-08-03 against Chase's current Pricing & Terms pages:
         # every one of these previously had a genuinely distinct BT APR range
         # (the whole reason this field isn't just derived from variable_apr) —
-        # Prime Rate has since dropped to 6.75% and Chase re-grouped Purchase/
+        # Prime Rate has since moved and Chase re-grouped Purchase/
         # My Chase Loan/Balance Transfer APR under one range for all of them.
         # Kept as their own group since a future audit could easily find this
         # has reverted, unlike the cards above which were never distinct.
-        ("chase-sapphire-reserve", "19.49%-27.99%", "19.49%-27.99%"),
-        ("chase-ihg-one-rewards-premier", "19.24%-27.74%", "19.24%-27.74%"),
-        ("chase-marriott-bonvoy-boundless", "19.24%-27.74%", "19.24%-27.74%"),
-        ("chase-united-club-infinite", "19.74%-28.24%", "19.74%-28.24%"),
+        ("chase-sapphire-reserve", "19.74%-28.24%", "19.74%-28.24%"),
+        ("chase-ihg-one-rewards-premier", "19.49%-27.99%", "19.49%-27.99%"),
+        ("chase-marriott-bonvoy-boundless", "19.49%-27.99%", "19.49%-27.99%"),
+        ("chase-united-club-infinite", "19.99%-28.49%", "19.99%-28.49%"),
     ],
 )
 def test_chase_variable_and_balance_transfer_apr(
@@ -749,11 +757,11 @@ def test_chase_foreign_transaction_fee_rate_matches_the_boolean() -> None:
     # Cards confirmed to charge 3% match `foreign_transaction_fee: true`;
     # cards confirmed fee-free have a null rate, not "0%" — there's nothing
     # to quote from a Pricing & Terms table that doesn't list the fee.
-    for card_id in ("chase-freedom-flex", "chase-freedom-unlimited", "chase-disney-premier"):
+    for card_id in ("chase-freedom-unlimited", "chase-disney-premier"):
         detail = client.get(f"/api/cards/{card_id}").json()
         assert detail["foreign_transaction_fee"] is True
         assert detail["foreign_transaction_fee_rate"] == "3%"
-    for card_id in ("chase-sapphire-reserve", "chase-amazon-prime-visa"):
+    for card_id in ("chase-sapphire-reserve", "chase-amazon-prime-visa", "chase-freedom-flex"):
         detail = client.get(f"/api/cards/{card_id}").json()
         assert detail["foreign_transaction_fee"] is False
         assert detail["foreign_transaction_fee_rate"] is None
@@ -818,7 +826,6 @@ def test_amex_hilton_surpass_no_longer_has_an_intro_offer_or_bt_support() -> Non
     detail = client.get("/api/cards/amex-hilton-honors-surpass").json()
     assert detail["intro_apr_purchases"] is None
     assert detail["intro_apr_balance_transfers"] is None
-    assert detail["variable_apr"] == "19.49%-28.49%"
     assert detail["balance_transfer_apr"] is None
     assert detail["balance_transfer_fee"] is None
 
@@ -831,7 +838,6 @@ def test_amex_delta_blue_no_intro_offer_and_no_longer_supports_balance_transfers
     detail = client.get("/api/cards/amex-delta-skymiles-blue").json()
     assert detail["intro_apr_purchases"] is None
     assert detail["intro_apr_balance_transfers"] is None
-    assert detail["variable_apr"] == "19.49%-28.49%"
     assert detail["balance_transfer_apr"] is None
     assert detail["balance_transfer_fee"] is None
 
@@ -901,10 +907,8 @@ def test_capital_one_premium_travel_cards_have_no_intro_offer() -> None:
         detail = client.get(f"/api/cards/{card_id}").json()
         assert detail["intro_apr_purchases"] is None
         assert detail["intro_apr_balance_transfers"] is None
-        # Re-verified 2026-08-03: Capital One's own disclosure quotes this as
-        # three discrete creditworthiness tiers, not a continuous min-max
-        # range — same non-fit as the Bass Pro/BJ's tiered-APR cards below.
-        assert detail["variable_apr"] == "19.49%, 24.49%, or 28.49%, based on creditworthiness"
+        # The product page prints this as a range; the middle tier isn't shown.
+        assert detail["variable_apr"] == "19.74%-28.74%, based on creditworthiness"
 
 
 def test_capital_one_kohls_no_longer_has_an_intro_offer() -> None:
@@ -922,14 +926,12 @@ def test_capital_one_savor_one_no_longer_has_an_intro_offer() -> None:
     # savorone/ (this card's own stored official_url): round 1 found a
     # 12-month 0% intro APR on purchases and balance transfers with an
     # 18.49%-28.49% ongoing range; the current page shows neither — a flat
-    # 28.99% rate with no intro period at all, a real product change (this
+    # rate with no intro period at all, a real product change (this
     # card is now positioned for Fair credit, unlike the Excellent-credit
     # Savor sibling, which still has its intro offer).
     detail = client.get("/api/cards/capital-one-savor-one").json()
     assert detail["intro_apr_purchases"] is None
     assert detail["intro_apr_balance_transfers"] is None
-    assert detail["variable_apr"] == "28.99%"
-    assert detail["balance_transfer_apr"] == "28.99%"
 
 
 def test_capital_one_bass_pro_cabelas_has_a_bifurcated_purchase_apr() -> None:
@@ -984,11 +986,11 @@ def test_citi_cards_with_asymmetric_intro_apr_durations(
     assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": bt_months}
 
 
-def test_citi_aadvantage_mileup_has_bt_intro_but_no_purchase_intro() -> None:
-    # The inverse asymmetry: an intro offer on balance transfers only.
+def test_citi_aadvantage_mileup_has_no_intro_offer() -> None:
+    # Neither Citi's fact sheet nor AA's terms show one, read Nov 7, 2026.
     detail = client.get("/api/cards/citi-aadvantage-mileup").json()
     assert detail["intro_apr_purchases"] is None
-    assert detail["intro_apr_balance_transfers"] == {"rate": "0%", "months": 15}
+    assert detail["intro_apr_balance_transfers"] is None
 
 
 def test_citi_two_cards_left_genuinely_unconfirmed_foreign_transaction_fee() -> None:
@@ -1132,13 +1134,11 @@ def test_bofa_travel_rewards_has_no_foreign_transaction_fee_unlike_cash_cards() 
 
 def test_bofa_premium_rewards_cards_have_no_intro_offer_and_flat_bt_fees() -> None:
     # Premium/Elite skip the intro-APR structure entirely and quote their transfer
-    # fee off the agreement's fee table rather than off an intro offer. The Sep
-    # 2026 refresh corrected both against that table: Premium is a 4% to 5% range,
-    # and Elite is a flat 5% (it had been stored as 4%, the only such value in the
-    # ten-card BofA folder).
+    # fee off the terms' fee table rather than off an intro offer. Both are a flat
+    # 5%, read from each card's offer terms on Nov 7, 2026.
     detail = client.get("/api/cards/bofa-premium-rewards").json()
     assert detail["intro_apr_purchases"] is None
-    assert detail["balance_transfer_fee"] == "4% to 5% of the amount of each transaction"
+    assert detail["balance_transfer_fee"] == "5% of the amount of each transaction"
     elite_detail = client.get("/api/cards/bofa-premium-rewards-elite").json()
     assert elite_detail["intro_apr_purchases"] is None
     assert elite_detail["balance_transfer_fee"] == "5% of the amount of each transaction"
@@ -1167,17 +1167,14 @@ def test_bilt_cards_have_a_nonzero_ten_percent_intro_apr(card_id: str) -> None:
     detail = client.get(f"/api/cards/{card_id}").json()
     assert detail["intro_apr_purchases"] == {"rate": "10%", "months": 12}
     assert detail["intro_apr_balance_transfers"] is None
-    assert detail["variable_apr"] == "26.74%-34.74%"
+    assert detail["variable_apr"] == "26.99%-34.99%"
     assert detail["foreign_transaction_fee"] is False
 
 
-def test_bilt_palladium_has_a_distinct_tiered_bt_fee_from_blue_and_obsidian() -> None:
-    palladium = client.get("/api/cards/bilt-palladium").json()
-    assert "60 days" not in palladium["balance_transfer_fee"]
-    assert "4 months" in palladium["balance_transfer_fee"]
-    for card_id in ("bilt-blue", "bilt-obsidian"):
-        detail = client.get(f"/api/cards/{card_id}").json()
-        assert detail["balance_transfer_fee"] == "The greater of 5% or $5"
+@pytest.mark.parametrize("card_id", ["bilt-blue", "bilt-obsidian", "bilt-palladium"])
+def test_bilt_cards_share_one_bt_fee(card_id: str) -> None:
+    detail = client.get(f"/api/cards/{card_id}").json()
+    assert detail["balance_transfer_fee"] == "The greater of 5% or $5"
 
 
 def test_bilt_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
@@ -1207,8 +1204,8 @@ def test_wells_fargo_autograph_has_no_balance_transfer_intro_offer() -> None:
     detail = client.get("/api/cards/wells-fargo-autograph").json()
     assert detail["intro_apr_purchases"] == {"rate": "0%", "months": 12}
     assert detail["intro_apr_balance_transfers"] is None
-    assert detail["variable_apr"] == "18.49%, 24.49%, or 28.49% (based on creditworthiness)"
-    assert detail["balance_transfer_apr"] == "18.49%, 24.49%, or 28.49% (based on creditworthiness)"
+    assert detail["variable_apr"] == "18.74%, 24.74%, or 28.74% (based on creditworthiness)"
+    assert detail["balance_transfer_apr"] == "18.74%, 24.74%, or 28.74% (based on creditworthiness)"
 
 
 @pytest.mark.parametrize(
@@ -1270,20 +1267,24 @@ def test_round_3_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
         assert field not in summary
 
 
-def test_welcome_bonus_shape_when_present() -> None:
-    """Whichever card ends up with an audited welcome bonus, the field is a
-    {bonus, requirement, estimated_value} object with the right value types,
-    not a bare string."""
+CARDS_DIR = Path(__file__).parent.parent.parent / "backend" / "data" / "cards"
+
+
+def test_welcome_bonus_is_captured_but_never_served() -> None:
+    """Offers can change daily or weekly, so the card files keep them for internal
+    use and no API response may carry them."""
+    raw = json.loads((CARDS_DIR / "amex" / "amex-gold.json").read_text())
+    assert raw["welcome_bonus"]
+    assert Card(**raw).welcome_bonus is not None
+    assert "welcome_bonus" not in Card(**raw).model_dump()
+
     all_ids = [c["id"] for c in client.get("/api/cards").json()]
-    cards = client.get("/api/cards/detail", params={"ids": ",".join(all_ids)}).json()
-    audited = [c for c in cards if c["welcome_bonus"] is not None]
-    if not audited:
-        pytest.skip("no card has an audited welcome_bonus yet")
-    sample = audited[0]["welcome_bonus"]
-    assert set(sample.keys()) == {"bonus", "requirement", "estimated_value"}
-    assert isinstance(sample["bonus"], str)
-    assert isinstance(sample["requirement"], str)
-    assert sample["estimated_value"] is None or isinstance(sample["estimated_value"], str)
+    for response in (
+        client.get("/api/cards"),
+        client.get("/api/cards/detail", params={"ids": ",".join(all_ids)}),
+        client.get("/api/cards/amex-gold"),
+    ):
+        assert "welcome_bonus" not in response.text
 
 
 def test_catalog_response_is_gzipped() -> None:

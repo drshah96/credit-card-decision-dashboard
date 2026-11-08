@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "27.49%",
-  "balance_transfer_apr": "27.49%",
+  "variable_apr": "27.74%",
+  "balance_transfer_apr": "27.74%",
   "balance_transfer_fee": "5% of the amount of each transaction",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "29.24%",
+  "cash_advance_apr": "29.49%",
   "penalty_apr": "Up to 29.99%, based on your creditworthiness",
   "penalty_apr_trigger": "Making a late payment; applies indefinitely once triggered",
   "pay_over_time_fee": "Monthly fee up to 1.72% of the purchase amount assigned to a BofA Custom Pay Plan",
@@ -44,7 +44,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Identical flat 1.5x rate to the unsecured Travel Rewards card, with the same statement-credit redemption against travel and dining purchases. Secured card products are not eligible for the BofA Rewards relationship bonus that boosts the unsecured card's rate by 10–75%.",
+  "earn_note": "Same earn rates as the unsecured Travel Rewards card: 1.5x everywhere, plus 3x on travel booked through BofA Travel, with the same statement-credit redemption against travel and dining purchases. Check bankofamerica.com/BofARewards before counting on the BofA Rewards bonus: Bank of America keeps a list of ineligible cards there.",
   "points": {
     "currency": "Bank of America Rewards",
     "redemption_options": [
@@ -54,13 +54,13 @@
         "best": true
       },
       {
-        "method": "Deposit to a Bank of America checking or savings account, or gift cards",
-        "cpp": 1.0,
+        "method": "Cash: deposit to a Bank of America checking or savings account, Merrill credit, or a check",
+        "cpp": 0.6,
         "best": false
       }
     ],
     "per_100k": "$1,000",
-    "note": "Same redemption menu as the unsecured card: value tops out around 1¢/point, with no transfer-partner program."
+    "note": "Same redemption menu as the unsecured card: 1¢ a point on travel and dining statement credits, 0.6¢ a point for cash, and gift card value varies. There's no transfer-partner program."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -98,11 +98,12 @@
   ],
   "protection_note": "No purchase-protection or extended-warranty guide published specifically for this card.",
   "rental_note": "No auto rental coverage documented publicly for this card.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {
       "name": "Refundable security deposit",
-      "detail": "$200–$5,000 sets your credit limit dollar-for-dollar."
+      "detail": "$200 to $5,000. Your maximum credit limit is based on your deposit, your income and your ability to pay."
     },
     {
       "name": "Deposit review for return",

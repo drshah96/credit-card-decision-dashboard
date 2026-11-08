@@ -1035,27 +1035,6 @@ function CardDetail({ card }: { card: Card }) {
 
       <SecuredPairingNote card={card} />
 
-      {/* Welcome bonus — disabled: sign-up offers rotate on the issuer's own
-      promotional calendar, much faster than APR/fee data drifts, so a stale
-      bonus reads as an active (wrong) promotional claim rather than a dated
-      fact. That's a worse failure mode for a decision-support site that
-      isn't trying to promote applying. Data still flows through the schema
-      and API; only the render is off, so this can come back if we find a
-      way to keep it current.
-      {card.welcome_bonus && (
-        <Block label="Sign-up offer" title="Welcome bonus" note="from the issuer's current terms">
-          <div className="welcome-bonus">
-            <div className="wb-amount">{card.welcome_bonus.bonus}</div>
-            <div className="wb-req">{card.welcome_bonus.requirement}</div>
-            {card.welcome_bonus.estimated_value && (
-              <div className="wb-value">
-                Worth an estimated {card.welcome_bonus.estimated_value}
-              </div>
-            )}
-          </div>
-        </Block>
-      )}
-      */}
 
       {/* Credits — right after the hero: it's the primary interactive tool
       on the page, not something to scroll past everything else to reach. */}

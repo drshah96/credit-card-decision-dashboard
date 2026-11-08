@@ -10,8 +10,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import PlainTextResponse
 from sqlalchemy import text
+from starlette.routing import Route
 
 from backend.db import engine
+from backend.mcp_server import mcp_endpoint
 from backend.models import Card, CardFeedbackIn, CardSummary, ClientErrorIn, EventIn
 from backend.services.cards import get_card, get_card_summaries, get_cards
 from backend.services.errors import record_client_error
@@ -25,7 +27,8 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     connection or query surfaces immediately at boot, not on the first real
     request a visitor makes."""
     get_card_summaries()
-    yield
+    async with mcp_endpoint.run():
+        yield
 
 
 app = FastAPI(
@@ -68,6 +71,7 @@ def root() -> dict:
         "docs": "/docs",
         "health": "/health",
         "liveness": "/healthz",
+        "mcp": "https://mcp.thewalletaudit.com/mcp",
     }
 
 
@@ -473,3 +477,8 @@ def submit_feedback(feedback: CardFeedbackIn, request: Request) -> dict:
         device_type=_device_type(request.headers.get("user-agent")),
     )
     return {"status": "ok", "feedback_id": feedback_id}
+
+
+# Plain routes, not a Mount: a Mount redirects POST /mcp to /mcp/ and turns 405s into 404s.
+app.router.routes.append(Route("/mcp", endpoint=mcp_endpoint))
+app.router.routes.append(Route("/mcp/", endpoint=mcp_endpoint))

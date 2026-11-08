@@ -1,0 +1,12 @@
+{
+  "card_id": "wells-fargo-one-key-plus",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:263734a0048b069d2531d32cc89a75539deb3d4a",
+    "evidence_scope": "card",
+    "facts_sha256": "2e62d7f24f231c78041d9964a63badbb526dc971da0a85e3f376733761a24b96",
+    "documents": [],
+    "not_checked": [],
+    "note": "Re-checked on 2026-11-07 against Wells Fargo product pages, pricing terms and the Guide to Benefits."
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "card_id": "us-bank-altitude-go-secured",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:40b86fa9c112c55a16d35179ed97a51b70478704",
+    "evidence_scope": "card",
+    "facts_sha256": "bcc3c8bab00b13a5f011ac4585cc242a5a1cecd49b1538716e567f943ff88641",
+    "documents": [],
+    "not_checked": [
+      "insurance",
+      "insurance_limits",
+      "additional_cards"
+    ],
+    "note": "Re-checked on 2026-11-07 against U.S. Bank product pages and Pricing and Terms. Not checked: insurance benefits, insurance dollar limits, and authorized-user terms."
+  }
+}

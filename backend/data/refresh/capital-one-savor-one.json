@@ -1,0 +1,14 @@
+{
+  "card_id": "capital-one-savor-one",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:93b8c86d046b1478ff85c14da6d4582c3938a1c9",
+    "evidence_scope": "card",
+    "facts_sha256": "df7c009dd799d3787908292b6f46887ae4c94ecfd6d06abf31ec7cd943850592",
+    "documents": [],
+    "not_checked": [
+      "rates_and_fees"
+    ],
+    "note": "Re-checked on 2026-11-07 against Capital One product pages, benefit terms and Guide to Benefits PDFs. Not checked: some rates and fees."
+  }
+}

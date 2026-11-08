@@ -1,0 +1,12 @@
+{
+  "card_id": "wells-fargo-reflect",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:263734a0048b069d2531d32cc89a75539deb3d4a",
+    "evidence_scope": "card",
+    "facts_sha256": "3a76aeec6c68818ad565317a28383c2b1a80e487946b5263598a7ef0eae3009d",
+    "documents": [],
+    "not_checked": [],
+    "note": "Re-checked on 2026-11-07 against Wells Fargo product pages, pricing terms and the Guide to Benefits."
+  }
+}

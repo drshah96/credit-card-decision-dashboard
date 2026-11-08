@@ -1,0 +1,16 @@
+{
+  "card_id": "chase-southwest-rapid-rewards-premier",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:3bc2fe4a44851e0bf3e7e0ccebb4959b9e72c3d8",
+    "evidence_scope": "card",
+    "facts_sha256": "97f969e8fdc6bf42598ce5a10fa5e8cde6de3d43163aaae2fceb610fdbb0f60a",
+    "documents": [],
+    "not_checked": [
+      "redemption",
+      "transfer_partners",
+      "insurance_limits"
+    ],
+    "note": "Re-checked on 2026-11-07 against the card's Chase pricing table, product page, rewards terms and Guide to Benefits. Not checked: redemption values, transfer partners, and insurance dollar limits."
+  }
+}

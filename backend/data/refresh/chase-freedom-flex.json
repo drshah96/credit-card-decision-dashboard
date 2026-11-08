@@ -1,0 +1,12 @@
+{
+  "card_id": "chase-freedom-flex",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:3bc2fe4a44851e0bf3e7e0ccebb4959b9e72c3d8",
+    "evidence_scope": "card",
+    "facts_sha256": "11e68bff607326b91ace45380c9f212101a63ee4c353609702501d12d843762f",
+    "documents": [],
+    "not_checked": [],
+    "note": "Re-checked on 2026-11-07 against the card's Chase pricing table, product page, rewards terms and Guide to Benefits."
+  }
+}

@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.49%-28.49%",
+  "variable_apr": "19.74%-28.74%",
   "balance_transfer_apr": null,
   "balance_transfer_fee": null,
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.74%",
+  "cash_advance_apr": "28.99%",
   "penalty_apr": "29.99%",
   "penalty_apr_trigger": "Missing at least the Minimum Payment Due, or a returned payment; applies for at least 6 months and is reviewed every 6 months after that",
   "pay_over_time_fee": "Up to 1.33% per month of each purchase placed in a Plan It plan",
@@ -60,7 +60,7 @@
     "currency": "Delta SkyMiles",
     "redemption_options": [
       {
-        "method": "Statement / low-end",
+        "method": "Pay with Miles (Delta flights)",
         "cpp": 1.0,
         "best": false
       },
@@ -104,6 +104,7 @@
   ],
   "protection_note": "The thinnest protection in the Delta lineup: no trip cancellation, no trip delay, no baggage coverage, and no emergency medical/evacuation assistance. This is a free card with free-card-level protection.",
   "rental_note": "Secondary only; put rentals on a card with primary coverage if you rent often.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {

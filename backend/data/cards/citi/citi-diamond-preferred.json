@@ -17,8 +17,8 @@
     "months": 21
   },
   "foreign_transaction_fee": true,
-  "variable_apr": "16.49%-27.24%",
-  "balance_transfer_apr": "16.49%-27.24%",
+  "variable_apr": "16.74%-27.49%",
+  "balance_transfer_apr": "16.74%-27.49%",
   "balance_transfer_fee": "3% of each transfer (minimum $5) within the first 4 months of account opening; 5% (minimum $5) after",
   "foreign_transaction_fee_rate": "3%",
   "cash_advance_apr": "29.99%",
@@ -40,7 +40,7 @@
     "currency": "No rewards program",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
-    "note": "No points or cash-back program of any kind. The entire value proposition is 0% intro APR: 12 months on purchases and 21 months on balance transfers from account opening (balance transfers must post within the first 4 months), then a 16.49%–27.24% variable ongoing APR based on creditworthiness. This is one of the longest 0% balance-transfer windows Citi offers on any card."
+    "note": "No points or cash-back program of any kind. The entire value proposition is 0% intro APR: 12 months on purchases and 21 months on balance transfers from account opening (balance transfers must post within the first 4 months), then a 16.74%-27.49% variable ongoing APR based on creditworthiness. This is one of the longest 0% balance-transfer windows Citi offers on any card."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -52,6 +52,7 @@
   "insurance": [],
   "protection_note": "Bare-bones by design. Citi's own page for this card lists fraud liability protection and Mastercard ID Theft Protection but no purchase protection, extended warranty, or travel insurance suite; treat this as carrying none of that coverage.",
   "rental_note": "No rental car coverage advertised; use a different card for rentals.",
+  "lounge_access": "none",
   "status_perks": [],
   "services": [
     {

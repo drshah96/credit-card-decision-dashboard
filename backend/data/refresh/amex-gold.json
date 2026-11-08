@@ -1,0 +1,14 @@
+{
+  "card_id": "amex-gold",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:98940f63d267723d4fb6cc1367be132a71708728",
+    "evidence_scope": "card",
+    "facts_sha256": "852eca3574f1994235e87a62b709eb88b252d4b6658dc0d1d779d551dbdfb472",
+    "documents": [],
+    "not_checked": [
+      "transfer_partners"
+    ],
+    "note": "Re-checked on 2026-11-07 against Amex application terms, cardmember agreements and benefit pages. Not checked: transfer partners. Some insurance limits come from excerpts of Amex benefit pages, not full reads."
+  }
+}

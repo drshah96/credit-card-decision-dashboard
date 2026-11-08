@@ -1,0 +1,16 @@
+{
+  "card_id": "amex-hilton-honors",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:98940f63d267723d4fb6cc1367be132a71708728",
+    "evidence_scope": "card",
+    "facts_sha256": "7dd07abda97de0d2437ea51f36363affe5b83b34f0dd8db4c10cb013685aacd0",
+    "documents": [],
+    "not_checked": [
+      "redemption",
+      "transfer_partners",
+      "insurance_limits"
+    ],
+    "note": "Re-checked on 2026-11-07 against Amex application terms, cardmember agreements and benefit pages. Not checked: redemption values, transfer partners, and insurance dollar limits."
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "card_id": "citi-secured",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:c4677373bcb5d7f6a590ad9c231601e72b0818ab",
+    "evidence_scope": "card",
+    "facts_sha256": "1f91033bcf0b5a66d6e7582dc74124c5a3fe0913d729ca6a5b7cfa6e57e0b27f",
+    "documents": [],
+    "not_checked": [
+      "insurance_limits"
+    ],
+    "note": "Re-checked on 2026-11-07 against Citi product pages and benefit documents. Not checked: insurance dollar limits. Citi fills in its rates in the browser, so they were read from Citi pages through a text renderer and matched to Citi documents."
+  }
+}

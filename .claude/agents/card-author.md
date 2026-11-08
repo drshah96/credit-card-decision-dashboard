@@ -73,6 +73,9 @@ worse, one that validates with a number a hundred times too large.
 - **Lookup values** — issuer, network, loyalty programme names — must match the
   exact strings existing cards use. "American Express", not "Amex" or "AmEx".
   Grep the catalog before inventing a spelling.
+- **`lounge_access`** is what the card gets you at airport lounges: `included`,
+  `passes`, `paid` or `none`. Leave it out if the issuer's terms don't settle it,
+  and don't infer `none` from a card saying nothing. Hotel lounges don't count.
 - **`transfer_partners.partners[]`** only gets per-partner entries where you
   have a verified per-partner source with name and ratio. Otherwise populate
   `transfer_partners.airline_count` and `.hotel_count` and leave the array
@@ -81,8 +84,8 @@ worse, one that validates with a number a hundred times too large.
 
 ## Credit tiers and default_value
 
-These are the judgment calls that feed `total_easy_credits` and the "your take"
-calculator, so reason explicitly rather than guessing:
+The tier is a judgment call that decides how the site groups a card's credits, so
+reason explicitly rather than guessing:
 
 - **Effortless** — auto-applies, or covers something the cardholder would
   unavoidably buy anyway.
@@ -90,11 +93,14 @@ calculator, so reason explicitly rather than guessing:
   is the realistic outcome.
 - **Niche** — worth something only if it happens to fit the person's life.
 
-`max_annual` is the advertised ceiling. `default_value` is what a typical person
-actually captures, and for anything instalment-based or category-restricted it
-should be meaningfully below the ceiling. Both are whole dollars. Before setting
-`default_value`, grep the catalog for a structurally similar credit and match
-its treatment — consistency across cards matters more than precision on any one.
+`max_annual` is the advertised ceiling. `default_value` is where the credit's slider
+starts on the site, and it is not an estimate of typical use. Set it to `0`, because
+what someone captures depends on their own situation. Almost every credit in the
+catalog is at `0`. If you think a credit needs anything else, say why in your report.
+Both are whole dollars.
+
+Before assigning a tier, grep the catalog for a structurally similar credit and match
+its treatment. Consistency across cards matters more than precision on any one.
 
 State your reasoning for every tier assignment in your report.
 
@@ -127,6 +133,8 @@ Then stop and report:
 - Tier assignments with reasoning
 - Anything you were uncertain about and the specific question a reviewer should
   resolve
+- A reminder that promoting the card needs `backend/data/refresh/<slug>.json` with
+  null dates. You do not write that file, and authoring a card is not verifying it.
 
 ## Memory
 
