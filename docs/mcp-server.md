@@ -66,7 +66,7 @@ All five are read-only and cost no database queries.
 
 | Tool | Use it to |
 |---|---|
-| `find_cards` | Search by name, issuer or program and get card ids. Start here. |
+| `find_cards` | Search by name, issuer or program and get card ids, best match first. Start here. |
 | `get_card` | Read one card's fees, rates, credits, earn rates, insurance and perks. |
 | `compare_cards` | Compare 2 to 4 cards side by side. |
 | `rank_by_category` | Rank cards for one of 18 spending categories, across the catalog or a wallet. |
@@ -83,7 +83,10 @@ All five are read-only and cost no database queries.
 | `not_verified` | No recorded check. |
 
 - `verified_on` is the date of the last check.
-- `review_due_on` is the date to stop relying on that check.
+- `review_due_on` is the date to stop relying on that check: 180 days after it, or sooner when
+  a term in the card's own data ends or changes first, such as a quarterly category.
+- `review_overdue` is true once today, in UTC, is past `review_due_on`. Treat that card's values
+  as unconfirmed until it is checked again.
 - `evidence_url` links the public record of the check.
 - `evidence_scope: issuer_pass` means an issuer-level pass covered the card, and that record
   may not mention the card individually.
@@ -110,7 +113,11 @@ and read `credits_at_zero` to see how many credits are still counted at $0.
 
 **Rankings.** The ranking uses the earn multiplier times the card's best realistic cents per
 point, which is not a guarantee that every dollar redeems at that rate. It never reads affiliate
-status. It ignores spending caps, activation requirements and sign-up offers. Passing `card_ids`
+status. It ignores spending caps, activation requirements and sign-up offers. A rate limited to
+one merchant, one brand, online orders or certain hours, such as Bilt partner restaurants, Citi
+Nights or Amazon, doesn't count toward a broad category, so the card's everyday rate competes
+instead. Travel portal rates count. A choose-your-category rate counts in each category it
+offers, though a cardholder picks only one or two. Passing `card_ids`
 ranks only those cards and applies points pooling between cards that share a points account.
 
 **Editorial content.** Verdicts and credit tiers are The Wallet Audit's own opinions, not issuer
