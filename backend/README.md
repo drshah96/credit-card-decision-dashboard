@@ -334,7 +334,9 @@ the facts it verified, and CI fails when they differ. Either record the new chec
 did. Editorial fields such as `verdict` and credit `tips` are outside the hash.
 
 **When ranking inputs or rules change.** Regenerate, then read the `expected.json`
-diff, which shows how every ranking moved:
+diff, which shows how every ranking moved, and the `winning_rates.json` diff, which shows
+which rate each card now competes on. Look there for a partner-only, online-only or
+time-limited rate that a reworded card has slipped past `LIMITED_RATE`:
 
 ```bash
 UPDATE_RANKING_FIXTURE=1 uv run pytest tests/backend/mcp_server/test_ranking_parity.py

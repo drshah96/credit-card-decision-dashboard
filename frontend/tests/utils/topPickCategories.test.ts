@@ -43,7 +43,6 @@ describe("TOP_PICK_CATEGORIES matchers (via computeTopPicks)", () => {
     ["dining", "Restaurants worldwide (incl. U.S. takeout/delivery)", "4×"],
     ["dining", "Select food delivery", "3×"],
     ["groceries", "U.S. supermarkets", "4×"],
-    ["groceries", "Amazon.com, Audible.com & Whole Foods Market, with Prime membership", "5×"],
     ["gas-ev", "Gas stations/EV charging", "3×"],
     ["streaming", "Popular streaming services: Netflix, Hulu, Disney+", "6×"],
     ["hotels", "Hotels, booked direct", "5×"],
@@ -96,7 +95,9 @@ describe("TOP_PICK_CATEGORIES matchers (via computeTopPicks)", () => {
       ],
     });
     const rows = computeTopPicks([card]);
-    expect(rows.find((r) => r.key === "gas-ev")?.topChoice?.multiplier).toBe("5%");
+    // Costco-only gas is a single-merchant rate, so LIMITED_RATE keeps it out of
+    // Gas & EV too. This card has no other gas rate and no base rate to fall back on.
+    expect(rows.find((r) => r.key === "gas-ev")?.topChoice).toBeUndefined();
     expect(rows.find((r) => r.key === "flights")?.topChoice?.multiplier).toBe("3%");
     expect(rows.find((r) => r.key === "hotels")?.topChoice?.multiplier).toBe("3%");
     expect(rows.find((r) => r.key === "car-rentals")?.topChoice?.multiplier).toBe("3%");
@@ -127,6 +128,106 @@ describe("TOP_PICK_CATEGORIES matchers (via computeTopPicks)", () => {
     expect(row.topChoice?.card.id).toBe("generic-card");
     expect(row.runnerUp?.card.id).toBe("united-card");
     expect(row.runnerUp?.multiplier).toBe("2×");
+  });
+
+  it("doesn't let a partner-restaurant or time-limited dining rate win Dining", () => {
+    // Regression test from an outside review: Bilt's "Up to 6×" is only at Bilt
+    // partner restaurants and Strata Elite's 6× only on Friday and Saturday
+    // nights, so ranking on them put advertised ceilings above a card that earns
+    // 4× at every restaurant.
+    const obsidian = makeSummary({
+      id: "obsidian",
+      best_cpp: 2.2,
+      categories: [
+        rate("Bilt partner restaurants (20,000+ U.S. locations)", "Up to 6×"),
+        rate("Choice of other dining or grocery (grocery capped at $25K/yr)", "3×"),
+        rate("Everything else", "1×", true),
+      ],
+    });
+    const elite = makeSummary({
+      id: "elite",
+      best_cpp: 1.7,
+      categories: [
+        rate('Restaurants: "Citi Nights," Fri–Sat, 6pm–6am ET', "6×"),
+        rate("Restaurants, all other times", "3×"),
+        rate("Everything else", "1.5×", true),
+      ],
+    });
+    const gold = makeSummary({
+      id: "gold",
+      best_cpp: 2,
+      categories: [rate("Restaurants worldwide (up to $50k/yr, then 1×)", "4×")],
+    });
+    const row = computeTopPicks([obsidian, elite, gold]).find((r) => r.key === "dining")!;
+    expect(row.topChoice?.card.id).toBe("gold");
+    expect(row.runnerUp?.card.id).toBe("obsidian");
+    expect(row.runnerUp?.multiplier).toBe("3×");
+    expect(row.honorableMention?.card.id).toBe("elite");
+    expect(row.honorableMention?.multiplier).toBe("3×");
+  });
+
+  it("drops a card from Dining when its only dining rate is a partner-network one", () => {
+    const blue = makeSummary({
+      id: "bilt-blue-like",
+      categories: [
+        rate("Bilt partner restaurants (20,000+ U.S. locations)", "Up to 4×"),
+        rate("Everything else", "1×", true),
+      ],
+    });
+    const savor = makeSummary({ id: "savor", categories: [rate("Dining", "3%")] });
+    const row = computeTopPicks([blue, savor]).find((r) => r.key === "dining")!;
+    expect(row.topChoice?.card.id).toBe("savor");
+    // Only the flat fallback can bring it back, and it says so.
+    expect(row.runnerUp?.card.id).toBe("bilt-blue-like");
+    expect(row.runnerUp?.isFallback).toBe(true);
+    expect(row.runnerUp?.multiplier).toBe("1×");
+  });
+
+  it.each([
+    ["groceries", "Amazon.com, Audible.com & Whole Foods Market, with Prime membership", "5%"],
+    ["groceries", "Online groceries", "3×"],
+    ["streaming", "DisneyPlus.com, Hulu.com & Stream.ESPN.com", "5%"],
+  ])("keeps a %s rate most purchases don't earn out of the ranking: %j", (key, text, multiplier) => {
+    // From the same outside review: one website's or one channel's rate isn't
+    // the category's rate, so the card's broad rate for it (here, none) competes.
+    const narrow = makeSummary({ id: "narrow", categories: [rate(text, multiplier)] });
+    const row = computeTopPicks([narrow]).find((r) => r.key === key)!;
+    expect(row.topChoice).toBeUndefined();
+  });
+
+  it("still ranks travel portal and choose-your-category rates, on purpose", () => {
+    const portal = makeSummary({
+      id: "portal",
+      categories: [rate("Hotels & rental cars, via Capital One Travel", "10×")],
+    });
+    const chooser = makeSummary({
+      id: "chooser",
+      categories: [
+        rate(
+          "Two categories you choose each quarter: fast food, home utilities, TV, internet and streaming",
+          "5%",
+        ),
+      ],
+    });
+    const rows = computeTopPicks([portal, chooser]);
+    expect(rows.find((r) => r.key === "hotels")?.topChoice?.card.id).toBe("portal");
+    expect(rows.find((r) => r.key === "streaming")?.topChoice?.card.id).toBe("chooser");
+    expect(rows.find((r) => r.key === "utilities")?.topChoice?.card.id).toBe("chooser");
+  });
+
+  it("ranks the Costco Visa on its everyday gas rate, not Costco-only gas", () => {
+    const costco = makeSummary({
+      id: "costco",
+      categories: [
+        rate(
+          "Gas at Costco (worldwide): first $7,000/yr combined with other gas/EV charging, then 1%",
+          "5%",
+        ),
+        rate("Gas & EV charging elsewhere: first $7,000/yr combined with Costco gas, then 1%", "4%"),
+      ],
+    });
+    const row = computeTopPicks([costco]).find((r) => r.key === "gas-ev")!;
+    expect(row.topChoice?.multiplier).toBe("4%");
   });
 
   it("doesn't let a single-hotel-brand rate win the broad Hotels ranking", () => {

@@ -9,6 +9,7 @@ from backend.mcp_server.ranking import (
     BRAND_EXCLUDE_SOURCES,
     CATEGORIES,
     CENTS_PER_GALLON_SOURCE,
+    LIMITED_RATE_SOURCE,
     MATCHER_SOURCES,
     WHOLESALE_EXCLUDES,
     RankInput,
@@ -22,8 +23,10 @@ from .parity_fixture import (
     EXPECTED_PATH,
     SCENARIOS_PATH,
     SUMMARIES_PATH,
+    WINNING_RATES_PATH,
     build_scenarios,
     build_summaries,
+    build_winning_rates,
     dump_json,
 )
 
@@ -46,6 +49,7 @@ def test_update_mode_writes_inputs_and_refuses_ci(summaries):
     SUMMARIES_PATH.parent.mkdir(parents=True, exist_ok=True)
     SUMMARIES_PATH.write_text(dump_json(dumped))
     SCENARIOS_PATH.write_text(dump_json(build_scenarios(dumped)))
+    WINNING_RATES_PATH.write_text(dump_json(build_winning_rates(dumped)))
 
 
 def _expected() -> dict:
@@ -56,6 +60,10 @@ def test_inputs_are_current(summaries):
     dumped = build_summaries(summaries)
     assert json.loads(SUMMARIES_PATH.read_text()) == dumped, REGENERATE
     assert json.loads(SCENARIOS_PATH.read_text()) == build_scenarios(dumped), REGENERATE
+    assert json.loads(WINNING_RATES_PATH.read_text()) == build_winning_rates(dumped), (
+        "Which rate a card competes on changed. Regenerate, then read the winning_rates.json "
+        "diff for any partner-only, online-only or time-limited rate now counting.\n" + REGENERATE
+    )
 
 
 def test_output_equals_typescript_exactly(summaries):
@@ -101,6 +109,7 @@ def test_definitions_equal_typescript():
     assert {k: {"source": v, "flags": "i"} for k, v in BRAND_EXCLUDE_SOURCES.items()} == expected[
         "brand_excludes"
     ], REGENERATE
+    assert expected["limited_rate"] == {"source": LIMITED_RATE_SOURCE, "flags": "i"}, REGENERATE
     assert expected["cents_per_gallon"] == {
         "source": CENTS_PER_GALLON_SOURCE,
         "flags": "i",

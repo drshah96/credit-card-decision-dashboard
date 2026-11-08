@@ -174,6 +174,22 @@ export default function MethodologyPage() {
             true if you actually own both cards.
           </P>
           <P>
+            <strong>Rates most purchases won't earn don't compete.</strong> Some bonus rates
+            apply only at one airline, hotel or store brand, only on one website, only online,
+            only at a partner network of restaurants, or only at certain hours, like Friday and
+            Saturday nights. Those are real, but ranking on them would put a rate most people
+            won't get at the top of a broad category. So in each category, the card's broadly
+            applicable rate competes instead. The narrower rates still show on the card's own
+            page.
+          </P>
+          <P>
+            Two kinds of narrower rate do count, on purpose. Travel booked through the card's
+            own portal counts, since any flight or hotel can be booked that way. And a
+            category you choose yourself, like the U.S. Bank Cash+ card's, counts in each
+            category it offers, because you earn it there if you choose it. You can only pick
+            one or two at a time, though, so the same card may appear in several rows.
+          </P>
+          <P>
             <strong>When a category has fewer than three cards with a real bonus</strong>, we
             fill the remaining slot with the next-best flat, everyday rate among the rest,
             labeled "No category bonus." A real, category-specific bonus always beats a flat-rate

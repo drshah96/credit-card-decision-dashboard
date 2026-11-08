@@ -4,13 +4,21 @@ import json
 import random
 from pathlib import Path
 
-from backend.mcp_server.ranking import RANK_INPUT_FIELDS
+from backend.mcp_server.ranking import (
+    CATEGORY_KEYS,
+    RANK_INPUT_FIELDS,
+    RateInput,
+    _is_rankable,
+    _matches_category,
+    parse_multiplier_value,
+)
 from backend.models import CardSummary
 
 FIXTURE_DIR = Path(__file__).parent.parent.parent / "fixtures" / "ranking_parity"
 SUMMARIES_PATH = FIXTURE_DIR / "summaries.json"
 SCENARIOS_PATH = FIXTURE_DIR / "scenarios.json"
 EXPECTED_PATH = FIXTURE_DIR / "expected.json"
+WINNING_RATES_PATH = FIXTURE_DIR / "winning_rates.json"
 WALLET_SEED = 20261106
 WALLET_COUNT = 20
 
@@ -51,6 +59,33 @@ def build_scenarios(summaries: list[dict]) -> list[dict]:
         wallet = rng.sample(ids, rng.randint(2, 25))
         scenarios.append(_scenario(f"wallet_{index:02d}", sorted(wallet), True))
     return scenarios
+
+
+def build_winning_rates(summaries: list[dict]) -> dict[str, dict[str, str]]:
+    """Which earn rate each card competes on in each category, in the issuer's own words.
+
+    The ranking decides by matching words in those descriptions, so a new card or a reworded rate
+    can slip a partner-only or online-only rate past LIMITED_RATE. This file puts every such
+    decision in the diff, where a reviewer reads it. Ties keep the first rate, as _best_rate does.
+    """
+    winners: dict[str, dict[str, str]] = {}
+    for key in CATEGORY_KEYS:
+        if key == "catch-all":
+            continue
+        row: dict[str, str] = {}
+        for summary in summaries:
+            best = None
+            for raw in summary["categories"]:
+                rate = RateInput(raw["category"], raw["multiplier"], raw["is_base"])
+                if not (_matches_category(rate, key) and _is_rankable(rate.multiplier)):
+                    continue
+                value = parse_multiplier_value(rate.multiplier)
+                if best is None or value > best[0]:
+                    best = (value, f"{rate.multiplier} | {rate.category}")
+            if best is not None:
+                row[summary["id"]] = best[1]
+        winners[key] = row
+    return winners
 
 
 def dump_json(value: object) -> str:
