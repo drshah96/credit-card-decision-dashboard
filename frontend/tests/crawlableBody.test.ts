@@ -173,6 +173,13 @@ describe("the crawlable body says enough to be worth crawling", () => {
     }
   });
 
+  it("tells crawlers on /methodology that the MCP server exists and needs no key", () => {
+    const body = render("/methodology");
+    expect(body).toContain("mcp.thewalletaudit.com/mcp");
+    expect(body).toMatch(/no key or sign-in/);
+    expect(body).not.toMatch(/github\.com/i);
+  });
+
   it("points every page back at the site", () => {
     for (const path of ["/", "/methodology", "/compare", "/top-picks", "/cards/amex-platinum"]) {
       expect(render(path)).toContain("https://thewalletaudit.com");

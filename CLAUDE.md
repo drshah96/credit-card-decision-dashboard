@@ -81,5 +81,5 @@ sections where they conflict.
   `backend/mcp_server/contract.py` are updated.
 
 Two details are easy to get wrong. `RankInput` has no affiliate field on purpose, so never
-add one. And `default_value` is 0 on 149 of 151 active credits, so the served totals say
+add one. And `default_value` is 0 on 157 of 159 active credits, so the served totals say
 `applied`, never `realistic`.
