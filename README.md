@@ -198,7 +198,7 @@ The answers are built so an agent can't mistake a gap for a fact:
 The site renders in the browser, but every page is also written out as HTML at
 build time by `frontend/scripts/prerender.mjs`, for link previews and for crawlers
 that don't run JavaScript. Each page gets its own title, description and
-OpenGraph tags. Card and issuer pages also carry readable text, such as a card's
+OpenGraph tags, plus readable text for crawlers. On a card page that's the card's
 fee, earn rates, credit names and APRs, while the analysis itself stays on the
 live page. Route metadata lives in one place, `frontend/src/utils/routeMeta.js`,
 which both the React app and the build scripts read, so the two can't drift.
