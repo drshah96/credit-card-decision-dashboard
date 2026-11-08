@@ -1579,6 +1579,35 @@ at `/api/cards`, so a key guarded capacity, not content.
 - Unproven: whether Claude's connector sends an `Origin` header. The SDK refuses browser origins,
   so a connector that sends one would get 403, logged as `http_403`.
 
+**A27. An outside review's ranking and freshness findings.** Four fixes, two rules kept on
+purpose, and contract 1.1.0.
+
+- **A rate counts toward a category only if most purchases in it earn it.** `LIMITED_RATE`, in
+  both rankings and pinned by the parity fixture, drops rates limited to a partner network
+  (Bilt), certain hours (Citi Nights), one merchant (Costco gas, Amazon and Whole Foods), one
+  website (Disney+, Hulu and ESPN) or online orders (Sapphire Preferred's groceries). The card's
+  broad rate competes instead, as `BRAND_EXCLUDES` already did for single-brand travel. Dining
+  had ranked Bilt Obsidian, Bilt Palladium and Strata Elite above Amex Gold on such rates. The
+  rule matches words, so a reworded card could slip past it: `winning_rates.json` lists the rate
+  every card competes on in every category, and CI fails until a change to it is regenerated and
+  read. CI also fails on a new "Up to" rate or website-only everyday rate the rule doesn't cover.
+- **Kept, on the owner's call:** travel portal rates still count, since any flight or hotel can
+  be booked that way, and a choose-your-category rate counts in each category it offers. Both
+  are now stated on the Methodology page and in `rank_by_category`'s limitations.
+- **`review_due_on` stops at the first end or change date in the card's served text.** Before, it
+  was always 180 days after the check, so Q4 rotating rates and rates "through Dec 31, 2026"
+  would have stayed vouched for until May 2027. A change date counts too, on purpose: a check
+  made before a credit changes "on or after January 1, 2027" can't vouch for how it landed.
+  `end_dates.py` reads every served string except the timeline, ignores dates before the check,
+  and a test fails on dated wording it can't parse. Eight cards move earlier, the soonest U.S.
+  Bank Altitude Connect on Nov 30, 2026. The cards still need updating when those terms end.
+- **`review_overdue` is worked out on every request, from today's UTC date.** The snapshot is
+  built at boot and keep-warm can hold a process up for weeks, so a flag fixed at startup would
+  stay false past the date. This adds a field and changes what rankings and review dates return,
+  so the contract moves to 1.1.0. 1.0.0's digest stays recorded.
+- **`find_cards` puts the best match first:** an exact id, then names holding more of the query's
+  words, then shorter ids. "amex platinum" had listed the Delta Platinum card first.
+
 **Defaults taken while owner decisions are open.** Each can change before release:
 
 - **Hosting:** free tier, as in D1.

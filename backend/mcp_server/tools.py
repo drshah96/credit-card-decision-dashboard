@@ -45,7 +45,11 @@ RANK_METHOD = schemas.RankMethod(
     formula="Earn multiplier times the card's best realistic cents per point. Percent rates are "
     "used as stated unless pooling boosted them.",
     tie_break="Equal values to 4 decimals go to the lower annual fee, then the name.",
-    limitations="Ignores spending caps, activation requirements and sign-up offers.",
+    limitations="Ignores spending caps, activation requirements and sign-up offers. A rate "
+    "limited to one merchant, one brand, online orders or certain hours doesn't count toward a "
+    "broad category, so the card's everyday rate competes instead. Travel portal rates count, "
+    "and a choose-your-category rate counts in each category it offers, though you pick only "
+    "one or two.",
 )
 VALUE_COUNTS = (
     "Statement credits and cash-like perks at the values applied, minus the annual fee. A credit "
@@ -126,6 +130,18 @@ def _hidden_twins(inputs) -> list[str]:
     )
 
 
+def _relevance(snapshot, card_id: str, tokens: list[str]) -> tuple[bool, int, int]:
+    """Best match first: the card whose id is the query, then names holding more of its words,
+    then shorter ids, which carry fewer words the query didn't ask for. The sort is stable, so
+    ties keep the catalog's name order."""
+    name = normalize_search_text(snapshot.cards[card_id].name)
+    return (
+        card_id != "-".join(tokens),
+        -sum(token in name for token in tokens),
+        card_id.count("-"),
+    )
+
+
 def create_server(load_snapshot: Callable[[], CatalogSnapshot]) -> MCPServer:
     @asynccontextmanager
     async def lifespan(_server: MCPServer) -> AsyncIterator[dict[str, CatalogSnapshot]]:
@@ -171,6 +187,8 @@ def create_server(load_snapshot: Callable[[], CatalogSnapshot]) -> MCPServer:
             and (issuer is None or snapshot.cards[card_id].issuer == issuer)
             and all(token in snapshot.search_text[card_id] for token in tokens)
         ]
+        if tokens:
+            matches.sort(key=lambda card_id: _relevance(snapshot, card_id, tokens))
         page = matches[offset : offset + limit]
         items = []
         for card_id in page:

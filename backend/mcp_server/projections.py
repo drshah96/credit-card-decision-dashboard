@@ -1,6 +1,7 @@
 """Turns stored cards into the published shapes. This is where honesty rules live."""
 
 import re
+from datetime import date, datetime, timezone
 
 from backend.mcp_server import contract, schemas
 from backend.mcp_server.snapshot import review_due_on
@@ -60,13 +61,20 @@ def _not_checked(state: VerificationState) -> list[str]:
     return [s.value for s in state.verification.not_checked] if state.verification else []
 
 
+def today() -> date:
+    """Read on every request, not at boot: keep-warm can hold one process up for weeks."""
+    return datetime.now(timezone.utc).date()
+
+
 def provenance_ref(card: Card, state: VerificationState) -> schemas.ProvenanceRef:
+    due = review_due_on(state, card)
     return schemas.ProvenanceRef(
         issuer_url=card.official_url,
         verification_status=verification_status(state),
         verified_on=state.last_verified_ok_at,
         not_checked=_not_checked(state),
-        review_due_on=review_due_on(state),
+        review_due_on=due,
+        review_overdue=due is not None and today() > due,
     )
 
 
