@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 import type { CardSummary } from "../../src/types/cards";
 import {
   BRAND_EXCLUDES,
+  LIMITED_RATE,
   CATEGORY_MATCHERS,
   CENTS_PER_GALLON,
   TOP_PICK_CATEGORIES,
@@ -80,6 +81,7 @@ describe("ranking parity fixture", () => {
       brand_excludes: Object.fromEntries(
         Object.entries(BRAND_EXCLUDES).map(([key, regex]) => [key, describeRegex(regex)]),
       ),
+      limited_rate: describeRegex(LIMITED_RATE),
       cents_per_gallon: describeRegex(CENTS_PER_GALLON),
       names_sorted: summaries.map((card) => card.name).sort((a, b) => a.localeCompare(b)),
     };

@@ -1579,6 +1579,21 @@ at `/api/cards`, so a key guarded capacity, not content.
 - Unproven: whether Claude's connector sends an `Origin` header. The SDK refuses browser origins,
   so a connector that sends one would get 403, logged as `http_403`.
 
+**A27. An outside review's ranking and freshness findings.**
+
+- **A rate counts toward a category only if most purchases in it earn it.** `LIMITED_RATE`, in
+  both rankings and pinned by the parity fixture, drops rates limited to a partner network
+  (Bilt), certain hours (Citi Nights), one merchant (Costco gas, Amazon and Whole Foods), one
+  website (Disney+, Hulu and ESPN) or online orders (Sapphire Preferred's groceries). The card's
+  broad rate competes instead, as `BRAND_EXCLUDES` already did for single-brand travel. Dining
+  had ranked Bilt Obsidian, Bilt Palladium and Strata Elite above Amex Gold on such rates. The
+  rule matches words, so a reworded card could slip past it: `winning_rates.json` lists the rate
+  every card competes on in every category, and CI fails until a change to it is regenerated and
+  read. CI also fails on a new "Up to" rate or website-only everyday rate the rule doesn't cover.
+- **Kept, on the owner's call:** travel portal rates still count, since any flight or hotel can
+  be booked that way, and a choose-your-category rate counts in each category it offers. Both
+  are now stated on the Methodology page and in `rank_by_category`'s limitations.
+
 **Defaults taken while owner decisions are open.** Each can change before release:
 
 - **Hosting:** free tier, as in D1.
