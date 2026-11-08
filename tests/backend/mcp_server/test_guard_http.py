@@ -14,7 +14,16 @@ from backend.mcp_server import mcp_endpoint
 from backend.mcp_server.config import McpConfig
 from backend.mcp_server.keys import KeyStore
 
-from .http_helpers import FAST, HEADERS, INITIALIZE, auth, call_tool, enabled_config, running
+from .http_helpers import (
+    FAST,
+    HEADERS,
+    INITIALIZE,
+    anonymous_config,
+    auth,
+    call_tool,
+    enabled_config,
+    running,
+)
 from .test_observability import captured
 
 
@@ -433,3 +442,51 @@ def test_a_tool_error_passes_through_as_a_result(snapshot):
         )
     assert response.status_code == 200
     assert response.json()["result"]["isError"] is True
+
+
+def test_anonymous_access_serves_a_request_with_no_credential(snapshot):
+    config, _ = anonymous_config()
+    with running(snapshot, config) as client:
+        initialize = client.post("/mcp", json=INITIALIZE, headers=HEADERS)
+        card = client.post(
+            "/mcp", json=call_tool("get_card", {"card_id": "amex-gold"}), headers=HEADERS
+        )
+        blank = client.post("/mcp", json=INITIALIZE, headers={**HEADERS, "authorization": "  "})
+    assert initialize.status_code == 200
+    assert card.status_code == 200
+    assert "amex-gold" in card.text
+    assert blank.status_code == 200
+    assert "www-authenticate" not in initialize.headers
+
+
+def test_anonymous_access_still_refuses_a_wrong_key_and_serves_a_right_one(snapshot):
+    config, key = anonymous_config()
+    with running(snapshot, config) as client:
+        wrong = client.post(
+            "/mcp", json=INITIALIZE, headers={**HEADERS, "authorization": "Bearer nope"}
+        )
+        right = client.post("/mcp", json=INITIALIZE, headers=auth(key))
+    assert wrong.status_code == 401
+    assert 'error="invalid_token"' in wrong.headers["www-authenticate"]
+    assert right.status_code == 200
+
+
+def test_anonymous_requests_share_one_limit_that_keys_do_not_spend(snapshot):
+    config, key = anonymous_config(replace(FAST, anonymous_per_minute=2))
+    with running(snapshot, config) as client:
+        statuses = [
+            client.post("/mcp", json=INITIALIZE, headers=HEADERS).status_code for _ in range(3)
+        ]
+        limited = client.post("/mcp", json=INITIALIZE, headers=HEADERS)
+        keyed = client.post("/mcp", json=INITIALIZE, headers=auth(key))
+    assert statuses == [200, 200, 429]
+    assert "without an API key" in limited.json()["error"]["message"]
+    assert int(limited.headers["retry-after"]) >= 1
+    assert keyed.status_code == 200
+
+
+def test_without_anonymous_access_a_missing_key_is_still_401(snapshot):
+    config, _ = enabled_config()
+    assert config.anonymous is False
+    with running(snapshot, config) as client:
+        assert client.post("/mcp", json=INITIALIZE, headers=HEADERS).status_code == 401

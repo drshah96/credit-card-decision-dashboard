@@ -70,6 +70,10 @@ services:
         sync: false
       - key: MCP_ALLOWED_HOSTS
         value: mcp.thewalletaudit.com,thewalletaudit-api.onrender.com
+      # Serves requests with no key under one shared limit, so Claude's custom connectors
+      # work without OAuth. Set to false to require a key again. See ADR 0003 A26.
+      - key: MCP_ANONYMOUS_ACCESS
+        value: "true"
 
   # Vite/React frontend, built as a static site.
   - type: web

@@ -42,6 +42,15 @@ _KNOWN_CATEGORIES_MAX = 32
 _CLIENT_INFO_META_KEY = "io.modelcontextprotocol/clientInfo"
 
 
+class _AnonymousCaller:
+    """Stands in for a key record on a request that carries no credential."""
+
+    id = "anonymous"
+
+
+ANONYMOUS = _AnonymousCaller()
+
+
 @dataclass
 class _KeyWindow:
     minute_start: float
@@ -61,6 +70,7 @@ class _Live:
     failed_by_client: dict[str, tuple[float, int]] = field(default_factory=dict)
     failed_global: tuple[float, int] = (0.0, 0)
     in_flight: int = 0
+    anonymous: bool = False
 
 
 def _build_snapshot():
@@ -105,6 +115,7 @@ class McpEndpoint:
             cards=len(snapshot.cards),
             verified_cards=sum(s.verification is not None for s in snapshot.verification.values()),
             keys=len(config.keys),
+            anonymous_access=config.anonymous,
             allowed_hosts=list(config.allowed_hosts),
         )
         try:
@@ -147,6 +158,7 @@ class McpEndpoint:
             rejections=observability.RejectionAggregator(
                 config.limits.rejection_log_seconds, self.clock
             ),
+            anonymous=config.anonymous,
         )
         return live, manager_context, snapshot
 
@@ -209,6 +221,10 @@ class McpEndpoint:
             return
 
         authorization = headers.get(b"authorization", b"").decode("latin-1")
+        if live.anonymous and not authorization.strip():
+            # No credential at all. A wrong key still gets 401 below, so key users see mistakes.
+            await self._serve(live, ANONYMOUS, scope, receive, tagged_send, request_id, headers)
+            return
         record = live.keys.verify(authorization)
         if record is None:
             await self._reject_auth(live, scope, headers, tagged_send, bool(authorization))
@@ -227,10 +243,15 @@ class McpEndpoint:
             return
         retry_after = self._charge_key(live, record)
         if retry_after is not None:
+            message = (
+                "The shared limit for requests without an API key is reached. Try again later."
+                if record is ANONYMOUS
+                else "This API key is over its rate limit."
+            )
             await _respond(
                 send,
                 429,
-                _jsonrpc_error("This API key is over its rate limit."),
+                _jsonrpc_error(message),
                 [(b"retry-after", str(retry_after).encode())],
             )
             _log_request(
@@ -322,7 +343,7 @@ class McpEndpoint:
             return 504, "timeout", 0
         return status, _classify(status, bytes(captured), parsed), size
 
-    def _charge_key(self, live: _Live, record: KeyRecord) -> int | None:
+    def _charge_key(self, live: _Live, record: KeyRecord | _AnonymousCaller) -> int | None:
         """Seconds until the key may retry when over a limit, else None after counting it."""
         now = self.clock()
         window = live.key_windows.get(record.id)
@@ -333,8 +354,12 @@ class McpEndpoint:
             window.minute_start, window.minute_count = now, 0
         if now - window.day_start >= _DAY_SECONDS:
             window.day_start, window.day_count = now, 0
-        per_minute = record.per_minute or live.limits.per_minute
-        per_day = record.per_day or live.limits.per_day
+        if record is ANONYMOUS:
+            per_minute = live.limits.anonymous_per_minute
+            per_day = live.limits.anonymous_per_day
+        else:
+            per_minute = record.per_minute or live.limits.per_minute
+            per_day = record.per_day or live.limits.per_day
         if window.day_count >= per_day:
             return max(1, int(_DAY_SECONDS - (now - window.day_start)))
         if window.minute_count >= per_minute:

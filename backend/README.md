@@ -304,11 +304,16 @@ rates, etc.) rather than duplicating them.
 
 ## MCP server
 
-A public MCP endpoint for AI agents, at `POST https://mcp.thewalletaudit.com/mcp`,
-by API key. It runs inside this API process. [ADR 0003](../docs/adr/0003-public-mcp-server.md)
+A public MCP endpoint for AI agents, at `POST https://mcp.thewalletaudit.com/mcp`.
+It runs inside this API process. [ADR 0003](../docs/adr/0003-public-mcp-server.md)
 has the design, and [docs/mcp-server.md](../docs/mcp-server.md) is what integrators read.
 
-**Keys.** Mint in a real terminal, because the command refuses to run without one:
+**Access.** With `MCP_ANONYMOUS_ACCESS=true`, a request with no `Authorization` header is
+served under one shared limit (`anonymous_per_minute` and `anonymous_per_day` in
+`backend/mcp_server/config.py`), so Claude's custom connectors work without OAuth. A wrong
+key still gets 401. Set it to `false` to require a key again. Any other value disables MCP.
+
+**Keys.** A key gets a limit of its own. Mint in a real terminal, because the command refuses to run without one:
 
 ```bash
 uv run python -m backend.scripts.mcp_keys mint --label "first reviewer" --contact "ops@example.com"
@@ -343,9 +348,10 @@ printed digest to `PUBLISHED_SURFACES` in `backend/mcp_server/contract.py`. Addi
 are minor. Removing, renaming, tightening or changing a meaning is major, and ships as
 new tool names with the old ones kept for a 90-day deprecation window.
 
-**Monitoring.** Keep-warm sends a keyless `POST /mcp` and expects 401. The `mcp-smoke`
-workflow runs on demand with the `MCP_SMOKE_KEY` secret and records challenge headers on
-all three hostnames. Logs are JSON lines: `mcp_started`, `mcp_disabled`, `mcp_request`
+**Monitoring.** Keep-warm sends `POST /mcp` with a deliberately invalid key and expects 401,
+which also holds with anonymous access on. The `mcp-smoke` workflow runs on demand with the
+`MCP_SMOKE_KEY` secret, calls a tool with no key, and records challenge headers on all three
+hostnames. Logs are JSON lines: `mcp_started`, `mcp_disabled`, `mcp_request`
 and `mcp_rejections`.
 
 **Known limit.** Tool calls make no database queries, but the start command runs

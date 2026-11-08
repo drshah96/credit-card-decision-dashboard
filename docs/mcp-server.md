@@ -4,9 +4,10 @@ Verified data on US consumer credit cards, for AI agents. It uses the Model Cont
 Protocol over Streamable HTTP.
 
 - **Endpoint:** `POST https://mcp.thewalletaudit.com/mcp`
-- **Auth:** `Authorization: Bearer <key>`. Keys are issued by hand: to request one, message
+- **Auth:** none needed. Requests without a key share one rate limit. For a limit of your
+  own, send `Authorization: Bearer <key>`. Keys are issued by hand: to request one, message
   [Dhruvin Shah on LinkedIn](https://www.linkedin.com/in/dhruvinshah1996/). Never put a key in a
-  URL: it is refused, and URLs can be recorded by proxies and hosting logs.
+  URL: it is not read there, and URLs can be recorded by proxies and hosting logs.
 - **Contract version:** see `meta.contract_version` on any response.
 
 This is informational data, not financial advice. Confirm current terms with the issuer
@@ -14,7 +15,11 @@ before applying.
 
 ## Connect
 
-**Claude Code:**
+**Claude (desktop, web or mobile):** open Settings, then Connectors, then Add custom
+connector. Name it The Wallet Audit, enter `https://mcp.thewalletaudit.com/mcp` as the URL,
+and leave the OAuth fields empty. No key or sign-in is needed.
+
+**With a key, in Claude Code:**
 
 ```bash
 claude mcp add --transport http thewalletaudit https://mcp.thewalletaudit.com/mcp \
@@ -37,7 +42,8 @@ wake:
 }
 ```
 
-**Claude Desktop:** use the third-party `mcp-remote` bridge, and keep spaces out of `args`:
+**With a key, in Claude Desktop's config file:** use the third-party `mcp-remote` bridge, and
+keep spaces out of `args`:
 
 ```json
 {
@@ -115,6 +121,7 @@ re-verified.
 
 | Limit | Value |
 |---|---|
+| Requests without a key, shared by everyone | 120 per minute, 5,000 per day |
 | Requests per key | 60 per minute, 2,000 per day |
 | Concurrent requests per server | 8 |
 | Request body | 32 KB |
@@ -124,7 +131,7 @@ The default limits can be changed per key.
 
 | Status | Meaning | What to do |
 |---|---|---|
-| 401 | Missing or invalid key | Check the `Authorization` header. |
+| 401 | A key was sent but isn't valid | Fix the key, or send no `Authorization` header to use the shared limit. |
 | 405 | Not a POST | The endpoint accepts POST only. |
 | 408, 413 | Body too slow or too large | Send a smaller request. |
 | 429 | Over a rate limit | Wait for `Retry-After`. |

@@ -146,8 +146,10 @@ they can change daily or weekly.
 ## For AI agents
 
 AI agents can query this catalog over the Model Context Protocol instead of scraping
-the site, at `https://mcp.thewalletaudit.com/mcp`. Access is by API key, issued by hand.
-To request one, message [Dhruvin Shah on LinkedIn](https://www.linkedin.com/in/dhruvinshah1996/).
+the site, at `https://mcp.thewalletaudit.com/mcp`. No key is needed: in Claude, add it under
+Settings, Connectors, Add custom connector. Requests without a key share one rate limit, and a
+key gives you a limit of your own. To request one, message
+[Dhruvin Shah on LinkedIn](https://www.linkedin.com/in/dhruvinshah1996/).
 
 - `find_cards`: search by name, issuer or rewards program to get card ids
 - `get_card`: one card's fees, rates, credits, earn rates, insurance and perks
@@ -226,7 +228,7 @@ uv run python -m backend.scripts.drafts promote 1
 | `GET` | `/api/cards` | List all cards (summary) |
 | `GET` | `/api/cards/detail?ids=…` | Full detail for many cards in one request |
 | `GET` | `/api/cards/{card_id}` | Full detail for one card |
-| `POST` | `https://mcp.thewalletaudit.com/mcp` | MCP endpoint for AI agents, by API key. See [docs/mcp-server.md](docs/mcp-server.md) |
+| `POST` | `https://mcp.thewalletaudit.com/mcp` | MCP endpoint for AI agents, no key needed. See [docs/mcp-server.md](docs/mcp-server.md) |
 
 ## Project structure
 
