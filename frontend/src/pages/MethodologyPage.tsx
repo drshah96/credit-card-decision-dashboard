@@ -247,6 +247,36 @@ export default function MethodologyPage() {
           </P>
         </Section>
 
+        <Section label="AI agents" title="Using this data from an AI assistant">
+          <P>
+            The same catalog and the same rankings are available to AI assistants through the
+            Model Context Protocol (MCP), at <strong>mcp.thewalletaudit.com/mcp</strong>. No key
+            or sign-in is needed. In Claude, open Settings, then Connectors, then Add custom
+            connector, and enter that address.
+          </P>
+          <P>An assistant gets the same honesty rules as this page. Every answer carries:</P>
+          <List>
+            <ListItem>
+              When the card was last checked against the issuer's own documents, and which parts
+              that check couldn't confirm.
+            </ListItem>
+            <ListItem>
+              A date after which that check shouldn't be relied on. It comes early when a rate or
+              credit is about to end or change, and once it passes the card is flagged as overdue
+              for review.
+            </ListItem>
+            <ListItem>
+              "Not recorded" for a fee or rate the catalog doesn't have, never a zero it could
+              mistake for "no fee".
+            </ListItem>
+          </List>
+          <P>
+            Its rankings are the ones on Top Pick: a shared test holds the two to identical
+            results, and neither considers affiliate status. Sign-up bonuses aren't served,
+            because they change faster than the catalog is re-checked.
+          </P>
+        </Section>
+
         <Section label="Limits" title="What this site doesn't account for">
           <P>Let's be upfront about where the math stops. Rankings don't model:</P>
           <List>
