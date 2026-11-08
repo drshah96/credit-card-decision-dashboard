@@ -1593,6 +1593,13 @@ at `/api/cards`, so a key guarded capacity, not content.
 - **Kept, on the owner's call:** travel portal rates still count, since any flight or hotel can
   be booked that way, and a choose-your-category rate counts in each category it offers. Both
   are now stated on the Methodology page and in `rank_by_category`'s limitations.
+- **`review_due_on` stops at the first end or change date in the card's served text.** Before, it
+  was always 180 days after the check, so Q4 rotating rates and rates "through Dec 31, 2026"
+  would have stayed vouched for until May 2027. A change date counts too, on purpose: a check
+  made before a credit changes "on or after January 1, 2027" can't vouch for how it landed.
+  `end_dates.py` reads every served string except the timeline, ignores dates before the check,
+  and a test fails on dated wording it can't parse. Eight cards move earlier, the soonest U.S.
+  Bank Altitude Connect on Nov 30, 2026. The cards still need updating when those terms end.
 
 **Defaults taken while owner decisions are open.** Each can change before release:
 

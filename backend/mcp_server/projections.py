@@ -66,7 +66,7 @@ def provenance_ref(card: Card, state: VerificationState) -> schemas.ProvenanceRe
         verification_status=verification_status(state),
         verified_on=state.last_verified_ok_at,
         not_checked=_not_checked(state),
-        review_due_on=review_due_on(state),
+        review_due_on=review_due_on(state, card),
     )
 
 

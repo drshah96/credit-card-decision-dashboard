@@ -9,6 +9,7 @@ from datetime import timedelta
 from pathlib import Path
 
 from backend.mcp_server import contract
+from backend.mcp_server.end_dates import earliest_end
 from backend.mcp_server.ranking import (
     CATEGORY_KEYS,
     RankEntry,
@@ -96,7 +97,10 @@ def build_snapshot() -> CatalogSnapshot:
     )
 
 
-def review_due_on(state: VerificationState):
+def review_due_on(state: VerificationState, card: Card | None = None):
+    """180 days after the check, or sooner if a term in the card's served text ends first."""
     if state.last_verified_ok_at is None:
         return None
-    return state.last_verified_ok_at + timedelta(days=contract.REVIEW_INTERVAL_DAYS)
+    due = state.last_verified_ok_at + timedelta(days=contract.REVIEW_INTERVAL_DAYS)
+    ends = earliest_end(card, state.last_verified_ok_at) if card is not None else None
+    return min(due, ends) if ends is not None else due
