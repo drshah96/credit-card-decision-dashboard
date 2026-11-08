@@ -1,14 +1,14 @@
 {
   "card_id": "wells-fargo-autograph-journey",
-  "last_verified_ok_at": "2026-09-06",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:405c511480a05952bfbb77ab6b9ca4d8da2765c7",
+    "evidence": "git:263734a0048b069d2531d32cc89a75539deb3d4a",
     "evidence_scope": "card",
-    "facts_sha256": "5eca1619a499ce6fe091259fbbb421b1b5811a49117904f320ee59eff1308876",
+    "facts_sha256": "504ffed1670fe4a05d72fc22a78eecd5ef72cde0f873542fa3170dcb2711d966",
     "documents": [],
     "not_checked": [
-      "redemption"
+      "transfer_partners"
     ],
-    "note": "Checked against Wells Fargo product pages and its Guide to Benefits. The rewards program terms could not be fetched, so redemption values were not checked."
+    "note": "Re-checked on 2026-11-07 against Wells Fargo product pages, pricing terms and the Guide to Benefits. Not checked: transfer partners."
   }
 }

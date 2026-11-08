@@ -1,14 +1,14 @@
 {
   "card_id": "citi-secured",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:54f0d72c12208c45f24898d3617a26a0296cb024",
-    "evidence_scope": "issuer_pass",
-    "facts_sha256": "29509e1aa17fae585e0ee12d3277511c857a2c9ffd6e344745c11e6ae101cd96",
+    "evidence": "git:c4677373bcb5d7f6a590ad9c231601e72b0818ab",
+    "evidence_scope": "card",
+    "facts_sha256": "1f91033bcf0b5a66d6e7582dc74124c5a3fe0913d729ca6a5b7cfa6e57e0b27f",
     "documents": [],
     "not_checked": [
-      "rates_and_fees"
+      "insurance_limits"
     ],
-    "note": "Benefits were checked against Citi's own pages. Citi fills in rate and fee numbers in the browser, so most APRs and fees could not be confirmed in this pass."
+    "note": "Re-checked on 2026-11-07 against Citi product pages and benefit documents. Not checked: insurance dollar limits. Citi fills in its rates in the browser, so they were read from Citi pages through a text renderer and matched to Citi documents."
   }
 }

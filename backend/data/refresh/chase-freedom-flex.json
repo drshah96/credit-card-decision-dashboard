@@ -1,16 +1,12 @@
 {
   "card_id": "chase-freedom-flex",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:1de0ac5abec4103d96dcc381078ca3ee1d2c3efe",
-    "evidence_scope": "issuer_pass",
-    "facts_sha256": "8999f7e7fa159769dc4182a0c69a6157352db2a04de464bd0a22e01a61575004",
+    "evidence": "git:3bc2fe4a44851e0bf3e7e0ccebb4959b9e72c3d8",
+    "evidence_scope": "card",
+    "facts_sha256": "11e68bff607326b91ace45380c9f212101a63ee4c353609702501d12d843762f",
     "documents": [],
-    "not_checked": [
-      "transfer_partners",
-      "insurance_limits",
-      "additional_cards"
-    ],
-    "note": "Checked against Chase pricing and terms tables, rewards program agreements and Guide to Benefits PDFs. Transfer partners, insurance limits and authorized-user rules were largely not checked."
+    "not_checked": [],
+    "note": "Re-checked on 2026-11-07 against the card's Chase pricing table, product page, rewards terms and Guide to Benefits."
   }
 }

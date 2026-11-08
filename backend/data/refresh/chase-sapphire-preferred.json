@@ -1,16 +1,12 @@
 {
   "card_id": "chase-sapphire-preferred",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:1de0ac5abec4103d96dcc381078ca3ee1d2c3efe",
+    "evidence": "git:3bc2fe4a44851e0bf3e7e0ccebb4959b9e72c3d8",
     "evidence_scope": "card",
-    "facts_sha256": "58c4071429480bbe53fa6c3fc2e72ef26f1bc1aa1305d5d7b040deaa79c3f447",
+    "facts_sha256": "e1da504ccbb1f101f4e03372632928554f572b089138100f2b452f668da71684",
     "documents": [],
-    "not_checked": [
-      "transfer_partners",
-      "insurance_limits",
-      "additional_cards"
-    ],
-    "note": "Checked against Chase pricing and terms tables, rewards program agreements and Guide to Benefits PDFs. Transfer partners, insurance limits and authorized-user rules were largely not checked."
+    "not_checked": [],
+    "note": "Re-checked on 2026-11-07 against the card's Chase pricing table, product page, rewards terms and Guide to Benefits."
   }
 }

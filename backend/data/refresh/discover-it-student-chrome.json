@@ -1,12 +1,12 @@
 {
   "card_id": "discover-it-student-chrome",
-  "last_verified_ok_at": "2026-09-06",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:405c511480a05952bfbb77ab6b9ca4d8da2765c7",
+    "evidence": "git:6329b2d100ef598daab31fcd435b15e4d1cca22d",
     "evidence_scope": "card",
-    "facts_sha256": "b6643f8dd455fa596f8040d8b55beb0fb55a4e3e2c5222173d225be55aa7d428",
+    "facts_sha256": "e0579c43590c29dcc66c2546fe29ff414ab3384f5250d0f3d6fcf574d82cb1ed",
     "documents": [],
     "not_checked": [],
-    "note": "Checked against the single Capital One cardmember agreement that has covered the Discover line since 30 June 2026, and Discover's own pages."
+    "note": "Re-checked on 2026-11-07 against Discover product pages and the Capital One cardmember agreement that now covers the Discover line."
   }
 }

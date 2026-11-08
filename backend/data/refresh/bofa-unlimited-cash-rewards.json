@@ -1,14 +1,15 @@
 {
   "card_id": "bofa-unlimited-cash-rewards",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:89bc4442b6227d64c9b9c346e0b988ec2598116c",
+    "evidence": "git:da76a45dae3fa3107d841f05ea4d6ff7bbc6a2de",
     "evidence_scope": "card",
-    "facts_sha256": "5da8eff3293186595eb8a1a12ccfa603d2aa61bbebdf8ccdeef7bab2e94f4eca",
+    "facts_sha256": "98bc085479ea8c5edd8aacdc103e961ef36021f86a8a4d5b85abb6c914f5299c",
     "documents": [],
     "not_checked": [
-      "insurance"
+      "insurance",
+      "insurance_limits"
     ],
-    "note": "Checked against Bank of America's card index and public sample cardmember agreements. Bank of America publishes no Guide to Benefits, so insurance was not checked."
+    "note": "Re-checked on 2026-11-07 against Bank of America product pages, offer disclosures and sample cardmember agreements. Not checked: insurance benefits and insurance dollar limits."
   }
 }

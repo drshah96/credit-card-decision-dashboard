@@ -1,5 +1,12 @@
 {
   "card_id": "chase-amazon-prime-visa",
-  "last_verified_ok_at": null,
-  "verification": null
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:3bc2fe4a44851e0bf3e7e0ccebb4959b9e72c3d8",
+    "evidence_scope": "card",
+    "facts_sha256": "b63fa67fe764b98663f34b9ada392baa8da95bc9ccd53cd1d598aa5f4b11734f",
+    "documents": [],
+    "not_checked": [],
+    "note": "Re-checked on 2026-11-07 against the card's Chase pricing table, product page, rewards terms and Guide to Benefits."
+  }
 }

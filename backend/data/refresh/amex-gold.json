@@ -1,14 +1,14 @@
 {
   "card_id": "amex-gold",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:99058a0186dd0d6c093f2a5f8d48fa51769420c8",
+    "evidence": "git:98940f63d267723d4fb6cc1367be132a71708728",
     "evidence_scope": "card",
-    "facts_sha256": "169623d338aee0503229746ae5074da63c89e72fa71f3f90d81346e5829d9b1b",
+    "facts_sha256": "852eca3574f1994235e87a62b709eb88b252d4b6658dc0d1d779d551dbdfb472",
     "documents": [],
     "not_checked": [
-      "insurance_limits"
+      "transfer_partners"
     ],
-    "note": "Checked field by field against Amex application terms, cardmember agreements and benefit policy pages. Insurance dollar limits are only published behind a cardmember login and were not checked."
+    "note": "Re-checked on 2026-11-07 against Amex application terms, cardmember agreements and benefit pages. Not checked: transfer partners. Some insurance limits come from excerpts of Amex benefit pages, not full reads."
   }
 }

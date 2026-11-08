@@ -1,14 +1,15 @@
 {
   "card_id": "bofa-bankamericard-secured",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:89bc4442b6227d64c9b9c346e0b988ec2598116c",
+    "evidence": "git:da76a45dae3fa3107d841f05ea4d6ff7bbc6a2de",
     "evidence_scope": "card",
-    "facts_sha256": "62fbcba09629d5318768f5ccccc3fbc16ea3b14cd6eaf664b0644ffea3923d00",
+    "facts_sha256": "f7a14e24556f68651e85c6bf2ae39fcae26e9019b83cdf932f5db55125cde7ce",
     "documents": [],
     "not_checked": [
-      "insurance"
+      "insurance",
+      "insurance_limits"
     ],
-    "note": "Checked against Bank of America's card index and public sample cardmember agreements. Bank of America publishes no Guide to Benefits, so insurance was not checked."
+    "note": "Re-checked on 2026-11-07 against Bank of America product pages, offer disclosures and sample cardmember agreements. Not checked: insurance benefits and insurance dollar limits."
   }
 }

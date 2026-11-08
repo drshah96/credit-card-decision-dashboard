@@ -1,16 +1,12 @@
 {
   "card_id": "chase-freedom-rise",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:1de0ac5abec4103d96dcc381078ca3ee1d2c3efe",
+    "evidence": "git:3bc2fe4a44851e0bf3e7e0ccebb4959b9e72c3d8",
     "evidence_scope": "card",
-    "facts_sha256": "526a2614d34824fbf792ab53affb517cd179c4b6c8e5cf101038b84b44010d9b",
+    "facts_sha256": "1ce563eafa26d68fcc872152ac3c2071e85efaece2a5d6f6c605062245ff9a84",
     "documents": [],
-    "not_checked": [
-      "transfer_partners",
-      "insurance_limits",
-      "additional_cards"
-    ],
-    "note": "Checked against Chase pricing and terms tables, rewards program agreements and Guide to Benefits PDFs. Transfer partners, insurance limits and authorized-user rules were largely not checked."
+    "not_checked": [],
+    "note": "Re-checked on 2026-11-07 against the card's Chase pricing table, product page, rewards terms and Guide to Benefits."
   }
 }

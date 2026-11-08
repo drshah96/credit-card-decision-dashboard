@@ -1,14 +1,12 @@
 {
   "card_id": "wells-fargo-reflect",
-  "last_verified_ok_at": "2026-09-06",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:367edbe845e12795543058e04cf394f269bc1f23",
+    "evidence": "git:263734a0048b069d2531d32cc89a75539deb3d4a",
     "evidence_scope": "card",
-    "facts_sha256": "f0af7a73a13377c6203c8f7d7bd2994a307ce4706e6999c20b271f002369365e",
+    "facts_sha256": "3a76aeec6c68818ad565317a28383c2b1a80e487946b5263598a7ef0eae3009d",
     "documents": [],
-    "not_checked": [
-      "redemption"
-    ],
-    "note": "Checked against Wells Fargo product pages and its Guide to Benefits. The rewards program terms could not be fetched, so redemption values were not checked."
+    "not_checked": [],
+    "note": "Re-checked on 2026-11-07 against Wells Fargo product pages, pricing terms and the Guide to Benefits."
   }
 }

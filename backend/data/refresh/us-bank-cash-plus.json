@@ -1,14 +1,16 @@
 {
   "card_id": "us-bank-cash-plus",
-  "last_verified_ok_at": "2026-09-06",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:367edbe845e12795543058e04cf394f269bc1f23",
+    "evidence": "git:5423930161a1db97ef50e7522c46ebb8422d9e89",
     "evidence_scope": "card",
-    "facts_sha256": "111fb5b4df829572d68288caef97433fe0c78d55ac41b25635333b74ace368ac",
+    "facts_sha256": "beefdc2a417135e0ba7b314da5ed1f5073a0913bf0d75b01c892de7aab957668",
     "documents": [],
     "not_checked": [
-      "insurance"
+      "insurance",
+      "insurance_limits",
+      "additional_cards"
     ],
-    "note": "Checked against U.S. Bank product pages and Pricing and Terms. U.S. Bank publishes no Guide to Benefits, so a missing insurance benefit cannot be confirmed as absent."
+    "note": "Re-checked on 2026-11-07 against U.S. Bank product pages and Pricing and Terms. Not checked: insurance benefits, insurance dollar limits, and authorized-user terms."
   }
 }

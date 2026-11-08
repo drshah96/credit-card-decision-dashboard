@@ -1,14 +1,14 @@
 {
   "card_id": "amex-blue-cash-preferred",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:99058a0186dd0d6c093f2a5f8d48fa51769420c8",
+    "evidence": "git:98940f63d267723d4fb6cc1367be132a71708728",
     "evidence_scope": "card",
-    "facts_sha256": "4012cef86f02cd5bd8d4a2887b919f0769a989ae0119560d01bbfffee68fe2bc",
+    "facts_sha256": "3addd992a49b7594c86926b1a0119edc851977e748328b2713a292ec939d51e0",
     "documents": [],
     "not_checked": [
-      "insurance_limits"
+      "transfer_partners"
     ],
-    "note": "Checked field by field against Amex application terms, cardmember agreements and benefit policy pages. Insurance dollar limits are only published behind a cardmember login and were not checked."
+    "note": "Re-checked on 2026-11-07 against Amex application terms, cardmember agreements and benefit pages. Not checked: transfer partners. Some insurance limits come from excerpts of Amex benefit pages, not full reads."
   }
 }

@@ -1,14 +1,14 @@
 {
   "card_id": "wells-fargo-choice-privileges-select",
-  "last_verified_ok_at": "2026-09-06",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:405c511480a05952bfbb77ab6b9ca4d8da2765c7",
+    "evidence": "git:263734a0048b069d2531d32cc89a75539deb3d4a",
     "evidence_scope": "card",
-    "facts_sha256": "751c4fe965e31da2be1fb726baae4fb11b53b919e1319f72518ef34e20bf54ff",
+    "facts_sha256": "f2b2f5d860194777843e932e3c6c5b8c4168c5510b114d1302f9235486495462",
     "documents": [],
     "not_checked": [
-      "redemption"
+      "transfer_partners"
     ],
-    "note": "Checked against Wells Fargo product pages and its Guide to Benefits. The rewards program terms could not be fetched, so redemption values were not checked."
+    "note": "Re-checked on 2026-11-07 against Wells Fargo product pages, pricing terms and the Guide to Benefits. Not checked: transfer partners."
   }
 }

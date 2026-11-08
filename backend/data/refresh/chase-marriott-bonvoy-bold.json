@@ -1,16 +1,12 @@
 {
   "card_id": "chase-marriott-bonvoy-bold",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:1de0ac5abec4103d96dcc381078ca3ee1d2c3efe",
+    "evidence": "git:3bc2fe4a44851e0bf3e7e0ccebb4959b9e72c3d8",
     "evidence_scope": "card",
-    "facts_sha256": "821cdac72d24b521222c11e22f63fb6e1918579bb77d3ae08420b50ba0076229",
+    "facts_sha256": "7cf6aa0a5cad3d8d802d693ebfa58d8beb4eaafab6265b36ec4d09a564b27147",
     "documents": [],
-    "not_checked": [
-      "transfer_partners",
-      "insurance_limits",
-      "additional_cards"
-    ],
-    "note": "Checked against Chase pricing and terms tables, rewards program agreements and Guide to Benefits PDFs. Transfer partners, insurance limits and authorized-user rules were largely not checked."
+    "not_checked": [],
+    "note": "Re-checked on 2026-11-07 against the card's Chase pricing table, product page, rewards terms and Guide to Benefits."
   }
 }

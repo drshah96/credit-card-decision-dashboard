@@ -1,16 +1,15 @@
 {
   "card_id": "chase-ihg-one-rewards-traveler",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:1de0ac5abec4103d96dcc381078ca3ee1d2c3efe",
+    "evidence": "git:3bc2fe4a44851e0bf3e7e0ccebb4959b9e72c3d8",
     "evidence_scope": "card",
-    "facts_sha256": "b86a020b9ebcad7c9e56c65b84b7ca1401566eb7d9721b204af68aeaaf1ebc87",
+    "facts_sha256": "b3d9736f67487dbbcd969ff51310d7022567b311a48e91a641ee99e3eb8133c2",
     "documents": [],
     "not_checked": [
-      "transfer_partners",
-      "insurance_limits",
-      "additional_cards"
+      "redemption",
+      "transfer_partners"
     ],
-    "note": "Checked against Chase pricing and terms tables, rewards program agreements and Guide to Benefits PDFs. Transfer partners, insurance limits and authorized-user rules were largely not checked."
+    "note": "Re-checked on 2026-11-07 against the card's Chase pricing table, product page, rewards terms and Guide to Benefits. Not checked: redemption values and transfer partners."
   }
 }

@@ -1,16 +1,15 @@
 {
   "card_id": "chase-southwest-rapid-rewards-plus",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:1de0ac5abec4103d96dcc381078ca3ee1d2c3efe",
+    "evidence": "git:3bc2fe4a44851e0bf3e7e0ccebb4959b9e72c3d8",
     "evidence_scope": "card",
-    "facts_sha256": "13398a7f1a5c4423491fe8db9ad906cb889d0d206e62bf3076fe88ace5049853",
+    "facts_sha256": "5ef30c185540dfa7edc919f24425f143219c9827ab2700893f152b3b06af67fa",
     "documents": [],
     "not_checked": [
-      "transfer_partners",
-      "insurance_limits",
-      "additional_cards"
+      "redemption",
+      "transfer_partners"
     ],
-    "note": "Checked against Chase pricing and terms tables, rewards program agreements and Guide to Benefits PDFs. Transfer partners, insurance limits and authorized-user rules were largely not checked."
+    "note": "Re-checked on 2026-11-07 against the card's Chase pricing table, product page, rewards terms and Guide to Benefits. Not checked: redemption values and transfer partners."
   }
 }

@@ -191,8 +191,12 @@ async def test_list_tools_expose_the_gaps_that_a_status_alone_would_hide(snapsho
         ranked["entries"][0]["provenance"],
     ):
         assert provenance["verification_status"] == "partially_verified"
-        assert provenance["not_checked"] == ["rates_and_fees"]
-        assert provenance["review_due_on"] == "2027-03-04"
+        assert provenance["not_checked"] == [
+            "rates_and_fees",
+            "transfer_partners",
+            "insurance_limits",
+        ]
+        assert provenance["review_due_on"] == "2027-05-06"
 
 
 async def test_a_card_with_no_recorded_check_is_not_verified(snapshot):
@@ -207,12 +211,31 @@ async def test_a_card_with_no_recorded_check_is_not_verified(snapshot):
     assert provenance["evidence_url"] is None
 
 
-async def test_issuer_pass_evidence_is_labelled(snapshot):
+async def test_card_evidence_links_the_commit(snapshot):
     async with connect(snapshot) as client:
         data = structured(await client.call_tool("get_card", {"card_id": "chase-freedom-flex"}))
-    assert data["provenance"]["evidence_scope"] == "issuer_pass"
+    assert data["provenance"]["evidence_scope"] == "card"
     assert data["provenance"]["evidence_url"].startswith(
         "https://github.com/drshah96/credit-card-decision-dashboard/commit/"
+    )
+
+
+def test_issuer_pass_evidence_is_labelled(snapshot):
+    record = {
+        "evidence": "pr:268",
+        "evidence_scope": "issuer_pass",
+        "facts_sha256": "0" * 64,
+        "documents": [],
+        "not_checked": [],
+        "note": "test",
+    }
+    state = VerificationState(
+        card_id="chase-freedom-flex", last_verified_ok_at="2026-11-07", verification=record
+    )
+    provenance = projections.full_provenance(snapshot.cards["chase-freedom-flex"], state)
+    assert provenance.evidence_scope == "issuer_pass"
+    assert provenance.evidence_url == (
+        "https://github.com/drshah96/credit-card-decision-dashboard/pull/268"
     )
 
 

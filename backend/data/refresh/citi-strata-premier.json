@@ -1,14 +1,16 @@
 {
   "card_id": "citi-strata-premier",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:54f0d72c12208c45f24898d3617a26a0296cb024",
-    "evidence_scope": "issuer_pass",
-    "facts_sha256": "450f57fa3f828d0b0460531a0fe319d3055f56f88221cb0ece7c9f5bafb61303",
+    "evidence": "git:c4677373bcb5d7f6a590ad9c231601e72b0818ab",
+    "evidence_scope": "card",
+    "facts_sha256": "5f3fac84019aae89d1f48131b67e6df0e1b38a754e8459f8a1cec1799bf57480",
     "documents": [],
     "not_checked": [
-      "rates_and_fees"
+      "redemption",
+      "transfer_partners",
+      "insurance_limits"
     ],
-    "note": "Benefits were checked against Citi's own pages. Citi fills in rate and fee numbers in the browser, so most APRs and fees could not be confirmed in this pass."
+    "note": "Re-checked on 2026-11-07 against Citi product pages and benefit documents. Not checked: redemption values, transfer partners, and insurance dollar limits. Citi fills in its rates in the browser, so they were read from Citi pages through a text renderer and matched to Citi documents. Citi lists transfer partners only behind a ThankYou login."
   }
 }

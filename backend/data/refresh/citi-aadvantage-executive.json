@@ -1,14 +1,15 @@
 {
   "card_id": "citi-aadvantage-executive",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:54f0d72c12208c45f24898d3617a26a0296cb024",
+    "evidence": "git:c4677373bcb5d7f6a590ad9c231601e72b0818ab",
     "evidence_scope": "card",
-    "facts_sha256": "cc839afe0a7d7a77a73f54e6ac1e03909af75214b625b1de6ed21683781e5a1f",
+    "facts_sha256": "5a33e69e5890c5a0e3940bc5c96647616a07734c9d8f5297fc855ceb7b46e48e",
     "documents": [],
     "not_checked": [
-      "rates_and_fees"
+      "redemption",
+      "transfer_partners"
     ],
-    "note": "Benefits were checked against Citi's own pages. Citi fills in rate and fee numbers in the browser, so most APRs and fees could not be confirmed in this pass."
+    "note": "Re-checked on 2026-11-07 against Citi product pages, Citi benefit documents and American Airlines pages. Not checked: redemption values and transfer partners. Citi fills in its rates in the browser, so they were read from Citi pages through a text renderer and matched to Citi documents."
   }
 }

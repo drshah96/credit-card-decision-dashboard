@@ -1,14 +1,16 @@
 {
   "card_id": "capital-one-platinum",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:cf1ab028b88caa89ff1bf32ca2b0564d170d2ee8",
-    "evidence_scope": "issuer_pass",
-    "facts_sha256": "072544ceeaf7f1f86fe3be062153aa7573b494529c991c09707eb6949ada63bc",
+    "evidence": "git:93b8c86d046b1478ff85c14da6d4582c3938a1c9",
+    "evidence_scope": "card",
+    "facts_sha256": "3409f07507354f84f9369840ec6a2d7cd1f1e658a3c67120bb4fcfcd6ab400a6",
     "documents": [],
     "not_checked": [
-      "rates_and_fees"
+      "rates_and_fees",
+      "insurance",
+      "insurance_limits"
     ],
-    "note": "Checked against Capital One product pages and Guide to Benefits PDFs. Only the annual fee and purchase APR were reachable; other APRs and fees were not checked."
+    "note": "Re-checked on 2026-11-07 against Capital One product pages, benefit terms and Guide to Benefits PDFs. Not checked: some rates and fees, insurance benefits, and insurance dollar limits."
   }
 }

@@ -1,14 +1,14 @@
 {
   "card_id": "wells-fargo-autograph",
-  "last_verified_ok_at": "2026-09-06",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:405c511480a05952bfbb77ab6b9ca4d8da2765c7",
+    "evidence": "git:263734a0048b069d2531d32cc89a75539deb3d4a",
     "evidence_scope": "card",
-    "facts_sha256": "3cfa138ad83cf1191edd5539fe5c004f4f3fdbf14205a736867090d898be127e",
+    "facts_sha256": "6e4811737926e4f2498335ccb6983bd22a8a586bd997f5b697a2e512ef8060a2",
     "documents": [],
     "not_checked": [
-      "redemption"
+      "transfer_partners"
     ],
-    "note": "Checked against Wells Fargo product pages and its Guide to Benefits. The rewards program terms could not be fetched, so redemption values were not checked."
+    "note": "Re-checked on 2026-11-07 against Wells Fargo product pages, pricing terms and the Guide to Benefits. Not checked: transfer partners."
   }
 }

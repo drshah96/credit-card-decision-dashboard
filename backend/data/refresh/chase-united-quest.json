@@ -1,16 +1,15 @@
 {
   "card_id": "chase-united-quest",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:1de0ac5abec4103d96dcc381078ca3ee1d2c3efe",
+    "evidence": "git:485c9af69a5d2d6dc41fc2d8c41dcaee7944ecd5",
     "evidence_scope": "card",
-    "facts_sha256": "f06ef0a020cef98e30cabc98a7fab074a5e0fd7efd99c3642cba3542dfcade8a",
+    "facts_sha256": "14e5cde507b6822d63bb89175748e84dd4161381e3a1331bdaaaff4c004be838",
     "documents": [],
     "not_checked": [
-      "transfer_partners",
-      "insurance_limits",
-      "additional_cards"
+      "redemption",
+      "transfer_partners"
     ],
-    "note": "Checked against Chase pricing and terms tables, rewards program agreements and Guide to Benefits PDFs. Transfer partners, insurance limits and authorized-user rules were largely not checked."
+    "note": "Re-checked on 2026-11-07 against the card's Chase pricing table, product page, rewards terms and Guide to Benefits. Not checked: redemption values and transfer partners."
   }
 }

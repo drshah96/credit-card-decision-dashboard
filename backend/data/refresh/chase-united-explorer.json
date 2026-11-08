@@ -1,16 +1,15 @@
 {
   "card_id": "chase-united-explorer",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:1de0ac5abec4103d96dcc381078ca3ee1d2c3efe",
+    "evidence": "git:485c9af69a5d2d6dc41fc2d8c41dcaee7944ecd5",
     "evidence_scope": "card",
-    "facts_sha256": "f7b1b01611e2797f7ecb6113b6eacfdb1fefd9f6a16e955aaa068223bd7f9529",
+    "facts_sha256": "358115e3f2f6c7bb6c005b579ae17a1917155682e1b32b24a6b1163d14663331",
     "documents": [],
     "not_checked": [
-      "transfer_partners",
-      "insurance_limits",
-      "additional_cards"
+      "redemption",
+      "transfer_partners"
     ],
-    "note": "Checked against Chase pricing and terms tables, rewards program agreements and Guide to Benefits PDFs. Transfer partners, insurance limits and authorized-user rules were largely not checked."
+    "note": "Re-checked on 2026-11-07 against the card's Chase pricing table, product page, rewards terms and Guide to Benefits. Not checked: redemption values and transfer partners."
   }
 }

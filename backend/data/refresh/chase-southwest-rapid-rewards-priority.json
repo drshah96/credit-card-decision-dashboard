@@ -1,16 +1,15 @@
 {
   "card_id": "chase-southwest-rapid-rewards-priority",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:1de0ac5abec4103d96dcc381078ca3ee1d2c3efe",
+    "evidence": "git:3bc2fe4a44851e0bf3e7e0ccebb4959b9e72c3d8",
     "evidence_scope": "card",
-    "facts_sha256": "09df8db80a74ae5dc27cd92f5fa1f137d51d88b2b1eed78e36267ad77dbebcfe",
+    "facts_sha256": "215e350a71d116af045e82e080c15166ae83f7e9905c2c5393380ef4129c9731",
     "documents": [],
     "not_checked": [
-      "transfer_partners",
-      "insurance_limits",
-      "additional_cards"
+      "redemption",
+      "transfer_partners"
     ],
-    "note": "Checked against Chase pricing and terms tables, rewards program agreements and Guide to Benefits PDFs. Transfer partners, insurance limits and authorized-user rules were largely not checked."
+    "note": "Re-checked on 2026-11-07 against the card's Chase pricing table, product page, rewards terms and Guide to Benefits. Not checked: redemption values and transfer partners."
   }
 }

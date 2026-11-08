@@ -1,14 +1,14 @@
 {
   "card_id": "amex-marriott-bonvoy-bevy",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:99058a0186dd0d6c093f2a5f8d48fa51769420c8",
+    "evidence": "git:98940f63d267723d4fb6cc1367be132a71708728",
     "evidence_scope": "card",
-    "facts_sha256": "6b2a644e06df89c8d8afd746c34a90ee2ab4db973a046cab89046bf80e601d5f",
+    "facts_sha256": "1b4043246e62dcffd8a6486dc16d79b20c08579e99de400fcf386902b8b22ad9",
     "documents": [],
     "not_checked": [
       "insurance_limits"
     ],
-    "note": "Checked field by field against Amex application terms, cardmember agreements and benefit policy pages. Insurance dollar limits are only published behind a cardmember login and were not checked."
+    "note": "Re-checked on 2026-11-07 against Amex application terms, cardmember agreements and benefit pages. Not checked: insurance dollar limits."
   }
 }

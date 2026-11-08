@@ -1,16 +1,12 @@
 {
   "card_id": "chase-slate-edge",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:1de0ac5abec4103d96dcc381078ca3ee1d2c3efe",
-    "evidence_scope": "issuer_pass",
-    "facts_sha256": "a813f873f144cecd1cdf0fabde4c370a62bc9896c8f344cbe7a4c2841369dfda",
+    "evidence": "git:5423930161a1db97ef50e7522c46ebb8422d9e89",
+    "evidence_scope": "card",
+    "facts_sha256": "a3d735c8a3a0bf0675ee38ca56c5dad8097b24beba424c0e55e133088a5ea0e7",
     "documents": [],
-    "not_checked": [
-      "transfer_partners",
-      "insurance_limits",
-      "additional_cards"
-    ],
-    "note": "Checked against Chase pricing and terms tables, rewards program agreements and Guide to Benefits PDFs. Transfer partners, insurance limits and authorized-user rules were largely not checked."
+    "not_checked": [],
+    "note": "Re-checked on 2026-11-07 against the card's Chase pricing table, product page, rewards terms and Guide to Benefits. The DoorDash end date comes from a DoorDash page that names Slate cards, not Slate Edge."
   }
 }

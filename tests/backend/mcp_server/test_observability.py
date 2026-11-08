@@ -61,7 +61,7 @@ def test_each_authenticated_request_logs_one_complete_line(snapshot):
         client.post("/mcp", json=call_tool("secret_tool", {}), headers=auth(key))
     started = logs.events("mcp_started")
     assert started[0]["cards"] == 109
-    assert started[0]["verified_cards"] == 85
+    assert started[0]["verified_cards"] == 89
 
     initialize, ok, unknown_card, invalid, unknown_tool = logs.events("mcp_request")
     assert initialize["rpc_method"] == "initialize"

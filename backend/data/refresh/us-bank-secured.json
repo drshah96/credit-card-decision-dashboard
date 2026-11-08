@@ -1,14 +1,19 @@
 {
   "card_id": "us-bank-secured",
-  "last_verified_ok_at": "2026-09-06",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:405c511480a05952bfbb77ab6b9ca4d8da2765c7",
+    "evidence": "git:40b86fa9c112c55a16d35179ed97a51b70478704",
     "evidence_scope": "card",
-    "facts_sha256": "b20490262fc96ec907ff6b0d1849674dc1a66d9f8dfd77363fffeb66a2c32337",
+    "facts_sha256": "8954008c9cc16925238219da42720d6957bd41182300b47b6ed6477a14f4c05b",
     "documents": [],
     "not_checked": [
-      "insurance"
+      "earn_rates",
+      "redemption",
+      "transfer_partners",
+      "insurance",
+      "insurance_limits",
+      "additional_cards"
     ],
-    "note": "Checked against U.S. Bank product pages and Pricing and Terms. U.S. Bank publishes no Guide to Benefits, so a missing insurance benefit cannot be confirmed as absent."
+    "note": "Re-checked on 2026-11-07 against U.S. Bank product pages and Pricing and Terms. Not checked: earn rates, redemption values, transfer partners, insurance benefits, insurance dollar limits, and authorized-user terms. Only fees, rates, credits and lounge access were re-read."
   }
 }

@@ -1,14 +1,15 @@
 {
   "card_id": "capital-one-quicksilver-secured",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:cf1ab028b88caa89ff1bf32ca2b0564d170d2ee8",
+    "evidence": "git:93b8c86d046b1478ff85c14da6d4582c3938a1c9",
     "evidence_scope": "card",
-    "facts_sha256": "7b2bf45c5a81aa802d84f14d506467a7ee16534826a30dccc6587ad81cd01b21",
+    "facts_sha256": "39e546faa7b9b5dcd978a2cdef5c5d88875c63c3c3c85e6ca410d4c77eac7309",
     "documents": [],
     "not_checked": [
-      "rates_and_fees"
+      "insurance",
+      "insurance_limits"
     ],
-    "note": "Checked against Capital One product pages and Guide to Benefits PDFs. Only the annual fee and purchase APR were reachable; other APRs and fees were not checked."
+    "note": "Re-checked on 2026-11-07 against Capital One product pages, benefit terms and Guide to Benefits PDFs. Not checked: insurance benefits and insurance dollar limits. No issuer statement settles lounge access, so it is left unrecorded."
   }
 }

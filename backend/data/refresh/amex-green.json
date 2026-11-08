@@ -1,14 +1,16 @@
 {
   "card_id": "amex-green",
-  "last_verified_ok_at": "2026-09-05",
+  "last_verified_ok_at": "2026-11-07",
   "verification": {
-    "evidence": "git:99058a0186dd0d6c093f2a5f8d48fa51769420c8",
+    "evidence": "git:98940f63d267723d4fb6cc1367be132a71708728",
     "evidence_scope": "card",
-    "facts_sha256": "a0efd73629919200e34e705c3dc5d3796b9e01f2402e034d27442705f6cd3a7f",
+    "facts_sha256": "8296665f6dc2787f18548c06b477ae551e72c21af3d3919de60fc751625ace42",
     "documents": [],
     "not_checked": [
+      "transfer_partners",
+      "insurance",
       "insurance_limits"
     ],
-    "note": "Checked field by field against Amex application terms, cardmember agreements and benefit policy pages. Insurance dollar limits are only published behind a cardmember login and were not checked."
+    "note": "Re-checked on 2026-11-07 against Amex application terms, cardmember agreements and benefit pages. Not checked: transfer partners, insurance benefits, and insurance dollar limits. Amex publishes no full benefit terms for this card. No issuer statement settles lounge access, so it is left unrecorded."
   }
 }
