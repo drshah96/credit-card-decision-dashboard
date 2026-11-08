@@ -61,6 +61,21 @@ jobs:
             exit 1
           fi
 
+      - name: Call a tool with no key, as Claude's custom connectors do
+        run: |
+          set -uo pipefail
+          URL=https://mcp.thewalletaudit.com/mcp
+          CALL='{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"get_card","arguments":{"card_id":"amex-gold"}}}'
+          status=$(curl -s --max-time 120 -o body.json -w '%{http_code}' -X POST "$URL" \
+            -H 'content-type: application/json' \
+            -H 'accept: application/json, text/event-stream' \
+            -d "$CALL")
+          echo "no key -> HTTP $status"
+          if [ "$status" != "200" ] || ! grep -q 'amex-gold' body.json; then
+            echo "::error::A request without a key was not served. Check MCP_ANONYMOUS_ACCESS=true on Render."
+            exit 1
+          fi
+
       - name: Check forged client IPs cannot escape the failed-auth limit
         run: |
           set -uo pipefail
