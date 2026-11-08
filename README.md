@@ -115,6 +115,15 @@ pooling needs you to actually hold both cards. It switches on only when you pick
 your own cards on Top Picks and one of them is a premium card that can reach those
 transfer partners.
 
+A rate counts toward a category only if most purchases in that category earn it.
+Some bonus rates apply only at a partner network of restaurants, at certain hours,
+at one merchant or website, or only online, like Bilt's "Up to 6×" at Bilt partner
+restaurants or the Costco Visa's 5% on gas at Costco. Those still show on the card's
+page, but in the ranking the card's broadly available rate competes instead. Two
+narrower kinds do count, on purpose: travel booked through the card's own portal,
+since any flight or hotel can be booked that way, and a category you choose
+yourself, which ranks in each category it offers.
+
 Rankings ignore monetization entirely, and a
 [regression test](frontend/tests/utils/topPickCategories.test.ts) proves the
 ranking function can't even see the affiliate flag.
@@ -175,6 +184,10 @@ The answers are built so an agent can't mistake a gap for a fact:
 - **Every card shows its source and age:** the issuer page, the date it was last
   checked against issuer documents, and the areas that check could not confirm. A
   card with no recorded check says `not_verified` rather than borrowing a date.
+- **A check expires on time:** each card has a date after which its check
+  shouldn't be relied on. That's 180 days after the check, or sooner if a rate or
+  credit in the card's data ends or changes first, such as a quarterly category.
+  Once that date passes, the card is flagged `review_overdue`.
 - **Unknown is never "none":** a rate or fee missing from the catalog comes back as
   `not_recorded`, not as a blank an agent could read as zero.
 - **Rankings match the site and ignore monetization:** a shared test fixture holds
