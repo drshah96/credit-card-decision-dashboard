@@ -376,12 +376,12 @@
     "is_base": false
    },
    {
-    "category": "Restaurants worldwide",
+    "category": "Restaurants worldwide (first $15,000/yr of a shared cap, then 2×)",
     "multiplier": "4×",
     "is_base": false
    },
    {
-    "category": "U.S. supermarkets",
+    "category": "U.S. supermarkets (first $15,000/yr of a shared cap, then 2×)",
     "multiplier": "4×",
     "is_base": false
    },
@@ -438,8 +438,13 @@
     "is_base": false
    },
    {
-    "category": "Prepaid hotels, via Amex Travel",
+    "category": "Prepaid hotels and Airbnb stays, via Amex Travel",
     "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Prepaid car rentals & cruises, via Amex Travel",
+    "multiplier": "2×",
     "is_base": false
    },
    {
@@ -960,6 +965,11 @@
     "is_base": false
    },
    {
+    "category": "Capital One Entertainment ticket purchases",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
     "category": "Everything else",
     "multiplier": "1.5%",
     "is_base": true
@@ -981,6 +991,11 @@
     "is_base": false
    },
    {
+    "category": "Capital One Entertainment ticket purchases",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
     "category": "Everything else",
     "multiplier": "1.5%",
     "is_base": true
@@ -998,6 +1013,11 @@
   "categories": [
    {
     "category": "Hotels, vacation rentals & rental cars, via Capital One Travel",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Capital One Entertainment ticket purchases",
     "multiplier": "5%",
     "is_base": false
    },
@@ -1110,6 +1130,16 @@
     "is_base": false
    },
    {
+    "category": "Hotels, vacation rentals & rental cars, via Capital One Travel",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Capital One Entertainment ticket purchases",
+    "multiplier": "8%",
+    "is_base": false
+   },
+   {
     "category": "Everything else",
     "multiplier": "1%",
     "is_base": true
@@ -1178,6 +1208,11 @@
     "is_base": false
    },
    {
+    "category": "Capital One Entertainment purchases",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
     "category": "Everything else, no categories",
     "multiplier": "1.25×",
     "is_base": true
@@ -1211,7 +1246,7 @@
    {
     "category": "Everything else, no categories",
     "multiplier": "2×",
-    "is_base": false
+    "is_base": true
    }
   ],
   "best_cpp": 1.85,
@@ -1230,7 +1265,7 @@
     "is_base": false
    },
    {
-    "category": "Chase Travel purchases",
+    "category": "Chase Travel purchases, with Prime membership",
     "multiplier": "5%",
     "is_base": false
    },
@@ -1307,7 +1342,7 @@
   "annual_fee": 0,
   "categories": [
    {
-    "category": "Quarterly rotating category. This quarter (Q3): Gas, EV charging, transit, entertainment, United Way",
+    "category": "Quarterly rotating category. This quarter (Q4): Grocery stores (excluding Walmart and Target), dining, American Red Cross",
     "multiplier": "5%",
     "is_base": false
    },
@@ -1342,11 +1377,6 @@
   "name": "Freedom Rise",
   "annual_fee": 0,
   "categories": [
-   {
-    "category": "Dining, first 6 months, up to $6,000 spent (then 1.5%)",
-    "multiplier": "3%",
-    "is_base": false
-   },
    {
     "category": "Everything else",
     "multiplier": "1.5%",
@@ -1392,7 +1422,7 @@
  {
   "id": "chase-ihg-one-rewards-premier",
   "name": "IHG One Rewards Premier Credit Card",
-  "annual_fee": 99,
+  "annual_fee": 150,
   "categories": [
    {
     "category": "IHG Hotels & Resorts",
@@ -1400,7 +1430,7 @@
     "is_base": false
    },
    {
-    "category": "Travel",
+    "category": "Travel through Dec 31, 2026, then only airline tickets booked direct and car rentals",
     "multiplier": "5×",
     "is_base": false
    },
@@ -1411,6 +1441,11 @@
    },
    {
     "category": "Gas stations",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
     "multiplier": "5×",
     "is_base": false
    },
@@ -1427,7 +1462,7 @@
  },
  {
   "id": "chase-ihg-one-rewards-traveler",
-  "name": "IHG One Rewards Traveler Credit Card",
+  "name": "IHG One Rewards Credit Card",
   "annual_fee": 0,
   "categories": [
    {
@@ -1441,12 +1476,22 @@
     "is_base": false
    },
    {
-    "category": "Utilities",
+    "category": "Utilities, through Dec 31, 2026 (then 2×)",
     "multiplier": "3×",
     "is_base": false
    },
    {
-    "category": "Select streaming services",
+    "category": "Select streaming services, through Dec 31, 2026 (then 2×)",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Internet, cable & phone, through Dec 31, 2026 (then 2×)",
     "multiplier": "3×",
     "is_base": false
    },
@@ -1482,7 +1527,7 @@
     "is_base": false
    },
    {
-    "category": "Rideshare",
+    "category": "Rideshare, taxis & limousines",
     "multiplier": "2×",
     "is_base": false
    },
@@ -1627,6 +1672,11 @@
    {
     "category": "Lyft (through Sep 2027)",
     "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Peloton equipment & accessories (through Dec 2027, up to $5,000 in purchases)",
+    "multiplier": "10×",
     "is_base": false
    },
    {
@@ -1910,7 +1960,7 @@
  {
   "id": "citi-aadvantage-executive",
   "name": "AAdvantage Executive World Legend",
-  "annual_fee": 595,
+  "annual_fee": 695,
   "categories": [
    {
     "category": "Hotels & car rentals, via AAdvantage portals",
@@ -2625,7 +2675,7 @@
   "annual_fee": 0,
   "categories": [
    {
-    "category": "Rotating quarterly categories, on up to $1,500 per quarter, once you activate",
+    "category": "Rotating quarterly categories, up to the quarterly maximum, once you activate",
     "multiplier": "5%",
     "is_base": false
    },
@@ -2677,7 +2727,7 @@
     "is_base": false
    },
    {
-    "category": "Travel: airlines, hotels, car rentals, trains, cruises",
+    "category": "Travel: airlines, hotels, car rentals, taxis, limousines, trains, cruises",
     "multiplier": "4×",
     "is_base": false
    },
@@ -2790,7 +2840,7 @@
   "annual_fee": 0,
   "categories": [
    {
-    "category": "Two categories you choose each quarter: fast food, home utilities, streaming, department stores, cell phone, electronics, sporting goods, furniture, movie theaters, ground transportation, gyms, or select clothing (first $2,000 combined, then 1%)",
+    "category": "Two categories you choose each quarter: fast food, home utilities, TV, internet and streaming, department stores, cell phone, electronics stores, sporting goods, furniture stores, movie theaters, ground transportation, gyms/fitness centers, or select clothing stores (first $2,000 combined, then 1%)",
     "multiplier": "5%",
     "is_base": false
    },
@@ -2800,7 +2850,7 @@
     "is_base": false
    },
    {
-    "category": "One everyday category you choose: gas/EV, groceries, or dining",
+    "category": "One everyday category you choose: gas/EV, grocery stores and grocery delivery, or restaurants",
     "multiplier": "2%",
     "is_base": false
    },
@@ -2821,7 +2871,7 @@
   "annual_fee": 0,
   "categories": [
    {
-    "category": "Two categories you choose each quarter: fast food, home utilities, streaming, department stores, cell phone, electronics, sporting goods, furniture, movie theaters, ground transportation, gyms, or select clothing (first $2,000 combined, then 1%)",
+    "category": "Two categories you choose each quarter: fast food, home utilities, TV, internet and streaming, department stores, cell phone, electronics stores, sporting goods, furniture stores, movie theaters, ground transportation, gyms/fitness centers, or select clothing stores (first $2,000 combined, then 1%)",
     "multiplier": "5%",
     "is_base": false
    },
@@ -2831,7 +2881,7 @@
     "is_base": false
    },
    {
-    "category": "One everyday category you choose: gas/EV, groceries, or dining",
+    "category": "One everyday category you choose: gas/EV, grocery stores and grocery delivery, or restaurants",
     "multiplier": "2%",
     "is_base": false
    },
@@ -2867,7 +2917,7 @@
     "is_base": false
    },
    {
-    "category": "Everything else, no rewards program",
+    "category": "Everything else, no rewards earned",
     "multiplier": "0%",
     "is_base": true
    }
@@ -2925,12 +2975,12 @@
   "annual_fee": 0,
   "categories": [
    {
-    "category": "Restaurants: dining, takeout, delivery, catering",
+    "category": "Restaurants: eating places, fast food, drinking places, catering; excludes third-party delivery services",
     "multiplier": "3×",
     "is_base": false
    },
    {
-    "category": "Travel: airfare, hotels, car rentals, cruises",
+    "category": "Travel: airlines, hotels, car rentals, cruises, timeshares, campgrounds, travel agencies",
     "multiplier": "3×",
     "is_base": false
    },
@@ -2940,7 +2990,7 @@
     "is_base": false
    },
    {
-    "category": "Transit: subways, rideshares, parking, tolls",
+    "category": "Transit: passenger rail, taxis, limousines, ferries, parking, tolls",
     "multiplier": "3×",
     "is_base": false
    },
