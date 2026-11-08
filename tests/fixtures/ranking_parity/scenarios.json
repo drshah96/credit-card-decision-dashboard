@@ -1,0 +1,518 @@
+[
+ {
+  "name": "catalog_default",
+  "card_ids": null,
+  "pooling": false
+ },
+ {
+  "name": "catalog_pooled",
+  "card_ids": null,
+  "pooling": true
+ },
+ {
+  "name": "pool_chase-ultimate-rewards-transferable_full",
+  "card_ids": [
+   "chase-freedom-flex",
+   "chase-freedom-unlimited",
+   "chase-sapphire-preferred",
+   "chase-sapphire-reserve"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "pool_chase-ultimate-rewards-transferable_feeders",
+  "card_ids": [
+   "chase-freedom-flex",
+   "chase-freedom-unlimited"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "pool_citi-thankyou-points-transferable_full",
+  "card_ids": [
+   "citi-double-cash",
+   "citi-strata",
+   "citi-strata-elite",
+   "citi-strata-premier"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "pool_citi-thankyou-points-transferable_feeders",
+  "card_ids": [
+   "citi-double-cash",
+   "citi-strata"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "secured_pairs",
+  "card_ids": [
+   "bofa-bankamericard",
+   "bofa-bankamericard-secured",
+   "bofa-customized-cash-rewards",
+   "bofa-cash-rewards-secured",
+   "bofa-travel-rewards",
+   "bofa-travel-rewards-secured",
+   "bofa-unlimited-cash-rewards",
+   "bofa-unlimited-cash-rewards-secured",
+   "capital-one-platinum",
+   "capital-one-platinum-secured",
+   "discover-it-cash-back",
+   "discover-it-secured",
+   "us-bank-altitude-go",
+   "us-bank-altitude-go-secured",
+   "us-bank-cash-plus",
+   "us-bank-cash-plus-secured"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "secured_only",
+  "card_ids": [
+   "bofa-bankamericard-secured",
+   "bofa-cash-rewards-secured",
+   "bofa-travel-rewards-secured",
+   "bofa-unlimited-cash-rewards-secured",
+   "capital-one-platinum-secured",
+   "discover-it-secured",
+   "us-bank-altitude-go-secured",
+   "us-bank-cash-plus-secured"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "single_receiver",
+  "card_ids": [
+   "chase-sapphire-preferred"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_00",
+  "card_ids": [
+   "amex-blue-cash-everyday",
+   "amex-blue-cash-preferred",
+   "amex-delta-skymiles-gold",
+   "amex-gold",
+   "amex-marriott-bonvoy-bevy",
+   "bilt-blue",
+   "bofa-bankamericard",
+   "bofa-premium-rewards",
+   "capital-one-bass-pro-cabelas-club",
+   "capital-one-key-rewards",
+   "capital-one-quicksilver",
+   "capital-one-quicksilver-one",
+   "capital-one-savor-one",
+   "capital-one-venture",
+   "capital-one-venture-x",
+   "chase-marriott-bonvoy-bold",
+   "citi-exxonmobil-smart-card-plus",
+   "citi-secured",
+   "citi-strata-premier",
+   "citi-wayfair",
+   "us-bank-altitude-connect",
+   "wells-fargo-one-key"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_01",
+  "card_ids": [
+   "amex-blue-cash-everyday",
+   "amex-hilton-honors-aspire",
+   "bofa-customized-cash-rewards",
+   "bofa-unlimited-cash-rewards",
+   "capital-one-bjs-one-plus",
+   "capital-one-key-rewards",
+   "chase-freedom-flex",
+   "chase-sapphire-preferred",
+   "chase-slate-edge",
+   "chase-united-quest",
+   "citi-aadvantage-globe",
+   "citi-aadvantage-platinum-select",
+   "citi-bloomingdales",
+   "citi-double-cash",
+   "discover-it-miles",
+   "discover-it-student-chrome",
+   "us-bank-altitude-connect",
+   "us-bank-altitude-go",
+   "us-bank-smartly",
+   "wells-fargo-active-cash",
+   "wells-fargo-autograph-journey",
+   "wells-fargo-choice-privileges",
+   "wells-fargo-reflect"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_02",
+  "card_ids": [
+   "amex-delta-skymiles-platinum",
+   "amex-green",
+   "amex-marriott-bonvoy-bevy",
+   "bofa-premium-rewards-elite",
+   "bofa-unlimited-cash-rewards-secured",
+   "capital-one-bass-pro-cabelas-club",
+   "capital-one-bjs-one-plus",
+   "capital-one-quicksilver-secured",
+   "capital-one-tmobile",
+   "chase-ihg-one-rewards-traveler",
+   "chase-slate-edge",
+   "chase-southwest-rapid-rewards-premier",
+   "citi-dillards",
+   "discover-it-secured",
+   "us-bank-secured"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_03",
+  "card_ids": [
+   "amex-delta-skymiles-blue",
+   "amex-green",
+   "amex-platinum",
+   "bofa-bankamericard",
+   "bofa-travel-rewards-secured",
+   "capital-one-bjs-one-plus",
+   "capital-one-quicksilver-secured",
+   "chase-freedom-flex",
+   "chase-sapphire-reserve",
+   "chase-united-explorer",
+   "citi-best-buy-visa",
+   "citi-costco-anywhere-visa",
+   "citi-secured",
+   "citi-simplicity",
+   "citi-tractor-supply",
+   "discover-it-student-cash-back"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_04",
+  "card_ids": [
+   "amex-blue-cash-preferred",
+   "amex-delta-skymiles-gold",
+   "amex-delta-skymiles-reserve",
+   "amex-hilton-honors",
+   "amex-hilton-honors-surpass",
+   "bofa-unlimited-cash-rewards-secured",
+   "capital-one-savor-one",
+   "chase-freedom-rise",
+   "chase-southwest-rapid-rewards-priority",
+   "chase-united-explorer",
+   "chase-united-quest",
+   "citi-aadvantage-globe",
+   "citi-home-depot-consumer",
+   "wells-fargo-choice-privileges"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_05",
+  "card_ids": [
+   "amex-delta-skymiles-gold",
+   "capital-one-quicksilver-secured",
+   "chase-amazon-prime-visa",
+   "chase-disney-premier",
+   "chase-marriott-bonvoy-bold",
+   "chase-southwest-rapid-rewards-plus",
+   "citi-bloomingdales",
+   "citi-double-cash",
+   "us-bank-altitude-go",
+   "wells-fargo-choice-privileges"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_06",
+  "card_ids": [
+   "amex-marriott-bonvoy-brilliant",
+   "capital-one-platinum",
+   "capital-one-quicksilver-secured",
+   "citi-aadvantage-globe",
+   "citi-macys",
+   "us-bank-altitude-connect",
+   "us-bank-cash-plus-secured",
+   "us-bank-shield"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_07",
+  "card_ids": [
+   "amex-delta-skymiles-gold",
+   "amex-delta-skymiles-platinum",
+   "amex-hilton-honors-aspire",
+   "amex-platinum",
+   "capital-one-key-rewards",
+   "chase-disney-premier",
+   "chase-freedom-flex",
+   "chase-freedom-rise",
+   "chase-ihg-one-rewards-premier",
+   "chase-southwest-rapid-rewards-premier",
+   "chase-united-explorer",
+   "citi-aadvantage-platinum-select",
+   "citi-att-points-plus",
+   "citi-strata-premier",
+   "discover-it-cash-back",
+   "discover-it-student-cash-back",
+   "wells-fargo-choice-privileges"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_08",
+  "card_ids": [
+   "bofa-bankamericard-secured",
+   "bofa-unlimited-cash-rewards-secured",
+   "capital-one-key-rewards",
+   "capital-one-quicksilver-secured",
+   "chase-freedom-flex",
+   "chase-ihg-one-rewards-traveler",
+   "chase-marriott-bonvoy-bold",
+   "chase-marriott-bonvoy-boundless",
+   "chase-slate-edge",
+   "chase-southwest-rapid-rewards-plus",
+   "chase-southwest-rapid-rewards-priority",
+   "chase-united-club-infinite",
+   "chase-united-quest",
+   "citi-costco-anywhere-visa",
+   "citi-diamond-preferred",
+   "citi-dillards",
+   "citi-exxonmobil-smart-card-plus",
+   "citi-llbean",
+   "citi-strata-premier",
+   "discover-it-miles",
+   "discover-it-secured",
+   "us-bank-altitude-connect"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_09",
+  "card_ids": [
+   "amex-marriott-bonvoy-bevy",
+   "bofa-cash-rewards-secured",
+   "bofa-premium-rewards",
+   "capital-one-tmobile",
+   "chase-freedom-rise",
+   "chase-sapphire-preferred",
+   "citi-att-points-plus",
+   "citi-exxonmobil-smart-card-plus",
+   "citi-strata-premier",
+   "us-bank-cash-plus",
+   "us-bank-shield",
+   "us-bank-split"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_10",
+  "card_ids": [
+   "amex-blue-cash-preferred",
+   "capital-one-bjs-one",
+   "capital-one-bjs-one-plus",
+   "citi-wayfair",
+   "discover-it-chrome",
+   "us-bank-altitude-connect",
+   "us-bank-altitude-go",
+   "us-bank-shield",
+   "us-bank-split",
+   "wells-fargo-choice-privileges-select"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_11",
+  "card_ids": [
+   "amex-delta-skymiles-blue",
+   "amex-gold",
+   "amex-hilton-honors-surpass",
+   "bilt-obsidian",
+   "bofa-premium-rewards",
+   "capital-one-rei-co-op",
+   "capital-one-savor",
+   "capital-one-tmobile",
+   "chase-freedom-rise",
+   "chase-united-club-infinite",
+   "citi-aadvantage-globe",
+   "citi-double-cash",
+   "citi-strata-premier",
+   "discover-it-cash-back",
+   "discover-it-chrome",
+   "us-bank-altitude-go-secured",
+   "us-bank-cash-plus-secured",
+   "us-bank-shield",
+   "wells-fargo-choice-privileges"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_12",
+  "card_ids": [
+   "chase-amazon-prime-visa",
+   "chase-southwest-rapid-rewards-plus",
+   "chase-united-quest",
+   "citi-secured",
+   "discover-it-chrome",
+   "us-bank-smartly"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_13",
+  "card_ids": [
+   "amex-gold",
+   "bofa-bankamericard",
+   "bofa-customized-cash-rewards",
+   "bofa-premium-rewards-elite",
+   "capital-one-bass-pro-cabelas-club",
+   "capital-one-platinum-secured",
+   "capital-one-quicksilver-one",
+   "capital-one-tmobile",
+   "chase-marriott-bonvoy-boundless",
+   "chase-sapphire-preferred",
+   "chase-united-club-infinite",
+   "chase-united-explorer",
+   "citi-aadvantage-executive",
+   "citi-diamond-preferred",
+   "us-bank-smartly",
+   "wells-fargo-autograph",
+   "wells-fargo-choice-privileges"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_14",
+  "card_ids": [
+   "amex-green",
+   "amex-platinum",
+   "bilt-blue",
+   "bilt-palladium",
+   "capital-one-quicksilver-one",
+   "capital-one-quicksilver-secured",
+   "capital-one-savor-one",
+   "capital-one-tmobile",
+   "capital-one-venture",
+   "capital-one-venture-x",
+   "chase-freedom-flex",
+   "chase-freedom-rise",
+   "chase-united-explorer",
+   "citi-best-buy-visa",
+   "citi-costco-anywhere-visa",
+   "citi-secured",
+   "citi-strata",
+   "citi-strata-premier",
+   "discover-it-secured",
+   "discover-it-student-cash-back",
+   "us-bank-cash-plus-secured",
+   "us-bank-smartly",
+   "us-bank-split",
+   "wells-fargo-autograph",
+   "wells-fargo-autograph-journey"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_15",
+  "card_ids": [
+   "amex-blue-cash-preferred",
+   "amex-hilton-honors",
+   "amex-hilton-honors-surpass",
+   "amex-marriott-bonvoy-brilliant",
+   "bofa-bankamericard",
+   "bofa-cash-rewards-secured",
+   "bofa-travel-rewards-secured",
+   "capital-one-bjs-one",
+   "capital-one-kohls-rewards",
+   "capital-one-quicksilver-secured",
+   "capital-one-rei-co-op",
+   "capital-one-savor",
+   "chase-freedom-flex",
+   "chase-world-of-hyatt",
+   "citi-aadvantage-platinum-select",
+   "citi-simplicity",
+   "citi-strata",
+   "citi-strata-premier",
+   "us-bank-cash-plus",
+   "wells-fargo-autograph-journey",
+   "wells-fargo-reflect"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_16",
+  "card_ids": [
+   "amex-gold",
+   "amex-hilton-honors-surpass",
+   "amex-platinum",
+   "bilt-obsidian",
+   "bofa-bankamericard",
+   "bofa-premium-rewards",
+   "capital-one-bjs-one-plus",
+   "capital-one-platinum",
+   "capital-one-venture-one",
+   "chase-freedom-flex",
+   "chase-ihg-one-rewards-premier",
+   "chase-southwest-rapid-rewards-plus",
+   "citi-llbean",
+   "citi-macys",
+   "discover-it-secured",
+   "discover-it-student-chrome"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_17",
+  "card_ids": [
+   "bofa-premium-rewards",
+   "capital-one-key-rewards",
+   "capital-one-kohls-rewards",
+   "chase-amazon-prime-visa",
+   "chase-disney-premier",
+   "chase-slate-edge",
+   "chase-southwest-rapid-rewards-premier",
+   "chase-southwest-rapid-rewards-priority",
+   "chase-united-club-infinite",
+   "citi-aadvantage-globe",
+   "citi-home-depot-consumer",
+   "citi-wayfair",
+   "discover-it-miles",
+   "discover-it-secured",
+   "discover-it-student-cash-back",
+   "us-bank-altitude-connect",
+   "us-bank-smartly"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_18",
+  "card_ids": [
+   "bofa-cash-rewards-secured",
+   "capital-one-bjs-one-plus",
+   "chase-freedom-rise",
+   "chase-ihg-one-rewards-premier",
+   "chase-ihg-one-rewards-traveler",
+   "chase-marriott-bonvoy-bold",
+   "citi-bloomingdales",
+   "citi-goodyear",
+   "us-bank-altitude-go",
+   "us-bank-split",
+   "wells-fargo-one-key"
+  ],
+  "pooling": true
+ },
+ {
+  "name": "wallet_19",
+  "card_ids": [
+   "bofa-unlimited-cash-rewards",
+   "capital-one-quicksilver",
+   "chase-sapphire-reserve",
+   "citi-double-cash",
+   "citi-simplicity",
+   "us-bank-shield"
+  ],
+  "pooling": true
+ }
+]

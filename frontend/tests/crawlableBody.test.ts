@@ -41,6 +41,13 @@ describe("the crawlable body withholds the analysis", () => {
     expect(leaked).toEqual([]);
   });
 
+  it("never claims credit values are a realistic or typical estimate", () => {
+    const source = readFileSync(join(__dirname, "..", "scripts", "crawlableBody.mjs"), "utf-8");
+    // \W+ also spans a string split across two lines, as the structured data was.
+    expect(source).not.toMatch(/realistic\W+(credit|estimate)|typical\W+person|hand-estimated/i);
+    expect(source).not.toMatch(/actually\W+captures/i);
+  });
+
   it("never emits a credit's realistic value or its tier", () => {
     const leaked: string[] = [];
     for (const c of ALL) {
@@ -162,7 +169,7 @@ describe("the crawlable body says enough to be worth crawling", () => {
 
   it("explains the method on every page type, since that is the pitch", () => {
     for (const path of ["/", "/methodology", "/compare", "/top-picks", "/cards/amex-platinum", "/issuer/chase"]) {
-      expect(render(path)).toMatch(/actually captures rather than at their advertised ceiling/);
+      expect(render(path)).toMatch(/actually use rather than at their advertised ceiling/);
     }
   });
 

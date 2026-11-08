@@ -62,3 +62,24 @@ Two further details are easy to get wrong when reasoning about this:
   transfer-partner access needs an actual premium account in the mix.
 
 All of it lives in `effectiveCppFor` in `frontend/src/utils/topPickCategories.ts`.
+
+**The MCP server's data rules are pinned, and three kinds of edit trip them.**
+
+`backend/mcp_server/` serves the catalog to AI agents from a snapshot built at boot.
+[ADR 0003](docs/adr/0003-public-mcp-server.md) has the design, and D13 overrides earlier
+sections where they conflict.
+
+- **A factual card edit fails CI** until its `backend/data/refresh/<id>.json` records a
+  new check or goes null. The file hashes what was verified. Updating only the hash claims
+  a check nobody did. Editorial fields such as `verdict` are outside the hash.
+- **A ranking input or rule change fails CI** until the fixture in
+  `tests/fixtures/ranking_parity/` is regenerated. A card edit or Python rule change fails
+  the backend job, and a TypeScript rule change fails the frontend job. Python and TypeScript
+  must agree down to exact floats, so a rule belongs in both. The steps are in
+  `backend/README.md`.
+- **A tool contract change fails CI** until `CONTRACT_VERSION` and `PUBLISHED_SURFACES` in
+  `backend/mcp_server/contract.py` are updated.
+
+Two details are easy to get wrong. `RankInput` has no affiliate field on purpose, so never
+add one. And `default_value` is 0 on 149 of 151 active credits, so the served totals say
+`applied`, never `realistic`.

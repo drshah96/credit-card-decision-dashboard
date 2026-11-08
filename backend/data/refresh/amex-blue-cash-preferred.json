@@ -1,0 +1,14 @@
+{
+  "card_id": "amex-blue-cash-preferred",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:98940f63d267723d4fb6cc1367be132a71708728",
+    "evidence_scope": "card",
+    "facts_sha256": "3addd992a49b7594c86926b1a0119edc851977e748328b2713a292ec939d51e0",
+    "documents": [],
+    "not_checked": [
+      "transfer_partners"
+    ],
+    "note": "Re-checked on 2026-11-07 against Amex application terms, cardmember agreements and benefit pages. Not checked: transfer partners. Some insurance limits come from excerpts of Amex benefit pages, not full reads."
+  }
+}

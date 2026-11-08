@@ -10,9 +10,8 @@ export const SITE_URL = "https://thewalletaudit.com";
 /**
  * The freshness claim the footer makes ("offers as of ..."). One place, on
  * purpose: the footer's hand-written copy went stale within a day of the
- * month changing (issue #154). A test fails when this falls more than ~2
- * months behind the clock, turning silent staleness into a red build that
- * demands either a data re-verification or a conscious bump.
+ * month changing (issue #154). A weekly workflow opens an issue when this falls
+ * 75+ days behind, asking for a data re-verification before it is bumped.
  */
 export const TERMS_AS_OF = "November 2026";
 

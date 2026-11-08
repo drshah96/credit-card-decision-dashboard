@@ -4,11 +4,12 @@
 actually worth keeping, built on the premise that a card's advertised value and
 its real value are rarely the same number.
 
-Live at **[thewalletaudit.com](https://thewalletaudit.com)**.
+Live at **[thewalletaudit.com](https://thewalletaudit.com)**. AI agents can
+[query the catalog too](#for-ai-agents).
 
 Most card comparison sites are paid per application. This one isn't, and that
-shapes the whole thing: statement credits are valued at what a normal person
-would realistically use rather than at their headline number, points are given
+shapes the whole thing: statement credits count at what you say you'd actually
+use rather than at their headline number, points are given
 one honest cents-per-point figure instead of an inflated one, and a card with no
 purchase protection says so plainly rather than padding the list.
 
@@ -55,18 +56,20 @@ So every credit is sorted into one of three tiers:
 | **Niche** | Only worth anything if it happens to fit your life | A rideshare credit in a city you don't visit |
 
 Each credit carries two numbers: `max_annual`, the advertised ceiling, and
-`default_value`, a realistic starting estimate of what a typical person captures.
-The card detail page seeds every slider from `default_value`, then lets you drag
+`default_value`, where its slider starts. That is $0 on almost every credit,
+because what you'd capture depends on your own situation, so a card's total starts
+low until you set your usage. The card detail page seeds every slider from
+`default_value`, then lets you drag
 each one to your own number and move credits between tiers, because a credit
 that's effortless for you may be niche for someone else. Your adjustments persist
 locally per card.
 
-Two derived totals appear on listing pages:
+Two derived totals come with each card's summary:
 
 - `total_max_credits` — the sum of every active credit's `max_annual`. The
   issuer's marketing number.
 - `total_easy_credits` — the sum of `default_value` for **Effortless** credits
-  only. The floor: what you'd get without planning anything.
+  only. With almost every default at $0, this is $0 on nearly every card.
 
 Credits the issuer has discontinued are marked `removed` and excluded from both.
 
@@ -140,6 +143,33 @@ they can change daily or weekly.
 
 ---
 
+## For AI agents
+
+AI agents can query this catalog over the Model Context Protocol instead of scraping
+the site, at `https://mcp.thewalletaudit.com/mcp`. Access is by API key, issued by hand.
+To request one, message [Dhruvin Shah on LinkedIn](https://www.linkedin.com/in/dhruvinshah1996/).
+
+- `find_cards`: search by name, issuer or rewards program to get card ids
+- `get_card`: one card's fees, rates, credits, earn rates, insurance and perks
+- `compare_cards`: 2 to 4 cards side by side
+- `rank_by_category`: the best cards for a spending category, across the catalog or a wallet
+- `estimate_value`: credits minus the annual fee, using your own expected usage
+
+The answers are built so an agent can't mistake a gap for a fact:
+
+- **Every card shows its source and age:** the issuer page, the date it was last checked
+  against issuer documents, and the areas that check could not confirm. A card with no
+  recorded check says `not_verified` rather than borrowing a date.
+- **Unknown is never "none":** a rate or fee missing from the catalog comes back as
+  `not_recorded`, not as a blank an agent could read as zero.
+- **Rankings match the site and ignore monetization:** a shared test fixture holds the Python
+  and TypeScript rankings to the same results, and the ranking code cannot read the affiliate flag.
+
+[docs/mcp-server.md](docs/mcp-server.md) covers connecting, tools and limits.
+[ADR 0003](docs/adr/0003-public-mcp-server.md) has the design and its tradeoffs.
+
+---
+
 ## Stack
 
 - **Backend:** Python 3.13, FastAPI, SQLAlchemy, Alembic
@@ -196,6 +226,7 @@ uv run python -m backend.scripts.drafts promote 1
 | `GET` | `/api/cards` | List all cards (summary) |
 | `GET` | `/api/cards/detail?ids=…` | Full detail for many cards in one request |
 | `GET` | `/api/cards/{card_id}` | Full detail for one card |
+| `POST` | `https://mcp.thewalletaudit.com/mcp` | MCP endpoint for AI agents, by API key. See [docs/mcp-server.md](docs/mcp-server.md) |
 
 ## Project structure
 
@@ -208,13 +239,17 @@ credit-card-decision-dashboard/
 │   ├── db_models.py            # ORM models (the normalized schema)
 │   ├── data/
 │   │   ├── cards/{issuer}/*.json  # Card content, source of truth
+│   │   ├── refresh/*.json      # When each card was last checked, and what that covered
 │   │   └── card_catalog.db     # Local dev SQLite db (gitignored, regenerable)
+│   ├── mcp_server/             # MCP server for AI agents (tools, auth guard, ranking port)
+│   ├── refresh/state.py        # The model for those per-card verification records
 │   ├── services/cards.py       # Query layer used by the API routes
 │   └── scripts/
 │       ├── upsert.py           # Card dict → normalized rows
 │       ├── drafts.py           # Review-queue CLI: add / list / show / promote / reject
 │       └── seed_catalog.py     # Bulk-seed/resync every committed card JSON
 ├── alembic/                    # Schema migrations
+├── docs/                       # MCP integrator guide and architecture decision records
 ├── frontend/
 │   ├── src/                    # React app (pages, components, api client)
 │   ├── scripts/                # Sitemap + prerender build steps

@@ -71,10 +71,11 @@ selection. Decide whether pool ids carry the market, and treat any
 `loyalty_programs` market dimension as a separate question driven by transfer
 partners and valuations rather than by ranking behavior.
 
-**Valuations are market-specific.** `best_cpp` and every `default_value_cents`
-encode assumptions about local prices and local redemption behavior. A US
-realistic-value estimate is not transferable. Decide whether tier assignments
-are per-market data or shared defaults with per-market overrides.
+**Valuations are market-specific.** `best_cpp` encodes assumptions about local
+prices and local redemption behavior, so a US valuation is not transferable.
+`default_value` is a slider start, not an estimate, and is `0` on almost every
+credit. Decide whether tier assignments are per-market data or shared defaults
+with per-market overrides.
 
 **Routing, SEO, and the prerender.** Path prefix, subdomain, or ccTLD; `hreflang`
 and canonical strategy; sitemap per locale; `routeMeta.js` becoming

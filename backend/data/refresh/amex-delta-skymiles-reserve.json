@@ -1,0 +1,14 @@
+{
+  "card_id": "amex-delta-skymiles-reserve",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:5423930161a1db97ef50e7522c46ebb8422d9e89",
+    "evidence_scope": "card",
+    "facts_sha256": "8f45cdb40ed43d897591b2036028825aab24b08be7f768001d69856c55e8a6f0",
+    "documents": [],
+    "not_checked": [
+      "transfer_partners"
+    ],
+    "note": "Re-checked on 2026-11-07 against Amex application terms, cardmember agreements and benefit pages. Not checked: transfer partners. Rental coverage and some insurance limits come from excerpts of Amex benefit pages, not full reads."
+  }
+}

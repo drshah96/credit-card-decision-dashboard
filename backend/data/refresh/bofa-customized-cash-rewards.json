@@ -1,0 +1,15 @@
+{
+  "card_id": "bofa-customized-cash-rewards",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:5423930161a1db97ef50e7522c46ebb8422d9e89",
+    "evidence_scope": "card",
+    "facts_sha256": "b89692010fc6a330e30697f23d63fbe095069c3edb83410fa355194b464fbb03",
+    "documents": [],
+    "not_checked": [
+      "insurance",
+      "insurance_limits"
+    ],
+    "note": "Re-checked on 2026-11-07 against Bank of America product pages, offer disclosures and sample cardmember agreements. Not checked: insurance benefits and insurance dollar limits."
+  }
+}

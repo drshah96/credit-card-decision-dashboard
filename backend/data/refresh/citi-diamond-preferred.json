@@ -1,0 +1,14 @@
+{
+  "card_id": "citi-diamond-preferred",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:c4677373bcb5d7f6a590ad9c231601e72b0818ab",
+    "evidence_scope": "card",
+    "facts_sha256": "1a8801f6100b92dffbe01642e8a9f23d95ac7dc38302839dd154ad8605180ad6",
+    "documents": [],
+    "not_checked": [
+      "insurance_limits"
+    ],
+    "note": "Re-checked on 2026-11-07 against Citi product pages and benefit documents. Not checked: insurance dollar limits. Rates were read from Citi's own site in a browser."
+  }
+}

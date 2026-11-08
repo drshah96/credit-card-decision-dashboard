@@ -1,0 +1,15 @@
+{
+  "card_id": "chase-united-club-infinite",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:485c9af69a5d2d6dc41fc2d8c41dcaee7944ecd5",
+    "evidence_scope": "card",
+    "facts_sha256": "a6807490c2936a6a0bd80255457055a07ba5f99a4317327d86c9d5bcd0e6b57b",
+    "documents": [],
+    "not_checked": [
+      "redemption",
+      "transfer_partners"
+    ],
+    "note": "Re-checked on 2026-11-07 against the card's Chase pricing table, product page, rewards terms and Guide to Benefits. Not checked: redemption values and transfer partners."
+  }
+}

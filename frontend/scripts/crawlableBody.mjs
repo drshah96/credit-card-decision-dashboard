@@ -12,8 +12,8 @@
 // the names and advertised ceilings of the credits, the APRs. These are public
 // regardless of this site, so publishing them costs nothing.
 //
-// In: a description of the *method*. That credits are valued at what a typical
-// person actually captures rather than at face value, and that points get one
+// In: a description of the *method*. That credits count at what you say you'd
+// actually use rather than at face value, and that points get one
 // honest cents-per-point figure. That is the pitch, and it is what lets a
 // crawler explain why this site differs.
 //
@@ -97,9 +97,9 @@ const AUTHOR_LINE =
 
 /** The one-line explanation of what this site does differently. */
 const METHOD_LINE =
-  "The Wallet Audit values statement credits at what a typical person actually " +
-  "captures rather than at their advertised ceiling, and gives each rewards " +
-  "currency a single honest cents-per-point figure.";
+  "The Wallet Audit counts statement credits at what you say you'd actually use " +
+  "rather than at their advertised ceiling, and gives each rewards currency a " +
+  "single honest cents-per-point figure.";
 
 const VISIT_LINE = (path, what) =>
   `<p>${esc(what)} <a href="${escAttr(SITE_URL + path)}">Open ${esc(SITE_URL + path)}</a>.</p>`;
@@ -149,9 +149,8 @@ ${
   creditList
     ? `<h2>Statement credits, at their advertised value</h2>
 <ul>${creditList}</ul>
-<p>Advertised total ${esc(money(advertised))} a year. This page shows a realistic
-estimate for each of these instead, which is usually lower, plus sliders to set
-your own figures.</p>`
+<p>Advertised total ${esc(money(advertised))} a year. The card's page has a slider
+for each one so you can set what you'd actually use, which is usually lower.</p>`
     : ""
 }
 ${
@@ -172,7 +171,7 @@ ${
           ""
 }
 ${card.variable_apr ? `<p>Purchase APR: ${esc(card.variable_apr)}</p>` : ""}
-${VISIT_LINE(`/cards/${card.id}`, "The verdict, the realistic credit values, the points valuation and the earn-rate breakdown are on the card's page.")}
+${VISIT_LINE(`/cards/${card.id}`, "The verdict, the credit calculator, the points valuation and the earn-rate breakdown are on the card's page.")}
 `.trim();
 }
 
@@ -184,7 +183,7 @@ function issuerBody(slug, label, cards) {
 <h1>${esc(label)} credit cards</h1>
 <p>${esc(METHOD_LINE)}</p>
 <ul>${list}</ul>
-${VISIT_LINE(`/issuer/${slug}`, "Each card's verdict and realistic credit value are on its own page.")}
+${VISIT_LINE(`/issuer/${slug}`, "Each card's verdict and credit calculator are on its own page.")}
 `.trim();
 }
 
@@ -213,8 +212,8 @@ const STATIC_BODIES = {
 <p>A card advertising a fee offset by statement credits only works out if you would
 have spent that money anyway. Each credit is sorted into one of three tiers,
 depending on whether it applies automatically, needs planning, or only pays off
-if it happens to fit your life, and carries a realistic estimate alongside its
-advertised ceiling.</p>
+if it happens to fit your life. A slider then lets you set what you'd actually use
+instead of the advertised ceiling.</p>
 <h2>Rankings ignore monetization</h2>
 <p>There are no paid placements and no affiliate influence on any ranking. A
 regression test proves the ranking function cannot read the affiliate flag at
@@ -231,8 +230,8 @@ ${VISIT_LINE("/methodology", "The tier definitions, the worked arithmetic and th
 <h1>Compare credit cards side by side</h1>
 <p>${esc(METHOD_LINE)}</p>
 <p>Put up to four cards next to each other on the things that decide it: annual
-fee, realistic credit value, earn rates, lounge access, insurance and foreign
-transaction fees.</p>
+fee, the credits you'd actually use, earn rates, lounge access, insurance and
+foreign transaction fees.</p>
 ${VISIT_LINE("/compare", "The comparison is interactive and runs in the browser.")}
 `.trim(),
   "/top-picks": `
@@ -274,8 +273,8 @@ const SITE_JSON_LD = {
   name: "The Wallet Audit",
   url: SITE_URL,
   description:
-    "Independent credit card analysis. Statement credits valued at what a typical " +
-    "person actually captures, and one honest cents-per-point figure per currency.",
+    "Independent credit card analysis. Statement credits counted at what you say you'd " +
+    "actually use, and one honest cents-per-point figure per currency.",
   author: AUTHOR_JSON_LD,
   publisher: AUTHOR_JSON_LD,
 };

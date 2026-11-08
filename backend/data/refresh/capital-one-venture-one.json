@@ -1,0 +1,14 @@
+{
+  "card_id": "capital-one-venture-one",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:93b8c86d046b1478ff85c14da6d4582c3938a1c9",
+    "evidence_scope": "card",
+    "facts_sha256": "6186aff4124edd272137ad7995222b8caf54598b9bf666b8e20087235d1afed4",
+    "documents": [],
+    "not_checked": [
+      "rates_and_fees"
+    ],
+    "note": "Re-checked on 2026-11-07 against Capital One product pages, benefit terms and Guide to Benefits PDFs. Not checked: some rates and fees. No issuer statement settles lounge access, so it is left unrecorded."
+  }
+}

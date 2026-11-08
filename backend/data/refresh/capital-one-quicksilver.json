@@ -1,0 +1,14 @@
+{
+  "card_id": "capital-one-quicksilver",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:93b8c86d046b1478ff85c14da6d4582c3938a1c9",
+    "evidence_scope": "card",
+    "facts_sha256": "37dd59809c04e107f7552f41de431bba3e92658e99decf8e4f49479ae7f84ea3",
+    "documents": [],
+    "not_checked": [
+      "rates_and_fees"
+    ],
+    "note": "Re-checked on 2026-11-07 against Capital One product pages, benefit terms and Guide to Benefits PDFs. Not checked: some rates and fees. Insurance terms differ between the Mastercard and Discover versions of this card."
+  }
+}

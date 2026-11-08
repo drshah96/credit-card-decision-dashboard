@@ -1,0 +1,3218 @@
+[
+ {
+  "id": "amex-blue-cash-everyday",
+  "name": "Blue Cash Everyday® Card from American Express",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "U.S. supermarkets (up to $6,000/yr, then 1%)",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "U.S. gas stations (up to $6,000/yr, then 1%)",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "U.S. online retail (up to $6,000/yr, then 1%)",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "amex-blue-cash-preferred",
+  "name": "Blue Cash Preferred® Card from American Express",
+  "annual_fee": 95,
+  "categories": [
+   {
+    "category": "U.S. supermarkets (up to $6,000/yr, then 1%)",
+    "multiplier": "6%",
+    "is_base": false
+   },
+   {
+    "category": "Select U.S. streaming subscriptions",
+    "multiplier": "6%",
+    "is_base": false
+   },
+   {
+    "category": "U.S. gas stations",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Transit",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "amex-delta-skymiles-blue",
+  "name": "Delta SkyMiles® Blue American Express Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Restaurants worldwide, plus U.S. takeout & delivery",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Delta purchases",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.15,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "amex-delta-skymiles-gold",
+  "name": "Delta SkyMiles® Gold American Express Card",
+  "annual_fee": 150,
+  "categories": [
+   {
+    "category": "Delta purchases",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants worldwide, plus U.S. takeout & delivery",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "U.S. supermarkets",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.15,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "amex-delta-skymiles-platinum",
+  "name": "Delta SkyMiles® Platinum American Express Card",
+  "annual_fee": 350,
+  "categories": [
+   {
+    "category": "Delta purchases",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Hotels, booked direct",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants worldwide, plus U.S. takeout & delivery",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "U.S. supermarkets",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.15,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "amex-delta-skymiles-reserve",
+  "name": "Delta SkyMiles® Reserve American Express Card",
+  "annual_fee": 650,
+  "categories": [
+   {
+    "category": "Delta purchases",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.15,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "amex-gold",
+  "name": "American Express® Gold Card",
+  "annual_fee": 325,
+  "categories": [
+   {
+    "category": "Prepaid hotels, via Amex Travel",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants worldwide (up to $50k/yr, then 1×)",
+    "multiplier": "4×",
+    "is_base": false
+   },
+   {
+    "category": "U.S. supermarkets (up to $25k/yr, then 1×)",
+    "multiplier": "4×",
+    "is_base": false
+   },
+   {
+    "category": "Flights, via Amex Travel or direct with airlines",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Prepaid car rentals & cruises, via Amex Travel",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 2.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "amex-green",
+  "name": "American Express® Classic Green Card",
+  "annual_fee": 150,
+  "categories": [
+   {
+    "category": "Travel: flights, hotels, cruises, car rentals, vacation rentals",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Transit: trains, rideshare, tolls, parking, buses, subways",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants worldwide (incl. U.S. takeout/delivery)",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 2.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "amex-hilton-honors",
+  "name": "Hilton Honors American Express Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Hilton portfolio hotels, direct",
+    "multiplier": "7×",
+    "is_base": false
+   },
+   {
+    "category": "U.S. restaurants",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "U.S. supermarkets",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "U.S. gas stations",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "3×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 0.5,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "amex-hilton-honors-aspire",
+  "name": "Hilton Honors American Express Aspire Card",
+  "annual_fee": 550,
+  "categories": [
+   {
+    "category": "Hilton portfolio hotels, direct",
+    "multiplier": "14×",
+    "is_base": false
+   },
+   {
+    "category": "Flights, direct or via Amex Travel",
+    "multiplier": "7×",
+    "is_base": false
+   },
+   {
+    "category": "Select car rentals",
+    "multiplier": "7×",
+    "is_base": false
+   },
+   {
+    "category": "U.S. restaurants",
+    "multiplier": "7×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "3×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 0.5,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "amex-hilton-honors-surpass",
+  "name": "Hilton Honors American Express Surpass® Card",
+  "annual_fee": 150,
+  "categories": [
+   {
+    "category": "Hilton portfolio hotels, direct",
+    "multiplier": "12×",
+    "is_base": false
+   },
+   {
+    "category": "U.S. restaurants",
+    "multiplier": "6×",
+    "is_base": false
+   },
+   {
+    "category": "U.S. supermarkets",
+    "multiplier": "6×",
+    "is_base": false
+   },
+   {
+    "category": "U.S. gas stations",
+    "multiplier": "6×",
+    "is_base": false
+   },
+   {
+    "category": "U.S. online retail",
+    "multiplier": "4×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "3×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 0.5,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "amex-marriott-bonvoy-bevy",
+  "name": "Marriott Bonvoy Bevy® American Express® Card",
+  "annual_fee": 250,
+  "categories": [
+   {
+    "category": "Marriott Bonvoy participating hotels",
+    "multiplier": "6×",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants worldwide (first $15,000/yr of a shared cap, then 2×)",
+    "multiplier": "4×",
+    "is_base": false
+   },
+   {
+    "category": "U.S. supermarkets (first $15,000/yr of a shared cap, then 2×)",
+    "multiplier": "4×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "2×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 0.8,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "amex-marriott-bonvoy-brilliant",
+  "name": "Marriott Bonvoy Brilliant® American Express® Card",
+  "annual_fee": 650,
+  "categories": [
+   {
+    "category": "Marriott Bonvoy participating hotels",
+    "multiplier": "6×",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants worldwide",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Flights booked direct with airlines",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "2×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 0.8,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "amex-platinum",
+  "name": "Platinum Card®",
+  "annual_fee": 895,
+  "categories": [
+   {
+    "category": "Flights, direct or via Amex Travel (first $500k/yr)",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Prepaid hotels and Airbnb stays, via Amex Travel",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Prepaid car rentals & cruises, via Amex Travel",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 2.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "bilt-blue",
+  "name": "Bilt Blue Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Rent or mortgage (Bilt Housing Rewards)",
+    "multiplier": "Up to 1.25×*",
+    "is_base": false
+   },
+   {
+    "category": "Bilt partner restaurants (20,000+ U.S. locations)",
+    "multiplier": "Up to 4×",
+    "is_base": false
+   },
+   {
+    "category": "Hotels, booked on the Bilt Travel Portal",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Flights, booked on the Bilt Travel Portal",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Lyft, after linking Bilt and Lyft accounts",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 2.2,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "bilt-obsidian",
+  "name": "Bilt Obsidian Card",
+  "annual_fee": 95,
+  "categories": [
+   {
+    "category": "Rent or mortgage (Bilt Housing Rewards)",
+    "multiplier": "Up to 1.25×*",
+    "is_base": false
+   },
+   {
+    "category": "Bilt partner restaurants (20,000+ U.S. locations)",
+    "multiplier": "Up to 6×",
+    "is_base": false
+   },
+   {
+    "category": "Choice of other dining or grocery (grocery capped at $25K/yr)",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Hotels, booked on the Bilt Travel Portal",
+    "multiplier": "4×",
+    "is_base": false
+   },
+   {
+    "category": "Flights, booked on the Bilt Travel Portal",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Other travel",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Lyft, after linking Bilt and Lyft accounts",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 2.2,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "bilt-palladium",
+  "name": "Bilt Palladium Card",
+  "annual_fee": 495,
+  "categories": [
+   {
+    "category": "Rent or mortgage (Bilt Housing Rewards)",
+    "multiplier": "Up to 1.25×*",
+    "is_base": false
+   },
+   {
+    "category": "Bilt partner restaurants (20,000+ U.S. locations)",
+    "multiplier": "Up to 5×",
+    "is_base": false
+   },
+   {
+    "category": "Hotels, booked on the Bilt Travel Portal",
+    "multiplier": "4×",
+    "is_base": false
+   },
+   {
+    "category": "Flights, booked on the Bilt Travel Portal",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Lyft, after linking Bilt and Lyft accounts",
+    "multiplier": "4×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "2×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 2.2,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "bofa-bankamericard",
+  "name": "BankAmericard Credit Card",
+  "annual_fee": 0,
+  "categories": [],
+  "best_cpp": 0.0,
+  "secured_variant_id": "bofa-bankamericard-secured",
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "bofa-bankamericard-secured",
+  "name": "BankAmericard Secured Credit Card",
+  "annual_fee": 0,
+  "categories": [],
+  "best_cpp": 0.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "bofa-cash-rewards-secured",
+  "name": "Customized Cash Rewards Secured Credit Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Choice category: gas/EV, online shopping, dining, travel, drug stores, or home improvement",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores & wholesale clubs",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "bofa-customized-cash-rewards",
+  "name": "Customized Cash Rewards Credit Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Choice category: gas/EV, online shopping, dining, travel, drug stores, or home improvement",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores & wholesale clubs",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": "bofa-cash-rewards-secured",
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "bofa-premium-rewards",
+  "name": "Premium Rewards Credit Card",
+  "annual_fee": 95,
+  "categories": [
+   {
+    "category": "Travel",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Dining",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1.5×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "bofa-premium-rewards-elite",
+  "name": "Premium Rewards Elite Credit Card",
+  "annual_fee": 550,
+  "categories": [
+   {
+    "category": "Travel",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Dining",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1.5×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.25,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "bofa-travel-rewards",
+  "name": "Travel Rewards Credit Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Travel booked through BofA Travel",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Everything, everywhere",
+    "multiplier": "1.5×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": "bofa-travel-rewards-secured",
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "bofa-travel-rewards-secured",
+  "name": "Travel Rewards Secured Credit Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Travel booked through BofA Travel",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Everything, everywhere",
+    "multiplier": "1.5×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "bofa-unlimited-cash-rewards",
+  "name": "Unlimited Cash Rewards Credit Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Everything",
+    "multiplier": "1.5%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": "bofa-unlimited-cash-rewards-secured",
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "bofa-unlimited-cash-rewards-secured",
+  "name": "Unlimited Cash Rewards Secured Credit Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Everything",
+    "multiplier": "1.5%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "capital-one-bass-pro-cabelas-club",
+  "name": "Bass Pro Shops & Cabela's CLUB Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Bass Pro Shops, Cabela's & participating Cenex: CLUB Classic (default tier)",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Bass Pro Shops & Cabela's: CLUB Silver, after $10,000 in annual spend",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Bass Pro Shops & Cabela's: CLUB Black, after $25,000 in annual spend",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "capital-one-bjs-one",
+  "name": "BJ's One Mastercard",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "In-club at BJ's, BJs.com & the BJ's app",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "BJ's Gas, discount at the pump, not a rewards rate",
+    "multiplier": "10¢/gal",
+    "is_base": false
+   },
+   {
+    "category": "Everywhere else Mastercard is accepted",
+    "multiplier": "1.5%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "capital-one-bjs-one-plus",
+  "name": "BJ's One+ Mastercard",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "In-club at BJ's, BJs.com & the BJ's app",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "BJ's Gas, discount at the pump, not a rewards rate",
+    "multiplier": "15¢/gal",
+    "is_base": false
+   },
+   {
+    "category": "Everywhere else Mastercard is accepted",
+    "multiplier": "2%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "capital-one-key-rewards",
+  "name": "The Key Rewards® Visa",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Williams Sonoma, Williams Sonoma Home, Pottery Barn, Pottery Barn Kids/Teen, West Elm, Rejuvenation & Mark & Graham",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "4%",
+    "is_base": false
+   },
+   {
+    "category": "Dining & food delivery",
+    "multiplier": "4%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else Visa is accepted",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "capital-one-kohls-rewards",
+  "name": "Kohl's Rewards Visa",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Kohl's & Kohls.com purchases",
+    "multiplier": "7.5%",
+    "is_base": false
+   },
+   {
+    "category": "Gas stations",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Everywhere else Visa is accepted",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "capital-one-platinum",
+  "name": "Platinum",
+  "annual_fee": 0,
+  "categories": [],
+  "best_cpp": 0.0,
+  "secured_variant_id": "capital-one-platinum-secured",
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "capital-one-platinum-secured",
+  "name": "Platinum Secured",
+  "annual_fee": 0,
+  "categories": [],
+  "best_cpp": 0.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "capital-one-quicksilver",
+  "name": "Quicksilver Cash Rewards",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Hotels, vacation rentals & rental cars, via Capital One Travel",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Capital One Entertainment ticket purchases",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1.5%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "capital-one-quicksilver-one",
+  "name": "QuicksilverOne Cash Rewards",
+  "annual_fee": 39,
+  "categories": [
+   {
+    "category": "Hotels, vacation rentals & rental cars, via Capital One Travel",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Capital One Entertainment ticket purchases",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1.5%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "capital-one-quicksilver-secured",
+  "name": "Quicksilver Secured Cash Rewards",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Hotels, vacation rentals & rental cars, via Capital One Travel",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Capital One Entertainment ticket purchases",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1.5%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "capital-one-rei-co-op",
+  "name": "REI Co-op® Mastercard®",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "REI retail stores & REI.com (net purchases, after returns/credits)",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "REI purchases during the annual Cardmember Double Rewards event",
+    "multiplier": "10%",
+    "is_base": false
+   },
+   {
+    "category": "Everywhere else",
+    "multiplier": "1.5%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "capital-one-savor",
+  "name": "Savor",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Dining: restaurants, cafes, takeout, bars",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores (excludes superstores like Walmart & Target)",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Entertainment: movies, concerts, sporting events, amusement parks",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Popular streaming services: Netflix, Hulu, Disney+",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Hotels, vacation rentals & rental cars, via Capital One Travel",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Capital One Entertainment ticket purchases",
+    "multiplier": "8%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "capital-one-savor-one",
+  "name": "SavorOne",
+  "annual_fee": 39,
+  "categories": [
+   {
+    "category": "Dining: restaurants, cafes, takeout, bars",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores (excludes superstores like Walmart & Target)",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Entertainment: movies, concerts, sporting events, amusement parks",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Popular streaming services: Netflix, Hulu, Disney+",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Hotels, vacation rentals & rental cars, via Capital One Travel",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Capital One Entertainment ticket purchases",
+    "multiplier": "8%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "capital-one-tmobile",
+  "name": "T-Mobile Visa",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Phones, devices & accessories: T-Mobile stores, T-Mobile.com & the T-Life app",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "All other net purchases",
+    "multiplier": "2%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "capital-one-venture",
+  "name": "Venture",
+  "annual_fee": 95,
+  "categories": [
+   {
+    "category": "Hotels, vacation rentals & rental cars, via Capital One Travel",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Live entertainment, via Capital One Entertainment",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else, no categories",
+    "multiplier": "2×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.85,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "capital-one-venture-one",
+  "name": "VentureOne",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Hotels, vacation rentals, rental cars & activities, via Capital One Travel",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Capital One Entertainment purchases",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else, no categories",
+    "multiplier": "1.25×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.85,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "capital-one-venture-x",
+  "name": "Venture X",
+  "annual_fee": 395,
+  "categories": [
+   {
+    "category": "Hotels & rental cars, via Capital One Travel",
+    "multiplier": "10×",
+    "is_base": false
+   },
+   {
+    "category": "Flights & vacation rentals, via Capital One Travel",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Capital One Entertainment purchases",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else, no categories",
+    "multiplier": "2×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.85,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "chase-amazon-prime-visa",
+  "name": "Prime Visa",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Amazon.com, Audible.com & Whole Foods Market, with Prime membership",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Chase Travel purchases, with Prime membership",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Gas stations",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Local transit & commuting, incl. rideshare",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "chase-disney-premier",
+  "name": "Disney® Premier Visa® Card",
+  "annual_fee": 49,
+  "categories": [
+   {
+    "category": "DisneyPlus.com, Hulu.com & Stream.ESPN.com",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Gas stations",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Most Disney U.S. locations",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "chase-freedom-flex",
+  "name": "Freedom Flex",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Quarterly rotating category. This quarter (Q4): Grocery stores (excluding Walmart and Target), dining, American Red Cross",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Chase Travel portal",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Dining: restaurants, takeout, eligible delivery",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Drugstores",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": "chase-ultimate-rewards-transferable",
+  "points_pool_receiver": false
+ },
+ {
+  "id": "chase-freedom-rise",
+  "name": "Freedom Rise",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Everything else",
+    "multiplier": "1.5%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "chase-freedom-unlimited",
+  "name": "Freedom Unlimited",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Chase Travel portal",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Dining: restaurants, takeout, eligible delivery",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Drugstores",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1.5%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": "chase-ultimate-rewards-transferable",
+  "points_pool_receiver": false
+ },
+ {
+  "id": "chase-ihg-one-rewards-premier",
+  "name": "IHG One Rewards Premier Credit Card",
+  "annual_fee": 150,
+  "categories": [
+   {
+    "category": "IHG Hotels & Resorts",
+    "multiplier": "10×",
+    "is_base": false
+   },
+   {
+    "category": "Travel through Dec 31, 2026, then only airline tickets booked direct and car rentals",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Dining, incl. eligible delivery",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Gas stations",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "3×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 0.6,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "chase-ihg-one-rewards-traveler",
+  "name": "IHG One Rewards Credit Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "IHG Hotels & Resorts",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Dining",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Utilities, through Dec 31, 2026 (then 2×)",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Select streaming services, through Dec 31, 2026 (then 2×)",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Internet, cable & phone, through Dec 31, 2026 (then 2×)",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Gas stations",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "2×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 0.6,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "chase-marriott-bonvoy-bold",
+  "name": "Marriott Bonvoy Bold® Credit Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Marriott Bonvoy hotels",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Rideshare, taxis & limousines",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Select food delivery",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Select streaming services",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Internet, cable & phone services",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 0.8,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "chase-marriott-bonvoy-boundless",
+  "name": "Marriott Bonvoy Boundless® Credit Card",
+  "annual_fee": 95,
+  "categories": [
+   {
+    "category": "Marriott Bonvoy hotels",
+    "multiplier": "6×",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Gas stations",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Dining",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "2×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 0.8,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "chase-sapphire-preferred",
+  "name": "Sapphire Preferred",
+  "annual_fee": 95,
+  "categories": [
+   {
+    "category": "Chase Travel portal",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Dining",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Gas & EV charging",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Vacation homes at top brands",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Select streaming services",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Online groceries",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Other travel, outside Chase Travel",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 2.0,
+  "secured_variant_id": null,
+  "points_pool_id": "chase-ultimate-rewards-transferable",
+  "points_pool_receiver": true
+ },
+ {
+  "id": "chase-sapphire-reserve",
+  "name": "Sapphire Reserve",
+  "annual_fee": 795,
+  "categories": [
+   {
+    "category": "Chase Travel portal",
+    "multiplier": "8×",
+    "is_base": false
+   },
+   {
+    "category": "Flights, booked direct",
+    "multiplier": "4×",
+    "is_base": false
+   },
+   {
+    "category": "Hotels, booked direct",
+    "multiplier": "4×",
+    "is_base": false
+   },
+   {
+    "category": "Dining, worldwide",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Lyft (through Sep 2027)",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Peloton equipment & accessories (through Dec 2027, up to $5,000 in purchases)",
+    "multiplier": "10×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 2.05,
+  "secured_variant_id": null,
+  "points_pool_id": "chase-ultimate-rewards-transferable",
+  "points_pool_receiver": true
+ },
+ {
+  "id": "chase-slate-edge",
+  "name": "Slate Edge",
+  "annual_fee": 0,
+  "categories": [],
+  "best_cpp": 0.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "chase-southwest-rapid-rewards-plus",
+  "name": "Southwest® Rapid Rewards® Plus Credit Card",
+  "annual_fee": 99,
+  "categories": [
+   {
+    "category": "Southwest purchases (flights, inflight, gift cards)",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Gas stations",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.3,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "chase-southwest-rapid-rewards-premier",
+  "name": "Southwest® Rapid Rewards® Premier Credit Card",
+  "annual_fee": 149,
+  "categories": [
+   {
+    "category": "Southwest purchases (flights, inflight, gift cards)",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.3,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "chase-southwest-rapid-rewards-priority",
+  "name": "Southwest® Rapid Rewards® Priority Credit Card",
+  "annual_fee": 229,
+  "categories": [
+   {
+    "category": "Southwest purchases (flights, inflight, gift cards)",
+    "multiplier": "4×",
+    "is_base": false
+   },
+   {
+    "category": "Gas stations, uncapped",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants, uncapped",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.3,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "chase-united-club-infinite",
+  "name": "United Club℠ Card",
+  "annual_fee": 695,
+  "categories": [
+   {
+    "category": "Eligible United flights",
+    "multiplier": "11×",
+    "is_base": false
+   },
+   {
+    "category": "Other United purchases",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Renowned Hotels, prepaid",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Other travel",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Dining, incl. eligible delivery",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.3,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "chase-united-explorer",
+  "name": "United Explorer Card",
+  "annual_fee": 150,
+  "categories": [
+   {
+    "category": "Eligible United flights",
+    "multiplier": "9×",
+    "is_base": false
+   },
+   {
+    "category": "Other United purchases",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Hotels, booked direct",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Dining, incl. eligible delivery",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.3,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "chase-united-quest",
+  "name": "United Quest Card",
+  "annual_fee": 350,
+  "categories": [
+   {
+    "category": "Renowned Hotels, prepaid",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Eligible United flights",
+    "multiplier": "10×",
+    "is_base": false
+   },
+   {
+    "category": "Other United purchases",
+    "multiplier": "4×",
+    "is_base": false
+   },
+   {
+    "category": "Other travel (airfare, trains, transit, cruises, hotels, cars, rideshare, tolls)",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Dining, incl. eligible delivery",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Select streaming",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.3,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "chase-world-of-hyatt",
+  "name": "World of Hyatt Credit Card",
+  "annual_fee": 95,
+  "categories": [
+   {
+    "category": "Hyatt hotels, direct",
+    "multiplier": "4×",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Airline tickets, booked direct",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Local transit & commuting",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Fitness clubs & gyms",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.8,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-aadvantage-executive",
+  "name": "AAdvantage Executive World Legend",
+  "annual_fee": 695,
+  "categories": [
+   {
+    "category": "Hotels & car rentals, via AAdvantage portals",
+    "multiplier": "12×",
+    "is_base": false
+   },
+   {
+    "category": "Eligible American Airlines purchases",
+    "multiplier": "4×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.4,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-aadvantage-globe",
+  "name": "AAdvantage® Globe™ Mastercard®",
+  "annual_fee": 350,
+  "categories": [
+   {
+    "category": "Hotels booked through aadvantagehotels.com",
+    "multiplier": "6×",
+    "is_base": false
+   },
+   {
+    "category": "Eligible American Airlines purchases",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants (incl. takeout/delivery)",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Rides & rails: taxis, rideshare, public transit",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "All other purchases",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.4,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-aadvantage-mileup",
+  "name": "AAdvantage MileUp",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Eligible American Airlines purchases",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores, incl. delivery",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.4,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-aadvantage-platinum-select",
+  "name": "AAdvantage Platinum Select",
+  "annual_fee": 99,
+  "categories": [
+   {
+    "category": "Eligible American Airlines purchases",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Gas stations",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.4,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-att-points-plus",
+  "name": "AT&T Points Plus® Card from Citi",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Gas stations & EV charging",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "AT&T products & services",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "All other purchases",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-best-buy-visa",
+  "name": "My Best Buy® Visa® Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Best Buy purchases (in-store & BestBuy.com): 6% for My Best Buy Elite Plus members",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Gas stations",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants, bars & grocery stores",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "All other purchases",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-bloomingdales",
+  "name": "Bloomingdale's American Express® Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Bloomingdale's, bloomingdales.com, Bloomingdale's The Outlet Store & everywhere Amex is accepted: Loyallist tier (default)",
+    "multiplier": "3 pts/$1",
+    "is_base": true
+   },
+   {
+    "category": "Same categories, at Top of the List / Top of the List Unlocked status tiers",
+    "multiplier": "4 pts/$1",
+    "is_base": false
+   }
+  ],
+  "best_cpp": 0.5,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-costco-anywhere-visa",
+  "name": "Costco Anywhere Visa® Card by Citi",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Gas at Costco (worldwide): first $7,000/yr combined with other gas/EV charging, then 1%",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Gas & EV charging elsewhere: first $7,000/yr combined with Costco gas, then 1%",
+    "multiplier": "4%",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Eligible travel: airfare, hotels, car rentals, Costco Travel",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Costco & Costco.com purchases",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-diamond-preferred",
+  "name": "Diamond Preferred",
+  "annual_fee": 0,
+  "categories": [],
+  "best_cpp": 0.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-dillards",
+  "name": "Dillard's Mastercard®",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Dillard's & dillards.com",
+    "multiplier": "2 pts/$1",
+    "is_base": false
+   },
+   {
+    "category": "U.S. supermarkets & grocery stores",
+    "multiplier": "2 pts/$1",
+    "is_base": false
+   },
+   {
+    "category": "U.S. gas stations",
+    "multiplier": "2 pts/$1",
+    "is_base": false
+   },
+   {
+    "category": "All other purchases where Mastercard is accepted",
+    "multiplier": "1 pt/$1",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-double-cash",
+  "name": "Double Cash",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Hotels, car rentals & attractions, booked via Citi Travel",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else: 1% when you buy, 1% when you pay it off",
+    "multiplier": "2%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": "citi-thankyou-points-transferable",
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-exxonmobil-smart-card-plus",
+  "name": "Exxon Mobil Smart Card+™ Credit Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Synergy Supreme+™ premium gasoline at Exxon & Mobil stations",
+    "multiplier": "12¢/gal",
+    "is_base": false
+   },
+   {
+    "category": "Regular, mid-grade & diesel fuel at Exxon & Mobil stations",
+    "multiplier": "10¢/gal",
+    "is_base": false
+   },
+   {
+    "category": "Convenience-store purchases at Exxon/Mobil (snacks, drinks, car washes): first $1,200/yr, then presumably 0%",
+    "multiplier": "5%",
+    "is_base": false
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-goodyear",
+  "name": "Goodyear Credit Card",
+  "annual_fee": 0,
+  "categories": [],
+  "best_cpp": 0.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-home-depot-consumer",
+  "name": "The Home Depot® Consumer Credit Card",
+  "annual_fee": 0,
+  "categories": [],
+  "best_cpp": 0.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-llbean",
+  "name": "L.L.Bean® Mastercard®",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "L.L.Bean purchases",
+    "multiplier": "4%",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "All other purchases",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-macys",
+  "name": "Macy's American Express® Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Macy's & macys.com: Platinum tier only ($1,200+ in annual card spend), every day with no merchandise exclusions",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Macy's & macys.com: Silver (default) and Gold ($500–$1,199/yr) tiers, only during scheduled bonus days rather than every purchase",
+    "multiplier": "Points on Star Money Days",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Supermarkets",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Gas stations",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "All other purchases",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-secured",
+  "name": "Secured Mastercard",
+  "annual_fee": 0,
+  "categories": [],
+  "best_cpp": 0.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-simplicity",
+  "name": "Simplicity",
+  "annual_fee": 0,
+  "categories": [],
+  "best_cpp": 0.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-strata",
+  "name": "Strata",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Hotels, car rentals & attractions, booked via cititravel.com",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Supermarkets",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Gas & EV charging",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Select transit",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Self-Select category: fitness clubs, streaming, live entertainment, cosmetics/barber/salon, or pet supply stores (one choice, changeable quarterly)",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.2,
+  "secured_variant_id": null,
+  "points_pool_id": "citi-thankyou-points-transferable",
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-strata-elite",
+  "name": "Strata Elite",
+  "annual_fee": 595,
+  "categories": [
+   {
+    "category": "Hotels, car rentals & attractions, booked via cititravel.com",
+    "multiplier": "12×",
+    "is_base": false
+   },
+   {
+    "category": "Air travel, booked via cititravel.com",
+    "multiplier": "6×",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants: \"Citi Nights,\" Fri–Sat, 6pm–6am ET",
+    "multiplier": "6×",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants, all other times",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1.5×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.7,
+  "secured_variant_id": null,
+  "points_pool_id": "citi-thankyou-points-transferable",
+  "points_pool_receiver": true
+ },
+ {
+  "id": "citi-strata-premier",
+  "name": "Strata Premier",
+  "annual_fee": 95,
+  "categories": [
+   {
+    "category": "Hotels, car rentals & attractions, booked via cititravel.com",
+    "multiplier": "10×",
+    "is_base": false
+   },
+   {
+    "category": "Air travel & other hotel purchases (outside Citi Travel)",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Supermarkets",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Gas & EV charging stations",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.7,
+  "secured_variant_id": null,
+  "points_pool_id": "citi-thankyou-points-transferable",
+  "points_pool_receiver": true
+ },
+ {
+  "id": "citi-tractor-supply",
+  "name": "TSC® Visa® Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Tractor Supply & Petsense purchases",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Gas stations",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Veterinary services",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "All other purchases",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "citi-wayfair",
+  "name": "Wayfair Mastercard®",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Wayfair, Joss & Main, AllModern, Birch Lane & Perigold (5% instead if using promotional financing on that purchase)",
+    "multiplier": "7%",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Other qualifying online purchases",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "discover-it-cash-back",
+  "name": "Discover it Cash Back",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Rotating quarterly categories, up to the quarterly maximum, once you activate",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.05,
+  "secured_variant_id": "discover-it-secured",
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "discover-it-chrome",
+  "name": "Discover it Chrome Gas & Restaurants",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Gas stations: first $1,000/quarter combined with restaurants, then 1%",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants: first $1,000/quarter combined with gas stations, then 1%",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.05,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "discover-it-miles",
+  "name": "Discover it Miles",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Travel and every other purchase, unlimited",
+    "multiplier": "1.5x",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "discover-it-secured",
+  "name": "Discover it Secured Cash Back",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Rotating quarterly categories, up to the quarterly maximum, once you activate",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.05,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "discover-it-student-cash-back",
+  "name": "Discover it Student Cash Back",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Rotating quarterly categories, up to the quarterly maximum, once you activate",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.05,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "discover-it-student-chrome",
+  "name": "Discover it Student Chrome",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Gas stations: first $1,000/quarter combined with restaurants, then 1%",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants: first $1,000/quarter combined with gas stations, then 1%",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.05,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "us-bank-altitude-connect",
+  "name": "Altitude Connect Visa Signature Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Prepaid hotels & car rentals, Travel Center only",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Travel: airlines, hotels, car rentals, taxis, limousines, trains, cruises",
+    "multiplier": "4×",
+    "is_base": false
+   },
+   {
+    "category": "Gas & EV charging, first $1,000/qtr, then 1×",
+    "multiplier": "4×",
+    "is_base": false
+   },
+   {
+    "category": "Dining",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Streaming",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "us-bank-altitude-go",
+  "name": "Altitude Go Visa Signature Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Dining, takeout & restaurant delivery, first $2,000/qtr, then 1×",
+    "multiplier": "4×",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Gas stations/EV charging",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Streaming services",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": "us-bank-altitude-go-secured",
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "us-bank-altitude-go-secured",
+  "name": "Altitude Go Secured Visa Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Dining, takeout & restaurant delivery, first $2,000/qtr, then 1×",
+    "multiplier": "4×",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Gas stations/EV charging",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Streaming services",
+    "multiplier": "2×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "us-bank-cash-plus",
+  "name": "Cash+ Visa Signature Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Two categories you choose each quarter: fast food, home utilities, TV, internet and streaming, department stores, cell phone, electronics stores, sporting goods, furniture stores, movie theaters, ground transportation, gyms/fitness centers, or select clothing stores (first $2,000 combined, then 1%)",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Prepaid air, hotel & car, Travel Center only",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "One everyday category you choose: gas/EV, grocery stores and grocery delivery, or restaurants",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": "us-bank-cash-plus-secured",
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "us-bank-cash-plus-secured",
+  "name": "Cash+ Secured Visa Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Two categories you choose each quarter: fast food, home utilities, TV, internet and streaming, department stores, cell phone, electronics stores, sporting goods, furniture stores, movie theaters, ground transportation, gyms/fitness centers, or select clothing stores (first $2,000 combined, then 1%)",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "Prepaid air, hotel & car, Travel Center only",
+    "multiplier": "5%",
+    "is_base": false
+   },
+   {
+    "category": "One everyday category you choose: gas/EV, grocery stores and grocery delivery, or restaurants",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "us-bank-secured",
+  "name": "Secured Visa Card",
+  "annual_fee": 0,
+  "categories": [],
+  "best_cpp": 0.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "us-bank-shield",
+  "name": "Shield Visa Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Prepaid air, hotel & car, Travel Center only",
+    "multiplier": "4%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else, no rewards earned",
+    "multiplier": "0%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "us-bank-smartly",
+  "name": "Smartly Visa Signature Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Everything else, no caps",
+    "multiplier": "2%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "us-bank-split",
+  "name": "Split World Mastercard",
+  "annual_fee": 0,
+  "categories": [],
+  "best_cpp": 0.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "wells-fargo-active-cash",
+  "name": "Active Cash Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Everything, unlimited",
+    "multiplier": "2%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "wells-fargo-autograph",
+  "name": "Autograph Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Restaurants: eating places, fast food, drinking places, catering; excludes third-party delivery services",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Travel: airlines, hotels, car rentals, cruises, timeshares, campgrounds, travel agencies",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Gas stations and EV charging",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Transit: passenger rail, taxis, limousines, ferries, parking, tolls",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Popular streaming services",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Phone plans",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "wells-fargo-autograph-journey",
+  "name": "Autograph Journey Card",
+  "annual_fee": 95,
+  "categories": [
+   {
+    "category": "Hotels",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Airlines",
+    "multiplier": "4×",
+    "is_base": false
+   },
+   {
+    "category": "Restaurants",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Other travel: campgrounds, timeshares, cruises, travel agencies, car rentals",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "wells-fargo-choice-privileges",
+  "name": "Choice Privileges Mastercard",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Choice Hotels stays and Choice Privileges point purchases",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Gas stations",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Home improvement stores",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Phone plans",
+    "multiplier": "3×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 0.6,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "wells-fargo-choice-privileges-select",
+  "name": "Choice Privileges Select Mastercard",
+  "annual_fee": 95,
+  "categories": [
+   {
+    "category": "Choice Hotels stays and Choice Privileges point purchases",
+    "multiplier": "10×",
+    "is_base": false
+   },
+   {
+    "category": "Gas stations",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Home improvement stores",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Phone plans",
+    "multiplier": "5×",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1×",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 0.6,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "wells-fargo-one-key",
+  "name": "One Key Card",
+  "annual_fee": 0,
+  "categories": [
+   {
+    "category": "Expedia, Hotels.com, and Vrbo bookings",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Gas stations",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Dining",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "1.5%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "wells-fargo-one-key-plus",
+  "name": "One Key+ Card",
+  "annual_fee": 99,
+  "categories": [
+   {
+    "category": "Expedia, Hotels.com, and Vrbo bookings",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Gas stations",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Grocery stores",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Dining",
+    "multiplier": "3%",
+    "is_base": false
+   },
+   {
+    "category": "Everything else",
+    "multiplier": "2%",
+    "is_base": true
+   }
+  ],
+  "best_cpp": 1.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ },
+ {
+  "id": "wells-fargo-reflect",
+  "name": "Reflect Card",
+  "annual_fee": 0,
+  "categories": [],
+  "best_cpp": 0.0,
+  "secured_variant_id": null,
+  "points_pool_id": null,
+  "points_pool_receiver": false
+ }
+]

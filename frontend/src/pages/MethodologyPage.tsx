@@ -190,8 +190,9 @@ export default function MethodologyPage() {
           <P>
             A card's advertised credits (airline credit, dining credit, and so on) are rarely
             worth their full face value to any one person. Most people don't use every credit
-            every year. So each credit on this site starts with a realistic, hand-estimated
-            default, not the maximum, grouped into three tiers:
+            every year, and how much you'd capture depends on your own life. So almost every
+            credit on this site starts at $0, not the maximum, until you set your own usage.
+            Credits are grouped into three tiers:
           </P>
           <List>
             <ListItem>

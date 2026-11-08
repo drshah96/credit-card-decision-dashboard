@@ -1,10 +1,7 @@
-name: Keep backend warm during waking hours
+name: Keep backend warm
 
-# Keeps the Render backend from spinning down (free tier, 15 minutes idle)
-# during roughly 7am-11pm ET. This project's URL goes out on job
-# applications, and a recruiter hitting a ~60s cold start looks like a broken
-# site. Deliberately NOT 24/7: outside this window the backend sleeps
-# normally, so a visit then pays the full cold-start cost.
+# Keeps the Render backend from spinning down (free tier, 15 minutes idle) around the clock,
+# because a ~60s cold start looks like a broken site. It uses up to 744 of Render's 750 free hours.
 #
 # ── Why this pings in a loop instead of once per scheduled run ──────────────
 #
@@ -58,12 +55,10 @@ name: Keep backend warm during waking hours
 # unaffected by our zone's bot settings, and wakes the same instance. Real
 # visitors always use api.thewalletaudit.com and get full protection.
 #
-# Cron is always UTC. The hour range below (11-23,0-3) is 7am-11pm EDT (UTC-4)
-# and will drift by an hour once DST ends (~November) until it resumes
-# (~March) — acceptable drift for a "wide window" goal.
+# Cron is always UTC.
 on:
   schedule:
-    - cron: "0,30 11-23,0-3 * * *"
+    - cron: "0,30 * * * *"
   workflow_dispatch:
 
 # No concurrency group on purpose: the overlap between consecutive runs is the
@@ -77,7 +72,7 @@ jobs:
     # rather than by the job timeout, which would report as a generic failure.
     timeout-minutes: 65
     steps:
-      - name: Ping /healthz every 5 minutes, /health every 30
+      - name: Ping /healthz every 5 minutes, /mcp every 30, /health every 30 outside 04-11 UTC
         run: |
           set -uo pipefail
 
@@ -90,6 +85,8 @@ jobs:
           worst_liveness_streak=0
           deep_failures=0
           deep_checks=0
+          mcp_checks=0
+          mcp_failures=0
 
           for i in $(seq 0 $((PINGS - 1))); do
             now=$(date -u +%H:%M:%S)
@@ -111,16 +108,32 @@ jobs:
             fi
 
             if [ $((i % DEEP_EVERY)) -eq 0 ]; then
-              deep_checks=$((deep_checks + 1))
-              # 30s, not 90s: backend/db.py sets a 10s connect_timeout, so an
-              # unreachable database now produces a fast 503 instead of the
-              # indefinite hang that used to eat the full curl budget.
-              if curl -sf --max-time 30 -o /dev/null "$ORIGIN/health"; then
-                echo "$now  readiness ok (database reachable)"
+              # /health wakes Neon, so it rests 04:00-10:59 UTC to add no overnight compute.
+              hour=$((10#$(date -u +%H)))
+              if [ "$hour" -lt 4 ] || [ "$hour" -ge 11 ]; then
+                deep_checks=$((deep_checks + 1))
+                # 30s, not 90s: backend/db.py sets a 10s connect_timeout, so an
+                # unreachable database now produces a fast 503 instead of the
+                # indefinite hang that used to eat the full curl budget.
+                if curl -sf --max-time 30 -o /dev/null "$ORIGIN/health"; then
+                  echo "$now  readiness ok (database reachable)"
+                else
+                  status=$?
+                  deep_failures=$((deep_failures + 1))
+                  echo "::warning::$now  readiness FAILED (curl exit $status) — database may be unreachable"
+                fi
+              fi
+
+              # Keyless on purpose: a working MCP endpoint answers 401 without touching
+              # the database, and anything else means it is disabled or gone.
+              mcp_checks=$((mcp_checks + 1))
+              mcp_status=$(curl -s --max-time 30 -o /dev/null -w '%{http_code}' -X POST \
+                -H 'content-type: application/json' -d '{}' "$ORIGIN/mcp")
+              if [ "$mcp_status" = "401" ]; then
+                echo "$now  mcp ok (401 without a key)"
               else
-                status=$?
-                deep_failures=$((deep_failures + 1))
-                echo "::warning::$now  readiness FAILED (curl exit $status) — database may be unreachable"
+                mcp_failures=$((mcp_failures + 1))
+                echo "::warning::$now  mcp probe got HTTP $mcp_status, expected 401"
               fi
             fi
 
@@ -132,6 +145,7 @@ jobs:
           echo "---"
           echo "liveness pings: $PINGS, worst consecutive failure streak: $worst_liveness_streak"
           echo "readiness checks: $deep_checks, failures: $deep_failures"
+          echo "mcp probes: $mcp_checks, failures: $mcp_failures"
 
           # Fail on a sustained outage, not on a single blip. One failed ping
           # is usually a runner network hiccup or a redeploy restarting the
@@ -145,6 +159,11 @@ jobs:
           fi
           if [ "$deep_failures" -gt 0 ]; then
             echo "::error::$deep_failures of $deep_checks readiness checks failed — /health could not reach the database. Check the Neon project is active and the invoice is paid."
+            exit_code=1
+          fi
+          # Two in a run, not one: a deploy restarting the service can fail a single probe.
+          if [ "$mcp_failures" -ge 2 ]; then
+            echo "::error::$mcp_failures of $mcp_checks MCP probes did not get 401. Check the mcp_disabled log line in Render and that MCP_API_KEYS is set."
             exit_code=1
           fi
           exit $exit_code

@@ -1,0 +1,12 @@
+{
+  "card_id": "bofa-premium-rewards",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:da76a45dae3fa3107d841f05ea4d6ff7bbc6a2de",
+    "evidence_scope": "card",
+    "facts_sha256": "840c8117b2ab434fa678d05c9aeca268ee889ec2a9265ab4f0a9bd81a11b6d76",
+    "documents": [],
+    "not_checked": [],
+    "note": "Re-checked on 2026-11-07 against Bank of America product pages, offer disclosures and sample cardmember agreements."
+  }
+}

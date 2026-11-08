@@ -1,0 +1,14 @@
+{
+  "card_id": "amex-platinum",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:5423930161a1db97ef50e7522c46ebb8422d9e89",
+    "evidence_scope": "card",
+    "facts_sha256": "abd856f8874acf1a61199b5cff7043e2055aa0025e43bd73701e3699da4dc313",
+    "documents": [],
+    "not_checked": [
+      "transfer_partners"
+    ],
+    "note": "Re-checked on 2026-11-07 against Amex application terms, cardmember agreements and benefit pages. Not checked: transfer partners. Rental coverage and some insurance limits come from excerpts of Amex benefit pages, not full reads."
+  }
+}

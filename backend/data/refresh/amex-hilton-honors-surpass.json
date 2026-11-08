@@ -1,0 +1,16 @@
+{
+  "card_id": "amex-hilton-honors-surpass",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:98940f63d267723d4fb6cc1367be132a71708728",
+    "evidence_scope": "card",
+    "facts_sha256": "b79087fb6d2827ba8ec36cd2d633478f364a39d6416ca6cab91cb280286263bd",
+    "documents": [],
+    "not_checked": [
+      "redemption",
+      "transfer_partners",
+      "insurance_limits"
+    ],
+    "note": "Re-checked on 2026-11-07 against Amex application terms, cardmember agreements and benefit pages. Not checked: redemption values, transfer partners, and insurance dollar limits."
+  }
+}

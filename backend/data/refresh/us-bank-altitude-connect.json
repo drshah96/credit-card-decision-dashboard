@@ -1,0 +1,16 @@
+{
+  "card_id": "us-bank-altitude-connect",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:40b86fa9c112c55a16d35179ed97a51b70478704",
+    "evidence_scope": "card",
+    "facts_sha256": "ffbaf0526b30e5f8b23b00a41e9e5c1b2bb37e376e41454f8c36a3e95afc983b",
+    "documents": [],
+    "not_checked": [
+      "insurance",
+      "insurance_limits",
+      "additional_cards"
+    ],
+    "note": "Re-checked on 2026-11-07 against U.S. Bank product pages and Pricing and Terms. Not checked: insurance benefits, insurance dollar limits, and authorized-user terms."
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "card_id": "us-bank-shield",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:40b86fa9c112c55a16d35179ed97a51b70478704",
+    "evidence_scope": "card",
+    "facts_sha256": "6883bda891cbd077038224674361634e388a72ff57c376704d621ed9c9dc9984",
+    "documents": [],
+    "not_checked": [
+      "insurance",
+      "insurance_limits",
+      "additional_cards"
+    ],
+    "note": "Re-checked on 2026-11-07 against U.S. Bank product pages and Pricing and Terms. Not checked: insurance benefits, insurance dollar limits, and authorized-user terms."
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "card_id": "citi-aadvantage-platinum-select",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:c4677373bcb5d7f6a590ad9c231601e72b0818ab",
+    "evidence_scope": "card",
+    "facts_sha256": "531e99ccef8e39cf99e074223ad7685449924447e39ed8be83cc3d1a87fd9877",
+    "documents": [],
+    "not_checked": [
+      "redemption",
+      "transfer_partners",
+      "insurance_limits"
+    ],
+    "note": "Re-checked on 2026-11-07 against Citi product pages, Citi benefit documents and American Airlines pages. Not checked: redemption values, transfer partners, and insurance dollar limits. Citi fills in its rates in the browser, so they were read from Citi pages through a text renderer and matched to Citi documents."
+  }
+}

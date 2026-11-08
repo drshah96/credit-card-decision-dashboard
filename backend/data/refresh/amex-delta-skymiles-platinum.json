@@ -1,0 +1,14 @@
+{
+  "card_id": "amex-delta-skymiles-platinum",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:98940f63d267723d4fb6cc1367be132a71708728",
+    "evidence_scope": "card",
+    "facts_sha256": "5f2cc2fc1e9f857effd0c51d39eec351f38723ec4729579c0c6cbe7a44dfa879",
+    "documents": [],
+    "not_checked": [
+      "transfer_partners"
+    ],
+    "note": "Re-checked on 2026-11-07 against Amex application terms, cardmember agreements and benefit pages. Not checked: transfer partners. Some insurance limits come from excerpts of Amex benefit pages, not full reads."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "card_id": "amex-delta-skymiles-blue",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:98940f63d267723d4fb6cc1367be132a71708728",
+    "evidence_scope": "card",
+    "facts_sha256": "3b238e2ac81c6f7180bf8cfe6db890b3ddc23d04255265dec2c1001a5f85474e",
+    "documents": [],
+    "not_checked": [
+      "transfer_partners",
+      "insurance_limits"
+    ],
+    "note": "Re-checked on 2026-11-07 against Amex application terms, cardmember agreements and benefit pages. Not checked: transfer partners and insurance dollar limits."
+  }
+}

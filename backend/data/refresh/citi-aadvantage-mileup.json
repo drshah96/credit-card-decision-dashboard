@@ -1,0 +1,16 @@
+{
+  "card_id": "citi-aadvantage-mileup",
+  "last_verified_ok_at": "2026-11-07",
+  "verification": {
+    "evidence": "git:c4677373bcb5d7f6a590ad9c231601e72b0818ab",
+    "evidence_scope": "card",
+    "facts_sha256": "f0e5d1bcb007f3f3bed393d1d5222d1e86e4b743fb56a7c91c85d5cf03d98d33",
+    "documents": [],
+    "not_checked": [
+      "redemption",
+      "transfer_partners",
+      "insurance_limits"
+    ],
+    "note": "Re-checked on 2026-11-07 against Citi product pages, Citi benefit documents and American Airlines pages. Not checked: redemption values, transfer partners, and insurance dollar limits. Citi fills in its rates in the browser, so they were read from Citi pages through a text renderer and matched to Citi documents."
+  }
+}

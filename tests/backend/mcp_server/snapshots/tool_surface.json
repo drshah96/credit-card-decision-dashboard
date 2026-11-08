@@ -1,0 +1,3003 @@
+{
+ "server": {
+  "name": "thewalletaudit",
+  "title": "The Wallet Audit",
+  "version": "1.0.0",
+  "instructions": "Data on US consumer credit cards, hand-sourced from issuer terms by The Wallet Audit. Money is whole US dollars. A field with status not_recorded has no value in the catalog: that does not mean the card lacks the feature. An insurance level of unconfirmed means the same, and so does an empty insurance list. Every card carries provenance: the issuer page, the date the card was last checked against issuer documents, a review_due_on date after which that check should not be relied on, and not_checked, the areas that check could not confirm. partially_verified means not_checked is not empty, so values in those areas are unconfirmed. not_verified means no recorded check. Verdicts and credit tiers are editorial estimates. A credit default of 0 means no use is assumed, not that the credit is worthless, so call estimate_value with real usage before weighing credits. Rankings use the earn multiplier times the card's best realistic cents per point and never consider affiliate status. The welcome_bonus field is not served. A lounge_access of unconfirmed means the catalog cannot say whether the card has access. Use find_cards to get card ids.",
+  "website_url": "https://thewalletaudit.com"
+ },
+ "tools": [
+  {
+   "name": "find_cards",
+   "title": "Find cards",
+   "description": "Search the catalog by name, issuer or rewards program and get card ids for the other tools. Returns at most limit cards plus total_matches and next_offset, so you can tell when there are more. Omit query to list every card for an issuer.",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "query": {
+      "anyOf": [
+       {
+        "maxLength": 64,
+        "minLength": 1,
+        "pattern": "^[^\\x00-\\x1f\\x7f]+$",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Query"
+     },
+     "issuer": {
+      "anyOf": [
+       {
+        "enum": [
+         "American Express",
+         "Bank of America",
+         "Bilt",
+         "Capital One",
+         "Chase",
+         "Citi",
+         "Discover",
+         "U.S. Bank",
+         "Wells Fargo"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Issuer"
+     },
+     "limit": {
+      "default": 10,
+      "maximum": 20,
+      "minimum": 1,
+      "title": "Limit",
+      "type": "integer"
+     },
+     "offset": {
+      "default": 0,
+      "maximum": 200,
+      "minimum": 0,
+      "title": "Offset",
+      "type": "integer"
+     }
+    },
+    "title": "find_cardsArguments"
+   },
+   "outputSchema": {
+    "$defs": {
+     "CardListItem": {
+      "additionalProperties": false,
+      "properties": {
+       "card_id": {
+        "title": "Card Id",
+        "type": "string"
+       },
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "issuer": {
+        "title": "Issuer",
+        "type": "string"
+       },
+       "network": {
+        "title": "Network",
+        "type": "string"
+       },
+       "points_program": {
+        "title": "Points Program",
+        "type": "string"
+       },
+       "annual_fee": {
+        "title": "Annual Fee",
+        "type": "integer"
+       },
+       "verdict_status": {
+        "title": "Verdict Status",
+        "type": "string"
+       },
+       "is_secured_variant_of": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Is Secured Variant Of"
+       },
+       "provenance": {
+        "$ref": "#/$defs/ProvenanceRef"
+       }
+      },
+      "required": [
+       "card_id",
+       "name",
+       "issuer",
+       "network",
+       "points_program",
+       "annual_fee",
+       "verdict_status",
+       "is_secured_variant_of",
+       "provenance"
+      ],
+      "title": "CardListItem",
+      "type": "object"
+     },
+     "FindCardsQuery": {
+      "additionalProperties": false,
+      "properties": {
+       "query": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Query"
+       },
+       "issuer": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Issuer"
+       },
+       "limit": {
+        "title": "Limit",
+        "type": "integer"
+       },
+       "offset": {
+        "title": "Offset",
+        "type": "integer"
+       }
+      },
+      "required": [
+       "query",
+       "issuer",
+       "limit",
+       "offset"
+      ],
+      "title": "FindCardsQuery",
+      "type": "object"
+     },
+     "Meta": {
+      "additionalProperties": false,
+      "properties": {
+       "contract_version": {
+        "title": "Contract Version",
+        "type": "string"
+       },
+       "catalog_digest": {
+        "description": "Hash of exactly what this server serves.",
+        "title": "Catalog Digest",
+        "type": "string"
+       },
+       "catalog_card_count": {
+        "title": "Catalog Card Count",
+        "type": "integer"
+       },
+       "market": {
+        "title": "Market",
+        "type": "string"
+       },
+       "currency": {
+        "title": "Currency",
+        "type": "string"
+       },
+       "methodology_url": {
+        "title": "Methodology Url",
+        "type": "string"
+       },
+       "disclaimer": {
+        "title": "Disclaimer",
+        "type": "string"
+       }
+      },
+      "required": [
+       "contract_version",
+       "catalog_digest",
+       "catalog_card_count",
+       "market",
+       "currency",
+       "methodology_url",
+       "disclaimer"
+      ],
+      "title": "Meta",
+      "type": "object"
+     },
+     "ProvenanceRef": {
+      "additionalProperties": false,
+      "properties": {
+       "issuer_url": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "Where current terms are published. Not proof of what was verified.",
+        "title": "Issuer Url"
+       },
+       "verification_status": {
+        "description": "verified: a recorded check with no gaps recorded, which does not prove every field was confirmed. partially_verified: not_checked lists areas that check could not confirm. not_verified: no recorded check.",
+        "enum": [
+         "verified",
+         "partially_verified",
+         "not_verified"
+        ],
+        "title": "Verification Status",
+        "type": "string"
+       },
+       "verified_on": {
+        "anyOf": [
+         {
+          "format": "date",
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Verified On"
+       },
+       "not_checked": {
+        "description": "Areas the check could not confirm. Treat them as unverified.",
+        "items": {
+         "type": "string"
+        },
+        "title": "Not Checked",
+        "type": "array"
+       },
+       "review_due_on": {
+        "anyOf": [
+         {
+          "format": "date",
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "Do not rely on verified_on after this date.",
+        "title": "Review Due On"
+       }
+      },
+      "required": [
+       "issuer_url",
+       "verification_status",
+       "verified_on",
+       "not_checked",
+       "review_due_on"
+      ],
+      "title": "ProvenanceRef",
+      "type": "object"
+     }
+    },
+    "additionalProperties": false,
+    "properties": {
+     "meta": {
+      "$ref": "#/$defs/Meta"
+     },
+     "query": {
+      "$ref": "#/$defs/FindCardsQuery"
+     },
+     "total_matches": {
+      "title": "Total Matches",
+      "type": "integer"
+     },
+     "returned": {
+      "title": "Returned",
+      "type": "integer"
+     },
+     "next_offset": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Next Offset"
+     },
+     "cards": {
+      "items": {
+       "$ref": "#/$defs/CardListItem"
+      },
+      "title": "Cards",
+      "type": "array"
+     }
+    },
+    "required": [
+     "meta",
+     "query",
+     "total_matches",
+     "returned",
+     "next_offset",
+     "cards"
+    ],
+    "title": "FindCardsResult",
+    "type": "object"
+   },
+   "annotations": {
+    "title": "Find cards",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  },
+  {
+   "name": "get_card",
+   "title": "Get card",
+   "description": "One card's fees, rates, credits, earn rates, redemption values, insurance and perks, with provenance. Heavy sections (credit tips, timeline, transfer partner list, services, additional cards, removed credits) are omitted unless requested in sections; omitted_sections lists what was left out. Rate and fee fields are {status, value}: not_recorded means the catalog has no value, not that the fee is zero.",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "card_id": {
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "title": "Card Id",
+      "type": "string"
+     },
+     "sections": {
+      "default": [],
+      "items": {
+       "enum": [
+        "credit_tips",
+        "timeline",
+        "transfer_partner_list",
+        "services",
+        "additional_cards",
+        "removed_credits"
+       ],
+       "type": "string"
+      },
+      "maxItems": 6,
+      "title": "Sections",
+      "type": "array"
+     }
+    },
+    "required": [
+     "card_id"
+    ],
+    "title": "get_cardArguments"
+   },
+   "outputSchema": {
+    "$defs": {
+     "AdditionalCardBenefit": {
+      "additionalProperties": false,
+      "properties": {
+       "text": {
+        "title": "Text",
+        "type": "string"
+       },
+       "included": {
+        "title": "Included",
+        "type": "boolean"
+       }
+      },
+      "required": [
+       "text",
+       "included"
+      ],
+      "title": "AdditionalCardBenefit",
+      "type": "object"
+     },
+     "AdditionalCardOption": {
+      "additionalProperties": false,
+      "properties": {
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "fee": {
+        "title": "Fee",
+        "type": "string"
+       },
+       "is_free": {
+        "title": "Is Free",
+        "type": "boolean"
+       },
+       "benefits": {
+        "items": {
+         "$ref": "#/$defs/AdditionalCardBenefit"
+        },
+        "title": "Benefits",
+        "type": "array"
+       }
+      },
+      "required": [
+       "name",
+       "fee",
+       "is_free",
+       "benefits"
+      ],
+      "title": "AdditionalCardOption",
+      "type": "object"
+     },
+     "AdditionalCardsInfo": {
+      "additionalProperties": false,
+      "properties": {
+       "title": {
+        "title": "Title",
+        "type": "string"
+       },
+       "options": {
+        "items": {
+         "$ref": "#/$defs/AdditionalCardOption"
+        },
+        "title": "Options",
+        "type": "array"
+       },
+       "note": {
+        "title": "Note",
+        "type": "string"
+       }
+      },
+      "required": [
+       "title",
+       "options",
+       "note"
+      ],
+      "title": "AdditionalCardsInfo",
+      "type": "object"
+     },
+     "CardDetail": {
+      "additionalProperties": false,
+      "properties": {
+       "id": {
+        "title": "Id",
+        "type": "string"
+       },
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "issuer": {
+        "title": "Issuer",
+        "type": "string"
+       },
+       "network": {
+        "title": "Network",
+        "type": "string"
+       },
+       "points_program": {
+        "title": "Points Program",
+        "type": "string"
+       },
+       "currency": {
+        "title": "Currency",
+        "type": "string"
+       },
+       "annual_fee": {
+        "title": "Annual Fee",
+        "type": "integer"
+       },
+       "editorial": {
+        "$ref": "#/$defs/Editorial"
+       },
+       "earn_rates": {
+        "items": {
+         "$ref": "#/$defs/EarnRate"
+        },
+        "title": "Earn Rates",
+        "type": "array"
+       },
+       "earn_note": {
+        "title": "Earn Note",
+        "type": "string"
+       },
+       "points": {
+        "$ref": "#/$defs/PointsInfo"
+       },
+       "credits": {
+        "items": {
+         "$ref": "#/$defs/CreditDetail"
+        },
+        "title": "Credits",
+        "type": "array"
+       },
+       "value": {
+        "$ref": "#/$defs/ValueTotals"
+       },
+       "rates_and_fees": {
+        "$ref": "#/$defs/RatesAndFees"
+       },
+       "insurance": {
+        "description": "Empty means no coverage is recorded, not that the card has none.",
+        "items": {
+         "$ref": "#/$defs/InsuranceDetail"
+        },
+        "title": "Insurance",
+        "type": "array"
+       },
+       "protection_note": {
+        "title": "Protection Note",
+        "type": "string"
+       },
+       "rental_note": {
+        "title": "Rental Note",
+        "type": "string"
+       },
+       "lounge_access": {
+        "description": "Airport lounges only. included: access comes with the card; see status_perks for visit caps and guests. passes: a few single-visit passes a year. paid: entry only by paying per visit. none: the check found no access. unconfirmed: the catalog cannot say whether the card has access.",
+        "enum": [
+         "included",
+         "passes",
+         "paid",
+         "none",
+         "unconfirmed"
+        ],
+        "title": "Lounge Access",
+        "type": "string"
+       },
+       "status_perks": {
+        "items": {
+         "$ref": "#/$defs/StatusPerk"
+        },
+        "title": "Status Perks",
+        "type": "array"
+       },
+       "transfer_partners": {
+        "$ref": "#/$defs/TransferPartnersInfo"
+       },
+       "related": {
+        "$ref": "#/$defs/Related"
+       },
+       "is_affiliate_link": {
+        "description": "A disclosure about the issuer link. Rankings never read it.",
+        "title": "Is Affiliate Link",
+        "type": "boolean"
+       },
+       "timeline": {
+        "anyOf": [
+         {
+          "items": {
+           "$ref": "#/$defs/TimelineEntry"
+          },
+          "type": "array"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "default": null,
+        "title": "Timeline"
+       },
+       "services": {
+        "anyOf": [
+         {
+          "items": {
+           "$ref": "#/$defs/ServiceEntry"
+          },
+          "type": "array"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "default": null,
+        "title": "Services"
+       },
+       "additional_cards": {
+        "anyOf": [
+         {
+          "$ref": "#/$defs/AdditionalCardsInfo"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "default": null
+       },
+       "removed_credits": {
+        "anyOf": [
+         {
+          "items": {
+           "$ref": "#/$defs/RemovedCredit"
+          },
+          "type": "array"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "default": null,
+        "title": "Removed Credits"
+       }
+      },
+      "required": [
+       "id",
+       "name",
+       "issuer",
+       "network",
+       "points_program",
+       "currency",
+       "annual_fee",
+       "editorial",
+       "earn_rates",
+       "earn_note",
+       "points",
+       "credits",
+       "value",
+       "rates_and_fees",
+       "insurance",
+       "protection_note",
+       "rental_note",
+       "lounge_access",
+       "status_perks",
+       "transfer_partners",
+       "related",
+       "is_affiliate_link"
+      ],
+      "title": "CardDetail",
+      "type": "object"
+     },
+     "CreditDetail": {
+      "additionalProperties": false,
+      "properties": {
+       "id": {
+        "title": "Id",
+        "type": "string"
+       },
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "subtitle": {
+        "title": "Subtitle",
+        "type": "string"
+       },
+       "tier": {
+        "description": "Editorial estimate of how easy this is to use.",
+        "title": "Tier",
+        "type": "string"
+       },
+       "max_annual": {
+        "description": "The issuer's advertised maximum per year.",
+        "title": "Max Annual",
+        "type": "integer"
+       },
+       "default_value": {
+        "description": "Starting figure on the site's calculator. 0 means no use is assumed.",
+        "title": "Default Value",
+        "type": "integer"
+       },
+       "description": {
+        "title": "Description",
+        "type": "string"
+       },
+       "tips": {
+        "anyOf": [
+         {
+          "items": {
+           "$ref": "#/$defs/CreditTip"
+          },
+          "type": "array"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "default": null,
+        "title": "Tips"
+       }
+      },
+      "required": [
+       "id",
+       "name",
+       "subtitle",
+       "tier",
+       "max_annual",
+       "default_value",
+       "description"
+      ],
+      "title": "CreditDetail",
+      "type": "object"
+     },
+     "CreditTip": {
+      "additionalProperties": false,
+      "properties": {
+       "text": {
+        "title": "Text",
+        "type": "string"
+       },
+       "is_warning": {
+        "title": "Is Warning",
+        "type": "boolean"
+       }
+      },
+      "required": [
+       "text",
+       "is_warning"
+      ],
+      "title": "CreditTip",
+      "type": "object"
+     },
+     "EarnRate": {
+      "additionalProperties": false,
+      "properties": {
+       "category": {
+        "title": "Category",
+        "type": "string"
+       },
+       "multiplier": {
+        "title": "Multiplier",
+        "type": "string"
+       },
+       "is_base": {
+        "title": "Is Base",
+        "type": "boolean"
+       }
+      },
+      "required": [
+       "category",
+       "multiplier",
+       "is_base"
+      ],
+      "title": "EarnRate",
+      "type": "object"
+     },
+     "Editorial": {
+      "additionalProperties": false,
+      "description": "The Wallet Audit's own estimates and opinions, not issuer terms.",
+      "properties": {
+       "verdict": {
+        "$ref": "#/$defs/Verdict"
+       },
+       "effective_cost": {
+        "title": "Effective Cost",
+        "type": "string"
+       }
+      },
+      "required": [
+       "verdict",
+       "effective_cost"
+      ],
+      "title": "Editorial",
+      "type": "object"
+     },
+     "Fact_IntroAprValue_": {
+      "additionalProperties": false,
+      "properties": {
+       "status": {
+        "enum": [
+         "recorded",
+         "not_recorded"
+        ],
+        "title": "Status",
+        "type": "string"
+       },
+       "value": {
+        "anyOf": [
+         {
+          "$ref": "#/$defs/IntroAprValue"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       }
+      },
+      "required": [
+       "status",
+       "value"
+      ],
+      "title": "Fact[IntroAprValue]",
+      "type": "object"
+     },
+     "Fact_bool_": {
+      "additionalProperties": false,
+      "properties": {
+       "status": {
+        "enum": [
+         "recorded",
+         "not_recorded"
+        ],
+        "title": "Status",
+        "type": "string"
+       },
+       "value": {
+        "anyOf": [
+         {
+          "type": "boolean"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Value"
+       }
+      },
+      "required": [
+       "status",
+       "value"
+      ],
+      "title": "Fact[bool]",
+      "type": "object"
+     },
+     "Fact_str_": {
+      "additionalProperties": false,
+      "properties": {
+       "status": {
+        "enum": [
+         "recorded",
+         "not_recorded"
+        ],
+        "title": "Status",
+        "type": "string"
+       },
+       "value": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Value"
+       }
+      },
+      "required": [
+       "status",
+       "value"
+      ],
+      "title": "Fact[str]",
+      "type": "object"
+     },
+     "GetCardQuery": {
+      "additionalProperties": false,
+      "properties": {
+       "card_id": {
+        "title": "Card Id",
+        "type": "string"
+       },
+       "sections": {
+        "items": {
+         "type": "string"
+        },
+        "title": "Sections",
+        "type": "array"
+       }
+      },
+      "required": [
+       "card_id",
+       "sections"
+      ],
+      "title": "GetCardQuery",
+      "type": "object"
+     },
+     "InsuranceDetail": {
+      "additionalProperties": false,
+      "properties": {
+       "coverage": {
+        "title": "Coverage",
+        "type": "string"
+       },
+       "level": {
+        "description": "unconfirmed: the catalog cannot say whether the card has this coverage.",
+        "enum": [
+         "strong",
+         "good",
+         "mid",
+         "none",
+         "unconfirmed"
+        ],
+        "title": "Level",
+        "type": "string"
+       },
+       "detail": {
+        "title": "Detail",
+        "type": "string"
+       }
+      },
+      "required": [
+       "coverage",
+       "level",
+       "detail"
+      ],
+      "title": "InsuranceDetail",
+      "type": "object"
+     },
+     "IntroAprValue": {
+      "additionalProperties": false,
+      "properties": {
+       "rate": {
+        "title": "Rate",
+        "type": "string"
+       },
+       "months": {
+        "title": "Months",
+        "type": "integer"
+       }
+      },
+      "required": [
+       "rate",
+       "months"
+      ],
+      "title": "IntroAprValue",
+      "type": "object"
+     },
+     "IssuerSource": {
+      "additionalProperties": false,
+      "properties": {
+       "kind": {
+        "title": "Kind",
+        "type": "string"
+       },
+       "url": {
+        "title": "Url",
+        "type": "string"
+       }
+      },
+      "required": [
+       "kind",
+       "url"
+      ],
+      "title": "IssuerSource",
+      "type": "object"
+     },
+     "Meta": {
+      "additionalProperties": false,
+      "properties": {
+       "contract_version": {
+        "title": "Contract Version",
+        "type": "string"
+       },
+       "catalog_digest": {
+        "description": "Hash of exactly what this server serves.",
+        "title": "Catalog Digest",
+        "type": "string"
+       },
+       "catalog_card_count": {
+        "title": "Catalog Card Count",
+        "type": "integer"
+       },
+       "market": {
+        "title": "Market",
+        "type": "string"
+       },
+       "currency": {
+        "title": "Currency",
+        "type": "string"
+       },
+       "methodology_url": {
+        "title": "Methodology Url",
+        "type": "string"
+       },
+       "disclaimer": {
+        "title": "Disclaimer",
+        "type": "string"
+       }
+      },
+      "required": [
+       "contract_version",
+       "catalog_digest",
+       "catalog_card_count",
+       "market",
+       "currency",
+       "methodology_url",
+       "disclaimer"
+      ],
+      "title": "Meta",
+      "type": "object"
+     },
+     "PointsInfo": {
+      "additionalProperties": false,
+      "properties": {
+       "currency": {
+        "title": "Currency",
+        "type": "string"
+       },
+       "best_cpp": {
+        "title": "Best Cpp",
+        "type": "number"
+       },
+       "per_100k": {
+        "title": "Per 100K",
+        "type": "string"
+       },
+       "note": {
+        "title": "Note",
+        "type": "string"
+       },
+       "redemption_options": {
+        "items": {
+         "$ref": "#/$defs/RedemptionOption"
+        },
+        "title": "Redemption Options",
+        "type": "array"
+       }
+      },
+      "required": [
+       "currency",
+       "best_cpp",
+       "per_100k",
+       "note",
+       "redemption_options"
+      ],
+      "title": "PointsInfo",
+      "type": "object"
+     },
+     "Provenance": {
+      "additionalProperties": false,
+      "properties": {
+       "issuer_url": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "Where current terms are published. Not proof of what was verified.",
+        "title": "Issuer Url"
+       },
+       "verification_status": {
+        "description": "verified: a recorded check with no gaps recorded, which does not prove every field was confirmed. partially_verified: not_checked lists areas that check could not confirm. not_verified: no recorded check.",
+        "enum": [
+         "verified",
+         "partially_verified",
+         "not_verified"
+        ],
+        "title": "Verification Status",
+        "type": "string"
+       },
+       "verified_on": {
+        "anyOf": [
+         {
+          "format": "date",
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Verified On"
+       },
+       "not_checked": {
+        "description": "Areas the check could not confirm. Treat them as unverified.",
+        "items": {
+         "type": "string"
+        },
+        "title": "Not Checked",
+        "type": "array"
+       },
+       "review_due_on": {
+        "anyOf": [
+         {
+          "format": "date",
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "Do not rely on verified_on after this date.",
+        "title": "Review Due On"
+       },
+       "issuer_sources": {
+        "description": "A product_page is where to check terms, not proof of verification.",
+        "items": {
+         "$ref": "#/$defs/IssuerSource"
+        },
+        "title": "Issuer Sources",
+        "type": "array"
+       },
+       "note": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Note"
+       },
+       "evidence_url": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "The public record of the check, a commit or pull request.",
+        "title": "Evidence Url"
+       },
+       "evidence_scope": {
+        "anyOf": [
+         {
+          "enum": [
+           "card",
+           "issuer_pass"
+          ],
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "issuer_pass: covered by an issuer-level pass, and the evidence may not mention this card individually.",
+        "title": "Evidence Scope"
+       },
+       "site_url": {
+        "title": "Site Url",
+        "type": "string"
+       }
+      },
+      "required": [
+       "issuer_url",
+       "verification_status",
+       "verified_on",
+       "not_checked",
+       "review_due_on",
+       "issuer_sources",
+       "note",
+       "evidence_url",
+       "evidence_scope",
+       "site_url"
+      ],
+      "title": "Provenance",
+      "type": "object"
+     },
+     "RatesAndFees": {
+      "additionalProperties": false,
+      "properties": {
+       "variable_apr": {
+        "$ref": "#/$defs/Fact_str_"
+       },
+       "intro_apr_purchases": {
+        "$ref": "#/$defs/Fact_IntroAprValue_"
+       },
+       "balance_transfer_apr": {
+        "$ref": "#/$defs/Fact_str_"
+       },
+       "intro_apr_balance_transfers": {
+        "$ref": "#/$defs/Fact_IntroAprValue_"
+       },
+       "balance_transfer_fee": {
+        "$ref": "#/$defs/Fact_str_"
+       },
+       "foreign_transaction_fee": {
+        "$ref": "#/$defs/Fact_bool_",
+        "description": "false means the catalog records no fee. Treat it as unconfirmed when the card is not_verified or not_checked lists rates_and_fees."
+       },
+       "foreign_transaction_fee_rate": {
+        "$ref": "#/$defs/Fact_str_"
+       },
+       "cash_advance_apr": {
+        "$ref": "#/$defs/Fact_str_"
+       },
+       "penalty_apr": {
+        "$ref": "#/$defs/Fact_str_"
+       },
+       "penalty_apr_trigger": {
+        "$ref": "#/$defs/Fact_str_"
+       },
+       "pay_over_time_fee": {
+        "$ref": "#/$defs/Fact_str_"
+       },
+       "late_payment_fee": {
+        "$ref": "#/$defs/Fact_str_"
+       },
+       "returned_payment_fee": {
+        "$ref": "#/$defs/Fact_str_"
+       },
+       "returned_check_fee": {
+        "$ref": "#/$defs/Fact_str_"
+       }
+      },
+      "required": [
+       "variable_apr",
+       "intro_apr_purchases",
+       "balance_transfer_apr",
+       "intro_apr_balance_transfers",
+       "balance_transfer_fee",
+       "foreign_transaction_fee",
+       "foreign_transaction_fee_rate",
+       "cash_advance_apr",
+       "penalty_apr",
+       "penalty_apr_trigger",
+       "pay_over_time_fee",
+       "late_payment_fee",
+       "returned_payment_fee",
+       "returned_check_fee"
+      ],
+      "title": "RatesAndFees",
+      "type": "object"
+     },
+     "RedemptionOption": {
+      "additionalProperties": false,
+      "properties": {
+       "method": {
+        "title": "Method",
+        "type": "string"
+       },
+       "cpp": {
+        "title": "Cpp",
+        "type": "number"
+       },
+       "best": {
+        "title": "Best",
+        "type": "boolean"
+       }
+      },
+      "required": [
+       "method",
+       "cpp",
+       "best"
+      ],
+      "title": "RedemptionOption",
+      "type": "object"
+     },
+     "Related": {
+      "additionalProperties": false,
+      "properties": {
+       "secured_variant_id": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Secured Variant Id"
+       },
+       "is_secured_variant_of": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Is Secured Variant Of"
+       },
+       "points_pool_id": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Points Pool Id"
+       },
+       "points_pool_receiver": {
+        "title": "Points Pool Receiver",
+        "type": "boolean"
+       }
+      },
+      "required": [
+       "secured_variant_id",
+       "is_secured_variant_of",
+       "points_pool_id",
+       "points_pool_receiver"
+      ],
+      "title": "Related",
+      "type": "object"
+     },
+     "RemovedCredit": {
+      "additionalProperties": false,
+      "properties": {
+       "id": {
+        "title": "Id",
+        "type": "string"
+       },
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "subtitle": {
+        "title": "Subtitle",
+        "type": "string"
+       },
+       "description": {
+        "title": "Description",
+        "type": "string"
+       }
+      },
+      "required": [
+       "id",
+       "name",
+       "subtitle",
+       "description"
+      ],
+      "title": "RemovedCredit",
+      "type": "object"
+     },
+     "ServiceEntry": {
+      "additionalProperties": false,
+      "properties": {
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "detail": {
+        "title": "Detail",
+        "type": "string"
+       }
+      },
+      "required": [
+       "name",
+       "detail"
+      ],
+      "title": "ServiceEntry",
+      "type": "object"
+     },
+     "StatusPerk": {
+      "additionalProperties": false,
+      "properties": {
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "strength": {
+        "title": "Strength",
+        "type": "integer"
+       },
+       "note": {
+        "title": "Note",
+        "type": "string"
+       }
+      },
+      "required": [
+       "name",
+       "strength",
+       "note"
+      ],
+      "title": "StatusPerk",
+      "type": "object"
+     },
+     "TimelineEntry": {
+      "additionalProperties": false,
+      "properties": {
+       "date": {
+        "title": "Date",
+        "type": "string"
+       },
+       "type": {
+        "title": "Type",
+        "type": "string"
+       },
+       "badge": {
+        "title": "Badge",
+        "type": "string"
+       },
+       "text": {
+        "title": "Text",
+        "type": "string"
+       }
+      },
+      "required": [
+       "date",
+       "type",
+       "badge",
+       "text"
+      ],
+      "title": "TimelineEntry",
+      "type": "object"
+     },
+     "TransferPartnerDetail": {
+      "additionalProperties": false,
+      "properties": {
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "type": {
+        "title": "Type",
+        "type": "string"
+       },
+       "ratio": {
+        "title": "Ratio",
+        "type": "string"
+       },
+       "notes": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Notes"
+       }
+      },
+      "required": [
+       "name",
+       "type",
+       "ratio",
+       "notes"
+      ],
+      "title": "TransferPartnerDetail",
+      "type": "object"
+     },
+     "TransferPartnersInfo": {
+      "additionalProperties": false,
+      "properties": {
+       "airline_count": {
+        "title": "Airline Count",
+        "type": "integer"
+       },
+       "hotel_count": {
+        "title": "Hotel Count",
+        "type": "integer"
+       },
+       "highlight": {
+        "title": "Highlight",
+        "type": "string"
+       },
+       "recent_changes": {
+        "title": "Recent Changes",
+        "type": "string"
+       },
+       "partners": {
+        "anyOf": [
+         {
+          "items": {
+           "$ref": "#/$defs/TransferPartnerDetail"
+          },
+          "type": "array"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "default": null,
+        "title": "Partners"
+       }
+      },
+      "required": [
+       "airline_count",
+       "hotel_count",
+       "highlight",
+       "recent_changes"
+      ],
+      "title": "TransferPartnersInfo",
+      "type": "object"
+     },
+     "ValueTotals": {
+      "additionalProperties": false,
+      "properties": {
+       "applied_credit_value": {
+        "description": "Sum of each credit's applied value. Not an estimate of worth.",
+        "title": "Applied Credit Value",
+        "type": "integer"
+       },
+       "applied_net": {
+        "description": "Applied value minus fee. Positive: credits win.",
+        "title": "Applied Net",
+        "type": "integer"
+       },
+       "advertised_credit_value": {
+        "title": "Advertised Credit Value",
+        "type": "integer"
+       },
+       "best_case_net": {
+        "title": "Best Case Net",
+        "type": "integer"
+       },
+       "credits_at_zero": {
+        "description": "Credits counted at $0 because no usage was given. A high count means applied figures understate the card: pass your own usage to estimate_value.",
+        "title": "Credits At Zero",
+        "type": "integer"
+       }
+      },
+      "required": [
+       "applied_credit_value",
+       "applied_net",
+       "advertised_credit_value",
+       "best_case_net",
+       "credits_at_zero"
+      ],
+      "title": "ValueTotals",
+      "type": "object"
+     },
+     "Verdict": {
+      "additionalProperties": false,
+      "properties": {
+       "status": {
+        "title": "Status",
+        "type": "string"
+       },
+       "text": {
+        "title": "Text",
+        "type": "string"
+       },
+       "short_tag": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Short Tag"
+       }
+      },
+      "required": [
+       "status",
+       "text",
+       "short_tag"
+      ],
+      "title": "Verdict",
+      "type": "object"
+     },
+     "WithheldField": {
+      "additionalProperties": false,
+      "properties": {
+       "field": {
+        "title": "Field",
+        "type": "string"
+       },
+       "reason": {
+        "title": "Reason",
+        "type": "string"
+       }
+      },
+      "required": [
+       "field",
+       "reason"
+      ],
+      "title": "WithheldField",
+      "type": "object"
+     }
+    },
+    "additionalProperties": false,
+    "properties": {
+     "meta": {
+      "$ref": "#/$defs/Meta"
+     },
+     "query": {
+      "$ref": "#/$defs/GetCardQuery"
+     },
+     "card": {
+      "$ref": "#/$defs/CardDetail"
+     },
+     "provenance": {
+      "$ref": "#/$defs/Provenance"
+     },
+     "omitted_sections": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Omitted Sections",
+      "type": "array"
+     },
+     "withheld": {
+      "items": {
+       "$ref": "#/$defs/WithheldField"
+      },
+      "title": "Withheld",
+      "type": "array"
+     }
+    },
+    "required": [
+     "meta",
+     "query",
+     "card",
+     "provenance",
+     "omitted_sections",
+     "withheld"
+    ],
+    "title": "GetCardResult",
+    "type": "object"
+   },
+   "annotations": {
+    "title": "Get card",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  },
+  {
+   "name": "compare_cards",
+   "title": "Compare cards",
+   "description": "Compare 2 to 4 cards side by side: annual fee, applied and advertised credit value, earn rates, best cents per point, lounge access, foreign transaction fee, intro APRs and insurance levels, each with provenance. Cards are returned in the order given.",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "card_ids": {
+      "items": {
+       "maxLength": 64,
+       "minLength": 1,
+       "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+       "type": "string"
+      },
+      "maxItems": 4,
+      "minItems": 2,
+      "title": "Card Ids",
+      "type": "array"
+     }
+    },
+    "required": [
+     "card_ids"
+    ],
+    "title": "compare_cardsArguments"
+   },
+   "outputSchema": {
+    "$defs": {
+     "CompareEntry": {
+      "additionalProperties": false,
+      "properties": {
+       "card_id": {
+        "title": "Card Id",
+        "type": "string"
+       },
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "issuer": {
+        "title": "Issuer",
+        "type": "string"
+       },
+       "annual_fee": {
+        "title": "Annual Fee",
+        "type": "integer"
+       },
+       "currency": {
+        "title": "Currency",
+        "type": "string"
+       },
+       "verdict_status": {
+        "title": "Verdict Status",
+        "type": "string"
+       },
+       "short_tag": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Short Tag"
+       },
+       "value": {
+        "$ref": "#/$defs/ValueTotals"
+       },
+       "best_cpp": {
+        "title": "Best Cpp",
+        "type": "number"
+       },
+       "points_program": {
+        "title": "Points Program",
+        "type": "string"
+       },
+       "earn_rates": {
+        "items": {
+         "$ref": "#/$defs/EarnRate"
+        },
+        "title": "Earn Rates",
+        "type": "array"
+       },
+       "lounge_access": {
+        "description": "Airport lounges only. included: access comes with the card; see status_perks for visit caps and guests. passes: a few single-visit passes a year. paid: entry only by paying per visit. none: the check found no access. unconfirmed: the catalog cannot say whether the card has access.",
+        "enum": [
+         "included",
+         "passes",
+         "paid",
+         "none",
+         "unconfirmed"
+        ],
+        "title": "Lounge Access",
+        "type": "string"
+       },
+       "foreign_transaction_fee": {
+        "$ref": "#/$defs/Fact_bool_"
+       },
+       "intro_apr_purchases": {
+        "$ref": "#/$defs/Fact_IntroAprValue_"
+       },
+       "intro_apr_balance_transfers": {
+        "$ref": "#/$defs/Fact_IntroAprValue_"
+       },
+       "insurance": {
+        "items": {
+         "$ref": "#/$defs/InsuranceLevelEntry"
+        },
+        "title": "Insurance",
+        "type": "array"
+       },
+       "transfer_partner_counts": {
+        "$ref": "#/$defs/TransferPartnerCounts"
+       },
+       "provenance": {
+        "$ref": "#/$defs/ProvenanceRef"
+       }
+      },
+      "required": [
+       "card_id",
+       "name",
+       "issuer",
+       "annual_fee",
+       "currency",
+       "verdict_status",
+       "short_tag",
+       "value",
+       "best_cpp",
+       "points_program",
+       "earn_rates",
+       "lounge_access",
+       "foreign_transaction_fee",
+       "intro_apr_purchases",
+       "intro_apr_balance_transfers",
+       "insurance",
+       "transfer_partner_counts",
+       "provenance"
+      ],
+      "title": "CompareEntry",
+      "type": "object"
+     },
+     "CompareQuery": {
+      "additionalProperties": false,
+      "properties": {
+       "card_ids": {
+        "items": {
+         "type": "string"
+        },
+        "title": "Card Ids",
+        "type": "array"
+       }
+      },
+      "required": [
+       "card_ids"
+      ],
+      "title": "CompareQuery",
+      "type": "object"
+     },
+     "EarnRate": {
+      "additionalProperties": false,
+      "properties": {
+       "category": {
+        "title": "Category",
+        "type": "string"
+       },
+       "multiplier": {
+        "title": "Multiplier",
+        "type": "string"
+       },
+       "is_base": {
+        "title": "Is Base",
+        "type": "boolean"
+       }
+      },
+      "required": [
+       "category",
+       "multiplier",
+       "is_base"
+      ],
+      "title": "EarnRate",
+      "type": "object"
+     },
+     "Fact_IntroAprValue_": {
+      "additionalProperties": false,
+      "properties": {
+       "status": {
+        "enum": [
+         "recorded",
+         "not_recorded"
+        ],
+        "title": "Status",
+        "type": "string"
+       },
+       "value": {
+        "anyOf": [
+         {
+          "$ref": "#/$defs/IntroAprValue"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       }
+      },
+      "required": [
+       "status",
+       "value"
+      ],
+      "title": "Fact[IntroAprValue]",
+      "type": "object"
+     },
+     "Fact_bool_": {
+      "additionalProperties": false,
+      "properties": {
+       "status": {
+        "enum": [
+         "recorded",
+         "not_recorded"
+        ],
+        "title": "Status",
+        "type": "string"
+       },
+       "value": {
+        "anyOf": [
+         {
+          "type": "boolean"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Value"
+       }
+      },
+      "required": [
+       "status",
+       "value"
+      ],
+      "title": "Fact[bool]",
+      "type": "object"
+     },
+     "InsuranceLevelEntry": {
+      "additionalProperties": false,
+      "properties": {
+       "coverage": {
+        "title": "Coverage",
+        "type": "string"
+       },
+       "level": {
+        "description": "unconfirmed: the catalog cannot say whether the card has this coverage.",
+        "enum": [
+         "strong",
+         "good",
+         "mid",
+         "none",
+         "unconfirmed"
+        ],
+        "title": "Level",
+        "type": "string"
+       }
+      },
+      "required": [
+       "coverage",
+       "level"
+      ],
+      "title": "InsuranceLevelEntry",
+      "type": "object"
+     },
+     "IntroAprValue": {
+      "additionalProperties": false,
+      "properties": {
+       "rate": {
+        "title": "Rate",
+        "type": "string"
+       },
+       "months": {
+        "title": "Months",
+        "type": "integer"
+       }
+      },
+      "required": [
+       "rate",
+       "months"
+      ],
+      "title": "IntroAprValue",
+      "type": "object"
+     },
+     "Meta": {
+      "additionalProperties": false,
+      "properties": {
+       "contract_version": {
+        "title": "Contract Version",
+        "type": "string"
+       },
+       "catalog_digest": {
+        "description": "Hash of exactly what this server serves.",
+        "title": "Catalog Digest",
+        "type": "string"
+       },
+       "catalog_card_count": {
+        "title": "Catalog Card Count",
+        "type": "integer"
+       },
+       "market": {
+        "title": "Market",
+        "type": "string"
+       },
+       "currency": {
+        "title": "Currency",
+        "type": "string"
+       },
+       "methodology_url": {
+        "title": "Methodology Url",
+        "type": "string"
+       },
+       "disclaimer": {
+        "title": "Disclaimer",
+        "type": "string"
+       }
+      },
+      "required": [
+       "contract_version",
+       "catalog_digest",
+       "catalog_card_count",
+       "market",
+       "currency",
+       "methodology_url",
+       "disclaimer"
+      ],
+      "title": "Meta",
+      "type": "object"
+     },
+     "ProvenanceRef": {
+      "additionalProperties": false,
+      "properties": {
+       "issuer_url": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "Where current terms are published. Not proof of what was verified.",
+        "title": "Issuer Url"
+       },
+       "verification_status": {
+        "description": "verified: a recorded check with no gaps recorded, which does not prove every field was confirmed. partially_verified: not_checked lists areas that check could not confirm. not_verified: no recorded check.",
+        "enum": [
+         "verified",
+         "partially_verified",
+         "not_verified"
+        ],
+        "title": "Verification Status",
+        "type": "string"
+       },
+       "verified_on": {
+        "anyOf": [
+         {
+          "format": "date",
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Verified On"
+       },
+       "not_checked": {
+        "description": "Areas the check could not confirm. Treat them as unverified.",
+        "items": {
+         "type": "string"
+        },
+        "title": "Not Checked",
+        "type": "array"
+       },
+       "review_due_on": {
+        "anyOf": [
+         {
+          "format": "date",
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "Do not rely on verified_on after this date.",
+        "title": "Review Due On"
+       }
+      },
+      "required": [
+       "issuer_url",
+       "verification_status",
+       "verified_on",
+       "not_checked",
+       "review_due_on"
+      ],
+      "title": "ProvenanceRef",
+      "type": "object"
+     },
+     "TransferPartnerCounts": {
+      "additionalProperties": false,
+      "properties": {
+       "airline": {
+        "title": "Airline",
+        "type": "integer"
+       },
+       "hotel": {
+        "title": "Hotel",
+        "type": "integer"
+       }
+      },
+      "required": [
+       "airline",
+       "hotel"
+      ],
+      "title": "TransferPartnerCounts",
+      "type": "object"
+     },
+     "ValueTotals": {
+      "additionalProperties": false,
+      "properties": {
+       "applied_credit_value": {
+        "description": "Sum of each credit's applied value. Not an estimate of worth.",
+        "title": "Applied Credit Value",
+        "type": "integer"
+       },
+       "applied_net": {
+        "description": "Applied value minus fee. Positive: credits win.",
+        "title": "Applied Net",
+        "type": "integer"
+       },
+       "advertised_credit_value": {
+        "title": "Advertised Credit Value",
+        "type": "integer"
+       },
+       "best_case_net": {
+        "title": "Best Case Net",
+        "type": "integer"
+       },
+       "credits_at_zero": {
+        "description": "Credits counted at $0 because no usage was given. A high count means applied figures understate the card: pass your own usage to estimate_value.",
+        "title": "Credits At Zero",
+        "type": "integer"
+       }
+      },
+      "required": [
+       "applied_credit_value",
+       "applied_net",
+       "advertised_credit_value",
+       "best_case_net",
+       "credits_at_zero"
+      ],
+      "title": "ValueTotals",
+      "type": "object"
+     }
+    },
+    "additionalProperties": false,
+    "properties": {
+     "meta": {
+      "$ref": "#/$defs/Meta"
+     },
+     "query": {
+      "$ref": "#/$defs/CompareQuery"
+     },
+     "cards": {
+      "items": {
+       "$ref": "#/$defs/CompareEntry"
+      },
+      "title": "Cards",
+      "type": "array"
+     }
+    },
+    "required": [
+     "meta",
+     "query",
+     "cards"
+    ],
+    "title": "CompareResult",
+    "type": "object"
+   },
+   "annotations": {
+    "title": "Compare cards",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  },
+  {
+   "name": "rank_by_category",
+   "title": "Rank cards by category",
+   "description": "Rank cards for a spending category by effective return per dollar: the earn multiplier times the card's best realistic cents per point (percent rates are used as stated). With card_ids, ranks only those cards and applies points pooling between cards that share a points account, as the site's My Cards view does; without it, ranks the whole catalog with no pooling. Ties go to the lower annual fee, then name. If fewer than 3 cards have a real bonus, the remaining top slots are filled with flat-rate cards marked is_fallback. Ignores spending caps, activation requirements and sign-up offers.",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "category": {
+      "enum": [
+       "dining",
+       "groceries",
+       "gas-ev",
+       "streaming",
+       "utilities",
+       "rent",
+       "drugstores",
+       "fitness",
+       "flights",
+       "hotels",
+       "car-rentals",
+       "other-travel",
+       "transit",
+       "online-shopping",
+       "wholesale",
+       "home-improvement",
+       "entertainment",
+       "catch-all"
+      ],
+      "title": "Category",
+      "type": "string"
+     },
+     "card_ids": {
+      "anyOf": [
+       {
+        "items": {
+         "maxLength": 64,
+         "minLength": 1,
+         "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+         "type": "string"
+        },
+        "maxItems": 25,
+        "minItems": 1,
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Card Ids"
+     },
+     "limit": {
+      "default": 3,
+      "maximum": 10,
+      "minimum": 1,
+      "title": "Limit",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "category"
+    ],
+    "title": "rank_by_categoryArguments"
+   },
+   "outputSchema": {
+    "$defs": {
+     "CategoryInfo": {
+      "additionalProperties": false,
+      "properties": {
+       "key": {
+        "title": "Key",
+        "type": "string"
+       },
+       "label": {
+        "title": "Label",
+        "type": "string"
+       },
+       "description": {
+        "title": "Description",
+        "type": "string"
+       },
+       "group": {
+        "title": "Group",
+        "type": "string"
+       }
+      },
+      "required": [
+       "key",
+       "label",
+       "description",
+       "group"
+      ],
+      "title": "CategoryInfo",
+      "type": "object"
+     },
+     "Meta": {
+      "additionalProperties": false,
+      "properties": {
+       "contract_version": {
+        "title": "Contract Version",
+        "type": "string"
+       },
+       "catalog_digest": {
+        "description": "Hash of exactly what this server serves.",
+        "title": "Catalog Digest",
+        "type": "string"
+       },
+       "catalog_card_count": {
+        "title": "Catalog Card Count",
+        "type": "integer"
+       },
+       "market": {
+        "title": "Market",
+        "type": "string"
+       },
+       "currency": {
+        "title": "Currency",
+        "type": "string"
+       },
+       "methodology_url": {
+        "title": "Methodology Url",
+        "type": "string"
+       },
+       "disclaimer": {
+        "title": "Disclaimer",
+        "type": "string"
+       }
+      },
+      "required": [
+       "contract_version",
+       "catalog_digest",
+       "catalog_card_count",
+       "market",
+       "currency",
+       "methodology_url",
+       "disclaimer"
+      ],
+      "title": "Meta",
+      "type": "object"
+     },
+     "ProvenanceRef": {
+      "additionalProperties": false,
+      "properties": {
+       "issuer_url": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "Where current terms are published. Not proof of what was verified.",
+        "title": "Issuer Url"
+       },
+       "verification_status": {
+        "description": "verified: a recorded check with no gaps recorded, which does not prove every field was confirmed. partially_verified: not_checked lists areas that check could not confirm. not_verified: no recorded check.",
+        "enum": [
+         "verified",
+         "partially_verified",
+         "not_verified"
+        ],
+        "title": "Verification Status",
+        "type": "string"
+       },
+       "verified_on": {
+        "anyOf": [
+         {
+          "format": "date",
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Verified On"
+       },
+       "not_checked": {
+        "description": "Areas the check could not confirm. Treat them as unverified.",
+        "items": {
+         "type": "string"
+        },
+        "title": "Not Checked",
+        "type": "array"
+       },
+       "review_due_on": {
+        "anyOf": [
+         {
+          "format": "date",
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "Do not rely on verified_on after this date.",
+        "title": "Review Due On"
+       }
+      },
+      "required": [
+       "issuer_url",
+       "verification_status",
+       "verified_on",
+       "not_checked",
+       "review_due_on"
+      ],
+      "title": "ProvenanceRef",
+      "type": "object"
+     },
+     "RankEntry": {
+      "additionalProperties": false,
+      "properties": {
+       "rank": {
+        "title": "Rank",
+        "type": "integer"
+       },
+       "card_id": {
+        "title": "Card Id",
+        "type": "string"
+       },
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "issuer": {
+        "title": "Issuer",
+        "type": "string"
+       },
+       "annual_fee": {
+        "title": "Annual Fee",
+        "type": "integer"
+       },
+       "multiplier": {
+        "title": "Multiplier",
+        "type": "string"
+       },
+       "is_percent_rate": {
+        "title": "Is Percent Rate",
+        "type": "boolean"
+       },
+       "effective_cents_per_dollar": {
+        "title": "Effective Cents Per Dollar",
+        "type": "number"
+       },
+       "best_cpp": {
+        "title": "Best Cpp",
+        "type": "number"
+       },
+       "effective_cpp": {
+        "title": "Effective Cpp",
+        "type": "number"
+       },
+       "is_fallback": {
+        "description": "A flat rate filling a top-3 slot, not a real category bonus.",
+        "title": "Is Fallback",
+        "type": "boolean"
+       },
+       "is_pooled": {
+        "title": "Is Pooled",
+        "type": "boolean"
+       },
+       "provenance": {
+        "$ref": "#/$defs/ProvenanceRef"
+       }
+      },
+      "required": [
+       "rank",
+       "card_id",
+       "name",
+       "issuer",
+       "annual_fee",
+       "multiplier",
+       "is_percent_rate",
+       "effective_cents_per_dollar",
+       "best_cpp",
+       "effective_cpp",
+       "is_fallback",
+       "is_pooled",
+       "provenance"
+      ],
+      "title": "RankEntry",
+      "type": "object"
+     },
+     "RankMethod": {
+      "additionalProperties": false,
+      "properties": {
+       "formula": {
+        "title": "Formula",
+        "type": "string"
+       },
+       "tie_break": {
+        "title": "Tie Break",
+        "type": "string"
+       },
+       "limitations": {
+        "title": "Limitations",
+        "type": "string"
+       }
+      },
+      "required": [
+       "formula",
+       "tie_break",
+       "limitations"
+      ],
+      "title": "RankMethod",
+      "type": "object"
+     },
+     "RankQuery": {
+      "additionalProperties": false,
+      "properties": {
+       "category": {
+        "title": "Category",
+        "type": "string"
+       },
+       "card_ids": {
+        "anyOf": [
+         {
+          "items": {
+           "type": "string"
+          },
+          "type": "array"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Card Ids"
+       },
+       "limit": {
+        "title": "Limit",
+        "type": "integer"
+       }
+      },
+      "required": [
+       "category",
+       "card_ids",
+       "limit"
+      ],
+      "title": "RankQuery",
+      "type": "object"
+     }
+    },
+    "additionalProperties": false,
+    "properties": {
+     "meta": {
+      "$ref": "#/$defs/Meta"
+     },
+     "query": {
+      "$ref": "#/$defs/RankQuery"
+     },
+     "category": {
+      "$ref": "#/$defs/CategoryInfo"
+     },
+     "mode": {
+      "enum": [
+       "catalog",
+       "wallet"
+      ],
+      "title": "Mode",
+      "type": "string"
+     },
+     "points_pooling_applied": {
+      "title": "Points Pooling Applied",
+      "type": "boolean"
+     },
+     "total_matching": {
+      "description": "Cards with a real bonus in this category.",
+      "title": "Total Matching",
+      "type": "integer"
+     },
+     "returned": {
+      "title": "Returned",
+      "type": "integer"
+     },
+     "hidden_as_secured_twins": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Hidden As Secured Twins",
+      "type": "array"
+     },
+     "entries": {
+      "items": {
+       "$ref": "#/$defs/RankEntry"
+      },
+      "title": "Entries",
+      "type": "array"
+     },
+     "method": {
+      "$ref": "#/$defs/RankMethod"
+     }
+    },
+    "required": [
+     "meta",
+     "query",
+     "category",
+     "mode",
+     "points_pooling_applied",
+     "total_matching",
+     "returned",
+     "hidden_as_secured_twins",
+     "entries",
+     "method"
+    ],
+    "title": "RankResult",
+    "type": "object"
+   },
+   "annotations": {
+    "title": "Rank cards by category",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  },
+  {
+   "name": "estimate_value",
+   "title": "Estimate card value",
+   "description": "A card's statement credits and cash-like perks at your expected annual use, minus its annual fee. Pass credit_overrides with what you expect to use: without them most credits count as $0, because the catalog assumes no use, not because they are worthless. credits_at_zero reports how many. Overrides are clamped to each credit's advertised maximum and reported. Excludes points earning, lounge access, insurance, status perks and sign-up offers.",
+   "inputSchema": {
+    "type": "object",
+    "$defs": {
+     "CreditOverride": {
+      "additionalProperties": false,
+      "properties": {
+       "credit_id": {
+        "maxLength": 64,
+        "minLength": 1,
+        "pattern": "^[a-z0-9]+([_-][a-z0-9]+)*$",
+        "title": "Credit Id",
+        "type": "string"
+       },
+       "annual_value": {
+        "maximum": 100000,
+        "minimum": 0,
+        "title": "Annual Value",
+        "type": "integer"
+       }
+      },
+      "required": [
+       "credit_id",
+       "annual_value"
+      ],
+      "title": "CreditOverride",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "card_id": {
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "title": "Card Id",
+      "type": "string"
+     },
+     "credit_overrides": {
+      "anyOf": [
+       {
+        "items": {
+         "$ref": "#/$defs/CreditOverride"
+        },
+        "maxItems": 30,
+        "minItems": 1,
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Credit Overrides"
+     }
+    },
+    "required": [
+     "card_id"
+    ],
+    "title": "estimate_valueArguments"
+   },
+   "outputSchema": {
+    "$defs": {
+     "AppliedCreditOut": {
+      "additionalProperties": false,
+      "properties": {
+       "credit_id": {
+        "title": "Credit Id",
+        "type": "string"
+       },
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "tier": {
+        "title": "Tier",
+        "type": "string"
+       },
+       "max_annual": {
+        "title": "Max Annual",
+        "type": "integer"
+       },
+       "default_value": {
+        "title": "Default Value",
+        "type": "integer"
+       },
+       "applied_value": {
+        "title": "Applied Value",
+        "type": "integer"
+       },
+       "source": {
+        "enum": [
+         "default",
+         "override",
+         "override_clamped"
+        ],
+        "title": "Source",
+        "type": "string"
+       },
+       "requested_value": {
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Requested Value"
+       }
+      },
+      "required": [
+       "credit_id",
+       "name",
+       "tier",
+       "max_annual",
+       "default_value",
+       "applied_value",
+       "source",
+       "requested_value"
+      ],
+      "title": "AppliedCreditOut",
+      "type": "object"
+     },
+     "CreditOverrideEcho": {
+      "additionalProperties": false,
+      "properties": {
+       "credit_id": {
+        "title": "Credit Id",
+        "type": "string"
+       },
+       "annual_value": {
+        "title": "Annual Value",
+        "type": "integer"
+       }
+      },
+      "required": [
+       "credit_id",
+       "annual_value"
+      ],
+      "title": "CreditOverrideEcho",
+      "type": "object"
+     },
+     "EstimateQuery": {
+      "additionalProperties": false,
+      "properties": {
+       "card_id": {
+        "title": "Card Id",
+        "type": "string"
+       },
+       "credit_overrides": {
+        "anyOf": [
+         {
+          "items": {
+           "$ref": "#/$defs/CreditOverrideEcho"
+          },
+          "type": "array"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Credit Overrides"
+       }
+      },
+      "required": [
+       "card_id",
+       "credit_overrides"
+      ],
+      "title": "EstimateQuery",
+      "type": "object"
+     },
+     "IssuerSource": {
+      "additionalProperties": false,
+      "properties": {
+       "kind": {
+        "title": "Kind",
+        "type": "string"
+       },
+       "url": {
+        "title": "Url",
+        "type": "string"
+       }
+      },
+      "required": [
+       "kind",
+       "url"
+      ],
+      "title": "IssuerSource",
+      "type": "object"
+     },
+     "Meta": {
+      "additionalProperties": false,
+      "properties": {
+       "contract_version": {
+        "title": "Contract Version",
+        "type": "string"
+       },
+       "catalog_digest": {
+        "description": "Hash of exactly what this server serves.",
+        "title": "Catalog Digest",
+        "type": "string"
+       },
+       "catalog_card_count": {
+        "title": "Catalog Card Count",
+        "type": "integer"
+       },
+       "market": {
+        "title": "Market",
+        "type": "string"
+       },
+       "currency": {
+        "title": "Currency",
+        "type": "string"
+       },
+       "methodology_url": {
+        "title": "Methodology Url",
+        "type": "string"
+       },
+       "disclaimer": {
+        "title": "Disclaimer",
+        "type": "string"
+       }
+      },
+      "required": [
+       "contract_version",
+       "catalog_digest",
+       "catalog_card_count",
+       "market",
+       "currency",
+       "methodology_url",
+       "disclaimer"
+      ],
+      "title": "Meta",
+      "type": "object"
+     },
+     "Provenance": {
+      "additionalProperties": false,
+      "properties": {
+       "issuer_url": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "Where current terms are published. Not proof of what was verified.",
+        "title": "Issuer Url"
+       },
+       "verification_status": {
+        "description": "verified: a recorded check with no gaps recorded, which does not prove every field was confirmed. partially_verified: not_checked lists areas that check could not confirm. not_verified: no recorded check.",
+        "enum": [
+         "verified",
+         "partially_verified",
+         "not_verified"
+        ],
+        "title": "Verification Status",
+        "type": "string"
+       },
+       "verified_on": {
+        "anyOf": [
+         {
+          "format": "date",
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Verified On"
+       },
+       "not_checked": {
+        "description": "Areas the check could not confirm. Treat them as unverified.",
+        "items": {
+         "type": "string"
+        },
+        "title": "Not Checked",
+        "type": "array"
+       },
+       "review_due_on": {
+        "anyOf": [
+         {
+          "format": "date",
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "Do not rely on verified_on after this date.",
+        "title": "Review Due On"
+       },
+       "issuer_sources": {
+        "description": "A product_page is where to check terms, not proof of verification.",
+        "items": {
+         "$ref": "#/$defs/IssuerSource"
+        },
+        "title": "Issuer Sources",
+        "type": "array"
+       },
+       "note": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Note"
+       },
+       "evidence_url": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "The public record of the check, a commit or pull request.",
+        "title": "Evidence Url"
+       },
+       "evidence_scope": {
+        "anyOf": [
+         {
+          "enum": [
+           "card",
+           "issuer_pass"
+          ],
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "issuer_pass: covered by an issuer-level pass, and the evidence may not mention this card individually.",
+        "title": "Evidence Scope"
+       },
+       "site_url": {
+        "title": "Site Url",
+        "type": "string"
+       }
+      },
+      "required": [
+       "issuer_url",
+       "verification_status",
+       "verified_on",
+       "not_checked",
+       "review_due_on",
+       "issuer_sources",
+       "note",
+       "evidence_url",
+       "evidence_scope",
+       "site_url"
+      ],
+      "title": "Provenance",
+      "type": "object"
+     },
+     "ValueTotals": {
+      "additionalProperties": false,
+      "properties": {
+       "applied_credit_value": {
+        "description": "Sum of each credit's applied value. Not an estimate of worth.",
+        "title": "Applied Credit Value",
+        "type": "integer"
+       },
+       "applied_net": {
+        "description": "Applied value minus fee. Positive: credits win.",
+        "title": "Applied Net",
+        "type": "integer"
+       },
+       "advertised_credit_value": {
+        "title": "Advertised Credit Value",
+        "type": "integer"
+       },
+       "best_case_net": {
+        "title": "Best Case Net",
+        "type": "integer"
+       },
+       "credits_at_zero": {
+        "description": "Credits counted at $0 because no usage was given. A high count means applied figures understate the card: pass your own usage to estimate_value.",
+        "title": "Credits At Zero",
+        "type": "integer"
+       }
+      },
+      "required": [
+       "applied_credit_value",
+       "applied_net",
+       "advertised_credit_value",
+       "best_case_net",
+       "credits_at_zero"
+      ],
+      "title": "ValueTotals",
+      "type": "object"
+     }
+    },
+    "additionalProperties": false,
+    "properties": {
+     "meta": {
+      "$ref": "#/$defs/Meta"
+     },
+     "query": {
+      "$ref": "#/$defs/EstimateQuery"
+     },
+     "card_id": {
+      "title": "Card Id",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "currency": {
+      "title": "Currency",
+      "type": "string"
+     },
+     "annual_fee": {
+      "title": "Annual Fee",
+      "type": "integer"
+     },
+     "credits": {
+      "items": {
+       "$ref": "#/$defs/AppliedCreditOut"
+      },
+      "title": "Credits",
+      "type": "array"
+     },
+     "totals": {
+      "$ref": "#/$defs/ValueTotals"
+     },
+     "counts": {
+      "title": "Counts",
+      "type": "string"
+     },
+     "excludes": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Excludes",
+      "type": "array"
+     },
+     "provenance": {
+      "$ref": "#/$defs/Provenance"
+     }
+    },
+    "required": [
+     "meta",
+     "query",
+     "card_id",
+     "name",
+     "currency",
+     "annual_fee",
+     "credits",
+     "totals",
+     "counts",
+     "excludes",
+     "provenance"
+    ],
+    "title": "EstimateResult",
+    "type": "object"
+   },
+   "annotations": {
+    "title": "Estimate card value",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  }
+ ]
+}
