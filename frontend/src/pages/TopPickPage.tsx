@@ -196,14 +196,10 @@ function MyCardsFilter({
 function RankCell({ entry }: { entry: TopPickEntry | undefined }) {
   if (!entry) return <td className="top-pick-cell-empty">—</td>;
   const cardImage = CARD_IMAGES[entry.card.id];
-  // A "%" rate normally already directly states cents earned per dollar, so
-  // its effectiveValue always equals the displayed number — showing it
-  // again would just be noise. Except when pooling has boosted it above
-  // that raw label (e.g. Freedom Flex's displayed "5%" really means ~10.3¢
-  // once pooled into a Sapphire Reserve account) — then the boosted number
-  // is exactly the point, and hiding it would make the isPooled note below
-  // meaningless.
-  const showEffectiveValue = !entry.multiplier.includes("%") || entry.isPooled;
+  // Every row shows cents per dollar, so a "6%" cash-back row and a "3×" points
+  // row can be compared at a glance. An "Up to" rate (Bilt's rent) is a
+  // ceiling, so its cents per dollar is labelled as one too.
+  const isCeiling = /^up to\b/i.test(entry.multiplier);
   return (
     <td>
       <Link
@@ -219,12 +215,11 @@ function RankCell({ entry }: { entry: TopPickEntry | undefined }) {
           <span className="top-pick-name">{entry.card.name}</span>
           <span className="top-pick-value">
             {entry.multiplier}
-            {showEffectiveValue && (
-              <span className="top-pick-effective-value">
-                {" "}
-                ≈ {entry.effectiveValue.toFixed(1)}¢/$1
-              </span>
-            )}
+            <span className="top-pick-effective-value">
+              {" "}
+              ≈ {isCeiling ? "up to " : ""}
+              {entry.effectiveValue.toFixed(1)}¢/$1
+            </span>
           </span>
           {entry.isFallback && (
             <span className="top-pick-fallback-note">No category bonus</span>

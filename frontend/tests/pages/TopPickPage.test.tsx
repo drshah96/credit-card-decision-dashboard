@@ -187,7 +187,7 @@ describe("TopPickPage", () => {
     expect(cells[2]).toHaveTextContent("—");
   });
 
-  it("shows the effective cents-per-dollar value for a points card, but not a cash-back one", async () => {
+  it("shows the effective cents-per-dollar value on points and cash-back rows alike", async () => {
     vi.mocked(fetchCards).mockResolvedValue([
       makeSummary({
         id: "points-card",
@@ -211,9 +211,26 @@ describe("TopPickPage", () => {
     const groceriesRow = (
       await screen.findByRole("rowheader", { name: "Groceries" })
     ).closest("tr")!;
-    // Flat cash back: the raw "%" already IS the effective value, so no
-    // redundant annotation.
-    expect(within(groceriesRow).queryByText(/≈/)).not.toBeInTheDocument();
+    // Percent rows show cents per dollar too, so rows compare at a glance.
+    expect(within(groceriesRow).getByText("≈ 3.0¢/$1")).toBeInTheDocument();
+  });
+
+  it("labels an Up to rate's cents per dollar as a ceiling", async () => {
+    vi.mocked(fetchCards).mockResolvedValue([
+      makeSummary({
+        id: "bilt-like",
+        name: "Rent Card",
+        best_cpp: 2.2,
+        categories: [
+          { category: "Rent or mortgage (Bilt Housing Rewards)", multiplier: "Up to 1.25×*", is_base: false },
+        ],
+      }),
+    ]);
+    renderPage();
+    const rentRow = (await screen.findByRole("rowheader", { name: "Rent or Mortgage" })).closest(
+      "tr",
+    )!;
+    expect(within(rentRow).getByText("≈ up to 2.8¢/$1")).toBeInTheDocument();
   });
 
   it("shows a card image for a ranked card that has one", async () => {
