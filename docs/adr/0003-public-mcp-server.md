@@ -1621,6 +1621,15 @@ purpose, and contract 1.1.0.
   ("which card should I get") skips it, on the owner's call. With `card_ids`, or once the site's
   visitor picks their cards, it counts. `ownCards` and `own_cards` carry that mode on both sides,
   and Freedom Flex's 5% leaves the catalog's Groceries.
+- **Cards most people can't get or can't spend sit out of whole-catalog rankings.** Two new card
+  fields, written only where they apply: `open_to_new_applicants: false` (Amex Green, closed since
+  Amex pulled its application page) and `points.redeemable: "store_only"` (14 store cards whose
+  rewards only work at their own store, such as Kohl's Cash, Wayfair Reward Dollars and BJ's
+  rewards). Both rank with `card_ids`, since a holder still uses the card, and a store-only club
+  card still ranks in Wholesale. Costco, One Key and Disney Premier stay `anywhere`, on the owner's
+  call: Costco's certificate cashes out, OneKeyCash pays for any Expedia, Hotels.com or Vrbo
+  booking, and Disney Rewards Dollars also cover airfare. Migration `d9e3f1a7b2c4` adds both
+  columns with defaults. `get_card`, `compare_cards` and `find_cards` serve them.
 
 **Defaults taken while owner decisions are open.** Each can change before release:
 

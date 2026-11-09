@@ -76,6 +76,12 @@ worse, one that validates with a number a hundred times too large.
 - **`lounge_access`** is what the card gets you at airport lounges: `included`,
   `passes`, `paid` or `none`. Leave it out if the issuer's terms don't settle it,
   and don't infer `none` from a card saying nothing. Hotel lounges don't count.
+- **`points.redeemable`** is `"store_only"` when the rewards can only be spent at the
+  card's own store or brand family (store certificates, Kohl's Cash). Leave it out
+  when they can be cashed out, used as a statement credit or spent broadly; the
+  default is `anywhere`. Store-only cards sit out of whole-catalog rankings.
+- **`open_to_new_applicants`** is `false` only when the issuer has stopped taking
+  applications, for example by pulling the application page. Leave it out otherwise.
 - **`transfer_partners.partners[]`** only gets per-partner entries where you
   have a verified per-partner source with name and ratio. Otherwise populate
   `transfer_partners.airline_count` and `.hotel_count` and leave the array

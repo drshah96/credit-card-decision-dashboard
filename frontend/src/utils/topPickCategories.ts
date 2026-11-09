@@ -456,6 +456,17 @@ export interface ComputeTopPicksOptions {
 /** Every real-bonus entry for one category, sorted, with fallbacks appended up
  * to 3 total. Takes the already-deduped cards and pool-adjusted cpp map so a
  * full computeTopPicks pass computes them once, not once per category. */
+/** Whether a card belongs in a whole-catalog ranking for this category. A card
+ * closed to new applicants can't be got, and a store-only card's rewards are
+ * worth their cents-per-point only to someone who shops at that store, so both
+ * sit out, except a store-only card in Wholesale, where one club is the norm.
+ * Someone ranking cards they hold (ownCards) keeps both, since they still use them. */
+function competesInCatalog(card: CardSummary, categoryKey: string): boolean {
+  if (card.open_to_new_applicants === false) return false;
+  if (card.rewards_redeemable === "store_only") return categoryKey === "wholesale";
+  return true;
+}
+
 function rankWithin(
   deduped: CardSummary[],
   categoryKey: string,
@@ -464,6 +475,7 @@ function rankWithin(
 ): TopPickEntry[] {
   const entries: TopPickEntry[] = [];
   for (const card of deduped) {
+    if (!ownCards && !competesInCatalog(card, categoryKey)) continue;
     const best = bestRateForCategory(card, categoryKey, ownCards);
     if (best) entries.push(toEntry(card, best, false, effectiveCppById.get(card.id)!));
   }
@@ -481,6 +493,7 @@ function rankWithin(
     const fallbacks: TopPickEntry[] = [];
     for (const card of deduped) {
       if (alreadyUsed.has(card.id)) continue;
+      if (!ownCards && !competesInCatalog(card, categoryKey)) continue;
       const catchAll = catchAllRateFor(card);
       if (catchAll) fallbacks.push(toEntry(card, catchAll, true, effectiveCppById.get(card.id)!));
     }

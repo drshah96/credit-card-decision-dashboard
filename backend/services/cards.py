@@ -111,6 +111,7 @@ def _to_card(c: CardModel, is_secured_variant_of: str | None = None) -> Card:
             ],
             per_100k=c.points_per_100k_label,
             note=c.points_note or "",
+            redeemable=c.points_redeemable,
         ),
         transfer_partners=TransferPartners(
             airline_count=c.transfer_airline_count,
@@ -181,6 +182,7 @@ def _to_card(c: CardModel, is_secured_variant_of: str | None = None) -> Card:
         ),
         foreign_transaction_fee=c.foreign_transaction_fee,
         lounge_access=c.lounge_access,
+        open_to_new_applicants=c.open_to_new_applicants,
         has_lounge_access=_has_lounge_access(c.lounge_access),
         variable_apr=c.variable_apr,
         balance_transfer_apr=c.balance_transfer_apr,
@@ -249,6 +251,8 @@ def _to_card_summary(c: CardModel, is_secured_variant_of: str | None = None) -> 
         ),
         foreign_transaction_fee=c.foreign_transaction_fee,
         has_lounge_access=_has_lounge_access(c.lounge_access),
+        rewards_redeemable=c.points_redeemable,
+        open_to_new_applicants=c.open_to_new_applicants,
     )
 
 

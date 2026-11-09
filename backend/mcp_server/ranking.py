@@ -222,6 +222,8 @@ class RankInput:
     secured_variant_id: str | None
     points_pool_id: str | None
     points_pool_receiver: bool
+    rewards_redeemable: str
+    open_to_new_applicants: bool
 
     @classmethod
     def from_summary(cls, summary: CardSummary) -> "RankInput":
@@ -236,6 +238,8 @@ class RankInput:
             secured_variant_id=summary.secured_variant_id,
             points_pool_id=summary.points_pool_id,
             points_pool_receiver=summary.points_pool_receiver,
+            rewards_redeemable=summary.rewards_redeemable,
+            open_to_new_applicants=summary.open_to_new_applicants,
         )
 
 
@@ -356,6 +360,15 @@ def _sort_key(entry: RankEntry) -> tuple[float, int, tuple[str, str]]:
     )
 
 
+def competes_in_catalog(card: RankInput, category_key: str) -> bool:
+    """See competesInCatalog in topPickCategories.ts."""
+    if not card.open_to_new_applicants:
+        return False
+    if card.rewards_redeemable == "store_only":
+        return category_key == "wholesale"
+    return True
+
+
 def rank_category(
     cards: Iterable[RankInput],
     category_key: str,
@@ -368,6 +381,8 @@ def rank_category(
     cpp = {c.id: _effective_cpp(c, deduped, pooling) for c in deduped}
     entries = []
     for card in deduped:
+        if not own_cards and not competes_in_catalog(card, category_key):
+            continue
         best = _best_rate(card, category_key, own_cards)
         if best is not None:
             entries.append(_to_entry(card, best, False, cpp[card.id]))
@@ -378,6 +393,8 @@ def rank_category(
         fallbacks = []
         for card in deduped:
             if card.id in used:
+                continue
+            if not own_cards and not competes_in_catalog(card, category_key):
                 continue
             catch_all = _catch_all_rate(card)
             if catch_all is not None:

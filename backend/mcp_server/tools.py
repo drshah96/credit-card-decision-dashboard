@@ -50,7 +50,9 @@ RANK_METHOD = schemas.RankMethod(
     "broad category, so the card's everyday rate competes instead. Travel and entertainment "
     "portal rates count, a choose-your-category rate counts in each category it offers, though "
     "you pick only one or two, and a single club's rate counts in Wholesale. A rotating "
-    "quarterly category counts only when card_ids are given, since a holder can activate it.",
+    "quarterly category counts only when card_ids are given, since a holder can activate it. "
+    "So does a card closed to new applicants, or one whose rewards can only be spent at its own "
+    "store, except a store-only club card in Wholesale.",
 )
 VALUE_COUNTS = (
     "Statement credits and cash-like perks at the values applied, minus the annual fee. A credit "
@@ -204,6 +206,7 @@ def create_server(load_snapshot: Callable[[], CatalogSnapshot]) -> MCPServer:
                     annual_fee=card.annual_fee,
                     verdict_status=card.verdict.status,
                     is_secured_variant_of=card.is_secured_variant_of,
+                    open_to_new_applicants=card.open_to_new_applicants,
                     provenance=projections.provenance_ref(card, snapshot.verification[card.id]),
                 )
             )

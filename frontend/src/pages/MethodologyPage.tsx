@@ -192,6 +192,14 @@ export default function MethodologyPage() {
             to just one.
           </P>
           <P>
+            <strong>Cards you can't get, or can't spend, sit out of the default ranking.</strong>{" "}
+            A card the issuer has closed to new applicants isn't a card you can choose. A store
+            card whose rewards only work at its own store, like Kohl's Cash or Wayfair Reward
+            Dollars, is worth its rate only if you shop there. Both are left out of the default
+            ranking, except a club card in Wholesale Clubs. Once you pick the cards you hold,
+            they count, since you still use them.
+          </P>
+          <P>
             <strong>When a category has fewer than three cards with a real bonus</strong>, we
             fill the remaining slot with the next-best flat, everyday rate among the rest,
             labeled "No category bonus." A real, category-specific bonus always beats a flat-rate

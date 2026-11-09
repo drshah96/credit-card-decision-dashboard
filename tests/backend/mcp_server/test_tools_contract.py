@@ -384,3 +384,29 @@ async def test_rotating_rates_count_with_card_ids_but_not_across_the_catalog(sna
     assert "chase-freedom-flex" not in [e["card_id"] for e in catalog["entries"]]
     assert wallet["entries"][0]["card_id"] == "chase-freedom-flex"
     assert wallet["entries"][0]["is_fallback"] is False
+
+
+async def test_closed_and_store_only_cards_are_labelled_and_left_out_of_catalog_rankings(snapshot):
+    async with connect(snapshot) as client:
+        green = structured(await client.call_tool("get_card", {"card_id": "amex-green"}))
+        found = structured(await client.call_tool("find_cards", {"query": "classic green"}))
+        compared = structured(
+            await client.call_tool("compare_cards", {"card_ids": ["citi-wayfair", "amex-gold"]})
+        )
+        dining = structured(
+            await client.call_tool("rank_by_category", {"category": "dining", "limit": 10})
+        )
+        held = structured(
+            await client.call_tool(
+                "rank_by_category", {"category": "dining", "card_ids": ["amex-green"]}
+            )
+        )
+    assert green["card"]["open_to_new_applicants"] is False
+    assert found["cards"][0]["open_to_new_applicants"] is False
+    wayfair = compared["cards"][0]
+    assert (wayfair["rewards_redeemable"], wayfair["open_to_new_applicants"]) == (
+        "store_only",
+        True,
+    )
+    assert "amex-green" not in [e["card_id"] for e in dining["entries"]]
+    assert held["entries"][0]["card_id"] == "amex-green"

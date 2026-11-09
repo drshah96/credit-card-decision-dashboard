@@ -78,6 +78,7 @@
   ],
   "earn_note": "This is the open-loop American Express version of Macy's card: it earns outside Macy's, unlike the closed-loop, store-only Macy's Credit Card, which only works at Macy's and Macy's Backstage. Star Rewards status is use-it-or-lose-it and resets based on trailing 12-month spend: Silver is the automatic starting tier and only earns points on Macy's-designated \"Star Money Days,\" not on everyday purchases; Gold ($500–$1,199/yr) works the same way; only Platinum ($1,200+/yr) converts to a flat 5% back on every Macy's purchase with no exclusions. The 3%/2%/1% non-Macy's rates come from the Amex network side and don't appear to vary by tier.",
   "points": {
+    "redeemable": "store_only",
     "currency": "Star Money",
     "redemption_options": [
       {

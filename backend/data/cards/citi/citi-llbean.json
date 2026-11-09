@@ -57,6 +57,7 @@
   ],
   "earn_note": "Unlike Macy's, Bloomingdale's, or Wayfair, L.L.Bean has issued this as a single open-loop Mastercard from the start; no separate closed-loop, store-only L.L.Bean card was found. Each Bean Buck equals $1 in savings at L.L.Bean, and Bean Bucks don't expire as long as the account stays open and active.",
   "points": {
+    "redeemable": "store_only",
     "currency": "Bean Bucks",
     "redemption_options": [
       {

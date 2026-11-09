@@ -3,6 +3,7 @@
 import json
 import random
 from pathlib import Path
+from types import SimpleNamespace
 
 from backend.mcp_server.ranking import (
     _ROTATING_RATE,
@@ -11,6 +12,7 @@ from backend.mcp_server.ranking import (
     RateInput,
     _is_rankable,
     _matches_category,
+    competes_in_catalog,
     parse_multiplier_value,
 )
 from backend.models import CardSummary
@@ -81,6 +83,12 @@ def build_winning_rates(summaries: list[dict]) -> dict[str, dict[str, str]]:
             continue
         row: dict[str, str] = {}
         for summary in summaries:
+            card = SimpleNamespace(
+                rewards_redeemable=summary["rewards_redeemable"],
+                open_to_new_applicants=summary["open_to_new_applicants"],
+            )
+            if not competes_in_catalog(card, key):
+                continue
             best = None
             for raw in summary["categories"]:
                 rate = RateInput(raw["category"], raw["multiplier"], raw["is_base"])

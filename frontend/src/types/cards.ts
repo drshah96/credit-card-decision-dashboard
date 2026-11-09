@@ -77,6 +77,9 @@ interface CardBase {
   /** Derived server-side from the card's authored lounge_access: true when the
    * card itself gets you into airport lounges free. */
   has_lounge_access: boolean;
+  /** False once the issuer stops taking applications. Whole-catalog rankings
+   * leave the card out; a ranking of cards someone holds keeps it. */
+  open_to_new_applicants: boolean;
 }
 
 export interface EarnCategorySummary {
@@ -90,6 +93,9 @@ export interface EarnCategorySummary {
 
 /** Returned by GET /api/cards */
 export interface CardSummary extends CardBase {
+  /** Points.redeemable, flattened for computeTopPicks: a store-only card is left
+   * out of whole-catalog rankings, except Wholesale, where one club is the norm. */
+  rewards_redeemable: "anywhere" | "store_only";
   total_easy_credits: number;
   total_max_credits: number;
   /** Category + multiplier pairs only (not full EarnRate objects) — enough to
@@ -122,6 +128,8 @@ export interface Points {
   redemption_options: RedemptionOption[];
   per_100k: string;
   note: string;
+  /** store_only: the rewards can only be spent at the card's own store. */
+  redeemable: "anywhere" | "store_only";
 }
 
 export type TransferPartnerType = "airline" | "hotel";

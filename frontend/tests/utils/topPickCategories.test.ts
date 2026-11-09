@@ -28,6 +28,8 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     intro_apr_balance_transfers: null,
     foreign_transaction_fee: null,
     has_lounge_access: false,
+    rewards_redeemable: "anywhere",
+    open_to_new_applicants: true,
     ...overrides,
   };
 }
@@ -252,6 +254,27 @@ describe("TOP_PICK_CATEGORIES matchers (via computeTopPicks)", () => {
     const held = computeTopPicks([flex], { ownCards: true });
     expect(held.find((r) => r.key === "dining")?.topChoice?.multiplier).toBe("5%");
     expect(held.find((r) => r.key === "groceries")?.topChoice?.multiplier).toBe("5%");
+  });
+
+  it("leaves store-only and closed cards out of the whole catalog, except a club in Wholesale", () => {
+    const store = makeSummary({
+      id: "store",
+      rewards_redeemable: "store_only",
+      categories: [rate("Restaurants", "4%"), rate("In-club at BJ's", "5%")],
+    });
+    const closed = makeSummary({
+      id: "closed",
+      open_to_new_applicants: false,
+      categories: [rate("Restaurants worldwide", "3×"), rate("Everything else", "1×", true)],
+    });
+    const catalog = computeTopPicks([store, closed]);
+    expect(catalog.find((r) => r.key === "dining")?.topChoice).toBeUndefined();
+    expect(catalog.find((r) => r.key === "catch-all")?.topChoice).toBeUndefined();
+    expect(catalog.find((r) => r.key === "wholesale")?.topChoice?.card.id).toBe("store");
+    // Someone who holds them still uses them.
+    const held = computeTopPicks([store, closed], { ownCards: true });
+    expect(held.find((r) => r.key === "dining")?.topChoice?.card.id).toBe("store");
+    expect(held.find((r) => r.key === "dining")?.runnerUp?.card.id).toBe("closed");
   });
 
   it("ranks the Costco Visa on its everyday gas rate, not Costco-only gas", () => {
