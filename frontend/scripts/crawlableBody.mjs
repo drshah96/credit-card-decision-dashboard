@@ -218,6 +218,13 @@ instead of the advertised ceiling.</p>
 <p>There are no paid placements and no affiliate influence on any ranking. A
 regression test proves the ranking function cannot read the affiliate flag at
 all.</p>
+<h2>Rates most purchases won't earn don't count</h2>
+<p>A rate counts toward a category only if most purchases there earn it, so a rate
+limited to partner restaurants, certain hours, one store or online orders does not.
+Travel and entertainment portal rates, choose-your-own categories and a single club's
+rate in Wholesale Clubs do count. Rotating quarterly categories, cards closed to new
+applicants, and store cards whose rewards only work at their own store are left out
+of the default ranking, and count once you pick the cards you hold.</p>
 <h2>Cards are sourced from the issuer</h2>
 <p>Every card is hand-authored from the issuer's own cardmember agreement and
 pricing-and-terms documents, not from aggregators, which during a product

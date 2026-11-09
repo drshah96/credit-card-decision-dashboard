@@ -200,6 +200,11 @@ export default function MethodologyPage() {
             they count, since you still use them.
           </P>
           <P>
+            <strong>Utilities means utility bills.</strong> Electric, gas and water count there.
+            Phone plans, internet and cable have their own Phone &amp; Internet row, so a card
+            that only rewards your phone bill can't outrank one that rewards your utilities.
+          </P>
+          <P>
             <strong>When a category has fewer than three cards with a real bonus</strong>, we
             fill the remaining slot with the next-best flat, everyday rate among the rest,
             labeled "No category bonus." A real, category-specific bonus always beats a flat-rate

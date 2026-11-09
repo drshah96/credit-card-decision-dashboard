@@ -128,6 +128,9 @@ every quarter, counts only once you pick the cards you hold. So do cards closed 
 applicants, and store cards whose rewards only work at their own store, except a club card
 in Wholesale Clubs.
 
+Utilities means electric, gas and water bills. Phone plans, internet and cable have their
+own Phone & Internet row, so a phone-only bonus can't outrank a real utilities rate.
+
 Rankings ignore monetization entirely, and a
 [regression test](frontend/tests/utils/topPickCategories.test.ts) proves the
 ranking function can't even see the affiliate flag.
@@ -194,6 +197,10 @@ The answers are built so an agent can't mistake a gap for a fact:
   Once that date passes, the card is flagged `review_overdue`.
 - **Unknown is never "none":** a rate or fee missing from the catalog comes back as
   `not_recorded`, not as a blank an agent could read as zero.
+- **It says when a card can't be got or spent:** `open_to_new_applicants` is
+  `false` once the issuer stops taking applications, and `store_only` rewards
+  can only be spent at the card's own store. Both are left out of whole-catalog
+  rankings, and counted when an agent ranks the cards someone holds.
 - **Rankings match the site and ignore monetization:** a shared test fixture holds
   the Python and TypeScript rankings to the same results, and the ranking code
   can't read the affiliate flag.
