@@ -180,6 +180,13 @@ describe("the crawlable body says enough to be worth crawling", () => {
     expect(body).not.toMatch(/github\.com/i);
   });
 
+  it("tells crawlers on /methodology which rates count and which cards sit out", () => {
+    const body = render("/methodology");
+    expect(body).toContain("only if most purchases there earn it");
+    expect(body).toMatch(/closed to new\s+applicants/);
+    expect(body).toMatch(/only work at their own store/);
+  });
+
   it("points every page back at the site", () => {
     for (const path of ["/", "/methodology", "/compare", "/top-picks", "/cards/amex-platinum"]) {
       expect(render(path)).toContain("https://thewalletaudit.com");
