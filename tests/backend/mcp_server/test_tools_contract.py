@@ -369,3 +369,18 @@ async def test_find_cards_without_a_query_stays_in_name_order(snapshot):
         )
     names = [c["name"] for c in found["cards"]]
     assert names == sorted(names, key=str.casefold)
+
+
+async def test_rotating_rates_count_with_card_ids_but_not_across_the_catalog(snapshot):
+    async with connect(snapshot) as client:
+        catalog = structured(
+            await client.call_tool("rank_by_category", {"category": "groceries", "limit": 10})
+        )
+        wallet = structured(
+            await client.call_tool(
+                "rank_by_category", {"category": "groceries", "card_ids": ["chase-freedom-flex"]}
+            )
+        )
+    assert "chase-freedom-flex" not in [e["card_id"] for e in catalog["entries"]]
+    assert wallet["entries"][0]["card_id"] == "chase-freedom-flex"
+    assert wallet["entries"][0]["is_fallback"] is False

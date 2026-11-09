@@ -236,6 +236,24 @@ describe("TOP_PICK_CATEGORIES matchers (via computeTopPicks)", () => {
     expect(rows.find((r) => r.key === "phone-internet")?.topChoice?.multiplier).toBe("5×");
   });
 
+  it("skips a rotating quarterly rate in the whole catalog but counts it for cards you hold", () => {
+    // It needs activation each quarter and stops at a cap, so it isn't a reason to get
+    // the card, but a holder can activate it.
+    const flex = makeSummary({
+      id: "flex",
+      categories: [
+        rate("Quarterly rotating category. This quarter (Q4): Grocery stores, dining", "5%"),
+        rate("Dining: restaurants, takeout, eligible delivery", "3%"),
+      ],
+    });
+    const catalog = computeTopPicks([flex]);
+    expect(catalog.find((r) => r.key === "dining")?.topChoice?.multiplier).toBe("3%");
+    expect(catalog.find((r) => r.key === "groceries")?.topChoice).toBeUndefined();
+    const held = computeTopPicks([flex], { ownCards: true });
+    expect(held.find((r) => r.key === "dining")?.topChoice?.multiplier).toBe("5%");
+    expect(held.find((r) => r.key === "groceries")?.topChoice?.multiplier).toBe("5%");
+  });
+
   it("ranks the Costco Visa on its everyday gas rate, not Costco-only gas", () => {
     const costco = makeSummary({
       id: "costco",

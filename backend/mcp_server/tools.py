@@ -49,7 +49,8 @@ RANK_METHOD = schemas.RankMethod(
     "limited to one merchant, one brand, online orders or certain hours doesn't count toward a "
     "broad category, so the card's everyday rate competes instead. Travel and entertainment "
     "portal rates count, a choose-your-category rate counts in each category it offers, though "
-    "you pick only one or two, and a single club's rate counts in Wholesale.",
+    "you pick only one or two, and a single club's rate counts in Wholesale. A rotating "
+    "quarterly category counts only when card_ids are given, since a holder can activate it.",
 )
 VALUE_COUNTS = (
     "Statement credits and cash-like perks at the values applied, minus the annual fee. A credit "
@@ -324,7 +325,7 @@ def create_server(load_snapshot: Callable[[], CatalogSnapshot]) -> MCPServer:
             if error:
                 return error
             inputs = [snapshot.rank_inputs[i] for i in card_ids]
-            ranked = rank_category(inputs, category, pooling=True)
+            ranked = rank_category(inputs, category, pooling=True, own_cards=True)
         info = _CATEGORY_BY_KEY[category]
         entries = [
             _rank_entry(snapshot, position, entry)

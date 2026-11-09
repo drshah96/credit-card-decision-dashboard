@@ -258,6 +258,12 @@ export const BRAND_EXCLUDES: Record<string, RegExp> = {
 //
 // test_matcher_input_invariants fails on a new "Up to" rate this doesn't cover,
 // or on a website-only rate in dining, groceries, gas or streaming.
+// A rotating quarterly category needs activation every quarter, stops after a
+// quarterly cap, and changes four times a year. A whole-catalog ranking answers
+// "which card should I get", where none of that is settled, so it skips these.
+// Someone ranking cards they already hold (ownCards) can activate, so it counts.
+export const ROTATING_RATE = /\brotating\b|\bthis quarter\b/i;
+
 export const LIMITED_RATE =
   /partner restaurants|citi nights|gas at costco|online groceries|amazon\.com|disneyplus\.com/i;
 
@@ -346,10 +352,12 @@ export interface TopPickRow extends TopPickCategory {
 function bestRateForCategory(
   card: CardSummary,
   categoryKey: string,
+  ownCards = false,
 ): { value: number; multiplier: string } | undefined {
   let best: { value: number; multiplier: string } | undefined;
   for (const rate of card.categories) {
     if (!matchesCategory(rate, categoryKey)) continue;
+    if (!ownCards && ROTATING_RATE.test(rate.category)) continue;
     if (!isRankableMultiplier(rate.multiplier)) continue;
     const value = parseMultiplierValue(rate.multiplier);
     if (!best || value > best.value) best = { value, multiplier: rate.multiplier };
@@ -440,6 +448,9 @@ export interface ComputeTopPicksOptions {
    * actually holding both the feeder and receiver card. Defaults to false
    * so every existing catalog-wide call site is unaffected. */
   applyPointsPooling?: boolean;
+  /** The cards are ones someone holds, not the whole catalog. Rates and cards
+   * that only a holder can use (a rotating quarterly category) then count. */
+  ownCards?: boolean;
 }
 
 /** Every real-bonus entry for one category, sorted, with fallbacks appended up
@@ -449,10 +460,11 @@ function rankWithin(
   deduped: CardSummary[],
   categoryKey: string,
   effectiveCppById: Map<string, number>,
+  ownCards: boolean,
 ): TopPickEntry[] {
   const entries: TopPickEntry[] = [];
   for (const card of deduped) {
-    const best = bestRateForCategory(card, categoryKey);
+    const best = bestRateForCategory(card, categoryKey, ownCards);
     if (best) entries.push(toEntry(card, best, false, effectiveCppById.get(card.id)!));
   }
   entries.sort(byValueDescThenFeeAscThenName);
@@ -479,7 +491,7 @@ function rankWithin(
 }
 
 function prepareRanking(cards: CardSummary[], options: ComputeTopPicksOptions) {
-  const { applyPointsPooling = false } = options;
+  const { applyPointsPooling = false, ownCards = false } = options;
   // A secured card with byte-identical earn rates to its unsecured twin
   // (CardSummary.secured_variant_id, set only on the unsecured card) is the
   // same card in every way that matters here, and showing both just crowds
@@ -494,7 +506,7 @@ function prepareRanking(cards: CardSummary[], options: ComputeTopPicksOptions) {
   const effectiveCppById = new Map<string, number>(
     deduped.map((card) => [card.id, effectiveCppFor(card, deduped, applyPointsPooling)]),
   );
-  return { deduped, effectiveCppById };
+  return { deduped, effectiveCppById, ownCards };
 }
 
 /** One category's full ranking, past the top 3 that computeTopPicks shows.
@@ -505,8 +517,8 @@ export function rankCategory(
   categoryKey: string,
   options: ComputeTopPicksOptions = {},
 ): TopPickEntry[] {
-  const { deduped, effectiveCppById } = prepareRanking(cards, options);
-  return rankWithin(deduped, categoryKey, effectiveCppById);
+  const { deduped, effectiveCppById, ownCards } = prepareRanking(cards, options);
+  return rankWithin(deduped, categoryKey, effectiveCppById, ownCards);
 }
 
 /** Ranks the whole catalog into the top 3 cards per category by *effective*
@@ -524,9 +536,9 @@ export function computeTopPicks(
   cards: CardSummary[],
   options: ComputeTopPicksOptions = {},
 ): TopPickRow[] {
-  const { deduped, effectiveCppById } = prepareRanking(cards, options);
+  const { deduped, effectiveCppById, ownCards } = prepareRanking(cards, options);
   return TOP_PICK_CATEGORIES.map((category) => {
-    const entries = rankWithin(deduped, category.key, effectiveCppById);
+    const entries = rankWithin(deduped, category.key, effectiveCppById, ownCards);
     return {
       ...category,
       topChoice: entries[0],

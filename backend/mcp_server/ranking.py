@@ -56,6 +56,9 @@ BRAND_EXCLUDE_SOURCES: dict[str, str] = {
     "transit": r"\blyft\b|\buber\b",
 }
 
+# Skipped in whole-catalog rankings only; see ROTATING_RATE in topPickCategories.ts.
+ROTATING_RATE_SOURCE = r"\brotating\b|\bthis quarter\b"
+
 # Applies in every category: a rate most purchases in the category don't earn, such as one
 # merchant network, one website or certain hours. See LIMITED_RATE in topPickCategories.ts.
 LIMITED_RATE_SOURCE = (
@@ -68,6 +71,7 @@ _MATCHERS = {key: re.compile(source, _FLAGS) for key, source in MATCHER_SOURCES.
 _BRAND_EXCLUDES = {key: re.compile(source, _FLAGS) for key, source in BRAND_EXCLUDE_SOURCES.items()}
 _CENTS_PER_GALLON = re.compile(CENTS_PER_GALLON_SOURCE, _FLAGS)
 _LIMITED_RATE = re.compile(LIMITED_RATE_SOURCE, _FLAGS)
+_ROTATING_RATE = re.compile(ROTATING_RATE_SOURCE, _FLAGS)
 _MULTIPLIER_TOKEN = re.compile(r"[\d.]+", re.ASCII)
 _PARSE_FLOAT_PREFIX = re.compile(r"\d+\.?\d*|\.\d+", re.ASCII)
 
@@ -289,10 +293,14 @@ def _is_rankable(multiplier: str) -> bool:
     return not _CENTS_PER_GALLON.search(multiplier)
 
 
-def _best_rate(card: RankInput, category_key: str) -> tuple[float, str] | None:
+def _best_rate(
+    card: RankInput, category_key: str, own_cards: bool = False
+) -> tuple[float, str] | None:
     best: tuple[float, str] | None = None
     for rate in card.categories:
         if not _matches_category(rate, category_key) or not _is_rankable(rate.multiplier):
+            continue
+        if not own_cards and _ROTATING_RATE.search(rate.category):
             continue
         value = parse_multiplier_value(rate.multiplier)
         if best is None or value > best[0]:
@@ -349,14 +357,18 @@ def _sort_key(entry: RankEntry) -> tuple[float, int, tuple[str, str]]:
 
 
 def rank_category(
-    cards: Iterable[RankInput], category_key: str, pooling: bool = False
+    cards: Iterable[RankInput],
+    category_key: str,
+    pooling: bool = False,
+    own_cards: bool = False,
 ) -> list[RankEntry]:
-    """Every real-bonus entry, sorted, with fallbacks appended up to 3 total."""
+    """Every real-bonus entry, sorted, with fallbacks appended up to 3 total. own_cards means
+    the cards are ones someone holds, so holder-only rates such as rotating categories count."""
     deduped = exclude_hidden_secured(cards)
     cpp = {c.id: _effective_cpp(c, deduped, pooling) for c in deduped}
     entries = []
     for card in deduped:
-        best = _best_rate(card, category_key)
+        best = _best_rate(card, category_key, own_cards)
         if best is not None:
             entries.append(_to_entry(card, best, False, cpp[card.id]))
     entries.sort(key=_sort_key)

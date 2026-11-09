@@ -398,7 +398,10 @@ export default function TopPickPage() {
   // account's redemption value) only makes sense once we know which cards
   // someone actually holds — never applied to the whole-catalog default.
   const rows = allCards
-    ? computeTopPicks(scopedCards, { applyPointsPooling: selectedIds.size > 0 })
+    ? computeTopPicks(scopedCards, {
+        applyPointsPooling: selectedIds.size > 0,
+        ownCards: selectedIds.size > 0,
+      })
     : [];
 
   return (

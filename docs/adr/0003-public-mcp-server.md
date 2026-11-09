@@ -1616,6 +1616,11 @@ purpose, and contract 1.1.0.
   (Wayfair, Williams Sonoma) can't match, and AT&T's "AT&T products & services" matches nothing.
   That is 19 categories. Kept, on the owner's call: entertainment portal rates count like travel
   portals, and a single club's rate counts in Wholesale, since people usually belong to one.
+- **A rotating quarterly category counts only for cards someone holds.** It needs activation each
+  quarter, stops at a quarterly cap and changes four times a year, so a whole-catalog ranking
+  ("which card should I get") skips it, on the owner's call. With `card_ids`, or once the site's
+  visitor picks their cards, it counts. `ownCards` and `own_cards` carry that mode on both sides,
+  and Freedom Flex's 5% leaves the catalog's Groceries.
 
 **Defaults taken while owner decisions are open.** Each can change before release:
 

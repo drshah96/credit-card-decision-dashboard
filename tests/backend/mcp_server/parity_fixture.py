@@ -5,6 +5,7 @@ import random
 from pathlib import Path
 
 from backend.mcp_server.ranking import (
+    _ROTATING_RATE,
     CATEGORY_KEYS,
     RANK_INPUT_FIELDS,
     RateInput,
@@ -24,7 +25,13 @@ WALLET_COUNT = 20
 
 
 def _scenario(name: str, card_ids: list[str] | None, pooling: bool) -> dict:
-    return {"name": name, "card_ids": card_ids, "pooling": pooling}
+    # A scenario with card_ids ranks cards someone holds, as the site and MCP server do.
+    return {
+        "name": name,
+        "card_ids": card_ids,
+        "pooling": pooling,
+        "own_cards": card_ids is not None,
+    }
 
 
 def build_summaries(summaries: list[CardSummary]) -> list[dict]:
@@ -62,7 +69,7 @@ def build_scenarios(summaries: list[dict]) -> list[dict]:
 
 
 def build_winning_rates(summaries: list[dict]) -> dict[str, dict[str, str]]:
-    """Which earn rate each card competes on in each category, in the issuer's own words.
+    """Which earn rate each card competes on in each whole-catalog category, in the issuer's words.
 
     The ranking decides by matching words in those descriptions, so a new card or a reworded rate
     can slip a partner-only or online-only rate past LIMITED_RATE. This file puts every such
@@ -78,6 +85,8 @@ def build_winning_rates(summaries: list[dict]) -> dict[str, dict[str, str]]:
             for raw in summary["categories"]:
                 rate = RateInput(raw["category"], raw["multiplier"], raw["is_base"])
                 if not (_matches_category(rate, key) and _is_rankable(rate.multiplier)):
+                    continue
+                if _ROTATING_RATE.search(rate.category):
                     continue
                 value = parse_multiplier_value(rate.multiplier)
                 if best is None or value > best[0]:

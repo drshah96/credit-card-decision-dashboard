@@ -123,7 +123,8 @@ page, but in the ranking the card's broadly available rate competes instead. Thr
 narrower kinds do count, on purpose: travel or tickets bought through the card's own
 portal, since anything can be booked that way; a category you choose yourself, which
 ranks in each category it offers; and a single club's rate in Wholesale Clubs, since
-most people belong to just one.
+most people belong to just one. A rotating quarterly category, which needs activation
+every quarter, counts only once you pick the cards you hold.
 
 Rankings ignore monetization entirely, and a
 [regression test](frontend/tests/utils/topPickCategories.test.ts) proves the

@@ -81,3 +81,11 @@ def test_single_store_and_att_rates_compete_nowhere_but_wholesale():
         card = _card(card_id)
         for category in ("home-improvement", "utilities", "phone-internet"):
             assert _best_rate(card, category) is None, (card_id, category)
+
+
+def test_a_rotating_quarterly_rate_counts_only_for_cards_someone_holds():
+    flex = _card("chase-freedom-flex")
+    assert _best_rate(flex, "groceries") is None
+    assert _best_rate(flex, "dining")[1] == "3%"
+    assert _best_rate(flex, "groceries", own_cards=True)[1] == "5%"
+    assert _best_rate(flex, "dining", own_cards=True)[1] == "5%"

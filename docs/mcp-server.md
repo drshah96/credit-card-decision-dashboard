@@ -118,7 +118,8 @@ one merchant, one brand, online orders or certain hours, such as Bilt partner re
 Nights or Amazon, doesn't count toward a broad category, so the card's everyday rate competes
 instead. Travel and entertainment portal rates count. A choose-your-category rate counts in
 each category it offers, though a cardholder picks only one or two. In `wholesale`, a single
-club's rate counts. Utilities covers electric, gas and water bills only, and `phone-internet`
+club's rate counts. A rotating quarterly category counts only when `card_ids` are given, since
+a holder can activate it. Utilities covers electric, gas and water bills only, and `phone-internet`
 covers phone plans, internet and cable. Passing `card_ids`
 ranks only those cards and applies points pooling between cards that share a points account.
 

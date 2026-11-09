@@ -284,7 +284,10 @@ export default function MethodologyPage() {
           <List>
             <ListItem>Spending caps on bonus categories.</ListItem>
             <ListItem>
-              Activation requirements. Some rates need to be manually enrolled each quarter.
+              Activation requirements and quarterly caps. That's why rotating quarterly
+              categories are left out of the default ranking: you'd need to sign up each
+              quarter, and the categories change four times a year. Once you pick the cards you
+              hold, they count, since you can activate them.
             </ListItem>
             <ListItem>Sign-up bonuses.</ListItem>
           </List>
