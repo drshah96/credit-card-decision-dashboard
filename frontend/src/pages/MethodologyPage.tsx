@@ -183,11 +183,21 @@ export default function MethodologyPage() {
             page.
           </P>
           <P>
-            Two kinds of narrower rate do count, on purpose. Travel booked through the card's
-            own portal counts, since any flight or hotel can be booked that way. And a
-            category you choose yourself, like the U.S. Bank Cash+ card's, counts in each
-            category it offers, because you earn it there if you choose it. You can only pick
-            one or two at a time, though, so the same card may appear in several rows.
+            Three kinds of narrower rate do count, on purpose. Travel or tickets bought
+            through the card's own portal count, since any flight, hotel or show can be booked
+            that way. A category you choose yourself, like the U.S. Bank Cash+ card's, counts
+            in each category it offers, because you earn it there if you choose it. You can
+            only pick one or two at a time, though, so the same card may appear in several
+            rows. And in Wholesale Clubs, a rate for one club counts, since most people belong
+            to just one.
+          </P>
+          <P>
+            <strong>Cards you can't get, or can't spend, sit out of the default ranking.</strong>{" "}
+            A card the issuer has closed to new applicants isn't a card you can choose. A store
+            card whose rewards only work at its own store, like Kohl's Cash or Wayfair Reward
+            Dollars, is worth its rate only if you shop there. Both are left out of the default
+            ranking, except a club card in Wholesale Clubs. Once you pick the cards you hold,
+            they count, since you still use them.
           </P>
           <P>
             <strong>When a category has fewer than three cards with a real bonus</strong>, we
@@ -282,7 +292,10 @@ export default function MethodologyPage() {
           <List>
             <ListItem>Spending caps on bonus categories.</ListItem>
             <ListItem>
-              Activation requirements. Some rates need to be manually enrolled each quarter.
+              Activation requirements and quarterly caps. That's why rotating quarterly
+              categories are left out of the default ranking: you'd need to sign up each
+              quarter, and the categories change four times a year. Once you pick the cards you
+              hold, they count, since you can activate them.
             </ListItem>
             <ListItem>Sign-up bonuses.</ListItem>
           </List>

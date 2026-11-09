@@ -38,14 +38,10 @@ MATCHER_SOURCES: dict[str, str] = {
     "online-shopping": r"online (shopping|retail|purchases)",
     "wholesale": r"wholesale club|costco|sam'?s club|\bbj'?s\b",
     "home-improvement": (
-        r"home improvement|hardware store|garden(ing)? (center|supply|store)|furniture|wayfair"
-        r"|williams sonoma|pottery barn|west elm|home depot|lowe'?s|ace hardware|rejuvenation"
-        r"|joss & main|allmodern|birch lane|perigold|mark & graham"
+        r"home improvement|hardware store|garden(ing)? (center|supply|store)|furniture"
     ),
-    "utilities": (
-        r"\butilit(y|ies)\b|phone plan|internet.{0,25}phone|cable.{0,20}phone|\bat&t\b"
-        r"|cell phone"
-    ),
+    "utilities": r"\butilit(y|ies)\b",
+    "phone-internet": r"\bphone plans?\b|\bcell phones?\b|\bwireless\b|\binternet\b|\bcable\b",
     "rent": r"\brent\b|\bmortgage\b",
     "drugstores": r"drugstores?|drug stores?|\bpharmacy\b",
     "entertainment": r"entertainment|\bmovies?\b|\bconcerts?\b|amusement park",
@@ -60,6 +56,9 @@ BRAND_EXCLUDE_SOURCES: dict[str, str] = {
     "transit": r"\blyft\b|\buber\b",
 }
 
+# Skipped in whole-catalog rankings only; see ROTATING_RATE in topPickCategories.ts.
+ROTATING_RATE_SOURCE = r"\brotating\b|\bthis quarter\b"
+
 # Applies in every category: a rate most purchases in the category don't earn, such as one
 # merchant network, one website or certain hours. See LIMITED_RATE in topPickCategories.ts.
 LIMITED_RATE_SOURCE = (
@@ -72,6 +71,7 @@ _MATCHERS = {key: re.compile(source, _FLAGS) for key, source in MATCHER_SOURCES.
 _BRAND_EXCLUDES = {key: re.compile(source, _FLAGS) for key, source in BRAND_EXCLUDE_SOURCES.items()}
 _CENTS_PER_GALLON = re.compile(CENTS_PER_GALLON_SOURCE, _FLAGS)
 _LIMITED_RATE = re.compile(LIMITED_RATE_SOURCE, _FLAGS)
+_ROTATING_RATE = re.compile(ROTATING_RATE_SOURCE, _FLAGS)
 _MULTIPLIER_TOKEN = re.compile(r"[\d.]+", re.ASCII)
 _PARSE_FLOAT_PREFIX = re.compile(r"\d+\.?\d*|\.\d+", re.ASCII)
 
@@ -118,11 +118,12 @@ CATEGORIES: tuple[Category, ...] = (
         "Monthly digital subscriptions for video and audio.",
         _DAILY,
     ),
+    Category("utilities", "Utilities", "💡", "Electric, gas and water bills.", _DAILY),
     Category(
-        "utilities",
-        "Utilities",
-        "💡",
-        "Electric, gas, water, and home internet or phone bills.",
+        "phone-internet",
+        "Phone & Internet",
+        "📱",
+        "Cell phone plans, home internet and cable TV.",
         _DAILY,
     ),
     Category("rent", "Rent or Mortgage", "🏠", "Rent or mortgage payments on your home.", _DAILY),
@@ -221,6 +222,8 @@ class RankInput:
     secured_variant_id: str | None
     points_pool_id: str | None
     points_pool_receiver: bool
+    rewards_redeemable: str
+    open_to_new_applicants: bool
 
     @classmethod
     def from_summary(cls, summary: CardSummary) -> "RankInput":
@@ -235,6 +238,8 @@ class RankInput:
             secured_variant_id=summary.secured_variant_id,
             points_pool_id=summary.points_pool_id,
             points_pool_receiver=summary.points_pool_receiver,
+            rewards_redeemable=summary.rewards_redeemable,
+            open_to_new_applicants=summary.open_to_new_applicants,
         )
 
 
@@ -292,10 +297,14 @@ def _is_rankable(multiplier: str) -> bool:
     return not _CENTS_PER_GALLON.search(multiplier)
 
 
-def _best_rate(card: RankInput, category_key: str) -> tuple[float, str] | None:
+def _best_rate(
+    card: RankInput, category_key: str, own_cards: bool = False
+) -> tuple[float, str] | None:
     best: tuple[float, str] | None = None
     for rate in card.categories:
         if not _matches_category(rate, category_key) or not _is_rankable(rate.multiplier):
+            continue
+        if not own_cards and _ROTATING_RATE.search(rate.category):
             continue
         value = parse_multiplier_value(rate.multiplier)
         if best is None or value > best[0]:
@@ -351,15 +360,30 @@ def _sort_key(entry: RankEntry) -> tuple[float, int, tuple[str, str]]:
     )
 
 
+def competes_in_catalog(card: RankInput, category_key: str) -> bool:
+    """See competesInCatalog in topPickCategories.ts."""
+    if not card.open_to_new_applicants:
+        return False
+    if card.rewards_redeemable == "store_only":
+        return category_key == "wholesale"
+    return True
+
+
 def rank_category(
-    cards: Iterable[RankInput], category_key: str, pooling: bool = False
+    cards: Iterable[RankInput],
+    category_key: str,
+    pooling: bool = False,
+    own_cards: bool = False,
 ) -> list[RankEntry]:
-    """Every real-bonus entry, sorted, with fallbacks appended up to 3 total."""
+    """Every real-bonus entry, sorted, with fallbacks appended up to 3 total. own_cards means
+    the cards are ones someone holds, so holder-only rates such as rotating categories count."""
     deduped = exclude_hidden_secured(cards)
     cpp = {c.id: _effective_cpp(c, deduped, pooling) for c in deduped}
     entries = []
     for card in deduped:
-        best = _best_rate(card, category_key)
+        if not own_cards and not competes_in_catalog(card, category_key):
+            continue
+        best = _best_rate(card, category_key, own_cards)
         if best is not None:
             entries.append(_to_entry(card, best, False, cpp[card.id]))
     entries.sort(key=_sort_key)
@@ -369,6 +393,8 @@ def rank_category(
         fallbacks = []
         for card in deduped:
             if card.id in used:
+                continue
+            if not own_cards and not competes_in_catalog(card, category_key):
                 continue
             catch_all = _catch_all_rate(card)
             if catch_all is not None:

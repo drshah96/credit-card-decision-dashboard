@@ -601,6 +601,16 @@ def test_has_lounge_access_true_for_a_known_lounge_card() -> None:
     assert summary["has_lounge_access"] is True
 
 
+def test_store_only_rewards_and_closed_cards_reach_detail_and_summary() -> None:
+    summaries = {c["id"]: c for c in client.get("/api/cards").json()}
+    assert summaries["citi-wayfair"]["rewards_redeemable"] == "store_only"
+    assert summaries["amex-green"]["open_to_new_applicants"] is False
+    assert summaries["amex-gold"]["rewards_redeemable"] == "anywhere"
+    assert summaries["amex-gold"]["open_to_new_applicants"] is True
+    assert client.get("/api/cards/citi-wayfair").json()["points"]["redeemable"] == "store_only"
+    assert client.get("/api/cards/amex-green").json()["open_to_new_applicants"] is False
+
+
 def test_has_lounge_access_false_for_a_card_with_no_such_perk() -> None:
     detail = client.get("/api/cards/chase-freedom-unlimited").json()
     assert detail["has_lounge_access"] is False

@@ -71,6 +71,7 @@
   ],
   "earn_note": "This is the open-loop Visa version of Tractor Supply's card: it earns outside Tractor Supply/Petsense, unlike the closed-loop, store-only TSC Store Card, which earns the same 5% at Tractor Supply/Petsense but nothing elsewhere. Cardholders are automatically enrolled as Preferred Plus Neighbors, the highest tier of Tractor Supply's separate Neighbor's Club loyalty program. Special financing offers (e.g., a 3.99% promotional rate on purchases of $1,599+) periodically run at TractorSupply.com/TSCCard on purchases of $199 and up.",
   "points": {
+    "redeemable": "store_only",
     "currency": "Neighbor's Club Rewards",
     "redemption_options": [
       {

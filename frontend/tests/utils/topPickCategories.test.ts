@@ -28,6 +28,8 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     intro_apr_balance_transfers: null,
     foreign_transaction_fee: null,
     has_lounge_access: false,
+    rewards_redeemable: "anywhere",
+    open_to_new_applicants: true,
     ...overrides,
   };
 }
@@ -53,8 +55,10 @@ describe("TOP_PICK_CATEGORIES matchers (via computeTopPicks)", () => {
     ["transit", "Local transit & commuting, incl. rideshare", "3×"],
     ["online-shopping", "U.S. online retail", "2×"],
     ["wholesale", "Costco & Costco.com purchases", "2%"],
-    ["home-improvement", "Williams Sonoma, Williams Sonoma Home, Pottery Barn", "3×"],
-    ["utilities", "Internet, cable & phone services", "3×"],
+    ["home-improvement", "Home improvement stores", "3×"],
+    ["phone-internet", "Internet, cable & phone services", "3×"],
+    ["phone-internet", "Phone plans", "3×"],
+    ["utilities", "Utilities", "3×"],
     ["rent", "Rent or mortgage (Bilt Housing Rewards)", "1×"],
     ["drugstores", "Drugstores", "3%"],
     ["entertainment", "Entertainment: movies, concerts, sporting events, amusement parks", "3%"],
@@ -215,6 +219,64 @@ describe("TOP_PICK_CATEGORIES matchers (via computeTopPicks)", () => {
     expect(rows.find((r) => r.key === "utilities")?.topChoice?.card.id).toBe("chooser");
   });
 
+  it("keeps phone-only, AT&T-only and single-store rates out of Utilities and Home Improvement", () => {
+    // From a second outside review: phone plans had counted as Utilities, ranking
+    // phone-only 5× above real utility rates, and single-store rates (Wayfair,
+    // Williams Sonoma) won Home Improvement. Each now goes where it belongs, or nowhere.
+    const card = makeSummary({
+      id: "narrow",
+      categories: [
+        rate("Phone plans", "5×"),
+        rate("AT&T products & services", "2×"),
+        rate("Wayfair, Joss & Main, AllModern, Birch Lane & Perigold", "7%"),
+        rate("Williams Sonoma, Williams Sonoma Home, Pottery Barn, West Elm", "5%"),
+      ],
+    });
+    const rows = computeTopPicks([card]);
+    expect(rows.find((r) => r.key === "utilities")?.topChoice).toBeUndefined();
+    expect(rows.find((r) => r.key === "home-improvement")?.topChoice).toBeUndefined();
+    expect(rows.find((r) => r.key === "phone-internet")?.topChoice?.multiplier).toBe("5×");
+  });
+
+  it("skips a rotating quarterly rate in the whole catalog but counts it for cards you hold", () => {
+    // It needs activation each quarter and stops at a cap, so it isn't a reason to get
+    // the card, but a holder can activate it.
+    const flex = makeSummary({
+      id: "flex",
+      categories: [
+        rate("Quarterly rotating category. This quarter (Q4): Grocery stores, dining", "5%"),
+        rate("Dining: restaurants, takeout, eligible delivery", "3%"),
+      ],
+    });
+    const catalog = computeTopPicks([flex]);
+    expect(catalog.find((r) => r.key === "dining")?.topChoice?.multiplier).toBe("3%");
+    expect(catalog.find((r) => r.key === "groceries")?.topChoice).toBeUndefined();
+    const held = computeTopPicks([flex], { ownCards: true });
+    expect(held.find((r) => r.key === "dining")?.topChoice?.multiplier).toBe("5%");
+    expect(held.find((r) => r.key === "groceries")?.topChoice?.multiplier).toBe("5%");
+  });
+
+  it("leaves store-only and closed cards out of the whole catalog, except a club in Wholesale", () => {
+    const store = makeSummary({
+      id: "store",
+      rewards_redeemable: "store_only",
+      categories: [rate("Restaurants", "4%"), rate("In-club at BJ's", "5%")],
+    });
+    const closed = makeSummary({
+      id: "closed",
+      open_to_new_applicants: false,
+      categories: [rate("Restaurants worldwide", "3×"), rate("Everything else", "1×", true)],
+    });
+    const catalog = computeTopPicks([store, closed]);
+    expect(catalog.find((r) => r.key === "dining")?.topChoice).toBeUndefined();
+    expect(catalog.find((r) => r.key === "catch-all")?.topChoice).toBeUndefined();
+    expect(catalog.find((r) => r.key === "wholesale")?.topChoice?.card.id).toBe("store");
+    // Someone who holds them still uses them.
+    const held = computeTopPicks([store, closed], { ownCards: true });
+    expect(held.find((r) => r.key === "dining")?.topChoice?.card.id).toBe("store");
+    expect(held.find((r) => r.key === "dining")?.runnerUp?.card.id).toBe("closed");
+  });
+
   it("ranks the Costco Visa on its everyday gas rate, not Costco-only gas", () => {
     const costco = makeSummary({
       id: "costco",
@@ -263,7 +325,7 @@ describe("TOP_PICK_CATEGORIES matchers (via computeTopPicks)", () => {
       categories: [rate("Gas stations, grocery stores, home improvement stores, and phone plans", "5%")],
     });
     const rows = computeTopPicks([card]);
-    for (const key of ["gas-ev", "groceries", "home-improvement", "utilities"]) {
+    for (const key of ["gas-ev", "groceries", "home-improvement", "phone-internet"]) {
       expect(rows.find((r) => r.key === key)?.topChoice?.card.id).toBe("x");
     }
   });

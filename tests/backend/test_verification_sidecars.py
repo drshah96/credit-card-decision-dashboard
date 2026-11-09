@@ -314,7 +314,14 @@ NOVEMBER_2026: dict[str, tuple[str, frozenset[str]]] = {
     ),
 }
 
-LEDGER = {**BACKFILL, **NOVEMBER_2026}
+# Checks a person made by hand, recorded against the commit whose facts they confirm.
+OWNER_CHECKS: dict[str, tuple[str, frozenset[str]]] = {
+    # Amex Green closed to new applicants: missing from Amex's personal card list, and its page
+    # redirects to that list, seen in a browser on 2026-11-08.
+    "8025eabaa8e639abc9c20e96ee7d0c37f5ad2f8a": ("2026-11-08", frozenset({"amex-green"})),
+}
+
+LEDGER = {**BACKFILL, **NOVEMBER_2026, **OWNER_CHECKS}
 
 # Only the September backfill used issuer-level evidence; every November record cites a card diff.
 ISSUER_PASS_CARDS = frozenset(

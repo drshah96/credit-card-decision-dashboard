@@ -16,6 +16,7 @@ from sqlalchemy import (
     String,
     UniqueConstraint,
     func,
+    true,
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -94,6 +95,9 @@ class CardModel(Base):
         CheckConstraint(
             "lounge_access IN ('included','passes','paid','none')", name="ck_card_lounge_access"
         ),
+        CheckConstraint(
+            "points_redeemable IN ('anywhere','store_only')", name="ck_card_points_redeemable"
+        ),
     )
 
     card_id: Mapped[int] = mapped_column(primary_key=True)
@@ -142,6 +146,9 @@ class CardModel(Base):
     points_pool_id: Mapped[str | None] = mapped_column(default=None)
     # See backend/models.py Card.lounge_access. Null means not yet audited.
     lounge_access: Mapped[str | None] = mapped_column(default=None)
+    # See backend/models.py Points.redeemable and Card.open_to_new_applicants.
+    points_redeemable: Mapped[str] = mapped_column(default="anywhere", server_default="anywhere")
+    open_to_new_applicants: Mapped[bool] = mapped_column(default=True, server_default=true())
     # True only for the card whose OWN account is what a pooled balance gets
     # redeemed through (e.g. Sapphire Preferred/Reserve, Strata Premier/
     # Elite) — false for a "feeder" card that only reaches full value once

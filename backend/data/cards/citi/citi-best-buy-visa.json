@@ -64,6 +64,7 @@
   ],
   "earn_note": "This is the open-loop Visa version of Best Buy's card: it earns outside Best Buy, unlike the closed-loop, store-only My Best Buy Credit Card, which earns 5% at Best Buy but nothing anywhere else and can't be swiped elsewhere. Choosing 0% promotional financing on a purchase forfeits the reward-earning on that purchase. Best Buy periodically runs limited-time bonus categories; check current terms before applying.",
   "points": {
+    "redeemable": "store_only",
     "currency": "My Best Buy Rewards Certificates",
     "redemption_options": [
       {

@@ -64,6 +64,7 @@
   ],
   "earn_note": "This is the open-loop Mastercard version of Dillard's card: it earns outside Dillard's, unlike the closed-loop, store-only Dillard's Credit Card, which earns the same 2 pts/$1 at Dillard's but nothing anywhere else. Citi acquired Dillard's card portfolio (private-label and co-branded) from Wells Fargo in January 2024; both card products are now issued by Citibank, N.A.",
   "points": {
+    "redeemable": "store_only",
     "currency": "Dillard's Rewards Points",
     "redemption_options": [
       {

@@ -2,12 +2,14 @@
  {
   "name": "catalog_default",
   "card_ids": null,
-  "pooling": false
+  "pooling": false,
+  "own_cards": false
  },
  {
   "name": "catalog_pooled",
   "card_ids": null,
-  "pooling": true
+  "pooling": true,
+  "own_cards": false
  },
  {
   "name": "pool_chase-ultimate-rewards-transferable_full",
@@ -17,7 +19,8 @@
    "chase-sapphire-preferred",
    "chase-sapphire-reserve"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "pool_chase-ultimate-rewards-transferable_feeders",
@@ -25,7 +28,8 @@
    "chase-freedom-flex",
    "chase-freedom-unlimited"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "pool_citi-thankyou-points-transferable_full",
@@ -35,7 +39,8 @@
    "citi-strata-elite",
    "citi-strata-premier"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "pool_citi-thankyou-points-transferable_feeders",
@@ -43,7 +48,8 @@
    "citi-double-cash",
    "citi-strata"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "secured_pairs",
@@ -65,7 +71,8 @@
    "us-bank-cash-plus",
    "us-bank-cash-plus-secured"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "secured_only",
@@ -79,14 +86,16 @@
    "us-bank-altitude-go-secured",
    "us-bank-cash-plus-secured"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "single_receiver",
   "card_ids": [
    "chase-sapphire-preferred"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_00",
@@ -114,7 +123,8 @@
    "us-bank-altitude-connect",
    "wells-fargo-one-key"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_01",
@@ -143,7 +153,8 @@
    "wells-fargo-choice-privileges",
    "wells-fargo-reflect"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_02",
@@ -164,7 +175,8 @@
    "discover-it-secured",
    "us-bank-secured"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_03",
@@ -186,7 +198,8 @@
    "citi-tractor-supply",
    "discover-it-student-cash-back"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_04",
@@ -206,7 +219,8 @@
    "citi-home-depot-consumer",
    "wells-fargo-choice-privileges"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_05",
@@ -222,7 +236,8 @@
    "us-bank-altitude-go",
    "wells-fargo-choice-privileges"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_06",
@@ -236,7 +251,8 @@
    "us-bank-cash-plus-secured",
    "us-bank-shield"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_07",
@@ -259,7 +275,8 @@
    "discover-it-student-cash-back",
    "wells-fargo-choice-privileges"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_08",
@@ -287,7 +304,8 @@
    "discover-it-secured",
    "us-bank-altitude-connect"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_09",
@@ -305,7 +323,8 @@
    "us-bank-shield",
    "us-bank-split"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_10",
@@ -321,7 +340,8 @@
    "us-bank-split",
    "wells-fargo-choice-privileges-select"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_11",
@@ -346,7 +366,8 @@
    "us-bank-shield",
    "wells-fargo-choice-privileges"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_12",
@@ -358,7 +379,8 @@
    "discover-it-chrome",
    "us-bank-smartly"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_13",
@@ -381,7 +403,8 @@
    "wells-fargo-autograph",
    "wells-fargo-choice-privileges"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_14",
@@ -412,7 +435,8 @@
    "wells-fargo-autograph",
    "wells-fargo-autograph-journey"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_15",
@@ -439,7 +463,8 @@
    "wells-fargo-autograph-journey",
    "wells-fargo-reflect"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_16",
@@ -461,7 +486,8 @@
    "discover-it-secured",
    "discover-it-student-chrome"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_17",
@@ -484,7 +510,8 @@
    "us-bank-altitude-connect",
    "us-bank-smartly"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_18",
@@ -501,7 +528,8 @@
    "us-bank-split",
    "wells-fargo-one-key"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  },
  {
   "name": "wallet_19",
@@ -513,6 +541,7 @@
    "citi-simplicity",
    "us-bank-shield"
   ],
-  "pooling": true
+  "pooling": true,
+  "own_cards": true
  }
 ]

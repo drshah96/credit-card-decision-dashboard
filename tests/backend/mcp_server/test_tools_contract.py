@@ -43,7 +43,7 @@ async def test_output_validates_against_its_published_schema(snapshot, tool, arg
     data = structured(result)
     jsonschema.validate(data, published[tool].output_schema)
     assert text_of(result) == json.dumps(data, separators=(",", ":"), ensure_ascii=False)
-    assert data["meta"]["contract_version"] == "1.1.0"
+    assert data["meta"]["contract_version"] == "1.2.0"
     assert data["meta"]["catalog_digest"] == snapshot.digest
     assert data["meta"]["disclaimer"]
 
@@ -369,3 +369,55 @@ async def test_find_cards_without_a_query_stays_in_name_order(snapshot):
         )
     names = [c["name"] for c in found["cards"]]
     assert names == sorted(names, key=str.casefold)
+
+
+async def test_rotating_rates_count_with_card_ids_but_not_across_the_catalog(snapshot):
+    async with connect(snapshot) as client:
+        catalog = structured(
+            await client.call_tool("rank_by_category", {"category": "groceries", "limit": 10})
+        )
+        wallet = structured(
+            await client.call_tool(
+                "rank_by_category", {"category": "groceries", "card_ids": ["chase-freedom-flex"]}
+            )
+        )
+    assert "chase-freedom-flex" not in [e["card_id"] for e in catalog["entries"]]
+    assert wallet["entries"][0]["card_id"] == "chase-freedom-flex"
+    assert wallet["entries"][0]["is_fallback"] is False
+
+
+async def test_closed_and_store_only_cards_are_labelled_and_left_out_of_catalog_rankings(snapshot):
+    async with connect(snapshot) as client:
+        green = structured(await client.call_tool("get_card", {"card_id": "amex-green"}))
+        found = structured(await client.call_tool("find_cards", {"query": "classic green"}))
+        compared = structured(
+            await client.call_tool("compare_cards", {"card_ids": ["citi-wayfair", "amex-gold"]})
+        )
+        dining = structured(
+            await client.call_tool("rank_by_category", {"category": "dining", "limit": 10})
+        )
+        held = structured(
+            await client.call_tool(
+                "rank_by_category", {"category": "dining", "card_ids": ["amex-green"]}
+            )
+        )
+    assert green["card"]["open_to_new_applicants"] is False
+    assert found["cards"][0]["open_to_new_applicants"] is False
+    wayfair = compared["cards"][0]
+    assert (wayfair["rewards_redeemable"], wayfair["open_to_new_applicants"]) == (
+        "store_only",
+        True,
+    )
+    assert "amex-green" not in [e["card_id"] for e in dining["entries"]]
+    assert held["entries"][0]["card_id"] == "amex-green"
+
+
+async def test_amex_greens_closure_is_backed_by_the_owners_dated_check(snapshot):
+    async with connect(snapshot) as client:
+        green = structured(await client.call_tool("get_card", {"card_id": "amex-green"}))
+    provenance = green["provenance"]
+    assert provenance["verification_status"] == "partially_verified"
+    assert provenance["verified_on"] == "2026-11-08"
+    assert provenance["review_due_on"] == "2027-05-07"
+    assert "confirmed in a browser" in provenance["note"]
+    assert provenance["evidence_url"].endswith("/commit/8025eabaa8e639abc9c20e96ee7d0c37f5ad2f8a")

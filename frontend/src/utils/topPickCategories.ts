@@ -57,9 +57,13 @@ export const CATEGORY_MATCHERS: Record<string, RegExp> = {
     /transit|rideshare|\buber\b|\blyft\b|subway|\btrain\b|\btolls?\b|\btaxi\b|\bparking\b|\bbus(es)?\b|\brides?\b|\brails?\b|ground transportation/i,
   "online-shopping": /online (shopping|retail|purchases)/i,
   wholesale: /wholesale club|costco|sam'?s club|\bbj'?s\b/i,
-  "home-improvement":
-    /home improvement|hardware store|garden(ing)? (center|supply|store)|furniture|wayfair|williams sonoma|pottery barn|west elm|home depot|lowe'?s|ace hardware|rejuvenation|joss & main|allmodern|birch lane|perigold|mark & graham/i,
-  utilities: /\butilit(y|ies)\b|phone plan|internet.{0,25}phone|cable.{0,20}phone|\bat&t\b|cell phone/i,
+  // Generic store types only. A rate that names one retailer (Wayfair, Williams
+  // Sonoma, Home Depot) is a single-store rate, so it can't match here at all.
+  "home-improvement": /home improvement|hardware store|garden(ing)? (center|supply|store)|furniture/i,
+  // Bills for electric, gas and water. Phone plans and internet had counted here,
+  // which ranked phone-only rates above real utility rates; they have their own row.
+  utilities: /\butilit(y|ies)\b/i,
+  "phone-internet": /\bphone plans?\b|\bcell phones?\b|\bwireless\b|\binternet\b|\bcable\b/i,
   rent: /\brent\b|\bmortgage\b/i,
   drugstores: /drugstores?|drug stores?|\bpharmacy\b/i,
   entertainment: /entertainment|\bmovies?\b|\bconcerts?\b|amusement park/i,
@@ -100,7 +104,14 @@ export const TOP_PICK_CATEGORIES: TopPickCategory[] = [
     key: "utilities",
     label: "Utilities",
     emoji: "💡",
-    description: "Electric, gas, water, and home internet or phone bills.",
+    description: "Electric, gas and water bills.",
+    group: "Common & Daily Spending",
+  },
+  {
+    key: "phone-internet",
+    label: "Phone & Internet",
+    emoji: "📱",
+    description: "Cell phone plans, home internet and cable TV.",
     group: "Common & Daily Spending",
   },
   {
@@ -239,13 +250,20 @@ export const BRAND_EXCLUDES: Record<string, RegExp> = {
 // category the card's broadly applicable rate competes instead, as with
 // BRAND_EXCLUDES. The rates still show on the card's own page.
 //
-// Two kinds of narrower rate do count, on purpose. A travel portal rate, since
-// any flight or hotel can be booked through the portal. And a category you
-// choose yourself (U.S. Bank Cash+, BofA Customized Cash), which ranks in each
-// category it offers, because you earn it there if you choose it.
+// Three kinds of narrower rate do count, on purpose. A travel or entertainment
+// portal rate, since any flight, hotel or ticket can be bought through the
+// portal. A category you choose yourself (U.S. Bank Cash+, BofA Customized Cash),
+// which ranks in each category it offers, because you earn it there if you choose
+// it. And a single club's rate in Wholesale, since people usually belong to one.
 //
 // test_matcher_input_invariants fails on a new "Up to" rate this doesn't cover,
 // or on a website-only rate in dining, groceries, gas or streaming.
+// A rotating quarterly category needs activation every quarter, stops after a
+// quarterly cap, and changes four times a year. A whole-catalog ranking answers
+// "which card should I get", where none of that is settled, so it skips these.
+// Someone ranking cards they already hold (ownCards) can activate, so it counts.
+export const ROTATING_RATE = /\brotating\b|\bthis quarter\b/i;
+
 export const LIMITED_RATE =
   /partner restaurants|citi nights|gas at costco|online groceries|amazon\.com|disneyplus\.com/i;
 
@@ -334,10 +352,12 @@ export interface TopPickRow extends TopPickCategory {
 function bestRateForCategory(
   card: CardSummary,
   categoryKey: string,
+  ownCards = false,
 ): { value: number; multiplier: string } | undefined {
   let best: { value: number; multiplier: string } | undefined;
   for (const rate of card.categories) {
     if (!matchesCategory(rate, categoryKey)) continue;
+    if (!ownCards && ROTATING_RATE.test(rate.category)) continue;
     if (!isRankableMultiplier(rate.multiplier)) continue;
     const value = parseMultiplierValue(rate.multiplier);
     if (!best || value > best.value) best = { value, multiplier: rate.multiplier };
@@ -428,19 +448,35 @@ export interface ComputeTopPicksOptions {
    * actually holding both the feeder and receiver card. Defaults to false
    * so every existing catalog-wide call site is unaffected. */
   applyPointsPooling?: boolean;
+  /** The cards are ones someone holds, not the whole catalog. Rates and cards
+   * that only a holder can use (a rotating quarterly category) then count. */
+  ownCards?: boolean;
 }
 
 /** Every real-bonus entry for one category, sorted, with fallbacks appended up
  * to 3 total. Takes the already-deduped cards and pool-adjusted cpp map so a
  * full computeTopPicks pass computes them once, not once per category. */
+/** Whether a card belongs in a whole-catalog ranking for this category. A card
+ * closed to new applicants can't be got, and a store-only card's rewards are
+ * worth their cents-per-point only to someone who shops at that store, so both
+ * sit out, except a store-only card in Wholesale, where one club is the norm.
+ * Someone ranking cards they hold (ownCards) keeps both, since they still use them. */
+function competesInCatalog(card: CardSummary, categoryKey: string): boolean {
+  if (card.open_to_new_applicants === false) return false;
+  if (card.rewards_redeemable === "store_only") return categoryKey === "wholesale";
+  return true;
+}
+
 function rankWithin(
   deduped: CardSummary[],
   categoryKey: string,
   effectiveCppById: Map<string, number>,
+  ownCards: boolean,
 ): TopPickEntry[] {
   const entries: TopPickEntry[] = [];
   for (const card of deduped) {
-    const best = bestRateForCategory(card, categoryKey);
+    if (!ownCards && !competesInCatalog(card, categoryKey)) continue;
+    const best = bestRateForCategory(card, categoryKey, ownCards);
     if (best) entries.push(toEntry(card, best, false, effectiveCppById.get(card.id)!));
   }
   entries.sort(byValueDescThenFeeAscThenName);
@@ -457,6 +493,7 @@ function rankWithin(
     const fallbacks: TopPickEntry[] = [];
     for (const card of deduped) {
       if (alreadyUsed.has(card.id)) continue;
+      if (!ownCards && !competesInCatalog(card, categoryKey)) continue;
       const catchAll = catchAllRateFor(card);
       if (catchAll) fallbacks.push(toEntry(card, catchAll, true, effectiveCppById.get(card.id)!));
     }
@@ -467,7 +504,7 @@ function rankWithin(
 }
 
 function prepareRanking(cards: CardSummary[], options: ComputeTopPicksOptions) {
-  const { applyPointsPooling = false } = options;
+  const { applyPointsPooling = false, ownCards = false } = options;
   // A secured card with byte-identical earn rates to its unsecured twin
   // (CardSummary.secured_variant_id, set only on the unsecured card) is the
   // same card in every way that matters here, and showing both just crowds
@@ -482,7 +519,7 @@ function prepareRanking(cards: CardSummary[], options: ComputeTopPicksOptions) {
   const effectiveCppById = new Map<string, number>(
     deduped.map((card) => [card.id, effectiveCppFor(card, deduped, applyPointsPooling)]),
   );
-  return { deduped, effectiveCppById };
+  return { deduped, effectiveCppById, ownCards };
 }
 
 /** One category's full ranking, past the top 3 that computeTopPicks shows.
@@ -493,8 +530,8 @@ export function rankCategory(
   categoryKey: string,
   options: ComputeTopPicksOptions = {},
 ): TopPickEntry[] {
-  const { deduped, effectiveCppById } = prepareRanking(cards, options);
-  return rankWithin(deduped, categoryKey, effectiveCppById);
+  const { deduped, effectiveCppById, ownCards } = prepareRanking(cards, options);
+  return rankWithin(deduped, categoryKey, effectiveCppById, ownCards);
 }
 
 /** Ranks the whole catalog into the top 3 cards per category by *effective*
@@ -512,9 +549,9 @@ export function computeTopPicks(
   cards: CardSummary[],
   options: ComputeTopPicksOptions = {},
 ): TopPickRow[] {
-  const { deduped, effectiveCppById } = prepareRanking(cards, options);
+  const { deduped, effectiveCppById, ownCards } = prepareRanking(cards, options);
   return TOP_PICK_CATEGORIES.map((category) => {
-    const entries = rankWithin(deduped, category.key, effectiveCppById);
+    const entries = rankWithin(deduped, category.key, effectiveCppById, ownCards);
     return {
       ...category,
       topChoice: entries[0],

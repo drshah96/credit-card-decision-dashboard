@@ -53,6 +53,7 @@
   ],
   "earn_note": "This is the base tier: 3% at BJ's and 1.5% everywhere else, paired with the standard Inner Circle membership (~$55/yr). The richer BJ's One+ card earns 5%/2% but requires upgrading to the pricier Perks+ membership (~$110/yr); don't confuse the two. Gas at BJ's Gas is a per-gallon discount taken at the pump, not rewards points, and doesn't stack with the earn rate. Excludes BJ's membership fees, alcohol, tobacco, lottery, gift cards, and a few other categories.",
   "points": {
+    "redeemable": "store_only",
     "currency": "BJ's Rewards (cash back)",
     "redemption_options": [
       {

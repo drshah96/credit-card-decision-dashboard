@@ -37,6 +37,9 @@ without re-doing your research.
 9. Insurance and coverage levels, and `lounge_access`: `included`, `passes`, `paid`
    or `none`, for airport lounges only. Report `none` only if the issuer states it
    or you read a full benefits list showing no lounge benefit, and say which.
+   Also check whether the card still takes applications (`open_to_new_applicants`)
+   and whether its rewards can be spent beyond the card's own store
+   (`points.redeemable`).
 10. Transfer partners and ratios, where `transfer_partners.partners[]` is
     populated
 

@@ -52,6 +52,10 @@ class Points(BaseModel):
     redemption_options: list[RedemptionOption]
     per_100k: str
     note: str
+    # Where the rewards can be spent. store_only: only at the card's own store or brand family
+    # (Kohl's Cash, Wayfair Reward Dollars), so the cents-per-point is real only to someone who
+    # shops there. Written only on store-only cards; anywhere is the default.
+    redeemable: Literal["anywhere", "store_only"] = "anywhere"
 
 
 class TransferPartner(BaseModel):
@@ -202,6 +206,10 @@ class Card(BaseModel):
     # visit. none: the issuer's terms show no access. None means not yet audited,
     # which is not the same as none. Hotel lounges don't count.
     lounge_access: Literal["included", "passes", "paid", "none"] | None = None
+    # False once the issuer stops taking applications. Existing cardholders keep the card, so
+    # it still ranks among cards someone holds, but not in whole-catalog rankings. Written only
+    # on closed cards.
+    open_to_new_applicants: bool = True
     # Derived from lounge_access: true when the card itself gets you in free.
     # Duplicated on CardSummary below for the same reason as the three fields above.
     has_lounge_access: bool = False
@@ -313,6 +321,11 @@ class CardSummary(BaseModel):
     intro_apr_balance_transfers: IntroApr | None = None
     foreign_transaction_fee: bool | None = None
     has_lounge_access: bool = False
+    # See Points.redeemable and Card.open_to_new_applicants, duplicated here because
+    # computeTopPicks only sees CardSummary: whole-catalog rankings leave out store-only and
+    # closed cards.
+    rewards_redeemable: Literal["anywhere", "store_only"] = "anywhere"
+    open_to_new_applicants: bool = True
 
 
 # ─── Anonymous session/traffic analytics ───────────────────────────────────

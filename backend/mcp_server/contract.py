@@ -1,6 +1,6 @@
 """The published identity of the server. Changing the surface needs a new version entry."""
 
-CONTRACT_VERSION = "1.1.0"
+CONTRACT_VERSION = "1.2.0"
 
 # Maps each published version to the SHA-256 of its canonical tools/list surface.
 PUBLISHED_SURFACES: dict[str, str] = {
@@ -8,6 +8,9 @@ PUBLISHED_SURFACES: dict[str, str] = {
     # Adds review_overdue. Rankings skip rates most purchases don't earn, and review_due_on
     # stops at a card's first end or change date (ADR 0003 A27).
     "1.1.0": "0635081d4250116db0624f4c9419f6907e38f160a9bdf7ff67984a2041ab3aa5",
+    # Adds the phone-internet category, narrows utilities and home-improvement, and keeps
+    # store-only, closed-card and rotating rates out of whole-catalog rankings (ADR 0003 A28).
+    "1.2.0": "305f63fe259894453862ac092ce935bd7c9dcd04d7e9730510ac90d32877626d",
 }
 
 SERVER_NAME = "thewalletaudit"
@@ -38,5 +41,7 @@ INSTRUCTIONS = (
     "is worthless, so call estimate_value with real usage before weighing credits. Rankings "
     "use the earn multiplier times the card's best realistic cents per point and never consider "
     "affiliate status. The welcome_bonus field is not served. A lounge_access of unconfirmed "
-    "means the catalog cannot say whether the card has access. Use find_cards to get card ids."
+    "means the catalog cannot say whether the card has access. A card closed to new applicants, "
+    "or one whose rewards are store_only, ranks only when card_ids are given, except store-only "
+    "club cards in wholesale. Use find_cards to get card ids."
 )
