@@ -44,6 +44,8 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     intro_apr_balance_transfers: null,
     foreign_transaction_fee: null,
     has_lounge_access: false,
+    rewards_redeemable: "anywhere",
+    open_to_new_applicants: true,
     ...overrides,
   };
 }
@@ -57,6 +59,7 @@ function makeCard(overrides: Partial<Card> = {}): Card {
     intro_apr_balance_transfers: null,
     foreign_transaction_fee: null,
     has_lounge_access: false,
+    open_to_new_applicants: true,
     variable_apr: null,
     balance_transfer_apr: null,
     balance_transfer_fee: null,
@@ -70,7 +73,13 @@ function makeCard(overrides: Partial<Card> = {}): Card {
     returned_check_fee: null,
     earn_rates: [],
     earn_note: "",
-    points: { currency: summary.points_program, redemption_options: [], per_100k: "", note: "" },
+    points: {
+      currency: summary.points_program,
+      redemption_options: [],
+      per_100k: "",
+      note: "",
+      redeemable: "anywhere",
+    },
     transfer_partners: { airline_count: 0, hotel_count: 0, highlight: "", recent_changes: "" },
     credits: [],
     insurance: [],

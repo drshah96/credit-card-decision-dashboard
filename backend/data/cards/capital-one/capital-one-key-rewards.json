@@ -64,6 +64,7 @@
   ],
   "earn_note": "Rewards purchased on 0% promotional financing plans (12 equal payments, $750+) don't earn any rewards at all; pick one or the other on a big purchase, not both. Rate applies identically across all eight brands regardless of which one's name is on your card; there's no per-store bonus.",
   "points": {
+    "redeemable": "store_only",
     "currency": "Key Rewards Certificates",
     "redemption_options": [
       {

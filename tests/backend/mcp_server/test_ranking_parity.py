@@ -11,6 +11,7 @@ from backend.mcp_server.ranking import (
     CENTS_PER_GALLON_SOURCE,
     LIMITED_RATE_SOURCE,
     MATCHER_SOURCES,
+    ROTATING_RATE_SOURCE,
     WHOLESALE_EXCLUDES,
     RankInput,
     collation_key,
@@ -77,7 +78,9 @@ def test_output_equals_typescript_exactly(summaries):
         ids = scenario["card_ids"]
         cards = inputs if ids is None else [by_id[i] for i in ids]
         for category in CATEGORIES:
-            ranked = rank_category(cards, category.key, pooling=scenario["pooling"])
+            ranked = rank_category(
+                cards, category.key, pooling=scenario["pooling"], own_cards=scenario["own_cards"]
+            )
             actual = {
                 "total": len(ranked),
                 "real": sum(not e.is_fallback for e in ranked),
@@ -110,6 +113,7 @@ def test_definitions_equal_typescript():
         "brand_excludes"
     ], REGENERATE
     assert expected["limited_rate"] == {"source": LIMITED_RATE_SOURCE, "flags": "i"}, REGENERATE
+    assert expected["rotating_rate"] == {"source": ROTATING_RATE_SOURCE, "flags": "i"}, REGENERATE
     assert expected["cents_per_gallon"] == {
         "source": CENTS_PER_GALLON_SOURCE,
         "flags": "i",
@@ -125,7 +129,7 @@ def test_the_fixture_actually_exercises_each_rule():
     expected = _expected()["scenarios"]
     rows = [row for scenario in expected.values() for row in scenario.values()]
     assert len(expected) >= 27
-    assert all(len(scenario) == 18 for scenario in expected.values())
+    assert all(len(scenario) == 19 for scenario in expected.values())
     assert any(any(top[4] for top in row["top"]) for row in rows), "no pooled entry"
     assert any(any(top[3] for top in row["top"]) for row in rows), "no fallback entry"
 

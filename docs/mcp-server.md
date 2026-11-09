@@ -116,8 +116,14 @@ point, which is not a guarantee that every dollar redeems at that rate. It never
 status. It ignores spending caps, activation requirements and sign-up offers. A rate limited to
 one merchant, one brand, online orders or certain hours, such as Bilt partner restaurants, Citi
 Nights or Amazon, doesn't count toward a broad category, so the card's everyday rate competes
-instead. Travel portal rates count. A choose-your-category rate counts in each category it
-offers, though a cardholder picks only one or two. Passing `card_ids`
+instead. Travel and entertainment portal rates count. A choose-your-category rate counts in
+each category it offers, though a cardholder picks only one or two. In `wholesale`, a single
+club's rate counts. A rotating quarterly category counts only when `card_ids` are given, since
+a holder can activate it. The same goes for a card with `open_to_new_applicants: false`, and for
+one whose `points.redeemable` (`rewards_redeemable` in `compare_cards`) is `store_only`, meaning
+its rewards can only be spent at its own store. A store-only club card still ranks in
+`wholesale`. Utilities covers electric, gas and water bills only, and `phone-internet`
+covers phone plans, internet and cable. Passing `card_ids`
 ranks only those cards and applies points pooling between cards that share a points account.
 
 **Editorial content.** Verdicts and credit tiers are The Wallet Audit's own opinions, not issuer

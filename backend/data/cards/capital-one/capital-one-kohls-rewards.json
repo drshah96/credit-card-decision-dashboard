@@ -64,6 +64,7 @@
   ],
   "earn_note": "The 7.5% at Kohl's is Capital One's marketing framing of 5% base Kohl's-member reward plus 2.5% for using this card instead of the store-only Kohl's Card. Every category (Kohl's, gas, grocery, and everything else) pays out in Kohl's Cash, not usable dollars, so the gas/grocery rates are really 'discounts good only at Kohl's,' not general cash back. No caps disclosed, but plenty of exclusions apply at Kohl's itself (Sephora, certain brands, gift cards).",
   "points": {
+    "redeemable": "store_only",
     "currency": "Kohl's Cash",
     "redemption_options": [
       {

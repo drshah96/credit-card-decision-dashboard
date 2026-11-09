@@ -46,6 +46,7 @@
   ],
   "earn_note": "Capital One and T-Mobile's own terms exclude device equipment installment plans, wireless service fees, and prepaid service from the 5% device rate: the 5% is for buying a phone or accessory outright, not for paying your monthly bill. There's no cap on either rate and rewards don't expire for the life of the account.",
   "points": {
+    "redeemable": "store_only",
     "currency": "T-Mobile Rewards",
     "redemption_options": [
       {

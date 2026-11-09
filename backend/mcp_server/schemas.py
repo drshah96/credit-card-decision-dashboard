@@ -150,6 +150,27 @@ class FindCardsQuery(_Out):
     offset: int
 
 
+OpenToNewApplicants = Annotated[
+    bool,
+    Field(
+        description=(
+            "False once the issuer stops taking applications. Existing cardholders keep the card, "
+            "so it ranks with card_ids but not across the whole catalog."
+        )
+    ),
+]
+Redeemable = Annotated[
+    Literal["anywhere", "store_only"],
+    Field(
+        description=(
+            "store_only: rewards can only be spent at the card's own store, so best_cpp is real "
+            "only to someone who shops there. Such cards rank across the whole catalog only in "
+            "wholesale."
+        )
+    ),
+]
+
+
 class CardListItem(_Out):
     card_id: str
     name: str
@@ -159,6 +180,7 @@ class CardListItem(_Out):
     annual_fee: int
     verdict_status: str
     is_secured_variant_of: str | None
+    open_to_new_applicants: OpenToNewApplicants
     provenance: ProvenanceRef
 
 
@@ -201,6 +223,7 @@ class PointsInfo(_Out):
     best_cpp: float
     per_100k: str
     note: str
+    redeemable: Redeemable
     redemption_options: list[RedemptionOption]
 
 
@@ -341,6 +364,7 @@ class CardDetail(_Out):
     protection_note: str
     rental_note: str
     lounge_access: LoungeAccess
+    open_to_new_applicants: OpenToNewApplicants
     status_perks: list[StatusPerk]
     transfer_partners: TransferPartnersInfo
     related: Related
@@ -399,6 +423,8 @@ class CompareEntry(_Out):
     points_program: str
     earn_rates: list[EarnRate]
     lounge_access: LoungeAccess
+    open_to_new_applicants: OpenToNewApplicants
+    rewards_redeemable: Redeemable
     foreign_transaction_fee: Fact[bool]
     intro_apr_purchases: Fact[IntroAprValue]
     intro_apr_balance_transfers: Fact[IntroAprValue]

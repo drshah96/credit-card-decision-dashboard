@@ -62,6 +62,7 @@ function makeCard(overrides: Partial<Card> = {}): Card {
     intro_apr_balance_transfers: null,
     foreign_transaction_fee: null,
     has_lounge_access: false,
+    open_to_new_applicants: true,
     variable_apr: null,
     balance_transfer_apr: null,
     balance_transfer_fee: null,
@@ -85,6 +86,7 @@ function makeCard(overrides: Partial<Card> = {}): Card {
         { method: "Statement credit", cpp: 0.6, best: false },
       ],
       per_100k: "$2,000",
+      redeemable: "anywhere",
       note: "Always transfer, never cash out.",
     },
     transfer_partners: {

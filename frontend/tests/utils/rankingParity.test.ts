@@ -5,6 +5,7 @@ import type { CardSummary } from "../../src/types/cards";
 import {
   BRAND_EXCLUDES,
   LIMITED_RATE,
+  ROTATING_RATE,
   CATEGORY_MATCHERS,
   CENTS_PER_GALLON,
   TOP_PICK_CATEGORIES,
@@ -21,6 +22,7 @@ interface Scenario {
   name: string;
   card_ids: string[] | null;
   pooling: boolean;
+  own_cards: boolean;
 }
 
 function readFixture<T>(name: string): T {
@@ -44,7 +46,10 @@ function rankScenario(scenario: Scenario) {
   const cards = cardsFor(scenario);
   return Object.fromEntries(
     TOP_PICK_CATEGORIES.map((category) => {
-      const ranked = rankCategory(cards, category.key, { applyPointsPooling: scenario.pooling });
+      const ranked = rankCategory(cards, category.key, {
+        applyPointsPooling: scenario.pooling,
+        ownCards: scenario.own_cards,
+      });
       return [
         category.key,
         {
@@ -82,6 +87,7 @@ describe("ranking parity fixture", () => {
         Object.entries(BRAND_EXCLUDES).map(([key, regex]) => [key, describeRegex(regex)]),
       ),
       limited_rate: describeRegex(LIMITED_RATE),
+      rotating_rate: describeRegex(ROTATING_RATE),
       cents_per_gallon: describeRegex(CENTS_PER_GALLON),
       names_sorted: summaries.map((card) => card.name).sort((a, b) => a.localeCompare(b)),
     };
@@ -95,7 +101,7 @@ describe("ranking parity fixture", () => {
 
   it("keeps rankCategory's first three entries equal to computeTopPicks's slots", () => {
     for (const scenario of scenarios) {
-      const options = { applyPointsPooling: scenario.pooling };
+      const options = { applyPointsPooling: scenario.pooling, ownCards: scenario.own_cards };
       const cards = cardsFor(scenario);
       for (const row of computeTopPicks(cards, options)) {
         const ranked = rankCategory(cards, row.key, options);

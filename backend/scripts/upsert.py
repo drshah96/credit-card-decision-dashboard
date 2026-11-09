@@ -203,6 +203,8 @@ def upsert_card(session: Session, data: dict) -> CardModel:
             card.secured_variant_id = data.get("secured_variant_id")
             card.points_pool_id = data.get("points_pool_id")
             card.lounge_access = data.get("lounge_access")
+            card.points_redeemable = data["points"].get("redeemable", "anywhere")
+            card.open_to_new_applicants = data.get("open_to_new_applicants", True)
             card.points_pool_receiver = data.get("points_pool_receiver", False)
             # Each is {"rate": "0%", "months": 15} or absent (not yet
             # audited) in the source JSON — flattened into the two scalar
