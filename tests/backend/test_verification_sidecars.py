@@ -314,7 +314,14 @@ NOVEMBER_2026: dict[str, tuple[str, frozenset[str]]] = {
     ),
 }
 
-LEDGER = {**BACKFILL, **NOVEMBER_2026}
+# Checks a person made by hand, recorded against the commit whose facts they confirm.
+OWNER_CHECKS: dict[str, tuple[str, frozenset[str]]] = {
+    # Amex Green closed to new applicants: missing from Amex's personal card list, and its page
+    # redirects to that list, seen in a browser on 2026-11-08.
+    "8025eabaa8e639abc9c20e96ee7d0c37f5ad2f8a": ("2026-11-08", frozenset({"amex-green"})),
+}
+
+LEDGER = {**BACKFILL, **NOVEMBER_2026, **OWNER_CHECKS}
 
 # Only the September backfill used issuer-level evidence; every November record cites a card diff.
 ISSUER_PASS_CARDS = frozenset(
@@ -369,8 +376,8 @@ def test_ledger_shape_matches_the_recorded_refresh():
     november = [cid for _, ids in NOVEMBER_2026.values() for cid in ids]
     assert len(november) == len(set(november)) == 89
     verified = {cid for cid, s in _sidecars().items() if s["verification"]}
-    assert len(verified) == 88
-    assert len(_sidecars()) - len(verified) == 21
+    assert len(verified) == 89
+    assert len(_sidecars()) - len(verified) == 20
 
 
 def test_a_ledger_date_cannot_be_borrowed():
@@ -383,7 +390,7 @@ def test_a_ledger_date_cannot_be_borrowed():
             when, ids = LEDGER[record["evidence"].removeprefix("git:")]
             assert card_id in ids, f"{card_id} cites evidence that does not cover it"
             assert sidecar["last_verified_ok_at"] == when
-    assert checked == 88, "the ledger must match the sidecars, or this test proves nothing"
+    assert checked == 89, "the ledger must match the sidecars, or this test proves nothing"
 
 
 def test_a_backfilled_date_is_superseded_only_by_a_later_one():

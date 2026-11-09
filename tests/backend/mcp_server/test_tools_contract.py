@@ -410,3 +410,14 @@ async def test_closed_and_store_only_cards_are_labelled_and_left_out_of_catalog_
     )
     assert "amex-green" not in [e["card_id"] for e in dining["entries"]]
     assert held["entries"][0]["card_id"] == "amex-green"
+
+
+async def test_amex_greens_closure_is_backed_by_the_owners_dated_check(snapshot):
+    async with connect(snapshot) as client:
+        green = structured(await client.call_tool("get_card", {"card_id": "amex-green"}))
+    provenance = green["provenance"]
+    assert provenance["verification_status"] == "partially_verified"
+    assert provenance["verified_on"] == "2026-11-08"
+    assert provenance["review_due_on"] == "2027-05-07"
+    assert "confirmed in a browser" in provenance["note"]
+    assert provenance["evidence_url"].endswith("/commit/8025eabaa8e639abc9c20e96ee7d0c37f5ad2f8a")

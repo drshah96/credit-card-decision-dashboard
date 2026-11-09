@@ -1630,6 +1630,9 @@ purpose, and contract 1.1.0.
   call: Costco's certificate cashes out, OneKeyCash pays for any Expedia, Hotels.com or Vrbo
   booking, and Disney Rewards Dollars also cover airfare. Migration `d9e3f1a7b2c4` adds both
   columns with defaults. `get_card`, `compare_cards` and `find_cards` serve them.
+  Green's closure couldn't be read from an Amex document, since Amex pages render client-side.
+  The owner confirmed it in a browser on 2026-11-08 (missing from the personal card list, and
+  its page redirects there), and its record now cites that check.
 
 **Defaults taken while owner decisions are open.** Each can change before release:
 

@@ -1,5 +1,16 @@
 {
   "card_id": "amex-green",
-  "last_verified_ok_at": null,
-  "verification": null
+  "last_verified_ok_at": "2026-11-08",
+  "verification": {
+    "evidence": "git:8025eabaa8e639abc9c20e96ee7d0c37f5ad2f8a",
+    "evidence_scope": "card",
+    "facts_sha256": "536d69d1dc5d5626c80beb5ad2bdfac92d9d34e2c508566f2be7734e79fb0194",
+    "documents": [],
+    "not_checked": [
+      "transfer_partners",
+      "insurance",
+      "insurance_limits"
+    ],
+    "note": "Re-checked on 2026-11-07 against Amex application terms, cardmember agreements and benefit pages. On 2026-11-08 the owner confirmed in a browser that Amex no longer offers the card: it is missing from Amex's personal card list, and its page redirects there. Not checked: transfer partners, insurance benefits, and insurance dollar limits. No issuer statement settles lounge access."
+  }
 }
