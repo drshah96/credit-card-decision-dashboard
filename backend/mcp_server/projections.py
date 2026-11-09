@@ -168,6 +168,7 @@ def card_detail(
             best_cpp=best_cpp,
             per_100k=card.points.per_100k,
             note=card.points.note,
+            redeemable=card.points.redeemable,
             redemption_options=[
                 schemas.RedemptionOption(method=o.method, cpp=o.cpp, best=o.best)
                 for o in card.points.redemption_options
@@ -205,6 +206,7 @@ def card_detail(
         protection_note=card.protection_note,
         rental_note=card.rental_note,
         lounge_access=served_lounge_access(card.lounge_access, state),
+        open_to_new_applicants=card.open_to_new_applicants,
         status_perks=[
             schemas.StatusPerk(name=p.name, strength=p.strength, note=p.note)
             for p in card.status_perks
@@ -292,6 +294,8 @@ def compare_entry(
         points_program=card.points_program,
         earn_rates=[earn_rate(r) for r in card.earn_rates],
         lounge_access=served_lounge_access(card.lounge_access, state),
+        open_to_new_applicants=card.open_to_new_applicants,
+        rewards_redeemable=card.points.redeemable,
         foreign_transaction_fee=fact(card.foreign_transaction_fee),
         intro_apr_purchases=_intro(card.intro_apr_purchases),
         intro_apr_balance_transfers=_intro(card.intro_apr_balance_transfers),

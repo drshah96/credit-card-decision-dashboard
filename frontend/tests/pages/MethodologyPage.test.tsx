@@ -88,6 +88,31 @@ describe("MethodologyPage", () => {
     );
   });
 
+  it("tells AI assistants where the MCP server is and how to add it in Claude", () => {
+    renderPage();
+    expect(screen.getByText("mcp.thewalletaudit.com/mcp")).toBeInTheDocument();
+    expect(screen.getByText(/Add custom\s+connector/)).toBeInTheDocument();
+    expect(screen.getByText(/No key\s+or sign-in is needed/)).toBeInTheDocument();
+  });
+
+  it("lists what every MCP answer carries as bullets", () => {
+    renderPage();
+    const items = screen.getAllByRole("listitem").map((li) => li.textContent);
+    expect(items).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining("last checked against the issuer's own documents"),
+        expect.stringContaining("flagged as overdue"),
+        expect.stringContaining("Not recorded"),
+      ]),
+    );
+  });
+
+  it("explains that Utilities means bills and phone plans have their own row", () => {
+    renderPage();
+    expect(screen.getByText(/Utilities means utility bills/)).toBeInTheDocument();
+    expect(screen.getByText(/Phone & Internet row/)).toBeInTheDocument();
+  });
+
   it("lists what the ranking doesn't model as bullets", () => {
     renderPage();
     const items = screen.getAllByRole("listitem").map((li) => li.textContent);

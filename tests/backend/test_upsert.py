@@ -578,6 +578,17 @@ def test_upsert_lounge_access_round_trips_and_defaults_to_none(session):
     assert unaudited.lounge_access is None
 
 
+def test_upsert_store_only_rewards_and_closed_cards_round_trip_with_open_defaults(session):
+    base = make_card_data({"id": "store-closed"})
+    base["points"] = {**base["points"], "redeemable": "store_only"}
+    base["open_to_new_applicants"] = False
+    marked = upsert_card(session, base)
+    default = upsert_card(session, make_card_data({"id": "plain"}))
+    session.flush()
+    assert (marked.points_redeemable, marked.open_to_new_applicants) == ("store_only", False)
+    assert (default.points_redeemable, default.open_to_new_applicants) == ("anywhere", True)
+
+
 def test_upsert_points_pool_id_defaults_to_none(session):
     card = upsert_card(session, make_card_data())
     session.commit()

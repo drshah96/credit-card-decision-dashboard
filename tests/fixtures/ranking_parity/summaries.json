@@ -28,7 +28,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "amex-blue-cash-preferred",
@@ -64,7 +66,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "amex-delta-skymiles-blue",
@@ -90,7 +94,9 @@
   "best_cpp": 1.15,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "amex-delta-skymiles-gold",
@@ -121,7 +127,9 @@
   "best_cpp": 1.15,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "amex-delta-skymiles-platinum",
@@ -157,7 +165,9 @@
   "best_cpp": 1.15,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "amex-delta-skymiles-reserve",
@@ -178,7 +188,9 @@
   "best_cpp": 1.15,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "amex-gold",
@@ -219,7 +231,9 @@
   "best_cpp": 2.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "amex-green",
@@ -250,7 +264,9 @@
   "best_cpp": 2.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": false
  },
  {
   "id": "amex-hilton-honors",
@@ -286,7 +302,9 @@
   "best_cpp": 0.5,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "amex-hilton-honors-aspire",
@@ -322,7 +340,9 @@
   "best_cpp": 0.5,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "amex-hilton-honors-surpass",
@@ -363,7 +383,9 @@
   "best_cpp": 0.5,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "amex-marriott-bonvoy-bevy",
@@ -394,7 +416,9 @@
   "best_cpp": 0.8,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "amex-marriott-bonvoy-brilliant",
@@ -425,7 +449,9 @@
   "best_cpp": 0.8,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "amex-platinum",
@@ -456,7 +482,9 @@
   "best_cpp": 2.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "bilt-blue",
@@ -497,7 +525,9 @@
   "best_cpp": 2.2,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "bilt-obsidian",
@@ -548,7 +578,9 @@
   "best_cpp": 2.2,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "bilt-palladium",
@@ -589,7 +621,9 @@
   "best_cpp": 2.2,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "bofa-bankamericard",
@@ -599,7 +633,9 @@
   "best_cpp": 0.0,
   "secured_variant_id": "bofa-bankamericard-secured",
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "bofa-bankamericard-secured",
@@ -609,7 +645,9 @@
   "best_cpp": 0.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "bofa-cash-rewards-secured",
@@ -635,7 +673,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "bofa-customized-cash-rewards",
@@ -661,7 +701,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": "bofa-cash-rewards-secured",
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "bofa-premium-rewards",
@@ -687,7 +729,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "bofa-premium-rewards-elite",
@@ -713,7 +757,9 @@
   "best_cpp": 1.25,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "bofa-travel-rewards",
@@ -734,7 +780,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": "bofa-travel-rewards-secured",
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "bofa-travel-rewards-secured",
@@ -755,7 +803,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "bofa-unlimited-cash-rewards",
@@ -771,7 +821,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": "bofa-unlimited-cash-rewards-secured",
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "bofa-unlimited-cash-rewards-secured",
@@ -787,7 +839,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "capital-one-bass-pro-cabelas-club",
@@ -818,7 +872,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "store_only",
+  "open_to_new_applicants": true
  },
  {
   "id": "capital-one-bjs-one",
@@ -844,7 +900,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "store_only",
+  "open_to_new_applicants": true
  },
  {
   "id": "capital-one-bjs-one-plus",
@@ -870,7 +928,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "store_only",
+  "open_to_new_applicants": true
  },
  {
   "id": "capital-one-key-rewards",
@@ -901,7 +961,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "store_only",
+  "open_to_new_applicants": true
  },
  {
   "id": "capital-one-kohls-rewards",
@@ -932,7 +994,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "store_only",
+  "open_to_new_applicants": true
  },
  {
   "id": "capital-one-platinum",
@@ -942,7 +1006,9 @@
   "best_cpp": 0.0,
   "secured_variant_id": "capital-one-platinum-secured",
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "capital-one-platinum-secured",
@@ -952,7 +1018,9 @@
   "best_cpp": 0.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "capital-one-quicksilver",
@@ -978,7 +1046,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "capital-one-quicksilver-one",
@@ -1004,7 +1074,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "capital-one-quicksilver-secured",
@@ -1030,7 +1102,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "capital-one-rei-co-op",
@@ -1056,7 +1130,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "store_only",
+  "open_to_new_applicants": true
  },
  {
   "id": "capital-one-savor",
@@ -1102,7 +1178,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "capital-one-savor-one",
@@ -1148,7 +1226,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "capital-one-tmobile",
@@ -1169,7 +1249,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "store_only",
+  "open_to_new_applicants": true
  },
  {
   "id": "capital-one-venture",
@@ -1195,7 +1277,9 @@
   "best_cpp": 1.85,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "capital-one-venture-one",
@@ -1221,7 +1305,9 @@
   "best_cpp": 1.85,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "capital-one-venture-x",
@@ -1252,7 +1338,9 @@
   "best_cpp": 1.85,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "chase-amazon-prime-visa",
@@ -1293,7 +1381,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "chase-disney-premier",
@@ -1334,7 +1424,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "chase-freedom-flex",
@@ -1370,7 +1462,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": "chase-ultimate-rewards-transferable",
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "chase-freedom-rise",
@@ -1386,7 +1480,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "chase-freedom-unlimited",
@@ -1417,7 +1513,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": "chase-ultimate-rewards-transferable",
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "chase-ihg-one-rewards-premier",
@@ -1458,7 +1556,9 @@
   "best_cpp": 0.6,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "chase-ihg-one-rewards-traveler",
@@ -1509,7 +1609,9 @@
   "best_cpp": 0.6,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "chase-marriott-bonvoy-bold",
@@ -1555,7 +1657,9 @@
   "best_cpp": 0.8,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "chase-marriott-bonvoy-boundless",
@@ -1591,7 +1695,9 @@
   "best_cpp": 0.8,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "chase-sapphire-preferred",
@@ -1642,7 +1748,9 @@
   "best_cpp": 2.0,
   "secured_variant_id": null,
   "points_pool_id": "chase-ultimate-rewards-transferable",
-  "points_pool_receiver": true
+  "points_pool_receiver": true,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "chase-sapphire-reserve",
@@ -1688,7 +1796,9 @@
   "best_cpp": 2.05,
   "secured_variant_id": null,
   "points_pool_id": "chase-ultimate-rewards-transferable",
-  "points_pool_receiver": true
+  "points_pool_receiver": true,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "chase-slate-edge",
@@ -1698,7 +1808,9 @@
   "best_cpp": 0.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "chase-southwest-rapid-rewards-plus",
@@ -1729,7 +1841,9 @@
   "best_cpp": 1.3,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "chase-southwest-rapid-rewards-premier",
@@ -1760,7 +1874,9 @@
   "best_cpp": 1.3,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "chase-southwest-rapid-rewards-priority",
@@ -1791,7 +1907,9 @@
   "best_cpp": 1.3,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "chase-united-club-infinite",
@@ -1832,7 +1950,9 @@
   "best_cpp": 1.3,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "chase-united-explorer",
@@ -1868,7 +1988,9 @@
   "best_cpp": 1.3,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "chase-united-quest",
@@ -1914,7 +2036,9 @@
   "best_cpp": 1.3,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "chase-world-of-hyatt",
@@ -1955,7 +2079,9 @@
   "best_cpp": 1.8,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-aadvantage-executive",
@@ -1981,7 +2107,9 @@
   "best_cpp": 1.4,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-aadvantage-globe",
@@ -2017,7 +2145,9 @@
   "best_cpp": 1.4,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-aadvantage-mileup",
@@ -2043,7 +2173,9 @@
   "best_cpp": 1.4,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-aadvantage-platinum-select",
@@ -2074,7 +2206,9 @@
   "best_cpp": 1.4,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-att-points-plus",
@@ -2105,7 +2239,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-best-buy-visa",
@@ -2136,7 +2272,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "store_only",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-bloomingdales",
@@ -2157,7 +2295,9 @@
   "best_cpp": 0.5,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "store_only",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-costco-anywhere-visa",
@@ -2198,7 +2338,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-diamond-preferred",
@@ -2208,7 +2350,9 @@
   "best_cpp": 0.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-dillards",
@@ -2239,7 +2383,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "store_only",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-double-cash",
@@ -2260,7 +2406,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": "citi-thankyou-points-transferable",
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-exxonmobil-smart-card-plus",
@@ -2286,7 +2434,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-goodyear",
@@ -2296,7 +2446,9 @@
   "best_cpp": 0.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-home-depot-consumer",
@@ -2306,7 +2458,9 @@
   "best_cpp": 0.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-llbean",
@@ -2332,7 +2486,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "store_only",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-macys",
@@ -2373,7 +2529,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "store_only",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-secured",
@@ -2383,7 +2541,9 @@
   "best_cpp": 0.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-simplicity",
@@ -2393,7 +2553,9 @@
   "best_cpp": 0.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-strata",
@@ -2439,7 +2601,9 @@
   "best_cpp": 1.2,
   "secured_variant_id": null,
   "points_pool_id": "citi-thankyou-points-transferable",
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-strata-elite",
@@ -2475,7 +2639,9 @@
   "best_cpp": 1.7,
   "secured_variant_id": null,
   "points_pool_id": "citi-thankyou-points-transferable",
-  "points_pool_receiver": true
+  "points_pool_receiver": true,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-strata-premier",
@@ -2516,7 +2682,9 @@
   "best_cpp": 1.7,
   "secured_variant_id": null,
   "points_pool_id": "citi-thankyou-points-transferable",
-  "points_pool_receiver": true
+  "points_pool_receiver": true,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-tractor-supply",
@@ -2552,7 +2720,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "store_only",
+  "open_to_new_applicants": true
  },
  {
   "id": "citi-wayfair",
@@ -2583,7 +2753,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "store_only",
+  "open_to_new_applicants": true
  },
  {
   "id": "discover-it-cash-back",
@@ -2604,7 +2776,9 @@
   "best_cpp": 1.05,
   "secured_variant_id": "discover-it-secured",
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "discover-it-chrome",
@@ -2630,7 +2804,9 @@
   "best_cpp": 1.05,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "discover-it-miles",
@@ -2646,7 +2822,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "discover-it-secured",
@@ -2667,7 +2845,9 @@
   "best_cpp": 1.05,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "discover-it-student-cash-back",
@@ -2688,7 +2868,9 @@
   "best_cpp": 1.05,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "discover-it-student-chrome",
@@ -2714,7 +2896,9 @@
   "best_cpp": 1.05,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "us-bank-altitude-connect",
@@ -2760,7 +2944,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "us-bank-altitude-go",
@@ -2796,7 +2982,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": "us-bank-altitude-go-secured",
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "us-bank-altitude-go-secured",
@@ -2832,7 +3020,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "us-bank-cash-plus",
@@ -2863,7 +3053,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": "us-bank-cash-plus-secured",
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "us-bank-cash-plus-secured",
@@ -2894,7 +3086,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "us-bank-secured",
@@ -2904,7 +3098,9 @@
   "best_cpp": 0.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "us-bank-shield",
@@ -2925,7 +3121,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "us-bank-smartly",
@@ -2941,7 +3139,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "us-bank-split",
@@ -2951,7 +3151,9 @@
   "best_cpp": 0.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "wells-fargo-active-cash",
@@ -2967,7 +3169,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "wells-fargo-autograph",
@@ -3013,7 +3217,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "wells-fargo-autograph-journey",
@@ -3049,7 +3255,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "wells-fargo-choice-privileges",
@@ -3090,7 +3298,9 @@
   "best_cpp": 0.6,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "wells-fargo-choice-privileges-select",
@@ -3131,7 +3341,9 @@
   "best_cpp": 0.6,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "wells-fargo-one-key",
@@ -3167,7 +3379,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "wells-fargo-one-key-plus",
@@ -3203,7 +3417,9 @@
   "best_cpp": 1.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  },
  {
   "id": "wells-fargo-reflect",
@@ -3213,6 +3429,8 @@
   "best_cpp": 0.0,
   "secured_variant_id": null,
   "points_pool_id": null,
-  "points_pool_receiver": false
+  "points_pool_receiver": false,
+  "rewards_redeemable": "anywhere",
+  "open_to_new_applicants": true
  }
 ]

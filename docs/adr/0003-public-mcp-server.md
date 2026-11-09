@@ -1608,6 +1608,32 @@ purpose, and contract 1.1.0.
 - **`find_cards` puts the best match first:** an exact id, then names holding more of the query's
   words, then shorter ids. "amex platinum" had listed the Delta Platinum card first.
 
+**A28. A second outside review: rates and cards most people can't use.** Contract 1.2.0.
+
+- **Utilities counts utility bills only, and phone, internet and cable get their own category,
+  `phone-internet`.** Phone plans had counted as Utilities, so two phone-only rates ranked second
+  and third. Home Improvement now matches store types only, so a rate naming one retailer
+  (Wayfair, Williams Sonoma) can't match, and AT&T's "AT&T products & services" matches nothing.
+  That is 19 categories. Kept, on the owner's call: entertainment portal rates count like travel
+  portals, and a single club's rate counts in Wholesale, since people usually belong to one.
+- **A rotating quarterly category counts only for cards someone holds.** It needs activation each
+  quarter, stops at a quarterly cap and changes four times a year, so a whole-catalog ranking
+  ("which card should I get") skips it, on the owner's call. With `card_ids`, or once the site's
+  visitor picks their cards, it counts. `ownCards` and `own_cards` carry that mode on both sides,
+  and Freedom Flex's 5% leaves the catalog's Groceries.
+- **Cards most people can't get or can't spend sit out of whole-catalog rankings.** Two new card
+  fields, written only where they apply: `open_to_new_applicants: false` (Amex Green, closed since
+  Amex pulled its application page) and `points.redeemable: "store_only"` (14 store cards whose
+  rewards only work at their own store, such as Kohl's Cash, Wayfair Reward Dollars and BJ's
+  rewards). Both rank with `card_ids`, since a holder still uses the card, and a store-only club
+  card still ranks in Wholesale. Costco, One Key and Disney Premier stay `anywhere`, on the owner's
+  call: Costco's certificate cashes out, OneKeyCash pays for any Expedia, Hotels.com or Vrbo
+  booking, and Disney Rewards Dollars also cover airfare. Migration `d9e3f1a7b2c4` adds both
+  columns with defaults. `get_card`, `compare_cards` and `find_cards` serve them.
+  Green's closure couldn't be read from an Amex document, since Amex pages render client-side.
+  The owner confirmed it in a browser on 2026-11-08 (missing from the personal card list, and
+  its page redirects there), and its record now cites that check.
+
 **Defaults taken while owner decisions are open.** Each can change before release:
 
 - **Hosting:** free tier, as in D1.

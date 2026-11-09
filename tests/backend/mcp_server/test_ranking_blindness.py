@@ -16,6 +16,8 @@ ALLOWED = {
     "secured_variant_id",
     "points_pool_id",
     "points_pool_receiver",
+    "rewards_redeemable",
+    "open_to_new_applicants",
 }
 
 

@@ -1,7 +1,8 @@
 # The Wallet Audit MCP server
 
-Verified data on US consumer credit cards, for AI agents. It uses the Model Context
-Protocol over Streamable HTTP.
+Data on US consumer credit cards, sourced from issuer terms, for AI agents. Every card says when
+it was last checked and what that check couldn't confirm. It uses the Model Context Protocol
+over Streamable HTTP.
 
 - **Endpoint:** `POST https://mcp.thewalletaudit.com/mcp`
 - **Auth:** none needed. Requests without a key share one rate limit. For a limit of your
@@ -26,8 +27,8 @@ claude mcp add --transport http thewalletaudit https://mcp.thewalletaudit.com/mc
   --header "Authorization: Bearer ${TWA_MCP_KEY}"
 ```
 
-Or in `.mcp.json`. Set a long timeout, because the server can take about 60 seconds to
-wake:
+Or in `.mcp.json`. Set a long timeout, because the first request after a deploy can take up to
+a minute:
 
 ```json
 {
@@ -57,8 +58,8 @@ keep spaces out of `args`:
 }
 ```
 
-**Any other client:** use any Streamable HTTP client that can send a custom header and
-allows a request timeout of about 120 seconds. Browser origins are refused.
+**Any other client:** use any Streamable HTTP client that allows a request timeout of about
+120 seconds. Browser origins are refused.
 
 ## Tools
 
@@ -67,9 +68,9 @@ All five are read-only and cost no database queries.
 | Tool | Use it to |
 |---|---|
 | `find_cards` | Search by name, issuer or program and get card ids, best match first. Start here. |
-| `get_card` | Read one card's fees, rates, credits, earn rates, insurance and perks. |
+| `get_card` | Read one card's fees, rates, credits, earn rates, insurance, lounge access and perks. |
 | `compare_cards` | Compare 2 to 4 cards side by side. |
-| `rank_by_category` | Rank cards for one of 18 spending categories, across the catalog or a wallet. |
+| `rank_by_category` | Rank cards for one of 19 spending categories, across the catalog or a wallet. |
 | `estimate_value` | Work out credits minus fee, using your expected use of each credit. |
 
 ## Reading the answers
@@ -82,14 +83,14 @@ All five are read-only and cost no database queries.
 | `partially_verified` | Checked, but `not_checked` lists areas that check could not confirm. Treat values there as unconfirmed. |
 | `not_verified` | No recorded check. |
 
-- `verified_on` is the date of the last check.
+- `verified_on` is the date of the last check, and `note` says what it was checked against.
 - `review_due_on` is the date to stop relying on that check: 180 days after it, or sooner when
   a term in the card's own data ends or changes first, such as a quarterly category.
 - `review_overdue` is true once today, in UTC, is past `review_due_on`. Treat that card's values
   as unconfirmed until it is checked again.
-- `evidence_url` links the public record of the check.
-- `evidence_scope: issuer_pass` means an issuer-level pass covered the card, and that record
-  may not mention the card individually.
+- `evidence_url` links the public record of the check, a commit or pull request.
+- `evidence_scope` is `card` when that record covers the card itself. `issuer_pass` means an
+  issuer-level pass covered it, and the record may not mention the card individually.
 - `issuer_url` is where to find current terms. It is not proof of what was verified.
 
 **Missing values.** Rate and fee fields are `{status, value}`. `not_recorded` means the catalog
@@ -107,22 +108,59 @@ absent. An empty `insurance` list means nothing is recorded.
 `passes` means a few single-visit passes a year, and `paid` means entry only by paying per visit.
 `none` is only used when a check covered perks. `unconfirmed` means the catalog cannot say.
 
+**Whether a card can be got and spent.**
+
+- `open_to_new_applicants` is `false` once the issuer stops taking applications. Existing
+  cardholders keep the card. `find_cards`, `get_card` and `compare_cards` return it.
+- `points.redeemable` in `get_card`, and `rewards_redeemable` in `compare_cards`, is
+  `store_only` when the rewards can only be spent at the card's own store, such as Kohl's Cash
+  or Wayfair Reward Dollars. The card's cents per point is then real only to someone who shops
+  there. Otherwise it is `anywhere`.
+
 **Credit values.** Most credits have a default of $0, which means no use is assumed, not that
 the credit is worthless. Pass `credit_overrides` to `estimate_value` with real expected use,
 and read `credits_at_zero` to see how many credits are still counted at $0.
 
-**Rankings.** The ranking uses the earn multiplier times the card's best realistic cents per
-point, which is not a guarantee that every dollar redeems at that rate. It never reads affiliate
-status. It ignores spending caps, activation requirements and sign-up offers. A rate limited to
-one merchant, one brand, online orders or certain hours, such as Bilt partner restaurants, Citi
-Nights or Amazon, doesn't count toward a broad category, so the card's everyday rate competes
-instead. Travel portal rates count. A choose-your-category rate counts in each category it
-offers, though a cardholder picks only one or two. Passing `card_ids`
-ranks only those cards and applies points pooling between cards that share a points account.
-
 **Editorial content.** Verdicts and credit tiers are The Wallet Audit's own opinions, not issuer
 terms. The `welcome_bonus` field is not served, because offers change faster than the catalog is
 re-verified.
+
+## Rankings
+
+`rank_by_category` ranks by the earn multiplier times the card's best realistic cents per point.
+A percent rate, such as 2% cash back, is used as stated. That is the card's best outcome, not a
+guarantee that every dollar redeems at that rate. Ties go to the lower annual fee, then the name.
+Rankings never read affiliate status.
+
+**Whole catalog or a wallet.** Without `card_ids`, the server ranks the whole catalog and returns
+`mode: "catalog"`. With `card_ids`, it ranks only those cards, as cards someone holds, returns
+`mode: "wallet"`, and applies points pooling between cards that share a points account
+(`points_pooling_applied: true`).
+
+**What counts toward a category.** A rate counts only if most purchases in that category earn it.
+
+- A rate limited to one merchant, one brand, online orders or certain hours, such as Bilt
+  partner restaurants, Citi Nights or Amazon, doesn't count. The card's everyday rate competes
+  instead.
+- Travel and entertainment portal rates count, since anything can be booked that way.
+- A choose-your-category rate counts in each category it offers, though a cardholder picks only
+  one or two.
+- In `wholesale`, a single club's rate counts, since most people belong to one.
+- `utilities` covers electric, gas and water bills only. `phone-internet` covers phone plans,
+  internet and cable.
+
+**Counted only in a wallet.** These count only when `card_ids` are given, because only someone who
+already holds the card can use them:
+
+- a rotating quarterly category, which needs activation every quarter
+- a card with `open_to_new_applicants: false`
+- a card whose rewards are `store_only`, except a store-only club card in `wholesale`
+
+**Fallback slots.** If fewer than three cards have a real bonus in a category, the remaining top
+slots go to flat-rate cards marked `is_fallback`. `total_matching` counts only the cards with a
+real bonus.
+
+Rankings don't account for spending caps, activation requirements or sign-up offers.
 
 ## Limits and errors
 
@@ -139,9 +177,12 @@ The default limits can be changed per key.
 | Status | Meaning | What to do |
 |---|---|---|
 | 401 | A key was sent but isn't valid | Fix the key, or send no `Authorization` header to use the shared limit. |
+| 404 | Wrong path | The endpoint is `/mcp`, without a trailing slash. |
 | 405 | Not a POST | The endpoint accepts POST only. |
 | 408, 413 | Body too slow or too large | Send a smaller request. |
-| 429 | Over a rate limit | Wait for `Retry-After`. |
+| 421 | Wrong hostname | Use `mcp.thewalletaudit.com`. |
+| 429 | Over a rate limit, or too many failed key attempts | Wait for `Retry-After`. |
+| 500, 504 | Server fault, or the request ran out of time | Retry once, then report it. |
 | 503 | Busy or unavailable | Wait for `Retry-After`, then retry. |
 
 Errors the model can fix come back as tool results with `isError: true`, starting with a code
@@ -152,9 +193,12 @@ under `query`, so check it if a misspelled option seems to have no effect.
 
 ## Availability and changes
 
-The server runs on a free hosting tier and can sleep when idle, so the first request after a
-quiet period can take about 60 seconds. It has no uptime guarantee.
+The server runs on a free hosting tier with no uptime guarantee. A keep-warm job pings it around
+the clock, so it normally answers at once. The first request after a deploy or restart can take
+up to a minute.
 
-New tools, optional inputs and output fields can appear in any version. Removing, renaming or
-changing the meaning of anything ships as new tool names, with the old ones kept for 90 days,
-and key holders with a contact on file are told in advance.
+Every change to what the tools return moves `meta.contract_version`. New tools, optional inputs
+and output fields, and corrections to how rankings or categories work, come in minor versions,
+and the methodology above is updated with them. Removing or renaming a tool, input or field ships
+as new tool names, with the old ones kept for 90 days, and key holders with a contact on file are
+told in advance.

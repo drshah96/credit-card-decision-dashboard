@@ -36,6 +36,8 @@ function makeSummary(overrides: Partial<CardSummary> = {}): CardSummary {
     intro_apr_balance_transfers: null,
     foreign_transaction_fee: null,
     has_lounge_access: false,
+    rewards_redeemable: "anywhere",
+    open_to_new_applicants: true,
     ...overrides,
   };
 }

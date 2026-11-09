@@ -7,10 +7,12 @@
 // crawlers — so every shared card link previewed as the generic site title,
 // with og:url pointing at the homepage.
 //
-// This is deliberately NOT server-side rendering: only the <head> differs per
-// route. The <body> is byte-identical to the SPA shell, so React boots and
-// takes over exactly as before. That avoids a headless browser in the build
-// and keeps hydration a non-issue.
+// This is deliberately NOT server-side rendering. The <head> differs per route,
+// and each page also gets readable text inside the root element, for clients
+// that never run JavaScript (see crawlableBody.mjs). React mounts with
+// createRoot, which clears that text on first render, so it boots and takes
+// over exactly as before. That avoids a headless browser in the build and keeps
+// hydration a non-issue.
 //
 // Render serves these because "Render does not apply redirect or rewrite rules
 // to a path if a resource exists at that path" — so the catch-all

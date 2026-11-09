@@ -57,6 +57,7 @@
   ],
   "earn_note": "Rewards post as they're earned and never expire for the life of the account, better than most store cards' certificate-and-clock model. The 1.5% base rate is fine but unexceptional; this card earns its keep almost entirely at REI itself. An active REI Co-op membership ($30 one-time fee, separate from the card) is required to hold the card at all.",
   "points": {
+    "redeemable": "store_only",
     "currency": "REI Co-op Mastercard Rewards (cash-equivalent, REI-redeemable)",
     "redemption_options": [
       {

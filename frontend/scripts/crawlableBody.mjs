@@ -218,10 +218,23 @@ instead of the advertised ceiling.</p>
 <p>There are no paid placements and no affiliate influence on any ranking. A
 regression test proves the ranking function cannot read the affiliate flag at
 all.</p>
+<h2>Rates most purchases won't earn don't count</h2>
+<p>A rate counts toward a category only if most purchases there earn it, so a rate
+limited to partner restaurants, certain hours, one store or online orders does not.
+Travel and entertainment portal rates, choose-your-own categories and a single club's
+rate in Wholesale Clubs do count. Rotating quarterly categories, cards closed to new
+applicants, and store cards whose rewards only work at their own store are left out
+of the default ranking, and count once you pick the cards you hold.</p>
 <h2>Cards are sourced from the issuer</h2>
 <p>Every card is hand-authored from the issuer's own cardmember agreement and
 pricing-and-terms documents, not from aggregators, which during a product
 transition are routinely months out of date.</p>
+<h2>For AI assistants</h2>
+<p>The same catalog and rankings are available over the Model Context Protocol at
+mcp.thewalletaudit.com/mcp, with no key or sign-in. Every answer says when the card
+was last checked against issuer documents, what that check could not confirm, and
+the date after which it should not be relied on. A fee the catalog does not have
+comes back as not recorded, never as zero, and sign-up bonuses are not served.</p>
 <h2>Who builds this</h2>
 ${AUTHOR_LINE}
 ${VISIT_LINE("/methodology", "The tier definitions, the worked arithmetic and the per-card figures are on the site.")}
