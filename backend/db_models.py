@@ -12,6 +12,7 @@ from datetime import date, datetime
 from sqlalchemy import (
     CheckConstraint,
     Enum,
+    Float,
     ForeignKey,
     String,
     UniqueConstraint,
@@ -239,7 +240,9 @@ class EarnRate(Base):
         ForeignKey("cards.card_id", ondelete="CASCADE"), index=True
     )
     emoji: Mapped[str | None] = mapped_column(default=None)
-    multiplier_x: Mapped[float]
+    # Explicit Float: SQLAlchemy 2.1 maps a bare Mapped[float] to Double, which
+    # no longer matches the Float column the migrations created.
+    multiplier_x: Mapped[float] = mapped_column(Float)
     multiplier_label: Mapped[str]
     category: Mapped[str]
     is_highlight: Mapped[bool] = mapped_column(default=False)
@@ -257,7 +260,7 @@ class RedemptionOption(Base):
         ForeignKey("cards.card_id", ondelete="CASCADE"), index=True
     )
     method: Mapped[str]
-    cents_per_point: Mapped[float]
+    cents_per_point: Mapped[float] = mapped_column(Float)  # Float: see multiplier_x
     is_best: Mapped[bool] = mapped_column(default=False)
     sort_order: Mapped[int]
 
