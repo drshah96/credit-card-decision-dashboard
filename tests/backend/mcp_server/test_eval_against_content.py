@@ -119,11 +119,13 @@ async def test_get_card_equals_every_raw_file(snapshot):
                 assert fact["status"] == ("not_recorded" if value is None else "recorded"), field
                 assert fact["value"] == value, field
             assert "welcome_bonus" not in json.dumps(served)
-            sources = data["provenance"]["issuer_sources"]
-            if raw.get("official_url"):
-                assert sources[0] == {"kind": "product_page", "url": raw["official_url"]}
-            else:
-                assert sources == []
+            url = raw.get("official_url")
+            page = [{"kind": "product_page", "url": url}] if url else []
+            record = sidecar["verification"]
+            documents = record["documents"] if record else []
+            assert data["provenance"]["issuer_sources"] == page + [
+                {"kind": d["kind"], "url": d["url"]} for d in documents
+            ]
             assert served["lounge_access"] == _expected_lounge_access(raw, sidecar)
             assert data["provenance"]["verified_on"] == sidecar["last_verified_ok_at"]
             assert data["provenance"]["verification_status"] == _expected_status(sidecar)

@@ -2,9 +2,9 @@
   "card_id": "citi-tractor-supply",
   "last_verified_ok_at": "2026-11-13",
   "verification": {
-    "evidence": "git:b9a5128809470dc88f378bf0bb945b62d6c54e2e",
+    "evidence": "git:eb9a4bfacb001cf93b7ae7c962c05f417b3f63c3",
     "evidence_scope": "card",
-    "facts_sha256": "91143780f4bddec4cf7dcf776f5a4ccebdd07eb1180432fa1fa7f41ea0faa1df",
+    "facts_sha256": "167a0b29197e6b5d37bdaa6165bff6339fce1d21351a284cac0708ba68dcff91",
     "documents": [
       {
         "kind": "rates_and_fees",

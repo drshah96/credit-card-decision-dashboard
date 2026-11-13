@@ -2,9 +2,9 @@
   "card_id": "citi-best-buy-visa",
   "last_verified_ok_at": "2026-11-13",
   "verification": {
-    "evidence": "git:b9a5128809470dc88f378bf0bb945b62d6c54e2e",
+    "evidence": "git:eb9a4bfacb001cf93b7ae7c962c05f417b3f63c3",
     "evidence_scope": "card",
-    "facts_sha256": "fa668def95b3f073b27094376b0406d59a1786e751a3258f91e8548d89a09d10",
+    "facts_sha256": "640e6605c6116fa2cf2d73873732454f523457d343b84f06b307c7b4403fa9c0",
     "documents": [
       {
         "kind": "rates_and_fees",

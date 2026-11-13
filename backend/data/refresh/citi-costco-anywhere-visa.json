@@ -2,9 +2,9 @@
   "card_id": "citi-costco-anywhere-visa",
   "last_verified_ok_at": "2026-11-13",
   "verification": {
-    "evidence": "git:b9a5128809470dc88f378bf0bb945b62d6c54e2e",
+    "evidence": "git:eb9a4bfacb001cf93b7ae7c962c05f417b3f63c3",
     "evidence_scope": "card",
-    "facts_sha256": "676bbfcfb37371f7cc62333629b4aca2e2c4e9f4ca6cfa1c2f293cc008d76a40",
+    "facts_sha256": "7a9a826674984478b7c99e1f6d92fb80c8919ca16310e182f721f76cb49ca342",
     "documents": [
       {
         "kind": "rates_and_fees",

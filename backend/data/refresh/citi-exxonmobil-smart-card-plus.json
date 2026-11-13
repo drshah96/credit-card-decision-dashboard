@@ -2,9 +2,9 @@
   "card_id": "citi-exxonmobil-smart-card-plus",
   "last_verified_ok_at": "2026-11-13",
   "verification": {
-    "evidence": "git:b9a5128809470dc88f378bf0bb945b62d6c54e2e",
+    "evidence": "git:eb9a4bfacb001cf93b7ae7c962c05f417b3f63c3",
     "evidence_scope": "card",
-    "facts_sha256": "9d554e68b1e8b52a37bc3d7041716da0549b607c9bd54f26ba1e3d6a7ea90331",
+    "facts_sha256": "d54a3a11a808348da26058d686312b5a7d2086d639514e374a2e59ec3b17113f",
     "documents": [
       {
         "kind": "rates_and_fees",

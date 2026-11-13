@@ -2,9 +2,9 @@
   "card_id": "citi-dillards",
   "last_verified_ok_at": "2026-11-13",
   "verification": {
-    "evidence": "git:b9a5128809470dc88f378bf0bb945b62d6c54e2e",
+    "evidence": "git:eb9a4bfacb001cf93b7ae7c962c05f417b3f63c3",
     "evidence_scope": "card",
-    "facts_sha256": "dfe1d782a2ffa488ec80c266b0549c836864ad8263880155aaa24e7ccb382398",
+    "facts_sha256": "26e2a1b963cdd16614692a865225f978b5c3019841166b30ef7f5b08ef0aa317",
     "documents": [
       {
         "kind": "rates_and_fees",

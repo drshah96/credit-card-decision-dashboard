@@ -351,6 +351,22 @@ RETAIL_2026_11: dict[str, tuple[str, frozenset[str]]] = {
             }
         ),
     ),
+    # Re-recorded after the code review on the same day changed these cards' facts.
+    "eb9a4bfacb001cf93b7ae7c962c05f417b3f63c3": (
+        "2026-11-13",
+        frozenset(
+            {
+                "capital-one-rei-co-op",
+                "citi-att-points-plus",
+                "citi-best-buy-visa",
+                "citi-costco-anywhere-visa",
+                "citi-dillards",
+                "citi-exxonmobil-smart-card-plus",
+                "citi-home-depot-consumer",
+                "citi-tractor-supply",
+            }
+        ),
+    ),
 }
 
 LEDGER = {**BACKFILL, **NOVEMBER_2026, **OWNER_CHECKS, **RETAIL_2026_11}
@@ -407,7 +423,7 @@ def test_ledger_shape_matches_the_recorded_refresh():
     assert len(NOVEMBER_2026) == 10
     november = [cid for _, ids in NOVEMBER_2026.values() for cid in ids]
     assert len(november) == len(set(november)) == 89
-    assert sum(len(ids) for _, ids in RETAIL_2026_11.values()) == 20
+    assert len(frozenset().union(*(ids for _, ids in RETAIL_2026_11.values()))) == 20
     verified = {cid for cid, s in _sidecars().items() if s["verification"]}
     assert len(verified) == 108
     assert set(_sidecars()) - verified == {"us-bank-split"}

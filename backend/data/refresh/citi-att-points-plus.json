@@ -2,9 +2,9 @@
   "card_id": "citi-att-points-plus",
   "last_verified_ok_at": "2026-11-13",
   "verification": {
-    "evidence": "git:b9a5128809470dc88f378bf0bb945b62d6c54e2e",
+    "evidence": "git:eb9a4bfacb001cf93b7ae7c962c05f417b3f63c3",
     "evidence_scope": "card",
-    "facts_sha256": "927b4e1c9efaa8973d3ac524cbaa3392cc49f1857619dbff874b112fc7c35da7",
+    "facts_sha256": "9665aa45c8bfc9eb4f87506086a5cacb82681da08e730e0499ea4c00e383fd18",
     "documents": [
       {
         "kind": "rates_and_fees",

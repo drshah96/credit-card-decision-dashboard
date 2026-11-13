@@ -2,9 +2,9 @@
   "card_id": "capital-one-rei-co-op",
   "last_verified_ok_at": "2026-11-13",
   "verification": {
-    "evidence": "git:b9a5128809470dc88f378bf0bb945b62d6c54e2e",
+    "evidence": "git:eb9a4bfacb001cf93b7ae7c962c05f417b3f63c3",
     "evidence_scope": "card",
-    "facts_sha256": "7f46ae0bbc1e34e6fc030008b4fc8ed345023ccd2d37f82b91322829028856de",
+    "facts_sha256": "91c77bc35c8efafbabf426ee9877ca06c438e7cd41c45912635e303006f9a0dc",
     "documents": [
       {
         "kind": "application_terms",
