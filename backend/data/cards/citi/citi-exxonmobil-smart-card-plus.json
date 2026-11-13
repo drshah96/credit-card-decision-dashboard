@@ -7,32 +7,32 @@
   "accent_color": "#ED1C24",
   "annual_fee": 0,
   "effective_cost": "Free, with no annual fee, but usable only at Exxon and Mobil branded stations",
-  "official_url": "https://www.citi.com/credit-cards/exxon-mobil-credit-card",
+  "official_url": null,
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "28.74%",
-  "balance_transfer_apr": null,
-  "balance_transfer_fee": null,
+  "variable_apr": "33.49%",
+  "balance_transfer_apr": "Not offered",
+  "balance_transfer_fee": "Not offered",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": null,
-  "penalty_apr": null,
+  "cash_advance_apr": "33.49%",
+  "penalty_apr": "None",
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
-  "late_payment_fee": null,
-  "returned_payment_fee": null,
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": "Up to $41",
   "returned_check_fee": null,
   "welcome_bonus": null,
   "verdict": {
     "status": "situational",
-    "text": "Only makes sense if you fuel up almost exclusively at Exxon/Mobil",
-    "short_tag": "Exxon/Mobil Drivers"
+    "text": "Closed to applicants; for cardholders who fuel almost only at Exxon/Mobil",
+    "short_tag": "Closed to applicants"
   },
   "earn_rates": [
     {
       "emoji": "⛽",
       "multiplier": "12¢/gal",
-      "category": "Synergy Supreme+™ premium gasoline at Exxon & Mobil stations",
+      "category": "Supreme+™ premium gasoline at Exxon & Mobil stations",
       "highlight": true,
       "is_base": false
     },
@@ -46,7 +46,7 @@
     {
       "emoji": "🏪",
       "multiplier": "5%",
-      "category": "Convenience-store purchases at Exxon/Mobil (snacks, drinks, car washes): first $1,200/yr, then presumably 0%",
+      "category": "Convenience-store purchases and car washes at Exxon/Mobil: first $1,200/yr, nothing earned above that",
       "highlight": false,
       "is_base": false
     }
@@ -67,7 +67,8 @@
       }
     ],
     "per_100k": "Not applicable: value is a per-gallon cents-off discount and a capped statement credit, not a points balance",
-    "note": "There's no points balance to redeem or track. The fuel discount posts automatically at checkout, and the convenience-store credit posts as a monthly statement credit up to its $1,200/year spend cap. Nothing here is portable or worth anything outside an Exxon/Mobil fuel purchase."
+    "note": "There's no points balance to redeem or track. The fuel discount posts automatically at checkout, and the convenience-store credit posts as a monthly statement credit up to its $1,200/year spend cap. Nothing here is portable or worth anything outside an Exxon/Mobil fuel purchase.",
+    "redeemable": "store_only"
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -114,11 +115,11 @@
   "services": [
     {
       "name": "Instant pump discount",
-      "detail": "12¢/gal off Synergy Supreme+ premium and 10¢/gal off regular/mid-grade/diesel, applied automatically at the pump; no signup process or minimum spend required to activate."
+      "detail": "12¢/gal off Supreme+ premium and 10¢/gal off regular, mid-grade and diesel, applied at the point of sale. If a station doesn't apply it, the discount posts as a statement credit within 1 to 2 billing cycles."
     },
     {
       "name": "Stacks with Exxon Mobil Rewards+",
-      "detail": "Can be combined with the separate Exxon Mobil Rewards+ loyalty program, and is compatible with regional grocery fuel-rewards programs (e.g. Albertsons/Safeway/ACME/Shaw's/Star Market for U)."
+      "detail": "The card's per-gallon discount applies on top of the separate Exxon Mobil Rewards+ loyalty program."
     },
     {
       "name": "$0 liability on unauthorized charges",
@@ -136,10 +137,17 @@
   },
   "timeline": [
     {
+      "date": "Nov 2026",
+      "type": "cut",
+      "badge": "Closed to applicants",
+      "text": "ExxonMobil's Smart Card+ pages now say applications are no longer being accepted, and Citi has taken down its product page for the card. Existing cardholders keep the 12¢ and 10¢ per gallon savings and the 5% back on the first $1,200 of in-store purchases each year."
+    },
+    {
       "date": "Ongoing",
       "type": "neutral",
       "badge": "Fuel-discount-only",
-      "text": "Standard APR runs notably high for a fuel card (roughly 33% variable as of late 2025 disclosures), with no introductory APR period offered. This card is built for people who pay in full monthly and fuel up almost exclusively at Exxon/Mobil, not for carrying a balance."
+      "text": "The standard APR runs high for a fuel card (33.49% variable), with no introductory APR period. This card suits people who pay in full monthly and fuel up almost exclusively at Exxon/Mobil, not people who carry a balance."
     }
-  ]
+  ],
+  "open_to_new_applicants": false
 }

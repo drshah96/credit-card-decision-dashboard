@@ -1,5 +1,35 @@
 {
   "card_id": "capital-one-tmobile",
-  "last_verified_ok_at": null,
-  "verification": null
+  "last_verified_ok_at": "2026-11-13",
+  "verification": {
+    "evidence": "git:b9a5128809470dc88f378bf0bb945b62d6c54e2e",
+    "evidence_scope": "card",
+    "facts_sha256": "09407fa78d4347dbfa4b63b4f756cf0341ffbc4a7a1be2193e35dc847c1d26de",
+    "documents": [
+      {
+        "kind": "cardmember_agreement",
+        "url": "https://ecm.capitalone.com/WCM/card/credit-card-agreements-q3-2026/credit-card-agreement-for-t-mobile-visa-in-capital-one-n.a.pdf"
+      },
+      {
+        "kind": "guide_to_benefits",
+        "url": "https://ecm.capitalone.com/WCM/card/benefits-guide/visa-signature-for-t-mobile.pdf"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.capitalone.com/credit-cards/t-mobile/"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.t-mobile.com/cards/visa-credit-rewards"
+      },
+      {
+        "kind": "other_issuer_document",
+        "url": "https://www.t-mobile.com/cards/visa-credit-rewards/faqs"
+      }
+    ],
+    "not_checked": [
+      "additional_cards"
+    ],
+    "note": "First check, 2026-11-13, against the Q3 2026 agreement, the T-Mobile-specific Guide to Benefits (no insurance) and T-Mobile's card page, rates as of 10/30/2026. The two documents disagree on the balance transfer fee; both are stated. Not checked: authorized-user fee."
+  }
 }

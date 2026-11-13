@@ -1,17 +1,33 @@
 """Shared fixtures for MCP tests. The snapshot is built once from the seeded test database."""
 
 from contextlib import asynccontextmanager
+from dataclasses import replace
 
 import pytest
 from mcp import Client
 
 from backend.mcp_server.snapshot import build_snapshot
 from backend.mcp_server.tools import create_server
+from backend.refresh.state import degraded
+
+# Verified in the live catalog. unverified_snapshot strips its check, so the never-checked path
+# stays covered however many cards the sidecars leave unverified.
+UNVERIFIED_CARD = "citi-costco-anywhere-visa"
 
 
 @pytest.fixture(scope="session")
 def snapshot(_seed_test_database):
     return build_snapshot()
+
+
+@pytest.fixture(scope="session")
+def unverified_snapshot(snapshot):
+    """The catalog with one card's check removed, the state a factual edit leaves behind."""
+    assert snapshot.verification[UNVERIFIED_CARD].verification is not None
+    return replace(
+        snapshot,
+        verification={**snapshot.verification, UNVERIFIED_CARD: degraded(UNVERIFIED_CARD)},
+    )
 
 
 @asynccontextmanager

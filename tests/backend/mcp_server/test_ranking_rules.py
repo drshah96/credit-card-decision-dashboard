@@ -108,6 +108,7 @@ STORE_ONLY = {
     "capital-one-bjs-one-plus",
     "capital-one-tmobile",
     "citi-wayfair",
+    "citi-exxonmobil-smart-card-plus",
 }
 
 
@@ -118,7 +119,10 @@ def _all_cards() -> list[RankInput]:
 def test_exactly_the_store_only_and_closed_cards_are_marked():
     cards = _all_cards()
     assert {c.id for c in cards if c.rewards_redeemable == "store_only"} == STORE_ONLY
-    assert {c.id for c in cards if not c.open_to_new_applicants} == {"amex-green"}
+    assert {c.id for c in cards if not c.open_to_new_applicants} == {
+        "amex-green",
+        "citi-exxonmobil-smart-card-plus",
+    }
 
 
 def test_store_only_and_closed_cards_sit_out_of_whole_catalog_rankings():

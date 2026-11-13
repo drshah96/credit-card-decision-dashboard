@@ -923,12 +923,13 @@ def test_capital_one_premium_travel_cards_have_no_intro_offer() -> None:
 
 def test_capital_one_kohls_no_longer_has_an_intro_offer() -> None:
     # Re-verified 2026-08-03: round 1 found a 12-month 0% intro APR with a
-    # 19.49%-28.49% ongoing range; the current disclosure modal on this
-    # card's own official_url shows a flat 29.49% with no intro period.
+    # 19.49%-28.49% ongoing range; the current disclosure shows a flat rate
+    # with no intro period. Re-checked 2026-11-13 against the live Kohl's
+    # application terms: Prime plus 22.74%, so 29.74% at a 7.00% Prime Rate.
     detail = client.get("/api/cards/capital-one-kohls-rewards").json()
     assert detail["intro_apr_purchases"] is None
     assert detail["intro_apr_balance_transfers"] is None
-    assert detail["variable_apr"] == "29.49%"
+    assert detail["variable_apr"] == "29.74%"
 
 
 def test_capital_one_savor_one_no_longer_has_an_intro_offer() -> None:
@@ -947,17 +948,17 @@ def test_capital_one_savor_one_no_longer_has_an_intro_offer() -> None:
 def test_capital_one_bass_pro_cabelas_has_a_bifurcated_purchase_apr() -> None:
     # A genuinely two-tier rate (special in-store rate vs. everything else)
     # rather than a single range — stored verbatim, not force-averaged.
-    # Re-verified 2026-08-03: the "everything else" tier is itself 3
-    # discrete creditworthiness values, not a min-max range.
+    # Re-checked 2026-11-13: the Q3 2026 agreement prints the "everything
+    # else" tier as a range, so it is stored as one.
     detail = client.get("/api/cards/capital-one-bass-pro-cabelas-club").json()
     assert "9.99%" in detail["variable_apr"]
-    assert detail["balance_transfer_apr"] == "19.49%, 22.99%, or 30.49%, based on creditworthiness"
+    assert detail["balance_transfer_apr"] == "19.74% - 30.74%, based on creditworthiness"
 
 
 def test_capital_one_bjs_cards_share_the_same_tiered_apr() -> None:
     # Re-verified 2026-08-03: now a 2-tier rate, not 3 — same finding
     # (both cards share identical APR terms), different current numbers.
-    tiered = "19.99% or 28.49%, based on creditworthiness"
+    tiered = "19.99% or 28.74%, based on creditworthiness"
     for card_id in ("capital-one-bjs-one", "capital-one-bjs-one-plus"):
         detail = client.get(f"/api/cards/{card_id}").json()
         assert detail["variable_apr"] == tiered
@@ -1003,26 +1004,27 @@ def test_citi_aadvantage_mileup_has_no_intro_offer() -> None:
     assert detail["intro_apr_balance_transfers"] is None
 
 
-def test_citi_two_cards_left_genuinely_unconfirmed_foreign_transaction_fee() -> None:
-    # Unlike the rest of the Citi batch, Goodyear and Dillard's Mastercard
-    # (our catalog's variant) couldn't be confirmed either way during
-    # research — null here means "not yet audited", not "confirmed fee-free".
-    for card_id in ("citi-goodyear", "citi-dillards"):
-        detail = client.get(f"/api/cards/{card_id}").json()
-        assert detail["foreign_transaction_fee"] is None
-        assert detail["foreign_transaction_fee_rate"] is None
+def test_citi_goodyear_left_genuinely_unconfirmed_foreign_transaction_fee() -> None:
+    # Goodyear's pricing table has no foreign transaction row, and the card is
+    # closed-loop, so null here means "not yet audited", not "confirmed
+    # fee-free". Dillard's Mastercard was settled on 2026-11-13: its pricing
+    # table charges 3%.
+    detail = client.get("/api/cards/citi-goodyear").json()
+    assert detail["foreign_transaction_fee"] is None
+    assert detail["foreign_transaction_fee_rate"] is None
 
 
 def test_citi_store_financing_cards_have_no_blanket_intro_offer() -> None:
     # Home Depot and ExxonMobil offer deferred-interest financing scoped to
     # specific purchase amounts, not a blanket account-wide intro APR — same
     # non-fit as Amazon Prime Visa in the Chase batch, left null rather than
-    # force-fit into {rate, months}.
+    # force-fit into {rate, months}. Neither pricing table has a balance
+    # transfer row (read 2026-11-13), so the APR says so rather than null.
     for card_id in ("citi-home-depot-consumer", "citi-exxonmobil-smart-card-plus"):
         detail = client.get(f"/api/cards/{card_id}").json()
         assert detail["intro_apr_purchases"] is None
-        assert detail["balance_transfer_apr"] is None
-        assert detail["balance_transfer_fee"] is None
+        assert detail["balance_transfer_apr"] == "Not offered"
+        assert detail["balance_transfer_fee"] == "Not offered"
 
 
 def test_citi_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:

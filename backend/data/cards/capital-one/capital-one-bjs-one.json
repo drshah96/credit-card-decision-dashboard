@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.99% or 28.49%, based on creditworthiness",
-  "balance_transfer_apr": "19.99% or 28.49%, based on creditworthiness",
-  "balance_transfer_fee": "$0 at the standard Transfer APR, or 4% at any promotional APR Capital One may offer",
+  "variable_apr": "19.99% or 28.74%, based on creditworthiness",
+  "balance_transfer_apr": "19.99% or 28.74%, based on creditworthiness",
+  "balance_transfer_fee": "None for balances transferred at the Balance Transfer APR",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%",
+  "cash_advance_apr": "28.49% or 28.74%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
@@ -51,19 +51,19 @@
       "is_base": true
     }
   ],
-  "earn_note": "This is the base tier: 3% at BJ's and 1.5% everywhere else, paired with the standard Inner Circle membership (~$55/yr). The richer BJ's One+ card earns 5%/2% but requires upgrading to the pricier Perks+ membership (~$110/yr); don't confuse the two. Gas at BJ's Gas is a per-gallon discount taken at the pump, not rewards points, and doesn't stack with the earn rate. Excludes BJ's membership fees, alcohol, tobacco, lottery, gift cards, and a few other categories.",
+  "earn_note": "This is the base tier: 3% at BJ's and 1.5% everywhere else, paired with a BJ's Club membership ($60/yr). The richer BJ's One+ card earns 5%/2% but requires the pricier BJ's Club+ membership ($120/yr); don't confuse the two. Gas at BJ's Gas is a 10¢/gal discount at the pump, not rewards, and BJ's Gas purchases don't earn. Eye exams, tax, bottle deposits, alcohol, tobacco, lottery, gift cards and propane don't earn, and neither do same-day delivery and pickup fees, BJ's Gas, or purchases through PayPal and other third-party wallets.",
   "points": {
     "redeemable": "store_only",
     "currency": "BJ's Rewards (cash back)",
     "redemption_options": [
       {
-        "method": "In-club, BJs.com, or BJ's app, applied like cash toward purchases",
+        "method": "At BJ's checkout in-club, on BJs.com or in the BJ's app, toward purchases or membership fees",
         "cpp": 1.0,
         "best": true
       }
     ],
     "per_100k": "Not applicable: rewards accrue as a dollar balance, not a points currency",
-    "note": "A flat cash-back balance, not points. Redeemable once it hits a $10 minimum, in any increment above that, only at BJ's. Doesn't expire as long as the account stays open. There's no cash-out to a bank account or statement credit; it's locked to BJ's."
+    "note": "A flat cash-back balance, not points. You can redeem once it reaches $10, but you have to use all the rewards presented to you at once, on a purchase of at least $10. Rewards can also pay your BJ's membership fee. They're yours for the life of the account, with no cash-out to a bank account or statement credit; they're locked to BJ's."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -105,11 +105,15 @@
   "services": [
     {
       "name": "BJ's membership required",
-      "detail": "You must be an active, paying BJ's member (Inner Circle, ~$55/yr) to apply for or use this card; it's not a substitute for membership and doesn't discount it."
+      "detail": "You must be an active, paying BJ's member (BJ's Club, $60/yr) to apply for or use this card; it's not a substitute for membership and doesn't discount it. BJ's B2B and Global Sales memberships aren't eligible."
     },
     {
       "name": "Card lock & account management",
       "detail": "Mobile app card lock, autopay, and flexible due-date selection via Capital One's servicing platform."
+    },
+    {
+      "name": "World Mastercard benefits",
+      "detail": "Mastercard ID Theft Protection (enrollment required), Travel & Lifestyle Services, Airport Concierge (15% off meet-and-greet) and Digital Merchant Offers."
     }
   ],
   "additional_cards": {
@@ -140,5 +144,6 @@
       "badge": "Rebrand",
       "text": "Capital One took over as issuer from Comenity, relaunching the BJ's Perks Plus Mastercard as BJ's One and the BJ's Perks Elite Mastercard as BJ's One+, on the Mastercard network."
     }
-  ]
+  ],
+  "lounge_access": "none"
 }

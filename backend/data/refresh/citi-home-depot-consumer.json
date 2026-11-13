@@ -1,5 +1,23 @@
 {
   "card_id": "citi-home-depot-consumer",
-  "last_verified_ok_at": null,
-  "verification": null
+  "last_verified_ok_at": "2026-11-13",
+  "verification": {
+    "evidence": "git:eb9a4bfacb001cf93b7ae7c962c05f417b3f63c3",
+    "evidence_scope": "card",
+    "facts_sha256": "21d46b664fd5b275513c19400c007df49e0bb959df76780338216ad21e3bd3df",
+    "documents": [
+      {
+        "kind": "rates_and_fees",
+        "url": "https://files.consumerfinance.gov/a/assets/credit-card-agreements/pdf/Q22026/CITIBANK_N.A./HD_Addendum_49_0226_vf-256088.pdf"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.citi.com/credit-cards/citi-home-depot-consumer-credit-card"
+      }
+    ],
+    "not_checked": [
+      "additional_cards"
+    ],
+    "note": "First check, 2026-11-13, against Citi's filed pricing table (a fixed 29.99% APR) and Citi's product page and benefits list. Not checked: authorized-user terms, which Citi lists without detail."
+  }
 }

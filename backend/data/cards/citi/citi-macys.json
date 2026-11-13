@@ -11,20 +11,20 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": true,
-  "variable_apr": "32.74%",
-  "balance_transfer_apr": "32.74%",
+  "variable_apr": "32.99%",
+  "balance_transfer_apr": "32.99%, for balance transfers completed within 4 months of account opening",
   "balance_transfer_fee": "The greater of $10 or 5% of the amount of each transfer",
   "foreign_transaction_fee_rate": "3%",
-  "cash_advance_apr": null,
-  "penalty_apr": "Up to 29.99%",
-  "penalty_apr_trigger": "Making a late payment or a payment that's returned",
+  "cash_advance_apr": "32.99%",
+  "penalty_apr": "None",
+  "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
   "late_payment_fee": "$30, or $41 if another late payment occurs within 6 billing cycles",
   "returned_payment_fee": "$30, or $41 if another returned payment occurs within 6 billing cycles",
   "returned_check_fee": null,
   "welcome_bonus": {
-    "bonus": "30% off macys.com purchases (in-store discount varies)",
-    "requirement": "the day you open a Macy's card",
+    "bonus": "30% off macys.com purchases (20% in store), up to $100 in total savings",
+    "requirement": "on purchases the day you're approved for a Macy's card; needs instant approval and doesn't apply to upgrades",
     "estimated_value": null
   },
   "verdict": {
@@ -36,21 +36,28 @@
     {
       "emoji": "⭐",
       "multiplier": "5%",
-      "category": "Macy's & macys.com: Platinum tier only ($1,200+ in annual card spend), every day with no merchandise exclusions",
+      "category": "Macy's & macys.com: Platinum tier ($1,200+ a year at Macy's with the card)",
       "highlight": true,
       "is_base": false
     },
     {
-      "emoji": "🛍️",
-      "multiplier": "Points on Star Money Days",
-      "category": "Macy's & macys.com: Silver (default) and Gold ($500–$1,199/yr) tiers, only during scheduled bonus days rather than every purchase",
+      "emoji": "⭐",
+      "multiplier": "3%",
+      "category": "Macy's & macys.com: Gold tier ($500 to $1,199 a year at Macy's with the card)",
+      "highlight": false,
+      "is_base": false
+    },
+    {
+      "emoji": "⭐",
+      "multiplier": "2%",
+      "category": "Macy's & macys.com: Silver tier (every new card starts here)",
       "highlight": false,
       "is_base": false
     },
     {
       "emoji": "🍽️",
       "multiplier": "3%",
-      "category": "Restaurants",
+      "category": "Stand-alone restaurants, including delivery",
       "highlight": false,
       "is_base": false
     },
@@ -76,7 +83,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "This is the open-loop American Express version of Macy's card: it earns outside Macy's, unlike the closed-loop, store-only Macy's Credit Card, which only works at Macy's and Macy's Backstage. Star Rewards status is use-it-or-lose-it and resets based on trailing 12-month spend: Silver is the automatic starting tier and only earns points on Macy's-designated \"Star Money Days,\" not on everyday purchases; Gold ($500–$1,199/yr) works the same way; only Platinum ($1,200+/yr) converts to a flat 5% back on every Macy's purchase with no exclusions. The 3%/2%/1% non-Macy's rates come from the Amex network side and don't appear to vary by tier.",
+  "earn_note": "This is the open-loop American Express version of Macy's card: it earns outside Macy's, unlike the closed-loop, store-only Macy's Credit Card, which only works at Macy's and Macy's Backstage. Every new card starts at Silver, which earns 2 points per $1 at Macy's. Gold ($500 to $1,199 a year) earns 3 and Platinum ($1,200+) earns 5. Only spend at Macy's with the card counts toward a tier, not spend elsewhere on the Amex. Star Money Bonus Days add extra points on top of these rates. The 3%/2%/1% rates outside Macy's don't vary by tier.",
   "points": {
     "redeemable": "store_only",
     "currency": "Star Money",
@@ -87,8 +94,8 @@
         "best": true
       }
     ],
-    "per_100k": "$1,000 in Star Money, but only accessible if points are actually being earned (i.e., you've reached Platinum, or it's a Star Money Day)",
-    "note": "1,000 points = $10 in Star Money. Star Money expires 30 days after issuance, so it has to be used quickly rather than banked. This isn't a flexible cash-back currency; it's spendable at Macy's/macys.com only."
+    "per_100k": "$1,000 in Star Money (1,000 points = $10)",
+    "note": "1,000 points = $10 in Star Money. Star Money expires 30 days after it's issued, so it has to be used quickly rather than banked. It can be spent at Macy's, Macy's Backstage and macys.com, but not on gift cards, services or a card payment. All points and unused Star Money are forfeited if you go 12 months in a row without a qualifying purchase."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -129,13 +136,13 @@
       "level": "none"
     }
   ],
-  "protection_note": "Despite running on the American Express network, this is a Citi-issued retail co-brand, not a standard Amex-issued card. The usual Amex purchase-protection/extended-warranty suite is not confirmed to apply. Treat this as a rewards-and-financing card with no meaningful insurance, not a card to rely on for large purchases.",
+  "protection_note": "Despite running on the American Express network, this is a Citi-issued retail co-brand, not an Amex-issued card, so Amex's own purchase protection and extended warranty don't apply. No Guide to Benefits for this card was found. Treat it as a rewards-and-financing card with no insurance you can count on.",
   "rental_note": "No rental car coverage found for this card.",
   "status_perks": [
     {
       "name": "Star Rewards tiers",
       "strength": 2,
-      "note": "Silver (default) → Gold ($500+/yr) → Platinum ($1,200+/yr), reassessed on a rolling basis. Only Platinum earns every-day rewards on Macy's spend; lower tiers mostly earn on special Star Money Days."
+      "note": "Silver (default), then Gold at $500 a year and Platinum at $1,200, counting only spend at Macy's with the card. Every tier earns on everyday Macy's purchases (2, 3 or 5 points per $1), and Star Money Bonus Days add more."
     }
   ],
   "services": [

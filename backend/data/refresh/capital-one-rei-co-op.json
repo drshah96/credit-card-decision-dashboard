@@ -1,5 +1,32 @@
 {
   "card_id": "capital-one-rei-co-op",
-  "last_verified_ok_at": null,
-  "verification": null
+  "last_verified_ok_at": "2026-11-13",
+  "verification": {
+    "evidence": "git:eb9a4bfacb001cf93b7ae7c962c05f417b3f63c3",
+    "evidence_scope": "card",
+    "facts_sha256": "91c77bc35c8efafbabf426ee9877ca06c438e7cd41c45912635e303006f9a0dc",
+    "documents": [
+      {
+        "kind": "application_terms",
+        "url": "https://disclosures.capitalone.com/disclosure.41840.en-US.pdf"
+      },
+      {
+        "kind": "guide_to_benefits",
+        "url": "https://ecm.capitalone.com/WCM/card/benefits-guide/rei/rei-coop-mc-gtb-english.pdf"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.rei.com/membership/mastercard"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.rei.com/mastercard/faq"
+      }
+    ],
+    "not_checked": [
+      "perks",
+      "additional_cards"
+    ],
+    "note": "First check, 2026-11-13, against the Account Terms, the full World Elite Guide to Benefits and REI's card pages, rates as of 10/30/2026. Not checked: Mastercard network lounge programs (pages blocked) and authorized-user terms."
+  }
 }

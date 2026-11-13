@@ -6,16 +6,16 @@
   "points_program": "BJ's Rewards",
   "accent_color": "#CC0000",
   "annual_fee": 0,
-  "effective_cost": "Free card, but requires BJ's Perks+ membership (~$110/yr) to hold it",
+  "effective_cost": "Free card, but requires a BJ's Club+ membership ($120/yr) to hold it",
   "official_url": "https://www.capitalone.com/credit-cards/bjs-wholesale-club/",
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.99% or 28.49%, based on creditworthiness",
-  "balance_transfer_apr": "19.99% or 28.49%, based on creditworthiness",
-  "balance_transfer_fee": "$0 at the standard Transfer APR, or 4% at any promotional APR Capital One may offer",
+  "variable_apr": "19.99% or 28.74%, based on creditworthiness",
+  "balance_transfer_apr": "19.99% or 28.74%, based on creditworthiness",
+  "balance_transfer_fee": "None for balances transferred at the Balance Transfer APR",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%",
+  "cash_advance_apr": "28.49% or 28.74%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
@@ -25,8 +25,8 @@
   "welcome_bonus": null,
   "verdict": {
     "status": "situational",
-    "text": "Worth it only if you already pay for BJ's Perks+ membership",
-    "short_tag": "BJ's Perks+ Members"
+    "text": "Worth it only if you already pay for BJ's Club+ membership",
+    "short_tag": "BJ's Club+ Members"
   },
   "earn_rates": [
     {
@@ -51,19 +51,19 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 5%/2% rate requires the card to be paired with a BJ's Perks+ membership (~$110/yr, the club's premium tier). Apply with the base Inner Circle membership and BJ's issues the lesser BJ's One card instead (3%/1.5%). Perks+ membership itself already bundles 2% back on in-club spend regardless of payment method, so the card's 5% is really a +3-point card bonus on top of what the membership alone pays. Gas at BJ's Gas is a per-gallon pump discount, not points, and doesn't stack with the earn rate. Same exclusions as BJ's One: membership fees, alcohol, tobacco, lottery, gift cards.",
+  "earn_note": "The 5%/2% rate requires a BJ's Club+ membership ($120/yr, the club's premium tier); with a BJ's Club membership you get the lesser BJ's One card instead (3%/1.5%). Club+ on its own pays 2% back on most BJ's purchases, capped at $500 in rewards a year, but cardholders earn under the card's terms instead, with no cap. Gas at BJ's Gas is a 15¢/gal discount at the pump, not rewards, and BJ's Gas purchases don't earn. Eye exams, tax, bottle deposits, alcohol, tobacco, lottery, gift cards and propane don't earn, and neither do same-day delivery and pickup fees, BJ's Gas, or purchases through PayPal and other third-party wallets.",
   "points": {
     "redeemable": "store_only",
     "currency": "BJ's Rewards (cash back)",
     "redemption_options": [
       {
-        "method": "In-club, BJs.com, or BJ's app, applied like cash toward purchases",
+        "method": "At BJ's checkout in-club, on BJs.com or in the BJ's app, toward purchases or membership fees",
         "cpp": 1.0,
         "best": true
       }
     ],
     "per_100k": "Not applicable: rewards accrue as a dollar balance, not a points currency",
-    "note": "A flat cash-back balance, not points. Redeemable once it hits a $10 minimum, in any increment above that, only at BJ's. Doesn't expire as long as the account stays open. No cash-out to a bank account or statement credit; locked to BJ's, same as the base card."
+    "note": "A flat cash-back balance, not points. You can redeem once it reaches $10, but you have to use all the rewards presented to you at once, on a purchase of at least $10. Rewards can also pay your BJ's membership fee. They're yours for the life of the account, with no cash-out to a bank account or statement credit; they're locked to BJ's."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -104,12 +104,16 @@
   "status_perks": [],
   "services": [
     {
-      "name": "BJ's Perks+ membership required",
-      "detail": "Only available to BJ's Perks+ members (~$110/yr, the club's premium tier); Inner Circle members are issued the lower-earning BJ's One card instead. Membership is billed separately and isn't discounted by the card."
+      "name": "BJ's Club+ membership required",
+      "detail": "Only available to BJ's Club+ members ($120/yr, the club's premium tier); BJ's Club members get the lower-earning BJ's One card instead. Membership is billed separately and isn't discounted by the card. A downgrade back to BJ's One happens only at membership renewal."
     },
     {
       "name": "Card lock & account management",
       "detail": "Mobile app card lock, autopay, and flexible due-date selection via Capital One's servicing platform."
+    },
+    {
+      "name": "World Elite Mastercard benefits",
+      "detail": "Mastercard ID Theft Protection, Travel & Lifestyle Services, 24/7 Concierge and Mastercard Merchant Offers."
     }
   ],
   "additional_cards": {
@@ -140,5 +144,6 @@
       "badge": "Rebrand",
       "text": "Capital One took over as issuer from Comenity, relaunching the BJ's Perks Elite Mastercard as BJ's One+ (and the Perks Plus Mastercard as BJ's One), on the Mastercard network."
     }
-  ]
+  ],
+  "lounge_access": "none"
 }

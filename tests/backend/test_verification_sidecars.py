@@ -321,7 +321,55 @@ OWNER_CHECKS: dict[str, tuple[str, frozenset[str]]] = {
     "8025eabaa8e639abc9c20e96ee7d0c37f5ad2f8a": ("2026-11-08", frozenset({"amex-green"})),
 }
 
-LEDGER = {**BACKFILL, **NOVEMBER_2026, **OWNER_CHECKS}
+# The 19 retail co-brands the November pass skipped, plus a re-check of Altitude Connect before
+# its GigSky perk's end date. Read against filed pricing tables, Guides and retailer terms.
+RETAIL_2026_11: dict[str, tuple[str, frozenset[str]]] = {
+    "b9a5128809470dc88f378bf0bb945b62d6c54e2e": (
+        "2026-11-13",
+        frozenset(
+            {
+                "capital-one-bass-pro-cabelas-club",
+                "capital-one-bjs-one",
+                "capital-one-bjs-one-plus",
+                "capital-one-key-rewards",
+                "capital-one-kohls-rewards",
+                "capital-one-rei-co-op",
+                "capital-one-tmobile",
+                "citi-att-points-plus",
+                "citi-best-buy-visa",
+                "citi-bloomingdales",
+                "citi-costco-anywhere-visa",
+                "citi-dillards",
+                "citi-exxonmobil-smart-card-plus",
+                "citi-goodyear",
+                "citi-home-depot-consumer",
+                "citi-llbean",
+                "citi-macys",
+                "citi-tractor-supply",
+                "citi-wayfair",
+                "us-bank-altitude-connect",
+            }
+        ),
+    ),
+    # Re-recorded after the code review on the same day changed these cards' facts.
+    "eb9a4bfacb001cf93b7ae7c962c05f417b3f63c3": (
+        "2026-11-13",
+        frozenset(
+            {
+                "capital-one-rei-co-op",
+                "citi-att-points-plus",
+                "citi-best-buy-visa",
+                "citi-costco-anywhere-visa",
+                "citi-dillards",
+                "citi-exxonmobil-smart-card-plus",
+                "citi-home-depot-consumer",
+                "citi-tractor-supply",
+            }
+        ),
+    ),
+}
+
+LEDGER = {**BACKFILL, **NOVEMBER_2026, **OWNER_CHECKS, **RETAIL_2026_11}
 
 # Only the September backfill used issuer-level evidence; every November record cites a card diff.
 ISSUER_PASS_CARDS = frozenset(
@@ -375,9 +423,10 @@ def test_ledger_shape_matches_the_recorded_refresh():
     assert len(NOVEMBER_2026) == 10
     november = [cid for _, ids in NOVEMBER_2026.values() for cid in ids]
     assert len(november) == len(set(november)) == 89
+    assert len(frozenset().union(*(ids for _, ids in RETAIL_2026_11.values()))) == 20
     verified = {cid for cid, s in _sidecars().items() if s["verification"]}
-    assert len(verified) == 89
-    assert len(_sidecars()) - len(verified) == 20
+    assert len(verified) == 108
+    assert set(_sidecars()) - verified == {"us-bank-split"}
 
 
 def test_a_ledger_date_cannot_be_borrowed():
@@ -390,7 +439,7 @@ def test_a_ledger_date_cannot_be_borrowed():
             when, ids = LEDGER[record["evidence"].removeprefix("git:")]
             assert card_id in ids, f"{card_id} cites evidence that does not cover it"
             assert sidecar["last_verified_ok_at"] == when
-    assert checked == 89, "the ledger must match the sidecars, or this test proves nothing"
+    assert checked == 108, "the ledger must match the sidecars, or this test proves nothing"
 
 
 def test_a_backfilled_date_is_superseded_only_by_a_later_one():

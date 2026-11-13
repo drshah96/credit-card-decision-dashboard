@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "29.49%",
-  "balance_transfer_apr": "29.49%",
+  "variable_apr": "29.74%",
+  "balance_transfer_apr": "29.74%",
   "balance_transfer_fee": "$0 at the standard Transfer APR, or 4% at any promotional APR Capital One may offer",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "29.49%",
+  "cash_advance_apr": "29.74%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
@@ -62,7 +62,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 7.5% at Kohl's is Capital One's marketing framing of 5% base Kohl's-member reward plus 2.5% for using this card instead of the store-only Kohl's Card. Every category (Kohl's, gas, grocery, and everything else) pays out in Kohl's Cash, not usable dollars, so the gas/grocery rates are really 'discounts good only at Kohl's,' not general cash back. No caps disclosed, but plenty of exclusions apply at Kohl's itself (Sephora, certain brands, gift cards).",
+  "earn_note": "The 7.5% at Kohl's is the 5% every Kohl's Rewards member earns plus 2.5% for paying with this card, and it needs the card linked to your Kohl's Rewards account. On a split payment, only the part charged to the card gets 7.5%, and purchases through a mobile or digital wallet may earn less. Every category pays out in Kohl's Cash, not usable dollars, so the gas and grocery rates are really discounts good only at Kohl's. Groceries bought at superstores, warehouse clubs and convenience stores earn 1%. Gift cards don't earn, and Kohl's Cash can't be spent on Sephora at Kohl's.",
   "points": {
     "redeemable": "store_only",
     "currency": "Kohl's Cash",
@@ -74,7 +74,7 @@
       }
     ],
     "per_100k": "Not applicable: rewards accrue as a Kohl's Cash balance, not a points currency",
-    "note": "Rewards convert to $5 Kohl's Cash increments on the 1st of the following month and expire just 30 days later. This short, hard-cutoff expiration is the single biggest catch on the card: unspent balances are simply forfeited, unlike BJ's or most cash-back cards where rewards sit indefinitely."
+    "note": "Rewards convert to $5 Kohl's Cash increments around the 1st of the following month and expire 30 days later, the single biggest catch on the card. A balance under $5 carries forward, but it expires if it stays under $5 for more than 12 months."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -86,17 +86,17 @@
   "insurance": [
     {
       "coverage": "Purchase protection",
-      "detail": "Not disclosed in available terms",
+      "detail": "Not included in the Kohl's Rewards Visa Guide to Benefits",
       "level": "none"
     },
     {
       "coverage": "Extended warranty",
-      "detail": "Not disclosed in available terms",
+      "detail": "Not included in the Kohl's Rewards Visa Guide to Benefits",
       "level": "none"
     },
     {
       "coverage": "Rental car CDW",
-      "detail": "Not disclosed in available terms",
+      "detail": "Not included in the Kohl's Rewards Visa Guide to Benefits",
       "level": "none"
     },
     {
@@ -110,13 +110,13 @@
       "level": "none"
     }
   ],
-  "protection_note": "Visa Signature status brings 24/7 concierge and travel/emergency assistance, but Capital One's public terms don't document purchase protection, extended warranty, or trip coverage for this specific card. Unlike some Visa Signature issuers, these benefits don't appear to be layered on here. Treat it as unprotected for big-ticket purchases.",
-  "rental_note": "No rental car coverage documented for this card.",
+  "protection_note": "Visa Signature status brings 24/7 concierge and travel/emergency assistance, but the Kohl's Rewards Visa Guide to Benefits includes no purchase protection, extended warranty, rental or trip coverage. Treat it as unprotected for big-ticket purchases.",
+  "rental_note": "No rental car coverage: the card's Guide to Benefits doesn't include any.",
   "status_perks": [
     {
-      "name": "Most Valuable Customer (MVC)",
+      "name": "Most Valued Customer (MVC)",
       "strength": 2,
-      "note": "Spend $600+ at Kohl's in a calendar year and unlock free standard shipping on Kohls.com for the following year."
+      "note": "Spend $600 at Kohl's stores or Kohls.com in a calendar year to reach MVC status, which runs through December 31 of the following year and brings monthly free shipping opportunities."
     }
   ],
   "services": [
@@ -131,6 +131,10 @@
     {
       "name": "Card lock & account management",
       "detail": "Mobile app card lock, autopay, and flexible due-date selection via Capital One's servicing platform."
+    },
+    {
+      "name": "Visa Signature extras",
+      "detail": "Roadside Dispatch (pay per use, about $80 a call), the Visa Signature Luxury Hotel Collection, and Troon Rewards golf discounts."
     }
   ],
   "additional_cards": {
@@ -167,5 +171,6 @@
       "badge": "Issuer change",
       "text": "Capital One became the issuer of Kohl's private-label credit cards, acquiring the existing portfolio from JPMorgan Chase."
     }
-  ]
+  ],
+  "lounge_access": "none"
 }

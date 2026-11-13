@@ -11,25 +11,25 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": null,
-  "variable_apr": "Variable 16.99%-33.49%, or non-variable 22.36%-26.99%, based on offer",
-  "balance_transfer_apr": "Variable 16.99%-33.49%, or non-variable 22.36%-26.99%, based on offer",
-  "balance_transfer_fee": "The greater of $10 or 5% of the amount of each transfer",
+  "variable_apr": "33.74%",
+  "balance_transfer_apr": "Not offered",
+  "balance_transfer_fee": "Not offered",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": null,
-  "penalty_apr": null,
+  "cash_advance_apr": "33.74%",
+  "penalty_apr": "None",
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
-  "late_payment_fee": null,
-  "returned_payment_fee": null,
+  "late_payment_fee": "Up to $40",
+  "returned_payment_fee": "Up to $41",
   "returned_check_fee": null,
   "welcome_bonus": {
-    "bonus": "$50 back",
-    "requirement": "on a first purchase of $250 or more",
+    "bonus": "$50 back, paid by prepaid physical or virtual card via online or mail-in rebate",
+    "requirement": "on a first qualifying purchase of $250 or more (before tax) with a new Goodyear Credit Card account; offer valid 6/1/2025-12/31/2026",
     "estimated_value": null
   },
   "verdict": {
     "status": "situational",
-    "text": "A tire financing card, not rewards: only for a specific 0% purchase",
+    "text": "A tire financing card, not rewards: for buys you can pay off in 6 months",
     "short_tag": "Tire Financing"
   },
   "earn_rates": [],
@@ -38,7 +38,7 @@
     "currency": "No rewards program",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
-    "note": "No points or cash back exist on this card. Value comes entirely from promotional 0%-interest financing windows on qualifying purchases, which revert to a high standard variable APR (roughly 22%–27% per Citi's disclosures) if the balance isn't paid in full by the deadline, including retroactive interest back to the purchase date under deferred-interest terms."
+    "note": "No points or cash back exist on this card. Its value is the 6-month deferred-interest offer on purchases of $250 or more. If the balance isn't paid in full by the deadline, interest is charged back to the purchase date at the card's 33.74% variable APR."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -79,7 +79,7 @@
       "level": "none"
     }
   ],
-  "protection_note": "None of the usual card protections apply: this is a closed-loop retail financing account, not a Visa/Mastercard, so there's no purchase protection, extended warranty, or travel insurance of any kind. $0 liability on unauthorized charges is the only fraud-related benefit found.",
+  "protection_note": "None of the usual card protections apply: this is a closed-loop retail financing account, not a Visa or Mastercard, so there's no purchase protection, extended warranty, or travel insurance. Citi lists $0 liability on unauthorized charges and identity theft protection.",
   "rental_note": "No rental car coverage; this card can't be used for rentals or anywhere outside Goodyear locations and participating Exxon/Mobil stations.",
   "status_perks": [],
   "services": [
@@ -98,6 +98,10 @@
     {
       "name": "$0 liability on unauthorized charges",
       "detail": "Standard fraud-liability protection."
+    },
+    {
+      "name": "Identity theft protection",
+      "detail": "Listed by Citi among the card's benefits."
     }
   ],
   "additional_cards": {
@@ -110,7 +114,8 @@
       "date": "Ongoing",
       "type": "neutral",
       "badge": "Financing-only, single product",
-      "text": "Unlike several other Citi retail co-brands (Best Buy, Wayfair, Macy's), Goodyear has no open-loop Visa/Mastercard counterpart; this closed-loop card is the only product offered. Value comes entirely from 0%-interest promotional financing windows on tire and service purchases, not from earning rewards."
+      "text": "Unlike Citi's Best Buy, Wayfair and Macy's co-brands, Goodyear has no open-loop network-branded counterpart; this closed-loop card is the only product offered. Its value comes from deferred-interest financing on tire and service purchases, not from earning rewards."
     }
-  ]
+  ],
+  "lounge_access": "none"
 }

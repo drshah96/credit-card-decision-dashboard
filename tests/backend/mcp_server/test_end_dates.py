@@ -14,7 +14,7 @@ from backend.mcp_server.end_dates import (
 )
 from backend.models import Card
 
-from .conftest import connect, structured
+from .conftest import UNVERIFIED_CARD, connect, structured
 
 CARDS_DIR = Path(__file__).parents[3] / "backend" / "data" / "cards"
 CHECKED = date(2026, 11, 7)
@@ -95,23 +95,23 @@ def test_earlier_dates_never_shorten_a_check():
 
 
 @pytest.mark.parametrize(
-    ("card_id", "due"),
+    ("card_id", "verified", "due"),
     [
-        ("chase-freedom-flex", "2026-12-31"),
-        ("chase-ihg-one-rewards-premier", "2026-12-31"),
-        ("chase-ihg-one-rewards-traveler", "2026-12-31"),
-        ("us-bank-altitude-connect", "2026-11-30"),
-        ("amex-platinum", "2026-12-31"),
-        ("bilt-blue", "2027-01-01"),
-        ("bilt-obsidian", "2027-01-01"),
-        ("bilt-palladium", "2027-01-01"),
-        ("amex-gold", "2027-05-06"),
+        ("chase-freedom-flex", "2026-11-07", "2026-12-31"),
+        ("chase-ihg-one-rewards-premier", "2026-11-07", "2026-12-31"),
+        ("chase-ihg-one-rewards-traveler", "2026-11-07", "2026-12-31"),
+        ("us-bank-altitude-connect", "2026-11-13", "2026-11-30"),
+        ("amex-platinum", "2026-11-07", "2026-12-31"),
+        ("bilt-blue", "2026-11-07", "2027-01-01"),
+        ("bilt-obsidian", "2026-11-07", "2027-01-01"),
+        ("bilt-palladium", "2026-11-07", "2027-01-01"),
+        ("amex-gold", "2026-11-07", "2027-05-06"),
     ],
 )
-async def test_review_due_on_stops_at_the_first_served_end_date(snapshot, card_id, due):
+async def test_review_due_on_stops_at_the_first_served_end_date(snapshot, card_id, verified, due):
     async with connect(snapshot) as client:
         data = structured(await client.call_tool("get_card", {"card_id": card_id}))
-    assert data["provenance"]["verified_on"] == "2026-11-07"
+    assert data["provenance"]["verified_on"] == verified
     assert data["provenance"]["review_due_on"] == due
 
 
@@ -137,10 +137,8 @@ async def test_review_overdue_is_worked_out_per_request(snapshot, monkeypatch, t
     assert gold["provenance"]["review_overdue"] is False
 
 
-async def test_a_card_with_no_check_is_never_overdue(snapshot):
-    async with connect(snapshot) as client:
-        data = structured(
-            await client.call_tool("get_card", {"card_id": "citi-costco-anywhere-visa"})
-        )
+async def test_a_card_with_no_check_is_never_overdue(unverified_snapshot):
+    async with connect(unverified_snapshot) as client:
+        data = structured(await client.call_tool("get_card", {"card_id": UNVERIFIED_CARD}))
     assert data["provenance"]["review_due_on"] is None
     assert data["provenance"]["review_overdue"] is False

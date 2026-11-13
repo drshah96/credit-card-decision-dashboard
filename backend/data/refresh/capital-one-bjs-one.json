@@ -1,5 +1,35 @@
 {
   "card_id": "capital-one-bjs-one",
-  "last_verified_ok_at": null,
-  "verification": null
+  "last_verified_ok_at": "2026-11-13",
+  "verification": {
+    "evidence": "git:b9a5128809470dc88f378bf0bb945b62d6c54e2e",
+    "evidence_scope": "card",
+    "facts_sha256": "d19b121d66142f110b5f68332c48cc7489d53bf52c3b6726619bf062082e5627",
+    "documents": [
+      {
+        "kind": "cardmember_agreement",
+        "url": "https://ecm.capitalone.com/WCM/card/credit-card-agreements-q3-2026/credit-card-agreement-for-bjs-mastercard-cards-in-capital-one-n.a.pdf"
+      },
+      {
+        "kind": "guide_to_benefits",
+        "url": "https://ecm.capitalone.com/WCM/card/benefits-guide/bjs/world-mastercard-for-bjs-cabelasclub.pdf"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.capitalone.com/credit-cards/bjs-wholesale-club/"
+      },
+      {
+        "kind": "benefit_policy",
+        "url": "https://www.bjs.com/info/bjsone-terms/"
+      },
+      {
+        "kind": "other_issuer_document",
+        "url": "https://help.bjs.com/hc/en-us/articles/26888200038676-What-are-BJs-membership-tiers-and-their-benefits"
+      }
+    ],
+    "not_checked": [
+      "additional_cards"
+    ],
+    "note": "First check, 2026-11-13, against the Q3 2026 agreement, the World Mastercard Guide to Benefits, BJ's One program terms effective 11/9/2026 and BJ's membership page. Not checked: authorized-user fee."
+  }
 }

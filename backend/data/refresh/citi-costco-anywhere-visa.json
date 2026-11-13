@@ -1,5 +1,39 @@
 {
   "card_id": "citi-costco-anywhere-visa",
-  "last_verified_ok_at": null,
-  "verification": null
+  "last_verified_ok_at": "2026-11-13",
+  "verification": {
+    "evidence": "git:eb9a4bfacb001cf93b7ae7c962c05f417b3f63c3",
+    "evidence_scope": "card",
+    "facts_sha256": "7a9a826674984478b7c99e1f6d92fb80c8919ca16310e182f721f76cb49ca342",
+    "documents": [
+      {
+        "kind": "rates_and_fees",
+        "url": "https://files.consumerfinance.gov/a/assets/credit-card-agreements/pdf/Q22026/CITIBANK_N.A./Costco_Anywhere_Visa_Pricing_and_Information_Table-256178.pdf"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.citi.com/credit-cards/citi-costco-anywhere-visa-credit-card"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.citi.com/credit-cards/citi-costco-anywhere-visa-credit-card/additional-information"
+      },
+      {
+        "kind": "other_issuer_document",
+        "url": "https://www.citi.com/credit-cards/money-management/costco-anywhere-visa-card-faqs"
+      },
+      {
+        "kind": "guide_to_benefits",
+        "url": "https://www.cardbenefits.citi.com/~/media/CPP/Files/LegalDocs/SOAPI/CostcoCon.ashx"
+      },
+      {
+        "kind": "other_issuer_document",
+        "url": "https://www.costcotravel.com/Info/Credit-Card"
+      }
+    ],
+    "not_checked": [
+      "insurance"
+    ],
+    "note": "First check, 2026-11-13, against Citi's filed pricing table, Citi's product pages, the Guide to Protection Benefits and Costco Travel's card page, rates at a 7.00% Prime Rate as of 10/29/2026. Not checked: whether travel accident insurance is still offered, since the Guide is from 2023."
+  }
 }

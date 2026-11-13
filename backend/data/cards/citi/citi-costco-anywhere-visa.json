@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "18.74%-26.74%",
-  "balance_transfer_apr": "18.74%-26.74%",
+  "variable_apr": "18.99%-27.49%",
+  "balance_transfer_apr": "18.99%-27.49%",
   "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "25.49%",
+  "cash_advance_apr": "28.99%",
   "penalty_apr": "Up to 29.99%",
   "penalty_apr_trigger": "Making a late payment or a payment that's returned",
   "pay_over_time_fee": "Up to 1.72% per month, for Citi Flex Plan balances subject to a Plan Fee",
@@ -53,7 +53,7 @@
     {
       "emoji": "✈️",
       "multiplier": "3%",
-      "category": "Eligible travel: airfare, hotels, car rentals, Costco Travel",
+      "category": "Eligible travel worldwide: airfare, hotels, car rentals, travel agencies, cruise lines & Costco Travel",
       "highlight": true,
       "is_base": false
     },
@@ -72,18 +72,18 @@
       "is_base": true
     }
   ],
-  "earn_note": "The 5%/4% gas rate is capped at a combined $7,000/year in Costco + other gas/EV-charging spend (about $350 in rewards), dropping to 1% after that. Heavy drivers will hit this cap well before year-end. Requires an active, paid Costco membership to apply for or keep the card; if your membership lapses, so does the card. No annual cap on the 3% or 2% categories found.",
+  "earn_note": "The 5%/4% gas rate is capped at a combined $7,000/year in Costco + other gas/EV-charging spend (about $350 in rewards), dropping to 1% after that. Heavy drivers will hit this cap well before year-end. Timeshares, campgrounds, bed & breakfasts and train or commuter travel earn 1%, as do bakeries and restaurants inside department stores, grocery stores or warehouse clubs. Citi says the card is exclusively for Costco members, and a current Costco membership in your name is required to apply. No annual cap on the 3% or 2% categories found.",
   "points": {
     "currency": "Cash Back",
     "redemption_options": [
       {
-        "method": "Annual reward certificate, issued once your February billing statement closes, redeemable for cash or merchandise at any U.S. Costco warehouse (incl. Puerto Rico)",
+        "method": "Annual reward certificate, issued once your February billing statement closes, redeemable for cash or merchandise in a single transaction at any U.S. Costco warehouse (incl. Puerto Rico) through December 31",
         "cpp": 1.0,
         "best": true
       }
     ],
     "per_100k": "Not applicable: this is a cash-back card with no points currency; a $1,000-equivalent year of 2–5% earning becomes a roughly $20–50 certificate depending on category mix",
-    "note": "Unlike most cash-back cards, rewards aren't a running statement credit. They accrue all year and pay out once annually as a single certificate you have to physically redeem in a Costco warehouse (or online per Costco's current process). If you close the account before the certificate is issued, you can lose accrued rewards, so time closures carefully."
+    "note": "Unlike most cash-back cards, rewards aren't a running statement credit. They accrue all year and pay out once a year as a single certificate, which you redeem for cash or merchandise in one transaction at a U.S. Costco warehouse by December 31."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -95,17 +95,17 @@
   "insurance": [
     {
       "coverage": "Purchase protection",
-      "detail": "Damage & theft coverage · 120 days (90 days for NY residents); per-item/per-year caps not published on Citi's public page",
+      "detail": "Damage & theft · up to $1,000 per item, $50,000 per year · 120 days (90 for NY residents) · primary (secondary in NY)",
       "level": "mid"
     },
     {
       "coverage": "Rental car CDW",
-      "detail": "Worldwide Car Rental Insurance when you decline the rental company's own collision coverage; secondary/primary status not confirmed",
+      "detail": "Up to $50,000 · 31 consecutive days · secondary in the US, primary outside it · decline the rental company's collision coverage",
       "level": "mid"
     },
     {
       "coverage": "Travel accident insurance",
-      "detail": "Named benefit; dollar limit not published on Citi's public page",
+      "detail": "Up to $250,000 per person on common carriers when the full fare is on the card, per the January 2023 Guide; Citi's current benefits list no longer names it, so confirm before relying on it",
       "level": "mid"
     },
     {
@@ -124,8 +124,8 @@
       "level": "none"
     }
   ],
-  "protection_note": "A standard Visa (not Visa Signature) no-fee card's protection suite: purchase protection, rental car coverage, and travel accident insurance are named benefits, but Citi's public pages don't publish the exact dollar caps; check your Guide to Benefits for specifics. No trip cancellation/interruption, baggage delay, or cell phone protection, so this isn't a substitute for a dedicated travel card on bigger trips.",
-  "rental_note": "Worldwide Car Rental Insurance applies when you decline the counter's own collision/theft coverage and charge the full rental to this card; Citi's public page doesn't confirm whether it pays primary or secondary to your personal auto policy.",
+  "protection_note": "Citi's Guide to Protection Benefits for this card covers purchase protection (up to $1,000 per item), car rental coverage (up to $50,000, secondary in the US and primary abroad) and travel accident insurance, though Citi's current benefits list no longer names the last one. No trip cancellation/interruption, baggage delay, or cell phone protection, so this isn't a substitute for a dedicated travel card on bigger trips.",
+  "rental_note": "Car rental coverage applies when you decline the rental company's collision coverage and pay for the whole rental with this card. It's secondary in the US and primary outside it, up to $50,000 per rental and 31 consecutive days.",
   "status_perks": [],
   "services": [
     {
@@ -134,7 +134,7 @@
     },
     {
       "name": "Roadside assistance dispatch",
-      "detail": "Pay-per-use dispatch service available in the US, Puerto Rico, and US Virgin Islands."
+      "detail": "Pay-per-use dispatch in the 50 states, Washington D.C., Puerto Rico and the US Virgin Islands."
     },
     {
       "name": "Free FICO Score access",
@@ -177,5 +177,6 @@
       "badge": "Membership-gated",
       "text": "Card eligibility and continued use are tied to holding a paid Costco membership; this has been the structure since Citi took over the Costco co-brand portfolio from American Express in 2016."
     }
-  ]
+  ],
+  "lounge_access": "none"
 }

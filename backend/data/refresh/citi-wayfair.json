@@ -1,5 +1,30 @@
 {
   "card_id": "citi-wayfair",
-  "last_verified_ok_at": null,
-  "verification": null
+  "last_verified_ok_at": "2026-11-13",
+  "verification": {
+    "evidence": "git:b9a5128809470dc88f378bf0bb945b62d6c54e2e",
+    "evidence_scope": "card",
+    "facts_sha256": "e5da666b5d3e33f80c9ba0dcb60c7575d79cb2e5b9e297eaeedf35e2f6fa44a3",
+    "documents": [
+      {
+        "kind": "rates_and_fees",
+        "url": "https://files.consumerfinance.gov/a/assets/credit-card-agreements/pdf/Q22026/CITIBANK_N.A./WF_MC_Addendum_102_0226_vf-256070.pdf"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.citi.com/credit-cards/wayfair-credit-cards"
+      },
+      {
+        "kind": "other_issuer_document",
+        "url": "https://www.wayfair.com/terms?section=wayfair-rewards-program-terms"
+      }
+    ],
+    "not_checked": [
+      "insurance",
+      "insurance_limits",
+      "perks",
+      "additional_cards"
+    ],
+    "note": "First check, 2026-11-13, against Citi's filed pricing table, Citi's product page and the Wayfair Rewards terms. Current APRs are Citi's filed margin plus the 7.00% Prime Rate (Federal Reserve H.15). Not checked: insurance (no Guide to Benefits found), lounge access and authorized-user fee."
+  }
 }

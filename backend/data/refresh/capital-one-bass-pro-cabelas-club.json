@@ -1,5 +1,45 @@
 {
   "card_id": "capital-one-bass-pro-cabelas-club",
-  "last_verified_ok_at": null,
-  "verification": null
+  "last_verified_ok_at": "2026-11-13",
+  "verification": {
+    "evidence": "git:b9a5128809470dc88f378bf0bb945b62d6c54e2e",
+    "evidence_scope": "card",
+    "facts_sha256": "68ea354f7ae1285dec0f0828dc659a250bf793e65010408c30bfc18abafc5324",
+    "documents": [
+      {
+        "kind": "cardmember_agreement",
+        "url": "https://ecm.capitalone.com/WCM/card/credit-card-agreements-q3-2026/credit-card-agreement-for-bass-pro-shops-club-cards-in-capital-one-n.a.pdf"
+      },
+      {
+        "kind": "cardmember_agreement",
+        "url": "https://ecm.capitalone.com/WCM/card/credit-card-agreements-q3-2026/credit-card-agreement-for-cabelas-club-cards-in-capital-one-n.a.pdf"
+      },
+      {
+        "kind": "guide_to_benefits",
+        "url": "https://ecm.capitalone.com/WCM/card/benefits-guide/world-mastercard-for-cabelas-club-2021.pdf"
+      },
+      {
+        "kind": "guide_to_benefits",
+        "url": "https://ecm.capitalone.com/WCM/card/benefits-guide/world-enhanced-mastercard-for-cabelas-and-bass-pro-shops-pro-club-2021.pdf"
+      },
+      {
+        "kind": "guide_to_benefits",
+        "url": "https://ecm.capitalone.com/WCM/card/benefits-guide/world-elite-mastercard-for-cabelas-and-bass-pro-shops-pro-club-2021.pdf"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.capitalone.com/credit-cards/bass-pro-shops/"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.capitalone.com/credit-cards/cabelas/"
+      }
+    ],
+    "not_checked": [
+      "earn_rates",
+      "redemption",
+      "additional_cards"
+    ],
+    "note": "First check, 2026-11-13, against both Q3 2026 agreements, all three Guides to Benefits and the product pages. Not checked: the 1% base rate, tier rules and point value (basspro.com blocks fetches), and authorized-user terms."
+  }
 }

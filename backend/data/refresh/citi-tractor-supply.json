@@ -1,5 +1,29 @@
 {
   "card_id": "citi-tractor-supply",
-  "last_verified_ok_at": null,
-  "verification": null
+  "last_verified_ok_at": "2026-11-13",
+  "verification": {
+    "evidence": "git:eb9a4bfacb001cf93b7ae7c962c05f417b3f63c3",
+    "evidence_scope": "card",
+    "facts_sha256": "167a0b29197e6b5d37bdaa6165bff6339fce1d21351a284cac0708ba68dcff91",
+    "documents": [
+      {
+        "kind": "rates_and_fees",
+        "url": "https://www.citi.com/CRD/PDF/CMA/pricingTables/Addendum_103A.pdf"
+      },
+      {
+        "kind": "cardmember_agreement",
+        "url": "https://www.citi.com/CRD/PDF/CMA/cardAgreement/TSC_Visa_CMA_1022.pdf"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.citi.com/credit-cards/citi-tractor-supply-credit-cards"
+      }
+    ],
+    "not_checked": [
+      "earn_rates",
+      "insurance",
+      "insurance_limits"
+    ],
+    "note": "First check, 2026-11-13, against Citi's pricing table 103-0326 and card agreement 100-TSC-CB-US 0326. Current APRs are Citi's filed margin plus the 7.00% Prime Rate (Federal Reserve H.15). Not checked: the rewards program terms (blocked), insurance (no public Guide to Benefits)."
+  }
 }

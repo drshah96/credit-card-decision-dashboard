@@ -56,10 +56,39 @@ and `/terms` under the card slug soft-404 to the card list; `citibank.com/cardag
 gone; `citicards.com/.../emailterms.action` 503s;
 `online.citi.com/US/ag/products-services/credit-cards/{card}` is an empty shell.
 
-**Untried leads, in order of promise.** The CFPB publishes a quarterly bulk ZIP of
-every cardmember agreement, which is a genuine primary source and would settle
-Citi outright; its web search is a JS form, so the bulk file is the way in, not a
-deep link. Failing that, a browser that renders JavaScript reads these pages fine.
+**Citi's own filed pricing tables, learned 2026-11-13.** Citi files every card's
+agreement and pricing addendum with the CFPB. The issuer listing at
+`consumerfinance.gov/credit-cards/agreements/issuer/citibank-na/?page=N` (3 pages)
+is plain HTML with direct links under
+`files.consumerfinance.gov/a/assets/credit-card-agreements/pdf/Q{N}{YYYY}/CITIBANK_N.A./`.
+Store cards use short names (`HD_Addendum_49_0226`, `TSC_Visa_Card_Addendum_103_0326`,
+`XOM_PL_Addendum_33_0126`); co-brands file a `Pricing_and_Information_Table`. The
+PDFs are AES-256 encrypted, so WebFetch sees binary and r.jina.ai returns 422, but
+`pdftotext -layout` decrypts them locally (empty user password). This agent has no
+shell, so name the files and let the caller read them. Some cards also have a
+readable copy at `citi.com/CRD/PDF/CMA/pricingTables/Addendum_{N}{letter}.pdf` or
+`.../cardAgreement/{name}.pdf`, found by search; file names do not track the
+version, so read the version code in the footer.
+
+The tables print the APR at the Prime Rate on their "as of" date plus a **margin**.
+When Prime has moved since, the current rate is margin plus today's Prime (Federal
+Reserve H.15, `federalreserve.gov/releases/h15/`). Say in the report that it was
+computed. **Citi store-card tables have no penalty APR row**, so a stored
+"Up to 29.99%" on a store card is a copy-paste error. Their late and returned
+payment rows read "Up to $41" (Goodyear and Exxon Mobil: late "Up to $40").
+
+**Retailer sites print the digits citi.com blanks**, in plain HTML or through
+r.jina.ai, and count as the co-brand partner's own disclosure: macys.com
+`/p/credit-service/exclusions-and-details/`, the bestbuy.com Credit Cards page
+footnotes, `costcotravel.com/Info/Credit-Card` (with a Prime as-of date), the
+bloomingdales.com Loyallist Program Terms article, the Dillard's rewards terms PDF
+at `dimg.dillards.com/is/content/DillardsZoom/rewardsprogrampdf`, and the Wayfair
+Rewards terms (rewards section past character 200,000; read with an offset).
+`citi.com/credit-cards/retail-guide/{brand}-credit-card-rewards-and-benefits`
+articles are dated and carry the full footnoted rewards terms. Citigroup press
+releases carry dated rate fine print. llbean.com, homedepot.com, tractorsupply.com
+and bjs.com/bjsone block automated fetches. Search also returns Citi test hosts
+(uat0x, qa3.aem, test02); never use them.
 
 **Cross-card consistency is a usable lead, not a source.** Citi's cash advance
 APR is normally uniform across its consumer cards, so a card whose stored value

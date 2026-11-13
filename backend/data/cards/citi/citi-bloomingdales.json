@@ -11,20 +11,20 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": true,
-  "variable_apr": "33.24%",
-  "balance_transfer_apr": "33.24%",
+  "variable_apr": "32.99%",
+  "balance_transfer_apr": "32.99%, for balance transfers completed within 4 months of account opening",
   "balance_transfer_fee": "The greater of $10 or 5% of the amount of each transfer",
   "foreign_transaction_fee_rate": "3%",
-  "cash_advance_apr": null,
-  "penalty_apr": "Up to 29.99%",
-  "penalty_apr_trigger": "Making a late payment or a payment that's returned",
+  "cash_advance_apr": "32.99%",
+  "penalty_apr": "None",
+  "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
   "late_payment_fee": "$30, or $41 if another late payment occurs within 6 billing cycles",
   "returned_payment_fee": "$30, or $41 if another returned payment occurs within 6 billing cycles",
   "returned_check_fee": null,
   "welcome_bonus": {
-    "bonus": "20% off, up to $250 total",
-    "requirement": "on purchases the day you open a Bloomingdale's card and the day after",
+    "bonus": "20% off, up to $250 total, plus 20,000 points ($100 reward)",
+    "requirement": "20% off on purchases the day you open a Bloomingdale's card and the day after; the points need $1,000 in net purchases outside Bloomingdale's in the first 90 days",
     "estimated_value": null
   },
   "verdict": {
@@ -35,20 +35,27 @@
   "earn_rates": [
     {
       "emoji": "🛍️",
-      "multiplier": "3 pts/$1",
-      "category": "Bloomingdale's, bloomingdales.com, Bloomingdale's The Outlet Store & everywhere Amex is accepted: Loyallist tier (default)",
+      "multiplier": "10 pts/$1",
+      "category": "Bloomingdale's, bloomingdales.com & The Outlet: Top of the List Unlocked ($15,000+ a year at Bloomingdale's)",
       "highlight": true,
+      "is_base": false
+    },
+    {
+      "emoji": "🛍️",
+      "multiplier": "3 pts/$1",
+      "category": "Bloomingdale's, bloomingdales.com, The Outlet & everywhere Amex is accepted: Loyallist tier (default)",
+      "highlight": false,
       "is_base": true
     },
     {
       "emoji": "⭐",
       "multiplier": "4 pts/$1",
-      "category": "Same categories, at Top of the List / Top of the List Unlocked status tiers",
+      "category": "Bloomingdale's & everywhere Amex is accepted: Top of the List ($5,000+ a year at Bloomingdale's), and Top of the List Unlocked outside Bloomingdale's",
       "highlight": true,
       "is_base": false
     }
   ],
-  "earn_note": "This is the open-loop American Express version of Bloomingdale's card: it earns outside Bloomingdale's, unlike the closed-loop, store-only Bloomingdale's Credit Card, which can earn up to 10 pts/$1 at Bloomingdale's at the top status tier but earns nothing anywhere else. On the Amex version, the rate is flat regardless of where you spend: 3 pts/$1 at Loyallist status, rising to 4 pts/$1 once you reach Top of the List status (exact annual-spend thresholds for tier advancement weren't published on Citi's or Bloomingdale's public pages at the time of writing).",
+  "earn_note": "This is the open-loop American Express version of Bloomingdale's card: it earns outside Bloomingdale's, unlike the closed-loop, store-only Bloomingdale's Credit Card, which earns nothing anywhere else. At Bloomingdale's, both cards earn 3, 4 or 10 points per $1 at Loyallist, Top of the List and Top of the List Unlocked. Everywhere else, this card earns 3 points at Loyallist and 4 at either higher tier. Top of the List takes $5,000 and Unlocked $15,000 in net purchases in a calendar year, and only spend at Bloomingdale's, The Outlet, Bloomie's and bloomingdales.com counts.",
   "points": {
     "redeemable": "store_only",
     "currency": "Loyallist Points",
@@ -59,8 +66,8 @@
         "best": true
       }
     ],
-    "per_100k": "$500 in Bloomingdale's rewards (5,000 points = $25, so 100,000 points ≈ $500)",
-    "note": "Despite the open-loop Amex network letting you earn everywhere, redemption is closed-loop: rewards come back as Bloomingdale's-only credit, not cash or a statement credit. At 3 pts/$1 and 5,000 pts = $25, the effective cash-back rate is about 1.5%, rising to roughly 2% at 4 pts/$1."
+    "per_100k": "$500 in Bloomingdale's rewards (5,000 points = $25), though points can't be banked for long: 85% of any balance is forfeited every January 1",
+    "note": "Despite the open-loop Amex network letting you earn everywhere, redemption is closed-loop: rewards come back as Bloomingdale's-only credit, not cash, gift cards or a statement credit. At 3 pts/$1 and 5,000 pts = $25, the effective rate is about 1.5%, rising to roughly 2% at 4 pts/$1. Rewards expire 180 days after they're issued, and on January 1 each year 85% of any remaining points are forfeited (members who join on or after October 1 are exempt the first year)."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -101,13 +108,13 @@
       "level": "none"
     }
   ],
-  "protection_note": "Despite running on the American Express network, this is a Citi-issued retail co-brand, not a standard Amex-issued card. The usual Amex purchase-protection/extended-warranty suite is not confirmed to apply. Treat this as a rewards-and-financing card with no meaningful insurance suite.",
+  "protection_note": "Despite running on the American Express network, this is a Citi-issued retail co-brand, not an Amex-issued card, so Amex's own purchase protection and extended warranty don't apply. No Guide to Benefits for this card was found. Treat it as a rewards-and-financing card with no insurance you can count on.",
   "rental_note": "No rental car coverage found for this card.",
   "status_perks": [
     {
       "name": "Loyallist status tiers",
       "strength": 2,
-      "note": "Loyallist (default) → Top of the List → Top of the List Unlocked, based on annual spend. Higher tiers earn more points per dollar and get earlier access to sales/events; exact spend thresholds weren't published on Citi's public page."
+      "note": "Loyallist (default), then Top of the List at $5,000 and Top of the List Unlocked at $15,000 in net purchases at Bloomingdale's in a calendar year. Unlocked earns 10 points per $1 at Bloomingdale's."
     }
   ],
   "services": [
@@ -154,7 +161,7 @@
       "date": "Ongoing",
       "type": "neutral",
       "badge": "Two-product lineup",
-      "text": "Bloomingdale's/Citi issue two distinct card products: the closed-loop, store-only Bloomingdale's Credit Card (up to 10 pts/$1 at Bloomingdale's at top status, unusable elsewhere) and this open-loop Bloomingdale's American Express Card (3–4 pts/$1 flat, anywhere Amex is accepted). Confirm which one you're comparing; they are not the same card."
+      "text": "Bloomingdale's/Citi issue two distinct card products: the closed-loop, store-only Bloomingdale's Credit Card (up to 10 pts/$1 at Bloomingdale's at top status, unusable elsewhere) and this open-loop Bloomingdale's American Express Card (3, 4 or 10 pts/$1 at Bloomingdale's depending on status, and 3 or 4 pts/$1 anywhere else Amex is accepted). Confirm which one you're comparing; they are not the same card."
     }
   ]
 }

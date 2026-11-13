@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "19.49%-27.49%",
-  "balance_transfer_apr": "19.49%-27.49%",
+  "variable_apr": "19.74%-27.74%",
+  "balance_transfer_apr": "19.74%-27.74%",
   "balance_transfer_fee": "Either $5 or 5% of the amount of each transfer, whichever is greater",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "29.74%",
+  "cash_advance_apr": "29.99%",
   "penalty_apr": "Up to 29.99%",
   "penalty_apr_trigger": "Making a late payment or a payment that's returned",
   "pay_over_time_fee": "Up to 1.72% per month, for Citi Flex Plan balances subject to a Plan Fee",
@@ -29,7 +29,7 @@
   },
   "verdict": {
     "status": "situational",
-    "text": "Only useful if you already pay AT&T bills: the bill discount is the value",
+    "text": "Good if you spend $1,000+ a cycle; AT&T's bill discount isn't a card perk",
     "short_tag": "AT&T Customers"
   },
   "earn_rates": [
@@ -62,7 +62,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "A separate, repeating $20 statement credit is issued each billing cycle you spend $1,000 or more on the card, effectively a standing 2% rebate on top of ThankYou Points once you clear that threshold, but $0 if you stay under it. No caps found on the bonus-category earning.",
+  "earn_note": "A separate $20 statement credit is issued each billing cycle you make $1,000 or more in net purchases. It's a flat $20, so it equals 2% only at exactly $1,000 and falls after that (1% at $2,000). AT&T's grocery rate includes grocery delivery services. No caps found on the bonus-category earning, and points don't expire.",
   "points": {
     "currency": "ThankYou® Points",
     "redemption_options": [
@@ -78,12 +78,12 @@
       }
     ],
     "per_100k": "$1,000, or somewhat more through select travel/gift-card redemptions",
-    "note": "This is base-tier ThankYou Points (not the Premier/Prestige tier), so there's no transfer-partner access. Redemption is capped at roughly 1¢/point via gift cards, merchandise, and the ThankYou travel portal. Points don't expire while the account is open."
+    "note": "Citi lists gift cards, travel, shopping with participating retailers, cash by direct deposit or check, statement credits, transfers to participating partners' programs and charitable donations as redemption options. It doesn't publish which transfer partners this card can use or at what ratios. Points don't expire."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners on this tier of ThankYou Points: that access is reserved for Citi's premium ThankYou cards (Premier, Prestige), not this no-fee co-brand.",
+    "highlight": "Citi lists transfers to participating partners' programs as a redemption option on this card, but doesn't publish which partners or at what ratios, so none are listed here. Citi's full ThankYou partner list goes with Strata Premier and Strata Elite.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -114,21 +114,29 @@
       "level": "none"
     }
   ],
-  "protection_note": "A bare-bones standard Mastercard: Citi and third-party reviews both confirm this card carries no purchase protection, extended warranty, travel insurance, or (most notably) cell phone protection, despite being a wireless carrier's own card. Its value is entirely in the AT&T bill discounts and everyday ThankYou Points earning, not in a protection suite.",
+  "protection_note": "Citi lists Mastercard ID Theft Protection, 24-hour fraud protection and Quick Lock, and publishes no purchase protection, extended warranty, travel insurance or cell phone protection for this card. That's a notable gap for a wireless carrier's own card.",
   "rental_note": "No rental car coverage found for this card.",
   "status_perks": [],
   "services": [
     {
       "name": "AT&T wireless bill discount",
-      "detail": "$10/month discount per eligible wireless line on your AT&T bill, when AutoPay and paperless billing are set to this card."
+      "detail": "$10/month per eligible wireless line. AT&T, not Citi, provides this discount, and it isn't a benefit of the card: AT&T gives it for AutoPay from a bank account or this card ($5 with a debit card). It starts after 2 bills for wireless and 3 for internet, and AT&T employees, retirees and IMO consumers are excluded."
     },
     {
       "name": "AT&T internet bill discount",
-      "detail": "$10/month discount on eligible AT&T internet bills under the same AutoPay/paperless-billing conditions; stacks with the wireless-line discount if you have both services."
+      "detail": "$10/month on eligible AT&T internet ($5 for AT&T Internet Air). AT&T, not Citi, provides this discount, and it isn't a benefit of the card: AT&T gives it for AutoPay from a bank account or this card ($5 with a debit card). It starts after 2 bills for wireless and 3 for internet, and AT&T employees, retirees and IMO consumers are excluded."
     },
     {
       "name": "Citi Quick Lock & fraud monitoring",
       "detail": "Standard Citi account-security tools: lock the card from the app, 24-hour fraud alerts."
+    },
+    {
+      "name": "Mastercard ID Theft Protection",
+      "detail": "Identity monitoring and resolution help from Mastercard."
+    },
+    {
+      "name": "Priceless Experiences, Citi Entertainment and Citi Flex Pay",
+      "detail": "World Mastercard access to Priceless Experiences, Citi Entertainment presales, and Citi Flex Pay installment plans."
     }
   ],
   "additional_cards": {
@@ -158,10 +166,16 @@
   },
   "timeline": [
     {
-      "date": "2026",
+      "date": "Apr 20, 2026",
+      "type": "add",
+      "badge": "Refresh",
+      "text": "Citi and AT&T refreshed the card: 2x points on AT&T purchases including bill payment, no more foreign transaction fees, and the $20 statement credit now needs only $1,000 in purchases each billing cycle."
+    },
+    {
+      "date": "Apr 20, 2026",
       "type": "neutral",
-      "badge": "Enhanced",
-      "text": "AT&T and Citi enhanced the Points Plus Card's bill-discount structure, adding the recurring monthly AT&T internet bill discount alongside the existing per-line wireless discount."
+      "badge": "AT&T discount",
+      "text": "AutoPay with this card now qualifies for AT&T's $10 per line wireless and internet discount, the same discount AT&T gives for AutoPay from a bank account."
     }
   ]
 }
