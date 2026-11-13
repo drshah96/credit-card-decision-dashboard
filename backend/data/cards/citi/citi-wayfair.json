@@ -11,20 +11,20 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": true,
-  "variable_apr": "33.49%",
-  "balance_transfer_apr": "33.49%",
+  "variable_apr": "33.74%",
+  "balance_transfer_apr": "33.74%, for balance transfers completed within 4 months of account opening",
   "balance_transfer_fee": "The greater of $10 or 5% of the amount of each transfer",
   "foreign_transaction_fee_rate": "3%",
-  "cash_advance_apr": null,
-  "penalty_apr": "Up to 29.99%",
-  "penalty_apr_trigger": "Making a late payment or a payment that's returned",
+  "cash_advance_apr": "33.74%",
+  "penalty_apr": "None",
+  "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
-  "late_payment_fee": "$30, or $41 if another late payment occurs within 6 billing cycles",
-  "returned_payment_fee": "$30, or $41 if another returned payment occurs within 6 billing cycles",
+  "late_payment_fee": "Up to $41",
+  "returned_payment_fee": "Up to $41",
   "returned_check_fee": null,
   "welcome_bonus": {
     "bonus": "$40 off",
-    "requirement": "on your first qualifying order of $250 or more",
+    "requirement": "your first Wayfair order of at least $100 (before tax, shipping and other discounts) made with the card; not valid at Perigold, Wayfair outlet stores or on promotional financing orders; offer ends Feb 1, 2027",
     "estimated_value": null
   },
   "verdict": {
@@ -36,7 +36,7 @@
     {
       "emoji": "🛋️",
       "multiplier": "7%",
-      "category": "Wayfair, Joss & Main, AllModern, Birch Lane & Perigold (5% instead if using promotional financing on that purchase)",
+      "category": "Wayfair, Joss & Main, AllModern, Birch Lane & Perigold sites, apps and stores, excluding outlets (5% instead if using promotional financing on that purchase)",
       "highlight": true,
       "is_base": false
     },
@@ -62,19 +62,19 @@
       "is_base": true
     }
   ],
-  "earn_note": "This is the open-loop Mastercard version of Wayfair's card: it earns outside the Wayfair family of brands, unlike the closed-loop, store-only Wayfair Credit Card, which earns the same 7%/5% at Wayfair brands but nothing elsewhere. Reward Dollars are capped at a maximum $2,500 redeemable per month across participating Wayfair sites. Citi has issued this program since 2020, after it moved from Comenity Bank.",
+  "earn_note": "This is the open-loop Mastercard version of Wayfair's card: it earns outside the Wayfair family of brands, unlike the closed-loop, store-only Wayfair Credit Card, which earns the same 7%/5% at Wayfair brands but nothing elsewhere. The 3% grocery rate is for stand-alone grocers: food bought at convenience stores, gas stations, warehouse clubs, supercenters and discount stores may earn 1%. The 2% online rate excludes subscriptions, utilities, insurance, medical, education and professional services. Reward Dollars are capped at $2,500 redeemed per month across Wayfair's brands.",
   "points": {
     "redeemable": "store_only",
     "currency": "Wayfair Reward Dollars",
     "redemption_options": [
       {
-        "method": "Applied automatically in cart/checkout at Wayfair, Joss & Main, AllModern, Birch Lane, or Perigold",
+        "method": "Applied in cart or at checkout at Wayfair, Joss & Main, AllModern, Birch Lane, or Perigold, online, by phone, or in stores (not outlets)",
         "cpp": 1.0,
         "best": true
       }
     ],
     "per_100k": "Not applicable: Wayfair Rewards accrue and redeem in dollars directly (no separate points conversion), capped at $2,500 redeemable per month",
-    "note": "Reward Dollars have no cash value and can't be redeemed anywhere outside the Wayfair family of brands. Rewards never expire while the account stays open, but the $2,500/month redemption cap matters for anyone making a large furniture purchase and trying to use accumulated rewards toward it in one go."
+    "note": "Reward Dollars have no cash value and can't be redeemed anywhere outside the Wayfair family of brands. They never expire while the account stays open, but they're forfeited 90 days after notice that the account has closed unless you become a paid Wayfair Rewards member. The $2,500/month redemption cap matters for anyone trying to put a large balance toward one big furniture purchase."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -115,10 +115,14 @@
       "level": "none"
     }
   ],
-  "protection_note": "A standard (not World Elite) Mastercard tier with no confirmed purchase protection, extended warranty, or travel insurance. Treat this as a rewards-and-financing card with no meaningful insurance suite, a real gap for a card marketed around furniture and home-goods purchases that could otherwise benefit from purchase protection or extended warranty.",
+  "protection_note": "No Guide to Benefits for this card was found, and Citi's product page lists no purchase protection, extended warranty, or travel insurance. That's a real gap for a card built around furniture and home-goods purchases.",
   "rental_note": "No rental car coverage found for this card.",
   "status_perks": [],
   "services": [
+    {
+      "name": "Free Wayfair Rewards membership",
+      "detail": "Cardholders are enrolled in Wayfair Rewards automatically, with the membership fee waived while the card account is open. The card's 7% replaces the 5% a paid member earns; it doesn't add to it."
+    },
     {
       "name": "Special financing offers",
       "detail": "Promotional financing plans available across participating Wayfair sites on qualifying items, selectable at checkout; using promotional financing on a purchase drops the earn rate from 7% to 5% on that purchase."

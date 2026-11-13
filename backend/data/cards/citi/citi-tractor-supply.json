@@ -11,13 +11,13 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": true,
-  "variable_apr": "32.49%",
-  "balance_transfer_apr": "32.49%",
+  "variable_apr": "32.74%",
+  "balance_transfer_apr": "32.74%, for balance transfers completed within 4 months of account opening",
   "balance_transfer_fee": "5% of each transaction, minimum $10",
   "foreign_transaction_fee_rate": "3%",
-  "cash_advance_apr": null,
-  "penalty_apr": "Up to 29.99%",
-  "penalty_apr_trigger": "Making a late payment or a payment that's returned",
+  "cash_advance_apr": "32.74%",
+  "penalty_apr": "None",
+  "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
   "late_payment_fee": "$30, or $41 if another late payment occurs within 6 billing cycles",
   "returned_payment_fee": "$30, or $41 if another returned payment occurs within 6 billing cycles",
@@ -36,7 +36,7 @@
     {
       "emoji": "🚜",
       "multiplier": "5%",
-      "category": "Tractor Supply & Petsense purchases",
+      "category": "Tractor Supply purchases",
       "highlight": true,
       "is_base": false
     },
@@ -69,7 +69,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "This is the open-loop Visa version of Tractor Supply's card: it earns outside Tractor Supply/Petsense, unlike the closed-loop, store-only TSC Store Card, which earns the same 5% at Tractor Supply/Petsense but nothing elsewhere. Cardholders are automatically enrolled as Preferred Plus Neighbors, the highest tier of Tractor Supply's separate Neighbor's Club loyalty program. Special financing offers (e.g., a 3.99% promotional rate on purchases of $1,599+) periodically run at TractorSupply.com/TSCCard on purchases of $199 and up.",
+  "earn_note": "This is the open-loop Visa version of Tractor Supply's card: it earns outside Tractor Supply, unlike the closed-loop, store-only TSC Store Card, which earns the same 5% at Tractor Supply but can be used only at Tractor Supply, TractorSupply.com and Petsense. Cardholders are automatically enrolled as Preferred Plus Neighbors, the highest tier of Tractor Supply's Neighbor's Club loyalty program. On Tractor Supply purchases of $199 and up you choose between the 5% reward and special financing, not both.",
   "points": {
     "redeemable": "store_only",
     "currency": "Neighbor's Club Rewards",
@@ -80,13 +80,13 @@
         "best": true
       }
     ],
-    "per_100k": "$1,000 in Tractor Supply / Petsense rewards, no other redemption exists",
-    "note": "A closed-loop currency despite the open-loop Visa network: rewards come back as Tractor Supply/Petsense credit, not cash or a statement credit."
+    "per_100k": "$1,000 in Tractor Supply rewards (5 points per $1 = 5%)",
+    "note": "A closed-loop currency despite the open-loop Visa network: rewards come back as Tractor Supply credit, not cash or a statement credit."
   },
   "transfer_partners": {
     "airline_count": 0,
     "hotel_count": 0,
-    "highlight": "No transfer partners: Neighbor's Club Rewards redeem only at Tractor Supply and Petsense.",
+    "highlight": "No transfer partners: Neighbor's Club Rewards redeem only at Tractor Supply.",
     "recent_changes": "Not applicable."
   },
   "credits": [],
@@ -122,7 +122,7 @@
       "level": "none"
     }
   ],
-  "protection_note": "A standard (not Signature) Visa tier with no confirmed purchase protection, extended warranty, or travel insurance. Treat this as a rewards-and-financing card with no meaningful insurance suite.",
+  "protection_note": "No Guide to Benefits for this card is public, and Citi's product page lists no purchase protection, extended warranty, or travel insurance. Treat it as a rewards-and-financing card with no insurance you can count on.",
   "rental_note": "No rental car coverage found for this card.",
   "status_perks": [
     {
@@ -134,7 +134,7 @@
   "services": [
     {
       "name": "Special financing offers",
-      "detail": "Limited-time and everyday promotional financing (e.g., 3.99% on purchases of $1,599+ until paid in full) on qualifying purchases of $199 or more."
+      "detail": "On Tractor Supply purchases of $199 and up you can choose special financing instead of the 5% reward. Purchases of $1,599 or more qualify for a 3.99% APR over 36 months with fixed monthly payments. Deferred-interest promotions charge all interest back to the purchase date if the balance isn't paid in full in time."
     },
     {
       "name": "$0 liability on unauthorized charges",
@@ -171,7 +171,7 @@
       "date": "Ongoing",
       "type": "neutral",
       "badge": "Two-product lineup",
-      "text": "Tractor Supply/Citi issue two distinct card products: the closed-loop, store-only TSC Store Card (5% at Tractor Supply/Petsense, unusable elsewhere) and this open-loop TSC Visa Card (same 5%, plus 3% gas/grocery/vet and 1% elsewhere). Confirm which one you're comparing; they are not the same card."
+      "text": "Tractor Supply/Citi issue two distinct card products: the closed-loop TSC Store Card (5% at Tractor Supply, usable only at Tractor Supply, TractorSupply.com and Petsense) and this open-loop TSC Visa Card (same 5%, plus 3% gas/grocery/vet and 1% elsewhere). Confirm which one you're comparing; they are not the same card."
     }
   ]
 }

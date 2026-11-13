@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "9.99% (Bass Pro Shops/Cabela's purchases); 19.49%, 22.99%, or 30.49% (all other purchases), based on creditworthiness",
-  "balance_transfer_apr": "19.49%, 22.99%, or 30.49%, based on creditworthiness",
-  "balance_transfer_fee": "$0 at the standard Transfer APR, or 3% at any promotional APR Capital One may offer",
+  "variable_apr": "9.99% (Bass Pro Shops/Cabela's purchases); 19.74% - 30.74% (all other purchases), based on creditworthiness",
+  "balance_transfer_apr": "19.74% - 30.74%, based on creditworthiness",
+  "balance_transfer_fee": "None for balances transferred at the Transfer APR",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "30.49%",
+  "cash_advance_apr": "30.74%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
@@ -23,8 +23,8 @@
   "returned_payment_fee": null,
   "returned_check_fee": null,
   "welcome_bonus": {
-    "bonus": "Up to $60 in CLUB Points",
-    "requirement": "$20 upon approval, $20 after 2 Bass Pro Shops/Cabela's purchases within 30 days, and $20 after 5 purchases anywhere else Mastercard is accepted within 30 days",
+    "bonus": "Up to $75 in CLUB Points",
+    "requirement": "$25 upon approval, $25 after 5 purchases anywhere Mastercard is accepted within 30 days of approval, and another $25 after 5 more purchases in the same 30 days",
     "estimated_value": null
   },
   "verdict": {
@@ -110,7 +110,7 @@
       "level": "mid"
     }
   ],
-  "protection_note": "Thinner than most co-brand cards: Capital One's official Guide to Benefits for the Cabela's/Bass Pro CLUB Mastercard covers only Mastercard ID Theft Protection, a Concierge Service, Mastercard Travel & Lifestyle Services (hotel rate/stay guarantees via a third-party lifestyle manager), and Airport Concierge discounts. It does not list purchase protection, extended warranty, price protection, travel accident insurance, or rental car coverage, despite some third-party reviews implying otherwise. Don't assume standard Mastercard World Elite purchase insurance carries over here without confirming your specific cardholder agreement.",
+  "protection_note": "Thinner than most co-brand cards: Capital One's Guides to Benefits for the CLUB Mastercard cover only Mastercard ID Theft Protection, Mastercard Travel & Lifestyle Services (hotel rate/stay guarantees), Airport Concierge discounts and Digital Merchant Offers, plus a Concierge Service on the World Enhanced and World Elite tiers. None lists purchase protection, extended warranty, price protection, travel accident insurance, or rental car coverage, despite some third-party reviews implying otherwise.",
   "rental_note": "No rental car coverage is listed in Capital One's Guide to Benefits for this card; use a different card for rental cars.",
   "status_perks": [],
   "services": [
@@ -120,7 +120,7 @@
     },
     {
       "name": "9.99% APR on Bass Pro/Cabela's purchases",
-      "detail": "A reduced promotional rate specifically for purchases at either chain; standard variable APR applies elsewhere."
+      "detail": "A standing 9.99% APR on Bass Pro/Cabela's purchases (in-store, online, by phone and at Signature Events); the standard APR applies elsewhere."
     },
     {
       "name": "5% price-beat guarantee",
@@ -128,7 +128,7 @@
     },
     {
       "name": "Mastercard Concierge & Travel Services",
-      "detail": "24/7 concierge line, hotel rate/stay guarantees through a third-party lifestyle manager, and Airport Concierge meet-and-greet discounts."
+      "detail": "Hotel rate/stay guarantees through Mastercard Travel & Lifestyle Services and Airport Concierge meet-and-greet discounts on every card; the 24/7 Concierge Service comes only with the World Enhanced and World Elite tiers."
     }
   ],
   "additional_cards": {
@@ -163,5 +163,6 @@
       "badge": "Consolidation",
       "text": "Following Bass Pro Shops' 2017 acquisition of Cabela's, the two loyalty programs were combined onto a single Capital One-issued Mastercard, replacing the old Cabela's CLUB Visa that had been issued by Cabela's own World's Foremost Bank."
     }
-  ]
+  ],
+  "lounge_access": "none"
 }

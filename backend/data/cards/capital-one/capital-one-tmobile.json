@@ -11,18 +11,22 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "18.49% or 28.49% (based on creditworthiness)",
-  "balance_transfer_apr": "18.49% or 28.49% (based on creditworthiness)",
-  "balance_transfer_fee": "Greater of 3% of the amount transferred or $3",
+  "variable_apr": "18.74% or 28.74% (based on creditworthiness)",
+  "balance_transfer_apr": "18.74% or 28.74% (based on creditworthiness)",
+  "balance_transfer_fee": "None at the standard Balance Transfer APR per Capital One's agreement; T-Mobile's disclosure lists the greater of 3% or $3",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "28.49%",
+  "cash_advance_apr": "28.74%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
   "late_payment_fee": "Up to $40",
   "returned_payment_fee": null,
   "returned_check_fee": null,
-  "welcome_bonus": null,
+  "welcome_bonus": {
+    "bonus": "One-time $50 T-Mobile wireless bill credit",
+    "requirement": "approval for a new T-Mobile Visa opened through an official T-Mobile channel showing the offer by 11/18/2026; one per wireless account, account open and in good standing when the credit applies",
+    "estimated_value": null
+  },
   "verdict": {
     "status": "situational",
     "text": "Only makes sense for active T-Mobile customers: rewards aren't cashable",
@@ -32,7 +36,7 @@
     {
       "emoji": "📱",
       "multiplier": "5%",
-      "category": "Phones, devices & accessories: T-Mobile stores, T-Mobile.com & the T-Life app",
+      "category": "Phones, devices & accessories: T-Mobile stores, Authorized Retailers, T-Mobile.com & the T-Life app",
       "highlight": true,
       "is_base": false
     },
@@ -44,19 +48,19 @@
       "is_base": true
     }
   ],
-  "earn_note": "Capital One and T-Mobile's own terms exclude device equipment installment plans, wireless service fees, and prepaid service from the 5% device rate: the 5% is for buying a phone or accessory outright, not for paying your monthly bill. There's no cap on either rate and rewards don't expire for the life of the account.",
+  "earn_note": "The 5% device rate excludes equipment installment plan payments, wireless service, fees and prepaid service: it's for buying a phone or accessory outright, not for paying your monthly bill. Purchases through third-party digital wallets don't get the 5%. Separately, linking the card to T-Mobile Dining Rewards earns 6% back at participating restaurants, paid as a statement credit once $10 has built up. Rewards don't expire for the life of the account.",
   "points": {
     "redeemable": "store_only",
     "currency": "T-Mobile Rewards",
     "redemption_options": [
       {
-        "method": "T-Mobile wireless bill, or phone/device/accessory purchases at T-Mobile.com, in the T-Life app, or in-store",
+        "method": "T-Mobile wireless bill, a one-time equipment installment plan payment, or phone/device/accessory purchases at T-Mobile.com, in the T-Life app, or in-store",
         "cpp": 1.0,
         "best": true
       }
     ],
     "per_100k": "$1,000 toward a T-Mobile bill or device, no other redemption exists",
-    "note": "A closed-loop currency, not cash back: there's no statement credit, gift card, or Capital One redemption option. Balances don't expire while the account is open, but they're stranded if you ever leave T-Mobile."
+    "note": "A closed-loop currency, not cash back: there's no statement credit, gift card, or Capital One redemption option. Rewards don't expire just because you leave T-Mobile, but you lose access to the redemption options that need an active T-Mobile account."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -68,23 +72,23 @@
   "insurance": [
     {
       "coverage": "Purchase protection",
-      "detail": "$500/claim · $50,000/cardholder · 90 days (standard Capital One Visa Signature Purchase Security benefit)",
-      "level": "mid"
+      "detail": "Not included in the T-Mobile Visa Signature Guide to Benefits",
+      "level": "none"
     },
     {
       "coverage": "Extended warranty",
-      "detail": "+1 yr on warranties ≤3 yrs · up to $10,000/claim, $50,000/cardholder",
-      "level": "strong"
+      "detail": "Not included in the T-Mobile Visa Signature Guide to Benefits",
+      "level": "none"
     },
     {
       "coverage": "Travel accident insurance",
-      "detail": "Up to $250,000 · when fare is charged entirely to the card",
-      "level": "good"
+      "detail": "Not included in the T-Mobile Visa Signature Guide to Benefits",
+      "level": "none"
     },
     {
       "coverage": "Lost luggage reimbursement",
-      "detail": "Up to $3,000/trip",
-      "level": "mid"
+      "detail": "Not included in the T-Mobile Visa Signature Guide to Benefits",
+      "level": "none"
     },
     {
       "coverage": "Cell phone protection",
@@ -92,21 +96,21 @@
       "level": "none"
     }
   ],
-  "protection_note": "These figures come from Capital One's standard Visa Signature Guide to Benefits, since a T-Mobile-specific guide wasn't independently confirmed; treat them as the baseline you should get, not a guarantee. The most surprising omission is cell phone protection: despite being T-Mobile's own card, it doesn't insure the phone you're paying it off with. There's no trip cancellation/interruption or baggage delay coverage either, only lost-luggage reimbursement.",
-  "rental_note": "Secondary auto rental collision/theft coverage via Visa Signature, up to 15 days domestically or 31 days internationally. Decline the counter's own CDW/LDW and charge the entire rental to this card to activate it; pays out after your personal auto policy.",
+  "protection_note": "Capital One publishes a T-Mobile-specific Guide to Benefits, and it carries no insurance at all: no purchase protection, extended warranty, travel or luggage coverage, and no cell phone protection, despite this being T-Mobile's own card. What's included is Visa Signature Concierge, travel and emergency assistance, Roadside Dispatch, the Luxury Hotel Collection and Troon Rewards.",
+  "rental_note": "No rental car coverage: the T-Mobile Visa Signature Guide to Benefits doesn't include any.",
   "status_perks": [],
   "services": [
     {
       "name": "No annual fee",
-      "detail": "$0/year, with a variable 18.49%–28.49% purchase APR based on creditworthiness."
+      "detail": "$0/year, with a variable 18.74% or 28.74% purchase APR based on creditworthiness."
     },
     {
       "name": "T-Mobile AutoPay discount",
-      "detail": "$5/month per line (up to 8 lines) off an eligible T-Mobile wireless plan when AutoPay is set to this card, separate from, and stackable with, the T-Mobile Rewards earned on purchases."
+      "detail": "The only credit card eligible for T-Mobile's AutoPay discount. The amount and the number of qualifying lines depend on your plan and account type."
     },
     {
       "name": "Visa Signature perks",
-      "detail": "24/7 Visa Signature Concierge, Visa Signature Luxury Hotel Collection, and retailer shopping discounts."
+      "detail": "Visa Signature Concierge, travel and emergency assistance, Roadside Dispatch, the Luxury Hotel Collection and Troon Rewards, plus cardholder deals on dining and travel from T-Mobile."
     },
     {
       "name": "Eligibility is carrier-locked",
@@ -130,8 +134,8 @@
             "included": true
           },
           {
-            "text": "Same purchase protections as the primary card",
-            "included": true
+            "text": "Only the primary cardholder can redeem rewards",
+            "included": false
           }
         ]
       }
@@ -145,5 +149,6 @@
       "badge": "Launch",
       "text": "Capital One and T-Mobile launch the T-Mobile Visa, the carrier's first co-branded credit card: 5% back on T-Mobile device purchases and 2% elsewhere, redeemable only within the T-Mobile ecosystem, with no annual fee."
     }
-  ]
+  ],
+  "lounge_access": "none"
 }

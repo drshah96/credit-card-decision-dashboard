@@ -11,32 +11,32 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": true,
-  "variable_apr": "19.49%-30.49%",
-  "balance_transfer_apr": "19.49%-30.49%",
+  "variable_apr": "19.74%, 25.74% or 30.74%, based on creditworthiness",
+  "balance_transfer_apr": "19.74%, 25.74% or 30.74%, for balance transfers completed within 4 months of account opening",
   "balance_transfer_fee": "5% of each transaction, minimum $10",
   "foreign_transaction_fee_rate": "3%",
-  "cash_advance_apr": null,
-  "penalty_apr": "Up to 29.99%",
-  "penalty_apr_trigger": "Making a late payment or a payment that's returned",
+  "cash_advance_apr": "32.74%",
+  "penalty_apr": "None",
+  "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
   "late_payment_fee": "$30, or $41 if another late payment occurs within 6 billing cycles",
   "returned_payment_fee": "$30, or $41 if another returned payment occurs within 6 billing cycles",
   "returned_check_fee": null,
   "welcome_bonus": {
-    "bonus": "20% off first purchase",
-    "requirement": "on your first L.L.Bean purchase upon approval",
+    "bonus": "20% off first llbean.com purchase",
+    "requirement": "one-time, on the llbean.com purchase made in the same visit as instant approval; many exclusions, can't be combined with other offers",
     "estimated_value": null
   },
   "verdict": {
     "status": "situational",
-    "text": "Decent 4% at L.L.Bean, but weak elsewhere and store-locked redemption",
+    "text": "Solid 5% at L.L.Bean, but weak elsewhere and store-locked redemption",
     "short_tag": "L.L.Bean Shoppers"
   },
   "earn_rates": [
     {
       "emoji": "🥾",
-      "multiplier": "4%",
-      "category": "L.L.Bean purchases",
+      "multiplier": "5%",
+      "category": "L.L.Bean purchases (U.S. businesses)",
       "highlight": true,
       "is_base": false
     },
@@ -55,19 +55,19 @@
       "is_base": true
     }
   ],
-  "earn_note": "Unlike Macy's, Bloomingdale's, or Wayfair, L.L.Bean has issued this as a single open-loop Mastercard from the start; no separate closed-loop, store-only L.L.Bean card was found. Each Bean Buck equals $1 in savings at L.L.Bean, and Bean Bucks don't expire as long as the account stays open and active.",
+  "earn_note": "Unlike Macy's, Bloomingdale's, or Wayfair, L.L.Bean has issued this as a single open-loop Mastercard from the start; no separate closed-loop, store-only L.L.Bean card was found. Each Bean Buck equals $1 in savings at L.L.Bean. Bakeries, and cafes inside department stores, grocery stores or warehouse clubs, may earn 1% rather than the 2% restaurant rate. Bean Bucks are forfeited if you go 24 months without a purchase on the card, or if the account closes or falls out of good standing.",
   "points": {
     "redeemable": "store_only",
     "currency": "Bean Bucks",
     "redemption_options": [
       {
-        "method": "Applied as savings toward a purchase at L.L.Bean or llbean.com",
+        "method": "Applied as savings toward a purchase at L.L.Bean stores, llbean.com or by phone, in any amount",
         "cpp": 1.0,
         "best": true
       }
     ],
     "per_100k": "Not applicable: Bean Bucks accrue and redeem in dollars directly, 1 Bean Buck = $1",
-    "note": "Bean Bucks redeem only at L.L.Bean: no cash, statement credit, or third-party redemption. They don't expire while the account remains open, which is more forgiving than the 30-day expiration on some competing store-card currencies (e.g. Macy's Star Money)."
+    "note": "Bean Bucks redeem only on L.L.Bean merchandise and services: no cash, statement credit, or third-party redemption, and not on expedited shipping, oversized freight, sales tax, Outdoor Discovery Programs or L.L.Bean for Business orders. They stay alive as long as you use the card at least once every 24 months."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -108,13 +108,13 @@
       "level": "none"
     }
   ],
-  "protection_note": "A standard (not World Elite) Mastercard tier with no confirmed purchase protection, extended warranty, or travel insurance. Treat this as a rewards card with no meaningful insurance suite.",
+  "protection_note": "No Guide to Benefits for this card was found, and Citi's pages list no purchase protection, extended warranty, or travel insurance. Treat it as a rewards card with no insurance you can count on.",
   "rental_note": "No rental car coverage found for this card.",
   "status_perks": [],
   "services": [
     {
       "name": "Free shipping at L.L.Bean",
-      "detail": "Free standard shipping on L.L.Bean orders paid with this card."
+      "detail": "Free standard U.S. shipping on L.L.Bean orders paid with this card or entirely with Bean Bucks; expedited, oversized, L.L.Bean for Business and international orders are excluded."
     },
     {
       "name": "Free return shipping",
@@ -123,6 +123,22 @@
     {
       "name": "Free monogramming",
       "detail": "Complimentary monogramming on eligible L.L.Bean items when purchased with this card."
+    },
+    {
+      "name": "Birthday bonus",
+      "detail": "Cardholders get a birthday bonus; Citi doesn't state the amount."
+    },
+    {
+      "name": "15% off Outdoor Discovery Programs",
+      "detail": "A discount on L.L.Bean's outdoor classes and programs."
+    },
+    {
+      "name": "Special sales and exclusive offers",
+      "detail": "Cardholder-only sales and offers from L.L.Bean."
+    },
+    {
+      "name": "Outdoor Impact Votes",
+      "detail": "One vote per eligible purchase (not on the day you're approved), cast during a yearly window to direct L.L.Bean's support for outdoor organizations."
     },
     {
       "name": "$0 liability on unauthorized charges",
@@ -152,9 +168,15 @@
         ]
       }
     ],
-    "note": "Free to add, useful mainly for pooling a household's L.L.Bean spend toward the 4% rate and shared shipping perks."
+    "note": "Free to add, useful mainly for pooling a household's L.L.Bean spend toward the 5% rate and shared shipping perks."
   },
   "timeline": [
+    {
+      "date": "2026",
+      "type": "add",
+      "badge": "Earn rate increase",
+      "text": "By August 2026 the L.L.Bean rate had gone up from 4% to 5% in Bean Bucks. Restaurants still earn 2% and everything else 1%."
+    },
     {
       "date": "Ongoing",
       "type": "neutral",

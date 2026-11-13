@@ -136,12 +136,17 @@
   "insurance": [
     {
       "coverage": "Trip cancel/interrupt",
-      "detail": "Coverage requires booking the trip on this card; see Guide to Benefits for limits",
+      "detail": "Up to $2,000 per insured person for non-refundable common carrier fares · the entire trip cost must be on this card · covers you, a spouse or domestic partner, and dependent children",
       "level": "mid"
     },
     {
       "coverage": "Trip delay",
-      "detail": "Trip Delay Reimbursement applies when you use this card to secure the trip; see Guide to Benefits for limits. SmartDelay is listed separately: register your flight at altitudeconnect.smartdelay.com",
+      "detail": "Up to $300 per ticket, one claim per trip, for delays over 12 hours from a covered hazard · part or all of the fare on this card. SmartDelay is listed separately: register your flight at altitudeconnect.smartdelay.com",
+      "level": "mid"
+    },
+    {
+      "coverage": "Travel accident",
+      "detail": "Up to $1,000 for accidental death or dismemberment while riding a common carrier, when the entire fare is charged to this card",
       "level": "mid"
     },
     {
@@ -151,17 +156,17 @@
     },
     {
       "coverage": "Purchase protection",
-      "detail": "Not publicly documented for this card",
+      "detail": "Not offered on this card",
       "level": "none"
     },
     {
       "coverage": "Extended warranty",
-      "detail": "Not publicly documented for this card",
+      "detail": "Not offered on this card",
       "level": "none"
     },
     {
       "coverage": "Rental car CDW",
-      "detail": "Not publicly documented for this card",
+      "detail": "Not offered on this card",
       "level": "none"
     },
     {
@@ -170,20 +175,20 @@
       "level": "none"
     }
   ],
-  "protection_note": "Trip cancellation/interruption and trip delay coverage are confirmed on the product page, which links the Guide to Benefits (mycardgtb.com/altitudeconnect) for dollar limits. Coverage applies only when you use this card to secure the trip. SmartDelay requires you to register your flight; it isn't automatic.",
-  "rental_note": "No auto rental coverage documented publicly for this card as of this writing.",
+  "protection_note": "The Guide to Benefits (effective March 1, 2026) covers trip cancellation/interruption up to $2,000 per person, trip delay up to $300 per ticket, and travel accident insurance up to $1,000. Coverage applies only when you use this card to pay for the trip. There's no purchase protection, extended warranty or rental car coverage. SmartDelay requires you to register your flight; it isn't automatic.",
+  "rental_note": "No auto rental coverage: the card's Guide to Benefits (effective March 1, 2026) doesn't include any.",
   "lounge_access": "passes",
   "status_perks": [
     {
       "name": "Priority Pass Select",
       "strength": 4,
-      "note": "Complimentary 12-month Priority Pass membership with four free visits a year (enroll separately at prioritypass.com/usbankaltitudeconnect), for airport lounges worldwide. Accompanying guests can get in too. Free enrollment is limited to one cardholder per account, including authorized users."
+      "note": "Complimentary 12-month Priority Pass membership with four free visits a year (enroll separately at prioritypass.com/usbankaltitudeconnect), for airport lounges worldwide. Guests count against the four free visits, and after that each visit by you or a guest is charged to the card. Free enrollment is limited to one cardholder per account, including authorized users."
     }
   ],
   "services": [
     {
       "name": "GigSky global data",
-      "detail": "A complimentary 5 GB, 15-day GigSky data plan usable in 175+ countries. There's no annual limit on plans, but a new one can't start until the last one's 15 days are up. The card has to be the default payment method in the GigSky app; register at gigsky.com/visa-usb-ac. Redeemable through Nov 30, 2026."
+      "detail": "A complimentary 5 GB, 15-day GigSky data plan usable in 175+ countries. There's no annual limit on plans, but a new one can't start until the last one's 15 days are up. The card has to be the default payment method in the GigSky app; register at gigsky.com/visa-usb-ac. Redeemable through Nov 30, 2026, after which GigSky says the benefit ends; a plan redeemed by then can be used within 12 months."
     },
     {
       "name": "U.S. Bank ExtendPay Plan",
@@ -219,8 +224,8 @@
     {
       "date": "Nov 30, 2026",
       "type": "future",
-      "badge": "Upcoming",
-      "text": "The complimentary GigSky global data benefit is redeemable through this date under current terms. Worth not reading too much into: U.S. Bank has published an end date like this for several years running and extended it each time, so treat it as a renewal checkpoint rather than a scheduled cut."
+      "badge": "Ending",
+      "text": "Last day to redeem the complimentary GigSky global data plan. GigSky says the Altitude Connect benefit ends December 1, and plans redeemed before then can be used within 12 months."
     }
   ]
 }

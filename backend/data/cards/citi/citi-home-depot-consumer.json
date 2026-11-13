@@ -12,15 +12,15 @@
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
   "variable_apr": "29.99%",
-  "balance_transfer_apr": null,
+  "balance_transfer_apr": "Not offered",
   "balance_transfer_fee": null,
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": null,
-  "penalty_apr": null,
+  "cash_advance_apr": "Not offered",
+  "penalty_apr": "None",
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
-  "late_payment_fee": null,
-  "returned_payment_fee": null,
+  "late_payment_fee": "Up to $41",
+  "returned_payment_fee": "Up to $41",
   "returned_check_fee": null,
   "welcome_bonus": {
     "bonus": "Up to $100 off",
@@ -29,8 +29,8 @@
   },
   "verdict": {
     "status": "situational",
-    "text": "A project-financing card, not rewards: only for a 0% Home Depot purchase",
-    "short_tag": "0% Project Financing"
+    "text": "A financing card, not rewards: for Home Depot buys you can pay off in time",
+    "short_tag": "Project Financing"
   },
   "earn_rates": [],
   "earn_note": "This card has no cash-back or points program of any kind. Its entire value proposition is deferred-interest financing (\"no interest if paid in full within the promotional period\") on Home Depot purchases, plus an extended return window. If you want rewards for home-improvement spend, a general-purpose card with a home-improvement or everyday-purchases category will out-earn this every time.",
@@ -38,7 +38,7 @@
     "currency": "No rewards program",
     "redemption_options": [],
     "per_100k": "$0, no rewards program",
-    "note": "No points or cash back exist on this card. Its value is entirely about financing terms: promotional 0%-interest windows (commonly 6 months on purchases of $299+, with longer up-to-24-month windows during special promotions) that revert to a high standard variable APR (published around 29.99% as of Citi's 2025/2026 disclosures) if not paid in full by the deadline, including retroactive interest back to the purchase date under deferred-interest terms, which is a real risk if you carry a balance past the promo window."
+    "note": "No points or cash back exist on this card. Its value is deferred-interest financing: 6 months on purchases of $299 or more, and up to 24 months during special promotions. If the balance isn't paid in full by the deadline, interest is charged back to the purchase date at the card's 29.99% APR, which is a real risk if you carry a balance past the promo window."
   },
   "transfer_partners": {
     "airline_count": 0,
@@ -79,7 +79,7 @@
       "level": "none"
     }
   ],
-  "protection_note": "None of the usual card protections apply: this is a closed-loop retail financing account, not a Visa/Mastercard, so there's no purchase protection, extended warranty, or travel insurance of any kind. $0 liability on unauthorized charges is the only fraud-related benefit found.",
+  "protection_note": "None of the usual card protections apply: this is a closed-loop retail financing account, not a Visa or Mastercard, so there's no purchase protection, extended warranty, or travel insurance. Citi lists $0 liability on unauthorized charges, a Fraud Protection Guarantee and fraud alerts.",
   "rental_note": "No rental car coverage; this card can't be used for rentals or anywhere outside Home Depot and homedepot.com.",
   "status_perks": [],
   "services": [
@@ -89,7 +89,7 @@
     },
     {
       "name": "Extended return window",
-      "detail": "Cardholders get 1 year to make returns instead of Home Depot's standard 90-day window, subject to Home Depot's Returns Policy exclusions."
+      "detail": "Cardholders get 1 year to make returns, four times Home Depot's standard window, subject to Home Depot's Returns Policy."
     },
     {
       "name": "Flexible due date",
@@ -103,14 +103,15 @@
   "additional_cards": {
     "title": "Authorized users",
     "options": [],
-    "note": "No distinct authorized-user program or benefit was found for this card; it's a single-purpose store-financing account."
+    "note": "Citi lists authorized users as a feature of this card but does not publish the terms on its product page."
   },
   "timeline": [
     {
       "date": "Ongoing",
       "type": "neutral",
       "badge": "Financing-only",
-      "text": "Structurally similar to other big-box store financing cards (e.g. Chase Slate Edge for credit-building): no rewards program, value comes entirely from 0%-interest promotional financing windows on qualifying purchases, not from earning anything back."
+      "text": "No rewards program: the card's value comes entirely from deferred-interest financing on qualifying Home Depot purchases, not from earning anything back."
     }
-  ]
+  ],
+  "lounge_access": "none"
 }

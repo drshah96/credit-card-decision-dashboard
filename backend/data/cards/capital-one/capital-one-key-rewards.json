@@ -11,11 +11,11 @@
   "intro_apr_purchases": null,
   "intro_apr_balance_transfers": null,
   "foreign_transaction_fee": false,
-  "variable_apr": "29.24%",
-  "balance_transfer_apr": "29.24%",
-  "balance_transfer_fee": "3% of the amount of each transferred balance",
+  "variable_apr": "29.49%",
+  "balance_transfer_apr": "29.49%",
+  "balance_transfer_fee": "$0 at the standard Transfer APR, or 3% at any promotional APR Capital One may offer",
   "foreign_transaction_fee_rate": null,
-  "cash_advance_apr": "29.24%",
+  "cash_advance_apr": "29.49%",
   "penalty_apr": null,
   "penalty_apr_trigger": null,
   "pay_over_time_fee": null,
@@ -36,7 +36,7 @@
     {
       "emoji": "🛋️",
       "multiplier": "5%",
-      "category": "Williams Sonoma, Williams Sonoma Home, Pottery Barn, Pottery Barn Kids/Teen, West Elm, Rejuvenation & Mark & Graham",
+      "category": "Williams Sonoma, Williams Sonoma Home, Pottery Barn, Pottery Barn Kids/Teen, West Elm, Rejuvenation & Mark & Graham (not GreenRow or Dormify)",
       "highlight": true,
       "is_base": false
     },
@@ -62,7 +62,7 @@
       "is_base": true
     }
   ],
-  "earn_note": "Rewards purchased on 0% promotional financing plans (12 equal payments, $750+) don't earn any rewards at all; pick one or the other on a big purchase, not both. Rate applies identically across all eight brands regardless of which one's name is on your card; there's no per-store bonus.",
+  "earn_note": "Purchases on the 12-month equal-payment financing plan ($750+) don't earn any rewards; pick one or the other on a big purchase, not both. Grocery purchases at gas stations, convenience stores, warehouse clubs, discount stores and superstores earn 1%, since earning follows the merchant's category code. The brand rate applies identically across all eight brands regardless of which one's name is on your card. Purchases at Williams Sonoma brand stores outside the U.S. count as ordinary purchases, not brand purchases.",
   "points": {
     "redeemable": "store_only",
     "currency": "Key Rewards Certificates",
@@ -115,7 +115,7 @@
       "level": "none"
     }
   ],
-  "protection_note": "Despite the Visa Signature label, the specific benefits guide Capital One issues for this card (\"Visa Signature Registered Card,\" Williams-Sonoma Inc. brands) carries none of the purchase protection, extended warranty, or trip/baggage insurance a typical Visa Signature card has. What's actually included is a referral-only concierge line, travel/emergency assistance (you pay for anything arranged), and a pay-per-use roadside dispatch service; none of which are insurance.",
+  "protection_note": "Despite the Visa Signature label, the Guide to Benefits Capital One issues for this card (\"Visa Signature for Williams-Sonoma, Inc. Brands\") carries none of the purchase protection, extended warranty, or trip/baggage insurance a typical Visa Signature card has. What's actually included is a referral-only concierge line, travel/emergency assistance (you pay for anything arranged), and a pay-per-use roadside dispatch service; none of which are insurance.",
   "rental_note": "No rental car coverage of any kind. Roadside Dispatch (a separate, unrelated benefit) is a pay-per-use towing/locksmith referral service (around $80 per call as of the card's Dec 2024 benefits guide), not a collision damage waiver.",
   "status_perks": [
     {
@@ -136,7 +136,7 @@
     },
     {
       "name": "$25 birthday reward",
-      "detail": "One $25 certificate per 12-month period, sent by email around your account anniversary/birthday; must be redeemed within 30 days of issuance."
+      "detail": "One $25 certificate per 12-month period, issued during your birthday month to your Williams-Sonoma, Inc. account; must be redeemed within 30 days. You need a purchase in the past 12 months, a valid email and U.S. address, and an open, current account."
     },
     {
       "name": "Early access to sales & events",
@@ -152,7 +152,7 @@
     },
     {
       "name": "No foreign transaction fee",
-      "detail": "Standard across Capital One's consumer card lineup, though not explicitly called out on this card's own product page."
+      "detail": "The card agreement says Capital One doesn't charge currency conversion fees."
     }
   ],
   "additional_cards": {
@@ -193,5 +193,6 @@
       "badge": "Launch",
       "text": "Williams-Sonoma, Inc. moved its store-card portfolio from Comenity Bank to Capital One and relaunched the loyalty program as \"The Key Rewards,\" issuing it under four brand-specific card names (Williams Sonoma, Pottery Barn, West Elm, and a plain Key Rewards Visa) that share one underlying product, one credit card agreement, and one rewards structure."
     }
-  ]
+  ],
+  "lounge_access": "none"
 }

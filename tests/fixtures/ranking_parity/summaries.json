@@ -938,7 +938,7 @@
   "annual_fee": 0,
   "categories": [
    {
-    "category": "Williams Sonoma, Williams Sonoma Home, Pottery Barn, Pottery Barn Kids/Teen, West Elm, Rejuvenation & Mark & Graham",
+    "category": "Williams Sonoma, Williams Sonoma Home, Pottery Barn, Pottery Barn Kids/Teen, West Elm, Rejuvenation & Mark & Graham (not GreenRow or Dormify)",
     "multiplier": "5%",
     "is_base": false
    },
@@ -1112,7 +1112,7 @@
   "annual_fee": 0,
   "categories": [
    {
-    "category": "REI retail stores & REI.com (net purchases, after returns/credits)",
+    "category": "REI stores & REI.com (net purchases, after returns/credits), plus donations to the REI Cooperative Action Fund; not purchases on REI promotional financing",
     "multiplier": "5%",
     "is_base": false
    },
@@ -1236,7 +1236,7 @@
   "annual_fee": 0,
   "categories": [
    {
-    "category": "Phones, devices & accessories: T-Mobile stores, T-Mobile.com & the T-Life app",
+    "category": "Phones, devices & accessories: T-Mobile stores, Authorized Retailers, T-Mobile.com & the T-Life app",
     "multiplier": "5%",
     "is_base": false
    },
@@ -2249,7 +2249,7 @@
   "annual_fee": 0,
   "categories": [
    {
-    "category": "Best Buy purchases (in-store & BestBuy.com): 6% for My Best Buy Elite Plus members",
+    "category": "Best Buy purchases (in-store, BestBuy.com & the app): 6% with a paid My Best Buy Plus or Total membership",
     "multiplier": "5%",
     "is_base": false
    },
@@ -2282,12 +2282,17 @@
   "annual_fee": 0,
   "categories": [
    {
-    "category": "Bloomingdale's, bloomingdales.com, Bloomingdale's The Outlet Store & everywhere Amex is accepted: Loyallist tier (default)",
+    "category": "Bloomingdale's, bloomingdales.com & The Outlet: Top of the List Unlocked ($15,000+ a year at Bloomingdale's)",
+    "multiplier": "10 pts/$1",
+    "is_base": false
+   },
+   {
+    "category": "Bloomingdale's, bloomingdales.com, The Outlet & everywhere Amex is accepted: Loyallist tier (default)",
     "multiplier": "3 pts/$1",
     "is_base": true
    },
    {
-    "category": "Same categories, at Top of the List / Top of the List Unlocked status tiers",
+    "category": "Bloomingdale's & everywhere Amex is accepted: Top of the List ($5,000+ a year at Bloomingdale's), and Top of the List Unlocked outside Bloomingdale's",
     "multiplier": "4 pts/$1",
     "is_base": false
    }
@@ -2320,7 +2325,7 @@
     "is_base": false
    },
    {
-    "category": "Eligible travel: airfare, hotels, car rentals, Costco Travel",
+    "category": "Eligible travel worldwide: airfare, hotels, car rentals, travel agencies, cruise lines & Costco Travel",
     "multiplier": "3%",
     "is_base": false
    },
@@ -2380,7 +2385,7 @@
     "is_base": true
    }
   ],
-  "best_cpp": 1.0,
+  "best_cpp": 0.67,
   "secured_variant_id": null,
   "points_pool_id": null,
   "points_pool_receiver": false,
@@ -2416,7 +2421,7 @@
   "annual_fee": 0,
   "categories": [
    {
-    "category": "Synergy Supreme+™ premium gasoline at Exxon & Mobil stations",
+    "category": "Supreme+™ premium gasoline at Exxon & Mobil stations",
     "multiplier": "12¢/gal",
     "is_base": false
    },
@@ -2426,7 +2431,7 @@
     "is_base": false
    },
    {
-    "category": "Convenience-store purchases at Exxon/Mobil (snacks, drinks, car washes): first $1,200/yr, then presumably 0%",
+    "category": "Convenience-store purchases and car washes at Exxon/Mobil: first $1,200/yr, nothing earned above that",
     "multiplier": "5%",
     "is_base": false
    }
@@ -2435,8 +2440,8 @@
   "secured_variant_id": null,
   "points_pool_id": null,
   "points_pool_receiver": false,
-  "rewards_redeemable": "anywhere",
-  "open_to_new_applicants": true
+  "rewards_redeemable": "store_only",
+  "open_to_new_applicants": false
  },
  {
   "id": "citi-goodyear",
@@ -2468,8 +2473,8 @@
   "annual_fee": 0,
   "categories": [
    {
-    "category": "L.L.Bean purchases",
-    "multiplier": "4%",
+    "category": "L.L.Bean purchases (U.S. businesses)",
+    "multiplier": "5%",
     "is_base": false
    },
    {
@@ -2496,17 +2501,22 @@
   "annual_fee": 0,
   "categories": [
    {
-    "category": "Macy's & macys.com: Platinum tier only ($1,200+ in annual card spend), every day with no merchandise exclusions",
+    "category": "Macy's & macys.com: Platinum tier ($1,200+ a year at Macy's with the card)",
     "multiplier": "5%",
     "is_base": false
    },
    {
-    "category": "Macy's & macys.com: Silver (default) and Gold ($500–$1,199/yr) tiers, only during scheduled bonus days rather than every purchase",
-    "multiplier": "Points on Star Money Days",
+    "category": "Macy's & macys.com: Gold tier ($500 to $1,199 a year at Macy's with the card)",
+    "multiplier": "3%",
     "is_base": false
    },
    {
-    "category": "Restaurants",
+    "category": "Macy's & macys.com: Silver tier (every new card starts here)",
+    "multiplier": "2%",
+    "is_base": false
+   },
+   {
+    "category": "Stand-alone restaurants, including delivery",
     "multiplier": "3%",
     "is_base": false
    },
@@ -2692,7 +2702,7 @@
   "annual_fee": 0,
   "categories": [
    {
-    "category": "Tractor Supply & Petsense purchases",
+    "category": "Tractor Supply purchases",
     "multiplier": "5%",
     "is_base": false
    },
@@ -2730,7 +2740,7 @@
   "annual_fee": 0,
   "categories": [
    {
-    "category": "Wayfair, Joss & Main, AllModern, Birch Lane & Perigold (5% instead if using promotional financing on that purchase)",
+    "category": "Wayfair, Joss & Main, AllModern, Birch Lane & Perigold sites, apps and stores, excluding outlets (5% instead if using promotional financing on that purchase)",
     "multiplier": "7%",
     "is_base": false
    },
