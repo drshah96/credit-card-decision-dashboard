@@ -2702,7 +2702,7 @@
   "annual_fee": 0,
   "categories": [
    {
-    "category": "Tractor Supply purchases",
+    "category": "Tractor Supply & Petsense purchases",
     "multiplier": "5%",
     "is_base": false
    },

@@ -86,22 +86,7 @@
     "highlight": "Citi lists transfers to participating partners' programs as a redemption option on this card, but doesn't publish which partners or at what ratios, so none are listed here. Citi's full ThankYou partner list goes with Strata Premier and Strata Elite.",
     "recent_changes": "Not applicable."
   },
-  "credits": [
-    {
-      "id": "spend-1000-credit",
-      "name": "$20 statement credit each billing cycle",
-      "subtitle": "$20 a cycle when you spend $1,000+",
-      "max_annual": 240,
-      "default_value": 0,
-      "tier": "plan",
-      "removed": false,
-      "description": "A $20 statement credit for each billing cycle in which you make $1,000 or more in net purchases (purchases minus returns and refunds), up to $240 a year. Balance transfers, cash advances and cash-like transactions don't count.",
-      "tips": [
-        "Only worth counting if you reliably put $1,000+ a cycle on this card; at exactly $1,000 it's a 2% kicker, and it shrinks as a percentage the more you spend.",
-        "A cycle where you fall short earns nothing, so a big purchase is worth timing into a cycle that would otherwise miss."
-      ]
-    }
-  ],
+  "credits": [],
   "insurance": [
     {
       "coverage": "Cell phone",

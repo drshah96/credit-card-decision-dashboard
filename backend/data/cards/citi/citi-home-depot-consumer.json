@@ -13,7 +13,7 @@
   "foreign_transaction_fee": false,
   "variable_apr": "29.99%",
   "balance_transfer_apr": "Not offered",
-  "balance_transfer_fee": null,
+  "balance_transfer_fee": "Not offered",
   "foreign_transaction_fee_rate": null,
   "cash_advance_apr": "Not offered",
   "penalty_apr": "None",

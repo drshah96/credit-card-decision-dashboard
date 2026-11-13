@@ -8,7 +8,7 @@ import pytest
 from backend.mcp_server import projections
 from backend.refresh.state import VerificationState
 
-from .conftest import connect, structured, text_of
+from .conftest import UNVERIFIED_CARD, connect, structured, text_of
 
 CALLS = [
     ("find_cards", {"query": "sapphire"}),
@@ -199,9 +199,9 @@ async def test_list_tools_expose_the_gaps_that_a_status_alone_would_hide(snapsho
         assert provenance["review_due_on"] == "2027-05-06"
 
 
-async def test_a_card_with_no_recorded_check_is_not_verified(snapshot):
-    async with connect(snapshot) as client:
-        data = structured(await client.call_tool("get_card", {"card_id": "us-bank-split"}))
+async def test_a_card_with_no_recorded_check_is_not_verified(unverified_snapshot):
+    async with connect(unverified_snapshot) as client:
+        data = structured(await client.call_tool("get_card", {"card_id": UNVERIFIED_CARD}))
     provenance = data["provenance"]
     assert provenance["verification_status"] == "not_verified"
     assert provenance["verified_on"] is None

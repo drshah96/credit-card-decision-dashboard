@@ -14,7 +14,7 @@ from backend.mcp_server.end_dates import (
 )
 from backend.models import Card
 
-from .conftest import connect, structured
+from .conftest import UNVERIFIED_CARD, connect, structured
 
 CARDS_DIR = Path(__file__).parents[3] / "backend" / "data" / "cards"
 CHECKED = date(2026, 11, 7)
@@ -137,8 +137,8 @@ async def test_review_overdue_is_worked_out_per_request(snapshot, monkeypatch, t
     assert gold["provenance"]["review_overdue"] is False
 
 
-async def test_a_card_with_no_check_is_never_overdue(snapshot):
-    async with connect(snapshot) as client:
-        data = structured(await client.call_tool("get_card", {"card_id": "us-bank-split"}))
+async def test_a_card_with_no_check_is_never_overdue(unverified_snapshot):
+    async with connect(unverified_snapshot) as client:
+        data = structured(await client.call_tool("get_card", {"card_id": UNVERIFIED_CARD}))
     assert data["provenance"]["review_due_on"] is None
     assert data["provenance"]["review_overdue"] is False

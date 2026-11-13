@@ -1009,10 +1009,9 @@ def test_citi_goodyear_left_genuinely_unconfirmed_foreign_transaction_fee() -> N
     # closed-loop, so null here means "not yet audited", not "confirmed
     # fee-free". Dillard's Mastercard was settled on 2026-11-13: its pricing
     # table charges 3%.
-    for card_id in ("citi-goodyear",):
-        detail = client.get(f"/api/cards/{card_id}").json()
-        assert detail["foreign_transaction_fee"] is None
-        assert detail["foreign_transaction_fee_rate"] is None
+    detail = client.get("/api/cards/citi-goodyear").json()
+    assert detail["foreign_transaction_fee"] is None
+    assert detail["foreign_transaction_fee_rate"] is None
 
 
 def test_citi_store_financing_cards_have_no_blanket_intro_offer() -> None:
@@ -1025,7 +1024,7 @@ def test_citi_store_financing_cards_have_no_blanket_intro_offer() -> None:
         detail = client.get(f"/api/cards/{card_id}").json()
         assert detail["intro_apr_purchases"] is None
         assert detail["balance_transfer_apr"] == "Not offered"
-        assert detail["balance_transfer_fee"] is None
+        assert detail["balance_transfer_fee"] == "Not offered"
 
 
 def test_citi_variable_apr_and_fee_fields_are_detail_only_not_on_summary() -> None:
