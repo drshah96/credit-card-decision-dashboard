@@ -1,5 +1,27 @@
 {
   "card_id": "citi-goodyear",
-  "last_verified_ok_at": null,
-  "verification": null
+  "last_verified_ok_at": "2026-11-13",
+  "verification": {
+    "evidence": "git:b9a5128809470dc88f378bf0bb945b62d6c54e2e",
+    "evidence_scope": "card",
+    "facts_sha256": "39baae6b5e58a9d03c81abdbda98d135fd787c64573984541e69aada83d41346",
+    "documents": [
+      {
+        "kind": "rates_and_fees",
+        "url": "https://files.consumerfinance.gov/a/assets/credit-card-agreements/pdf/Q22026/CITIBANK_N.A./GY_Addendum_57_0126_vf-441670.pdf"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.citi.com/credit-cards/goodyear-credit-cards"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.citi.com/credit-cards/retail-store-credit-cards"
+      }
+    ],
+    "not_checked": [
+      "additional_cards"
+    ],
+    "note": "First check, 2026-11-13, against Citi's filed pricing table and Citi's product pages, pricing as of 9/22/2026. Current APRs are Citi's filed margin plus the 7.00% Prime Rate (Federal Reserve H.15). Not checked: authorized-user terms."
+  }
 }

@@ -23,13 +23,14 @@ export const TERMS_AS_OF = "November 2026";
  * actually been re-checked against official sources, not on incidental edits
  * to a single card. Update CARDS_LAST_AUDITED with it.
  */
-export const LAST_AUDITED = "November 7, 2026";
+export const LAST_AUDITED = "November 13, 2026";
 
 /**
- * How many cards that re-check really covered. The November pass skipped the 19
- * retail co-brands and could not read U.S. Bank Split, whose page is gone.
+ * How many cards that re-check really covered. The November pass checked 89
+ * cards on November 7 and the 19 retail co-brands on November 13. It could not
+ * read U.S. Bank Split, whose page is gone.
  */
-export const CARDS_LAST_AUDITED = 89;
+export const CARDS_LAST_AUDITED = 108;
 
 /**
  * How many cards are in the catalogue. Hardcoded because the Footer renders in

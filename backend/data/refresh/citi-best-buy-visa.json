@@ -1,5 +1,37 @@
 {
   "card_id": "citi-best-buy-visa",
-  "last_verified_ok_at": null,
-  "verification": null
+  "last_verified_ok_at": "2026-11-13",
+  "verification": {
+    "evidence": "git:b9a5128809470dc88f378bf0bb945b62d6c54e2e",
+    "evidence_scope": "card",
+    "facts_sha256": "fa668def95b3f073b27094376b0406d59a1786e751a3258f91e8548d89a09d10",
+    "documents": [
+      {
+        "kind": "rates_and_fees",
+        "url": "https://files.consumerfinance.gov/a/assets/credit-card-agreements/pdf/Q22026/CITIBANK_N.A./BBY_Visa_Addendum_76_0326_vf-256116.pdf"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.citi.com/credit-cards/citi-best-buy-credit-cards"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.bestbuy.com/site/Finance/Credit-Cards/pcmcat102500050032.c?id=pcmcat102500050032"
+      },
+      {
+        "kind": "benefit_policy",
+        "url": "https://www.bestbuy.com/site/best-buy-membership/my-best-buy-program-rules/pcmcat311100050001.c?id=pcmcat311100050001"
+      },
+      {
+        "kind": "other_issuer_document",
+        "url": "https://www.bestbuy.com/site/financing-rewards/storewide-financing-details/pcmcat1592857565498.c?id=pcmcat1592857565498"
+      }
+    ],
+    "not_checked": [
+      "insurance",
+      "insurance_limits",
+      "additional_cards"
+    ],
+    "note": "First check, 2026-11-13, against Citi's filed pricing table, Citi's product page, Best Buy's card disclosure and the My Best Buy program rules updated 9/25/2026. Not checked: insurance (no Guide to Benefits found) and authorized-user terms."
+  }
 }

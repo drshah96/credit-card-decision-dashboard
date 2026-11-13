@@ -1,5 +1,38 @@
 {
   "card_id": "citi-bloomingdales",
-  "last_verified_ok_at": null,
-  "verification": null
+  "last_verified_ok_at": "2026-11-13",
+  "verification": {
+    "evidence": "git:b9a5128809470dc88f378bf0bb945b62d6c54e2e",
+    "evidence_scope": "card",
+    "facts_sha256": "24d069afe11611127a036541f93f2ade776370df90894b6798c60f475fc59346",
+    "documents": [
+      {
+        "kind": "rates_and_fees",
+        "url": "https://files.consumerfinance.gov/a/assets/credit-card-agreements/pdf/Q22026/CITIBANK_N.A./Bloomingdales_Amex_Addendum_107_EN_0126_vf-321045.pdf"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.citi.com/credit-cards/bloomingdales-credit-cards"
+      },
+      {
+        "kind": "benefit_policy",
+        "url": "https://www.bloomingdales.com/customer-service/articles/bloomingdales-loyallist-program-terms-and-conditions"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.bloomingdales.com/b/loyallist/benefits/"
+      },
+      {
+        "kind": "other_issuer_document",
+        "url": "https://www.bloomingdales.com/customer-service/articles/how-do-i-receive-my-introductory-bloomingdales-american-express-card-offer"
+      }
+    ],
+    "not_checked": [
+      "insurance",
+      "insurance_limits",
+      "perks",
+      "additional_cards"
+    ],
+    "note": "First check, 2026-11-13, against Citi's filed pricing table, Citi's product page and the Loyallist program terms. Current APRs are Citi's filed margin plus the 7.00% Prime Rate (Federal Reserve H.15). Not checked: insurance (no Guide to Benefits found), tier perks beyond earning, and authorized-user terms."
+  }
 }

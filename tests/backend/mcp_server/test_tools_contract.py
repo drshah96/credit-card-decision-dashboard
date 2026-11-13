@@ -201,9 +201,7 @@ async def test_list_tools_expose_the_gaps_that_a_status_alone_would_hide(snapsho
 
 async def test_a_card_with_no_recorded_check_is_not_verified(snapshot):
     async with connect(snapshot) as client:
-        data = structured(
-            await client.call_tool("get_card", {"card_id": "citi-costco-anywhere-visa"})
-        )
+        data = structured(await client.call_tool("get_card", {"card_id": "us-bank-split"}))
     provenance = data["provenance"]
     assert provenance["verification_status"] == "not_verified"
     assert provenance["verified_on"] is None

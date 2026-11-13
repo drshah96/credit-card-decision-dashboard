@@ -1,16 +1,40 @@
 {
   "card_id": "us-bank-altitude-connect",
-  "last_verified_ok_at": "2026-11-07",
+  "last_verified_ok_at": "2026-11-13",
   "verification": {
-    "evidence": "git:40b86fa9c112c55a16d35179ed97a51b70478704",
+    "evidence": "git:b9a5128809470dc88f378bf0bb945b62d6c54e2e",
     "evidence_scope": "card",
-    "facts_sha256": "ffbaf0526b30e5f8b23b00a41e9e5c1b2bb37e376e41454f8c36a3e95afc983b",
-    "documents": [],
+    "facts_sha256": "81c0d811428ece779ae1f0a1107c51a1b1be7fcf4a81e60af07ff64f8fccd6d8",
+    "documents": [
+      {
+        "kind": "rates_and_fees",
+        "url": "https://applications.usbank.com/oad/termsSimpleApply.controller?offerId=8BB5BD89H1&locationCode=18569&sourceCode=88416"
+      },
+      {
+        "kind": "guide_to_benefits",
+        "url": "https://mycardgtb.com/altitudeconnect"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.usbank.com/credit-cards/altitude-connect-visa-signature-credit-card.html"
+      },
+      {
+        "kind": "benefit_policy",
+        "url": "https://rewards.usbank.com/benefits/card/AltitudeConnectBenefits/program-rules"
+      },
+      {
+        "kind": "benefit_policy",
+        "url": "https://www.gigsky.com/visa/terms?tab=us-bank"
+      },
+      {
+        "kind": "other_issuer_document",
+        "url": "https://www.gigsky.com/visa-usb-ac"
+      }
+    ],
     "not_checked": [
-      "insurance",
-      "insurance_limits",
+      "redemption",
       "additional_cards"
     ],
-    "note": "Re-checked on 2026-11-07 against U.S. Bank product pages and Pricing and Terms. Not checked: insurance benefits, insurance dollar limits, and authorized-user terms."
+    "note": "Re-checked on 2026-11-13 against U.S. Bank's Pricing and Terms, the Guide to Benefits effective 3/1/26, the Program Rules and GigSky's partner terms. Not checked: cents-per-point values and authorized-user terms."
   }
 }

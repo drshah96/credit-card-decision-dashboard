@@ -1,5 +1,35 @@
 {
   "card_id": "capital-one-kohls-rewards",
-  "last_verified_ok_at": null,
-  "verification": null
+  "last_verified_ok_at": "2026-11-13",
+  "verification": {
+    "evidence": "git:b9a5128809470dc88f378bf0bb945b62d6c54e2e",
+    "evidence_scope": "card",
+    "facts_sha256": "213a6466fcf2295602737b4f392197fd68ab1600e6847c42ea86f69c8aded638",
+    "documents": [
+      {
+        "kind": "application_terms",
+        "url": "https://disclosures.capitalone.com/disclosure.41856.en-US.pdf"
+      },
+      {
+        "kind": "cardmember_agreement",
+        "url": "https://ecm.capitalone.com/WCM/card/credit-card-agreements-q3-2026/credit-card-agreement-for-kohls-rewards-visa-in-capital-one-n.a.pdf"
+      },
+      {
+        "kind": "guide_to_benefits",
+        "url": "https://ecm.capitalone.com/WCM/card/benefits-guide/visa-signature-for-kohls-rewards-visa.pdf"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.capitalone.com/credit-cards/kohls/"
+      },
+      {
+        "kind": "benefit_policy",
+        "url": "https://www.kohls.com/feature/rewards-terms.jsp"
+      }
+    ],
+    "not_checked": [
+      "additional_cards"
+    ],
+    "note": "First check, 2026-11-13, against the live application terms (Prime plus 22.74%), the Q3 2026 agreement, the full Guide to Benefits and Kohl's rewards terms. Not checked: authorized-user fee and earning."
+  }
 }

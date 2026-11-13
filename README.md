@@ -19,8 +19,9 @@ plainly rather than padding the list.
 
 Every card in the catalog is hand-authored as JSON, sourced from the issuer's own
 cardmember agreement and pricing terms rather than from aggregators, and reviewed
-in git like code. 89 of the 109 cards were re-checked against issuer terms in
-November 2026. The other 20, mostly store cards, have no recent check.
+in git like code. 108 of the 109 cards were re-checked against issuer terms in
+November 2026. The other one, U.S. Bank Split, has no recent check because its
+terms page is gone.
 
 ### The four main pages
 

@@ -25,9 +25,10 @@ reports them absent.
 
 Its date is an "accurate as of MM/YYYY" string rather than a version id.
 
-**Absence cannot be proven for U.S. Bank.** There is no reachable Guide to
-Benefits and no eligible-card list, so an `insurance[]` entry at `level: "none"`
-stays unverified rather than confirmed. This is the opposite of Capital One, whose
+**Absence was unprovable for U.S. Bank until 2026-11-13** (see the
+`mycardgtb.com` correction below, which now makes it provable). Before that there
+was no reachable Guide to Benefits and no eligible-card list, so an `insurance[]`
+entry at `level: "none"` stayed unverified rather than confirmed. This is the opposite of Capital One, whose
 per-network PDFs do prove absence, and of Amex and Chase, whose per-benefit pages
 do. Dead as of 2026-09-05: `credit-card-agreements.html`,
 `credit-card-benefits.html`, `visa-signature-benefits.html` and
@@ -46,9 +47,14 @@ where the on-page link does not: take the offerId from the broken link and rebui
 the working URL.
 
 A Guide to Benefits route **does** now exist at `mycardgtb.com/{slug}`, linked from
-some product pages. It is JS-rendered and still returns only a table-of-contents
-stub to a plain fetch, so absence remains unprovable for U.S. Bank. Do not treat
-the link's existence as coverage confirmed.
+some product pages as "Guide to Benefits (PDF)". A plain fetch still returns only a
+table-of-contents stub, but **read through r.jina.ai it returns the full dated
+Guide with section headings** (checked 2026-11-13 on Altitude Connect, effective
+3/1/26), so absence is provable after all. The Program Rules page,
+`rewards.usbank.com/benefits/card/{CardName}Benefits/program-rules`, linked from a
+product page footnote, carries the charity match, transfer caps and streaming
+merchant list. On Altitude Connect the terms document had nothing on authorized
+users, so don't count on it for that.
 
 **A portfolio-wide authoring error worth knowing:** all the U.S. Bank files stored
 `cash_advance_apr` as a range, `29.49%-30.49%`. U.S. Bank prints a **single**

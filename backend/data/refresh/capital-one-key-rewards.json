@@ -1,5 +1,29 @@
 {
   "card_id": "capital-one-key-rewards",
-  "last_verified_ok_at": null,
-  "verification": null
+  "last_verified_ok_at": "2026-11-13",
+  "verification": {
+    "evidence": "git:b9a5128809470dc88f378bf0bb945b62d6c54e2e",
+    "evidence_scope": "card",
+    "facts_sha256": "66b77faa6b123b2fe88404a561a28d81ef81cfd60cab764b1db5f4d6196a2cdd",
+    "documents": [
+      {
+        "kind": "cardmember_agreement",
+        "url": "https://ecm.capitalone.com/WCM/card/credit-card-agreements-q3-2026/credit-card-agreement-for-key-rewards-visa-in-capital-one-n.a.pdf"
+      },
+      {
+        "kind": "guide_to_benefits",
+        "url": "https://ecm.capitalone.com/WCM/card/benefits-guide/visa-benefits-guides/visa-signature-for-williams-sonoma-inc..pdf"
+      },
+      {
+        "kind": "product_page",
+        "url": "https://www.capitalone.com/credit-cards/thekeyrewards/"
+      }
+    ],
+    "not_checked": [
+      "redemption",
+      "transfer_partners",
+      "additional_cards"
+    ],
+    "note": "First check, 2026-11-13, against the card's Q3 2026 agreement, its Guide to Benefits and the product page, which shows the current 29.49% APR. Not checked: certificate terms (Williams-Sonoma sites block fetches), transfer options and authorized-user terms."
+  }
 }

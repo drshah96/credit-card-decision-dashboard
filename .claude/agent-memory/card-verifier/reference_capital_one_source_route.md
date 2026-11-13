@@ -35,7 +35,7 @@ network and card tier. Fetch the index for URLs rather than guessing, because
 saves the binary and prints the local path; read that path with the Read tool and
 a `pages` range.
 
-Each guide's cover **names the exact products it covers** and carries an "in effect
+Most guide covers **name the exact products they cover** (partner guides may not) and carry an "in effect
 as of" date and a form number, so it doubles as an eligibility list and stamps its
 own freshness. **Absence from the guide is a positive finding.** That is how "no
 trip delay, no cell phone, no emergency medical" were confirmed on
@@ -60,6 +60,22 @@ agreement lookup, `/credit-cards/no-foreign-transaction-fee/`,
 `/credit-cards/platinum-mastercard/`, and the help-centre fee pages. The CFPB
 agreement database is form-driven and its issuer path guesses 404.
 
-**Rate route, found 2026-11-07:** `capitalone.com/credit-cards/lp/credit-card-agreements/`
-lists quarterly agreement PDFs. They give line-wide ranges with no product names, so
-they bound a card's APR but do not confirm it.
+**Rate route, found 2026-11-07, corrected 2026-11-13:** `capitalone.com/credit-cards/lp/credit-card-agreements/`
+lists quarterly agreement PDFs under `credit-card-agreements-q{N}-{YYYY}/`. The
+generic consumer agreements give line-wide ranges with no product names. **Partner
+and retail cards get their own named agreement with a full pricing table** (Key
+Rewards, Kohl's, REI, BJ's, T-Mobile, Bass Pro, Cabela's and more), so use those
+first. Swapping the quarter in the folder name reaches older versions, which is how
+to date a change. The printed rate lags the Prime Rate by up to a quarter, so check
+a live disclosure too: the retailer's application terms link 302s to
+`disclosures.capitalone.com/disclosure.{id}.en-US.pdf`, and t-mobile.com and rei.com
+print dated rates (both 403 directly, readable through r.jina.ai). Copies at
+`card-apis.capitalone.com/disclosure.{id}.en-US.html` can be stale.
+
+**Partner Guides to Benefits can be far thinner than the network-tier guide.** The
+T-Mobile guide (`visa-signature-for-t-mobile.pdf`) has no insurance at all, while
+the generic Visa Signature guide has purchase security and travel accident cover.
+Never carry generic tier limits onto a co-brand. Partner guides sit under "Partner"
+in the benefits-guide index, and some covers don't name the product (REI's says only
+"Capital One World Elite Mastercard"), so rely on the index label. The modal's
+footnote text is in the page HTML: ask WebFetch to quote footnotes by number.
